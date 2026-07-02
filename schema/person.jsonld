@@ -1,0 +1,98 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://micheleokimura.com/#person",
+  "name": "Michele Okimura",
+  "givenName": "Michele",
+  "familyName": "Okimura",
+  "url": "https://micheleokimura.com",
+  "image": "https://micheleokimura.com/michele-headshot.jpg",
+  "description": "Michele Okimura is an author, speaker, workshop leader, and coach based on O'ahu, Hawai'i. She is the founder of Michele Okimura LLC and the founder and Executive Director of Releasing Generations.",
+  "jobTitle": [
+    "Author",
+    "Speaker",
+    "Executive Director",
+    "Coach"
+  ],
+  "gender": "Female",
+  "birthPlace": {
+    "@type": "Place",
+    "name": "Honolulu, Hawaii, USA"
+  },
+  "nationality": "American",
+  "worksFor": [
+    {
+      "@type": "Organization",
+      "@id": "https://micheleokimura.com/#organization",
+      "name": "Michele Okimura LLC"
+    },
+    {
+      "@type": "Organization",
+      "name": "Releasing Generations",
+      "url": "https://www.releasinggenerations.org"
+    }
+  ],
+  "alumniOf": [
+    {
+      "@type": "EducationalOrganization",
+      "name": "University of Hawaii at Manoa",
+      "url": "https://www.hawaii.edu/",
+      "sameAs": "https://en.wikipedia.org/wiki/University_of_Hawaii_at_Manoa"
+    },
+    {
+      "@type": "EducationalOrganization",
+      "name": "Kalani High School",
+      "sameAs": "https://en.wikipedia.org/wiki/Kalani_High_School"
+    }
+  ],
+  "award": [
+    "State of Hawaii Outstanding Advocate for Children and Youth (2023, conferred by Governor Josh Green and Mayor Rick Blangiardi)"
+  ],
+  "knowsAbout": [
+    "Memoir writing",
+    "Book coaching",
+    "Christian author coaching",
+    "AI-assisted writing",
+    "Purpose",
+    "Dreaming",
+    "Healing",
+    "Sexual integrity education",
+    "Children's ministry",
+    "Teen leadership development",
+    "Christian devotional writing"
+  ],
+  "hasOccupation": [
+    {
+      "@type": "Occupation",
+      "name": "Author"
+    },
+    {
+      "@type": "Occupation",
+      "name": "Speaker"
+    },
+    {
+      "@type": "Occupation",
+      "name": "Executive Director"
+    },
+    {
+      "@type": "Occupation",
+      "name": "Coach"
+    }
+  ],
+  "sameAs": [
+    "https://www.linkedin.com/in/michele-okimura-36861951",
+    "https://www.facebook.com/michele.okimura",
+    "https://www.instagram.com/michele_okimura/",
+    "https://www.amazon.com/stores/Michele-Okimura/author/B0086P0V0S",
+    "https://www.releasinggenerations.org",
+    "https://www.explicitmovement.org"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Honolulu",
+    "addressRegion": "HI",
+    "addressCountry": "US"
+  },
+  "email": "michele@micheleokimura.com",
+  "telephone": "+1-808-721-5811"
+}

@@ -1,0 +1,33 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "@id": "https://micheleokimura.com/works/dream-big#book",
+  "name": "Brave Purpose",
+  "alternateName": "Dream Big",
+  "author": {
+    "@type": "Person",
+    "@id": "https://micheleokimura.com/#person",
+    "name": "Michele Okimura"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Dream Big Publish / Ohana Style Publishing"
+  },
+  "datePublished": "2027",
+  "inLanguage": "en",
+  "bookFormat": ["Paperback", "EBook"],
+  "numberOfPages": "255",
+  "description": "A story-driven adult book on healing, purpose, and the courage to dream. The secular companion to Brave Purpose with God.",
+  "image": "https://micheleokimura.com/works/brave-purpose-cover.jpg",
+  "about": [
+    "Purpose",
+    "Healing",
+    "Dreaming",
+    "Personal transformation"
+  ],
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "Adult readers across all life stages"
+  },
+  "url": "https://micheleokimura.com/works/dream-big"
+}

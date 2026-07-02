@@ -1,0 +1,21 @@
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://micheleokimura.com/#website",
+  "url": "https://micheleokimura.com",
+  "name": "Michele Okimura",
+  "description": "Author, speaker, executive director, and coach. Brave purpose on the page and in the room.",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://micheleokimura.com/#organization"
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://micheleokimura.com/search?q={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  },
+  "inLanguage": "en-US"
+}

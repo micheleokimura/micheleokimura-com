@@ -1,0 +1,24 @@
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://micheleokimura.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "PARENT SECTION NAME",
+      "item": "https://micheleokimura.com/PARENT-SLUG"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "CURRENT PAGE NAME",
+      "item": "https://micheleokimura.com/PARENT-SLUG/CURRENT-SLUG"
+    }
+  ]
+}

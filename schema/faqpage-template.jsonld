@@ -1,0 +1,87 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://micheleokimura.com/faq#faqpage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do I need to be a Christian to work with Michele?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The Method holds for any book. If you are writing in a secular voice, Michele coaches in that voice. If you are writing for a Christian reader, she coaches in that one. She speaks credibly across both audiences because her own two forthcoming books release in parallel secular and faith editions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to have a draft already?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Many writers come in with an idea, a paragraph of notes, or a half-finished draft from years ago. The Method meets you in whichever posture you are in. Three postures: blank page, partial draft, finished manuscript that needs voice. Same fee, same 26 weeks, same weekly rhythm."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long is the engagement?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Twenty-six weeks from signature. Many writers finish earlier. The term is an outer wall so we are not rushed."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the price?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "$4,997 for the full engagement. Two-payment or six-payment plans available. Hawaii General Excise Tax may apply."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is this different from a regular book coach?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A traditional book coach works on a manual timeline that can take years. The Brave Purpose Author Method folds Claude and Gemini into the workflow so writing moves faster without flattening your voice. You still get coached on structure, story, and prose. You also walk away knowing how to use the tools that are reshaping the craft."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will my book sound like AI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If you follow the Method, your book will sound like you. The voice corpus is the whole point. Your own spoken and written voice becomes the source material Claude and Gemini draw from. By the end of the engagement you will be able to tell within two sentences whether a draft sounds like you. So will your readers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens at Week 26?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You leave with a manuscript, three AI cover concepts to choose from, and a walk through three publishing paths in writing: Legacy Publishing (a hybrid publisher Michele refers to), books.by (self-publishing), or independent (KDP, IngramSpark, or a hybrid of your choosing). The choice is yours."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Who is Michele Okimura?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Michele Okimura is an author, speaker, and coach based on O'ahu, Hawaii. She is the founder of Michele Okimura LLC and the Executive Director of Releasing Generations. In 2023 the State of Hawaii named her the Outstanding Advocate for Children and Youth. She has published two trade books with two more releasing in 2027, plus the Brave Series teen leadership curriculum and the Dream Big Journal Curriculum."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where is Michele based?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "O'ahu, Hawaii. Honolulu-born. Coaching engagements run virtually via Zoom for clients anywhere in the world; in-person on O'ahu by mutual agreement."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I book Michele to speak?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Send an inquiry via the /speaking page or email michele@micheleokimura.com. Include the event date, location, audience type and size, and what you are hoping the talk does for the room. Michele responds personally within three business days."
+      }
+    }
+  ]
+}

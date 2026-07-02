@@ -1,0 +1,32 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://micheleokimura.com/blog/POST-SLUG#article",
+  "headline": "POST TITLE HERE",
+  "description": "POST EXCERPT / META DESCRIPTION HERE (140-160 characters).",
+  "image": "https://micheleokimura.com/blog/POST-SLUG-featured.jpg",
+  "datePublished": "YYYY-MM-DD",
+  "dateModified": "YYYY-MM-DD",
+  "author": {
+    "@type": "Person",
+    "@id": "https://micheleokimura.com/#person",
+    "name": "Michele Okimura",
+    "url": "https://micheleokimura.com/about"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://micheleokimura.com/#organization",
+    "name": "Michele Okimura LLC",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://micheleokimura.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://micheleokimura.com/blog/POST-SLUG"
+  },
+  "articleSection": "Blog category",
+  "keywords": ["keyword one", "keyword two", "keyword three"],
+  "wordCount": 1800
+}

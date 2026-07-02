@@ -1,0 +1,98 @@
+{
+  "archive_name": "micheleokimura.com archive",
+  "source_site": "https://micheleokimura.com/",
+  "crawl_date": "2026-05-22",
+  "crawled_by": "Claude (Cowork session)",
+  "wordpress_generator": "Elementor 3.34.0",
+  "note_on_site_title": "The live <title> tag still reads 'Michele Okimura - Come up with a tagline for your business here' - the default WordPress tagline placeholder. The rebuild should set a proper tagline.",
+  "pages_crawled": [
+    {"url": "https://micheleokimura.com/", "slug": "home", "title": "Home"},
+    {"url": "https://micheleokimura.com/about/", "slug": "about", "title": "About"},
+    {"url": "https://micheleokimura.com/books-2/", "slug": "books", "title": "Books"},
+    {"url": "https://micheleokimura.com/blog/", "slug": "blog", "title": "Blog"},
+    {"url": "https://micheleokimura.com/contact/", "slug": "contact", "title": "Contact"},
+    {"url": "https://micheleokimura.com/the-great-dance/", "slug": "the-great-dance", "title": "The Great Dance"},
+    {"url": "https://micheleokimura.com/the-mantle/", "slug": "the-mantle", "title": "The Mantle"},
+    {"url": "https://micheleokimura.com/dreaming-big/", "slug": "dreaming-big", "title": "Dreaming Big"}
+  ],
+  "image_download_status": "FAILED - sandbox proxy blocks all outbound HTTP to micheleokimura.com. Image URLs are listed below; use download-images.sh to fetch them on Michele's Mac.",
+  "image_counts": {
+    "shared": 2,
+    "home": 23,
+    "about": 24,
+    "books": 4,
+    "contact": 1,
+    "posts": 3,
+    "total_unique": 56
+  },
+  "images": {
+    "shared": [
+      "https://micheleokimura.com/wp-content/uploads/2025/07/MOkimura_Logo_white-1024x595.png",
+      "https://micheleokimura.com/wp-content/uploads/2025/07/MOkimura_Logo-scaled.png"
+    ],
+    "home": [
+      "https://micheleokimura.com/wp-content/uploads/2025/09/dream-big-books-3-1024x848.png",
+      "https://micheleokimura.com/wp-content/uploads/2025/08/–-Audrey-Hepburn-4000-x-1000-px-scaled.png",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/gears.jpg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/family-1024x576.jpg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/bridge-1024x576.jpg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/hawaii-DOE.jpg",
+      "https://micheleokimura.com/wp-content/uploads/2025/08/missionary-church.png",
+      "https://micheleokimura.com/wp-content/uploads/2025/08/transform-our-world.png",
+      "https://micheleokimura.com/wp-content/uploads/2025/08/island-pacific-academy.png",
+      "https://micheleokimura.com/wp-content/uploads/2025/08/missio-nexus.png",
+      "https://micheleokimura.com/wp-content/uploads/2025/08/kupu.png",
+      "https://micheleokimura.com/wp-content/uploads/2025/08/nancy-vuu.png",
+      "https://micheleokimura.com/wp-content/uploads/2025/08/the-foursquare-church.png",
+      "https://micheleokimura.com/wp-content/uploads/2025/08/hawaii-pacific-academy.png",
+      "https://micheleokimura.com/wp-content/uploads/2025/08/hawaii-catholic-schools.png",
+      "https://micheleokimura.com/wp-content/uploads/2025/08/hanalani-schools.png",
+      "https://micheleokimura.com/wp-content/uploads/2025/08/hale-kipa.png",
+      "https://micheleokimura.com/wp-content/uploads/2025/08/christian-academy.png",
+      "https://micheleokimura.com/wp-content/uploads/2025/08/arise-native-american-family-camp.png",
+      "https://micheleokimura.com/wp-content/uploads/2025/06/3-1024x576.jpg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/2-1-1024x576.jpg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/1-1-1024x576.jpg"
+    ],
+    "about": [
+      "https://micheleokimura.com/wp-content/uploads/2025/09/1-mom-and-dad-scaled.jpeg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/2-sisters--scaled.jpeg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/3-MIss-Teen-USA-scaled.jpeg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/4-HS-Graduation-scaled.jpeg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/5-UH-graduation.jpeg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/6-wedding-scaled.jpeg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/7-Aaron-scaled.jpeg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/8-Jessica-joned--scaled.jpeg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/9-LIfespring-Church.png",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/Renaissance-2010-and-2011-scaled.jpeg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/10-Dancing-with-Father-scaled.jpeg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/11-2014-EX-conference-.jpeg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/12-Middle-School-Conf.jpeg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/13-Philippines.jpeg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/14-Singapore.jpeg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/15-PACRIM.png",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/16-EX-books-scaled.jpeg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/17-SoCal-scaled.jpeg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/Kingdom-Kids-Workshops.jpeg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/ReThink-Creativity-2020-and-2021-scaled.jpeg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/18-B-and-Beautiful-.jpeg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/19-award.jpeg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/20-10th-Annniversary-scaled.jpeg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/21-dream-books-scaled.jpeg"
+    ],
+    "books": [
+      "https://micheleokimura.com/wp-content/uploads/2025/09/1-2-1024x1024.jpg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/2-2-1024x1024.jpg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/3-1-1024x1024.jpg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/4-1024x1024.jpg"
+    ],
+    "contact": [
+      "https://micheleokimura.com/wp-content/uploads/2025/08/–-Audrey-Hepburn-4000-x-1000-px-scaled.png"
+    ],
+    "posts": [
+      "https://micheleokimura.com/wp-content/uploads/2025/06/Screenshot-2025-09-10-at-10.10.03-PM-1024x1019.png",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/the-mantle.jpg",
+      "https://micheleokimura.com/wp-content/uploads/2025/09/Screenshot-2025-09-10-at-10.08.48-PM.png"
+    ]
+  }
+}

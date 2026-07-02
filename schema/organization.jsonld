@@ -1,0 +1,34 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://micheleokimura.com/#organization",
+  "name": "Michele Okimura LLC",
+  "alternateName": "Michele Okimura Consulting LLC",
+  "url": "https://micheleokimura.com",
+  "logo": "https://micheleokimura.com/logo.png",
+  "description": "Michele Okimura LLC is the commercial vehicle of author and speaker Michele Okimura. It houses her workshops, retreats, coaching engagements, and the Brave Purpose Author Method.",
+  "foundingDate": "2017",
+  "founder": {
+    "@type": "Person",
+    "@id": "https://micheleokimura.com/#person",
+    "name": "Michele Okimura"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Honolulu",
+    "addressRegion": "HI",
+    "addressCountry": "US"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "email": "michele@micheleokimura.com",
+    "telephone": "+1-808-721-5811",
+    "areaServed": "Worldwide (virtual); in-person on O'ahu",
+    "availableLanguage": ["English"]
+  },
+  "sameAs": [
+    "https://www.linkedin.com/in/michele-okimura-36861951",
+    "https://www.facebook.com/michele.okimura"
+  ]
+}

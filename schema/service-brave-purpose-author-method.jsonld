@@ -1,0 +1,66 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://micheleokimura.com/coaching/the-brave-purpose-author-method#service",
+  "name": "The Brave Purpose Author Method",
+  "description": "A 26-week one-to-one author coaching engagement with Michele Okimura. The writer arrives in one of three postures (blank page, partial draft, or finished manuscript that needs voice) and leaves with a publication-ready manuscript in the writer's own voice, three AI-generated cover concepts, and the durable identity of an author.",
+  "provider": {
+    "@type": "Person",
+    "@id": "https://micheleokimura.com/#person",
+    "name": "Michele Okimura"
+  },
+  "serviceType": "Author coaching",
+  "areaServed": {
+    "@type": "AdministrativeArea",
+    "name": "Worldwide (virtual)"
+  },
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "Writers with a book they want to finish"
+  },
+  "termsOfService": "https://micheleokimura.com/legal/coaching-terms",
+  "offers": {
+    "@type": "Offer",
+    "price": "4997.00",
+    "priceCurrency": "USD",
+    "priceValidUntil": "2026-12-31",
+    "availability": "https://schema.org/InStock",
+    "url": "https://micheleokimura.com/coaching/the-brave-purpose-author-method",
+    "seller": {
+      "@type": "Organization",
+      "@id": "https://micheleokimura.com/#organization"
+    },
+    "priceSpecification": [
+      {
+        "@type": "PriceSpecification",
+        "name": "Two-payment plan",
+        "price": "4997.00",
+        "priceCurrency": "USD",
+        "description": "Two payments of $2,498.50: deposit at signing, balance at the mid-engagement checkpoint (approximately Week 13)."
+      },
+      {
+        "@type": "PriceSpecification",
+        "name": "Six-payment plan",
+        "price": "4997.00",
+        "priceCurrency": "USD",
+        "description": "Six monthly payments of $832.83 starting at signing."
+      }
+    ]
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "What's included",
+    "itemListElement": [
+      "Free Session 0 discovery call before signature",
+      "Up to twelve one-hour live Zoom sessions across 26 weeks",
+      "Weekly written or recorded review",
+      "AI-assisted developmental editing (Claude and Gemini)",
+      "Custom Claude project the writer keeps",
+      "Voice corpus built from the writer's own words",
+      "Mid-engagement Checkpoint at Week 13",
+      "Three AI cover concepts by Week 22",
+      "Publication-ready manuscript by Week 26",
+      "Post-engagement follow-up at days 7, 30, 90, 180"
+    ]
+  }
+}
