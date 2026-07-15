@@ -6,7 +6,7 @@ import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { PageIntro } from '@/components/PageIntro'
 import { ContactBlock } from '@/components/ContactBlock'
-import { siteConfig, authoredWorks, type AuthoredWork } from '@/lib/site-config'
+import { siteConfig, authoredWorks, collaborations, type AuthoredWork } from '@/lib/site-config'
 
 export const metadata: Metadata = {
   title: 'Works',
@@ -147,6 +147,78 @@ export default function WorksPage() {
           </section>
         )
       })}
+
+      {collaborations.length > 0 && (
+        <section aria-label="Collaborations">
+          <Container className="mt-16 sm:mt-24">
+            <FadeIn>
+              <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-teal)] uppercase">
+                Collaborations
+              </h2>
+              <p className="mt-4 max-w-2xl text-base leading-7 text-neutral-600">
+                Works where Michele contributed as a co-author or collaborator.
+              </p>
+            </FadeIn>
+            <FadeInStagger faster className="mt-8">
+              <ul
+                role="list"
+                className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+              >
+                {collaborations.map((collab) => (
+                  <FadeIn as="li" key={collab.slug} scaleIn>
+                    <div className="flex h-full flex-col rounded-3xl bg-white p-6 ring-1 ring-neutral-900/5">
+                      {collab.coverImage ? (
+                        <div className="relative mb-4 aspect-[3/4] w-full overflow-hidden rounded-xl bg-neutral-100">
+                          <Image
+                            src={collab.coverImage}
+                            alt={`Cover of ${collab.title}`}
+                            fill
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                            className="object-cover"
+                          />
+                        </div>
+                      ) : (
+                        <div className="mb-4 flex aspect-[3/4] w-full items-center justify-center rounded-xl bg-neutral-50 p-6">
+                          <span className="text-center font-display text-lg font-semibold tracking-tight text-neutral-400">
+                            {collab.title}
+                          </span>
+                        </div>
+                      )}
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-semibold tracking-widest text-[var(--color-brand-teal)] uppercase">
+                          {collab.role}
+                        </span>
+                      </div>
+                      <h3 className="mt-2 font-display text-lg font-semibold tracking-tight text-neutral-950">
+                        {collab.title}
+                      </h3>
+                      <p className="mt-1 text-sm text-neutral-500">
+                        by {collab.primaryAuthor}
+                      </p>
+                      {collab.subtitle && (
+                        <p className="mt-2 flex-1 text-sm leading-6 text-neutral-600">
+                          {collab.subtitle}
+                        </p>
+                      )}
+                      {collab.purchaseUrl && (
+                        <a
+                          href={collab.purchaseUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-neutral-950"
+                        >
+                          View on Amazon
+                          <span aria-hidden="true">&rarr;</span>
+                        </a>
+                      )}
+                    </div>
+                  </FadeIn>
+                ))}
+              </ul>
+            </FadeInStagger>
+          </Container>
+        </section>
+      )}
 
       <ContactBlock heading="Work with Michele.">
         <p>

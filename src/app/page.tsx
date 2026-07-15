@@ -217,27 +217,61 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* Authored works archive */}
-      <section aria-label="Authored works">
+      {/* Selected works */}
+      <section aria-label="Selected works">
         <SectionIntro
-          eyebrow="Fifteen works"
-          title="The catalog."
+          eyebrow="Fifteen works and counting"
+          title="Books, curricula, and movements."
           className="mt-24 sm:mt-32 lg:mt-40"
         >
           <p>
-            Trade books, curricula, conferences, and programs. Each one is a
-            case study of the same method Michele now teaches.
+            Four decades of healing work distilled into trade books, curricula
+            for every age group, conferences with global reach, and programs
+            that have reached schools, churches, and families across three
+            continents.
           </p>
         </SectionIntro>
         <Container className="mt-10">
-          <FadeIn>
-            <Link
-              href="/works"
-              className="inline-flex items-center gap-2 text-base font-semibold text-neutral-950 underline decoration-[var(--color-cta)] underline-offset-4 hover:decoration-2"
+          <FadeInStagger faster>
+            <ul
+              role="list"
+              className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
             >
-              Browse all fifteen works
-              <span aria-hidden="true">&rarr;</span>
-            </Link>
+              {authoredWorks
+                .filter((w) => w.coverImage)
+                .slice(0, 4)
+                .map((work) => (
+                  <FadeIn as="li" key={work.slug} scaleIn>
+                    <Link
+                      href={`/works/${work.slug}`}
+                      className="group flex h-full flex-col rounded-2xl bg-white p-4 ring-1 ring-neutral-900/5 transition hover:shadow-lg hover:ring-neutral-900/15"
+                    >
+                      <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-neutral-100">
+                        <Image
+                          src={work.coverImage!}
+                          alt={`Cover of ${work.title}`}
+                          fill
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                          className="object-cover transition group-hover:scale-105"
+                        />
+                      </div>
+                      <h3 className="mt-3 font-display text-base font-semibold tracking-tight text-neutral-950">
+                        {work.title}
+                      </h3>
+                      {work.subtitle && (
+                        <p className="mt-1 flex-1 text-sm leading-6 text-neutral-600 line-clamp-2">
+                          {work.subtitle}
+                        </p>
+                      )}
+                    </Link>
+                  </FadeIn>
+                ))}
+            </ul>
+          </FadeInStagger>
+          <FadeIn className="mt-10">
+            <Button href="/works">
+              See all fifteen works
+            </Button>
           </FadeIn>
         </Container>
       </section>

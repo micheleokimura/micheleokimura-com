@@ -228,13 +228,39 @@ export const authoredWorks: AuthoredWork[] = [
   },
 ]
 
+export type Collaboration = {
+  slug: string
+  title: string
+  subtitle: string
+  primaryAuthor: string
+  role: string
+  year?: number
+  publisher?: string
+  isbn?: string
+  purchaseUrl?: string
+  coverImage?: string
+}
+
+export const collaborations: Collaboration[] = [
+  {
+    slug: 'tried-and-true-love',
+    title: 'Tried and True Love',
+    subtitle: 'A book on building lasting marriages and relationships.',
+    primaryAuthor: 'Rob Okimura',
+    role: 'Contributing Author',
+    publisher: 'WestBow Press',
+    isbn: '978-1973617228',
+    purchaseUrl: 'https://www.amazon.com/Tried-True-Love-Robert-Okimura/dp/1973617226',
+  },
+]
+
 export const navItems = [
   { href: '/', label: 'Home' },
   { href: '/brave-purpose', label: 'Brave Purpose' },
+  { href: '/works', label: 'Works' },
   { href: '/about', label: 'About' },
   { href: '/podcast', label: 'In a Moment' },
   { href: '/coaching', label: 'Coaching' },
   { href: '/portfolio', label: 'Speaking' },
-  { href: '/works', label: 'Works' },
   { href: '/resources', label: 'Resources' },
 ] as const
