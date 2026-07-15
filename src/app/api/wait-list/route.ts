@@ -29,8 +29,8 @@ const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/
  * the others:
  *  1. Google Sheet via an Apps Script web app (WAITLIST_SHEET_WEBHOOK_URL) so
  *     Brett can see every lead and which CTA it came from.
- *  2. GHL contact (best-effort) so it lands in Emily's pipeline.
- *  3. Resend email to Emily (the hard requirement — a non-OK status here lets
+ *  2. GHL contact (best-effort) so it lands in the pipeline.
+ *  3. Resend email notification (the hard requirement — a non-OK status here lets
  *     the client surface an error rather than silently dropping a lead).
  *
  * See _handoff/google-sheets-waitlist-setup-2026-06-15.md for the Sheet setup.

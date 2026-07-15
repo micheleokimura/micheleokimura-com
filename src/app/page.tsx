@@ -62,24 +62,27 @@ export default function HomePage() {
                 <div className="max-w-2xl">
                   <FadeIn>
                     <span className="mb-5 block font-display text-sm font-semibold tracking-wider text-[var(--color-brand-teal)] uppercase">
-                      Brave Purpose
+                      Coming 2027
                     </span>
                     <h1 className="font-display text-[2.75rem] leading-[1.05] font-medium tracking-tight text-balance text-neutral-950 sm:text-6xl lg:text-[3.75rem] lg:leading-[1.08]">
-                      Turn your story into your purpose.
+                      Brave Purpose.
                     </h1>
                     <p className="mt-6 max-w-xl text-xl leading-8 text-neutral-600">
-                      Welcome. I&rsquo;m Michele Okimura, a speaker, author, and coach. For four
-                      decades I&rsquo;ve helped people find courage, healing, and the purpose
-                      that was waiting on the other side of their hardest seasons.
+                      I&rsquo;m Michele Okimura. For four decades I&rsquo;ve
+                      watched people walk through fire and come out carrying
+                      something they did not have before. Brave Purpose is the
+                      book that puts that journey into your hands.
                     </p>
                     <div className="mt-10 flex flex-wrap items-center gap-6">
-                      <JoinWaitListButton source="home-hero" />
-                      <Button href="/case-studies" variant="ghost">
-                        See the work
+                      <JoinWaitListButton source="home-hero">
+                        Get first look
+                      </JoinWaitListButton>
+                      <Button href="/brave-purpose" variant="ghost">
+                        Learn more
                       </Button>
                     </div>
                     <p className="mt-6 text-sm font-medium text-neutral-500">
-                      The <span className="text-neutral-700">Brave Purpose Author Method</span>. Coaching for the story only you can tell.
+                      Two editions: <span className="text-neutral-700">Brave Purpose</span> for every reader. <span className="text-neutral-700">Brave Purpose with God</span> for the faith journey.
                     </p>
                   </FadeIn>
                 </div>
@@ -151,25 +154,88 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* Case studies teaser */}
-      <section aria-label="Case studies">
+      {/* Brave Purpose flagship */}
+      <section aria-label="Brave Purpose">
         <SectionIntro
-          eyebrow="The work"
-          title="Stories from the work."
+          eyebrow="The flagship"
+          title="Two books. One healing journey."
           className="mt-24 sm:mt-32 lg:mt-40"
         >
           <p>
-            Schools, churches, and nonprofits Michele has walked with. Each story
-            is told from the inside, by the work and the outcome.
+            Brave Purpose puts four decades of healing work into a book for the
+            first time. Two editions: one for every reader, one for the faith
+            journey. Coming 2027.
+          </p>
+        </SectionIntro>
+        <Container className="mt-10">
+          <FadeInStagger faster>
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 max-w-2xl">
+              <FadeIn>
+                <Link
+                  href="/brave-purpose"
+                  className="group block rounded-2xl bg-white p-6 ring-1 ring-neutral-900/5 transition hover:shadow-lg hover:ring-neutral-900/15"
+                >
+                  <span className="inline-block rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-medium text-amber-800">
+                    Coming 2027
+                  </span>
+                  <h3 className="mt-3 font-display text-lg font-semibold tracking-tight text-neutral-950">
+                    Brave Purpose
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-neutral-600">
+                    The secular edition. For every reader who has walked through
+                    fire.
+                  </p>
+                  <span className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-neutral-950">
+                    Learn more
+                    <span aria-hidden="true">&rarr;</span>
+                  </span>
+                </Link>
+              </FadeIn>
+              <FadeIn>
+                <Link
+                  href="/brave-purpose"
+                  className="group block rounded-2xl bg-white p-6 ring-1 ring-neutral-900/5 transition hover:shadow-lg hover:ring-neutral-900/15"
+                >
+                  <span className="inline-block rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-medium text-amber-800">
+                    Coming 2027
+                  </span>
+                  <h3 className="mt-3 font-display text-lg font-semibold tracking-tight text-neutral-950">
+                    Brave Purpose with God
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-neutral-600">
+                    The faith companion. Scripture and the Holy Spirit alongside
+                    the journey.
+                  </p>
+                  <span className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-neutral-950">
+                    Learn more
+                    <span aria-hidden="true">&rarr;</span>
+                  </span>
+                </Link>
+              </FadeIn>
+            </div>
+          </FadeInStagger>
+        </Container>
+      </section>
+
+      {/* Authored works archive */}
+      <section aria-label="Authored works">
+        <SectionIntro
+          eyebrow="Fifteen works"
+          title="The catalog."
+          className="mt-24 sm:mt-32 lg:mt-40"
+        >
+          <p>
+            Trade books, curricula, conferences, and programs. Each one is a
+            case study of the same method Michele now teaches.
           </p>
         </SectionIntro>
         <Container className="mt-10">
           <FadeIn>
             <Link
-              href="/case-studies"
+              href="/works"
               className="inline-flex items-center gap-2 text-base font-semibold text-neutral-950 underline decoration-[var(--color-cta)] underline-offset-4 hover:decoration-2"
             >
-              Read the case studies
+              Browse all fifteen works
               <span aria-hidden="true">&rarr;</span>
             </Link>
           </FadeIn>

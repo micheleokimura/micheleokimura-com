@@ -197,8 +197,8 @@ export function JoinWaitListModal({
                   You&rsquo;re on the list.
                 </h2>
                 <p className="mt-4 text-base leading-7 text-neutral-600">
-                  Emily will reach out by email when a spot opens. Keep an eye on
-                  your inbox.
+                  Michele will reach out by email when a spot opens. Keep an eye
+                  on your inbox.
                 </p>
                 <div className="mt-8">
                   <button
@@ -219,9 +219,9 @@ export function JoinWaitListModal({
                   Join the wait list
                 </h2>
                 <p className="mt-3 text-base leading-7 text-neutral-600">
-                  Emily takes on a small number of new churches each quarter.
-                  Drop your info and she&rsquo;ll reach out personally by email
-                  when a spot opens.
+                  Michele takes on a small number of coaching clients and
+                  speaking dates. Drop your info and she&rsquo;ll reach out
+                  personally by email when a spot opens.
                 </p>
 
                 <form onSubmit={onSubmit} noValidate className="mt-6">
@@ -293,14 +293,14 @@ export function JoinWaitListModal({
 
                   <div className="mt-4">
                     <label htmlFor={`${titleId}-domain`} className="sr-only">
-                      Church website domain (optional)
+                      Website (optional)
                     </label>
                     <input
                       id={`${titleId}-domain`}
                       type="text"
                       name="churchDomain"
                       autoComplete="url"
-                      placeholder="Church website domain (optional)"
+                      placeholder="Website (optional)"
                       value={churchDomain}
                       onChange={(e) => setChurchDomain(e.target.value)}
                       disabled={status === 'submitting'}
@@ -338,7 +338,7 @@ export function JoinWaitListModal({
                     ) : null}
                     {status === 'error' ? (
                       <p className="mt-3 text-sm text-neutral-700">
-                        Something went wrong. Please try again or email Emily
+                        Something went wrong. Please try again or email Michele
                         directly.
                       </p>
                     ) : null}

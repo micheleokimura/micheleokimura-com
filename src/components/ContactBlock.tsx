@@ -28,8 +28,8 @@ export function ContactBlock({ heading, children, source = 'contact-block' }: Pr
               </div>
             </div>
 
-            {/* Circular portrait of Emily humanizes the conversion moment. Shown
-                at lg+ where it balances the empty right side. */}
+            {/* Circular portrait humanizes the conversion moment. Shown at lg+
+                where it balances the empty right side. */}
             <FadeIn scaleIn className="hidden lg:block lg:justify-self-end">
               <EmilyAvatar size={300} className="ring-2 ring-white/15" />
             </FadeIn>

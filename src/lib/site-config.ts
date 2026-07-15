@@ -73,7 +73,7 @@ export const authoredWorks: AuthoredWork[] = [
     year: 2011,
     publisher: 'Xulon Press',
     isbn: '978-1613792711',
-    format: 'Paperback and audiobook',
+    format: 'Paperback, hardcover, and audiobook',
     illustrator: 'Danielle Iranon',
     subtitle: 'An illustrated poetic book of healing for women.',
     inLanguage: 'en',
@@ -90,16 +90,21 @@ export const authoredWorks: AuthoredWork[] = [
     publisher: 'Explicit Movement / Releasing Generations',
     format: 'Paperback and e-book',
     inLanguage: 'en',
+    purchaseUrl: 'https://www.explicitmovement.org/shop',
     coverImage: '/images/books/birth-of-explicit-movement.webp',
   },
   {
     slug: 'explicit-movement-21-day-journal',
     title: 'Explicit Movement 21-Day Interactive Journal',
+    subtitle: 'Companion journal to The Birth of Explicit Movement.',
     category: 'trade-book',
     status: 'published',
     year: 2018,
+    publisher: 'Explicit Movement',
+    isbn: '978-0692127865',
     format: 'Print and e-book',
     inLanguage: 'en',
+    purchaseUrl: 'https://www.amazon.com/Explicit-Movement-Day-Interactive-Journal/dp/0692127860',
   },
   {
     slug: 'discover-your-purpose',
@@ -109,6 +114,7 @@ export const authoredWorks: AuthoredWork[] = [
     format: 'Print and e-book',
     subtitle: 'Short-form purpose-focused workbook.',
     inLanguage: 'en',
+    purchaseUrl: 'https://www.explicitmovement.org/shop',
   },
   {
     slug: 'brave-purpose',
@@ -139,7 +145,9 @@ export const authoredWorks: AuthoredWork[] = [
     category: 'curriculum',
     status: 'published',
     year: '2023-2025',
+    publisher: 'Michele Okimura LLC',
     format: 'Journal + teacher guide (preschool, younger elementary, older elementary, youth, adult)',
+    purchaseUrl: 'https://micheleokimura.square.site/shop/dream-big-journals/H6TBHCP3MCA7N6OILXANY2JV',
     coverImage: '/images/books/dream-big-journals.webp',
   },
   {
@@ -149,6 +157,7 @@ export const authoredWorks: AuthoredWork[] = [
     category: 'curriculum',
     status: 'published',
     format: 'Lesson book, 100+ lessons',
+    purchaseUrl: 'https://micheleokimura.square.site/shop/kingdom-kids-lesson-book',
     coverImage: '/images/books/kingdom-kids.webp',
   },
   {
@@ -159,7 +168,8 @@ export const authoredWorks: AuthoredWork[] = [
     status: 'published',
     year: 2022,
     publisher: 'Releasing Generations / The Brave Series',
-    format: 'Teen leadership curriculum for girls',
+    format: 'Four volumes with facilitator guides. Faith and Classic (secular) editions.',
+    purchaseUrl: 'https://braveseries.square.site',
   },
   {
     slug: 'brave-and-bold',
@@ -167,8 +177,10 @@ export const authoredWorks: AuthoredWork[] = [
     subtitle: 'Leadership curriculum for teen boys focused on courage, healthy masculinity, and purpose.',
     category: 'curriculum',
     status: 'published',
+    year: 2024,
     publisher: 'Releasing Generations / The Brave Series',
-    format: 'Teen leadership curriculum for boys',
+    format: 'Four volumes with facilitator guides. Faith and Classic (secular) editions.',
+    purchaseUrl: 'https://braveseries.square.site',
   },
   {
     slug: 'brave-together',
@@ -177,7 +189,8 @@ export const authoredWorks: AuthoredWork[] = [
     category: 'curriculum',
     status: 'published',
     publisher: 'Releasing Generations / The Brave Series',
-    format: 'Coed curriculum, 80+ lessons with slide decks',
+    format: 'Four volumes, 80+ lessons with facilitator slide decks. Classic (secular) edition available.',
+    purchaseUrl: 'https://braveseries.square.site',
   },
   {
     slug: 'wisdom-flows',
@@ -194,6 +207,8 @@ export const authoredWorks: AuthoredWork[] = [
     subtitle: 'Faith-based resources and conferences equipping parents, pastors, and youth leaders. 2023 Outstanding Advocate for Children and Youth of Hawai\'i.',
     category: 'program',
     status: 'active',
+    year: 2014,
+    purchaseUrl: 'https://www.explicitmovement.org',
   },
   {
     slug: 'kingdom-families',
@@ -201,6 +216,7 @@ export const authoredWorks: AuthoredWork[] = [
     subtitle: 'Strengthening families, equipping parents, and raising up the next generation.',
     category: 'program',
     status: 'active',
+    purchaseUrl: 'https://kingdomfamilieshawaii.com',
   },
   {
     slug: 'rethink-creativity',
@@ -208,16 +224,17 @@ export const authoredWorks: AuthoredWork[] = [
     subtitle: 'Awakening creativity in everyday people. Online Creativity Conferences with global reach in 2020 and 2021.',
     category: 'program',
     status: 'active',
+    purchaseUrl: 'https://www.explicitmovement.org/rethink-creativity',
   },
 ]
 
 export const navItems = [
   { href: '/', label: 'Home' },
+  { href: '/brave-purpose', label: 'Brave Purpose' },
   { href: '/about', label: 'About' },
-  { href: '/works', label: 'Works' },
-  { href: '/how-it-works', label: 'How it works' },
+  { href: '/podcast', label: 'In a Moment' },
   { href: '/coaching', label: 'Coaching' },
   { href: '/portfolio', label: 'Speaking' },
-  { href: '/case-studies', label: 'Case Studies' },
+  { href: '/works', label: 'Works' },
   { href: '/resources', label: 'Resources' },
 ] as const
