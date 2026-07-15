@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 192" width="512" height="192">
+  <style>
+    .l1 { font: 700 36px "Inter","Helvetica Neue",Arial,sans-serif; fill: #ffffff; letter-spacing: -0.5px; }
+    .l2 { font: 500 18px "Inter","Helvetica Neue",Arial,sans-serif; fill: #ffffff; opacity: 0.78; letter-spacing: 1.2px; text-transform: uppercase; }
+  </style>
+  <text x="256" y="86" class="l1" text-anchor="middle">Brave & Bold</text>
+  <text x="256" y="124" class="l2" text-anchor="middle">Youth + Parent Conference</text>
+</svg>

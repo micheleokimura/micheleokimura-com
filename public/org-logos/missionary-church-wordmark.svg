@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 96" width="256" height="96" role="img" aria-label="Missionary Church">
+  <title>Missionary Church</title>
+  <desc>Plain-text wordmark fallback for missionary-church. Original SVG markup, neutral system font. No stylized brand artwork. Not in the canonical org-map featured set; registry flags as out-of-scope for the hero grid.</desc>
+  <text x="128" y="42" text-anchor="middle" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="600" fill="#1f2937" letter-spacing="0.2">Missionary Church</text>
+  <text x="128" y="62" text-anchor="middle" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="400" fill="#6b7280" letter-spacing="0.5">speaking venue family</text>
+</svg>

@@ -1,0 +1,145 @@
+import type { Metadata } from 'next'
+
+import { Container } from '@/components/Container'
+import { FadeIn } from '@/components/FadeIn'
+import { PageIntro } from '@/components/PageIntro'
+import Image from 'next/image'
+
+import { AboutPhotoGrid } from '@/components/AboutPhotoGrid'
+import { ContactBlock } from '@/components/ContactBlock'
+import { awards, credentials } from '@/lib/credentials'
+import { OWN_BRANDS } from '@/lib/organizations'
+
+export const metadata: Metadata = {
+  title: 'About Michele',
+  description:
+    'Michele Okimura is an author, speaker, executive director, and coach based on O\'ahu, Hawai\'i. Founder of Releasing Generations, Explicit Movement, Kingdom Families, and ReThink Creativity. 2023 Outstanding Advocate for Children and Youth of Hawai\'i.',
+  alternates: { canonical: '/about' },
+}
+
+// Voice ported from Michele's current micheleokimura.com /about page (warm,
+// vulnerable, first person, Brené Brown style); facts confirmed against the
+// citation-backed credentials dossier. Em dashes -> commas per house style.
+// Verbatim review by Michele pending.
+export default function AboutPage() {
+  return (
+    <>
+      <PageIntro eyebrow="Maybe dreams give purpose a voice." title="About Michele.">
+        <p>
+          I&rsquo;m an author, speaker, and coach who has spent the last four
+          decades inspiring courage, vulnerability, healing, and purpose.
+        </p>
+      </PageIntro>
+
+      <Container className="mt-14 sm:mt-16">
+        <FadeIn className="max-w-2xl space-y-6 text-lg leading-8 text-neutral-600">
+          <p>
+            My story has been an adventure in finding purpose, and it began with my
+            own healing journey. Transforming feelings of worthlessness into a deep
+            sense of value ignited a fire in me, a passion to help others discover
+            the same strength within themselves.
+          </p>
+          <p>
+            I am the founder and executive director of Releasing Generations, and I
+            write, speak, and teach across Hawai&lsquo;i and beyond. For more than
+            twenty years I served as a pastor, and before that I spent seventeen
+            years as an elementary school teacher. Across all of it the work is the
+            same: helping people find the courage to live out the purpose they were
+            made for.
+          </p>
+          <p>
+            My firm belief is that every person&rsquo;s story, even the broken ones,
+            can become a launchpad into a future full of freedom, wonder, and
+            limitless possibilities.
+          </p>
+        </FadeIn>
+      </Container>
+
+      {/* The hover-to-reveal photo grid (locked interaction). Hover, or tap the
+          teal + on mobile, to read each moment. */}
+      <Container className="mt-16 sm:mt-20">
+        <FadeIn>
+          <AboutPhotoGrid />
+        </FadeIn>
+      </Container>
+
+      {/* The work Michele leads — her own brand family (own surface, not endorsers) */}
+      <Container className="mt-20 sm:mt-28">
+        <FadeIn className="mx-auto max-w-4xl">
+          <h2 className="text-center font-display text-sm font-semibold tracking-widest text-[var(--color-brand-teal)] uppercase">
+            The work Michele leads
+          </h2>
+          <ul
+            role="list"
+            className="mt-8 grid grid-cols-2 items-center gap-6 sm:grid-cols-4"
+          >
+            {OWN_BRANDS.map((brand) => (
+              <li
+                key={brand.name}
+                className="flex h-24 items-center justify-center rounded-2xl border border-neutral-200 bg-white p-5"
+              >
+                <span className="relative block h-full w-full">
+                  <Image
+                    src={brand.logo}
+                    alt={brand.name}
+                    fill
+                    sizes="180px"
+                    className="object-contain"
+                  />
+                </span>
+              </li>
+            ))}
+          </ul>
+        </FadeIn>
+      </Container>
+
+      {/* Honors & recognition + credentials, from the citation-backed dossier */}
+      <Container className="mt-20 sm:mt-28">
+        <div className="mx-auto grid max-w-4xl grid-cols-1 gap-12 lg:grid-cols-2">
+          <FadeIn>
+            <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-teal)] uppercase">
+              Honors and recognition
+            </h2>
+            <ul role="list" className="mt-6 divide-y divide-neutral-200 border-t border-neutral-200">
+              {awards.map((award) => (
+                <li key={award.title} className="py-5">
+                  <p className="font-display text-lg font-semibold tracking-tight text-neutral-950">
+                    {award.title}
+                    {award.year ? `, ${award.year}` : ''}
+                  </p>
+                  <p className="mt-1 text-sm text-neutral-600">{award.grantor}</p>
+                  {award.recipient && (
+                    <p className="mt-1 text-sm text-neutral-500">{award.recipient}</p>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </FadeIn>
+
+          <FadeIn>
+            <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-teal)] uppercase">
+              Roles and work
+            </h2>
+            <ul role="list" className="mt-6 space-y-3 border-t border-neutral-200 pt-6 text-base text-neutral-700">
+              {credentials.map((c) => (
+                <li key={c} className="flex gap-3">
+                  <span aria-hidden="true" className="text-[var(--color-brand-teal)]">
+                    &middot;
+                  </span>
+                  <span>{c}</span>
+                </li>
+              ))}
+            </ul>
+          </FadeIn>
+        </div>
+      </Container>
+
+      <ContactBlock heading="Let&rsquo;s work together.">
+        <p>
+          Whether it is coaching through the Brave Purpose Author Method or a
+          speaking date, join the waitlist and Michele will reach out personally.
+        </p>
+      </ContactBlock>
+    </>
+  )
+}
