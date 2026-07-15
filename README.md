@@ -1,11 +1,11 @@
 # micheleokimura.com
 
-Content and research foundation for Michele Okimura's personal website. This repo is the primary source of truth for every page, every case study, every research document, every schema template, and every asset the site needs. The site itself is built in Fable 5 pulling content from this repo. Deployment runs through Vercel from the `main` branch.
+Content, research, and site code for Michele Okimura's personal website. This repo is the primary source of truth for every page, every case study, every research document, every schema template, and every asset the site needs. The Next.js site code lives at root alongside Michele's content. Deployment runs through Vercel from the `main` branch.
 
 ## Who this is for
 
 - **Michele Okimura** (`micheleokimura` on GitHub). Owner. The site is her personal brand at `micheleokimura.com`.
-- **Brett Moore** (`brettkmore` on GitHub, brett@brettkmore.com). Chief operator. Builds the site in Fable 5. Admin collaborator on this repo.
+- **Brett Moore** (`brettkmore` on GitHub, brett@brettkmore.com). Chief operator. Admin collaborator on this repo.
 - **Future Claude sessions** working in this repo. See `CLAUDE.md`.
 
 ## What lives here
@@ -13,43 +13,60 @@ Content and research foundation for Michele Okimura's personal website. This rep
 ```
 micheleokimura-com/
 |
-+-- content/            All source content Brett pulls from at build time.
-|   +-- copywriting/    Page copy for every page on the site.
-|   +-- bios/           Michele's bio at four lengths (one-line, short, medium, long).
-|   +-- brand/          Voice guide, style guide, colors, logo rules, authored-works catalog.
-|   +-- case-studies/   One Markdown file per authored work. Michele's authored works ARE the case studies.
-|   +-- testimonials/   Reader / audience testimonials. Nancy Webb (first coaching client) when available.
-|   +-- blog/           Editorial calendar plus drafted hero posts.
-|
-+-- research/           Every research document that informed the content decisions.
-|                       Read these to understand WHY the site is shaped the way it is.
-|
-+-- schema/             Ready-to-paste JSON-LD schema templates for Brett to inject at build.
-|
++-- content/            Michele's source content (copywriting, bios, brand, case studies, blog, testimonials).
++-- research/           Research documents that informed content and design decisions.
++-- schema/             JSON-LD schema templates for structured data.
 +-- assets-raw/         Source photos, current-site archive, logo files. Raw material.
 |
-+-- site/               Where Brett's Fable 5 build lives. Starts as GETTING-STARTED + DEPLOYMENT docs.
++-- src/                Next.js site source code.
+|   +-- app/            Route files (pages).
+|   +-- components/     React components.
+|   +-- content/        MDX content consumed by the build (blog posts, case study markdown).
+|   +-- lib/            Shared utilities, data loaders, site config.
+|   +-- styles/         Tailwind CSS and base styles.
+|   +-- fonts/          Self-hosted web fonts.
++-- public/             Static assets served by Next.js (images, logos, mosaic tiles).
++-- scripts/            Build and utility scripts.
 ```
 
 ## How to work in this repo
 
 1. **Read `CLAUDE.md` first.** It orients any new Claude session and names the voice rules.
-2. **Content is source-of-truth.** Do not edit page copy in Fable 5. Edit it here, commit, redeploy.
+2. **Content is source-of-truth.** Edit content in `content/`, commit, redeploy.
 3. **No em dashes anywhere.** This is Michele's most-held rule. See `content/brand/voice-guide.md`.
 4. **Spell Michele with one L.** Always. Never Michelle.
 5. **Schema goes on every page.** See `schema/` for the templates and `research/04-schema-markup-templates.md` for the strategy.
 
+## Development
+
+```sh
+pnpm install
+pnpm dev
+# http://localhost:3037
+```
+
+### Stack
+
+- Next.js 16.2.6 (App Router, Turbopack), TypeScript, React 19
+- Tailwind CSS v4 (`@theme` tokens in `src/styles/tailwind.css`)
+- Self-hosted Mona Sans via `next/font/local`
+- Server Components by default
+- Markdown blog rendered with `gray-matter` and `remark`
+- Lenis smooth scroll
+- JSON-LD structured data on every page
+
+### Build
+
+```sh
+pnpm build    # production build
+pnpm start    # serve the production build locally
+```
+
 ## Deploy pipeline
 
 ```
-edit content -> commit to main -> Vercel auto-deploy -> micheleokimura.com
+edit content or code -> commit to main -> Vercel auto-deploy -> micheleokimura.com
 ```
-
-Custom domain configuration and DNS records live outside this repo. See `site/DEPLOYMENT.md`.
-
-## For Brett: start here
-
-Read `site/GETTING-STARTED.md` for the Fable 5 build handoff.
 
 ## For Michele: what changed vs. the current site
 

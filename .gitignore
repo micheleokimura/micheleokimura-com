@@ -34,11 +34,17 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+*.log
 
-# Lock files (keep one, ignore others)
-# yarn.lock
-# pnpm-lock.yaml
+# Lock files (keep pnpm-lock.yaml, ignore others)
 package-lock.json
+
+# Next.js generated
+next-env.d.ts
+tsconfig.tsbuildinfo
+
+# Claude / tooling
+.gstack/
 
 # Raw asset scratch that should not be committed
 assets-raw/photos/private/

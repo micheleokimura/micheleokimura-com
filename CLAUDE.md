@@ -4,7 +4,7 @@
 
 ## What this repo is
 
-The complete content and research foundation for `micheleokimura.com`, Michele Okimura's personal website. Every page copy, every research document, every schema template, every raw asset lives here. Brett Moore builds the actual site in Fable 5 by pulling from `content/` and injecting schema from `schema/`. Vercel auto-deploys from `main`.
+The complete content, research, and site code for `micheleokimura.com`, Michele Okimura's personal website. The Next.js site code lives at root (`src/`, `public/`, `package.json`, etc.) alongside Michele's content (`content/`), research (`research/`), schema templates (`schema/`), and raw assets (`assets-raw/`). Vercel auto-deploys from `main`.
 
 ## Voice rules (non-negotiable)
 
@@ -55,10 +55,16 @@ Brett built `createchurchmedia.com`. That site's case-study pattern, navigation,
 ## Deploy pipeline
 
 ```
-edit content -> commit to main -> Vercel auto-deploy -> micheleokimura.com
+edit content or code -> commit to main -> Vercel auto-deploy -> micheleokimura.com
 ```
 
-Details in `site/DEPLOYMENT.md`.
+## Development
+
+```sh
+pnpm install
+pnpm dev          # http://localhost:3037
+pnpm build        # production build
+```
 
 ## Where to start by task
 
@@ -68,5 +74,6 @@ Details in `site/DEPLOYMENT.md`.
 - **Change a schema template** -> `schema/<type>.jsonld` and check `research/04-schema-markup-templates.md`
 - **Understand a decision** -> `research/`
 - **Add a photo or logo** -> `assets-raw/photos/` or `assets-raw/logo/`
-- **Fable 5 build questions** -> `site/GETTING-STARTED.md`
-- **Vercel deployment questions** -> `site/DEPLOYMENT.md`
+- **Edit a page component** -> `src/app/<route>/page.tsx`
+- **Edit a shared component** -> `src/components/<name>.tsx`
+- **Site config (brand, podcast, social)** -> `src/lib/site-config.ts`
