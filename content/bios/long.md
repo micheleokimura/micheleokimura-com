@@ -6,7 +6,7 @@
 
 Michele Okimura is an author, speaker, workshop leader, executive director, and coach. She is the founder of Michele Okimura LLC and the founder and Executive Director of Releasing Generations, a Christian nonprofit.
 
-Honolulu-born, Michele lives on O'ahu, Hawai'i. She spent roughly fourteen years as a Hawai'i public school teacher and more than twenty years (1997 to 2020) as Associate Pastor at Hope Chapel LifeSpring alongside her husband Rob; both are now Pastors Emeritus. Her three vantage points (classroom teacher, pastor, mother) shape how she works with adults stepping into a deeper purpose.
+Honolulu-born, Michele lives on O'ahu, Hawai'i. She spent roughly fourteen years as a Hawai'i public school teacher and is a part-time pastor at Lifespring Church in Honolulu, the church she and her husband Rob planted in 1997 (originally as Hope Chapel LifeSpring). Her three vantage points (classroom teacher, pastor, mother) shape how she works with adults stepping into a deeper purpose.
 
 In 2023, Governor Josh Green and Mayor Rick Blangiardi named Michele the State of Hawai'i Outstanding Advocate for Children and Youth. The award was conferred at the 30th anniversary of Hawai'i Children and Youth Day.
 

@@ -84,6 +84,6 @@ Coming 2027. Pre-order details will be posted when available.
 ## To be harvested
 
 - [ ] Cover art (final)
-- [ ] Foreword and praise-page endorsements (charismatic evangelical, Hope Chapel / Foursquare lineage priority)
+- [ ] Foreword and praise-page endorsements (charismatic evangelical, Hope Chapel lineage priority)
 - [ ] Pre-order links
 - [ ] Audiobook narrator and release date

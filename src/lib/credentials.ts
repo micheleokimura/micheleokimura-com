@@ -33,7 +33,7 @@ export const credentials: string[] = [
   'Founder and Executive Director, Releasing Generations',
   'Founder and Director, Explicit Movement, Kingdom Families, and ReThink Creativity',
   'Author of Dancing with Father and The Brave Series curriculum',
-  'Associate Pastor (1997-2020), now Pastor Emeritus, Hope Chapel Lifespring, Honolulu',
+  'Part-time pastor at Lifespring Church, Honolulu',
   '17 years as an elementary public school teacher in Hawai‘i',
 ]
 

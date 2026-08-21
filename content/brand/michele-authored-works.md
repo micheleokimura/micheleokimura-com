@@ -37,16 +37,9 @@
 - **Positioning:** Companion journal to *The Birth of Explicit Movement*.
 - **Case study:** `content/case-studies/explicit-movement-21-day-journal.md`
 
-### 4. Discover Your Purpose (e-book + print)
-- **Author:** Michele Okimura
-- **Format:** Print edition $15, e-book $9.99
-- **Sold via:** Explicit Movement shop
-- **Positioning:** Short-form purpose-focused workbook.
-- **Case study:** `content/case-studies/discover-your-purpose.md`
-
 ## Trade books (in production, releasing 2027)
 
-### 5. Brave Purpose (secular edition)
+### 4. Brave Purpose (secular edition)
 - **Author:** Michele Okimura
 - **Imprint:** Dream Big Publish / Ohana Style Publishing
 - **Release date:** 2027
@@ -56,7 +49,7 @@
 - **Positioning:** A story-driven adult book on healing, purpose, and the courage to dream. Explicitly secular register; accessible to non-Christian readers.
 - **Case study:** `content/case-studies/dream-big.md`
 
-### 6. Brave Purpose with God (faith edition)
+### 5. Brave Purpose with God (faith edition)
 - **Author:** Michele Okimura
 - **Imprint:** Dream Big Publish / Ohana Style Publishing
 - **Release date:** 2027
@@ -68,7 +61,7 @@
 
 ## Curricula and lesson books
 
-### 7. Dream Big Journal Curriculum (2023-2025)
+### 6. Dream Big Journal Curriculum (2023-2025)
 - **Author:** Michele Okimura
 - **Editions:** Preschool, younger elementary, older elementary, youth, adult
 - **Format:** Journal + teacher guide per edition
@@ -76,14 +69,14 @@
 - **Positioning:** Activity-based curriculum used in schools, churches, and families for discovery of purpose across all life stages.
 - **Case study:** `content/case-studies/dream-big-journals.md`
 
-### 8. Raising Kingdom Kids Lesson Book
+### 7. Raising Kingdom Kids Lesson Book
 - **Author:** Michele Okimura
 - **Format:** Lesson book, 100+ lessons
 - **Sold via:** `micheleokimura.square.site/shop/kingdom-kids-lesson-book`
 - **Positioning:** Companion to the Kingdom Families and Kingdom Kids workshop. For parents and children's church leaders raising children of faith.
 - **Case study:** `content/case-studies/raising-kingdom-kids.md`
 
-### 9. Brave & Beautiful (2022)
+### 8. Brave & Beautiful (2022)
 - **Creative Director / Chief Editor / lead author:** Michele Okimura
 - **Publisher:** Releasing Generations / The Brave Series
 - **Format:** Teen leadership curriculum for girls
@@ -91,7 +84,7 @@
 - **Positioning:** Leadership curriculum for teen girls focused on identity, worth, and protection from exploitation.
 - **Case study:** `content/case-studies/brave-and-beautiful.md`
 
-### 10. Brave & Bold
+### 9. Brave & Bold
 - **Creative Director / Chief Editor / lead author:** Michele Okimura
 - **Publisher:** Releasing Generations / The Brave Series
 - **Format:** Teen leadership curriculum for boys
@@ -99,7 +92,7 @@
 - **Positioning:** Leadership curriculum for teen boys focused on courage, healthy masculinity, and purpose.
 - **Case study:** `content/case-studies/brave-and-bold.md`
 
-### 11. Brave Together
+### 10. Brave Together
 - **Creative Director / Chief Editor / lead author:** Michele Okimura
 - **Publisher:** Releasing Generations / The Brave Series
 - **Format:** Coed curriculum, 80+ lessons with slide decks
@@ -109,7 +102,7 @@
 
 ## Blog
 
-### 12. Wisdom Flows (2025-present)
+### 11. Wisdom Flows (2025-present)
 - **Author:** Michele Okimura
 - **Platform:** micheleokimura.com/blog
 - **Positioning:** Short essays on healing, purpose, creativity, and the quiet moments that change everything.
@@ -117,17 +110,17 @@
 
 ## Programs and produced projects
 
-### 13. Explicit Movement (conferences + program)
+### 12. Explicit Movement (conferences + program)
 - **Founder & Director:** Michele Okimura
 - **Positioning:** Faith-based resources and conferences equipping parents, pastors, and youth leaders. In 2023, received the "Outstanding Advocate for Children and Youth" award from the State of Hawai'i.
 - **Case study:** `content/case-studies/explicit-movement.md`
 
-### 14. Kingdom Families (program)
+### 13. Kingdom Families (program)
 - **Founder & Director:** Michele Okimura
 - **Positioning:** Strengthening families, equipping parents, and raising up the next generation as passionate lovers of Jesus.
 - **Case study:** `content/case-studies/kingdom-families.md`
 
-### 15. ReThink Creativity (conferences + program)
+### 14. ReThink Creativity (conferences + program)
 - **Founder & Host:** Michele Okimura
 - **Positioning:** Awakening creativity in everyday people. Hosted online Creativity Conferences with global reach in 2020 and 2021.
 - **Case study:** `content/case-studies/rethink-creativity.md`

@@ -29,7 +29,6 @@ The full list of authored works is in `content/brand/michele-authored-works.md`.
 - `dancing-with-father.md` (2011)
 - `birth-of-explicit-movement.md` (2018)
 - `explicit-movement-21-day-journal.md` (2018)
-- `discover-your-purpose.md`
 - `dream-big.md` (2027, in production, secular)
 - `dream-big-with-god.md` (2027, in production, faith)
 

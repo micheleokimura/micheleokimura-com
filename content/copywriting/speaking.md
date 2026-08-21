@@ -71,7 +71,7 @@ Michele has spoken and taught for schools, churches, nonprofits, and leadership 
 - The Philippines (Manila and Baguio, Explicit Movement Conferences; ongoing curriculum training with Pag-Asa Foundation and TeachBeyond)
 - Brazil (Colégio El Shadai, São João da Boa Vista, on-site teacher training)
 - Singapore (Youth and Parent Conference)
-- Ministries and nonprofits (Foursquare Church, Missionary Church, Missio Nexus, Transform Our World, Hale Kipa, Ho'okupu Center, ARISE Native American Family Camp, Kupu)
+- Ministries and nonprofits (Missionary Church, Missio Nexus, Transform Our World, Hale Kipa, Ho'okupu Center, ARISE Native American Family Camp, Kupu)
 
 Logo grid renders here (from `assets-raw/current-site-archive-2026-06-26/images/shared/original/organizations/`).
 

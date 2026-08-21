@@ -113,10 +113,11 @@ const ERAS: Era[] = [
           and I still call them my twin-like sweeties.
         </p>
         <p>
-          In 1997 Rob and I helped plant Hope Chapel LifeSpring in Honolulu. Rob
-          was senior pastor. I served as Associate Pastor from 1997 to 2020,
-          more than twenty years, mostly walking with children and then teens.
-          We are now Pastors Emeritus.
+          In 1997 Rob and I helped plant the church in Honolulu that is now
+          called Lifespring Church (originally Hope Chapel LifeSpring). I have
+          served as a pastor there ever since, mostly walking with children and
+          then teens, and I am still on staff today as a part-time pastor
+          alongside our lead pastors Sean and Hitomi Nakamoto.
         </p>
       </>
     ),

@@ -46,7 +46,7 @@ Nav label for `/books` is "Books" and for `/brave-purpose-author-method` is "Coa
 
 ## 4. Reconciliation flags applied conservatively
 
-Per `research/RECONCILIATION.md`: the site prints "Associate Pastor at Hope Chapel LifeSpring from 1997 to 2020" (not "Pastor Michele at Lifespring"), uses "Michele Okimura" with no mention of "Lea", makes no ordination claim, and never says Brave Together is DOE-approved. Each of these loosens only when Michele confirms.
+Per `research/RECONCILIATION.md`: as of 2026-08-21 Michele confirmed she is a part-time pastor at Lifespring Church (the church she and Rob planted in 1997, originally as Hope Chapel LifeSpring); the site now prints that current-tense pastoral role. The site continues to use "Michele Okimura" with no mention of "Lea", makes no ordination claim, and never says Brave Together is DOE-approved. Each of the remaining flags loosens only when Michele confirms.
 
 ## 5. Forms without a backend (v1)
 

@@ -152,7 +152,7 @@ O'ahu, Hawai'i. Honolulu-born.
 
 ### Is Michele a licensed therapist?
 
-No. Michele is not a licensed therapist, counselor, or medical professional. She is a pastor-teacher-author with a bachelor's in Elementary Education, roughly fourteen years of Hawai'i public school teaching, and more than twenty years as Associate Pastor at Hope Chapel LifeSpring alongside her husband Rob.
+No. Michele is not a licensed therapist, counselor, or medical professional. She is a pastor-teacher-author with a bachelor's in Elementary Education, roughly fourteen years of Hawai'i public school teaching, and ongoing pastoral work at Lifespring Church in Honolulu (the church she and her husband Rob planted in 1997).
 
 ### What is the 2023 Hawai'i award?
 

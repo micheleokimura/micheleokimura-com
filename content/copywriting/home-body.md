@@ -34,7 +34,6 @@ Grid of authored works (linked to individual case-study pages):
 - Brave & Beautiful (2022, teen girls) -> `/works/brave-and-beautiful`
 - Brave & Bold (teen boys) -> `/works/brave-and-bold`
 - Brave Together (coed, 80+ lessons) -> `/works/brave-together`
-- Discover Your Purpose (print + e-book) -> `/works/discover-your-purpose`
 
 CTA under the grid:
 
@@ -113,7 +112,7 @@ Michele has served, spoken, or partnered with schools, ministries, and organizat
 
 Logo grid (from `assets-raw/current-site-archive-2026-06-26/images/shared/original/organizations/`):
 
-Hawai'i DOE. Missionary Church. Transform Our World. Island Pacific Academy. Missio Nexus. Kupu. Nancy Vuu. Foursquare Church. Hawai'i Pacific Academy. Hawai'i Catholic Schools. Hanalani Schools. Hale Kipa. Christian Academy. ARISE Native American Family Camp. Ho'okupu Center. Hawai'i Baptist Academy. Kamehameha Schools.
+Hawai'i DOE. Missionary Church. Transform Our World. Island Pacific Academy. Missio Nexus. Kupu. Nancy Vuu. Hawai'i Pacific Academy. Hawai'i Catholic Schools. Hanalani Schools. Hale Kipa. Christian Academy. ARISE Native American Family Camp. Ho'okupu Center. Hawai'i Baptist Academy. Kamehameha Schools.
 
 ---
 

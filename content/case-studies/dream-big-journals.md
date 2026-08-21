@@ -19,7 +19,7 @@ A curriculum of journals with teacher guides spanning preschool through adult ed
 
 ## Origin story
 
-Michele's fourteen years in a Hawai'i public elementary classroom gave her a working sense of how children learn. Her more than twenty years as Associate Pastor and Children's Ministry lead at Hope Chapel LifeSpring gave her a working sense of how children think about God, purpose, and the wide open horizon of their own lives.
+Michele's fourteen years in a Hawai'i public elementary classroom gave her a working sense of how children learn. Her ongoing pastoral work at Lifespring Church in Honolulu (the church she and her husband Rob planted in 1997, where she led Children's Ministry for years and continues as a part-time pastor) gave her a working sense of how children think about God, purpose, and the wide open horizon of their own lives.
 
 She spent a decade running Dream Big workshops for children, teens, and adults. Participants across every session asked the same question, in different words: "Can we do this at home?" or "Can we do this in my school?"
 

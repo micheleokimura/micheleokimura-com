@@ -1,5 +1,7 @@
 # Inbox Mining (Releasing Generations): Executive Summary
 
+> **CORRECTION 2026-08-21.** Michele confirmed that three bio-claim threads in the mining output below are fabrications and must not be promoted anywhere: (1) any Michele-bio "Foursquare" or "Foursquare Hong Kong" framing, including the July 2026 mission-trip claim and any pending "Foursquare ordination" claim; (2) any bio claim tying Michele to Arizona State University as her school or academic background (the ASU Office of Sex Trafficking Intervention Research partnership with Dr. Roe-Sepowitz remains a valid CLIENT case study); (3) a book titled "Discover Your Purpose" attributed to Michele (does not exist). Also: Michele is a CURRENT part-time pastor at Lifespring Church, still on staff. All entries below that predate this correction should be read through this lens.
+
 Source: `michele@releasinggenerations.org` Gmail, mined 2026-07-02. Follow-up to `_inbox-mining/` folder (personal account mined 2026-07-01).
 
 ## What this inbox reveals

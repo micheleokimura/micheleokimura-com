@@ -56,9 +56,9 @@ I graduated from Kalani High School in 1979 (Miss Teen USA finalist, and no, I d
 
 For roughly fourteen years I taught elementary school in the Hawai'i public system. Those were formative years. What I know about how a person actually learns, I learned in a classroom of eight-year-olds.
 
-### Twenty years alongside my husband as a pastor.
+### Pastoring alongside my husband.
 
-In 1997 Rob and I founded Hope Chapel LifeSpring in Honolulu. Rob was senior pastor. I served as Associate Pastor from 1997 to 2020, more than twenty years, mostly overseeing children's ministry and then youth ministry. Rob and I are now Pastors Emeritus.
+In 1997 Rob and I planted the church in Honolulu that is now called Lifespring Church (originally Hope Chapel LifeSpring). I have been on staff there ever since, mostly overseeing children's ministry and then youth ministry. I still serve as a part-time pastor at Lifespring today, alongside our lead pastors Sean and Hitomi Nakamoto.
 
 I did not call myself a pastor for the longest time. A phone call with a friend named Steve, followed by an unrelated Jim Carrey interview on the Oprah Winfrey Show that afternoon, both delivering the exact same sentence in the exact same words ("Michele, if God has given you that mantle, you must take it and wear it"), changed that in an afternoon. I wrote the whole story down in the Wisdom Flows post called "The Mantle." Read it if you want the long version.
 

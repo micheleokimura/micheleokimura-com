@@ -6,13 +6,11 @@
 
 ---
 
-## Flag 1: "Pastor Michele" at Lifespring Church
+## Flag 1: "Pastor Michele" at Lifespring Church - RESOLVED 2026-08-21
 
-The polished bio says Michele served as Associate Pastor at Hope Chapel LifeSpring from 1997 to 2020 and is now Pastor Emeritus. The RG inbox says otherwise: the Lifespring Church mid-week update of July 2, 2026 (thread `19f24698b83aea56`) opens a praise report with "Praise report from Pastor Michele." The church currently meets at Liholiho Elementary (thread `19ebf8c221dadbae`).
+Confirmed with Michele on 2026-08-21: she is currently a part-time pastor at Lifespring Church in Honolulu, still on staff. Lifespring Church is the same congregation the family planted in 1997 (originally as Hope Chapel LifeSpring). Older bio phrasing that bounded her pastoral tenure to 1997-2020 or labeled her "former Associate Pastor" or "Pastor Emeritus" was inaccurate and has been retired across the repo.
 
-**Question for Michele:** Are you currently serving as a pastor at Lifespring Church? Is Lifespring the same congregation as Hope Chapel LifeSpring under a shortened name, or a distinct church? Which title do you want printed: Pastor, Pastor Emeritus, or former Associate Pastor?
-
-**What the site prints until confirmed:** "Associate Pastor at Hope Chapel LifeSpring from 1997 to 2020, now Pastor Emeritus." This matches the bios in `content/bios/` and avoids claiming an active role that has not been confirmed.
+**What the site now prints:** "Part-time pastor at Lifespring Church, Honolulu" in credentials and current-tense pastoral language in the bios and About page.
 
 ## Flag 2: First name may be "Lea"
 
@@ -22,11 +20,9 @@ Multiple senders address Michele as "Lea." Ed Silvoso opens a June 26, 2026 lett
 
 **What the site prints until confirmed:** "Michele Okimura" everywhere, with no mention of Lea. Note for the Google Knowledge Panel work: if the legal name is Lea, consistent NAP across public records may need a decision later.
 
-## Flag 3: Foursquare ordination is in progress, not complete
+## Flag 3: Foursquare ordination - RETIRED 2026-08-21
 
-Sean Nakamoto forwarded Michele the "You're Invited to Apply for Foursquare Ordination" email on June 3, 2026 (thread `19ef85c8ab7c6e5e`) and appears to be sponsoring her application. As of July 2, 2026 the process is underway and not finished.
-
-**Rule for the site:** Do not print "ordained" anywhere until the ordination lands. The site currently makes no ordination claim at all. When it completes, the About page and Person schema can add it.
+Michele confirmed on 2026-08-21 that earlier notes describing a Foursquare / Foursquare-Hong-Kong connection in her bio were fabrications introduced by an earlier chat. Any prior Foursquare framing in Michele-bio contexts has been struck from the workspace and repo. The site never printed an ordination claim; that guardrail stands regardless.
 
 ## Flag 4: Brave Together is under DOE review, not approved
 

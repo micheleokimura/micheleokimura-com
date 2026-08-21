@@ -27,7 +27,7 @@ export const siteConfig = {
   offerName: 'Brave Purpose Author Method',
   positioning: 'Brave Purpose',
   description:
-    'Michele Okimura is a speaker, author, and coach based on O\'ahu, Hawai\'i. She is the founder and Executive Director of Releasing Generations, founder of Explicit Movement, Kingdom Families, and ReThink Creativity, and author of fifteen published and forthcoming works spanning trade books, curricula, and programs.',
+    'Michele Okimura is a speaker, author, and coach based on O\'ahu, Hawai\'i. She is the founder and Executive Director of Releasing Generations, founder of Explicit Movement, Kingdom Families, and ReThink Creativity, and author of fourteen published and forthcoming works spanning trade books, curricula, and programs.',
   nonprofit: 'Releasing Generations',
   nonprofitUrl: 'https://releasinggenerations.org',
   church: 'Hope Chapel Lifespring',
@@ -99,15 +99,6 @@ export const authoredWorks: AuthoredWork[] = [
     status: 'published',
     year: 2018,
     format: 'Print and e-book',
-    inLanguage: 'en',
-  },
-  {
-    slug: 'discover-your-purpose',
-    title: 'Discover Your Purpose',
-    category: 'trade-book',
-    status: 'published',
-    format: 'Print and e-book',
-    subtitle: 'Short-form purpose-focused workbook.',
     inLanguage: 'en',
   },
   {

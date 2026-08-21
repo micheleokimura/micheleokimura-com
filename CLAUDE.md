@@ -23,7 +23,7 @@ The full voice guide lives at `content/brand/voice-guide.md`. Read it before wri
 
 ## Who Michele is (short version)
 
-Michele Okimura is a Honolulu-based author, speaker, workshop leader, and coach. She founded Michele Okimura LLC (her commercial vehicle) and Releasing Generations (her Christian nonprofit umbrella). She spent roughly fourteen years as a Hawai'i public elementary school teacher and more than twenty years as Associate Pastor at Hope Chapel LifeSpring alongside her husband Rob. In 2023 the State of Hawai'i named her Outstanding Advocate for Children and Youth.
+Michele Okimura is a Honolulu-based author, speaker, workshop leader, and coach. She founded Michele Okimura LLC (her commercial vehicle) and Releasing Generations (her Christian nonprofit umbrella). She spent roughly fourteen years as a Hawai'i public elementary school teacher and is currently a part-time pastor at Lifespring Church in Honolulu, the church she and her husband Rob planted in 1997 (originally as Hope Chapel LifeSpring). In 2023 the State of Hawai'i named her Outstanding Advocate for Children and Youth.
 
 She has authored two published trade books (*Dancing with Father*, 2011; *The Birth of Explicit Movement*, 2018), the Dream Big Journal Curriculum (preschool through adult), the Raising Kingdom Kids Lesson Book, and the Brave Series curriculum (Brave & Beautiful, Brave & Bold, Brave Together). Two more trade books release in 2027 under the shared title *Brave Purpose* (secular) and *Brave Purpose with God* (faith).
 

@@ -22,7 +22,7 @@ For Michele, that day was not the beginning. It was a quieter thing. It was the 
 
 Long before any board, any pulpit, any conference stage, Michele was a teacher. She grew up in Kaimukī, graduated from Kalani High School, and went to the University of Hawai'i at Mānoa for her education degree. For seventeen years, she taught elementary public school in Hawai'i. The keiki of this state were her work day in and day out, and they have stayed her work in every season since.
 
-In 1997, Rob Okimura founded Hope Chapel Lifespring in Honolulu and served as Senior Pastor. Michele served alongside him as Associate Pastor from 1997 to 2020, overseeing the Children's and Youth Ministries. Rob and Michele are now Pastors Emeritus. The teacher's heart did not retire when the pastor's calling arrived; it deepened.
+In 1997, Rob Okimura and Michele helped plant the Honolulu church now called Lifespring Church (originally Hope Chapel LifeSpring), where Rob served as Senior Pastor. Michele has served on staff there ever since, overseeing the Children's and Youth Ministries and continuing today as a part-time pastor alongside lead pastors Sean and Hitomi Nakamoto. The teacher's heart did not retire when the pastor's calling arrived; it deepened.
 
 ## From classroom to movement
 

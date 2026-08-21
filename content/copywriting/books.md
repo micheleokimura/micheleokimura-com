@@ -98,12 +98,6 @@ Companion to *The Birth of Explicit Movement*. Print $14.99, e-book $9.99 on the
 
 [ Read the case study ] -> `/works/explicit-movement-21-day-journal`
 
-### Discover Your Purpose (print + e-book)
-
-Short form, purpose-focused, sold via Explicit Movement shop.
-
-[ Read the case study ] -> `/works/discover-your-purpose`
-
 ---
 
 ## In production

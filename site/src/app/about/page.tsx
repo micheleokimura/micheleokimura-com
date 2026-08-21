@@ -23,10 +23,10 @@ export const metadata: Metadata = {
 // Verbatim review by Michele pending. Voice rules honored (no em-dashes, no
 // AI-tell vocab, first-person, warm, unhurried).
 //
-// Reconciliation flag (see report): the dossier's open questions on Michele's
-// current pastoral status at Lifespring Church in 2026 are NOT surfaced on
-// this page. The page states only what is confirmed: Associate Pastor
-// 1997-2020, now Pastor Emeritus at Hope Chapel LifeSpring.
+// Reconciliation resolved 2026-08-21: Michele is currently a part-time pastor
+// at Lifespring Church in Honolulu (the church she and Rob planted in 1997,
+// originally as Hope Chapel LifeSpring). Older "Associate Pastor 1997-2020" /
+// "Pastor Emeritus" phrasing was incorrect and has been retired.
 export default function AboutPage() {
   return (
     <>
