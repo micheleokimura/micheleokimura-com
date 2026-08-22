@@ -251,7 +251,7 @@ export default function SpeakPage() {
                     <div className="lg:grid lg:grid-cols-[6rem_1fr] lg:gap-10">
                       <p
                         aria-hidden="true"
-                        className="font-display text-4xl font-semibold tracking-tight text-[var(--color-cta)]"
+                        className="font-display text-4xl font-semibold tracking-tight text-[var(--color-brand-orange-ink)]"
                       >
                         {topic.number}
                       </p>
@@ -374,7 +374,7 @@ export default function SpeakPage() {
       </section>
 
       <Container className="mt-24 sm:mt-32 lg:mt-40">
-        <FadeIn className="-mx-6 rounded-4xl bg-neutral-950 px-6 py-20 sm:mx-0 sm:py-24 md:px-12">
+        <FadeIn className="-mx-6 rounded-4xl bg-neutral-950 surface-sapphire px-6 py-20 sm:mx-0 sm:py-24 md:px-12">
           <div className="mx-auto max-w-4xl">
             <h2 className="font-display text-3xl font-medium tracking-tight text-balance text-white sm:text-4xl">
               Book Michele.

@@ -15,7 +15,7 @@ type Props = {
 export function ContactBlock({ heading, children, source = 'contact-block' }: Props) {
   return (
     <Container className="mt-24 sm:mt-32 lg:mt-40">
-      <FadeIn className="-mx-6 rounded-4xl bg-neutral-950 px-6 py-20 sm:mx-0 sm:py-32 md:px-12">
+      <FadeIn className="-mx-6 rounded-4xl bg-neutral-950 surface-sapphire px-6 py-20 sm:mx-0 sm:py-32 md:px-12">
         <div className="mx-auto max-w-4xl">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1fr_auto] lg:gap-16">
             <div className="max-w-xl">
@@ -44,7 +44,7 @@ export function ContactBlock({ heading, children, source = 'contact-block' }: Pr
                 <dd className="mt-3">
                   <a
                     href={`mailto:${siteConfig.email}`}
-                    className="text-white hover:text-[var(--color-cta)]"
+                    className="text-white hover:text-[var(--color-brand-orange-on-dark)]"
                   >
                     {siteConfig.email}
                   </a>

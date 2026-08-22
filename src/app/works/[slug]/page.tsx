@@ -131,7 +131,7 @@ export default async function WorkPage({
                   <p>
                     <Link
                       href={projectHref}
-                      className="inline-flex items-center gap-2 font-semibold text-[var(--color-brand-teal)] underline underline-offset-4 hover:decoration-2"
+                      className="inline-flex items-center gap-2 font-semibold text-[var(--color-brand-orange-ink)] underline underline-offset-4 hover:decoration-2"
                     >
                       Read the story behind this work
                       <span aria-hidden="true">&rarr;</span>
@@ -145,7 +145,7 @@ export default async function WorkPage({
                       href={work.purchaseUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 font-semibold text-[var(--color-brand-teal)] underline underline-offset-4 hover:decoration-2"
+                      className="inline-flex items-center gap-2 font-semibold text-[var(--color-brand-orange-ink)] underline underline-offset-4 hover:decoration-2"
                     >
                       Get this book
                       <span aria-hidden="true">&rarr;</span>
@@ -157,7 +157,7 @@ export default async function WorkPage({
 
             <aside>
               <dl className="rounded-2xl border border-neutral-200 bg-white p-6">
-                <h3 className="mb-4 font-display text-sm font-semibold tracking-widest text-[var(--color-brand-teal)] uppercase">
+                <h3 className="mb-4 font-display text-sm font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
                   Details
                 </h3>
                 <MetadataRow label="Category" value={categoryLabel(work.category)} />

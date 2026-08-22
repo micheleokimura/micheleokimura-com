@@ -53,7 +53,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${monaSans.variable} h-full bg-white text-base antialiased`}>
-      <body className="flex min-h-full flex-col font-sans text-neutral-950 selection:bg-[var(--color-cta)] selection:text-neutral-950">
+      <body className="flex min-h-full flex-col font-sans text-[var(--color-cta-ink)] selection:bg-[var(--color-cta)] selection:text-[var(--color-cta-ink)]">
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-neutral-950 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"

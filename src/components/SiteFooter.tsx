@@ -104,7 +104,7 @@ export function SiteFooter() {
                 rel="noopener noreferrer"
                 className="group mt-6 flex items-start gap-3"
               >
-                <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-neutral-950/[0.06] text-neutral-700 transition group-hover:bg-[var(--color-cta)] group-hover:text-white">
+                <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-neutral-950/[0.06] text-neutral-700 transition group-hover:bg-[var(--color-cta)] group-hover:text-[var(--color-cta-ink)]">
                   <MicIcon className="h-4 w-4" />
                 </span>
                 <span>

@@ -50,7 +50,7 @@ export default function HomePage() {
               <div className="flex items-start justify-between gap-12">
                 <div className="max-w-2xl">
                   <FadeIn>
-                    <span className="mb-5 block font-display text-sm font-semibold tracking-wider text-[var(--color-brand-teal)] uppercase">
+                    <span className="mb-5 block font-display text-sm font-semibold tracking-wider text-[var(--color-brand-orange-ink)] uppercase">
                       Brave Purpose
                     </span>
                     <h1 className="font-display text-[2.75rem] leading-[1.05] font-medium tracking-tight text-balance text-neutral-950 sm:text-6xl lg:text-[3.75rem] lg:leading-[1.08]">

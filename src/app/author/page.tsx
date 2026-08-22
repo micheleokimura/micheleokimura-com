@@ -45,7 +45,7 @@ type AvailableLink = { text: string; href?: string }
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-teal)] uppercase">
+    <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
       {children}
     </h2>
   )
@@ -115,7 +115,7 @@ function Endorsements({
         {items.map((item, i) => (
           <figure
             key={`${item.source}-${i}`}
-            className="border-l-2 border-[var(--color-brand-teal)] pl-5"
+            className="border-l-2 border-[var(--color-brand-orange)] pl-5"
           >
             <blockquote className="text-base leading-7 text-neutral-700 italic">
               {item.quote}
@@ -155,7 +155,7 @@ function AvailableAt({
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-medium text-neutral-950 underline decoration-[var(--color-brand-teal)] decoration-1 underline-offset-4 transition hover:decoration-2"
+              className="font-medium text-neutral-950 underline decoration-[var(--color-brand-orange)] decoration-1 underline-offset-4 transition hover:decoration-2"
             >
               {link.text}
             </a>
@@ -224,7 +224,7 @@ function ReadTheStory({ href, label }: { href: string; label: string }) {
     <div className="mt-8">
       <Link
         href={href}
-        className="group inline-flex items-center gap-2 font-display text-base font-semibold text-neutral-950 underline decoration-[var(--color-brand-teal)] decoration-2 underline-offset-4 transition hover:text-[var(--color-brand-teal)]"
+        className="group inline-flex items-center gap-2 font-display text-base font-semibold text-neutral-950 underline decoration-[var(--color-brand-orange)] decoration-2 underline-offset-4 transition hover:text-[var(--color-brand-orange-ink)]"
       >
         Read the story of {label}
         <span aria-hidden="true">&rarr;</span>
@@ -435,7 +435,7 @@ export default function AuthorPage() {
           from src/lib/projects.ts, which every case study also quotes. */}
       <Container className="mt-2 sm:mt-6">
         <FadeIn>
-          <p className="max-w-3xl border-l-2 border-[var(--color-brand-teal)] pl-6 font-display text-xl leading-9 text-neutral-800 italic sm:text-2xl sm:leading-10">
+          <p className="max-w-3xl border-l-2 border-[var(--color-brand-orange)] pl-6 font-display text-xl leading-9 text-neutral-800 italic sm:text-2xl sm:leading-10">
             {GOLDEN_THREAD_LINE}
           </p>
           <figure className="mt-8 max-w-3xl">
@@ -450,7 +450,7 @@ export default function AuthorPage() {
             Every title here has a story behind it. You can read them all on the{' '}
             <Link
               href="/projects"
-              className="font-medium text-neutral-950 underline decoration-[var(--color-brand-teal)] decoration-1 underline-offset-4 transition hover:decoration-2"
+              className="font-medium text-neutral-950 underline decoration-[var(--color-brand-orange)] decoration-1 underline-offset-4 transition hover:decoration-2"
             >
               projects page
             </Link>
@@ -569,7 +569,7 @@ export default function AuthorPage() {
                     <li key={story} className="flex gap-3">
                       <span
                         aria-hidden="true"
-                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-teal)]"
+                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-orange)]"
                       />
                       <span className="text-base leading-7 text-neutral-700">
                         {story}
@@ -825,11 +825,11 @@ export default function AuthorPage() {
                 </p>
               </Prose>
 
-              {/* Recognition callout. The hex mirrors --color-brand-teal; an opacity
+              {/* Recognition callout. The hex mirrors --color-brand-orange; an opacity
                   modifier on a var() color is not reliable across Tailwind
                   versions, so the literal is used here. */}
-              <div className="mt-8 rounded-3xl bg-[#0097b2]/[0.06] p-6 ring-1 ring-[#0097b2]/[0.2] sm:p-8">
-                <h4 className="font-display text-xs font-semibold tracking-widest text-[var(--color-brand-teal)] uppercase">
+              <div className="mt-8 rounded-3xl bg-[#ff4500]/[0.06] p-6 ring-1 ring-[#ff4500]/[0.2] sm:p-8">
+                <h4 className="font-display text-xs font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
                   Recognition
                 </h4>
                 <ul role="list" className="mt-5 space-y-4">
@@ -837,7 +837,7 @@ export default function AuthorPage() {
                     <li key={item} className="flex gap-3">
                       <span
                         aria-hidden="true"
-                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-teal)]"
+                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-orange)]"
                       />
                       <span className="text-base leading-7 text-neutral-800">
                         {item}
@@ -931,7 +931,7 @@ export default function AuthorPage() {
                   />
                 }
               >
-                <span className="inline-flex items-center rounded-full bg-[var(--color-brand-teal)] px-3 py-1 text-xs font-semibold tracking-widest text-white uppercase">
+                <span className="inline-flex items-center rounded-full bg-[var(--color-brand-orange)] px-3 py-1 text-xs font-semibold tracking-widest text-[var(--color-cta-ink)] uppercase">
                   Targeted Spring 2027
                 </span>
                 <div className="mt-4">
@@ -962,7 +962,7 @@ export default function AuthorPage() {
                 <div className="mt-8">
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-1.5 font-display text-base font-semibold text-neutral-950 underline decoration-[var(--color-brand-teal)] decoration-2 underline-offset-4 transition hover:text-[var(--color-brand-teal)]"
+                    className="inline-flex items-center gap-1.5 font-display text-base font-semibold text-neutral-950 underline decoration-[var(--color-brand-orange)] decoration-2 underline-offset-4 transition hover:text-[var(--color-brand-orange-ink)]"
                   >
                     Contact Michele for release updates
                     <span aria-hidden="true">&rarr;</span>
@@ -977,7 +977,7 @@ export default function AuthorPage() {
               <Work
                 cover={<Cover alt="Brave Purpose" sizes={COVER_SIZES_MAIN} />}
               >
-                <span className="inline-flex items-center rounded-full bg-[var(--color-brand-teal)] px-3 py-1 text-xs font-semibold tracking-widest text-white uppercase">
+                <span className="inline-flex items-center rounded-full bg-[var(--color-brand-orange)] px-3 py-1 text-xs font-semibold tracking-widest text-[var(--color-cta-ink)] uppercase">
                   Releasing 2027
                 </span>
                 <div className="mt-4">
@@ -1002,7 +1002,7 @@ export default function AuthorPage() {
                 <div className="mt-8">
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-1.5 font-display text-base font-semibold text-neutral-950 underline decoration-[var(--color-brand-teal)] decoration-2 underline-offset-4 transition hover:text-[var(--color-brand-teal)]"
+                    className="inline-flex items-center gap-1.5 font-display text-base font-semibold text-neutral-950 underline decoration-[var(--color-brand-orange)] decoration-2 underline-offset-4 transition hover:text-[var(--color-brand-orange-ink)]"
                   >
                     Contact Michele for release updates
                     <span aria-hidden="true">&rarr;</span>
@@ -1037,9 +1037,9 @@ export default function AuthorPage() {
                 <FadeIn as="li" key={project.href} scaleIn>
                   <Link
                     href={project.href}
-                    className="group flex h-full flex-col rounded-3xl bg-white p-8 ring-1 ring-neutral-900/5 transition hover:shadow-lg hover:ring-neutral-900/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)]"
+                    className="group flex h-full flex-col rounded-3xl bg-white p-8 ring-1 ring-neutral-900/5 transition hover:shadow-lg hover:ring-neutral-900/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-orange)]"
                   >
-                    <span className="text-xs font-semibold tracking-widest text-[var(--color-brand-teal)] uppercase">
+                    <span className="text-xs font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
                       {project.kicker}
                     </span>
                     <h3 className="mt-3 font-display text-xl font-semibold tracking-tight text-neutral-950">
@@ -1059,7 +1059,7 @@ export default function AuthorPage() {
               <FadeIn as="li" scaleIn>
                 <Link
                   href="/projects"
-                  className="group flex h-full flex-col justify-between rounded-3xl bg-neutral-950 p-8 transition hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)]"
+                  className="group flex h-full flex-col justify-between rounded-3xl bg-neutral-950 p-8 transition hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-orange)]"
                 >
                   <div>
                     <span className="text-xs font-semibold tracking-widest text-white/70 uppercase">

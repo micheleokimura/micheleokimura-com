@@ -91,7 +91,7 @@ export function AboutPhotoGrid() {
               }}
               aria-expanded={open}
               aria-label={`${panel.headline} ${panel.body}`}
-              className="block w-full text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)]"
+              className="block w-full text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-orange)]"
             >
               {/* Photo */}
               <div className="relative aspect-[4/5] w-full">
@@ -112,7 +112,7 @@ export function AboutPhotoGrid() {
                     'absolute inset-0 flex flex-col justify-end p-6 opacity-0 transition-opacity duration-500 group-hover:opacity-100',
                     open && 'opacity-100',
                   )}
-                  style={{ backgroundColor: 'color-mix(in oklab, var(--color-brand-teal) 40%, transparent)' }}
+                  style={{ backgroundColor: 'color-mix(in oklab, var(--color-brand-orange) 40%, transparent)' }}
                 >
                   {/* Layer 1: headline (~150ms) */}
                   <p
@@ -141,7 +141,7 @@ export function AboutPhotoGrid() {
                 {/* Teal "+" pin affordance (lower-right) */}
                 <span
                   className={cn(
-                    'absolute right-4 bottom-4 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-[var(--color-brand-teal)] shadow-md ring-1 ring-[var(--color-brand-teal)]/30 transition group-hover:opacity-0',
+                    'absolute right-4 bottom-4 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-[var(--color-brand-orange-ink)] shadow-md ring-1 ring-[var(--color-brand-orange)]/30 transition group-hover:opacity-0',
                     open && 'opacity-0',
                   )}
                 >

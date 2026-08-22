@@ -39,7 +39,7 @@ export function JoinWaitListButton({
 
   const variants: Record<Variant, string> = {
     primary:
-      'bg-[var(--color-cta)] text-neutral-950 shadow-sm hover:bg-[var(--color-cta-hover)]',
+      'bg-[var(--color-cta)] text-[var(--color-cta-ink)] shadow-sm hover:bg-[var(--color-cta-hover)]',
     secondary:
       'bg-transparent text-neutral-950 ring-1 ring-inset ring-neutral-300 hover:ring-neutral-950',
     ghost: 'bg-transparent text-neutral-950 hover:bg-neutral-950/[0.06]',

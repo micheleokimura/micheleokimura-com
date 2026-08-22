@@ -130,7 +130,7 @@ export default function ReThinkCreativityPage() {
           panel rather than sitting inside the origin prose. */}
       <Container className="mt-20 sm:mt-28">
         <FadeIn>
-          <div className="-mx-6 rounded-4xl bg-neutral-950 px-6 py-16 sm:mx-0 sm:py-20 md:px-12">
+          <div className="-mx-6 rounded-4xl bg-neutral-950 surface-sapphire px-6 py-16 sm:mx-0 sm:py-20 md:px-12">
             <div className="mx-auto max-w-3xl">
               <h2 className="font-display text-xs font-semibold tracking-widest text-white/70 uppercase">
                 The craftsmen
@@ -140,7 +140,7 @@ export default function ReThinkCreativityPage() {
                 does not call forth the priests. He does not call forth the
                 warriors. He calls forth the craftsmen.
               </p>
-              <figure className="mt-8 border-l-2 border-[var(--color-brand-teal)] pl-6">
+              <figure className="mt-8 border-l-2 border-[var(--color-brand-orange)] pl-6">
                 <blockquote className="text-lg leading-8 text-neutral-300 italic">
                   &ldquo;God uses our craftsmanship to dismantle the works of the
                   enemy. There&rsquo;s a powerful thing we need to tap into with

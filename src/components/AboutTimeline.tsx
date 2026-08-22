@@ -288,7 +288,7 @@ function PhotoGrid({ photos }: { photos: Photo[] }) {
       {photos.map((p) => (
         <li key={p.src}>
           <figure className="group relative overflow-hidden rounded-2xl bg-neutral-100 ring-1 ring-neutral-200">
-            <span className="relative block aspect-[4/5] w-full bg-[color-mix(in_oklab,var(--color-brand-teal)_10%,white)]">
+            <span className="relative block aspect-[4/5] w-full bg-[color-mix(in_oklab,var(--color-brand-orange)_10%,white)]">
               <Image
                 src={p.src}
                 alt={p.alt}
@@ -319,7 +319,7 @@ function EraBlock({ era, index }: { era: Era; index: number }) {
     <FadeIn as="section" aria-label={`${era.years}: ${era.headline}`}>
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-14 lg:items-start">
         <div className={cn('lg:col-span-5', !proseFirst && 'lg:order-last')}>
-          <p className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-teal)] uppercase">
+          <p className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
             {era.years}
           </p>
           <h2 className="mt-3 font-display text-3xl font-medium tracking-tight text-neutral-950 sm:text-4xl">

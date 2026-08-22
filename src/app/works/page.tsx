@@ -81,7 +81,7 @@ export default function WorksPage() {
           <section key={section.label} aria-label={section.label}>
             <Container className="mt-16 sm:mt-24">
               <FadeIn>
-                <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-teal)] uppercase">
+                <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
                   {section.label}
                 </h2>
               </FadeIn>
@@ -94,7 +94,7 @@ export default function WorksPage() {
                     <FadeIn as="li" key={work.slug} scaleIn>
                       <Link
                         href={`/works/${work.slug}`}
-                        className="group flex h-full flex-col rounded-3xl bg-white p-6 ring-1 ring-neutral-900/5 transition hover:shadow-lg hover:ring-neutral-900/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)]"
+                        className="group flex h-full flex-col rounded-3xl bg-white p-6 ring-1 ring-neutral-900/5 transition hover:shadow-lg hover:ring-neutral-900/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-orange)]"
                       >
                         {work.coverImage ? (
                           <div className="relative mb-4 aspect-[3/4] w-full overflow-hidden rounded-xl bg-neutral-100">
@@ -114,7 +114,7 @@ export default function WorksPage() {
                           </div>
                         )}
                         <div className="flex items-center gap-2">
-                          <span className="text-xs font-semibold tracking-widest text-[var(--color-brand-teal)] uppercase">
+                          <span className="text-xs font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
                             {categoryLabel(work.category)}
                           </span>
                           {statusBadge(work)}

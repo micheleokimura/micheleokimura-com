@@ -37,9 +37,9 @@ function ProjectCard({ study }: { study: ProjectStudy }) {
     <FadeIn as="li" scaleIn>
       <Link
         href={study.href}
-        className="group flex h-full flex-col rounded-3xl bg-white p-8 ring-1 ring-neutral-900/5 transition hover:shadow-lg hover:ring-neutral-900/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)]"
+        className="group flex h-full flex-col rounded-3xl bg-white p-8 ring-1 ring-neutral-900/5 transition hover:shadow-lg hover:ring-neutral-900/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-orange)]"
       >
-        <span className="text-xs font-semibold tracking-widest text-[var(--color-brand-teal)] uppercase">
+        <span className="text-xs font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
           {study.kicker}
         </span>
         <h3 className="mt-3 font-display text-xl font-semibold tracking-tight text-neutral-950">
@@ -72,7 +72,7 @@ function Group({
     <section aria-labelledby={id}>
       <Container className={className}>
         <FadeIn>
-          <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-teal)] uppercase">
+          <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
             <span id={id}>{heading}</span>
           </h2>
         </FadeIn>
@@ -113,8 +113,8 @@ export default function ProjectsPage() {
           read as one body of work rather than a list of unrelated products. */}
       <Container className="mt-4 sm:mt-8">
         <FadeIn>
-          <figure className="max-w-3xl rounded-3xl bg-[#0097b2]/[0.06] p-8 ring-1 ring-[#0097b2]/[0.2] sm:p-10">
-            <h2 className="font-display text-xs font-semibold tracking-widest text-[var(--color-brand-teal)] uppercase">
+          <figure className="max-w-3xl rounded-3xl bg-[#ff4500]/[0.06] p-8 ring-1 ring-[#ff4500]/[0.2] sm:p-10">
+            <h2 className="font-display text-xs font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
               The golden thread
             </h2>
             <blockquote className="mt-5 font-display text-xl leading-9 text-neutral-800 italic sm:text-2xl sm:leading-10">
@@ -123,7 +123,7 @@ export default function ProjectsPage() {
             <figcaption className="mt-4 text-sm font-medium text-neutral-500 not-italic">
               Michele Okimura
             </figcaption>
-            <blockquote className="mt-6 border-t border-[#0097b2]/[0.25] pt-6 text-base leading-7 text-neutral-800 italic">
+            <blockquote className="mt-6 border-t border-[#ff4500]/[0.25] pt-6 text-base leading-7 text-neutral-800 italic">
               &ldquo;{GOLDEN_THREAD_CULMINATION}&rdquo;
             </blockquote>
           </figure>
@@ -151,7 +151,7 @@ export default function ProjectsPage() {
             worked with? Those stories live on the{' '}
             <Link
               href="/case-studies"
-              className="font-medium text-neutral-950 underline decoration-[var(--color-brand-teal)] decoration-1 underline-offset-4 transition hover:decoration-2"
+              className="font-medium text-neutral-950 underline decoration-[var(--color-brand-orange)] decoration-1 underline-offset-4 transition hover:decoration-2"
             >
               case studies
             </Link>{' '}

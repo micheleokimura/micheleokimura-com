@@ -62,7 +62,7 @@ export default function AboutPage() {
           quote. Verbatim. */}
       <Container className="mt-16 sm:mt-20">
         <FadeIn>
-          <figure className="mx-auto max-w-4xl border-l-2 border-[var(--color-brand-teal)] pl-6 sm:pl-8">
+          <figure className="mx-auto max-w-4xl border-l-2 border-[var(--color-brand-orange)] pl-6 sm:pl-8">
             <blockquote className="font-display text-2xl leading-10 text-neutral-900 italic sm:text-3xl sm:leading-tight">
               &ldquo;{GOLDEN_THREAD_QUOTE}&rdquo;
             </blockquote>
@@ -83,7 +83,7 @@ export default function AboutPage() {
       {/* The work Michele leads — her own brand family (own surface, not endorsers) */}
       <Container className="mt-20 sm:mt-28">
         <FadeIn className="mx-auto max-w-4xl">
-          <h2 className="text-center font-display text-sm font-semibold tracking-widest text-[var(--color-brand-teal)] uppercase">
+          <h2 className="text-center font-display text-sm font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
             The work Michele leads
           </h2>
           <ul
@@ -114,7 +114,7 @@ export default function AboutPage() {
       <Container className="mt-20 sm:mt-28">
         <div className="mx-auto grid max-w-4xl grid-cols-1 gap-12 lg:grid-cols-2">
           <FadeIn>
-            <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-teal)] uppercase">
+            <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
               Honors and recognition
             </h2>
             <ul role="list" className="mt-6 divide-y divide-neutral-200 border-t border-neutral-200">
@@ -134,13 +134,13 @@ export default function AboutPage() {
           </FadeIn>
 
           <FadeIn>
-            <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-teal)] uppercase">
+            <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
               Roles and work
             </h2>
             <ul role="list" className="mt-6 space-y-3 border-t border-neutral-200 pt-6 text-base text-neutral-700">
               {credentials.map((c) => (
                 <li key={c} className="flex gap-3">
-                  <span aria-hidden="true" className="text-[var(--color-brand-teal)]">
+                  <span aria-hidden="true" className="text-[var(--color-brand-orange-ink)]">
                     &middot;
                   </span>
                   <span>{c}</span>

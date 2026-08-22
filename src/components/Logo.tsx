@@ -21,7 +21,7 @@ export function Logo({
       )}
     >
       Michele Okimura
-      <span className="text-[var(--color-brand-teal)]">.</span>
+      <span className="text-[var(--color-brand-orange-ink)]">.</span>
     </span>
   )
 }

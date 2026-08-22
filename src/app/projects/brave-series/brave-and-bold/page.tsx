@@ -116,7 +116,7 @@ export default function BraveAndBoldPage() {
             The full account of the series is on the{' '}
             <Link
               href="/projects/brave-series"
-              className="font-medium text-neutral-950 underline decoration-[var(--color-brand-teal)] decoration-1 underline-offset-4 transition hover:decoration-2"
+              className="font-medium text-neutral-950 underline decoration-[var(--color-brand-orange)] decoration-1 underline-offset-4 transition hover:decoration-2"
             >
               Brave Series hub
             </Link>

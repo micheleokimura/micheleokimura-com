@@ -1,11 +1,11 @@
 import { cn } from '@/lib/cn'
 
 /**
- * Teal highlighter swipe behind nav and CTA text. Literal CSS fill value
+ * Orange highlighter swipe behind nav and CTA text. Literal CSS fill value
  * instead of var() because Safari/iOS won't evaluate var() inside an SVG
  * presentation attribute.
  */
-const MARKER_TEAL = '#0097B2'
+const MARKER_ORANGE = '#FF4500'
 
 export function MarkerSwipe({ className }: { className?: string }) {
   return (
@@ -30,8 +30,8 @@ export function MarkerSwipe({ className }: { className?: string }) {
       >
         <path
           d="M 1,11 L 6,3.5 L 94,3.5 L 99,11 L 94,18.5 L 6,18.5 Z"
-          fill={MARKER_TEAL}
-          style={{ fill: MARKER_TEAL }}
+          fill={MARKER_ORANGE}
+          style={{ fill: MARKER_ORANGE }}
           opacity="0.9"
         />
       </svg>

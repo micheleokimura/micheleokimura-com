@@ -12,7 +12,7 @@ import { GOLDEN_THREAD_CULMINATION, GOLDEN_THREAD_QUOTE } from '@/lib/projects'
 // same hero, the same golden-thread callout, the same quote and endorsement
 // treatments. Book case studies should use these too rather than re-styling.
 //
-// The teal literal (#0097b2) mirrors --color-brand-teal. An opacity modifier on
+// The teal literal (#ff4500) mirrors --color-brand-orange. An opacity modifier on
 // a var() color is not reliable across Tailwind versions, so tinted surfaces use
 // the literal while solid fills use the token.
 
@@ -49,7 +49,7 @@ export function CaseStudyLayout({
         <FadeIn>
           <Link
             href="/projects"
-            className="group inline-flex items-center gap-2 font-display text-base font-semibold text-neutral-950 transition hover:text-[var(--color-brand-teal)]"
+            className="group inline-flex items-center gap-2 font-display text-base font-semibold text-neutral-950 transition hover:text-[var(--color-brand-orange-ink)]"
           >
             <span aria-hidden="true">&larr;</span>
             All projects
@@ -85,7 +85,7 @@ function BravePurposeClose() {
     <Container className="mt-24 sm:mt-32">
       <FadeIn>
         <div className="mx-auto max-w-3xl border-t border-neutral-200 pt-12 text-center">
-          <h2 className="font-display text-xs font-semibold tracking-widest text-[var(--color-brand-teal)] uppercase">
+          <h2 className="font-display text-xs font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
             Where the thread leads
           </h2>
           <figure className="mt-6">
@@ -101,7 +101,7 @@ function BravePurposeClose() {
             through the{' '}
             <Link
               href="/coaching"
-              className="font-medium text-neutral-950 underline decoration-[var(--color-brand-teal)] decoration-2 underline-offset-4 transition hover:text-[var(--color-brand-teal)]"
+              className="font-medium text-neutral-950 underline decoration-[var(--color-brand-orange)] decoration-2 underline-offset-4 transition hover:text-[var(--color-brand-orange-ink)]"
             >
               Brave Purpose Author Method
             </Link>
@@ -132,7 +132,7 @@ export function CaseStudySection({
       <Container className={className}>
         {heading ? (
           <FadeIn>
-            <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-teal)] uppercase">
+            <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
               <span id={id}>{heading}</span>
             </h2>
           </FadeIn>
@@ -179,8 +179,8 @@ export function GoldenThread({ children }: { children: React.ReactNode }) {
   return (
     <Container className="mt-20 sm:mt-28">
       <FadeIn>
-        <div className="rounded-3xl bg-[#0097b2]/[0.06] p-8 ring-1 ring-[#0097b2]/[0.2] sm:p-10">
-          <h2 className="font-display text-xs font-semibold tracking-widest text-[var(--color-brand-teal)] uppercase">
+        <div className="rounded-3xl bg-[#ff4500]/[0.06] p-8 ring-1 ring-[#ff4500]/[0.2] sm:p-10">
+          <h2 className="font-display text-xs font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
             The golden thread
           </h2>
           <figure className="mt-5">
@@ -191,7 +191,7 @@ export function GoldenThread({ children }: { children: React.ReactNode }) {
               Michele Okimura
             </figcaption>
           </figure>
-          <p className="mt-6 max-w-3xl border-t border-[#0097b2]/[0.25] pt-6 text-base leading-7 text-neutral-800">
+          <p className="mt-6 max-w-3xl border-t border-[#ff4500]/[0.25] pt-6 text-base leading-7 text-neutral-800">
             {children}
           </p>
         </div>
@@ -252,7 +252,7 @@ export function Endorsements({
         {items.map((item, i) => (
           <figure
             key={`${item.source}-${i}`}
-            className="border-l-2 border-[var(--color-brand-teal)] pl-5"
+            className="border-l-2 border-[var(--color-brand-orange)] pl-5"
           >
             <blockquote className="text-base leading-7 text-neutral-700 italic">
               &ldquo;{item.quote}&rdquo;
@@ -279,8 +279,8 @@ export function Recognition({
 }) {
   return (
     <FadeIn className="mt-10 max-w-3xl">
-      <div className="rounded-3xl bg-[#0097b2]/[0.06] p-6 ring-1 ring-[#0097b2]/[0.2] sm:p-8">
-        <h3 className="font-display text-xs font-semibold tracking-widest text-[var(--color-brand-teal)] uppercase">
+      <div className="rounded-3xl bg-[#ff4500]/[0.06] p-6 ring-1 ring-[#ff4500]/[0.2] sm:p-8">
+        <h3 className="font-display text-xs font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
           {label}
         </h3>
         <ul role="list" className="mt-5 space-y-4">
@@ -288,7 +288,7 @@ export function Recognition({
             <li key={item} className="flex gap-3">
               <span
                 aria-hidden="true"
-                className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-teal)]"
+                className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-orange)]"
               />
               <span className="text-base leading-7 text-neutral-800">
                 {item}
@@ -322,7 +322,7 @@ export function FactList({
           <li key={item} className="flex gap-3">
             <span
               aria-hidden="true"
-              className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-teal)]"
+              className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-orange)]"
             />
             <span className="text-base leading-7 text-neutral-700">{item}</span>
           </li>
@@ -383,7 +383,7 @@ export function BuyLinks({
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-medium text-neutral-950 underline decoration-[var(--color-brand-teal)] decoration-1 underline-offset-4 transition hover:decoration-2"
+                className="font-medium text-neutral-950 underline decoration-[var(--color-brand-orange)] decoration-1 underline-offset-4 transition hover:decoration-2"
               >
                 {link.text}
               </a>
@@ -478,7 +478,7 @@ export function SiblingLinks({
           <li key={item.href}>
             <Link
               href={item.href}
-              className="group flex h-full flex-col rounded-2xl border border-neutral-200 bg-white p-5 transition hover:shadow-lg hover:ring-1 hover:ring-neutral-900/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)]"
+              className="group flex h-full flex-col rounded-2xl border border-neutral-200 bg-white p-5 transition hover:shadow-lg hover:ring-1 hover:ring-neutral-900/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-orange)]"
             >
               <p className="font-display text-lg font-semibold tracking-tight text-neutral-950">
                 {item.title}
