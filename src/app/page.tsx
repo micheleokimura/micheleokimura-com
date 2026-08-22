@@ -13,7 +13,6 @@ import { CredentialsBar } from '@/components/CredentialsBar'
 import { EmilyPortrait as MichelePortrait } from '@/components/EmilyAvatar'
 import { OrgCarousel } from '@/components/OrgCarousel'
 import { ContactBlock } from '@/components/ContactBlock'
-import { PodcastSeriesJsonLd } from '@/components/JsonLd'
 import { siteConfig, authoredWorks } from '@/lib/site-config'
 
 export const metadata: Metadata = {
@@ -40,18 +39,8 @@ const WHAT_I_DO = [
 ]
 
 export default function HomePage() {
-  const podcast = siteConfig.podcast
-
   return (
     <>
-      <PodcastSeriesJsonLd
-        name={podcast.name}
-        url={podcast.url}
-        publisher={podcast.publisher}
-        description={podcast.description}
-        inLanguage={podcast.inLanguage}
-      />
-
       {/* Sticky parallax: hero pins while the org band scrolls over it */}
       <div className="relative">
         <div className="relative isolate overflow-hidden md:sticky md:top-0 md:z-0">
