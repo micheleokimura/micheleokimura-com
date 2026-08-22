@@ -8,6 +8,7 @@ import { Container } from '@/components/Container'
 import { Logo } from '@/components/Logo'
 import { MarkerSwipe } from '@/components/MarkerSwipe'
 import { JoinWaitListButton } from '@/components/wait-list/JoinWaitListButton'
+import { ContactPopup } from '@/components/ContactPopup'
 import { navItems, siteConfig } from '@/lib/site-config'
 
 function MenuIcon(props: React.SVGProps<SVGSVGElement>) {
@@ -30,6 +31,9 @@ function XIcon(props: React.SVGProps<SVGSVGElement>) {
 export function SiteHeader() {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
+  // Sitewide contact popup. The header owns the state; the popup portals itself
+  // to the body, so it is unaffected by the header's stacking context.
+  const [contactOpen, setContactOpen] = useState(false)
 
   useEffect(() => {
     setOpen(false)
@@ -100,6 +104,15 @@ export function SiteHeader() {
               withArrow={false}
               className="hidden sm:inline-flex"
             />
+            {/* Sitewide contact CTA. Near-black rather than teal so it reads as
+                a separate action from the teal wait-list button next to it. */}
+            <button
+              type="button"
+              onClick={() => setContactOpen(true)}
+              className="inline-flex items-center justify-center rounded-md bg-neutral-950 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-neutral-800 focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 focus-visible:outline-none sm:px-5 sm:py-2.5"
+            >
+              Contact
+            </button>
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
@@ -164,6 +177,8 @@ export function SiteHeader() {
           </ul>
         </Container>
       </div>
+
+      <ContactPopup open={contactOpen} onClose={() => setContactOpen(false)} />
     </header>
   )
 }
