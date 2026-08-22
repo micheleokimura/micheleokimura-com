@@ -9,6 +9,7 @@ import { AboutPhotoGrid } from '@/components/AboutPhotoGrid'
 import { ContactBlock } from '@/components/ContactBlock'
 import { awards, credentials } from '@/lib/credentials'
 import { OWN_BRANDS } from '@/lib/organizations'
+import { GOLDEN_THREAD_QUOTE } from '@/lib/projects'
 
 export const metadata: Metadata = {
   title: 'About Michele',
@@ -52,6 +53,23 @@ export default function AboutPage() {
             can become a launchpad into a future full of freedom, wonder, and
             limitless possibilities.
           </p>
+        </FadeIn>
+      </Container>
+
+      {/* The golden thread. Michele's own framing of what connects the books,
+          the curricula, and the programs. Wording is single-sourced from
+          src/lib/projects.ts, which the Author page and every case study also
+          quote. Verbatim. */}
+      <Container className="mt-16 sm:mt-20">
+        <FadeIn>
+          <figure className="mx-auto max-w-4xl border-l-2 border-[var(--color-brand-teal)] pl-6 sm:pl-8">
+            <blockquote className="font-display text-2xl leading-10 text-neutral-900 italic sm:text-3xl sm:leading-tight">
+              &ldquo;{GOLDEN_THREAD_QUOTE}&rdquo;
+            </blockquote>
+            <figcaption className="mt-5 text-sm font-medium text-neutral-500 not-italic">
+              Michele Okimura
+            </figcaption>
+          </figure>
         </FadeIn>
       </Container>
 
