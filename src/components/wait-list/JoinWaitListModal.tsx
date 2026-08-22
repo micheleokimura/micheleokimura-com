@@ -197,8 +197,7 @@ export function JoinWaitListModal({
                   You&rsquo;re on the list.
                 </h2>
                 <p className="mt-4 text-base leading-7 text-neutral-600">
-                  Emily will reach out by email when a spot opens. Keep an eye on
-                  your inbox.
+                  Michele will be in touch soon.
                 </p>
                 <div className="mt-8">
                   <button
@@ -216,12 +215,10 @@ export function JoinWaitListModal({
                   id={titleId}
                   className="font-display text-2xl font-semibold tracking-tight text-neutral-950"
                 >
-                  Join the wait list
+                  Get in touch
                 </h2>
                 <p className="mt-3 text-base leading-7 text-neutral-600">
-                  Emily takes on a small number of new churches each quarter.
-                  Drop your info and she&rsquo;ll reach out personally by email
-                  when a spot opens.
+                  Send Michele a message and she&rsquo;ll get back to you.
                 </p>
 
                 <form onSubmit={onSubmit} noValidate className="mt-6">
@@ -327,7 +324,7 @@ export function JoinWaitListModal({
                       disabled={status === 'submitting'}
                       className="inline-flex w-full items-center justify-center gap-1.5 rounded-md bg-[var(--color-cta)] px-6 py-3 text-sm font-semibold text-[var(--color-cta-ink)] shadow-sm transition hover:bg-[var(--color-cta-hover)] disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2"
                     >
-                      {status === 'submitting' ? 'Saving' : 'Save my spot'}
+                      {status === 'submitting' ? 'Sending' : 'Send'}
                       <span aria-hidden="true">&rarr;</span>
                     </button>
                   </div>
@@ -338,7 +335,7 @@ export function JoinWaitListModal({
                     ) : null}
                     {status === 'error' ? (
                       <p className="mt-3 text-sm text-neutral-700">
-                        Something went wrong. Please try again or email Emily
+                        Something went wrong. Please try again or email Michele
                         directly.
                       </p>
                     ) : null}

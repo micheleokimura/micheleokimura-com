@@ -30,7 +30,7 @@ export function JoinWaitListButton({
   tone = 'light',
   withArrow = true,
   className,
-  children = 'Join the wait list',
+  children = 'Contact',
 }: Props) {
   const { openWaitListModal } = useWaitList()
 
