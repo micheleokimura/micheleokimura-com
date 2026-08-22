@@ -21,24 +21,25 @@ const SCRIPT_URL =
 const CONFIGURED = Boolean(SCRIPT_URL) && SCRIPT_URL !== SCRIPT_URL_PLACEHOLDER
 
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/
-/** At least 7 digits once punctuation is stripped. Keeps international formats. */
-const PHONE_DIGITS_RE = /\d/g
+
+/** How long the confirmation sits before the popup closes itself. */
+const DONE_AUTOCLOSE_MS = 4000
 
 type Status = 'idle' | 'submitting' | 'done' | 'error'
 
+export type ContactInterest = 'coaching' | 'speaking' | 'other'
+
 /**
- * `value` is what lands in the sheet and the email subject; `label` is the
- * shorter text on the chip so all six options fit on a 375px screen without
- * scrolling.
+ * `value` is what rides in the `interests` array on the payload; `label` is
+ * what the reader sees. Three options only, per the Brett + Michele review:
+ * the old six-way category grid asked people to classify themselves before
+ * they had said anything.
  */
-const CATEGORIES = [
-  { value: 'Speaking engagement', label: 'Speaking engagement' },
-  { value: 'Brave Purpose Author Method (coaching)', label: 'Author Method coaching' },
-  { value: 'Nonprofit consulting', label: 'Nonprofit consulting' },
-  { value: 'Media, interview, or podcast', label: 'Media or podcast' },
-  { value: 'Bulk order or curriculum inquiry', label: 'Bulk or curriculum order' },
-  { value: 'Something else', label: 'Something else' },
-] as const
+const INTERESTS: { value: ContactInterest; label: string }[] = [
+  { value: 'coaching', label: 'Coaching' },
+  { value: 'speaking', label: 'Speaking' },
+  { value: 'other', label: 'Other / general inquiry' },
+]
 
 function XIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -52,20 +53,21 @@ function XIcon(props: React.SVGProps<SVGSVGElement>) {
 /**
  * Sitewide contact popup.
  *
- * Opened by the "Contact" button in `SiteHeader`, which owns the open/close
- * state. The whole page behind is dimmed and blurred so the form is the only
- * thing in focus, matching the pattern Brett pointed at on createchurchmedia.com.
+ * One form for every inquiry on the site. The header's "Contact" button opens
+ * it plain; page CTAs open it through `ContactTrigger` with an interest already
+ * ticked (the coaching page's "Join the waitlist" buttons pass "coaching").
+ * It replaced the separate coaching wait-list form, so there is now a single
+ * inbox and a single sheet.
  *
- * Layout is deliberately compact: on a 375px phone every control (heading, the
- * six category chips, all six fields, and Send) sits above the fold so nobody
- * has to scroll to submit. The dialog still carries a max-height overflow as a
- * safety valve for very small viewports or large browser text settings, so
- * content is never clipped outright.
+ * Fields, in order: what are you interested in (multi-select, at least one),
+ * an optional place to tell the story, then first name, last name, email, and
+ * phone. Everything but the story is required. The phone is checked for
+ * content only, so international and informal formats both pass.
  *
  * Accessibility is handled by hand, matching `JoinWaitListModal`: role="dialog"
  * + aria-modal, focus moved in on open and restored to the trigger on close, a
- * Tab focus trap, Escape and backdrop click to close, a real radio group inside
- * a fieldset (so arrow keys work), and a polite live region for errors.
+ * Tab focus trap, Escape and backdrop click to close, real checkboxes inside a
+ * fieldset, and a polite live region for errors.
  *
  * Submission posts JSON to a Google Apps Script Web App. The Content-Type is
  * text/plain on purpose: it is CORS-safelisted, so the browser skips the
@@ -75,23 +77,28 @@ function XIcon(props: React.SVGProps<SVGSVGElement>) {
 export function ContactPopup({
   open,
   onClose,
+  preSelectedInterest,
 }: {
   open: boolean
   onClose: () => void
+  /** Ticked by default when the popup opens. Set by page-level CTAs. */
+  preSelectedInterest?: ContactInterest
 }) {
   const titleId = useId()
+  const descId = useId()
   const dialogRef = useRef<HTMLDivElement>(null)
 
   const [mounted, setMounted] = useState(false)
   const [status, setStatus] = useState<Status>('idle')
   const [error, setError] = useState<string | null>(null)
-  const [category, setCategory] = useState<string>(CATEGORIES[0].value)
+  const [interests, setInterests] = useState<ContactInterest[]>(
+    preSelectedInterest ? [preSelectedInterest] : [],
+  )
+  const [story, setStory] = useState('')
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
-  const [organization, setOrganization] = useState('')
-  const [message, setMessage] = useState('')
 
   useEffect(() => setMounted(true), [])
 
@@ -100,14 +107,25 @@ export function ContactPopup({
     if (!open) return
     setStatus('idle')
     setError(null)
-    setCategory(CATEGORIES[0].value)
+    setInterests(preSelectedInterest ? [preSelectedInterest] : [])
+    setStory('')
     setFirstName('')
     setLastName('')
     setEmail('')
     setPhone('')
-    setOrganization('')
-    setMessage('')
-  }, [open])
+  }, [open, preSelectedInterest])
+
+  // Close the popup a few seconds after a successful send. Held in a ref so a
+  // parent that passes an inline arrow for onClose does not restart the timer.
+  const onCloseRef = useRef(onClose)
+  useEffect(() => {
+    onCloseRef.current = onClose
+  }, [onClose])
+  useEffect(() => {
+    if (status !== 'done') return
+    const timer = window.setTimeout(() => onCloseRef.current(), DONE_AUTOCLOSE_MS)
+    return () => window.clearTimeout(timer)
+  }, [status])
 
   // Focus management, Escape/Tab handling, and scroll lock while open.
   useEffect(() => {
@@ -118,10 +136,9 @@ export function ContactPopup({
 
     const focusTimer = window.setTimeout(() => {
       const dialog = dialogRef.current
-      // Land on the first text field so a keyboard user starts typing right
-      // away; the category group already has a sensible default selected.
+      // Land on the first interest checkbox, which is where the form starts.
       const target =
-        dialog?.querySelector<HTMLElement>('input[type="text"]:not([tabindex="-1"])') ??
+        dialog?.querySelector<HTMLElement>('input[type="checkbox"]') ??
         dialog?.querySelector<HTMLElement>('button')
       target?.focus()
     }, 20)
@@ -162,6 +179,15 @@ export function ContactPopup({
     }
   }, [open, onClose])
 
+  function toggleInterest(value: ContactInterest) {
+    setInterests((current) =>
+      current.includes(value)
+        ? current.filter((item) => item !== value)
+        : [...current, value],
+    )
+    if (error) setError(null)
+  }
+
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
@@ -179,6 +205,10 @@ export function ContactPopup({
     const em = email.trim()
     const ph = phone.trim()
 
+    if (!interests.length) {
+      setError('Pick at least one thing you are interested in.')
+      return
+    }
     if (!fn || !ln) {
       setError('Enter your first and last name.')
       return
@@ -187,7 +217,7 @@ export function ContactPopup({
       setError('Enter a valid email address.')
       return
     }
-    if ((ph.match(PHONE_DIGITS_RE) || []).length < 7) {
+    if (!ph) {
       setError('Enter a phone number Michele can reach you on.')
       return
     }
@@ -210,14 +240,22 @@ export function ContactPopup({
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         redirect: 'follow',
         body: JSON.stringify({
-          category,
-          firstName: fn,
-          lastName: ln,
+          source: 'contact',
+          interests,
+          story: story.trim(),
+          first_name: fn,
+          last_name: ln,
           email: em,
           phone: ph,
-          organization: organization.trim(),
-          message: message.trim(),
           pageUrl: typeof window === 'undefined' ? '' : window.location.href,
+          // Legacy aliases. The Apps Script in content/setup/ reads the
+          // snake_case keys above, but whatever version Michele has deployed
+          // right now still reads these. Keeping both means the sheet keeps
+          // filling in even before she redeploys the script.
+          firstName: fn,
+          lastName: ln,
+          message: story.trim(),
+          category: interests.join(', '),
         }),
       })
       if (!res.ok) throw new Error('request failed')
@@ -245,6 +283,7 @@ export function ContactPopup({
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
+        aria-describedby={status === 'done' ? undefined : descId}
         data-lenis-prevent
         className="relative max-h-[calc(100dvh-1rem)] w-full max-w-[440px] overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl ring-1 ring-neutral-900/10 sm:max-h-[calc(100dvh-2rem)] sm:p-7"
         initial={{ opacity: 0, y: 16, scale: 0.98 }}
@@ -256,7 +295,7 @@ export function ContactPopup({
           type="button"
           onClick={onClose}
           aria-label="Close"
-          className="absolute top-3 right-3 rounded-full p-2 text-neutral-500 transition hover:bg-neutral-100 hover:text-neutral-950 focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 focus-visible:outline-none"
+          className="absolute top-3 right-3 rounded-md p-2 text-neutral-500 transition hover:bg-neutral-100 hover:text-neutral-950 focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 focus-visible:outline-none"
         >
           <XIcon className="h-5 w-5" />
         </button>
@@ -290,35 +329,33 @@ export function ContactPopup({
             >
               Get in touch
             </h2>
+            <p id={descId} className="mt-2 text-[15px] leading-6 text-neutral-600">
+              Send Michele a note and she will get back to you.
+            </p>
 
-            <form onSubmit={onSubmit} noValidate className="mt-4">
+            <form onSubmit={onSubmit} noValidate className="mt-5">
               <fieldset>
                 <legend className="text-xs font-semibold tracking-wider text-neutral-500 uppercase">
-                  What is this about?
+                  What are you interested in?
                 </legend>
-                <div className="mt-2 grid grid-cols-2 gap-2">
-                  {CATEGORIES.map((option) => {
-                    const id = `${titleId}-cat-${option.value.replace(/\W+/g, '-')}`
-                    const selected = category === option.value
+                <div className="mt-3 space-y-2.5">
+                  {INTERESTS.map((option) => {
+                    const id = `${titleId}-interest-${option.value}`
                     return (
-                      <div key={option.value}>
+                      <div key={option.value} className="flex items-center gap-3">
                         <input
                           id={id}
-                          type="radio"
-                          name="category"
+                          type="checkbox"
+                          name="interests"
                           value={option.value}
-                          checked={selected}
-                          onChange={() => setCategory(option.value)}
+                          checked={interests.includes(option.value)}
+                          onChange={() => toggleInterest(option.value)}
                           disabled={status === 'submitting'}
-                          className="peer sr-only"
+                          className="h-4 w-4 flex-none accent-[var(--color-cta)] focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 focus-visible:outline-none"
                         />
                         <label
                           htmlFor={id}
-                          className={
-                            selected
-                              ? 'flex h-full cursor-pointer items-center rounded-lg border border-neutral-950 bg-neutral-950 px-3 py-2 text-[13px] leading-tight font-medium text-white transition peer-focus-visible:ring-2 peer-focus-visible:ring-neutral-950 peer-focus-visible:ring-offset-2'
-                              : 'flex h-full cursor-pointer items-center rounded-lg border border-neutral-300 bg-white px-3 py-2 text-[13px] leading-tight font-medium text-neutral-700 transition hover:border-neutral-500 hover:text-neutral-950 peer-focus-visible:ring-2 peer-focus-visible:ring-neutral-950 peer-focus-visible:ring-offset-2'
-                          }
+                          className="cursor-pointer text-[15px] leading-6 font-medium text-neutral-700 select-none"
                         >
                           {option.label}
                         </label>
@@ -328,7 +365,26 @@ export function ContactPopup({
                 </div>
               </fieldset>
 
-              <div className="mt-3 grid grid-cols-2 gap-2">
+              <div className="mt-5">
+                <label
+                  htmlFor={`${titleId}-story`}
+                  className="block text-xs font-semibold tracking-wider text-neutral-500 uppercase"
+                >
+                  Share a bit of your story
+                </label>
+                <textarea
+                  id={`${titleId}-story`}
+                  name="story"
+                  rows={4}
+                  placeholder="Optional. Tell Michele whatever you would like her to know."
+                  value={story}
+                  onChange={(e) => setStory(e.target.value)}
+                  disabled={status === 'submitting'}
+                  className={`${fieldClass} mt-2 resize-none`}
+                />
+              </div>
+
+              <div className="mt-4 grid grid-cols-2 gap-2">
                 <div>
                   <label htmlFor={`${titleId}-first`} className="sr-only">
                     First name
@@ -336,7 +392,7 @@ export function ContactPopup({
                   <input
                     id={`${titleId}-first`}
                     type="text"
-                    name="firstName"
+                    name="first_name"
                     autoComplete="given-name"
                     placeholder="First name"
                     required
@@ -356,7 +412,7 @@ export function ContactPopup({
                   <input
                     id={`${titleId}-last`}
                     type="text"
-                    name="lastName"
+                    name="last_name"
                     autoComplete="family-name"
                     placeholder="Last name"
                     required
@@ -394,59 +450,25 @@ export function ContactPopup({
                 />
               </div>
 
-              <div className="mt-2 grid grid-cols-2 gap-2">
-                <div>
-                  <label htmlFor={`${titleId}-phone`} className="sr-only">
-                    Phone number
-                  </label>
-                  <input
-                    id={`${titleId}-phone`}
-                    type="tel"
-                    name="phone"
-                    autoComplete="tel"
-                    inputMode="tel"
-                    placeholder="Phone"
-                    required
-                    value={phone}
-                    onChange={(e) => {
-                      setPhone(e.target.value)
-                      if (error) setError(null)
-                    }}
-                    disabled={status === 'submitting'}
-                    className={fieldClass}
-                  />
-                </div>
-                <div>
-                  <label htmlFor={`${titleId}-org`} className="sr-only">
-                    Organization (optional)
-                  </label>
-                  <input
-                    id={`${titleId}-org`}
-                    type="text"
-                    name="organization"
-                    autoComplete="organization"
-                    placeholder="Organization"
-                    value={organization}
-                    onChange={(e) => setOrganization(e.target.value)}
-                    disabled={status === 'submitting'}
-                    className={fieldClass}
-                  />
-                </div>
-              </div>
-
               <div className="mt-2">
-                <label htmlFor={`${titleId}-message`} className="sr-only">
-                  How can Michele help?
+                <label htmlFor={`${titleId}-phone`} className="sr-only">
+                  Phone number
                 </label>
-                <textarea
-                  id={`${titleId}-message`}
-                  name="message"
-                  rows={2}
-                  placeholder="How can Michele help?"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
+                <input
+                  id={`${titleId}-phone`}
+                  type="tel"
+                  name="phone"
+                  autoComplete="tel"
+                  inputMode="tel"
+                  placeholder="Phone number"
+                  required
+                  value={phone}
+                  onChange={(e) => {
+                    setPhone(e.target.value)
+                    if (error) setError(null)
+                  }}
                   disabled={status === 'submitting'}
-                  className={`${fieldClass} resize-none`}
+                  className={fieldClass}
                 />
               </div>
 
@@ -458,7 +480,7 @@ export function ContactPopup({
                 </label>
               </div>
 
-              <div className="mt-3">
+              <div className="mt-4">
                 <button
                   type="submit"
                   disabled={status === 'submitting'}

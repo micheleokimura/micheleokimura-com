@@ -2,14 +2,12 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { BannerHero } from '@/components/BannerHero'
 import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { Border } from '@/components/Border'
 import { SectionIntro } from '@/components/SectionIntro'
-import {
-  CoachingWaitlistProvider,
-  WaitlistButton,
-} from '@/components/coaching/CoachingWaitlist'
+import { ContactTrigger } from '@/components/ContactTrigger'
 import { FaqJsonLd, ServiceJsonLd } from '@/components/JsonLd'
 import { siteConfig } from '@/lib/site-config'
 
@@ -168,25 +166,28 @@ function CheckMark() {
 
 export default function CoachingPage() {
   return (
-    <CoachingWaitlistProvider>
+    <>
       <ServiceJsonLd />
       <FaqJsonLd faqs={FAQS} />
 
-      {/* ---------------- 1. HERO ---------------- */}
-      <Container className="mt-8 sm:mt-12 lg:mt-16">
+      {/* ---------------- 1. BANNER HERO ---------------- */}
+      <BannerHero
+        eyebrow={siteConfig.offerName}
+        title="Write your book in six months."
+        subtitle="I turn your conversations into a manuscript."
+      >
+        <ContactTrigger interest="coaching" tone="dark">
+          Join the waitlist
+        </ContactTrigger>
+      </BannerHero>
+
+      {/* The opening paragraphs and portrait that used to sit inside the tall
+          hero. They read as the lead now, on ivory, straight under the band. */}
+      <Container className="mt-12 sm:mt-16">
         <FadeIn>
-          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1fr_minmax(0,26rem)] lg:gap-16">
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1fr_minmax(0,24rem)] lg:gap-16">
             <div>
-              <p className="font-display text-sm font-semibold tracking-wider text-[var(--color-coach-accent-text)] uppercase sm:text-base">
-                {siteConfig.offerName}
-              </p>
-              <h1 className="font-display mt-5 max-w-2xl text-[2.5rem] leading-[1.05] font-medium tracking-tight text-balance text-neutral-950 sm:text-5xl lg:text-6xl">
-                Write your book in six months.
-              </h1>
-              <p className="font-display mt-6 max-w-xl text-xl leading-8 font-medium text-neutral-950 sm:text-2xl">
-                I turn your conversations into a manuscript.
-              </p>
-              <div className="mt-6 max-w-xl space-y-4 text-lg leading-8 text-neutral-600">
+              <div className="max-w-xl space-y-4 text-lg leading-8 text-neutral-600">
                 <p>
                   You speak. I listen. Together with Claude, we turn what you
                   say into pages you can hold.
@@ -196,8 +197,7 @@ export default function CoachingPage() {
                   where your book lives.
                 </p>
               </div>
-              <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
-                <WaitlistButton source="coaching-hero" />
+              <div className="mt-8">
                 <Link
                   href="#learn-more"
                   className="text-base font-medium text-neutral-950 underline decoration-dashed decoration-neutral-400 underline-offset-4 transition-colors hover:decoration-[var(--color-coach-accent)]"
@@ -214,7 +214,7 @@ export default function CoachingPage() {
                   alt="Michele Okimura in Honolulu"
                   fill
                   priority
-                  sizes="(min-width: 1024px) 26rem, 100vw"
+                  sizes="(min-width: 1024px) 24rem, 100vw"
                   className="object-cover object-[30%_center]"
                 />
               </div>
@@ -457,7 +457,9 @@ export default function CoachingPage() {
               list and I will reach out personally.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
-              <WaitlistButton source="coaching-footer" tone="dark" />
+              <ContactTrigger interest="coaching" tone="dark">
+                Join the waitlist
+              </ContactTrigger>
               <Link
                 href={`mailto:${siteConfig.email}?subject=Brave%20Purpose%20Author%20Method`}
                 className="text-base font-semibold text-white underline decoration-[var(--color-coach-accent)] underline-offset-4 hover:decoration-2"
@@ -468,6 +470,6 @@ export default function CoachingPage() {
           </div>
         </FadeIn>
       </Container>
-    </CoachingWaitlistProvider>
+    </>
   )
 }

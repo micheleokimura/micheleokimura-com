@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { Border } from '@/components/Border'
-import { PageIntro } from '@/components/PageIntro'
+import { BannerHero } from '@/components/BannerHero'
 import { SectionIntro } from '@/components/SectionIntro'
 import { JoinWaitListButton } from '@/components/wait-list/JoinWaitListButton'
 import { siteConfig } from '@/lib/site-config'
@@ -216,18 +216,26 @@ function Endorsements({
 export default function SpeakPage() {
   return (
     <>
-      <PageIntro eyebrow="Speaking" title="Some messages do more than inspire.">
-        <p className="font-display text-2xl font-medium tracking-tight text-neutral-950 sm:text-3xl">
-          They give people permission to be brave.
-        </p>
-        <p className="mt-6">
-          Michele Okimura speaks at churches, conferences, and schools, and to
-          small groups, leadership teams, and community organizations. Whether
-          you are gathering a crowd or an intimate team, she brings messages that
-          build brave purpose in homes, workplaces, ministries, and teams, and
-          help people find the courage to dream big and make a difference.
-        </p>
-      </PageIntro>
+      <BannerHero
+        eyebrow="Speaking"
+        title="Some messages do more than inspire."
+        subtitle="They give people permission to be brave."
+      />
+
+      {/* The intro paragraph that used to sit inside the tall hero. It reads as
+          the lead now, on ivory, straight under the banner. */}
+      <Container className="mt-12 sm:mt-16">
+        <FadeIn>
+          <p className="max-w-3xl text-xl leading-9 text-neutral-600">
+            Michele Okimura speaks at churches, conferences, and schools, and to
+            small groups, leadership teams, and community organizations. Whether
+            you are gathering a crowd or an intimate team, she brings messages
+            that build brave purpose in homes, workplaces, ministries, and
+            teams, and help people find the courage to dream big and make a
+            difference.
+          </p>
+        </FadeIn>
+      </Container>
 
       <section aria-label="Topics">
         <SectionIntro

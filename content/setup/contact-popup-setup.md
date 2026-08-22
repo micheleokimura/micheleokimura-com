@@ -26,6 +26,12 @@ else to fill in. For reference, the columns end up as:
 | Timestamp | Category | First Name | Last Name | Email | Phone | Organization | Message |
 | --------- | -------- | ---------- | --------- | ----- | ----- | ------------ | ------- |
 
+Two of those column names are older than the form they now hold. **Category**
+carries the boxes the person ticked under "What are you interested in?", joined
+with commas, and **Message** carries "Share a bit of your story". The popup no
+longer asks for an organization, so that column stays blank. The headers were
+left alone on purpose so a sheet that already has rows keeps its columns.
+
 ---
 
 ## Step 2. Open the script editor
@@ -152,8 +158,8 @@ silently disappears.
 
 ## Step 7. Send a real one
 
-Load the live site, click **Contact** in the top right, pick a category, fill in
-the form, and hit Send. Within a few seconds:
+Load the live site, click **Contact** in the top right, tick at least one of the
+interest boxes, fill in the form, and hit Send. Within a few seconds:
 
 - a new row lands in the **Submissions** tab, and
 - an email arrives at `michele@micheleokimura.com` with the subject
@@ -175,23 +181,25 @@ That keeps the same URL, so nothing on the site needs to change.
 
 ---
 
-## The six categories
+## The three interest boxes
 
-The popup offers these, and the chosen one is written to the Category column and
-into the email subject:
+"What are you interested in?" is a set of checkboxes, so a person can tick more
+than one. At least one is required. Everything ticked is written to the Category
+column and into the email subject:
 
-1. Speaking engagement
-2. Brave Purpose Author Method (coaching)
-3. Nonprofit consulting
-4. Media, interview, or podcast
-5. Bulk order or curriculum inquiry
-6. Something else
+1. Coaching
+2. Speaking
+3. Other / general inquiry
 
-To change the wording, edit the `CATEGORIES` array at the top of
+To change the wording, edit the `INTERESTS` array at the top of
 `src/components/ContactPopup.tsx`. Each entry has a `value` (what gets recorded)
-and a `label` (the shorter text on the button, kept short so all six fit on a
-phone screen without scrolling). The Apps Script needs no change: it records
-whatever category it receives.
+and a `label` (what the reader sees). The Apps Script needs no change: it
+records whatever it receives.
+
+Page CTAs can open the popup with a box already ticked. The "Join the waitlist"
+buttons on `/coaching` do exactly that, through `ContactTrigger` with
+`interest="coaching"`. That is why there is no separate coaching wait-list form
+any more: it is all one inbox and one sheet.
 
 ---
 

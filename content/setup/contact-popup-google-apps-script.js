@@ -21,7 +21,12 @@ var NOTIFY_EMAIL = 'michele@micheleokimura.com'
 /** Tab inside the spreadsheet that holds the submissions. */
 var SHEET_NAME = 'Submissions'
 
-/** Column order. The header row is written automatically on the first run. */
+/**
+ * Column order. The header row is written automatically on the first run.
+ * Deliberately unchanged from the first version so existing sheets keep their
+ * columns: 'Category' now holds the comma-joined interests, and 'Message'
+ * holds the story. 'Organization' is no longer collected and stays blank.
+ */
 var HEADERS = [
   'Timestamp',
   'Category',
@@ -49,13 +54,19 @@ function doPost(e) {
 
     var row = {
       timestamp: new Date(),
-      category: clean(data.category, 120) || 'Something else',
-      firstName: clean(data.firstName, 80),
-      lastName: clean(data.lastName, 80),
+      // The popup now posts an `interests` array (coaching / speaking / other)
+      // where it used to post a single `category` string. Both are read here so
+      // the sheet keeps filling in whichever version of the site is live.
+      category: interestList(data) || 'Something else',
+      // Field names moved to snake_case with the simplified popup. camelCase is
+      // still accepted so nothing is lost mid-deploy.
+      firstName: clean(data.first_name || data.firstName, 80),
+      lastName: clean(data.last_name || data.lastName, 80),
       email: clean(data.email, 200),
       phone: clean(data.phone, 60),
       organization: clean(data.organization, 200),
-      message: clean(data.message, 5000),
+      // "Share a bit of your story" replaced the old free-text message field.
+      message: clean(data.story || data.message, 5000),
       pageUrl: clean(data.pageUrl, 300),
     }
 
@@ -129,13 +140,13 @@ function sendNotification(row) {
   var body = [
     'New contact form submission from micheleokimura.com',
     '',
-    'Category: ' + row.category,
+    'Interested in: ' + row.category,
     'Name: ' + who,
     'Email: ' + row.email,
     'Phone: ' + (row.phone || '(not provided)'),
     'Organization: ' + (row.organization || '(not provided)'),
     '',
-    'Message:',
+    'Their story:',
     row.message || '(none provided)',
     '',
     '---',
@@ -150,6 +161,23 @@ function sendNotification(row) {
   }
 
   GmailApp.sendEmail(NOTIFY_EMAIL, subject, body, options)
+}
+
+/**
+ * Reads what the person is interested in, whichever shape the site posted:
+ * the `interests` array from the current popup, or the older single
+ * `category` string. Returns one comma-joined string for the sheet column.
+ */
+function interestList(data) {
+  if (Object.prototype.toString.call(data.interests) === '[object Array]') {
+    var picked = []
+    for (var i = 0; i < data.interests.length; i++) {
+      var item = clean(data.interests[i], 60)
+      if (item) picked.push(item)
+    }
+    if (picked.length) return picked.join(', ')
+  }
+  return clean(data.category, 120)
 }
 
 /** Trims a value to a string and caps its length. */
@@ -183,13 +211,13 @@ function testSubmission() {
   doPost({
     postData: {
       contents: JSON.stringify({
-        category: 'Speaking engagement',
-        firstName: 'Test',
-        lastName: 'Submission',
+        source: 'contact',
+        interests: ['coaching', 'speaking'],
+        story: 'Checking that the contact form wiring works.',
+        first_name: 'Test',
+        last_name: 'Submission',
         email: 'michele@micheleokimura.com',
         phone: '808-555-0100',
-        organization: 'Releasing Generations',
-        message: 'Checking that the contact form wiring works.',
         pageUrl: 'https://micheleokimura.com/',
       }),
     },

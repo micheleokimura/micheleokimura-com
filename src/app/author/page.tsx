@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
-import { PageIntro } from '@/components/PageIntro'
+import { BannerHero } from '@/components/BannerHero'
 import { ContactBlock } from '@/components/ContactBlock'
 import { siteConfig } from '@/lib/site-config'
 import {
@@ -416,24 +416,30 @@ const COVER_SIZES_GRID = '(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 15r
 export default function AuthorPage() {
   return (
     <>
-      <PageIntro
+      <BannerHero
         eyebrow="Author"
         title="Books, Journals, and Curricula for Dreamers of Every Age"
-      >
-        <p>
-          From published books to a 24-volume teen curriculum to multi-age
-          journals in both faith and non-faith editions, Michele&rsquo;s body of
-          work walks readers through the practice of dreaming big and stepping
-          into brave purpose. Whether you&rsquo;re a preschooler with a first
-          dream, an adult navigating a new season, or a leader shaping the next
-          generation, there&rsquo;s a doorway here for you.
-        </p>
-      </PageIntro>
+      />
+
+      {/* The intro paragraph that used to sit inside the tall hero. It reads as
+          the lead now, on ivory, straight under the banner. */}
+      <Container className="mt-12 sm:mt-16">
+        <FadeIn>
+          <p className="max-w-3xl text-xl leading-9 text-neutral-600">
+            From published books to a 24-volume teen curriculum to multi-age
+            journals in both faith and non-faith editions, Michele&rsquo;s body
+            of work walks readers through the practice of dreaming big and
+            stepping into brave purpose. Whether you&rsquo;re a preschooler with
+            a first dream, an adult moving into a new season, or a leader
+            shaping the next generation, there&rsquo;s a doorway here for you.
+          </p>
+        </FadeIn>
+      </Container>
 
       {/* The golden thread, stated once at the top so the works below read as
           one body of work rather than a catalogue. Wording is single-sourced
           from src/lib/projects.ts, which every case study also quotes. */}
-      <Container className="mt-2 sm:mt-6">
+      <Container className="mt-10 sm:mt-12">
         <FadeIn>
           <p className="max-w-3xl border-l-2 border-[var(--color-brand-orange)] pl-6 font-display text-xl leading-9 text-neutral-800 italic sm:text-2xl sm:leading-10">
             {GOLDEN_THREAD_LINE}
