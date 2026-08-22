@@ -38,7 +38,8 @@ type Endorsement = {
 type Topic = {
   number: string
   title: string
-  body: string
+  /** One string for a single paragraph, an array when the topic runs longer. */
+  body: string | string[]
   /** Shown when the message also travels without the faith framing. */
   nonFaith?: boolean
   /** Context the reader needs before the endorsements underneath a topic. */
@@ -115,6 +116,23 @@ const TOPICS: Topic[] = [
       'Identity, Healing, and Walking in the Fullness of Who God Made You with Brave Purpose',
     body:
       'A message Michele is often invited to bring in women\'s ministry settings and churches. She walks women through the truth of their identity in Christ, and the healing God offers for the trauma, wounds, and hindrances that quietly hold them back from walking in confidence and joy. Rooted in her own journey and years of ministering to women in faith communities.',
+  },
+  {
+    number: '07',
+    title: 'How to Hear God\'s Voice',
+    body: [
+      'For children, youth, and adults ready to grow their two-way relationship with God. Beyond the ways most Christians know God speaks (through Scripture, sermons, music), Michele opens the door to the other ways God is already speaking: through a thought, a vision, a picture, a circumstance. This workshop teaches discernment, builds faith through testimony, and gives every participant practical activities to practice hearing God\'s voice in real time.',
+      'Michele also unpacks the invitation of 1 Corinthians 14:1 ("eagerly desire spiritual gifts, especially the gift of prophecy"), helping listeners grow the prophetic in their homes, their churches, and the encouragement they bring to others.',
+      'Delivered for children, teens, families, ministry teams, and pastors. Watching people realize "I can hear God\'s voice" is what keeps Michele coming back to this one.',
+    ],
+    endorsements: [
+      {
+        quote:
+          'She just did a session at Native Camp in Montana and it was excellent, the most impactful session of the whole camp. We had 19 FMI workers there. Every person had an experience of how to prophesy over each other. Simple, practical, and powerful. I saw it all personally. Now many children in our church prophesy and unashamedly pray for healing, all because of Michele.',
+        name: 'Pastor Kihāpiʻilani Pimental',
+        role: 'Worker Supervisor, Foursquare Missions International',
+      },
+    ],
   },
 ]
 
@@ -241,9 +259,17 @@ export default function SpeakPage() {
                         <h3 className="font-display text-2xl font-semibold tracking-tight text-balance text-neutral-950 sm:text-3xl">
                           {topic.title}
                         </h3>
-                        <p className="mt-5 max-w-3xl text-lg leading-8 text-neutral-600">
-                          {topic.body}
-                        </p>
+                        {(Array.isArray(topic.body)
+                          ? topic.body
+                          : [topic.body]
+                        ).map((paragraph) => (
+                          <p
+                            key={paragraph}
+                            className="mt-5 max-w-3xl text-lg leading-8 text-neutral-600"
+                          >
+                            {paragraph}
+                          </p>
+                        ))}
                         {topic.nonFaith && <NonFaithNote />}
                         {topic.endorsements && (
                           <div className="max-w-3xl">

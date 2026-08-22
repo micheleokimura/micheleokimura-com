@@ -58,6 +58,19 @@
 
 ---
 
+## 10. Kihāpiʻilani Pimental - Foursquare Missions International
+
+*Filed under: How to Hear God's Voice (topic 7).*
+
+> "I cannot recommend Michele to you more highly. She just did a session for Monique and Yas at Native Camp in Montana (the one you did last year) and it was excellent. The most impactful session of the whole camp. We had 19 FMI workers there including Chita Olson, Manuel and Colette Häberle and family, Bethany Yeager, Liz Horn and family, Faith Aguillar and family. Please check with them about her session where she gave every person an experience of how to prophesy over each other. It was simple, practical and powerful. I saw it all personally.
+>
+> Michele and husband Rob are in the pipeline to become multi regional FMI workers. I have seen her help young people stay pure and watched her disciple many to be disciple makers themselves. There are a generation of young pastors in ministry because of these two. The Family Ministry Director in my home church was discipled by her. Now many children in our church prophesy and unashamedly pray for healing, all because of Michele."
+
+**Attribution:** Pastor Kihāpiʻilani Pimental, Worker Supervisor, Foursquare Missions International
+**Note:** One sentence from the original letter was removed at Michele's editorial direction. Everything above is verbatim; the removed sentence stays out of every use of this endorsement. A shorter trim of this quote runs on the Speaker page under topic 7.
+
+---
+
 ## Attendee comments block
 
 > [TODO: pull verbatim from the Kingdom Kids Workshop endorsements docx. This is the block of shorter, unattributed or first-name-only comments from workshop attendees. Preserve wording exactly as it appears in the docx.]

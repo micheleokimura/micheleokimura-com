@@ -65,6 +65,18 @@ Your child's heart has a door, and you hold the key. In this transformative work
 
 A message Michele is often invited to bring in women's ministry settings and churches. She walks women through the truth of their identity in Christ, and the healing God offers for the trauma, wounds, and hindrances that quietly hold them back from walking in confidence and joy. Rooted in her own journey and years of ministering to women in faith communities.
 
+### 7. How to Hear God's Voice
+
+For children, youth, and adults ready to grow their two-way relationship with God. Beyond the ways most Christians know God speaks (through Scripture, sermons, music), Michele opens the door to the other ways God is already speaking: through a thought, a vision, a picture, a circumstance. This workshop teaches discernment, builds faith through testimony, and gives every participant practical activities to practice hearing God's voice in real time.
+
+Michele also unpacks the invitation of 1 Corinthians 14:1 ("eagerly desire spiritual gifts, especially the gift of prophecy"), helping listeners grow the prophetic in their homes, their churches, and the encouragement they bring to others.
+
+Delivered for children, teens, families, ministry teams, and pastors. Watching people realize "I can hear God's voice" is what keeps Michele coming back to this one.
+
+> "She just did a session at Native Camp in Montana and it was excellent, the most impactful session of the whole camp. We had 19 FMI workers there. Every person had an experience of how to prophesy over each other. Simple, practical, and powerful. I saw it all personally. Now many children in our church prophesy and unashamedly pray for healing, all because of Michele."
+>
+> Pastor Kihāpiʻilani Pimental, Worker Supervisor, Foursquare Missions International
+
 ## WHERE I'VE SPOKEN
 
 - Arise Native American Leaders Camp · Montana, August 2026
