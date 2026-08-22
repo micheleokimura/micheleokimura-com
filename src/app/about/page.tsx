@@ -5,7 +5,7 @@ import { FadeIn } from '@/components/FadeIn'
 import { PageIntro } from '@/components/PageIntro'
 import Image from 'next/image'
 
-import { AboutPhotoGrid } from '@/components/AboutPhotoGrid'
+import { AboutTimeline } from '@/components/AboutTimeline'
 import { ContactBlock } from '@/components/ContactBlock'
 import { awards, credentials } from '@/lib/credentials'
 import { OWN_BRANDS } from '@/lib/organizations'
@@ -73,12 +73,11 @@ export default function AboutPage() {
         </FadeIn>
       </Container>
 
-      {/* The hover-to-reveal photo grid (locked interaction). Hover, or tap the
-          teal + on mobile, to read each moment. */}
-      <Container className="mt-16 sm:mt-20">
-        <FadeIn>
-          <AboutPhotoGrid />
-        </FadeIn>
+      {/* Photo timeline: six eras, 20 photos, 1962 to 2025. Captions sit in an
+          always-visible band on each photo, so they read the same on a phone as
+          they do on a desktop. */}
+      <Container className="mt-16 sm:mt-24">
+        <AboutTimeline />
       </Container>
 
       {/* The work Michele leads — her own brand family (own surface, not endorsers) */}
