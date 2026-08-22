@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 
 const COVERS = [
   {
-    src: '/images/brave-series/brave-and-bold-vol1-faith-digital.png',
+    src: '/images/brave-series/brave-and-bold-vol1-facilitator-guide-faith-digital.png',
     alt: 'Brave & Bold, Volume 1',
     caption: 'Volume 1',
   },
