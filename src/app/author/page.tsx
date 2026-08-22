@@ -7,6 +7,7 @@ import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { PageIntro } from '@/components/PageIntro'
 import { ContactBlock } from '@/components/ContactBlock'
 import { siteConfig } from '@/lib/site-config'
+import { GOLDEN_THREAD_LINE, projectStudies } from '@/lib/projects'
 
 // Author page, rendered 2026-08-22 from the locked copy at
 // content/author/author-page-copy.md. Endorser quotes are verbatim and must
@@ -210,6 +211,24 @@ function Prose({ children }: { children: React.ReactNode }) {
   )
 }
 
+/**
+ * Link from a work on this page to its full case study under /projects. This
+ * page is the shelf; the case study is the story behind the item on it.
+ */
+function ReadTheStory({ href, label }: { href: string; label: string }) {
+  return (
+    <div className="mt-8">
+      <Link
+        href={href}
+        className="group inline-flex items-center gap-2 font-display text-base font-semibold text-neutral-950 underline decoration-[var(--color-brand-teal)] decoration-2 underline-offset-4 transition hover:text-[var(--color-brand-teal)]"
+      >
+        Read the story of {label}
+        <span aria-hidden="true">&rarr;</span>
+      </Link>
+    </div>
+  )
+}
+
 /* ------------------------------------------------------------------ copy */
 
 const EXPLICIT_MOVEMENT_ENDORSEMENTS: Endorsement[] = [
@@ -376,6 +395,15 @@ const BRAVE_PURPOSE_SECULAR_ENDORSEMENTS: Endorsement[] = [
   },
 ]
 
+/**
+ * Programs that have a case study but no titled entry on the shelf above. Card
+ * copy is read from the project registry so these and the /projects index never
+ * drift apart.
+ */
+const OTHER_PROJECTS = projectStudies.filter((project) =>
+  ['kingdom-kids', 'rethink-creativity'].includes(project.slug),
+)
+
 const COVER_SIZES_MAIN = '(max-width: 1024px) 16rem, 20rem'
 const COVER_SIZES_GRID = '(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 15rem'
 
@@ -397,6 +425,27 @@ export default function AuthorPage() {
           generation, there&rsquo;s a doorway here for you.
         </p>
       </PageIntro>
+
+      {/* The golden thread, stated once at the top so the works below read as
+          one body of work rather than a catalogue. Wording is single-sourced
+          from src/lib/projects.ts, which every case study also quotes. */}
+      <Container className="mt-2 sm:mt-6">
+        <FadeIn>
+          <p className="max-w-3xl border-l-2 border-[var(--color-brand-teal)] pl-6 font-display text-xl leading-9 text-neutral-800 italic sm:text-2xl sm:leading-10">
+            {GOLDEN_THREAD_LINE}
+          </p>
+          <p className="mt-6 max-w-3xl text-base leading-7 text-neutral-600">
+            Every title here has a story behind it. You can read them all on the{' '}
+            <Link
+              href="/projects"
+              className="font-medium text-neutral-950 underline decoration-[var(--color-brand-teal)] decoration-1 underline-offset-4 transition hover:decoration-2"
+            >
+              projects page
+            </Link>
+            .
+          </p>
+        </FadeIn>
+      </Container>
 
       {/* ------------------------------------------------ published books */}
       <section aria-labelledby="published-books">
@@ -463,6 +512,10 @@ export default function AuthorPage() {
                   },
                 ]}
               />
+              <ReadTheStory
+                href="/projects/birth-of-explicit-movement"
+                label="The Birth of Explicit Movement"
+              />
             </Work>
 
             {/* Dancing with Father */}
@@ -518,6 +571,10 @@ export default function AuthorPage() {
                 links={[
                   { text: 'micheleokimura.com/store (book, audiobook)' },
                 ]}
+              />
+              <ReadTheStory
+                href="/projects/dancing-with-father"
+                label="Dancing with Father"
               />
             </Work>
           </div>
@@ -635,6 +692,10 @@ export default function AuthorPage() {
                 label="Voices from the classroom"
               />
               <AvailableAt links={[{ text: 'micheleokimura.com/store' }]} />
+              <ReadTheStory
+                href="/projects/dream-big-journals"
+                label="the Dream Big Journals"
+              />
             </Work>
           </div>
 
@@ -822,6 +883,10 @@ export default function AuthorPage() {
                   },
                 ]}
               />
+              <ReadTheStory
+                href="/projects/brave-series"
+                label="the Brave Series"
+              />
             </Work>
           </div>
         </Container>
@@ -878,6 +943,10 @@ export default function AuthorPage() {
                   items={BRAVE_PURPOSE_FAITH_ENDORSEMENTS}
                   label="Early praise"
                 />
+                <ReadTheStory
+                  href="/projects/brave-purpose-with-god"
+                  label="Brave Purpose with God"
+                />
                 <div className="mt-8">
                   <Link
                     href="/contact"
@@ -914,6 +983,10 @@ export default function AuthorPage() {
                   items={BRAVE_PURPOSE_SECULAR_ENDORSEMENTS}
                   label="Early praise"
                 />
+                <ReadTheStory
+                  href="/projects/brave-purpose"
+                  label="Brave Purpose"
+                />
                 <div className="mt-8">
                   <Link
                     href="/contact"
@@ -930,6 +1003,73 @@ export default function AuthorPage() {
             </div>
           </Container>
         </div>
+      </section>
+
+      {/* ------------------------------------------------- other projects */}
+      {/* Kingdom Kids and ReThink Creativity are programs rather than titles,
+          so they have no shelf entry above. They belong to the same body of
+          work, so they get cards here and a route into the full index. */}
+      <section aria-labelledby="other-projects">
+        <Container className="mt-24 sm:mt-32">
+          <FadeIn>
+            <SectionHeading>
+              <span id="other-projects">Also built by Michele</span>
+            </SectionHeading>
+          </FadeIn>
+          <FadeInStagger faster className="mt-8">
+            <ul
+              role="list"
+              className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
+            >
+              {OTHER_PROJECTS.map((project) => (
+                <FadeIn as="li" key={project.href} scaleIn>
+                  <Link
+                    href={project.href}
+                    className="group flex h-full flex-col rounded-3xl bg-white p-8 ring-1 ring-neutral-900/5 transition hover:shadow-lg hover:ring-neutral-900/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)]"
+                  >
+                    <span className="text-xs font-semibold tracking-widest text-[var(--color-brand-teal)] uppercase">
+                      {project.kicker}
+                    </span>
+                    <h3 className="mt-3 font-display text-xl font-semibold tracking-tight text-neutral-950">
+                      {project.title}
+                    </h3>
+                    <p className="mt-4 flex-1 text-base leading-7 text-neutral-600">
+                      {project.blurb}
+                    </p>
+                    <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-neutral-950">
+                      Read the story
+                      <span aria-hidden="true">&rarr;</span>
+                    </span>
+                  </Link>
+                </FadeIn>
+              ))}
+
+              <FadeIn as="li" scaleIn>
+                <Link
+                  href="/projects"
+                  className="group flex h-full flex-col justify-between rounded-3xl bg-neutral-950 p-8 transition hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)]"
+                >
+                  <div>
+                    <span className="text-xs font-semibold tracking-widest text-white/70 uppercase">
+                      All projects
+                    </span>
+                    <h3 className="mt-3 font-display text-xl font-semibold tracking-tight text-white">
+                      Every story in one place
+                    </h3>
+                    <p className="mt-4 text-base leading-7 text-neutral-300">
+                      The origin, the making, and the reach of each book,
+                      curriculum, and program.
+                    </p>
+                  </div>
+                  <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white">
+                    Browse the projects
+                    <span aria-hidden="true">&rarr;</span>
+                  </span>
+                </Link>
+              </FadeIn>
+            </ul>
+          </FadeInStagger>
+        </Container>
       </section>
 
       {/* ---------------------------------------------- closing invitation */}

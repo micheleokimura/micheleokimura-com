@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
@@ -8,6 +9,7 @@ import { PageIntro } from '@/components/PageIntro'
 import { ContactBlock } from '@/components/ContactBlock'
 import { BookJsonLd } from '@/components/JsonLd'
 import { siteConfig, authoredWorks, type AuthoredWork } from '@/lib/site-config'
+import { worksSlugToProject } from '@/lib/projects'
 
 export function generateStaticParams() {
   return authoredWorks.map((w) => ({ slug: w.slug }))
@@ -66,6 +68,7 @@ export default async function WorkPage({
   if (!work) notFound()
 
   const isBook = work.category === 'trade-book'
+  const projectHref = worksSlugToProject[work.slug]
 
   return (
     <>
@@ -113,7 +116,9 @@ export default async function WorkPage({
                 )}
 
                 {/* TODO Michele content: full case-study prose will replace
-                    this summary when it lands from the content repo. */}
+                    this summary when it lands from the content repo. Where a
+                    project case study already exists, the link below carries
+                    the reader to it rather than repeating the story here. */}
                 <p>
                   <em>{work.title}</em> is{' '}
                   {work.subtitle
@@ -121,6 +126,18 @@ export default async function WorkPage({
                       work.subtitle.slice(1)
                     : `a work by Michele Okimura.`}
                 </p>
+
+                {projectHref && (
+                  <p>
+                    <Link
+                      href={projectHref}
+                      className="inline-flex items-center gap-2 font-semibold text-[var(--color-brand-teal)] underline underline-offset-4 hover:decoration-2"
+                    >
+                      Read the story behind this work
+                      <span aria-hidden="true">&rarr;</span>
+                    </Link>
+                  </p>
+                )}
 
                 {work.purchaseUrl && (
                   <p>

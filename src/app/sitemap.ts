@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { siteConfig, authoredWorks } from '@/lib/site-config'
 import { getPublishableSlugs } from '@/lib/case-studies'
+import { projectRoutes } from '@/lib/projects'
 import { getAllPostSlugs } from '@/lib/blog'
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -21,6 +22,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
+  // Project case studies: the story behind each thing Michele built. Routes are
+  // listed in src/lib/projects.ts so the index, the links, and this file move
+  // together.
+  const projectEntries: MetadataRoute.Sitemap = projectRoutes.map((route) => ({
+    url: `${siteConfig.url}${route}`,
+    lastModified,
+    changeFrequency: 'monthly',
+    priority: route === '/projects' ? 0.8 : 0.7,
+  }))
+
   const caseStudyEntries: MetadataRoute.Sitemap = getPublishableSlugs().map((slug) => ({
     url: `${siteConfig.url}/case-studies/${slug}`,
     lastModified,
@@ -35,5 +46,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
-  return [...baseEntries, ...worksEntries, ...caseStudyEntries, ...postEntries]
+  return [
+    ...baseEntries,
+    ...projectEntries,
+    ...worksEntries,
+    ...caseStudyEntries,
+    ...postEntries,
+  ]
 }
