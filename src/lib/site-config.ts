@@ -205,7 +205,7 @@ export const authoredWorks: AuthoredWork[] = [
 export const navItems = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
-  { href: '/works', label: 'Works' },
+  { href: '/author', label: 'Author' },
   { href: '/how-it-works', label: 'How it works' },
   { href: '/coaching', label: 'Coaching' },
   { href: '/speak', label: 'Speaking' },
