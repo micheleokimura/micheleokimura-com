@@ -1,10 +1,10 @@
-// Shared data for the three home page design variants at /home-v1-narrative,
-// /home-v2-clarity, and /home-v3-golden-thread.
+// Shared data for the home page (`src/app/page.tsx`).
 //
-// These routes exist so Michele can compare three directions side by side
-// before one is promoted to `/`. Keeping the proof data here means all three
-// variants quote the same endorsements and the same award wording, so the
-// comparison is about LAYOUT and EMPHASIS rather than about copy drift.
+// This file originally backed three design-variant routes (home-v1-narrative,
+// home-v2-clarity, home-v3-golden-thread) so Michele could compare directions
+// side by side. Golden-thread (v3) was promoted to `/`; DOORS, ENDORSEMENTS,
+// ENDORSING_ORGS, and PROOF_POINTS are what it still uses. FEATURED_WORKS and
+// NONPROFIT_ROOM were used only by the retired v1/v2 variants.
 //
 // HARD RULE: endorser wording is verbatim. Do not edit a quote to make it fit.
 // Trim only by dropping whole sentences, and only where an existing signed-off
