@@ -208,7 +208,7 @@ export const navItems = [
   { href: '/works', label: 'Works' },
   { href: '/how-it-works', label: 'How it works' },
   { href: '/coaching', label: 'Coaching' },
-  { href: '/portfolio', label: 'Speaking' },
+  { href: '/speak', label: 'Speaking' },
   { href: '/case-studies', label: 'Case Studies' },
   { href: '/resources', label: 'Resources' },
 ] as const
