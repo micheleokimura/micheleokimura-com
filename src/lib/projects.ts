@@ -17,9 +17,20 @@
 export const GOLDEN_THREAD_QUOTE =
   'There is a golden thread of bringing restoration, healing, and encouragement to the heart. If you don’t believe that you are valuable, you will not believe that the dreams in your heart are valuable. I make a case for knowing your value, and throughout pretty much everything that I do, there is that golden thread of bringing restoration, healing, and encouragement to people’s hearts.'
 
-/** One-line version used as the Author page hero subtitle. */
+/**
+ * Michele's completion of the thought: the thread does not only run through the
+ * work, it arrives somewhere. Verbatim. Do not edit the wording.
+ */
+export const GOLDEN_THREAD_CULMINATION =
+  'The golden thread is like the spine. It runs through everything I do and teach and coach and speak on. And it culminates in embracing your brave purpose. And living it out.'
+
+/**
+ * One-line version used as the Author page hero subtitle. Keeps the "runs
+ * through ... culminates in embracing your brave purpose and living it out"
+ * structure, which is the point of the sentence.
+ */
 export const GOLDEN_THREAD_LINE =
-  'A golden thread of restoration, healing, and encouragement to the heart runs through every book, journal, and program below.'
+  'A golden thread of restoration, healing, and encouragement runs through every book, journal, and program below. It culminates in one thing: embracing your brave purpose and living it out.'
 
 export type ProjectStudy = {
   slug: string

@@ -5,7 +5,7 @@ import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { PageIntro } from '@/components/PageIntro'
 import { ContactBlock } from '@/components/ContactBlock'
-import { GOLDEN_THREAD_QUOTE } from '@/lib/projects'
+import { GOLDEN_THREAD_CULMINATION, GOLDEN_THREAD_QUOTE } from '@/lib/projects'
 
 // Shared furniture for the project case studies at /projects/<slug>. Every page
 // in that tree is assembled from these pieces so the pages read as one set: the
@@ -43,7 +43,9 @@ export function CaseStudyLayout({
 
       {children}
 
-      <Container className="mt-24 sm:mt-32">
+      <BravePurposeClose />
+
+      <Container className="mt-16 sm:mt-20">
         <FadeIn>
           <Link
             href="/projects"
@@ -64,6 +66,50 @@ export function CaseStudyLayout({
         )}
       </ContactBlock>
     </>
+  )
+}
+
+/* --------------------------------------------------- brave purpose close */
+
+/**
+ * The closing frame every case study ends on. The golden thread does not only
+ * run through the work, it arrives somewhere, and the destination is the same
+ * on every page: the reader embracing and living out their brave purpose.
+ *
+ * Rendered by CaseStudyLayout, so each case study gets it without opting in.
+ * Kept deliberately light. It sits between a tinted callout and the dark
+ * ContactBlock, and three heavy panels in a row would read as a wall.
+ */
+function BravePurposeClose() {
+  return (
+    <Container className="mt-24 sm:mt-32">
+      <FadeIn>
+        <div className="mx-auto max-w-3xl border-t border-neutral-200 pt-12 text-center">
+          <h2 className="font-display text-xs font-semibold tracking-widest text-[var(--color-brand-teal)] uppercase">
+            Where the thread leads
+          </h2>
+          <figure className="mt-6">
+            <blockquote className="font-display text-2xl leading-tight font-medium text-balance text-neutral-950 italic sm:text-3xl sm:leading-tight">
+              &ldquo;{GOLDEN_THREAD_CULMINATION}&rdquo;
+            </blockquote>
+            <figcaption className="mt-5 text-sm font-medium text-neutral-500 not-italic">
+              Michele Okimura
+            </figcaption>
+          </figure>
+          <p className="mt-8 text-base leading-7 text-neutral-600">
+            If you are ready to walk this out yourself, Michele coaches authors
+            through the{' '}
+            <Link
+              href="/coaching"
+              className="font-medium text-neutral-950 underline decoration-[var(--color-brand-teal)] decoration-2 underline-offset-4 transition hover:text-[var(--color-brand-teal)]"
+            >
+              Brave Purpose Author Method
+            </Link>
+            .
+          </p>
+        </div>
+      </FadeIn>
+    </Container>
   )
 }
 

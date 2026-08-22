@@ -6,6 +6,7 @@ import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { PageIntro } from '@/components/PageIntro'
 import { ContactBlock } from '@/components/ContactBlock'
 import {
+  GOLDEN_THREAD_CULMINATION,
   GOLDEN_THREAD_QUOTE,
   projectStudies,
   type ProjectStudy,
@@ -122,6 +123,9 @@ export default function ProjectsPage() {
             <figcaption className="mt-4 text-sm font-medium text-neutral-500 not-italic">
               Michele Okimura
             </figcaption>
+            <blockquote className="mt-6 border-t border-[#0097b2]/[0.25] pt-6 text-base leading-7 text-neutral-800 italic">
+              &ldquo;{GOLDEN_THREAD_CULMINATION}&rdquo;
+            </blockquote>
           </figure>
         </FadeIn>
       </Container>

@@ -7,7 +7,11 @@ import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { PageIntro } from '@/components/PageIntro'
 import { ContactBlock } from '@/components/ContactBlock'
 import { siteConfig } from '@/lib/site-config'
-import { GOLDEN_THREAD_LINE, projectStudies } from '@/lib/projects'
+import {
+  GOLDEN_THREAD_CULMINATION,
+  GOLDEN_THREAD_LINE,
+  projectStudies,
+} from '@/lib/projects'
 
 // Author page, rendered 2026-08-22 from the locked copy at
 // content/author/author-page-copy.md. Endorser quotes are verbatim and must
@@ -434,7 +438,15 @@ export default function AuthorPage() {
           <p className="max-w-3xl border-l-2 border-[var(--color-brand-teal)] pl-6 font-display text-xl leading-9 text-neutral-800 italic sm:text-2xl sm:leading-10">
             {GOLDEN_THREAD_LINE}
           </p>
-          <p className="mt-6 max-w-3xl text-base leading-7 text-neutral-600">
+          <figure className="mt-8 max-w-3xl">
+            <blockquote className="text-base leading-7 text-neutral-700 italic">
+              &ldquo;{GOLDEN_THREAD_CULMINATION}&rdquo;
+            </blockquote>
+            <figcaption className="mt-2 text-sm font-medium text-neutral-500 not-italic">
+              Michele Okimura
+            </figcaption>
+          </figure>
+          <p className="mt-8 max-w-3xl text-base leading-7 text-neutral-600">
             Every title here has a story behind it. You can read them all on the{' '}
             <Link
               href="/projects"
