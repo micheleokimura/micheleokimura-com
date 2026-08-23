@@ -235,9 +235,9 @@ export const authoredWorks: AuthoredWork[] = [
  */
 export const navItems = [
   { href: '/', label: 'Home' },
-  { href: '/coach', label: 'Coach' },
-  { href: '/author', label: 'Author' },
   { href: '/speaker', label: 'Speaker' },
+  { href: '/author', label: 'Author' },
+  { href: '/coach', label: 'Coach' },
   { href: '/about', label: 'About' },
 ] as const
 
@@ -254,9 +254,9 @@ export const footerColumns = [
     heading: 'Explore',
     links: [
       { href: '/', label: 'Home' },
-      { href: '/coach', label: 'Coach' },
-      { href: '/author', label: 'Author' },
       { href: '/speaker', label: 'Speaker' },
+      { href: '/author', label: 'Author' },
+      { href: '/coach', label: 'Coach' },
       { href: '/about', label: 'About' },
       { href: '/how-it-works', label: 'How it works' },
     ],
