@@ -18,10 +18,12 @@ import {
 // stay that way; edit the markdown and this file together.
 //
 // Covers currently in the repo: The Birth of Explicit Movement, the Explicit
-// Movement 21-Day Journal, and the eight Dream Big with God journals and
-// teacher guides, plus one non-faith Dream Big journal. Dancing with Father,
-// the Brave Series, and both Brave Purpose editions render a placeholder tile
-// until art lands; drop the file in /public/images/books and set `cover`.
+// Movement 21-Day Journal, the eight Dream Big with God journals and teacher
+// guides, plus one non-faith Dream Big journal, and now the Brave Series
+// (Brave & Beautiful Vol. 1 Faith Journey cover, extracted 2026-08-23).
+// Dancing with Father and both Brave Purpose editions still render a
+// placeholder tile until art lands; drop the file in /public/images/books
+// and set `cover`.
 
 export const metadata: Metadata = {
   title: 'Author',
@@ -808,7 +810,11 @@ export default function AuthorPage() {
           <div className="mt-10 sm:mt-12">
             <Work
               cover={
-                <Cover alt="The Brave Series" sizes={COVER_SIZES_MAIN} />
+                <Cover
+                  src="/images/brave-series/brave-and-beautiful-vol1-faith-journey@2x.jpg"
+                  alt="Brave & Beautiful, Volume 1 (Faith Journey edition)"
+                  sizes={COVER_SIZES_MAIN}
+                />
               }
             >
               <WorkTitle title="The Brave Series" />

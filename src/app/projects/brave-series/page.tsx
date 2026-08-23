@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import {
   CaseStudyLayout,
   CaseStudySection,
+  CoverGrid,
   CoverTile,
   Endorsements,
   FactList,
@@ -97,6 +98,60 @@ const COVERS = [
     src: '/images/brave-series/brave-together-4-volume-set-faith-hardcopy.png',
     alt: 'Brave Together, four-volume set',
     caption: 'Brave Together',
+  },
+]
+
+// Individual volume and edition covers, extracted 2026-08-23 from Michele's
+// Releasing Generations Drive PDFs. Supplements the four-volume-set covers
+// above; does not replace them.
+const BEAUTIFUL_COVERS = [
+  {
+    src: '/images/brave-series/brave-and-beautiful-vol1-faith-journey.jpg',
+    alt: 'Brave & Beautiful, Volume 1, Faith Journey edition',
+    caption: 'Vol. 1 · Faith Journey',
+  },
+  {
+    src: '/images/brave-series/brave-and-beautiful-vol2-faith-journey.jpg',
+    alt: 'Brave & Beautiful, Volume 2, Faith Journey edition',
+    caption: 'Vol. 2 · Faith Journey',
+  },
+  {
+    src: '/images/brave-series/brave-and-beautiful-vol3-faith-journey.jpg',
+    alt: 'Brave & Beautiful, Volume 3, Faith Journey edition',
+    caption: 'Vol. 3 · Faith Journey',
+  },
+  {
+    src: '/images/brave-series/brave-and-beautiful-vol4-classic-book.jpg',
+    alt: 'Brave & Beautiful, Volume 4, Classic edition',
+    caption: 'Vol. 4 · Classic',
+  },
+]
+
+const BOLD_COVERS = [
+  {
+    src: '/images/brave-series/brave-and-bold-vol1-classic-book.jpg',
+    alt: 'Brave & Bold, Volume 1, Classic edition',
+    caption: 'Vol. 1 · Classic',
+  },
+  {
+    src: '/images/brave-series/brave-and-bold-vol2-classic-book.jpg',
+    alt: 'Brave & Bold, Volume 2, Classic edition',
+    caption: 'Vol. 2 · Classic',
+  },
+  {
+    src: '/images/brave-series/brave-and-bold-vol6-classic-book.jpg',
+    alt: 'Brave & Bold, Volume 6, Classic edition',
+    caption: 'Vol. 6 · Classic',
+  },
+  {
+    src: '/images/brave-series/brave-and-bold-vol1-classic-teacher-guide.jpg',
+    alt: 'Brave & Bold, Volume 1 Teacher Guide, Classic edition',
+    caption: 'Vol. 1 · Teacher Guide',
+  },
+  {
+    src: '/images/brave-series/brave-and-bold-vol2-classic-teacher-guide.jpg',
+    alt: 'Brave & Bold, Volume 2 Teacher Guide, Classic edition',
+    caption: 'Vol. 2 · Teacher Guide',
   },
 ]
 
@@ -296,6 +351,11 @@ export default function BraveSeriesPage() {
 
       <CaseStudySection heading="The three titles" id="titles">
         <SiblingLinks label="Read each story" items={TITLES} />
+      </CaseStudySection>
+
+      <CaseStudySection heading="More covers from the series" id="more-covers">
+        <CoverGrid items={BEAUTIFUL_COVERS} label="Brave & Beautiful, by volume and edition" />
+        <CoverGrid items={BOLD_COVERS} label="Brave & Bold, by volume and edition" />
       </CaseStudySection>
 
       <CaseStudySection heading="Where it is being used" id="adoption">
