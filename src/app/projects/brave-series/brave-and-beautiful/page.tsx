@@ -5,7 +5,6 @@ import {
   BuyLinks,
   CaseStudyLayout,
   CaseStudySection,
-  CoverGrid,
   Endorsements,
   FactList,
   GoldenThread,
@@ -13,8 +12,12 @@ import {
   PullQuote,
   type Endorsement,
 } from '@/components/CaseStudyLayout'
+import { BraveSeriesCovers } from '@/components/BraveSeriesCovers'
 import { Container } from '@/components/Container'
+import { BRAVE_SERIES_TITLES } from '@/lib/brave-series-covers'
 import { pageMetadata } from '@/lib/schema'
+
+const braveTitle = BRAVE_SERIES_TITLES.find((t) => t.slug === 'brave-and-beautiful')!
 
 export const metadata: Metadata = pageMetadata({
   title: 'Brave & Beautiful',
@@ -25,29 +28,6 @@ export const metadata: Metadata = pageMetadata({
   ogDescription:
     'Four volumes for teen girls on identity, worth, and protection.',
 })
-
-const COVERS = [
-  {
-    src: '/images/brave-series/brave-and-beautiful-vol1-faith-guide@2x.jpg',
-    alt: 'Brave & Beautiful, Volume 1',
-    caption: 'Volume 1',
-  },
-  {
-    src: '/images/brave-series/brave-and-beautiful-vol2-faith-digital.png',
-    alt: 'Brave & Beautiful, Volume 2',
-    caption: 'Volume 2',
-  },
-  {
-    src: '/images/brave-series/brave-and-beautiful-vol3-faith-digital.png',
-    alt: 'Brave & Beautiful, Volume 3',
-    caption: 'Volume 3',
-  },
-  {
-    src: '/images/brave-series/brave-and-beautiful-vol4-faith-digital.png',
-    alt: 'Brave & Beautiful, Volume 4',
-    caption: 'Volume 4',
-  },
-]
 
 const DETAIL = [
   'Volumes 1 through 3 build identity, emotional health, self-worth, healthy relationships, and vision for your life.',
@@ -130,7 +110,10 @@ export default function BraveAndBeautifulPage() {
       </CaseStudySection>
 
       <Container className="mt-16 sm:mt-20">
-        <CoverGrid items={COVERS} label="The four volumes" />
+        <BraveSeriesCovers
+          titles={[braveTitle]}
+          showTitleLabels={false}
+        />
       </Container>
 
       <CaseStudySection heading="What is inside" id="structure">

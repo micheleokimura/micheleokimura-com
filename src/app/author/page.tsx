@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { BannerHero } from '@/components/BannerHero'
+import { BraveSeriesCovers } from '@/components/BraveSeriesCovers'
 import { ContactBlock } from '@/components/ContactBlock'
 import { AllWorksJsonLd, WebPageJsonLd } from '@/components/JsonLd'
 import {
@@ -1057,6 +1058,24 @@ export default function AuthorPage() {
                 label="the Brave Series"
               />
             </Work>
+          </div>
+
+          {/* Twelve covers, four volumes per title, Faith and Classic
+              alternating across each row. The full 24-edition set is
+              deliberately not shown here. Source: lib/brave-series-covers. */}
+          <div className="mt-16 sm:mt-20">
+            <FadeIn>
+              <h4 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
+                The twelve volumes
+              </h4>
+              <p className="mt-3 max-w-2xl text-base leading-7 text-neutral-600">
+                Four volumes in each title, shown here in a mix of the Faith and
+                Classic editions. Every volume ships in both.
+              </p>
+            </FadeIn>
+            <div className="mt-8">
+              <BraveSeriesCovers />
+            </div>
           </div>
         </Container>
       </section>

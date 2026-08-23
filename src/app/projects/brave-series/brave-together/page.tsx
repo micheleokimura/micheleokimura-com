@@ -5,7 +5,6 @@ import {
   BuyLinks,
   CaseStudyLayout,
   CaseStudySection,
-  CoverGrid,
   Endorsements,
   FactList,
   GoldenThread,
@@ -14,11 +13,15 @@ import {
   Recognition,
   type Endorsement,
 } from '@/components/CaseStudyLayout'
+import { BraveSeriesCovers } from '@/components/BraveSeriesCovers'
 import { Container } from '@/components/Container'
 
 // The DOE approval is the headline of this page: Brave Together is the edition
 // the State of Hawai‘i vetted and approved for secondary public schools in 2026.
+import { BRAVE_SERIES_TITLES } from '@/lib/brave-series-covers'
 import { pageMetadata } from '@/lib/schema'
+
+const braveTitle = BRAVE_SERIES_TITLES.find((t) => t.slug === 'brave-together')!
 
 export const metadata: Metadata = pageMetadata({
   title: 'Brave Together',
@@ -34,29 +37,6 @@ const RECOGNITION = [
   'Brave Together (non-faith version) vetted and approved by the Hawaiʻi State Department of Education for use in secondary public schools, 2026',
   'Teacher lessons written by Phyllis Unebasami, retired Hawaiʻi Deputy Superintendent of the Department of Education and a leading curriculum designer in the state',
   '2023 Outstanding Advocate for the Children and Youth of Hawaiʻi, awarded to Releasing Generations by Hawaiʻi’s Governor and Honolulu’s Mayor for the development of the Brave Series',
-]
-
-const COVERS = [
-  {
-    src: '/images/brave-series/brave-together-vol1-faith-digital.png',
-    alt: 'Brave Together, Volume 1',
-    caption: 'Volume 1',
-  },
-  {
-    src: '/images/brave-series/brave-together-vol2-faith-digital.png',
-    alt: 'Brave Together, Volume 2',
-    caption: 'Volume 2',
-  },
-  {
-    src: '/images/brave-series/brave-together-vol3-faith-digital.png',
-    alt: 'Brave Together, Volume 3',
-    caption: 'Volume 3',
-  },
-  {
-    src: '/images/brave-series/brave-together-hawaii-vol4-classic.jpg',
-    alt: 'Brave Together, Volume 4, Hawaiʻi classic edition',
-    caption: 'Volume 4',
-  },
 ]
 
 const DETAIL = [
@@ -142,7 +122,10 @@ export default function BraveTogetherPage() {
       </CaseStudySection>
 
       <Container className="mt-16 sm:mt-20">
-        <CoverGrid items={COVERS} label="The four volumes" />
+        <BraveSeriesCovers
+          titles={[braveTitle]}
+          showTitleLabels={false}
+        />
       </Container>
 
       <CaseStudySection heading="What is inside" id="structure">

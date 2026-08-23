@@ -5,8 +5,6 @@ import { pageMetadata } from '@/lib/schema'
 import {
   CaseStudyLayout,
   CaseStudySection,
-  CoverGrid,
-  CoverTile,
   Endorsements,
   FactList,
   GoldenThread,
@@ -19,8 +17,8 @@ import {
   BuyLinks,
   type Endorsement,
 } from '@/components/CaseStudyLayout'
+import { BraveSeriesCovers } from '@/components/BraveSeriesCovers'
 import { Container } from '@/components/Container'
-import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 
 // Origin story is Michele's own account, condensed for the web. Endorsements are
 // verbatim and are the same set carried on /author; edit both together.
@@ -80,78 +78,6 @@ const TITLES = [
   },
 ]
 
-const COVERS = [
-  {
-    src: '/images/brave-series/brave-and-beautiful-4-volume-set-faith-hardcopy.jpeg',
-    alt: 'Brave & Beautiful, four-volume set',
-    caption: 'Brave & Beautiful',
-  },
-  {
-    src: '/images/brave-series/brave-and-bold-4-volume-set-faith-hardcopy.jpeg',
-    alt: 'Brave & Bold, four-volume set',
-    caption: 'Brave & Bold',
-  },
-  {
-    src: '/images/brave-series/brave-together-4-volume-set-faith-hardcopy.png',
-    alt: 'Brave Together, four-volume set',
-    caption: 'Brave Together',
-  },
-]
-
-// Individual volume and edition covers, extracted 2026-08-23 from Michele's
-// Releasing Generations Drive PDFs. Supplements the four-volume-set covers
-// above; does not replace them.
-const BEAUTIFUL_COVERS = [
-  {
-    src: '/images/brave-series/brave-and-beautiful-vol1-faith-journey.jpg',
-    alt: 'Brave & Beautiful, Volume 1, Faith Journey edition',
-    caption: 'Vol. 1 · Faith Journey',
-  },
-  {
-    src: '/images/brave-series/brave-and-beautiful-vol2-faith-journey.jpg',
-    alt: 'Brave & Beautiful, Volume 2, Faith Journey edition',
-    caption: 'Vol. 2 · Faith Journey',
-  },
-  {
-    src: '/images/brave-series/brave-and-beautiful-vol3-faith-journey.jpg',
-    alt: 'Brave & Beautiful, Volume 3, Faith Journey edition',
-    caption: 'Vol. 3 · Faith Journey',
-  },
-  {
-    src: '/images/brave-series/brave-and-beautiful-vol4-classic-book.jpg',
-    alt: 'Brave & Beautiful, Volume 4, Classic edition',
-    caption: 'Vol. 4 · Classic',
-  },
-]
-
-const BOLD_COVERS = [
-  {
-    src: '/images/brave-series/brave-and-bold-vol1-classic-book.jpg',
-    alt: 'Brave & Bold, Volume 1, Classic edition',
-    caption: 'Vol. 1 · Classic',
-  },
-  {
-    src: '/images/brave-series/brave-and-bold-vol2-classic-book.jpg',
-    alt: 'Brave & Bold, Volume 2, Classic edition',
-    caption: 'Vol. 2 · Classic',
-  },
-  {
-    src: '/images/brave-series/brave-and-bold-vol6-classic-book.jpg',
-    alt: 'Brave & Bold, Volume 6, Classic edition',
-    caption: 'Vol. 6 · Classic',
-  },
-  {
-    src: '/images/brave-series/brave-and-bold-vol1-classic-teacher-guide.jpg',
-    alt: 'Brave & Bold, Volume 1 Teacher Guide, Classic edition',
-    caption: 'Vol. 1 · Teacher Guide',
-  },
-  {
-    src: '/images/brave-series/brave-and-bold-vol2-classic-teacher-guide.jpg',
-    alt: 'Brave & Bold, Volume 2 Teacher Guide, Classic edition',
-    caption: 'Vol. 2 · Teacher Guide',
-  },
-]
-
 const ENDORSEMENTS: Endorsement[] = [
   {
     quote:
@@ -201,24 +127,10 @@ export default function BraveSeriesPage() {
         trafficked in the first place.
       </PullQuote>
 
+      {/* Twelve covers, one per volume, Faith and Classic alternating across
+          each row. The full 24-edition set is deliberately not shown. */}
       <Container className="mt-16 sm:mt-20">
-        <FadeInStagger faster>
-          <ul
-            role="list"
-            className="grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-10"
-          >
-            {COVERS.map((cover) => (
-              <FadeIn as="li" key={cover.src} scaleIn>
-                <CoverTile
-                  src={cover.src}
-                  alt={cover.alt}
-                  caption={cover.caption}
-                  sizes="(max-width: 640px) 80vw, 22rem"
-                />
-              </FadeIn>
-            ))}
-          </ul>
-        </FadeInStagger>
+        <BraveSeriesCovers />
       </Container>
 
       <CaseStudySection heading="The assignment" id="assignment">
@@ -348,11 +260,6 @@ export default function BraveSeriesPage() {
 
       <CaseStudySection heading="The three titles" id="titles">
         <SiblingLinks label="Read each story" items={TITLES} />
-      </CaseStudySection>
-
-      <CaseStudySection heading="More covers from the series" id="more-covers">
-        <CoverGrid items={BEAUTIFUL_COVERS} label="Brave & Beautiful, by volume and edition" />
-        <CoverGrid items={BOLD_COVERS} label="Brave & Bold, by volume and edition" />
       </CaseStudySection>
 
       <CaseStudySection heading="Where it is being used" id="adoption">
