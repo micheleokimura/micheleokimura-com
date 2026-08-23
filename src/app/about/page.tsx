@@ -46,30 +46,45 @@ export default function AboutPage() {
       </PageIntro>
 
       <Container className="mt-14 sm:mt-16">
-        <FadeIn className="max-w-2xl space-y-6 text-lg leading-8 text-neutral-600">
-          <p>
-            I&rsquo;m an author, speaker, and coach who has spent the last four
-            decades inspiring courage, vulnerability, healing, and purpose.
-          </p>
-          <p>
-            My story has been an adventure in finding purpose, and it began with my
-            own healing journey. Transforming feelings of worthlessness into a deep
-            sense of value ignited a fire in me, a passion to help others discover
-            the same strength within themselves.
-          </p>
-          <p>
-            I am the founder and executive director of Releasing Generations, and I
-            write, speak, and teach across Hawai&lsquo;i and beyond. For more than
-            twenty years I served as a pastor, and before that I spent seventeen
-            years as an elementary school teacher. Across all of it the work is the
-            same: helping people find the courage to live out the purpose they were
-            made for.
-          </p>
-          <p>
-            My firm belief is that every person&rsquo;s story, even the broken ones,
-            can become a launchpad into a future full of freedom, wonder, and
-            limitless possibilities.
-          </p>
+        <FadeIn>
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,20rem)_1fr] lg:items-start lg:gap-16">
+            <div className="relative aspect-[4/5] w-full max-w-xs overflow-hidden rounded-3xl bg-neutral-100 sm:max-w-sm lg:max-w-none">
+              <Image
+                src="/images/michele/about-hero.jpg"
+                alt="Michele Okimura laughing at home"
+                fill
+                priority
+                sizes="(min-width: 1024px) 20rem, 60vw"
+                className="object-cover"
+              />
+            </div>
+
+            <div className="max-w-2xl space-y-6 text-lg leading-8 text-neutral-600">
+              <p>
+                I&rsquo;m an author, speaker, and coach who has spent the last four
+                decades inspiring courage, vulnerability, healing, and purpose.
+              </p>
+              <p>
+                My story has been an adventure in finding purpose, and it began with my
+                own healing journey. Transforming feelings of worthlessness into a deep
+                sense of value ignited a fire in me, a passion to help others discover
+                the same strength within themselves.
+              </p>
+              <p>
+                I am the founder and executive director of Releasing Generations, and I
+                write, speak, and teach across Hawai&lsquo;i and beyond. For more than
+                twenty years I served as a pastor, and before that I spent seventeen
+                years as an elementary school teacher. Across all of it the work is the
+                same: helping people find the courage to live out the purpose they were
+                made for.
+              </p>
+              <p>
+                My firm belief is that every person&rsquo;s story, even the broken ones,
+                can become a launchpad into a future full of freedom, wonder, and
+                limitless possibilities.
+              </p>
+            </div>
+          </div>
         </FadeIn>
       </Container>
 
@@ -90,7 +105,7 @@ export default function AboutPage() {
         </FadeIn>
       </Container>
 
-      {/* Photo timeline: six eras, 20 photos, 1962 to 2025. Captions sit in an
+      {/* Photo timeline: seven eras, 21 photos, 1962 to today. Captions sit in an
           always-visible band on each photo, so they read the same on a phone as
           they do on a desktop. */}
       <Container className="mt-16 sm:mt-24">

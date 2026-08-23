@@ -29,13 +29,11 @@ import { siteConfig } from '@/lib/site-config'
  * Michele is pulling hex codes off her own photos. When that palette lands,
  * edit those five values and this page recolors. Nothing here hardcodes a hex.
  *
- * PHOTOS: the repo has no dedicated Michele headshot yet, so the two photos
- * below are the warmest available from the About timeline. Drop a real headshot
- * into /public/images/ and change the two constants directly under this note.
+ * PHOTOS: hero portrait is Michele's own headshot, added 2026-08-23.
  */
 
-/** Hero portrait. Swap to a proper headshot when one lands in the repo. */
-const HERO_PHOTO = '/images/about-timeline/about-2023-hawaii-outstanding-advocate-19.jpg'
+/** Hero portrait: Michele at home with her coffee mug. */
+const HERO_PHOTO = '/images/michele/coach-hero.jpg'
 /** "Why Michele" photo: her on the mic at the Releasing Generations 10th. */
 const MICHELE_PHOTO = '/images/about-timeline/about-2023-rg-10th-anniversary-20.jpg'
 import { pageMetadata } from '@/lib/schema'
@@ -212,11 +210,11 @@ export default function CoachingPage() {
               <div className="relative aspect-[3/2] w-full overflow-hidden rounded-3xl bg-neutral-100 lg:aspect-[4/5]">
                 <Image
                   src={HERO_PHOTO}
-                  alt="Michele Okimura in Honolulu"
+                  alt="Michele Okimura holding a coffee mug at home in Honolulu"
                   fill
                   priority
                   sizes="(min-width: 1024px) 24rem, 100vw"
-                  className="object-cover object-[30%_center]"
+                  className="object-cover object-[center_20%]"
                 />
               </div>
             </div>

@@ -268,6 +268,26 @@ const ERAS: Era[] = [
       },
     ],
   },
+  {
+    years: '2026',
+    headline: 'Today, Honolulu.',
+    body: (
+      <>
+        <p>
+          Still here on O&lsquo;ahu, still telling the truth about my own story
+          so it can make room for someone else&rsquo;s. The work now is helping
+          other people find their book, the way I found mine.
+        </p>
+      </>
+    ),
+    photos: [
+      {
+        src: `${IMG_ROOT}/present-day-with-tree.jpg`,
+        alt: 'Michele Okimura today, in Honolulu.',
+        caption: 'Today. Honolulu.',
+      },
+    ],
+  },
 ]
 
 function PhotoGrid({ photos }: { photos: Photo[] }) {

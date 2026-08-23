@@ -446,30 +446,45 @@ export default function AuthorPage() {
 
       {/* The golden thread, stated once at the top so the works below read as
           one body of work rather than a catalogue. Wording is single-sourced
-          from src/lib/projects.ts, which every case study also quotes. */}
+          from src/lib/projects.ts, which every case study also quotes.
+          Paired with Michele's headshot, added 2026-08-23. */}
       <Container className="mt-10 sm:mt-12">
         <FadeIn>
-          <p className="max-w-3xl border-l-2 border-[var(--color-brand-terracotta)] pl-6 font-display text-xl leading-9 text-neutral-800 italic sm:text-2xl sm:leading-10">
-            {GOLDEN_THREAD_LINE}
-          </p>
-          <figure className="mt-8 max-w-3xl">
-            <blockquote className="text-base leading-7 text-neutral-700 italic">
-              &ldquo;{GOLDEN_THREAD_CULMINATION}&rdquo;
-            </blockquote>
-            <figcaption className="mt-2 text-sm font-medium text-neutral-500 not-italic">
-              Michele Okimura
-            </figcaption>
-          </figure>
-          <p className="mt-8 max-w-3xl text-base leading-7 text-neutral-600">
-            Every title here has a story behind it. You can read them all on the{' '}
-            <Link
-              href="/projects"
-              className="font-medium text-neutral-950 underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition hover:decoration-2"
-            >
-              projects page
-            </Link>
-            .
-          </p>
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,20rem)_1fr] lg:items-center lg:gap-16">
+            <div className="relative order-first aspect-[4/5] w-full max-w-xs overflow-hidden rounded-3xl bg-neutral-100 sm:max-w-sm lg:order-last lg:max-w-none">
+              <Image
+                src="/images/michele/author-hero.jpg"
+                alt="Michele Okimura with her coffee mug at home"
+                fill
+                sizes="(min-width: 1024px) 20rem, 60vw"
+                className="object-cover"
+              />
+            </div>
+
+            <div>
+              <p className="max-w-3xl border-l-2 border-[var(--color-brand-terracotta)] pl-6 font-display text-xl leading-9 text-neutral-800 italic sm:text-2xl sm:leading-10">
+                {GOLDEN_THREAD_LINE}
+              </p>
+              <figure className="mt-8 max-w-3xl">
+                <blockquote className="text-base leading-7 text-neutral-700 italic">
+                  &ldquo;{GOLDEN_THREAD_CULMINATION}&rdquo;
+                </blockquote>
+                <figcaption className="mt-2 text-sm font-medium text-neutral-500 not-italic">
+                  Michele Okimura
+                </figcaption>
+              </figure>
+              <p className="mt-8 max-w-3xl text-base leading-7 text-neutral-600">
+                Every title here has a story behind it. You can read them all on the{' '}
+                <Link
+                  href="/projects"
+                  className="font-medium text-neutral-950 underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition hover:decoration-2"
+                >
+                  projects page
+                </Link>
+                .
+              </p>
+            </div>
+          </div>
         </FadeIn>
       </Container>
 
