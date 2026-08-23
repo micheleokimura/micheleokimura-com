@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 
 import { Container } from '@/components/Container'
@@ -19,6 +20,9 @@ export const metadata: Metadata = pageMetadata({
   ogDescription:
     'Some messages do more than inspire. They give people permission to be brave.',
 })
+
+/** Hero photo: Michele mid-message on stage, Day 1 26:31.5, open palm gesture. */
+const HERO_PHOTO = '/images/michele/speaker-hero.jpg'
 
 // Copy of record: site/content/speaker/speaker-page-copy.md (locked with Michele
 // 2026-08-22). Endorser wording is verbatim and must not be edited, including
@@ -226,17 +230,33 @@ export default function SpeakerPage() {
       />
 
       {/* The intro paragraph that used to sit inside the tall hero. It reads as
-          the lead now, on cream, straight under the banner. */}
+          the lead now, on cream, straight under the banner, alongside a stage
+          photo. */}
       <Container className="mt-12 sm:mt-16">
         <FadeIn>
-          <p className="max-w-3xl text-xl leading-9 text-neutral-600">
-            Michele Okimura speaks at churches, conferences, and schools, and to
-            small groups, leadership teams, and community organizations. Whether
-            you are gathering a crowd or an intimate team, she brings messages
-            that build brave purpose in homes, workplaces, ministries, and
-            teams, and help people find the courage to dream big and make a
-            difference.
-          </p>
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1fr_minmax(0,28rem)] lg:gap-16">
+            <p className="max-w-3xl text-xl leading-9 text-neutral-600">
+              Michele Okimura speaks at churches, conferences, and schools, and
+              to small groups, leadership teams, and community organizations.
+              Whether you are gathering a crowd or an intimate team, she
+              brings messages that build brave purpose in homes, workplaces,
+              ministries, and teams, and help people find the courage to
+              dream big and make a difference.
+            </p>
+
+            <div className="order-first lg:order-last">
+              <div className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl bg-neutral-100">
+                <Image
+                  src={HERO_PHOTO}
+                  alt="Michele Okimura speaking on stage, microphone in hand"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 28rem, 100vw"
+                  className="object-cover"
+                />
+              </div>
+            </div>
+          </div>
         </FadeIn>
       </Container>
 
