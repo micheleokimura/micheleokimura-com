@@ -57,8 +57,8 @@ const COVERS = [
     caption: 'Volume 3',
   },
   {
-    src: '/images/brave-series/brave-together-vol4-faith-digital.png',
-    alt: 'Brave Together, Volume 4',
+    src: '/images/brave-series/brave-together-hawaii-vol4-classic.jpg',
+    alt: 'Brave Together, Volume 4, Hawaiʻi classic edition',
     caption: 'Volume 4',
   },
 ]
