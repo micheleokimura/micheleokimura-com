@@ -51,3 +51,4 @@ assets-raw/photos/private/
 
 # 300 DPI PDF page renders: local reference only, too large to track
 design-references/pdf-pages/
+pnpm-workspace.yaml
