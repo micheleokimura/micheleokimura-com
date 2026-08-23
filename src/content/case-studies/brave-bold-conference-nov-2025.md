@@ -37,8 +37,8 @@ For Michele, the conference was a model run. The same architecture has shipped b
 
 ## Where this work goes next
 
-The conference is now part of Explicit Movement's annual rhythm. The 2026 cycle is in planning, with the same model and an expanded coalition base. If you are a pastor, a youth leader, or a parent who wants to bring the Brave & Bold work into your church or your home, get in touch through the [Speaking page](/speaking).
+The conference is now part of Explicit Movement's annual rhythm. The 2026 cycle is in planning, with the same model and an expanded coalition base. If you are a pastor, a youth leader, or a parent who wants to bring the Brave & Bold work into your church or your home, get in touch through the [Speaking page](/speaker).
 
 If you are building a coalition of your own around a body of work, the architecture Michele runs is teachable. The Brave Purpose Author Method is the path she shares with leaders who want to do the same.
 
-[Learn about the Brave Purpose Author Method](/coaching)
+[Learn about the Brave Purpose Author Method](/coach)

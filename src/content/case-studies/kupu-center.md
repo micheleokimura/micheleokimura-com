@@ -17,7 +17,7 @@ Kupu Center is a community-based Hawaiʻi organization serving high-risk youth, 
 
 ## The Engagement
 
-Michele partnered with Nancy Vuu on this one, and the two of them spoke together to the youth about dreaming big for their lives. It is a message that asks something real of a room where many of the young people have had good reason to stop expecting much. Alongside the speaking, Michele introduced Brave & Beautiful and Brave & Bold to the Kupu Center leadership team as resources the staff could carry forward after the session ended.
+Michele partnered with [Nancy Vuu](/case-studies/nancy-vuu) on this one, and the two of them spoke together to the youth about dreaming big for their lives. It is a message that asks something real of a room where many of the young people have had good reason to stop expecting much. Alongside the speaking, Michele introduced Brave & Beautiful and Brave & Bold to the Kupu Center leadership team as resources the staff could carry forward after the session ended.
 
 ## The Outcome
 

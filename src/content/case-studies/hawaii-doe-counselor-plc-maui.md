@@ -41,4 +41,4 @@ This page describes the engagement at the institutional level. The Hawai'i State
 
 If you lead in a school district, a counseling team, or any setting where curriculum has to clear both an academic-credibility bar and a real-room field-implementation bar, Michele has done this work. The Brave Purpose Author Method is the path she teaches others on.
 
-[Learn about the Brave Purpose Author Method](/coaching)
+[Learn about the Brave Purpose Author Method](/coach)

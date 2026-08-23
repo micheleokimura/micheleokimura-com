@@ -27,3 +27,5 @@ Rebecca Furuhashi, the school's Principal, on what the work did to the campus:
 > Rebecca Furuhashi, Principal, Christian Academy
 
 The board presentation and the leadership Zoom in July 2026 mean the conversation has moved from individual sessions to what the school wants to build.
+
+Michele also collaborates with [Nancy Vuu](/case-studies/nancy-vuu) on the school's crowning ceremony for graduating seniors.

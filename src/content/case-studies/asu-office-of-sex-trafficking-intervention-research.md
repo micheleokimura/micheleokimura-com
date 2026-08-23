@@ -39,4 +39,4 @@ For the curriculum, the partnership did the harder work. It separated what Brave
 
 If you build curriculum, lead a prevention or healing program, or steward a body of work that needs both warmth and rigor, the Brave Purpose Author Method is shaped for exactly this kind of build. Michele has walked it.
 
-[Learn about the Brave Purpose Author Method](/coaching)
+[Learn about the Brave Purpose Author Method](/coach)

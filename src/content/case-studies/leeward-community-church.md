@@ -37,6 +37,6 @@ For the church, the partnership is the kind of inside-the-network sharing that s
 
 ## Where this work goes next
 
-If you pastor or lead in a faith community that wants the Brave teaching brought into your room, or if you would like to host a Brave & Bold conference for your community, get in touch through the [Speaking page](/speaking).
+If you pastor or lead in a faith community that wants the Brave teaching brought into your room, or if you would like to host a Brave & Bold conference for your community, get in touch through the [Speaking page](/speaker).
 
-[Learn about the Brave Purpose Author Method](/coaching)
+[Learn about the Brave Purpose Author Method](/coach)

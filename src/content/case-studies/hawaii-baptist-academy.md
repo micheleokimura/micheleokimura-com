@@ -40,4 +40,4 @@ For Michele, the HBA partnership confirmed that the Brave material reaches into 
 
 If you lead a school, faith community, or family team and you want a speaker who treats identity and value as inside work, Michele's Brave Purpose Author Method walks the same path she walked with HBA. Start with a conversation.
 
-[Learn about the Brave Purpose Author Method](/coaching)
+[Learn about the Brave Purpose Author Method](/coach)

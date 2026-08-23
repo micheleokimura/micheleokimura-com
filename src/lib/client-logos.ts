@@ -17,9 +17,9 @@ export type ClientLogo = {
 }
 
 export const CLIENT_LOGOS: ClientLogo[] = [
-  { slug: 'hawaii-state-doe', name: 'Hawaiʻi State Department of Education', logo: null },
+  { slug: 'hawaii-state-doe', name: 'State of Hawaiʻi Department of Education', logo: null },
   { slug: 'missionary-church-hawaii', name: 'Missionary Church Hawaiʻi', logo: null },
-  { slug: 'transform-our-world-hawaii', name: 'Transform Our World Hawaiʻi', logo: null },
+  { slug: 'transform-our-world-hawaii', name: 'Transform Our World', logo: null },
   { slug: 'island-pacific-academy', name: 'Island Pacific Academy', logo: null },
   { slug: 'missio-nexus', name: 'Missio Nexus', logo: null },
   { slug: 'kupu-center', name: 'Kupu Center', logo: null },

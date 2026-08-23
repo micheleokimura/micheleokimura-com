@@ -21,7 +21,7 @@ Michele's relationship with Cal Chinen is a long friendship before it is anythin
 
 ## The Outcome
 
-Those pastors all belong to the Transform Our World Hawaiʻi chapter, which meets weekly, so the relationships stay current rather than going quiet between engagements. Every one of them is a strong supporter of Releasing Generations. Cal Chinen on the workshop material Michele brought to his congregation:
+Those pastors all belong to the [Transform Our World](/case-studies/transform-our-world-hawaii) Hawaiʻi chapter, which meets weekly, so the relationships stay current rather than going quiet between engagements. Every one of them is a strong supporter of Releasing Generations. Cal Chinen on the workshop material Michele brought to his congregation:
 
 > "The Kingdom Kids Workshop has been the single most powerful equipping workshop for the parents and children's ministry workers in our church. It gave them practical tools, and it imparted a living and powerful love and excitement for God."
 > Cal Chinen, Moanalua Gardens Missionary Church, Honolulu

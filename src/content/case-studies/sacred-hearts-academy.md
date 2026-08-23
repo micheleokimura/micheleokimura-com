@@ -40,4 +40,4 @@ The Sacred Hearts conversation is documented here because the partnership archit
 
 If you lead a faith-rooted school and want the Brave Series brought into a real conversation about your community, the path Sacred Hearts is walking is the path the conversation usually takes. Start with a note.
 
-[Learn about Michele's speaking and school work](/speaking)
+[Learn about Michele's speaking and school work](/speaker)

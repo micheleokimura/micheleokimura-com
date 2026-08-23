@@ -5,7 +5,7 @@ engagement-type: school-partner
 ready-to-publish: true
 nda-flagged: false
 endorsements-pending: false
-hero-headline: Her material in the sixth-grade Bible classroom
+hero-headline: Piloting in Bible study, with school-wide plans ahead
 completion-date: 2026-02
 ---
 
@@ -17,8 +17,10 @@ Hanalani Schools is a private Christian school on Oʻahu serving students from t
 
 ## The Engagement
 
-Michele first spoke at Hanalani in January 2025. The relationship moved from the stage into the classroom: in February 2026 the school placed an order for her materials, and Hanalani's sixth-grade Bible studies now use them.
+Hanalani has hosted multiple trainings with Releasing Generations over a long working relationship, much of it built alongside former Headmaster Mark Morimoto, who is now retiring. The school has invited Michele in to lead parenting workshops on connecting with your children, nurturing creativity, and dreaming big at home. She also spoke at Hanalani's Christian Emphasis Week, where she led two youth assemblies.
+
+In January 2025 Michele spoke on campus again, and the work moved from the assembly hall into the classroom. Hanalani has piloted Brave & Beautiful and Brave & Bold with sixth-grade Bible study groups, one for girls and one for boys, running with a small group of students.
 
 ## The Outcome
 
-Hanalani is an active paying client. Her material sits inside a graded course rather than a one-off assembly, which is the version of adoption that lasts past the season a speaker visits.
+The pilot is active and the school is excited about a future school-wide implementation of Brave Together. Getting the material into a graded course rather than a one-off assembly is the version of adoption that lasts past the season a speaker visits.
