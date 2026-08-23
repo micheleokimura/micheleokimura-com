@@ -51,11 +51,11 @@ export default function AboutPage() {
             <div className="relative aspect-[4/5] w-full max-w-xs overflow-hidden rounded-3xl bg-neutral-100 sm:max-w-sm lg:max-w-none">
               <Image
                 src="/images/michele/about-hero.jpg"
-                alt="Michele Okimura laughing at home"
+                alt="Michele Okimura on the beach in Hawai'i"
                 fill
                 priority
                 sizes="(min-width: 1024px) 20rem, 60vw"
-                className="object-cover"
+                className="object-cover object-[62%_28%]"
               />
             </div>
 
@@ -102,6 +102,36 @@ export default function AboutPage() {
               Michele Okimura
             </figcaption>
           </figure>
+        </FadeIn>
+      </Container>
+
+      {/* Meet Michele: a closer, warmer photo before the timeline pulls back
+          to tell the whole story chronologically. */}
+      <Container className="mt-16 sm:mt-20">
+        <FadeIn>
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,20rem)_1fr] lg:items-center lg:gap-16">
+            <div className="relative order-first aspect-[4/5] w-full max-w-xs overflow-hidden rounded-3xl bg-neutral-100 sm:max-w-sm lg:order-last lg:max-w-none">
+              <Image
+                src="/images/michele/about-meet-michele.jpg"
+                alt="Michele Okimura laughing at home"
+                fill
+                sizes="(min-width: 1024px) 20rem, 60vw"
+                className="object-cover"
+              />
+            </div>
+
+            <div className="max-w-2xl space-y-4">
+              <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
+                Meet Michele
+              </h2>
+              <p className="text-lg leading-8 text-neutral-600">
+                If you catch me on a good day, I am probably laughing about
+                something, coffee in hand, telling a story that gets a little
+                more dramatic every time I tell it. That is the same person who
+                shows up to every Talk Story Session and every stage.
+              </p>
+            </div>
+          </div>
         </FadeIn>
       </Container>
 
