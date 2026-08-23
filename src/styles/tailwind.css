@@ -39,105 +39,164 @@
   --font-display--font-variation-settings: 'wdth' 125;
 
   /* ---------------------------------------------------------------------
-     MICHELE OKIMURA BRAND PALETTE  (teal + terracotta, approved Aug 2026)
+     MICHELE OKIMURA BRAND PALETTE
+     Sampled from her printed book design. Locked by Brett + Michele, Aug 2026.
      ---------------------------------------------------------------------
-     Teal is the primary and terracotta is its warm complement. This replaces
-     the sapphire + orange scheme, which read as "blue and orange" all at once.
-     The site's original pre-sapphire palette was already teal (#0097B2 ocean
-     teal with #DB6437 terracotta, taken from Michele's Elementor accent), so
-     this is a return to that family rather than a new direction. The exact
-     hexes changed for contrast; see the note under teal below.
+     THE FIVE. Everything else in this block is derived from them, and every
+     derived value exists for one reason: a contrast measurement. Nothing here
+     is a second opinion about the hue.
 
-       teal            #0F766E  headings, wordmark, dark surface panels
-       teal-deep       #134E4A  footer ground, banner-hero gradient, depth
-                                beneath teal
-       terracotta      #D4735A  the warm accent: CTA fills, marker swipe,
-                                rules, small emphasis
-       terracotta-ink  #9E5442  the same accent when it must be read AS TEXT
-                                on cream. #D4735A on cream is only 2.91:1 and
-                                fails WCAG AA (needs 4.5:1); #9E5442 is 4.90:1
-                                and still reads as terracotta.
-       terracotta-soft #E08E76  the CTA hover fill, one step lighter so the
-                                near-black label gains contrast on hover
-                                (6.77:1) rather than losing it.
-       cream           #F5F1E8  every page, card and modal background. Warmer
-                                than the old ivory, which was picked for
-                                sapphire and read cold beside teal.
-       ink             #1F1B16  warm near-black. This is the text that sits ON
-                                a terracotta fill, NOT the body copy color.
+       teal    #00B09F  primary accent. Decorative marks, secondary buttons,
+                        accents on navy, the banner glow.
+       coral   #F15C3D  primary CTA fill. Contact, Join waitlist, form submits.
+       gold    #E9AE3F  DECORATIVE ONLY. Dividers, ornament, tiny bullets.
+       navy    #1F2744  body text, headings on cream, every dark UI surface.
+       cream   #F2ECDF  the dominant ground. Oat/parchment, masculine-neutral.
 
-     Why NOT the original #0097B2 ocean teal: as text on cream it is 3.07:1,
-     and cream on it is also 3.07:1, so it fails AA both as a heading color and
-     as a bar carrying cream text. #0F766E is the same hue family at 4.86:1 in
-     both directions. Keep #0097B2 out of the tokens; it is heritage, not live.
+     ---------------------------------------------------------------------
+     THE THREE DERIVED TEXT COLORS, and why each one has to exist
+     ---------------------------------------------------------------------
+     The brand hexes are display colors. Three of them cannot legally carry
+     text, so each gets exactly one measured stand-in. All figures are WCAG 2.1
+     contrast against cream #F2ECDF unless stated.
 
-     Contrast carve-outs, all measured against cream #F5F1E8:
-     - Text ON a terracotta or terracotta-soft fill is ink #1F1B16, never
-       cream. Cream on #D4735A is 2.91:1 and fails; ink is 5.22:1.
-     - Neither terracotta (1.67:1) nor terracotta-ink (2.4:1) is legible on
-       teal. When the accent has to sit ON a teal panel, use
-       --color-brand-terracotta-on-dark (#FDE8D9): 4.62:1 on #0F766E and
-       8.00:1 on #134E4A, so it holds anywhere on the banner gradient. */
-  --color-cream: #f5f1e8;
-  --color-ink: #1f1b16;
-  --color-brand-teal: #0f766e;
-  --color-brand-teal-deep: #134e4a;
-  --color-brand-terracotta: #d4735a;
-  --color-brand-terracotta-ink: #9e5442;
-  --color-brand-terracotta-soft: #e08e76;
-  --color-brand-terracotta-on-dark: #fde8d9;
+     1. --color-teal-text #0F766E, because teal #00B09F on cream is 2.31:1.
+        That fails AA (4.5:1) AND fails the 3:1 large-text floor, so bright
+        teal is not a heading color at ANY size. #0F766E is the same hue family
+        at 4.65:1 and is the only teal allowed to be read as words on cream.
 
-  /* Teal at low opacity, for the quiet structural work: card rings, hairline
-     dividers, soft shadows. Full-strength teal on a border is loud, and using
-     it everywhere is what made the previous palette read as a clown suit.
-     Reach for these first; reach for --color-brand-teal only when the element
-     is genuinely meant to carry brand weight. */
-  --color-teal-05: rgba(15, 118, 110, 0.05);
-  --color-teal-10: rgba(15, 118, 110, 0.1);
-  --color-teal-20: rgba(15, 118, 110, 0.2);
-  --color-teal-30: rgba(15, 118, 110, 0.3);
+     2. --color-coral-text #B8431F, because coral #F15C3D on cream is 2.81:1.
+        #B8431F is 4.62:1 and still reads as coral.
+
+     3. --color-coral-ink #1B2239, the label ON a coral button. Cream on coral
+        is 2.81:1 -- coral is a light color, so cream on it fails exactly as
+        hard as coral on cream. Plain navy #1F2744 gets 4.43:1, which is
+        agonisingly short of 4.5, so the ink is nudged two steps darker to
+        #1B2239 for 4.75:1. It is indistinguishable from navy to the eye.
+
+     Gold has no text stand-in on purpose. Gold on cream is 1.68:1. It is an
+     ornament color, and the rule is absolute: gold never spells a word.
+
+     ---------------------------------------------------------------------
+     ON NAVY (footer, banner, dark panels)
+     ---------------------------------------------------------------------
+     Cream on navy is 12.46:1 and teal on navy is 5.38:1, so both are safe.
+     The exception is the banner, where a teal glow LIGHTENS the navy field
+     under the eyebrow: teal-on-field falls to 3.94:1 at the glow's centre.
+     --color-teal-on-dark #9FE8DF is the pale teal for accents that must be
+     read as text on a dark surface; it holds 7.71:1 even at the brightest
+     point of the banner gradient, so it cannot drift below AA as the glow is
+     tuned. Use it for every eyebrow and small caption on navy. */
+  --color-cream: #f2ecdf;
+  --color-navy: #1f2744;
+  --color-teal: #00b09f;
+  --color-coral: #f15c3d;
+  --color-gold: #e9ae3f;
+
+  --color-teal-text: #0f766e;
+  --color-teal-on-dark: #9fe8df;
+  --color-coral-text: #b8431f;
+  --color-coral-hover: #f47c60;
+  --color-coral-ink: #1b2239;
+
+  /* ---------------------------------------------------------------------
+     COMPATIBILITY ALIASES
+     ---------------------------------------------------------------------
+     ~300 call sites across the site were written against the teal+terracotta
+     names. They are aliased rather than renamed so the palette swap is one
+     file. The mapping is not mechanical -- it follows how each name is USED:
+
+       brand-terracotta      is only ever decoration/border/ring/outline in
+                             this codebase (never text), so it takes the full
+                             coral safely.
+       brand-terracotta-ink  is only ever text, so it takes coral-text.
+       brand-teal            is used for headings AND fills, so it maps to
+                             teal-text #0F766E, NOT to bright teal. Pointing
+                             it at #00B09F would drop ~8 headings to 2.31:1.
+
+     Bright teal is therefore opt-in by the `--color-teal` name only. */
+  --color-ink: var(--color-navy);
+  --color-brand-teal: var(--color-teal-text);
+  --color-brand-teal-deep: var(--color-navy);
+  --color-brand-terracotta: var(--color-coral);
+  --color-brand-terracotta-ink: var(--color-coral-text);
+  --color-brand-terracotta-soft: var(--color-coral-hover);
+  --color-brand-terracotta-on-dark: var(--color-teal-on-dark);
+
+  /* Low-opacity structural color: card rings, hairline dividers, soft shadows.
+     These were teal-tinted; they are navy now, per the locked rules ("any
+     subtle border in an accent color -> navy/10 or navy/20"). A hairline is
+     structure, and structure should not carry brand hue. The token names keep
+     the `teal-` prefix only because 31 call sites use them. */
+  --color-teal-05: rgba(31, 39, 68, 0.05);
+  --color-teal-10: rgba(31, 39, 68, 0.1);
+  --color-teal-20: rgba(31, 39, 68, 0.2);
+  --color-teal-30: rgba(31, 39, 68, 0.3);
+  --color-navy-10: rgba(31, 39, 68, 0.1);
+  --color-navy-20: rgba(31, 39, 68, 0.2);
+
+  /* The border of a form field, and nothing else. It is a separate token from
+     the neutral ramp because WCAG 1.4.11 holds a form border to 3:1 while a
+     decorative dashed placeholder rule is exempt as pure decoration -- and the
+     ramp is used for both. #7F8699 is 3.09:1 on cream.
+
+     This matters more than it looks: `bg-white` is cream, and the modals are
+     also cream, so an input is a cream box on a cream card and this border is
+     the ONLY thing that says "type here". neutral-300 was 1.74:1, which made
+     the field effectively invisible. */
+  --color-field-border: #7f8699;
+
+  /* Focus ring on cards and image buttons. Coral #F15C3D is 2.81:1 on cream
+     and misses the 3:1 a focus indicator owes under WCAG 2.4.11, so the ring
+     uses coral-text at 4.62:1. Same identity, legally visible. */
+  --color-focus-ring: var(--color-coral-text);
 
   /* Tailwind's own `white` is retargeted to cream so the ~220 existing
      bg-white / text-white utilities pick up the warm ground site-wide.
      Anything that genuinely needs pure white must say #ffffff explicitly.
 
-     `neutral-950` is warm charcoal #3D3730, the body-copy color. It is
-     deliberately NOT the brand color: it was once retargeted to sapphire,
-     which turned every name, caption and modal scrim blue and made the site
-     read as a wash of one hue. Teal is opt-in, applied by name.
+     `neutral-950` IS navy now. Body copy, major headings and every dark UI
+     surface are the same locked navy, which is what the palette asks for.
 
-     The rest of the neutral ramp is warmed to match. The stock Tailwind
-     neutrals are cool greys and go visibly grey-blue against cream, which is
-     the same failure in miniature. Every value below is measured on cream:
-     700 8.75:1, 600 6.68:1, 500 5.06:1. 400 and lighter are decorative
-     (rules, dividers, disabled) and must not carry body text. */
-  --color-white: #f5f1e8;
-  --color-neutral-950: #3d3730;
-  --color-neutral-900: #423c34;
-  --color-neutral-800: #464039;
-  --color-neutral-700: #4a4239;
-  --color-neutral-600: #5c5349;
-  --color-neutral-500: #6f6558;
-  --color-neutral-400: #8a7f70;
-  --color-neutral-300: #c0b5a6;
-  --color-neutral-200: #ddd4c5;
-  --color-neutral-100: #ebe5d9;
-  --color-neutral-50: #f2ede3;
+     A caution carried over from the sapphire era, because it still applies:
+     retargeting this ramp to a SATURATED brand color turns every name,
+     caption and modal scrim into that hue and the site reads as a wash. Navy
+     survives the move where sapphire did not, because navy #1F2744 is dark
+     and desaturated enough to read as a near-black rather than as "blue".
+     Do not retarget this ramp to teal or coral.
 
-  /* CTA fills. Rest is terracotta, hover lightens to terracotta-soft, and both
-     carry warm near-black ink (see contrast note above). */
-  --color-cta: #d4735a;
-  --color-cta-hover: #e08e76;
-  --color-cta-ink: #1f1b16;
+     The ramp runs navy at the dark end to cream at the light end, so it is
+     literally an interpolation between the two locked ground colors. Measured
+     on cream: 950 12.46:1, 700 9.34:1, 600 6.53:1, 500 4.97:1. 400 and
+     lighter are decorative (rules, dividers, disabled) and must not carry
+     body text. */
+  --color-white: #f2ecdf;
+  --color-neutral-950: #1f2744;
+  --color-neutral-900: #252d4b;
+  --color-neutral-800: #2b3352;
+  --color-neutral-700: #333b59;
+  --color-neutral-600: #4a5270;
+  --color-neutral-500: #5c6480;
+  --color-neutral-400: #8a91a8;
+  --color-neutral-300: #b8b5b0;
+  --color-neutral-200: #d8d2c6;
+  --color-neutral-100: #eae3d3;
+  --color-neutral-50: #f0e9da;
+
+  /* CTA fills. Rest is coral, hover lightens one step, and both carry
+     coral-ink (see the derived-text note above: cream on coral is 2.81:1 and
+     cannot be the label). Ink on coral is 4.75:1 and on the hover 5.92:1, so
+     the label GAINS contrast on hover rather than losing it. */
+  --color-cta: var(--color-coral);
+  --color-cta-hover: var(--color-coral-hover);
+  --color-cta-ink: var(--color-coral-ink);
 
   /* ---------------------------------------------------------------------
      COACHING PAGE PALETTE HOOK  (/coaching)
      ---------------------------------------------------------------------
      These six tokens are the ONLY color inputs the coaching page uses.
-     Michele is pulling hex codes off her own photos; when that palette
-     lands, change the six values below and the whole page recolors.
-     Nothing else needs to be touched. They are aliased onto the existing
-     site tokens for now so the page ships on-brand in the meantime.
+     The palette they were waiting on has landed, so they now point at the
+     locked tokens rather than at loose hexes.
 
        --color-coach-accent        buttons, rules, numerals, underlines
        --color-coach-accent-hover  button hover
@@ -146,55 +205,62 @@
        --color-coach-surface-dark  the dark hero + closing CTA panels
        --color-coach-surface-soft  the tinted "in six months" panel
      --------------------------------------------------------------------- */
-  --color-coach-accent: #d4735a;
-  --color-coach-accent-hover: #e08e76;
-  --color-coach-accent-ink: #1f1b16;
-  --color-coach-accent-text: #9e5442;
-  --color-coach-surface-dark: #134e4a;
-  --color-coach-surface-soft: #efe9dc;
+  --color-coach-accent: var(--color-coral);
+  --color-coach-accent-hover: var(--color-coral-hover);
+  --color-coach-accent-ink: var(--color-coral-ink);
+  --color-coach-accent-text: var(--color-coral-text);
+  --color-coach-surface-dark: var(--color-navy);
+  --color-coach-surface-soft: #eae3d3;
 }
 
 html {
   text-wrap: pretty;
 }
 
-/* Depth on the big teal panels: deep teal at the top easing into the primary
-   teal, so a full-bleed dark section reads as lit from above rather than as a
-   flat block. Opt-in, applied alongside `bg-neutral-950` on full-width section
-   panels only; the background-image wins over that background-color. Cards,
-   buttons, chips and the modal scrims stay flat so they keep a single solid
-   edge. */
+/* Depth on the big dark panels: a deeper navy at the top easing into the
+   locked navy, so a full-bleed dark section reads as lit from above rather
+   than as a flat block. Opt-in, applied alongside `bg-neutral-950` on
+   full-width section panels only; the background-image wins over that
+   background-color. Cards, buttons, chips and the modal scrims stay flat so
+   they keep a single solid edge.
+
+   Both stops are darker than navy at its lightest, so cream text on this
+   surface never drops below the 12.46:1 it gets on flat navy. */
 .surface-teal {
   background-image: linear-gradient(
     to bottom,
-    var(--color-brand-teal-deep) 0%,
-    var(--color-brand-teal) 55%
+    #161c33 0%,
+    var(--color-navy) 55%
   );
 }
 
 /* THE site-wide banner surface. Every interior page hero uses this and only
-   this: no per-page photography, no per-page background. A warm terracotta
-   glow sits at the centre over a teal field that deepens toward the edges, so
-   the banner reads as one cohesive identity across Author, Speak, Coaching,
-   About, and every case study.
+   this: no per-page photography, no per-page background. A teal glow sits at
+   the centre over a navy field that deepens toward the edges, so the banner
+   reads as one cohesive identity across Author, Speak, Coaching, About, and
+   every case study.
 
-   The glow is capped at 18% so the teal underneath never lightens past
-   #0F766E. That matters: the eyebrow is --color-brand-terracotta-on-dark,
-   which is 4.62:1 on #0F766E and 8.00:1 on #134E4A. Lighten the field and the
-   eyebrow drops below AA. */
+   The glow is capped at 20%. That cap is a contrast budget, not a taste call.
+   At 20% the field under the eyebrow blends to #194256, where:
+     - the eyebrow (--color-teal-on-dark, pale teal) holds 7.71:1
+     - the cream title holds 9.12:1
+   Raising the cap keeps both above AA for a while yet, but bright teal
+   #00B09F as an eyebrow would already be at 3.94:1 here, which is why the
+   eyebrow is the PALE teal and not the brand teal. If you retune this glow,
+   re-measure against the centre of the ellipse, not the edge. */
 .surface-teal-banner {
-  background-color: var(--color-brand-teal-deep);
+  background-color: var(--color-navy);
   background-image:
     radial-gradient(
       ellipse 75% 130% at 50% 45%,
-      rgba(212, 115, 90, 0.18) 0%,
-      rgba(212, 115, 90, 0.07) 45%,
-      rgba(212, 115, 90, 0) 72%
+      rgba(0, 176, 159, 0.2) 0%,
+      rgba(0, 176, 159, 0.08) 45%,
+      rgba(0, 176, 159, 0) 72%
     ),
     radial-gradient(
       ellipse 110% 150% at 50% 50%,
-      var(--color-brand-teal) 0%,
-      var(--color-brand-teal-deep) 78%
+      #243052 0%,
+      var(--color-navy) 78%
     );
 }
 
@@ -349,7 +415,7 @@ html.lenis body {
 
 /* Article body styling for /resources/[slug] pages */
 .prose-blog {
-  color: #404040;
+  color: var(--color-neutral-800);
   font-size: 1.0625rem;
   line-height: 1.75;
 }
@@ -414,16 +480,16 @@ html.lenis body {
   padding-left: 1.25em;
   border-left: 3px solid var(--color-cta);
   font-style: italic;
-  color: #525252;
+  color: var(--color-neutral-600);
 }
 .prose-blog hr {
   margin: 2.5em 0;
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid var(--color-navy-10);
 }
 .prose-blog code {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 0.9em;
-  background: #f4efe7;
+  background: var(--color-neutral-100);
   padding: 0.1em 0.3em;
   border-radius: 0.25rem;
 }

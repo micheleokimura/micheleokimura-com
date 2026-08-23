@@ -49,18 +49,27 @@ export default function HomePage() {
     <>
       {/* ------------------------------------------------------------- hero */}
       {/* Video hero. Michele is framed on the RIGHT of michele-hero.mp4 (it was
-          mirrored for exactly this reason), so the teal overlay is
+          mirrored for exactly this reason), so the navy overlay is
           strongest on the left, where her name sits, and eases to transparent
           on the right so her face reads through. Below sm there is no room for
           a left column beside her face, so the overlay flattens to a uniform
-          teal wash and the text goes full-width and centered, with the
+          navy wash and the text goes full-width and centered, with the
           video still playing behind it as ambient motion.
+
+          The middle stop is navy/80, and it must stay navy. It used to be
+          teal/55, which measured 1.98:1 against the cream H1 over a bright
+          video frame. Teal cannot hold this stop at ANY opacity: even at 90%
+          it only reaches 3.81:1, because the teal itself is too light. Navy
+          at 80% gives the H1 6.56:1 and the eyebrow 5.55:1 on a white frame,
+          which is the worst case the video can produce. The text column runs
+          to roughly 52% of the width on a wide screen, so it genuinely
+          overlaps this stop.
 
           Height is capped rather than full-viewport so the three doors below
           clear the fold on a laptop. See DESIGN-RULES.md. */}
       <section
         aria-label="Michele Okimura"
-        className="relative isolate flex min-h-[360px] w-full items-center overflow-hidden bg-[var(--color-brand-teal-deep)] sm:min-h-[420px] lg:min-h-[440px]"
+        className="relative isolate flex min-h-[360px] w-full items-center overflow-hidden bg-[var(--color-navy)] sm:min-h-[420px] lg:min-h-[440px]"
       >
         <video
           src="/videos/michele-hero.mp4"
@@ -75,7 +84,7 @@ export default function HomePage() {
 
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[var(--color-brand-teal-deep)]/75 sm:bg-gradient-to-r sm:from-[var(--color-brand-teal-deep)]/90 sm:via-[var(--color-brand-teal)]/55 sm:to-transparent"
+          className="absolute inset-0 bg-[var(--color-navy)]/75 sm:bg-gradient-to-r sm:from-[var(--color-navy)]/90 sm:via-[var(--color-navy)]/80 sm:to-transparent"
         />
 
         <Container className="relative py-14 sm:py-16">
@@ -83,7 +92,7 @@ export default function HomePage() {
             <h1 className="font-display text-[2.25rem] leading-[1.05] font-medium tracking-tight text-balance text-[var(--color-cream)] sm:text-[2.75rem] lg:text-6xl">
               Michele Okimura
             </h1>
-            <p className="font-display mt-4 text-lg font-semibold tracking-[0.14em] text-[var(--color-brand-terracotta-on-dark)] uppercase sm:mt-5 sm:text-xl lg:text-2xl">
+            <p className="font-display mt-4 text-lg font-semibold tracking-[0.14em] text-[var(--color-teal-on-dark)] uppercase sm:mt-5 sm:text-xl lg:text-2xl">
               Author. Speaker. Coach.
             </p>
             <p className="mt-5 max-w-xl text-base leading-7 text-[var(--color-cream)]/85 sm:text-lg sm:leading-8">

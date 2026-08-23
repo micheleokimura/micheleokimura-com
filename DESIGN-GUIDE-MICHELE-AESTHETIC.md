@@ -77,6 +77,31 @@ photography with no rounded corners or drop shadows, and generous white space.
 
 ## 2. Locked palette
 
+> **IMPLEMENTATION LOCKED. See `DESIGN-RULES.md` for canonical tokens.**
+>
+> As of August 2026 this palette won. Brett and Michele adopted the shared
+> core below (coral `#F15C3D`, gold `#E9AE3F`, teal `#00B09F`) plus Brave &
+> Beautiful's navy `#1F2744` as the sitewide palette, and `DESIGN-RULES.md`
+> has been rewritten around it. The site no longer runs the old teal
+> `#0F766E` plus terracotta `#D4735A` scheme.
+>
+> The hexes in this section remain as the SOURCE palette: what Michele's
+> printed books actually measure. They are the reference, and they should not
+> be edited to match the site.
+>
+> The implementation uses adjusted values in two places, both for contrast
+> and both documented in `DESIGN-RULES.md`:
+>
+> - **Ground and dark surfaces.** The site grounds on warm cream `#F2ECDF`
+>   rather than the books' true black or blush, and its dark surfaces are
+>   navy `#1F2744` rather than black.
+> - **Text colours.** Coral, gold, and teal are display colours and cannot
+>   carry small text on a light ground. Each has a measured stand-in in the
+>   token file. Gold carries no text at all.
+>
+> When this file and `DESIGN-RULES.md` disagree about a value that ships,
+> `DESIGN-RULES.md` wins. Read section 2.5 below for the full mapping.
+
 ### Shared core
 
 | Token | Hex | Use |
@@ -122,31 +147,42 @@ photography with no rounded corners or drop shadows, and generous white space.
   That is a deliberate signal for difficult subject matter, and it should stay rare.
 
 
-### Relationship to DESIGN-RULES.md
+### 2.5 Relationship to DESIGN-RULES.md
 
-`DESIGN-RULES.md` locks a different set of hexes: teal `#0F766E`, terracotta `#D4735A`,
-warm cream `#F5F1E8`. That is not a competing claim, and it should win for anything that
-ships.
+Settled, August 2026. The two files no longer hold competing palettes.
 
-The two files are doing different jobs:
+- **This file holds the SOURCE palette.** Sampled off Michele's printed books.
+  Its job is fidelity, and it is the reference for anyone designing new print or
+  banner art.
+- **`DESIGN-RULES.md` holds the IMPLEMENTATION palette.** Its job is contrast. It
+  now derives from this file rather than from a separate scheme.
 
-- **This file holds the source palette.** It is sampled directly off Michele's printed
-  books and it describes what her work actually looks like. Its job is fidelity.
-- **`DESIGN-RULES.md` holds the implementation palette.** Its job is contrast, and it is
-  right that several of the print values fail on the web. `#00B09F` is lighter than the
-  site teal and does not reach WCAG AA as text on any light ground. The same is true of
-  coral `#F15C3D` and gold `#E9AE3F` as text.
+Use the print values for large fields, photographic areas, banner art, and ornament,
+where contrast ratios do not apply. Use the `DESIGN-RULES.md` tokens for anything a
+person has to read or click. On any text colour, `DESIGN-RULES.md` wins.
 
-The hue families agree, which is the important part: teal, a warm orange-red, and a gold,
-on a light ground with near-black ink. Use the print values for large fields, photographic
-areas, banner art, and ornament, where contrast ratios do not apply. Use the
-`DESIGN-RULES.md` values for anything a person has to read or click. When the two conflict
-on a text colour, `DESIGN-RULES.md` wins.
+**Source to implementation mapping:**
 
-One genuine divergence worth a decision from Brett and Michele: her books ground on **true
-black or blush**, and the site currently grounds on **warm cream**. Cream is a third thing
-that appears nowhere in the seven books. That is a legitimate choice for a website, and it
-is worth making deliberately rather than by drift.
+| Source (this file) | Implementation | Why it changed |
+|---|---|---|
+| `coral` `#F15C3D` | unchanged, as `--color-coral` | Ships as-is for CTA fills |
+| `gold` `#E9AE3F` | unchanged, as `--color-gold` | Ornament only, so no ratio applies |
+| `teal` `#00B09F` | unchanged, as `--color-teal` | Ships as-is for glows and marks |
+| `navy` `#1F2744` | unchanged, as `--color-navy` | Body text and dark surfaces |
+| `paper` `#FFFFFF` / `blush` `#FDEAE7` / `ink` `#000000` | warm cream `#F2ECDF` ground, navy dark surfaces | See the note below |
+| coral as text | `#B8431F` (`--color-coral-text`) | `#F15C3D` is 2.81:1 on cream |
+| teal as text on cream | `#0F766E` (`--color-teal-text`) | `#00B09F` is 2.31:1, missing even the 3:1 large-text floor |
+| teal as text on navy | `#9FE8DF` (`--color-teal-on-dark`) | Holds 6.84:1 at the lit centre of the banner glow |
+| text on a coral fill | `#1B2239` (`--color-coral-ink`) | Cream on coral is 2.81:1; coral is a light colour |
+| gold as text | none, deliberately | Gold on cream is 1.68:1. Gold never spells a word |
+
+**The one remaining divergence, now a made decision rather than drift:** the books
+ground on true black or blush, and the site grounds on warm cream `#F2ECDF` with navy
+`#1F2744` dark surfaces. Cream appears nowhere in the seven books. It was kept because
+it is the ground the site was built on, it flatters the coral, and it reads
+masculine-neutral in a way blush does not. Navy replaces black for the same reason navy
+was already in Brave & Beautiful: it carries cream text at 12.46:1 and reads warmer than
+a true black panel.
 
 ---
 

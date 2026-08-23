@@ -6,14 +6,15 @@ import { JoinWaitListButton } from '@/components/wait-list/JoinWaitListButton'
 import { footerColumns, siteConfig } from '@/lib/site-config'
 
 /**
- * Site footer: a full-bleed deep-teal surface carrying a newsletter block on
- * top and a four-column nav underneath (Explore / Community / Built By /
+ * Site footer: a full-bleed navy surface carrying a newsletter block on top
+ * and a four-column nav underneath (Explore / Community / Built By /
  * wordmark + tagline), per the Living in Duvall reference.
  *
  * It is dark on purpose. The footer is the one place the brand gets to fill
  * the whole viewport width, which is why the rest of the site can stay cream
- * and quiet. Everything in here is cream text on --color-brand-teal-deep,
- * measured at 8.41:1.
+ * and quiet. Everything in here is cream text on --color-navy, measured at
+ * 12.46:1. Column headings and the wordmark's accent dot are pale teal
+ * (--color-teal-on-dark) at 10.53:1.
  *
  * This is also where the pages cut from the header nav live. The header is
  * capped at four links plus Contact; Explore and Community below carry the
@@ -21,10 +22,10 @@ import { footerColumns, siteConfig } from '@/lib/site-config'
  */
 
 const headingClass =
-  'font-display text-xs font-semibold tracking-[0.22em] uppercase text-[var(--color-brand-terracotta-on-dark)]'
+  'font-display text-xs font-semibold tracking-[0.22em] uppercase text-[var(--color-teal-on-dark)]'
 
 const linkClass =
-  'text-[var(--color-cream)]/75 transition hover:text-[var(--color-cream)] hover:underline underline-offset-4 decoration-[var(--color-brand-terracotta-on-dark)]'
+  'text-[var(--color-cream)]/75 transition hover:text-[var(--color-cream)] hover:underline underline-offset-4 decoration-[var(--color-teal-on-dark)]'
 
 const socials = [
   {
@@ -64,7 +65,7 @@ export function SiteFooter() {
   ]
 
   return (
-    <footer className="mt-24 w-full bg-[var(--color-brand-teal-deep)] sm:mt-32 lg:mt-40" data-surface="dark">
+    <footer className="mt-24 w-full bg-[var(--color-navy)] sm:mt-32 lg:mt-40" data-surface="dark">
       {/* The podcast lives in the footer, so its structured data travels with
           it and ships on every page instead of only the home page. */}
       <PodcastSeriesJsonLd
@@ -92,7 +93,7 @@ export function SiteFooter() {
                 </p>
               </div>
               <div className="lg:justify-self-end">
-                {/* `primary` is the filled terracotta button. JoinWaitListButton
+                {/* `primary` is the filled coral button. JoinWaitListButton
                     has no `solid` variant; that belongs to Button. */}
                 <JoinWaitListButton source="footer" variant="primary" tone="dark" />
               </div>
@@ -102,12 +103,12 @@ export function SiteFooter() {
           {/* -------------------------------------------- four columns */}
           {/* Order: brand + socials, Explore, Community, More from Michele. */}
           <div className="grid grid-cols-2 gap-x-8 gap-y-12 py-14 sm:py-16 lg:grid-cols-4">
-            {/* Wordmark, tagline, location, socials. Cream on teal. */}
+            {/* Wordmark, tagline, location, socials. Cream on navy. */}
             <div className="col-span-2 lg:col-span-1">
               <Link href="/" aria-label={`${siteConfig.brand} home`} className="inline-block">
                 <span className="font-display text-xl font-semibold tracking-tight whitespace-nowrap text-[var(--color-cream)]">
                   Michele Okimura
-                  <span className="text-[var(--color-brand-terracotta-on-dark)]">.</span>
+                  <span className="text-[var(--color-teal-on-dark)]">.</span>
                 </span>
               </Link>
               <p className="mt-5 max-w-xs text-sm leading-6 text-[var(--color-cream)]/75">
@@ -164,7 +165,7 @@ export function SiteFooter() {
                   <MicIcon className="h-4 w-4" />
                 </span>
                 <span>
-                  <span className="font-display block text-base font-semibold text-[var(--color-cream)] decoration-[var(--color-brand-terracotta-on-dark)] underline-offset-4 group-hover:underline">
+                  <span className="font-display block text-base font-semibold text-[var(--color-cream)] decoration-[var(--color-teal-on-dark)] underline-offset-4 group-hover:underline">
                     {podcast.name}
                   </span>
                   <span className="mt-0.5 block text-xs text-[var(--color-cream)]/60">

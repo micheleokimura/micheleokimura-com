@@ -39,7 +39,7 @@ function Tile({ item }: { item: CarouselItem }) {
       <Link
         href={item.href}
         aria-label={`Read the ${item.alt} case study`}
-        className={`${TILE_CLASS} focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-terracotta)]`}
+        className={`${TILE_CLASS} focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus-ring)]`}
       >
         <TileInner item={item} />
       </Link>

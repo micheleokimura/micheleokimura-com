@@ -91,7 +91,7 @@ export function AboutPhotoGrid() {
               }}
               aria-expanded={open}
               aria-label={`${panel.headline} ${panel.body}`}
-              className="block w-full text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-terracotta)]"
+              className="block w-full text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus-ring)]"
             >
               {/* Photo */}
               <div className="relative aspect-[4/5] w-full">

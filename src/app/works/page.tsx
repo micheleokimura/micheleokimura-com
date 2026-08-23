@@ -94,7 +94,7 @@ export default function WorksPage() {
                     <FadeIn as="li" key={work.slug} scaleIn>
                       <Link
                         href={`/works/${work.slug}`}
-                        className="group flex h-full flex-col rounded-3xl bg-white p-6 ring-1 ring-neutral-900/5 transition hover:shadow-lg hover:ring-neutral-900/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-terracotta)]"
+                        className="group flex h-full flex-col rounded-3xl bg-white p-6 ring-1 ring-neutral-900/5 transition hover:shadow-lg hover:ring-neutral-900/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus-ring)]"
                       >
                         {work.coverImage ? (
                           <div className="relative mb-4 aspect-[3/4] w-full overflow-hidden rounded-xl bg-neutral-100">

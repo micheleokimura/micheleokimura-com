@@ -77,9 +77,12 @@ export function SiteHeader() {
                   href={item.href}
                   className={cn(
                     'group relative isolate inline-flex items-center px-2 py-2 text-[13px] font-medium whitespace-nowrap transition lg:px-4 lg:text-sm',
+                    // The marker swipe is opaque coral, so any label sitting
+                    // on it must be coral-ink: navy #1F2744 on coral is
+                    // 4.43:1 and misses AA, coral-ink is 4.75:1.
                     active
-                      ? 'text-neutral-950'
-                      : 'text-neutral-700 hover:text-neutral-950',
+                      ? 'text-[var(--color-cta-ink)]'
+                      : 'text-neutral-700 hover:text-[var(--color-cta-ink)]',
                   )}
                   aria-current={active ? 'page' : undefined}
                   // Drop focus after a MOUSE click so the keyboard focus ring
@@ -108,7 +111,7 @@ export function SiteHeader() {
                 button beside it (the wait-list button, whose label had already
                 been unified to "Contact"), so the header shipped two identical
                 CTAs. The wait-list flow now lives inside the contact popup, so
-                this is the only entry point and it carries the terracotta. */}
+                this is the only entry point and it carries the coral. */}
             <button
               type="button"
               onClick={() => setContactOpen(true)}
@@ -157,8 +160,8 @@ export function SiteHeader() {
                     className={cn(
                       'group relative isolate inline-flex items-center px-4 py-3 text-base font-medium transition',
                       active
-                        ? 'text-neutral-950'
-                        : 'text-neutral-700 hover:text-neutral-950',
+                        ? 'text-[var(--color-cta-ink)]'
+                        : 'text-neutral-700 hover:text-[var(--color-cta-ink)]',
                     )}
                     aria-current={active ? 'page' : undefined}
                     onClick={(e) => {

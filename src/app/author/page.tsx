@@ -1043,7 +1043,7 @@ export default function AuthorPage() {
                 <FadeIn as="li" key={project.href} scaleIn>
                   <Link
                     href={project.href}
-                    className="group flex h-full flex-col rounded-3xl bg-white p-8 ring-1 ring-neutral-900/5 transition hover:shadow-lg hover:ring-neutral-900/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-terracotta)]"
+                    className="group flex h-full flex-col rounded-3xl bg-white p-8 ring-1 ring-neutral-900/5 transition hover:shadow-lg hover:ring-neutral-900/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus-ring)]"
                   >
                     <span className="text-xs font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
                       {project.kicker}

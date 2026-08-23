@@ -6,100 +6,152 @@ design. Read both.
 
 ## Palette (locked)
 
-Teal primary, terracotta warm accent, warm cream ground. This replaced the
-sapphire + orange scheme, which read as "blue and orange" all at once. The
-site's pre-sapphire palette was already teal (`#0097B2` with `#DB6437`), so
-this is a return to that family rather than a new direction.
+Sampled from Michele's printed Brave Series books. Locked by Brett and Michele,
+August 2026. This file is the canonical source for implementation tokens.
 
-> **Unresolved: two files currently claim a locked palette.**
-> `DESIGN-GUIDE-MICHELE-AESTHETIC.md` locks a different set, sampled from
-> Michele's printed Brave Series books: teal `#00B09F`, coral `#F15C3D`, gold
-> `#E9AE3F`, on true black and pure white. The hue families agree with this
-> file (teal plus a warm coral) but the values do not, and that guide has a
-> real claim to authority because it came off her actual books.
->
-> The values below are what is IMPLEMENTED, because they were the direction
-> given for this pass. Two cautions before anyone switches: `#00B09F` is
-> lighter than `#0097B2`, so it fails WCAG AA as text on any light ground even
-> harder, and that guide's black-and-white grounds are a different decision
-> from the warm cream here. Adopting it is a deliberate call for Michele and
-> Brett to make, not a drive-by correction. Until then, do not "fix" one file
-> to match the other.
+This settles the conflict the previous version of this file flagged. Two docs
+each claimed a locked palette: this one held teal `#0F766E` with terracotta,
+and `DESIGN-GUIDE-MICHELE-AESTHETIC.md` held the set sampled off the actual
+printed books. The books won. That guide is now marked "implementation locked"
+and points here for tokens. There is one palette.
+
+The site ground stays warm cream rather than the guide's paper white, and the
+dark surfaces are navy rather than the guide's true black. Those two are
+deliberate: cream is the ground the site was built on and it flatters the
+coral, and navy at `#1F2744` carries cream text at 12.46:1.
+
+### The five
 
 | Role | Hex | Token |
 | ---- | --- | ----- |
-| Primary (teal) | `#0F766E` | `--color-brand-teal` |
-| Deep teal: footer, banners, depth | `#134E4A` | `--color-brand-teal-deep` |
-| Warm accent (terracotta) | `#D4735A` | `--color-brand-terracotta` |
-| Terracotta AS TEXT on cream | `#9E5442` | `--color-brand-terracotta-ink` |
-| Terracotta ON a teal panel | `#FDE8D9` | `--color-brand-terracotta-on-dark` |
-| CTA hover fill | `#E08E76` | `--color-brand-terracotta-soft` |
-| Background (warm cream) | `#F5F1E8` | `--color-cream` |
-| Body copy (warm charcoal) | `#3D3730` | `--color-neutral-950` |
-| Text ON a terracotta fill | `#1F1B16` | `--color-ink` |
+| Primary accent (teal) | `#00B09F` | `--color-teal` |
+| Primary CTA (coral) | `#F15C3D` | `--color-coral` |
+| Decorative only (gold) | `#E9AE3F` | `--color-gold` |
+| Body text, headings, dark surfaces (navy) | `#1F2744` | `--color-navy` |
+| Dominant background (warm cream) | `#F2ECDF` | `--color-cream` |
+
+### The five derived values, and why each exists
+
+Three of the five cannot legally carry text. Each gets exactly one measured
+stand-in. Do not invent a sixth.
+
+| Role | Hex | Token |
+| ---- | --- | ----- |
+| Teal AS TEXT on cream | `#0F766E` | `--color-teal-text` |
+| Teal accent AS TEXT on navy | `#9FE8DF` | `--color-teal-on-dark` |
+| Coral AS TEXT on cream | `#B8431F` | `--color-coral-text` |
+| CTA hover fill | `#F47C60` | `--color-coral-hover` |
+| Text ON a coral fill | `#1B2239` | `--color-coral-ink` |
+
+Two more tokens exist for controls, because WCAG holds those to 3:1 while
+decoration is exempt:
+
+| Role | Hex | Token |
+| ---- | --- | ----- |
+| Form field borders | `#7F8699` | `--color-field-border` |
+| Focus ring on cards and image buttons | `#B8431F` | `--color-focus-ring` |
 
 The tokens live in `src/styles/tailwind.css`. Use the token, never the raw hex.
 The one unavoidable exception is `src/components/MarkerSwipe.tsx`: Safari will
 not evaluate `var()` inside an SVG presentation attribute, so the swipe carries
-a literal `#D4735A` that has to be kept in step by hand.
+a literal `#F15C3D` that has to be kept in step by hand.
 
-Three contrast carve-outs are baked into the tokens. Keep using them:
+### Contrast rules (measured, non-negotiable)
 
-- `#D4735A` as text on cream is 2.91:1 and fails WCAG AA. When the terracotta
-  has to be read AS TEXT on cream, use `--color-brand-terracotta-ink`
-  (`#9E5442`, 4.90:1).
-- Terracotta is invisible on teal (1.67:1). When the accent sits ON a teal
-  panel, use `--color-brand-terracotta-on-dark` (`#FDE8D9`): 4.62:1 on
-  `#0F766E` and 8.00:1 on `#134E4A`, so it holds anywhere on the banner.
-- Text ON a terracotta or terracotta-soft fill is `--color-ink`, never cream.
-  Cream on `#D4735A` is 2.91:1; ink is 5.22:1.
+All figures are WCAG 2.1 against cream `#F2ECDF` unless stated. AA is 4.5:1 for
+text, 3:1 for large text and for UI components.
 
-Do NOT reintroduce `#0097B2`. It is Michele's original Elementor accent and it
-is the right hue, but at 3.07:1 it fails AA both as a heading on cream and as a
-bar carrying cream text. `#0F766E` is the same family and passes at 4.86:1.
+- **Body text on cream is navy** `#1F2744` at 12.46:1. Passes AAA.
+- **Headings on cream** are navy, or `--color-teal-text` `#0F766E` at 4.65:1.
+- **Bright teal `#00B09F` never carries text on cream.** It measures 2.31:1,
+  which misses AA *and* misses the 3:1 large-text floor, so it is not a heading
+  color at any size. This is the single most likely mistake with this palette,
+  because the token is named `--color-teal` and looks like the obvious choice.
+  Reach for `--color-teal-text`.
+- **Coral `#F15C3D` never carries text on cream** either, at 2.81:1. Use
+  `--color-coral-text` `#B8431F` at 4.62:1.
+- **Text on a coral button is `--color-coral-ink`, never cream.** Coral is a
+  light color, so cream on it is 2.81:1 and fails exactly as hard as coral on
+  cream. Plain navy gets 4.43:1 and still misses, which is why the ink is
+  `#1B2239` for 4.75:1. On the hover fill it rises to 5.92:1, so the label
+  gains contrast on hover.
+- **Gold is DECORATIVE ONLY and never spells a word.** Gold on cream is
+  1.68:1. Divider lines, ornament, tiny bullets, subtle highlights. That is
+  the whole list. The rule is absolute even where gold would technically pass
+  (it is 7.40:1 on navy), because a color that is unreadable on the dominant
+  ground should not be a text color anywhere on the site.
+- **On navy surfaces** (footer, banners, dark panels): cream text at 12.46:1,
+  `--color-teal-on-dark` for accents that are read as words at 10.53:1, bright
+  teal for graphics and glows at 5.38:1, coral for CTA hovers.
+- **Subtle borders** are `--color-teal-05 / -10 / -20 / -30`, which are navy at
+  low opacity despite the legacy names. Structure does not carry brand hue.
 
-The neutral ramp is warmed to match the cream (`neutral-700` `#4A4239` through
-`neutral-100` `#EBE5D9`). Stock Tailwind neutrals are cool greys and go
-visibly blue against cream. `neutral-400` and lighter are decorative only and
-must never carry body text.
+### Two traps this palette sets
+
+Both were live failures caught during the recalibration. They will come back if
+someone edits without measuring.
+
+1. **The marker swipe must stay opaque.** It ran at 0.9 alpha, which let the
+   background through: coral over cream landed at `#F16A4D` but coral over a
+   navy panel muddied to `#DC573E`, dropping the label to 4.10:1. At full
+   opacity the swipe is exactly coral on every ground and the label holds
+   4.75:1 anywhere. For the same reason, a `tone="dark"` hover swipe goes to
+   full opacity rather than the 70% used on cream, where 70% coral over navy
+   blends to a dark brick at 3.00:1.
+2. **Any label sitting on the swipe is `--color-coral-ink`.** `text-neutral-950`
+   is navy and lands at 4.43:1 on coral. The header nav made exactly this
+   mistake.
+
+### The neutral ramp
+
+`--color-neutral-950` is navy `#1F2744`, and it is both the body copy color and
+every dark UI surface. The ramp runs navy at the dark end to cream at the light
+end, so it is an interpolation between the two locked grounds. Measured on
+cream: 950 at 12.46:1, 700 at 9.34:1, 600 at 6.53:1, 500 at 4.97:1.
+`neutral-400` and lighter are decorative and must never carry body text.
+
+Do NOT retarget this ramp to teal or coral. It was once pointed at sapphire so
+~220 utilities would recolor at once, and every name, caption, and modal scrim
+turned blue until the site read as a wash of one hue. Navy survives the move
+where a saturated color does not, because navy is dark and desaturated enough
+to read as a near-black. The accents stay opt-in, applied by name.
 
 ## Restraint (read this before adding any color)
 
 Bold colors are used SPARINGLY. Cream dominates the content areas. If a page
-feels "loud" or clown-like, it is because too much teal and terracotta is
-landing at once. That is the failure mode this site keeps falling into, so the
-allowed jobs for each color are listed exhaustively below. If a use is not on
-the list, the answer is cream with warm-charcoal text.
+feels "loud" or clown-like, it is because too much teal and coral is landing at
+once. That is the failure mode this site keeps falling into, so the allowed
+jobs for each color are listed exhaustively below. If a use is not on the list,
+the answer is cream with navy text.
 
 **Teal** may be used for:
 
 - the wordmark in the header
-- the footer ground (`--color-brand-teal-deep`, full-bleed)
-- the interior banner hero (`.surface-teal-banner`) and the home video-hero
-  overlay
-- the full-bleed dark panels (`.surface-teal`)
-- major H1 and H2 heading text on cream
-- low-opacity structure: card rings, hairline dividers, soft shadows, via
-  `--color-teal-05 / -10 / -20 / -30`
+- the glow at the centre of the interior banner hero
+- accents on navy surfaces, as `--color-teal-on-dark` when read as words
+- secondary buttons
+- major H1 and H2 heading text on cream, as `--color-teal-text` only
+- decorative marks and small emphasis
 
-**Terracotta** may be used for:
+**Coral** may be used for:
 
 - primary CTA buttons and the marker swipe
-- tracked small-caps eyebrow labels, as `--color-brand-terracotta-ink` on cream
-  or `--color-brand-terracotta-on-dark` on teal
+- tracked small-caps eyebrow labels, as `--color-coral-text` on cream
 - link underlines and hover states
 - a 2px left rule on a pull quote
+- CTA hovers on navy surfaces
 
-**Never**: terracotta backgrounds, terracotta-tinted panels, terracotta card
-rings, terracotta decorative shapes or bullet dots, teal body copy, teal small
-print, or terracotta headings on a teal panel (headings on teal are cream).
-Never a stock Tailwind accent (`amber-100`, `green-100`, and friends); they are
-off-palette and read as a third and fourth brand color.
+**Gold** may be used for:
 
-`--color-neutral-950` is warm charcoal and must stay that way. It was once
-retargeted to sapphire so that ~220 utilities would recolor at once; the result
-was that every name, caption, and modal scrim turned blue and the site read as
-a wash of one hue. The brand color is opt-in, applied by name.
+- divider lines and hairline rules
+- small ornament and bullet marks
+- subtle highlights on cream
+
+**Never**: gold text of any size, bright teal text of any size on cream, coral
+backgrounds, coral-tinted panels, coral card rings, teal body copy, teal small
+print, or coral headings on a navy panel (headings on navy are cream or pale
+teal). Never a stock Tailwind accent (`amber-100`, `green-100`, and friends);
+they are off-palette and read as extra brand colors.
 
 ## Eyebrows and badges
 
@@ -118,15 +170,14 @@ The house pattern is:
 font-display text-xs font-semibold tracking-[0.22em] uppercase sm:text-sm
 ```
 
-in `--color-brand-terracotta-ink` on cream, or
-`--color-brand-terracotta-on-dark` on teal.
+in `--color-coral-text` on cream, or `--color-teal-on-dark` on navy.
 
 ## Hero heights
 
 - Home page: video hero, 360 to 440px. Deliberately NOT full-viewport. The
   three AUTHOR / SPEAKER / COACH door cards have to clear the fold on a laptop,
   and a full-height hero pushed them under it. Michele is framed on the RIGHT
-  of `michele-hero.mp4` (mirrored for this reason), so the teal overlay is
+  of `michele-hero.mp4` (mirrored for this reason), so the navy overlay is
   strongest on the left where the text sits.
 - EVERY other page: the SAME banner, 280 to 320px tall. Author, Speak,
   Coaching, About, Resources, Works, Projects, and every case study.
@@ -134,19 +185,23 @@ in `--color-brand-terracotta-ink` on cream, or
 `src/components/BannerHero.tsx` is the single implementation, and
 `src/components/PageIntro.tsx` is a thin alias over it for the pages built
 against the older prop names. It sits below the site header rather than under
-it, because the header is warm-charcoal text on cream and `main` already
+it, because the header is navy text on cream and `main` already
 carries the padding that clears it. Below the banner, hard cut to cream and the
 content starts immediately.
 
 NO hero photography, and no per-page hero background. The identity is the
-banner, so it must be identical everywhere: a warm terracotta glow at the
-centre over a teal field deepening at the edges, defined once as
-`.surface-teal-banner` in `tailwind.css`. `PageIntro` used to render a photo
-mosaic (`HeroMosaic`) behind near-black text with a white text-shadow; that was
-dropped by direction and `HeroMosaic` is no longer rendered anywhere.
+banner, so it must be identical everywhere: a teal glow at the centre over a
+navy field deepening at the edges, defined once as `.surface-teal-banner` in
+`tailwind.css`. `PageIntro` used to render a photo mosaic (`HeroMosaic`) behind
+near-black text with a white text-shadow; that was dropped by direction and
+`HeroMosaic` is no longer rendered anywhere.
 
-The glow is capped at 18% opacity on purpose. Lighten the teal field past
-`#0F766E` and the peach eyebrow drops below WCAG AA.
+The glow is capped at 20% opacity, and that cap is a contrast budget rather
+than a taste call. At 20% the lit centre of the field measures 6.84:1 against
+the pale-teal eyebrow and 8.09:1 against the cream title. Bright teal `#00B09F`
+as an eyebrow would already be at 3.94:1 there, which is why the eyebrow is
+`--color-teal-on-dark`. If you retune the glow, measure at the CENTRE of the
+ellipse, not the edge.
 
 Banner content is always: tracked small-caps eyebrow (a LABEL, not a sentence),
 big H1, optional one-line subhead, all in cream. Keep the subhead to a line or
@@ -190,7 +245,7 @@ there. Re-measure first.
 
 ## Footer
 
-Full-bleed `--color-brand-teal-deep`, cream text, per the Living in Duvall
+Full-bleed `--color-navy`, cream text, per the Living in Duvall
 reference. This is the one place the brand fills the whole viewport width,
 which is what lets the rest of the site stay cream and quiet.
 

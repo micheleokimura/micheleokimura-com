@@ -8,11 +8,11 @@ type Tone = 'light' | 'dark'
 type ButtonProps = {
   variant?: Variant
   /**
-   * Background the CTA sits on. `light` (default) keeps the text near-black so
-   * it reads on cream. `dark` flips the text to cream so it stays legible on a
-   * teal panel. Either way, the moment the terracotta marker slides in behind
-   * the text the label switches to near-black, because cream on #D4735A is
-   * only 2.91:1. For `solid` it drives the focus-ring offset color.
+   * Background the CTA sits on. `light` (default) keeps the text navy so it
+   * reads on cream. `dark` flips the text to cream so it stays legible on a
+   * navy panel. Either way, the moment the coral marker slides in behind the
+   * text the label switches to coral-ink, because cream on coral #F15C3D is
+   * only 2.81:1. For `solid` it drives the focus-ring offset color.
    */
   tone?: Tone
   withArrow?: boolean
@@ -28,7 +28,7 @@ type ButtonProps = {
  *   text rather than filled rectangles. `primary` shows the highlighter swipe
  *   behind the whole phrase; `secondary` / `ghost` swap a dashed underline for
  *   the swipe on hover.
- * - `solid` is a conventional rectangular terracotta button with rounded corners
+ * - `solid` is a conventional rectangular coral button with rounded corners
  *   and a clear button affordance. This is the locked treatment for FORM submit
  *   buttons (footer, contact block, /contact), where the marker-swiped text
  *   read as ambiguous next to an input. The marker swipe stays reserved for
@@ -48,7 +48,7 @@ export function Button({
   const isPrimary = variant === 'primary'
   const isDark = tone === 'dark'
 
-  // Solid: rectangular terracotta button carrying near-black ink. No marker, no
+  // Solid: rectangular coral button carrying coral-ink. No marker, no
   // underline — a plain, obvious "press me" control for forms.
   if (variant === 'solid') {
     const solid = cn(
@@ -87,10 +87,10 @@ export function Button({
     'group relative isolate inline-flex items-center justify-center gap-1.5 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4',
     // Focus ring tracks the background so it stays visible on dark sections.
     isDark ? 'focus-visible:outline-white' : 'focus-visible:outline-neutral-950',
-    // A primary CTA is a solid-terracotta "label tape" with near-black text on
-    // every background, so its text color is context-independent (the marker
-    // handles the contrast). Secondary/ghost text flips with tone at rest, then
-    // drops to near-black on hover once the terracotta marker is behind it.
+    // A primary CTA is a solid-coral "label tape" with coral-ink text on every
+    // background, so its text color is context-independent (the marker handles
+    // the contrast). Secondary/ghost text flips with tone at rest, then drops
+    // to coral-ink on hover once the coral marker is behind it.
     isPrimary
       ? 'text-[var(--color-cta-ink)]'
       : cn(
@@ -107,7 +107,14 @@ export function Button({
         className={cn(
           isPrimary
             ? 'scale-x-100 opacity-100'
-            : 'scale-x-0 opacity-0 transition-[transform,opacity] duration-[280ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-x-100 group-hover:opacity-70',
+            : cn(
+                'scale-x-0 opacity-0 transition-[transform,opacity] duration-[280ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-x-100',
+                // On cream the hover swipe can stay translucent: the label
+                // reads at 6.32:1 through a 70% coral. On a navy panel the
+                // same 70% blends DOWN to a dark brick and the label falls to
+                // 3.00:1, so the swipe goes fully opaque there instead.
+                isDark ? 'group-hover:opacity-100' : 'group-hover:opacity-70',
+              ),
         )}
       />
       <span

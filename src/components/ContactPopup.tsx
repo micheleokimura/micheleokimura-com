@@ -268,7 +268,7 @@ export function ContactPopup({
   if (!mounted || !open) return null
 
   const fieldClass =
-    'w-full rounded-lg border border-neutral-300 bg-white px-3 py-2.5 text-[15px] text-neutral-950 transition placeholder:text-neutral-400 focus:border-neutral-950 focus:ring-4 focus:ring-neutral-950/5 focus:outline-none disabled:opacity-60'
+    'w-full rounded-lg border border-[var(--color-field-border)] bg-white px-3 py-2.5 text-[15px] text-neutral-950 transition placeholder:text-neutral-400 focus:border-neutral-950 focus:ring-4 focus:ring-neutral-950/5 focus:outline-none disabled:opacity-60'
 
   return createPortal(
     <motion.div

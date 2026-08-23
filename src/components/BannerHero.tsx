@@ -17,17 +17,17 @@ import { FadeIn } from '@/components/FadeIn'
  * pt-28 / sm:pt-32 to clear it, so the banner begins where that padding ends.
  * That keeps the nav legible without a per-page dark-header variant.
  *
- * Background is `.surface-teal-banner`: a warm terracotta glow at the centre
- * over a teal field deepening to --color-brand-teal-deep at the edges. Defined
- * once in tailwind.css so it cannot drift between pages.
+ * Background is `.surface-teal-banner`: a teal glow at the centre over a navy
+ * field deepening at the edges. Defined once in tailwind.css so it cannot
+ * drift between pages.
  *
  * The eyebrow is plain tracked small caps. No pill, no badge, no border, no
  * rounded corners, anywhere, ever. Pills read as buttons and people click them.
  *
- * Its color is --color-brand-terracotta-on-dark rather than the brand
- * terracotta: #D4735A on teal is 1.67:1 and fails WCAG AA badly, while the
- * pale peach holds 4.62:1 against the lightest point of the gradient. See the
- * palette block in tailwind.css.
+ * Its color is --color-teal-on-dark (pale teal) rather than the brand teal:
+ * #00B09F sits at 3.94:1 against the lit centre of the glow and misses AA,
+ * while the pale teal holds 7.71:1 there. See the palette block in
+ * tailwind.css.
  */
 export function BannerHero({
   eyebrow,
@@ -55,7 +55,7 @@ export function BannerHero({
           <h1>
             {eyebrow ? (
               <>
-                <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-terracotta-on-dark)] uppercase sm:text-sm">
+                <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-teal-on-dark)] uppercase sm:text-sm">
                   {eyebrow}
                 </span>
                 <span className="sr-only"> - </span>
