@@ -11,6 +11,21 @@ sapphire + orange scheme, which read as "blue and orange" all at once. The
 site's pre-sapphire palette was already teal (`#0097B2` with `#DB6437`), so
 this is a return to that family rather than a new direction.
 
+> **Unresolved: two files currently claim a locked palette.**
+> `DESIGN-GUIDE-MICHELE-AESTHETIC.md` locks a different set, sampled from
+> Michele's printed Brave Series books: teal `#00B09F`, coral `#F15C3D`, gold
+> `#E9AE3F`, on true black and pure white. The hue families agree with this
+> file (teal plus a warm coral) but the values do not, and that guide has a
+> real claim to authority because it came off her actual books.
+>
+> The values below are what is IMPLEMENTED, because they were the direction
+> given for this pass. Two cautions before anyone switches: `#00B09F` is
+> lighter than `#0097B2`, so it fails WCAG AA as text on any light ground even
+> harder, and that guide's black-and-white grounds are a different decision
+> from the warm cream here. Adopting it is a deliberate call for Michele and
+> Brett to make, not a drive-by correction. Until then, do not "fix" one file
+> to match the other.
+
 | Role | Hex | Token |
 | ---- | --- | ----- |
 | Primary (teal) | `#0F766E` | `--color-brand-teal` |
