@@ -18,18 +18,21 @@ import {
 // stay that way; edit the markdown and this file together.
 //
 // Covers currently in the repo: The Birth of Explicit Movement, the Explicit
-// Movement 21-Day Journal, the eight Dream Big with God journals and teacher
-// guides, plus one non-faith Dream Big journal, and now the Brave Series
-// (Brave & Beautiful Vol. 1 Faith Journey cover, extracted 2026-08-23).
-// Dancing with Father and both Brave Purpose editions still render a
-// placeholder tile until art lands; drop the file in /public/images/books
-// and set `cover`.
+// Movement 21-Day Journal, the four Dream Big with God (Faith) journals and
+// their four teacher guides, one Classic Dream Big journal (Youth & Adults),
+// Raising Kingdom Kids, and the Brave Series (Brave & Beautiful Vol. 1 Faith
+// Journey cover, extracted 2026-08-23).
+//
+// Still rendering a placeholder tile until art lands: Dancing with Father,
+// both Brave Purpose editions, and the Classic Dream Big journals for
+// Preschool, Younger Elementary, and Older Elementary. Drop the file in
+// /public/images/journals or /public/images/books and fill in the field.
 import { pageMetadata } from '@/lib/schema'
 
 export const metadata: Metadata = pageMetadata({
   title: 'Author',
   description:
-    'Books, journals, and curricula by Michele Okimura. Two published trade books, a 21-day interactive journal, the multi-age Dream Big journals in faith and non-faith editions, the 24-volume Brave Series, and Brave Purpose coming 2027.',
+    'Books, journals, and curricula by Michele Okimura. Two published trade books, a 21-day interactive journal, the multi-age Dream Big journals in Faith and Classic editions, the Raising Kingdom Kids lesson book, the 24-volume Brave Series, and Brave Purpose coming 2027.',
   path: '/author',
   ogDescription:
     'Books, journals, and curricula for dreamers of every age.',
@@ -302,32 +305,58 @@ const DREAM_BIG_ENDORSEMENTS: Endorsement[] = [
   },
 ]
 
+/**
+ * The four age brackets, youngest first, each in both editions plus its
+ * companion teacher guide. A missing `classic` cover renders the Cover
+ * placeholder rather than dropping the tile, so the shelf always shows the
+ * full 4 x 2 set. Drop the art in /public/images/journals and fill the field.
+ */
 const DREAM_BIG_EDITIONS = [
   {
-    label: 'Preschool & Kindergarten',
-    journal: '/images/journals/dream-big-with-god-journal-preschool@2x.jpg',
+    label: 'Preschool',
+    faith: '/images/journals/dream-big-with-god-journal-preschool@2x.jpg',
+    classic: null,
     guide: '/images/journals/dream-big-with-god-teacher-guide-preschool@2x.jpg',
   },
   {
     label: 'Younger Elementary, grades 1-2',
-    journal:
+    faith:
       '/images/journals/dream-big-with-god-journal-younger-elementary@2x.jpg',
+    classic: null,
     guide:
       '/images/journals/dream-big-with-god-teacher-guide-younger-elementary@2x.jpg',
   },
   {
     label: 'Older Elementary, grades 3-5',
-    journal:
+    faith:
       '/images/journals/dream-big-with-god-journal-older-elementary@2x.jpg',
+    classic: null,
     guide:
       '/images/journals/dream-big-with-god-teacher-guide-older-elementary@2x.jpg',
   },
   {
     label: 'Youth & Adults, “Keys to Unlock Your Dreams”',
-    journal:
+    faith:
       '/images/journals/dream-big-with-god-journal-youth-and-adults@2x.jpg',
+    classic: '/images/journals/dream-big-journal-youth-and-adults@2x.jpg',
     guide:
       '/images/journals/dream-big-with-god-teacher-guide-youth-and-adults@2x.jpg',
+  },
+]
+
+const RAISING_KINGDOM_KIDS_TOPICS = [
+  'Identity in Christ',
+  'Hearing God’s voice',
+  'Raising children leaders',
+  'Giving children a voice',
+  'Healing hearts',
+]
+
+const RAISING_KINGDOM_KIDS_ENDORSEMENTS: Endorsement[] = [
+  {
+    quote:
+      '“We purchased your curriculum because it was so amazing! We absolutely love your curriculum! We actually use it churchwide at times. So much of the curriculum is easily taught to all ages.”',
+    source: 'Children’s ministry customer',
   },
 ]
 
@@ -717,11 +746,12 @@ export default function AuthorPage() {
 
               <p className="mt-8 text-base leading-7 text-neutral-700">
                 <strong className="font-semibold text-neutral-950">
-                  Available in four editions:
+                  Available in four age brackets:
                 </strong>{' '}
-                Preschool &amp; Kindergarten, Younger Elementary (grades 1-2),
-                Older Elementary (grades 3-5), Youth &amp; Adults
-                (&ldquo;Keys to Unlock Your Dreams&rdquo;).{' '}
+                Preschool, Younger Elementary (grades 1-2), Older Elementary
+                (grades 3-5), Youth &amp; Adults (&ldquo;Keys to Unlock Your
+                Dreams&rdquo;). Every bracket comes in a Faith edition and a
+                Classic edition, eight journals in all.{' '}
                 <strong className="font-semibold text-neutral-950">
                   Companion teacher guides
                 </strong>{' '}
@@ -740,11 +770,13 @@ export default function AuthorPage() {
             </Work>
           </div>
 
-          {/* Full-width cover gallery: four journals over four teacher guides. */}
+          {/* Full-width cover gallery: the four age brackets in the Faith
+              edition, the same four in the Classic edition, then the four
+              teacher guides. Eight journal covers in all. */}
           <div className="mt-16 sm:mt-20">
             <FadeIn>
               <h4 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
-                The four editions
+                Faith edition, four age brackets
               </h4>
             </FadeIn>
             <FadeInStagger faster className="mt-6">
@@ -755,8 +787,31 @@ export default function AuthorPage() {
                 {DREAM_BIG_EDITIONS.map((edition) => (
                   <FadeIn as="li" key={edition.label} scaleIn>
                     <Cover
-                      src={edition.journal}
+                      src={edition.faith}
                       alt={`Dream Big with God Journal, ${edition.label}`}
+                      sizes={COVER_SIZES_GRID}
+                      caption={edition.label}
+                    />
+                  </FadeIn>
+                ))}
+              </ul>
+            </FadeInStagger>
+
+            <FadeIn className="mt-12">
+              <h4 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
+                Classic edition, four age brackets
+              </h4>
+            </FadeIn>
+            <FadeInStagger faster className="mt-6">
+              <ul
+                role="list"
+                className="grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-8"
+              >
+                {DREAM_BIG_EDITIONS.map((edition) => (
+                  <FadeIn as="li" key={`classic-${edition.label}`} scaleIn>
+                    <Cover
+                      src={edition.classic ?? undefined}
+                      alt={`Dream Big Journal, ${edition.label}`}
                       sizes={COVER_SIZES_GRID}
                       caption={edition.label}
                     />
@@ -802,15 +857,84 @@ export default function AuthorPage() {
             >
               <WorkTitle
                 title="Dream Big Journals"
-                meta="Non-faith edition · Published 2023-2025 · Sole author: Michele Okimura"
+                meta="Classic edition · Published 2023-2025 · Sole author: Michele Okimura"
               />
               <Prose>
                 <p>
-                  Same curriculum, same age brackets, God language removed.
-                  Available in four editions plus companion teacher guides.
+                  Same curriculum, same four age brackets, God language removed.
+                  The Classic edition is the one that goes into public school
+                  classrooms and secular leadership rooms. Companion teacher
+                  guides in every bracket.
                 </p>
               </Prose>
               <AvailableAt links={[{ text: 'micheleokimura.com/store' }]} />
+            </Work>
+          </div>
+
+          {/* Raising Kingdom Kids. The lesson book behind the Kingdom Kids
+              Workshop, and a title on the shelf in its own right. */}
+          <div className="mt-20 sm:mt-28">
+            <Work
+              cover={
+                <Cover
+                  src="/images/books/kingdom-kids.webp"
+                  alt="Raising Kingdom Kids"
+                  sizes={COVER_SIZES_MAIN}
+                />
+              }
+            >
+              <WorkTitle
+                title="Raising Kingdom Kids"
+                meta="A lesson book for equipping the next generation · More than 100 lessons"
+              />
+              <Prose>
+                <p>
+                  A compilation of over 100 proven, true lessons Michele
+                  developed across ten years of active children&rsquo;s ministry
+                  and youth ministry work. Every lesson in the book was taught
+                  in a real room with real kids before it was written down.
+                  Nothing here is theory.
+                </p>
+                <p>
+                  The book was built for children&rsquo;s ministry leaders and
+                  parents, and the range turned out to be much wider than that.
+                  Many of the lessons carry straight across every age group,
+                  adults included, which is how churches have ended up teaching
+                  them from the main platform.
+                </p>
+              </Prose>
+
+              <div className="mt-8">
+                <h4 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
+                  What the lessons cover
+                </h4>
+                <ul
+                  role="list"
+                  className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2"
+                >
+                  {RAISING_KINGDOM_KIDS_TOPICS.map((topic) => (
+                    <li key={topic} className="flex gap-3">
+                      <span
+                        aria-hidden="true"
+                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-teal)]"
+                      />
+                      <span className="text-base leading-7 text-neutral-700">
+                        {topic}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <Endorsements
+                items={RAISING_KINGDOM_KIDS_ENDORSEMENTS}
+                label="What churches say"
+              />
+              <AvailableAt links={[{ text: 'micheleokimura.com/store' }]} />
+              <ReadTheStory
+                href="/projects/raising-kingdom-kids"
+                label="Raising Kingdom Kids"
+              />
             </Work>
           </div>
         </Container>

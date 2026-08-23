@@ -10,8 +10,11 @@
 // URL. A tile links to its case study when `href` is set; null => non-clickable.
 //
 // === EXCLUSIONS (per screen-share decisions 2026-06-17) ===
-// - kamehameha-schools: NDA. Never appears here (no logo, no tile). Surfaces only
-//   as unnamed aggregate framing (see lib/case-studies getNdaAggregate / About).
+// - kamehameha-schools: no logo mark is ever used, per their trademark. It does
+//   not appear in this hero/carousel registry at all. It does appear on the home
+//   LogoMarquee as a TEXT-ONLY tile (see lib/client-logos), confirmed by Michele
+//   2026-08-23. Engagement detail still surfaces as unnamed aggregate framing
+//   (see lib/case-studies getNdaAggregate / About).
 // - sacred-hearts-academy: on hold (ready-to-publish:false). Not in grid/marquee.
 // - Metro Christian, Lifespring 808, New Hope Community, Windward Missionary,
 //   Calvary Assembly of God: relationship-only. No logo, no tile.

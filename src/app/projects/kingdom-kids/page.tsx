@@ -168,7 +168,7 @@ export default function KingdomKidsPage() {
             </Link>
             . The content is the same. Its companion lesson book is{' '}
             <Link
-              href="/works/raising-kingdom-kids"
+              href="/projects/raising-kingdom-kids"
               className="font-medium text-neutral-950 underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition hover:decoration-2"
             >
               Raising Kingdom Kids

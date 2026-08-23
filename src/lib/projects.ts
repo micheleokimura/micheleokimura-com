@@ -47,7 +47,7 @@ export type ProjectStudy = {
 /**
  * The index registry.
  *
- * All eight entries now have full narrative pages under /projects. The /works
+ * All nine entries now have full narrative pages under /projects. The /works
  * detail pages for the same titles carry registry metadata only and link here
  * for the story. Keeping the href in data means the index, the Author page
  * links, and the sitemap all move together.
@@ -78,6 +78,15 @@ export const projectStudies: ProjectStudy[] = [
     kicker: 'Workshop · Since 2008',
     blurb:
       'Ten years of testing what children can actually carry, distilled into the workshop that changed how churches see the youngest people in the room.',
+    group: 'curricula-and-programs',
+  },
+  {
+    slug: 'raising-kingdom-kids',
+    href: '/projects/raising-kingdom-kids',
+    title: 'Raising Kingdom Kids',
+    kicker: 'Curriculum · 100+ lessons',
+    blurb:
+      'Over 100 proven lessons from ten years of firsthand children’s and youth ministry, on identity, hearing God’s voice, leadership, voice, and healing.',
     group: 'curricula-and-programs',
   },
   {
@@ -136,6 +145,7 @@ export const projectRoutes = [
   '/projects/brave-series/brave-together',
   '/projects/dream-big-journals',
   '/projects/kingdom-kids',
+  '/projects/raising-kingdom-kids',
   '/projects/rethink-creativity',
   '/projects/dancing-with-father',
   '/projects/birth-of-explicit-movement',
@@ -145,7 +155,7 @@ export const projectRoutes = [
 
 /** Maps an authoredWorks slug to its project case study, when one exists. */
 export const worksSlugToProject: Record<string, string> = {
-  'raising-kingdom-kids': '/projects/kingdom-kids',
+  'raising-kingdom-kids': '/projects/raising-kingdom-kids',
   'rethink-creativity': '/projects/rethink-creativity',
   'dream-big-journal-curriculum': '/projects/dream-big-journals',
   'brave-and-beautiful': '/projects/brave-series/brave-and-beautiful',
