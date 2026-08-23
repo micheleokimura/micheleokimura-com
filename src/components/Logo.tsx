@@ -16,15 +16,15 @@ export function Logo({
     <span
       className={cn(
         'font-display text-xl font-semibold tracking-tight whitespace-nowrap',
-        // Sapphire on ivory is one of the few places the full-strength brand
-        // color is wanted: it is the wordmark. Everything else on an ivory
+        // Teal on cream is one of the few places the full-strength brand
+        // color is wanted: it is the wordmark. Everything else on an cream
         // ground stays near-black. See DESIGN-RULES.md.
-        invert ? 'text-white' : 'text-[var(--color-brand-sapphire)]',
+        invert ? 'text-white' : 'text-[var(--color-brand-teal)]',
         className,
       )}
     >
       Michele Okimura
-      <span className="text-[var(--color-brand-orange-ink)]">.</span>
+      <span className="text-[var(--color-brand-terracotta-ink)]">.</span>
     </span>
   )
 }

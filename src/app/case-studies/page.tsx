@@ -35,13 +35,23 @@ export default function CaseStudiesPage() {
     <>
       <PageIntro eyebrow="Case Studies" title="Stories from the work.">
         <p>
-          Schools, churches, and organizations Michele has walked with through her
-          speaking, her curriculum, and the Explicit Movement team. Each story is
-          told by the work and the outcome. Not every engagement is named here.
-          Some of the strongest work has happened inside institutions that prefer to
-          stay private, and those are honored without a logo or a name.
+          Schools, churches, and organizations Michele has walked with through
+          her speaking, her curriculum, and the Explicit Movement team.
         </p>
       </PageIntro>
+
+      {/* The rest of the original intro. It moved out of the hero when every
+          interior page became a fixed-height banner; the words are unchanged. */}
+      <Container className="mt-14 sm:mt-16">
+        <FadeIn>
+          <p className="max-w-2xl text-lg leading-8 text-neutral-600">
+            Each story is told by the work and the outcome. Not every engagement
+            is named here. Some of the strongest work has happened inside
+            institutions that prefer to stay private, and those are honored
+            without a logo or a name.
+          </p>
+        </FadeIn>
+      </Container>
 
       <Container className="mt-16 sm:mt-24">
         <FadeInStagger faster>
@@ -50,9 +60,9 @@ export default function CaseStudiesPage() {
               <FadeIn as="li" key={study.slug} scaleIn>
                 <Link
                   href={`/case-studies/${study.slug}`}
-                  className="group flex h-full flex-col rounded-3xl bg-white p-8 ring-1 ring-neutral-900/5 transition hover:shadow-lg hover:ring-neutral-900/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-orange)]"
+                  className="group flex h-full flex-col rounded-3xl bg-white p-8 ring-1 ring-neutral-900/5 transition hover:shadow-lg hover:ring-neutral-900/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-terracotta)]"
                 >
-                  <span className="text-xs font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
+                  <span className="text-xs font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
                     {engagementLabel(study.engagementType)}
                   </span>
                   <h2 className="mt-3 font-display text-xl font-semibold tracking-tight text-neutral-950">

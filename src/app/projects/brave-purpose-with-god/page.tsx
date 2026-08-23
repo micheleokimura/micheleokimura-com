@@ -249,7 +249,7 @@ export default function BravePurposeWithGodProject() {
           <p>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-1.5 font-display text-base font-semibold text-neutral-950 underline decoration-[var(--color-brand-orange)] decoration-2 underline-offset-4 transition hover:text-[var(--color-brand-orange-ink)]"
+              className="inline-flex items-center gap-1.5 font-display text-base font-semibold text-neutral-950 underline decoration-[var(--color-brand-terracotta)] decoration-2 underline-offset-4 transition hover:text-[var(--color-brand-terracotta-ink)]"
             >
               Contact Michele for release updates
               <span aria-hidden="true">&rarr;</span>

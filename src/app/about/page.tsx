@@ -25,15 +25,20 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <PageIntro eyebrow="Maybe dreams give purpose a voice." title="About Michele.">
-        <p>
-          I&rsquo;m an author, speaker, and coach who has spent the last four
-          decades inspiring courage, vulnerability, healing, and purpose.
-        </p>
+      {/* Eyebrow is a label, not a sentence. "Maybe dreams give purpose a
+          voice." moved to the subtitle, and the author/speaker/coach line that
+          used to be the subtitle now opens the body copy below, where it has
+          room to breathe. No words were cut. */}
+      <PageIntro eyebrow="About" title="About Michele.">
+        <p>Maybe dreams give purpose a voice.</p>
       </PageIntro>
 
       <Container className="mt-14 sm:mt-16">
         <FadeIn className="max-w-2xl space-y-6 text-lg leading-8 text-neutral-600">
+          <p>
+            I&rsquo;m an author, speaker, and coach who has spent the last four
+            decades inspiring courage, vulnerability, healing, and purpose.
+          </p>
           <p>
             My story has been an adventure in finding purpose, and it began with my
             own healing journey. Transforming feelings of worthlessness into a deep
@@ -62,7 +67,7 @@ export default function AboutPage() {
           quote. Verbatim. */}
       <Container className="mt-16 sm:mt-20">
         <FadeIn>
-          <figure className="mx-auto max-w-4xl border-l-2 border-[var(--color-brand-orange)] pl-6 sm:pl-8">
+          <figure className="mx-auto max-w-4xl border-l-2 border-[var(--color-brand-terracotta)] pl-6 sm:pl-8">
             <blockquote className="font-display text-2xl leading-10 text-neutral-900 italic sm:text-3xl sm:leading-tight">
               &ldquo;{GOLDEN_THREAD_QUOTE}&rdquo;
             </blockquote>
@@ -83,7 +88,7 @@ export default function AboutPage() {
       {/* The work Michele leads — her own brand family (own surface, not endorsers) */}
       <Container className="mt-20 sm:mt-28">
         <FadeIn className="mx-auto max-w-4xl">
-          <h2 className="text-center font-display text-sm font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
+          <h2 className="text-center font-display text-sm font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
             The work Michele leads
           </h2>
           <ul
@@ -114,7 +119,7 @@ export default function AboutPage() {
       <Container className="mt-20 sm:mt-28">
         <div className="mx-auto grid max-w-4xl grid-cols-1 gap-12 lg:grid-cols-2">
           <FadeIn>
-            <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
+            <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
               Honors and recognition
             </h2>
             <ul role="list" className="mt-6 divide-y divide-neutral-200 border-t border-neutral-200">
@@ -134,13 +139,13 @@ export default function AboutPage() {
           </FadeIn>
 
           <FadeIn>
-            <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
+            <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
               Roles and work
             </h2>
             <ul role="list" className="mt-6 space-y-3 border-t border-neutral-200 pt-6 text-base text-neutral-700">
               {credentials.map((c) => (
                 <li key={c} className="flex gap-3">
-                  <span aria-hidden="true" className="text-[var(--color-brand-orange-ink)]">
+                  <span aria-hidden="true" className="text-[var(--color-brand-terracotta-ink)]">
                     &middot;
                   </span>
                   <span>{c}</span>

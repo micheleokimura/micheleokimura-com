@@ -156,7 +156,7 @@ export default function BraveTogetherPage() {
             vision and the two and a half years of production, is on the{' '}
             <Link
               href="/projects/brave-series"
-              className="font-medium text-neutral-950 underline decoration-[var(--color-brand-orange)] decoration-1 underline-offset-4 transition hover:decoration-2"
+              className="font-medium text-neutral-950 underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition hover:decoration-2"
             >
               Brave Series hub
             </Link>

@@ -6,63 +6,85 @@ design. Read both.
 
 ## Palette (locked)
 
+Teal primary, terracotta warm accent, warm cream ground. This replaced the
+sapphire + orange scheme, which read as "blue and orange" all at once. The
+site's pre-sapphire palette was already teal (`#0097B2` with `#DB6437`), so
+this is a return to that family rather than a new direction.
+
 | Role | Hex | Token |
 | ---- | --- | ----- |
-| Primary dark (sapphire) | `#0F52BA` | `--color-brand-sapphire` |
-| Primary accent (orange splash) | `#FF4500` | `--color-brand-orange` |
-| Hover / soft accent (coral) | `#FF7F50` | `--color-brand-coral` |
-| Depth / gradient shadow (deep royal sapphire) | `#1E3A8A` | `--color-brand-sapphire-deep` |
-| Background (warm ivory) | `#FDFBF7` | `--color-ivory` |
+| Primary (teal) | `#0F766E` | `--color-brand-teal` |
+| Deep teal: footer, banners, depth | `#134E4A` | `--color-brand-teal-deep` |
+| Warm accent (terracotta) | `#D4735A` | `--color-brand-terracotta` |
+| Terracotta AS TEXT on cream | `#9E5442` | `--color-brand-terracotta-ink` |
+| Terracotta ON a teal panel | `#FDE8D9` | `--color-brand-terracotta-on-dark` |
+| CTA hover fill | `#E08E76` | `--color-brand-terracotta-soft` |
+| Background (warm cream) | `#F5F1E8` | `--color-cream` |
+| Body copy (warm charcoal) | `#3D3730` | `--color-neutral-950` |
+| Text ON a terracotta fill | `#1F1B16` | `--color-ink` |
 
 The tokens live in `src/styles/tailwind.css`. Use the token, never the raw hex.
+The one unavoidable exception is `src/components/MarkerSwipe.tsx`: Safari will
+not evaluate `var()` inside an SVG presentation attribute, so the swipe carries
+a literal `#D4735A` that has to be kept in step by hand.
 
-Two contrast carve-outs already baked into the tokens, and they exist for a
-reason. Keep using them:
+Three contrast carve-outs are baked into the tokens. Keep using them:
 
-- `#FF4500` as text on ivory is only 3.33:1 and fails WCAG AA. When the orange
-  has to be read AS TEXT on a light surface, use `--color-brand-orange-ink`
-  (`#CC3700`, 4.94:1).
-- Neither `#FF4500` (2.08:1) nor coral (2.86:1) is legible on sapphire. When the
-  accent has to sit ON a dark panel, use `--color-brand-orange-on-dark`
-  (`#FFC2A3`, 4.60:1).
-- Text ON an orange or coral fill is near-black `--color-ink`, never ivory.
+- `#D4735A` as text on cream is 2.91:1 and fails WCAG AA. When the terracotta
+  has to be read AS TEXT on cream, use `--color-brand-terracotta-ink`
+  (`#9E5442`, 4.90:1).
+- Terracotta is invisible on teal (1.67:1). When the accent sits ON a teal
+  panel, use `--color-brand-terracotta-on-dark` (`#FDE8D9`): 4.62:1 on
+  `#0F766E` and 8.00:1 on `#134E4A`, so it holds anywhere on the banner.
+- Text ON a terracotta or terracotta-soft fill is `--color-ink`, never cream.
+  Cream on `#D4735A` is 2.91:1; ink is 5.22:1.
+
+Do NOT reintroduce `#0097B2`. It is Michele's original Elementor accent and it
+is the right hue, but at 3.07:1 it fails AA both as a heading on cream and as a
+bar carrying cream text. `#0F766E` is the same family and passes at 4.86:1.
+
+The neutral ramp is warmed to match the cream (`neutral-700` `#4A4239` through
+`neutral-100` `#EBE5D9`). Stock Tailwind neutrals are cool greys and go
+visibly blue against cream. `neutral-400` and lighter are decorative only and
+must never carry body text.
 
 ## Restraint (read this before adding any color)
 
-Bold colors are used SPARINGLY. Ivory dominates the content areas. If a page
-feels "loud" or clown-like, it is because too much sapphire and orange is
+Bold colors are used SPARINGLY. Cream dominates the content areas. If a page
+feels "loud" or clown-like, it is because too much teal and terracotta is
 landing at once. That is the failure mode this site keeps falling into, so the
 allowed jobs for each color are listed exhaustively below. If a use is not on
-the list, the answer is ivory with near-black text.
+the list, the answer is cream with warm-charcoal text.
 
-**Sapphire `#0F52BA`** may be used for:
+**Teal** may be used for:
 
 - the wordmark in the header
-- the footer ground and the full-bleed dark panels (`.surface-sapphire`)
-- banner heroes and the home video-hero overlay
-- major H1 and H2 heading text on ivory
+- the footer ground (`--color-brand-teal-deep`, full-bleed)
+- the interior banner hero (`.surface-teal-banner`) and the home video-hero
+  overlay
+- the full-bleed dark panels (`.surface-teal`)
+- major H1 and H2 heading text on cream
 - low-opacity structure: card rings, hairline dividers, soft shadows, via
-  `--color-sapphire-05 / -10 / -20 / -30`
+  `--color-teal-05 / -10 / -20 / -30`
 
-**Orange `#FF4500`** may be used for:
+**Terracotta** may be used for:
 
-- primary CTA buttons (Contact, Work with Michele, and the like)
-- tracked small-caps eyebrow labels, as `--color-brand-orange-ink` on ivory or
-  `--color-brand-orange-on-dark` on sapphire
+- primary CTA buttons and the marker swipe
+- tracked small-caps eyebrow labels, as `--color-brand-terracotta-ink` on cream
+  or `--color-brand-terracotta-on-dark` on teal
 - link underlines and hover states
 - a 2px left rule on a pull quote
 
-**Never**: orange backgrounds, orange-tinted panels, orange card rings, orange
-decorative shapes or bullet dots, sapphire body copy, sapphire small print, or
-orange headings on a sapphire panel (headings on sapphire are ivory).
+**Never**: terracotta backgrounds, terracotta-tinted panels, terracotta card
+rings, terracotta decorative shapes or bullet dots, teal body copy, teal small
+print, or terracotta headings on a teal panel (headings on teal are cream).
+Never a stock Tailwind accent (`amber-100`, `green-100`, and friends); they are
+off-palette and read as a third and fourth brand color.
 
-`--color-neutral-950` is near-black `#1a1a1a` and must stay that way. It was
-once retargeted to sapphire so that ~220 utilities would recolor at once; the
-result was that every name, caption, and modal scrim turned blue and the site
-read as a wash of sapphire. Sapphire is opt-in, applied by name.
-
-Body copy on ivory is `text-neutral-700`. Small print, captions, dates, and
-secondary metadata are `text-neutral-500`.
+`--color-neutral-950` is warm charcoal and must stay that way. It was once
+retargeted to sapphire so that ~220 utilities would recolor at once; the result
+was that every name, caption, and modal scrim turned blue and the site read as
+a wash of one hue. The brand color is opt-in, applied by name.
 
 ## Eyebrows and badges
 
@@ -81,35 +103,69 @@ The house pattern is:
 font-display text-xs font-semibold tracking-[0.22em] uppercase sm:text-sm
 ```
 
-in `--color-brand-orange-ink` on ivory, or `--color-brand-orange-on-dark` on
-sapphire.
+in `--color-brand-terracotta-ink` on cream, or
+`--color-brand-terracotta-on-dark` on teal.
 
 ## Hero heights
 
 - Home page: video hero, 360 to 440px. Deliberately NOT full-viewport. The
   three AUTHOR / SPEAKER / COACH door cards have to clear the fold on a laptop,
   and a full-height hero pushed them under it. Michele is framed on the RIGHT
-  of `michele-hero.mp4` (mirrored for this reason), so the sapphire overlay is
+  of `michele-hero.mp4` (mirrored for this reason), so the teal overlay is
   strongest on the left where the text sits.
-- All other pages (Author, Speaker, Coaching, About, case studies, etc.):
-  BANNER style, 280 to 320px tall. Compact, calm, doesn't demand attention.
+- EVERY other page: the SAME banner, 280 to 320px tall. Author, Speak,
+  Coaching, About, Resources, Works, Projects, and every case study.
 
-`src/components/BannerHero.tsx` is the implementation. It sits below the site
-header rather than under it, because the header is near-black text on ivory and
-`main` already carries the padding that clears it. Below the banner, hard cut to
-warm ivory and the content starts immediately.
+`src/components/BannerHero.tsx` is the single implementation, and
+`src/components/PageIntro.tsx` is a thin alias over it for the pages built
+against the older prop names. It sits below the site header rather than under
+it, because the header is warm-charcoal text on cream and `main` already
+carries the padding that clears it. Below the banner, hard cut to cream and the
+content starts immediately.
+
+NO hero photography, and no per-page hero background. The identity is the
+banner, so it must be identical everywhere: a warm terracotta glow at the
+centre over a teal field deepening at the edges, defined once as
+`.surface-teal-banner` in `tailwind.css`. `PageIntro` used to render a photo
+mosaic (`HeroMosaic`) behind near-black text with a white text-shadow; that was
+dropped by direction and `HeroMosaic` is no longer rendered anywhere.
+
+The glow is capped at 18% opacity on purpose. Lighten the teal field past
+`#0F766E` and the peach eyebrow drops below WCAG AA.
+
+Banner content is always: tracked small-caps eyebrow (a LABEL, not a sentence),
+big H1, optional one-line subhead, all in cream. Keep the subhead to a line or
+two. Two pages had a five-line intro in the hero; the overflow moved into the
+page body rather than stretching the banner.
 
 ## Header
 
+- The header carries FOUR links plus Contact, and no more: Author, Speak,
+  Coach, About. That cap is load-bearing. The previous eight-item nav could not
+  fit beside the wordmark and the CTA until 1024px, so every laptop
+  half-screen visitor saw a bare hamburger and reported "there are no menu
+  items". Four labels fit from 768px. Do not add a fifth without re-measuring.
+- Everything else lives in the footer, in `footerColumns` in
+  `src/lib/site-config.ts`. Cutting a link from the header means moving it
+  there, never dropping it.
+- The full nav shows from `md` (768px). Below that it collapses to a button
+  reading "Menu", not a bare glyph. A hairline icon alone was read as "there
+  are no menu items."
 - Exactly ONE Contact button is on screen at any width. Below `sm` it lives
   inside the hamburger panel; from `sm` up it sits right-most in the header bar
   and the panel copy is hidden. The header once shipped two side by side (the
   wait-list button had been relabelled "Contact" without removing it).
-- The full nav shows from `lg` (1024px). It cannot go lower: eight labels plus
-  the wordmark and the CTA need roughly 920px, and `Container` caps its
-  contents at 42rem below `lg` anyway.
-- Below `lg` the collapsed nav is a button reading "Menu", not a bare glyph.
-  A hairline icon alone was read as "there are no menu items."
+
+## Footer
+
+Full-bleed `--color-brand-teal-deep`, cream text, per the Living in Duvall
+reference. This is the one place the brand fills the whole viewport width,
+which is what lets the rest of the site stay cream and quiet.
+
+Structure, top to bottom: a newsletter/wait-list block, then four columns
+(Explore / Community / Built by Michele / wordmark + tagline), then the bottom
+bar with the copyright and the 988 crisis line. The 988 line ships on every
+page and does not get removed.
 
 ## Contact
 

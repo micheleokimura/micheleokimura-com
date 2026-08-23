@@ -174,7 +174,7 @@ const ENGAGEMENTS: Engagement[] = [
 
 function NonFaithNote() {
   return (
-    <p className="mt-5 border-l-2 border-[var(--color-sapphire-30)] pl-4 text-sm text-neutral-600">
+    <p className="mt-5 border-l-2 border-[var(--color-teal-30)] pl-4 text-sm text-neutral-600">
       Also available in a non-faith framing for schools, workplaces, and public
       events.
     </p>
@@ -223,7 +223,7 @@ export default function SpeakPage() {
       />
 
       {/* The intro paragraph that used to sit inside the tall hero. It reads as
-          the lead now, on ivory, straight under the banner. */}
+          the lead now, on cream, straight under the banner. */}
       <Container className="mt-12 sm:mt-16">
         <FadeIn>
           <p className="max-w-3xl text-xl leading-9 text-neutral-600">
@@ -259,7 +259,7 @@ export default function SpeakPage() {
                     <div className="lg:grid lg:grid-cols-[6rem_1fr] lg:gap-10">
                       <p
                         aria-hidden="true"
-                        className="font-display text-4xl font-semibold tracking-tight text-[var(--color-brand-orange-ink)]"
+                        className="font-display text-4xl font-semibold tracking-tight text-[var(--color-brand-terracotta-ink)]"
                       >
                         {topic.number}
                       </p>
@@ -382,7 +382,7 @@ export default function SpeakPage() {
       </section>
 
       <Container className="mt-24 sm:mt-32 lg:mt-40">
-        <FadeIn className="-mx-6 rounded-4xl bg-neutral-950 surface-sapphire px-6 py-20 sm:mx-0 sm:py-24 md:px-12">
+        <FadeIn className="-mx-6 rounded-4xl bg-neutral-950 surface-teal px-6 py-20 sm:mx-0 sm:py-24 md:px-12">
           <div className="mx-auto max-w-4xl">
             <h2 className="font-display text-3xl font-medium tracking-tight text-balance text-white sm:text-4xl">
               Book Michele.

@@ -1,19 +1,30 @@
 import Link from 'next/link'
 import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
-import { Logo } from '@/components/Logo'
 import { PodcastSeriesJsonLd } from '@/components/JsonLd'
 import { JoinWaitListButton } from '@/components/wait-list/JoinWaitListButton'
-import { navItems, siteConfig } from '@/lib/site-config'
+import { footerColumns, siteConfig } from '@/lib/site-config'
+
+/**
+ * Site footer: a full-bleed deep-teal surface carrying a newsletter block on
+ * top and a four-column nav underneath (Explore / Community / Built By /
+ * wordmark + tagline), per the Living in Duvall reference.
+ *
+ * It is dark on purpose. The footer is the one place the brand gets to fill
+ * the whole viewport width, which is why the rest of the site can stay cream
+ * and quiet. Everything in here is cream text on --color-brand-teal-deep,
+ * measured at 8.41:1.
+ *
+ * This is also where the pages cut from the header nav live. The header is
+ * capped at four links plus Contact; Explore and Community below carry the
+ * rest, so nothing became unreachable.
+ */
 
 const headingClass =
-  'font-display text-sm font-semibold tracking-wider uppercase text-neutral-950'
+  'font-display text-xs font-semibold tracking-[0.22em] uppercase text-[var(--color-brand-terracotta-on-dark)]'
 
 const linkClass =
-  'transition hover:text-neutral-950 hover:underline underline-offset-4 decoration-[var(--color-cta)]'
-
-/** Footer nav = the primary nav plus Contact, which lives outside navItems. */
-const footerNavItems = [...navItems, { href: '/contact', label: 'Contact' }]
+  'text-[var(--color-cream)]/75 transition hover:text-[var(--color-cream)] hover:underline underline-offset-4 decoration-[var(--color-brand-terracotta-on-dark)]'
 
 const socials = [
   {
@@ -53,9 +64,9 @@ export function SiteFooter() {
   ]
 
   return (
-    <Container as="footer" className="mt-24 w-full sm:mt-32 lg:mt-40">
-      {/* The podcast now lives in the footer, so its structured data travels
-          with it and ships on every page instead of only the home page. */}
+    <footer className="mt-24 w-full bg-[var(--color-brand-teal-deep)] sm:mt-32 lg:mt-40" data-surface="dark">
+      {/* The podcast lives in the footer, so its structured data travels with
+          it and ships on every page instead of only the home page. */}
       <PodcastSeriesJsonLd
         name={podcast.name}
         url={podcast.url}
@@ -63,40 +74,51 @@ export function SiteFooter() {
         description={podcast.description}
         inLanguage={podcast.inLanguage}
       />
-      <FadeIn>
-        <div className="border-t border-neutral-200 pt-16 sm:pt-20">
-          <div className="grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-12">
-            {/* Brand */}
-            <div className="lg:col-span-4 lg:pr-8">
-              <Link href="/" aria-label={`${siteConfig.brand} home`} className="inline-block">
-                <Logo />
-              </Link>
-              <p className="mt-5 max-w-xs text-sm leading-6 text-neutral-600">
-                Speaker, author, and coach. Helping people turn their hardest
-                stories into the purpose they were carrying all along.
-              </p>
-              <p className="mt-5 text-sm text-neutral-500">
-                {siteConfig.city}, {siteConfig.state}
-              </p>
+
+      <Container>
+        <FadeIn>
+          {/* ------------------------------------------------ newsletter */}
+          <div className="border-b border-[var(--color-cream)]/15 py-14 sm:py-16">
+            <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[1fr_auto] lg:gap-16">
+              <div className="max-w-xl">
+                <h2 className={headingClass}>Stay in touch</h2>
+                <p className="font-display mt-4 text-2xl leading-tight font-medium text-balance text-[var(--color-cream)] sm:text-3xl">
+                  Michele takes a small number of coaching clients and speaking
+                  dates each year.
+                </p>
+                <p className="mt-4 max-w-md text-base leading-7 text-[var(--color-cream)]/75">
+                  Leave your info and she will reach out personally when a spot
+                  opens.
+                </p>
+              </div>
+              <div className="lg:justify-self-end">
+                {/* `primary` is the filled terracotta button. JoinWaitListButton
+                    has no `solid` variant; that belongs to Button. */}
+                <JoinWaitListButton source="footer" variant="primary" tone="dark" />
+              </div>
             </div>
+          </div>
 
-            {/* Site nav */}
-            <nav aria-label="Footer navigation" className="lg:col-span-2">
-              <h2 className={headingClass}>Site</h2>
-              <ul className="mt-6 space-y-3 text-sm text-neutral-700">
-                {footerNavItems.map((item) => (
-                  <li key={item.href}>
-                    <Link href={item.href} className={linkClass}>
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+          {/* -------------------------------------------- four columns */}
+          <div className="grid grid-cols-2 gap-x-8 gap-y-12 py-14 sm:py-16 lg:grid-cols-4">
+            {footerColumns.map((column) => (
+              <nav key={column.heading} aria-label={`${column.heading} navigation`}>
+                <h2 className={headingClass}>{column.heading}</h2>
+                <ul className="mt-6 space-y-3 text-sm">
+                  {column.links.map((item) => (
+                    <li key={item.href}>
+                      <Link href={item.href} className={linkClass}>
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            ))}
 
-            {/* Podcast + social */}
-            <div className="lg:col-span-3">
-              <h2 className={headingClass}>Podcast</h2>
+            {/* Built By: the podcast, the socials, and how to reach her. */}
+            <div>
+              <h2 className={headingClass}>Built by Michele</h2>
 
               <a
                 href={podcast.url}
@@ -104,46 +126,43 @@ export function SiteFooter() {
                 rel="noopener noreferrer"
                 className="group mt-6 flex items-start gap-3"
               >
-                <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-neutral-950/[0.06] text-neutral-700 transition group-hover:bg-[var(--color-cta)] group-hover:text-[var(--color-cta-ink)]">
+                <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--color-cream)]/10 text-[var(--color-cream)] transition group-hover:bg-[var(--color-cta)] group-hover:text-[var(--color-cta-ink)]">
                   <MicIcon className="h-4 w-4" />
                 </span>
                 <span>
-                  <span className="block font-display text-base font-semibold text-neutral-950 underline-offset-4 group-hover:underline decoration-[var(--color-cta)]">
+                  <span className="font-display block text-base font-semibold text-[var(--color-cream)] decoration-[var(--color-brand-terracotta-on-dark)] underline-offset-4 group-hover:underline">
                     {podcast.name}
                   </span>
-                  <span className="mt-0.5 block text-xs text-neutral-500">
+                  <span className="mt-0.5 block text-xs text-[var(--color-cream)]/60">
                     With {podcast.coHost}
                   </span>
                 </span>
               </a>
 
-              <p className="mt-4 max-w-xs text-sm leading-6 text-neutral-600">
-                Honest conversations about faith, marriage, and the moments that
-                change everything.
-              </p>
-
-              <ul className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-neutral-700">
+              <ul className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
                 {podcastLinks.map((item, i) => (
                   <li key={item.href} className="flex items-center gap-3">
                     {i > 0 ? (
-                      <span aria-hidden="true" className="text-neutral-300">
+                      <span aria-hidden="true" className="text-[var(--color-cream)]/30">
                         &middot;
                       </span>
                     ) : null}
-                    <a
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={linkClass}
-                    >
+                    <a href={item.href} target="_blank" rel="noopener noreferrer" className={linkClass}>
                       {item.label}
                     </a>
                   </li>
                 ))}
               </ul>
 
-              <h2 className={`${headingClass} mt-10`}>Follow</h2>
-              <div className="mt-5 flex gap-4">
+              <ul className="mt-6 space-y-3 text-sm">
+                <li>
+                  <a href={`mailto:${siteConfig.email}`} className={linkClass}>
+                    {siteConfig.email}
+                  </a>
+                </li>
+              </ul>
+
+              <div className="mt-6 flex gap-4">
                 {socials.map((item) => (
                   <a
                     key={item.href}
@@ -151,7 +170,7 @@ export function SiteFooter() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={item.label}
-                    className="text-neutral-500 transition hover:text-neutral-950"
+                    className="text-[var(--color-cream)]/60 transition hover:text-[var(--color-cream)]"
                   >
                     <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path d={item.path} />
@@ -161,61 +180,51 @@ export function SiteFooter() {
               </div>
             </div>
 
-            {/* Contact */}
-            <div className="lg:col-span-3">
-              <h2 className={headingClass}>Contact</h2>
-
-              <ul className="mt-6 space-y-3 text-sm text-neutral-700">
-                <li>
-                  <a href={`mailto:${siteConfig.email}`} className={linkClass}>
-                    {siteConfig.email}
-                  </a>
-                </li>
-                <li>
-                  <Link href="/contact" className={linkClass}>
-                    Send a message
-                  </Link>
-                </li>
-              </ul>
-
-              <p className="mt-6 max-w-xs text-sm leading-6 text-neutral-600">
-                Michele takes a small number of coaching clients and speaking
-                dates each year. Leave your info and she will reach out
-                personally when a spot opens.
+            {/* Wordmark + tagline. Cream on teal, so the Logo runs inverted. */}
+            <div className="col-span-2 lg:col-span-1">
+              <Link href="/" aria-label={`${siteConfig.brand} home`} className="inline-block">
+                <span className="font-display text-xl font-semibold tracking-tight whitespace-nowrap text-[var(--color-cream)]">
+                  Michele Okimura
+                  <span className="text-[var(--color-brand-terracotta-on-dark)]">.</span>
+                </span>
+              </Link>
+              <p className="mt-5 max-w-xs text-sm leading-6 text-[var(--color-cream)]/75">
+                Speaker, author, and coach. Helping people turn their hardest
+                stories into the purpose they were carrying all along.
               </p>
-              <div className="mt-5">
-                <JoinWaitListButton source="footer" variant="secondary" />
-              </div>
+              <p className="mt-5 text-sm text-[var(--color-cream)]/60">
+                {siteConfig.city}, {siteConfig.state}
+              </p>
             </div>
           </div>
 
-          {/* Bottom bar */}
-          <div className="mt-16 border-t border-neutral-200 pt-8 pb-12">
-            <p className="text-sm text-neutral-500">
+          {/* ------------------------------------------------ bottom bar */}
+          <div className="border-t border-[var(--color-cream)]/15 pt-8 pb-12">
+            <p className="text-sm text-[var(--color-cream)]/60">
               &copy; {siteConfig.brand} {new Date().getFullYear()}. All rights
               reserved.
             </p>
 
             {/* Mental-health resource. The site tells stories that touch on
                 crisis, so the way out stays one tap away on every page. */}
-            <p className="mt-6 max-w-2xl text-xs leading-5 text-neutral-500">
+            <p className="mt-6 max-w-2xl text-xs leading-5 text-[var(--color-cream)]/60">
               If you&rsquo;re in crisis, please reach out.{' '}
-              <a href="tel:988" className="text-neutral-600 underline underline-offset-2 hover:text-neutral-950">
+              <a href="tel:988" className="text-[var(--color-cream)]/85 underline underline-offset-2 hover:text-[var(--color-cream)]">
                 988 Suicide &amp; Crisis Lifeline (call or text 988)
               </a>{' '}
-              <span aria-hidden="true" className="text-neutral-300">&middot;</span>{' '}
+              <span aria-hidden="true" className="text-[var(--color-cream)]/30">&middot;</span>{' '}
               <a
                 href="https://988lifeline.org"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-neutral-600 underline underline-offset-2 hover:text-neutral-950"
+                className="text-[var(--color-cream)]/85 underline underline-offset-2 hover:text-[var(--color-cream)]"
               >
                 988lifeline.org
               </a>
             </p>
           </div>
-        </div>
-      </FadeIn>
-    </Container>
+        </FadeIn>
+      </Container>
+    </footer>
   )
 }

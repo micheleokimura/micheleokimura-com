@@ -1,11 +1,12 @@
 import { cn } from '@/lib/cn'
 
 /**
- * Orange highlighter swipe behind nav and CTA text. Literal CSS fill value
+ * Terracotta highlighter swipe behind nav and CTA text. Literal CSS fill value
  * instead of var() because Safari/iOS won't evaluate var() inside an SVG
- * presentation attribute.
+ * presentation attribute, so this hex has to be kept in step with
+ * --color-brand-terracotta in tailwind.css by hand.
  */
-const MARKER_ORANGE = '#FF4500'
+const MARKER_TERRACOTTA = '#D4735A'
 
 export function MarkerSwipe({ className }: { className?: string }) {
   return (
@@ -30,8 +31,8 @@ export function MarkerSwipe({ className }: { className?: string }) {
       >
         <path
           d="M 1,11 L 6,3.5 L 94,3.5 L 99,11 L 94,18.5 L 6,18.5 Z"
-          fill={MARKER_ORANGE}
-          style={{ fill: MARKER_ORANGE }}
+          fill={MARKER_TERRACOTTA}
+          style={{ fill: MARKER_TERRACOTTA }}
           opacity="0.9"
         />
       </svg>

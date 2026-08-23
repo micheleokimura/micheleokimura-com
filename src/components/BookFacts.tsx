@@ -56,7 +56,7 @@ export function BookFacts({
 
         <div>
           {badge ? (
-            <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-orange-ink)] uppercase sm:text-sm">
+            <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-terracotta-ink)] uppercase sm:text-sm">
               {badge}
             </span>
           ) : null}

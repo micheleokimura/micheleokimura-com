@@ -61,7 +61,7 @@ export function SiteHeader() {
 
           <nav
             aria-label="Primary"
-            className="hidden lg:flex items-center gap-2"
+            className="hidden md:flex items-center gap-1"
           >
             {navItems.map((item) => {
               const active = pathname === item.href
@@ -70,7 +70,7 @@ export function SiteHeader() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    'group relative isolate inline-flex items-center px-4 py-2 text-sm font-medium transition',
+                    'group relative isolate inline-flex items-center px-3 py-2 text-sm font-medium transition lg:px-4',
                     active
                       ? 'text-neutral-950'
                       : 'text-neutral-700 hover:text-neutral-950',
@@ -102,7 +102,7 @@ export function SiteHeader() {
                 button beside it (the wait-list button, whose label had already
                 been unified to "Contact"), so the header shipped two identical
                 CTAs. The wait-list flow now lives inside the contact popup, so
-                this is the only entry point and it carries the brand orange. */}
+                this is the only entry point and it carries the terracotta. */}
             <button
               type="button"
               onClick={() => setContactOpen(true)}
@@ -110,17 +110,19 @@ export function SiteHeader() {
             >
               Contact
             </button>
-            {/* Below lg this is the only way to reach the nav, so it is a
+            {/* Below md this is the only way to reach the nav, so it is a
                 labelled button rather than a bare glyph. Michele and Brett
                 reported "no header menu items" at a half-screen width: the
                 nav was correctly collapsed, but a 20px hairline icon did not
-                read as a menu. The word carries it. */}
+                read as a menu. The word carries it. Cutting the nav to four
+                links also let the full nav come down from lg to md, so the
+                half-screen case now shows real links rather than this. */}
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
               aria-expanded={open}
               aria-controls="mobile-nav-panel"
-              className="inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-neutral-900 ring-1 ring-[var(--color-sapphire-20)] transition hover:bg-[var(--color-sapphire-05)] hover:ring-[var(--color-sapphire-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-sapphire)] lg:hidden"
+              className="inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-neutral-900 ring-1 ring-[var(--color-teal-20)] transition hover:bg-[var(--color-teal-05)] hover:ring-[var(--color-teal-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)] md:hidden"
             >
               {open ? (
                 <XIcon className="h-4 w-4" />
@@ -136,7 +138,7 @@ export function SiteHeader() {
       <div
         id="mobile-nav-panel"
         hidden={!open}
-        className="lg:hidden mt-6 border-t border-neutral-200 bg-white"
+        className="md:hidden mt-6 border-t border-neutral-200 bg-white"
       >
         <Container className="py-6">
           <ul className="flex flex-col gap-1">

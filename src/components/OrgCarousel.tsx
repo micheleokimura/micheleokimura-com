@@ -31,7 +31,7 @@ function TileInner({ item }: { item: CarouselItem }) {
 }
 
 const TILE_CLASS =
-  'group flex w-40 shrink-0 flex-col items-center gap-2 rounded-2xl px-4 py-3 ring-1 ring-inset ring-white/10 transition hover:bg-white/[0.07] hover:ring-[var(--color-brand-orange)] hover:shadow-sm hover:shadow-[var(--color-brand-orange)]/30 sm:w-44'
+  'group flex w-40 shrink-0 flex-col items-center gap-2 rounded-2xl px-4 py-3 ring-1 ring-inset ring-white/10 transition hover:bg-white/[0.07] hover:ring-[var(--color-brand-terracotta)] hover:shadow-sm hover:shadow-[var(--color-brand-terracotta)]/30 sm:w-44'
 
 function Tile({ item }: { item: CarouselItem }) {
   if (item.href) {
@@ -39,7 +39,7 @@ function Tile({ item }: { item: CarouselItem }) {
       <Link
         href={item.href}
         aria-label={`Read the ${item.alt} case study`}
-        className={`${TILE_CLASS} focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-orange)]`}
+        className={`${TILE_CLASS} focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-terracotta)]`}
       >
         <TileInner item={item} />
       </Link>
@@ -74,7 +74,7 @@ export function OrgCarousel() {
     <section
       aria-label="Organizations Michele has worked with"
       data-surface="dark"
-      className="rounded-4xl bg-neutral-950 surface-sapphire py-20 sm:py-24"
+      className="rounded-4xl bg-neutral-950 surface-teal py-20 sm:py-24"
     >
       <Container>
         <FadeIn>

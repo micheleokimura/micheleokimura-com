@@ -182,7 +182,7 @@ export default function CoachingPage() {
       </BannerHero>
 
       {/* The opening paragraphs and portrait that used to sit inside the tall
-          hero. They read as the lead now, on ivory, straight under the band. */}
+          hero. They read as the lead now, on cream, straight under the band. */}
       <Container className="mt-12 sm:mt-16">
         <FadeIn>
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1fr_minmax(0,24rem)] lg:gap-16">

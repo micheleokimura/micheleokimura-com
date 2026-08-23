@@ -49,7 +49,7 @@ export default async function ResourcesPage() {
                     className="group flex h-full flex-col rounded-3xl bg-white p-8 ring-1 ring-neutral-900/5 transition hover:shadow-lg hover:ring-neutral-900/15"
                   >
                     {post.featured && (
-                      <span className="text-xs font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
+                      <span className="text-xs font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
                         Featured
                       </span>
                     )}

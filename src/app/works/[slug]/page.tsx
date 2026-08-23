@@ -109,7 +109,7 @@ export default async function WorkPage({
 
               <div className="prose-blog max-w-2xl space-y-5 text-base leading-7 text-neutral-700">
                 {work.status === 'in-production' && (
-                  <p className="rounded-xl bg-amber-50 px-5 py-4 text-amber-900">
+                  <p className="rounded-xl border-l-2 border-[var(--color-brand-terracotta)] bg-[var(--color-teal-05)] px-5 py-4 text-neutral-800">
                     This title is currently in production and is scheduled for
                     release in {work.year}.
                   </p>
@@ -131,7 +131,7 @@ export default async function WorkPage({
                   <p>
                     <Link
                       href={projectHref}
-                      className="inline-flex items-center gap-2 font-semibold text-[var(--color-brand-orange-ink)] underline underline-offset-4 hover:decoration-2"
+                      className="inline-flex items-center gap-2 font-semibold text-[var(--color-brand-terracotta-ink)] underline underline-offset-4 hover:decoration-2"
                     >
                       Read the story behind this work
                       <span aria-hidden="true">&rarr;</span>
@@ -145,7 +145,7 @@ export default async function WorkPage({
                       href={work.purchaseUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 font-semibold text-[var(--color-brand-orange-ink)] underline underline-offset-4 hover:decoration-2"
+                      className="inline-flex items-center gap-2 font-semibold text-[var(--color-brand-terracotta-ink)] underline underline-offset-4 hover:decoration-2"
                     >
                       Get this book
                       <span aria-hidden="true">&rarr;</span>
@@ -157,7 +157,7 @@ export default async function WorkPage({
 
             <aside>
               <dl className="rounded-2xl border border-neutral-200 bg-white p-6">
-                <h3 className="mb-4 font-display text-sm font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
+                <h3 className="mb-4 font-display text-sm font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
                   Details
                 </h3>
                 <MetadataRow label="Category" value={categoryLabel(work.category)} />

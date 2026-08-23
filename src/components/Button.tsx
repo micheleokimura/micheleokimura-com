@@ -9,10 +9,10 @@ type ButtonProps = {
   variant?: Variant
   /**
    * Background the CTA sits on. `light` (default) keeps the text near-black so
-   * it reads on ivory. `dark` flips the text to ivory so it stays legible on a
-   * sapphire panel. Either way, the moment the orange marker slides in behind
-   * the text the label switches to near-black, because ivory on #FF4500 is
-   * only 3.33:1. For `solid` it drives the focus-ring offset color.
+   * it reads on cream. `dark` flips the text to cream so it stays legible on a
+   * teal panel. Either way, the moment the terracotta marker slides in behind
+   * the text the label switches to near-black, because cream on #D4735A is
+   * only 2.91:1. For `solid` it drives the focus-ring offset color.
    */
   tone?: Tone
   withArrow?: boolean
@@ -28,7 +28,7 @@ type ButtonProps = {
  *   text rather than filled rectangles. `primary` shows the highlighter swipe
  *   behind the whole phrase; `secondary` / `ghost` swap a dashed underline for
  *   the swipe on hover.
- * - `solid` is a conventional rectangular orange button with rounded corners
+ * - `solid` is a conventional rectangular terracotta button with rounded corners
  *   and a clear button affordance. This is the locked treatment for FORM submit
  *   buttons (footer, contact block, /contact), where the marker-swiped text
  *   read as ambiguous next to an input. The marker swipe stays reserved for
@@ -48,7 +48,7 @@ export function Button({
   const isPrimary = variant === 'primary'
   const isDark = tone === 'dark'
 
-  // Solid: rectangular orange button carrying near-black ink. No marker, no
+  // Solid: rectangular terracotta button carrying near-black ink. No marker, no
   // underline — a plain, obvious "press me" control for forms.
   if (variant === 'solid') {
     const solid = cn(
@@ -87,10 +87,10 @@ export function Button({
     'group relative isolate inline-flex items-center justify-center gap-1.5 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4',
     // Focus ring tracks the background so it stays visible on dark sections.
     isDark ? 'focus-visible:outline-white' : 'focus-visible:outline-neutral-950',
-    // A primary CTA is a solid-orange "label tape" with near-black text on
+    // A primary CTA is a solid-terracotta "label tape" with near-black text on
     // every background, so its text color is context-independent (the marker
     // handles the contrast). Secondary/ghost text flips with tone at rest, then
-    // drops to near-black on hover once the orange marker is behind it.
+    // drops to near-black on hover once the terracotta marker is behind it.
     isPrimary
       ? 'text-[var(--color-cta-ink)]'
       : cn(

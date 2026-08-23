@@ -49,18 +49,18 @@ export default function HomePage() {
     <>
       {/* ------------------------------------------------------------- hero */}
       {/* Video hero. Michele is framed on the RIGHT of michele-hero.mp4 (it was
-          mirrored for exactly this reason), so the sapphire overlay is
+          mirrored for exactly this reason), so the teal overlay is
           strongest on the left, where her name sits, and eases to transparent
           on the right so her face reads through. Below sm there is no room for
           a left column beside her face, so the overlay flattens to a uniform
-          sapphire wash and the text goes full-width and centered, with the
+          teal wash and the text goes full-width and centered, with the
           video still playing behind it as ambient motion.
 
           Height is capped rather than full-viewport so the three doors below
           clear the fold on a laptop. See DESIGN-RULES.md. */}
       <section
         aria-label="Michele Okimura"
-        className="relative isolate flex min-h-[360px] w-full items-center overflow-hidden bg-[var(--color-brand-sapphire-deep)] sm:min-h-[420px] lg:min-h-[440px]"
+        className="relative isolate flex min-h-[360px] w-full items-center overflow-hidden bg-[var(--color-brand-teal-deep)] sm:min-h-[420px] lg:min-h-[440px]"
       >
         <video
           src="/videos/michele-hero.mp4"
@@ -75,18 +75,18 @@ export default function HomePage() {
 
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[var(--color-brand-sapphire-deep)]/75 sm:bg-gradient-to-r sm:from-[var(--color-brand-sapphire-deep)]/90 sm:via-[var(--color-brand-sapphire)]/55 sm:to-transparent"
+          className="absolute inset-0 bg-[var(--color-brand-teal-deep)]/75 sm:bg-gradient-to-r sm:from-[var(--color-brand-teal-deep)]/90 sm:via-[var(--color-brand-teal)]/55 sm:to-transparent"
         />
 
         <Container className="relative py-14 sm:py-16">
           <FadeIn className="mx-auto max-w-xl text-center sm:mx-0 sm:max-w-lg sm:text-left lg:max-w-2xl">
-            <h1 className="font-display text-[2.25rem] leading-[1.05] font-medium tracking-tight text-balance text-[var(--color-ivory)] sm:text-[2.75rem] lg:text-6xl">
+            <h1 className="font-display text-[2.25rem] leading-[1.05] font-medium tracking-tight text-balance text-[var(--color-cream)] sm:text-[2.75rem] lg:text-6xl">
               Michele Okimura
             </h1>
-            <p className="font-display mt-4 text-lg font-semibold tracking-[0.14em] text-[var(--color-brand-orange-on-dark)] uppercase sm:mt-5 sm:text-xl lg:text-2xl">
+            <p className="font-display mt-4 text-lg font-semibold tracking-[0.14em] text-[var(--color-brand-terracotta-on-dark)] uppercase sm:mt-5 sm:text-xl lg:text-2xl">
               Author. Speaker. Coach.
             </p>
-            <p className="mt-5 max-w-xl text-base leading-7 text-[var(--color-ivory)]/85 sm:text-lg sm:leading-8">
+            <p className="mt-5 max-w-xl text-base leading-7 text-[var(--color-cream)]/85 sm:text-lg sm:leading-8">
               She helps people find the shape of the work they were made to do,
               then walks with them until it lives in the world.
             </p>
@@ -110,16 +110,16 @@ export default function HomePage() {
                 <Link
                   href={door.href}
                   aria-label={`${door.label}: ${door.cta}`}
-                  className="group flex w-full flex-col rounded-3xl bg-[var(--color-sapphire-05)] p-6 ring-1 ring-[var(--color-sapphire-10)] transition duration-300 hover:bg-[var(--color-ivory)] hover:shadow-xl hover:shadow-[var(--color-sapphire-20)] hover:ring-[var(--color-sapphire-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-sapphire)] lg:p-8"
+                  className="group flex w-full flex-col rounded-3xl bg-[var(--color-teal-05)] p-6 ring-1 ring-[var(--color-teal-10)] transition duration-300 hover:bg-[var(--color-cream)] hover:shadow-xl hover:shadow-[var(--color-teal-20)] hover:ring-[var(--color-teal-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)] lg:p-8"
                 >
-                  <h3 className="font-display text-xs font-semibold tracking-[0.18em] text-[var(--color-brand-orange-ink)] uppercase">
+                  <h3 className="font-display text-xs font-semibold tracking-[0.18em] text-[var(--color-brand-terracotta-ink)] uppercase">
                     {door.label}
                   </h3>
                   <div className="mt-3 flex flex-auto flex-col lg:mt-4">
                     <p className="flex-auto text-sm leading-6 text-neutral-700 lg:text-base lg:leading-7">
                       {door.hook}
                     </p>
-                    <span className="font-display mt-5 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-[var(--color-brand-sapphire)] underline decoration-[var(--color-brand-orange)] decoration-1 underline-offset-4 transition group-hover:decoration-2 lg:mt-6">
+                    <span className="font-display mt-5 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition group-hover:decoration-2 lg:mt-6">
                       {door.cta}
                       <span
                         aria-hidden="true"
@@ -146,11 +146,11 @@ export default function HomePage() {
               width={1029}
               height={1286}
               sizes="(min-width: 1024px) 14rem, (min-width: 640px) 11rem, 9rem"
-              className="h-36 w-36 shrink-0 rounded-full object-cover object-top shadow-lg shadow-[var(--color-sapphire-10)] ring-4 ring-[var(--color-ivory)] sm:h-44 sm:w-44 lg:h-56 lg:w-56"
+              className="h-36 w-36 shrink-0 rounded-full object-cover object-top shadow-lg shadow-[var(--color-teal-10)] ring-4 ring-[var(--color-cream)] sm:h-44 sm:w-44 lg:h-56 lg:w-56"
             />
             <p className="max-w-2xl text-center text-lg leading-8 text-neutral-700 sm:text-left sm:text-xl sm:leading-9">
               Founder and{' '}
-              <span className="font-semibold text-[var(--color-brand-sapphire)]">
+              <span className="font-semibold text-[var(--color-brand-teal)]">
                 Executive Director of Releasing Generations
               </span>
               . Part-time pastor at Lifespring Church, Honolulu. Fourteen years
@@ -164,10 +164,10 @@ export default function HomePage() {
       <section aria-label="Recognition and proof">
         <Container className="mt-20 sm:mt-28 lg:mt-32">
           <FadeIn className="max-w-3xl">
-            <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-orange-ink)] uppercase sm:text-sm">
+            <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-terracotta-ink)] uppercase sm:text-sm">
               Recognition
             </span>
-            <h2 className="font-display mt-6 text-3xl font-medium tracking-tight text-balance text-[var(--color-brand-sapphire)] sm:text-4xl lg:text-5xl">
+            <h2 className="font-display mt-6 text-3xl font-medium tracking-tight text-balance text-[var(--color-brand-teal)] sm:text-4xl lg:text-5xl">
               The work has been checked by people who had to be sure.
             </h2>
           </FadeIn>
@@ -178,9 +178,9 @@ export default function HomePage() {
                 <FadeIn
                   as="div"
                   key={point.label}
-                  className="h-full rounded-2xl bg-[var(--color-sapphire-05)] p-6 ring-1 ring-[var(--color-sapphire-10)] sm:flex sm:items-baseline sm:gap-6 lg:block lg:p-8"
+                  className="h-full rounded-2xl bg-[var(--color-teal-05)] p-6 ring-1 ring-[var(--color-teal-10)] sm:flex sm:items-baseline sm:gap-6 lg:block lg:p-8"
                 >
-                  <dt className="font-display text-2xl font-semibold tracking-tight text-[var(--color-brand-sapphire)] sm:w-36 sm:shrink-0 lg:w-auto lg:text-3xl">
+                  <dt className="font-display text-2xl font-semibold tracking-tight text-[var(--color-brand-teal)] sm:w-36 sm:shrink-0 lg:w-auto lg:text-3xl">
                     {point.label}
                   </dt>
                   <dd className="mt-3 text-sm leading-6 text-neutral-700 sm:mt-0 lg:mt-3 lg:text-base lg:leading-7">
@@ -204,7 +204,7 @@ export default function HomePage() {
                   key={item.name}
                   className="last:sm:col-span-2 last:lg:col-span-1"
                 >
-                  <figure className="flex h-full flex-col border-t border-[var(--color-sapphire-30)] pt-6 last:sm:max-w-md last:lg:max-w-none">
+                  <figure className="flex h-full flex-col border-t border-[var(--color-teal-30)] pt-6 last:sm:max-w-md last:lg:max-w-none">
                     <blockquote className="flex-auto text-base leading-7 text-neutral-700 italic">
                       &ldquo;{item.quote}&rdquo;
                     </blockquote>
@@ -239,10 +239,10 @@ export default function HomePage() {
       <section aria-label="Featured work">
         <Container className="mt-20 sm:mt-28 lg:mt-32">
           <FadeIn className="max-w-3xl">
-            <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-orange-ink)] uppercase sm:text-sm">
+            <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-terracotta-ink)] uppercase sm:text-sm">
               A body of work
             </span>
-            <h2 className="font-display mt-6 text-3xl font-medium tracking-tight text-balance text-[var(--color-brand-sapphire)] sm:text-4xl lg:text-5xl">
+            <h2 className="font-display mt-6 text-3xl font-medium tracking-tight text-balance text-[var(--color-brand-teal)] sm:text-4xl lg:text-5xl">
               Fourteen works, and eight of them have a case study.
             </h2>
             <p className="mt-6 text-lg leading-8 text-neutral-700 sm:text-xl">
@@ -259,7 +259,7 @@ export default function HomePage() {
               {FEATURED_WORKS.map((work) => (
                 <FadeIn as="li" key={work.href}>
                   <Link href={work.href} className="group block">
-                    <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-[var(--color-ivory)] ring-1 ring-[var(--color-sapphire-10)] transition duration-300 group-hover:ring-[var(--color-sapphire-30)]">
+                    <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-[var(--color-cream)] ring-1 ring-[var(--color-teal-10)] transition duration-300 group-hover:ring-[var(--color-teal-30)]">
                       {work.cover ? (
                         <Image
                           src={work.cover}
@@ -269,8 +269,8 @@ export default function HomePage() {
                           className="object-contain p-3 transition duration-500 group-hover:scale-[1.04]"
                         />
                       ) : (
-                        <div className="flex h-full w-full flex-col items-center justify-center bg-[var(--color-sapphire-05)] p-4 text-center">
-                          <span className="font-display text-base font-medium text-balance text-[var(--color-brand-sapphire)] italic">
+                        <div className="flex h-full w-full flex-col items-center justify-center bg-[var(--color-teal-05)] p-4 text-center">
+                          <span className="font-display text-base font-medium text-balance text-[var(--color-brand-teal)] italic">
                             {work.title}
                           </span>
                           <span className="font-display mt-3 text-xs font-semibold tracking-widest text-neutral-500 uppercase">
@@ -279,7 +279,7 @@ export default function HomePage() {
                         </div>
                       )}
                     </div>
-                    <p className="font-display mt-3 text-xs font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
+                    <p className="font-display mt-3 text-xs font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
                       {work.kicker}
                     </p>
                     <h3 className="font-display mt-1 text-sm font-semibold tracking-tight text-balance text-neutral-900">
@@ -303,10 +303,10 @@ export default function HomePage() {
       <section aria-label="The Brave Purpose Author Method">
         <Container className="mt-20 sm:mt-28 lg:mt-32">
           <FadeIn className="mx-auto max-w-3xl text-center">
-            <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-orange-ink)] uppercase sm:text-sm">
+            <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-terracotta-ink)] uppercase sm:text-sm">
               The Brave Purpose Author Method
             </span>
-            <h2 className="font-display mt-6 text-3xl font-medium tracking-tight text-balance text-[var(--color-brand-sapphire)] sm:text-4xl lg:text-5xl">
+            <h2 className="font-display mt-6 text-3xl font-medium tracking-tight text-balance text-[var(--color-brand-teal)] sm:text-4xl lg:text-5xl">
               A book in you. A method that gets it on the page.
             </h2>
             <p className="mt-6 text-lg leading-8 text-neutral-700 sm:text-xl">

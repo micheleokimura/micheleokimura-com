@@ -37,9 +37,9 @@ function ProjectCard({ study }: { study: ProjectStudy }) {
     <FadeIn as="li" scaleIn>
       <Link
         href={study.href}
-        className="group flex h-full flex-col rounded-3xl bg-white p-8 ring-1 ring-neutral-900/5 transition hover:shadow-lg hover:ring-neutral-900/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-orange)]"
+        className="group flex h-full flex-col rounded-3xl bg-white p-8 ring-1 ring-neutral-900/5 transition hover:shadow-lg hover:ring-neutral-900/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-terracotta)]"
       >
-        <span className="text-xs font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
+        <span className="text-xs font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
           {study.kicker}
         </span>
         <h3 className="mt-3 font-display text-xl font-semibold tracking-tight text-neutral-950">
@@ -72,7 +72,7 @@ function Group({
     <section aria-labelledby={id}>
       <Container className={className}>
         <FadeIn>
-          <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
+          <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
             <span id={id}>{heading}</span>
           </h2>
         </FadeIn>
@@ -100,21 +100,28 @@ export default function ProjectsPage() {
   return (
     <>
       <PageIntro eyebrow="Projects" title="Everything she has built, and why.">
-        <p>
-          Michele&rsquo;s authored works are her case studies. Each curriculum,
-          conference, journal series, and book below is a record of taking an
-          idea from nothing to something people can hold. These are the stories
-          behind them: where each one came from, how it was made, and who it has
-          reached.
-        </p>
+        <p>Michele&rsquo;s authored works are her case studies.</p>
       </PageIntro>
+
+      {/* The rest of the original intro. It moved out of the hero when every
+          interior page became a fixed-height banner; the words are unchanged. */}
+      <Container className="mt-14 sm:mt-16">
+        <FadeIn>
+          <p className="max-w-2xl text-lg leading-8 text-neutral-600">
+            Each curriculum, conference, journal series, and book below is a
+            record of taking an idea from nothing to something people can hold.
+            These are the stories behind them: where each one came from, how it
+            was made, and who it has reached.
+          </p>
+        </FadeIn>
+      </Container>
 
       {/* The golden thread stated once, up front, so the grouped cards below
           read as one body of work rather than a list of unrelated products. */}
       <Container className="mt-4 sm:mt-8">
         <FadeIn>
-          <figure className="max-w-3xl rounded-3xl bg-[var(--color-sapphire-05)] p-8 ring-1 ring-[var(--color-sapphire-20)] sm:p-10">
-            <h2 className="font-display text-xs font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
+          <figure className="max-w-3xl rounded-3xl bg-[var(--color-teal-05)] p-8 ring-1 ring-[var(--color-teal-20)] sm:p-10">
+            <h2 className="font-display text-xs font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
               The golden thread
             </h2>
             <blockquote className="mt-5 font-display text-xl leading-9 text-neutral-800 italic sm:text-2xl sm:leading-10">
@@ -123,7 +130,7 @@ export default function ProjectsPage() {
             <figcaption className="mt-4 text-sm font-medium text-neutral-500 not-italic">
               Michele Okimura
             </figcaption>
-            <blockquote className="mt-6 border-t border-[#ff4500]/[0.25] pt-6 text-base leading-7 text-neutral-800 italic">
+            <blockquote className="mt-6 border-t border-[var(--color-teal-20)] pt-6 text-base leading-7 text-neutral-800 italic">
               &ldquo;{GOLDEN_THREAD_CULMINATION}&rdquo;
             </blockquote>
           </figure>
@@ -151,7 +158,7 @@ export default function ProjectsPage() {
             worked with? Those stories live on the{' '}
             <Link
               href="/case-studies"
-              className="font-medium text-neutral-950 underline decoration-[var(--color-brand-orange)] decoration-1 underline-offset-4 transition hover:decoration-2"
+              className="font-medium text-neutral-950 underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition hover:decoration-2"
             >
               case studies
             </Link>{' '}

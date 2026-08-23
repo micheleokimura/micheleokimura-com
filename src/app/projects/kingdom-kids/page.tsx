@@ -165,14 +165,14 @@ export default function KingdomKidsPage() {
             The workshop is offered today under the title{' '}
             <Link
               href="/speak"
-              className="font-medium text-neutral-950 underline decoration-[var(--color-brand-orange)] decoration-1 underline-offset-4 transition hover:decoration-2"
+              className="font-medium text-neutral-950 underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition hover:decoration-2"
             >
               Building a Kingdom Culture at Home and in Ministry
             </Link>
             . The content is the same. Its companion lesson book is{' '}
             <Link
               href="/works/raising-kingdom-kids"
-              className="font-medium text-neutral-950 underline decoration-[var(--color-brand-orange)] decoration-1 underline-offset-4 transition hover:decoration-2"
+              className="font-medium text-neutral-950 underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition hover:decoration-2"
             >
               Raising Kingdom Kids
             </Link>

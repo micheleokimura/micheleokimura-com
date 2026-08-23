@@ -202,13 +202,46 @@ export const authoredWorks: AuthoredWork[] = [
   },
 ]
 
+/**
+ * Header nav. FOUR links, plus the Contact button the header renders itself.
+ * That cap is the point: the previous eight-item nav could not fit beside the
+ * wordmark and the CTA until 1024px, so every laptop-half-screen visitor saw a
+ * bare hamburger and reported "there are no menu items". Four labels fit from
+ * 768px. Do not add a fifth without re-measuring.
+ *
+ * Everything else lives in the footer. See `footerColumns` below.
+ */
 export const navItems = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
   { href: '/author', label: 'Author' },
-  { href: '/how-it-works', label: 'How it works' },
-  { href: '/coaching', label: 'Coaching' },
-  { href: '/speak', label: 'Speaking' },
-  { href: '/case-studies', label: 'Case Studies' },
-  { href: '/resources', label: 'Resources' },
+  { href: '/speak', label: 'Speak' },
+  { href: '/coaching', label: 'Coach' },
+  { href: '/about', label: 'About' },
+] as const
+
+/**
+ * Footer navigation. This is where the pages that came out of the header went,
+ * so nothing became unreachable when the nav was cut to four.
+ */
+export const footerColumns = [
+  {
+    heading: 'Explore',
+    links: [
+      { href: '/', label: 'Home' },
+      { href: '/author', label: 'Author' },
+      { href: '/speak', label: 'Speaking' },
+      { href: '/coaching', label: 'Coaching' },
+      { href: '/how-it-works', label: 'How it works' },
+      { href: '/works', label: 'Authored works' },
+    ],
+  },
+  {
+    heading: 'Community',
+    links: [
+      { href: '/about', label: 'About Michele' },
+      { href: '/projects', label: 'Projects' },
+      { href: '/case-studies', label: 'Case studies' },
+      { href: '/resources', label: 'Resources' },
+      { href: '/contact', label: 'Contact' },
+    ],
+  },
 ] as const
