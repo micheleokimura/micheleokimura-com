@@ -2,9 +2,10 @@
 //
 // This file originally backed three design-variant routes (home-v1-narrative,
 // home-v2-clarity, home-v3-golden-thread) so Michele could compare directions
-// side by side. Golden-thread (v3) was promoted to `/`; DOORS, ENDORSEMENTS,
-// ENDORSING_ORGS, and PROOF_POINTS are what it still uses. FEATURED_WORKS and
-// NONPROFIT_ROOM were used only by the retired v1/v2 variants.
+// side by side. Golden-thread (v3) was promoted to `/` and then rejected in
+// review; the clarity direction (v2) is what `/` renders now. It uses DOORS,
+// PROOF_POINTS, ENDORSEMENTS, ENDORSING_ORGS, and FEATURED_WORKS. Only
+// NONPROFIT_ROOM is currently unreferenced; it is kept for the About page work.
 //
 // HARD RULE: endorser wording is verbatim. Do not edit a quote to make it fit.
 // Trim only by dropping whole sentences, and only where an existing signed-off

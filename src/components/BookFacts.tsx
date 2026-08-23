@@ -56,7 +56,7 @@ export function BookFacts({
 
         <div>
           {badge ? (
-            <span className="inline-flex items-center rounded-full bg-[var(--color-brand-orange)] px-3 py-1 text-xs font-semibold tracking-widest text-[var(--color-cta-ink)] uppercase">
+            <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-orange-ink)] uppercase sm:text-sm">
               {badge}
             </span>
           ) : null}

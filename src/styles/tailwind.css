@@ -76,15 +76,31 @@
      same warm family at 4.60:1. Never use it on ivory (1.5:1). */
   --color-brand-orange-on-dark: #ffc2a3;
 
-  /* Tailwind's own `white` and `neutral-950` are retargeted here so the ~220
-     existing bg-white / text-white / text-neutral-950 / bg-neutral-950
-     utilities recolor site-wide without editing every component. The rest of
-     the neutral ramp is deliberately untouched, so body copy
-     (text-neutral-600/700) stays readable warm grey on ivory rather than
-     turning blue. Anything that genuinely needs pure white must say
-     #ffffff explicitly. */
+  /* Sapphire at low opacity, for the quiet structural work: card rings, hairline
+     dividers, soft shadows. Full-strength sapphire on a border is loud, and
+     using it everywhere is what made the site read as "blue and orange" all at
+     once. Reach for these first; reach for --color-brand-sapphire only when the
+     element is genuinely meant to carry brand weight. */
+  --color-sapphire-05: rgba(15, 82, 186, 0.05);
+  --color-sapphire-10: rgba(15, 82, 186, 0.1);
+  --color-sapphire-20: rgba(15, 82, 186, 0.2);
+  --color-sapphire-30: rgba(15, 82, 186, 0.3);
+
+  /* Tailwind's own `white` is retargeted to ivory so the ~220 existing
+     bg-white / text-white utilities pick up the warm ground site-wide.
+     Anything that genuinely needs pure white must say #ffffff explicitly.
+
+     `neutral-950` is deliberately NOT retargeted to sapphire. It used to be,
+     which meant all ~97 text-neutral-950 utilities (body emphasis, names,
+     captions, small print, modal scrims) rendered blue, and the site read as
+     a wash of sapphire. Sapphire is now opt-in: it is applied by name to the
+     surfaces and headings that have earned it, and neutral-950 is the near-
+     black it says it is. The six full-bleed dark panels are unaffected because
+     they carry `.surface-sapphire`, whose background-image wins over the
+     background-color. The rest of the neutral ramp stays untouched, so body
+     copy (text-neutral-600/700) remains readable warm grey on ivory. */
   --color-white: #fdfbf7;
-  --color-neutral-950: #0f52ba;
+  --color-neutral-950: #1a1a1a;
 
   /* CTA fills. Rest is the vivid brand orange, hover warms to coral, and both
      carry near-black ink (see contrast note above). */

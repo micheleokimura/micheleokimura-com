@@ -113,7 +113,7 @@ export default function ProjectsPage() {
           read as one body of work rather than a list of unrelated products. */}
       <Container className="mt-4 sm:mt-8">
         <FadeIn>
-          <figure className="max-w-3xl rounded-3xl bg-[#ff4500]/[0.06] p-8 ring-1 ring-[#ff4500]/[0.2] sm:p-10">
+          <figure className="max-w-3xl rounded-3xl bg-[var(--color-sapphire-05)] p-8 ring-1 ring-[var(--color-sapphire-20)] sm:p-10">
             <h2 className="font-display text-xs font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
               The golden thread
             </h2>

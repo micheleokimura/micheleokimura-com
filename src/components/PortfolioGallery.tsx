@@ -169,7 +169,7 @@ function Lightbox({
           />
         </div>
         <figcaption className="mt-4 flex items-center gap-3 text-sm text-white/80">
-          <span className="rounded-full bg-white/10 px-3 py-1 font-medium uppercase tracking-wider text-white">
+          <span className="font-display text-xs font-semibold tracking-[0.22em] text-white uppercase">
             {piece.category}
           </span>
           <span>{piece.alt}</span>
@@ -209,9 +209,9 @@ function Tile({
         />
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 flex items-center justify-center bg-neutral-950/0 opacity-0 transition group-hover:bg-neutral-950/10 group-hover:opacity-100"
+          className="pointer-events-none absolute inset-0 flex items-center justify-center bg-neutral-950/0 opacity-0 transition group-hover:bg-neutral-950/45 group-hover:opacity-100"
         >
-          <span className="rounded-full bg-white/90 px-3 py-1.5 text-xs font-semibold text-neutral-950 shadow-sm">
+          <span className="font-display text-xs font-semibold tracking-[0.22em] text-white uppercase drop-shadow-[0_1px_3px_rgba(0,0,0,0.65)]">
             View full size
           </span>
         </span>

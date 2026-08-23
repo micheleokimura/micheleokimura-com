@@ -27,10 +27,51 @@ reason. Keep using them:
   (`#FFC2A3`, 4.60:1).
 - Text ON an orange or coral fill is near-black `--color-ink`, never ivory.
 
+## Restraint (read this before adding any color)
+
+Bold colors are used SPARINGLY. Ivory dominates the content areas. If a page
+feels "loud" or clown-like, it is because too much sapphire and orange is
+landing at once. That is the failure mode this site keeps falling into, so the
+allowed jobs for each color are listed exhaustively below. If a use is not on
+the list, the answer is ivory with near-black text.
+
+**Sapphire `#0F52BA`** may be used for:
+
+- the wordmark in the header
+- the footer ground and the full-bleed dark panels (`.surface-sapphire`)
+- banner heroes and the home video-hero overlay
+- major H1 and H2 heading text on ivory
+- low-opacity structure: card rings, hairline dividers, soft shadows, via
+  `--color-sapphire-05 / -10 / -20 / -30`
+
+**Orange `#FF4500`** may be used for:
+
+- primary CTA buttons (Contact, Work with Michele, and the like)
+- tracked small-caps eyebrow labels, as `--color-brand-orange-ink` on ivory or
+  `--color-brand-orange-on-dark` on sapphire
+- link underlines and hover states
+- a 2px left rule on a pull quote
+
+**Never**: orange backgrounds, orange-tinted panels, orange card rings, orange
+decorative shapes or bullet dots, sapphire body copy, sapphire small print, or
+orange headings on a sapphire panel (headings on sapphire are ivory).
+
+`--color-neutral-950` is near-black `#1a1a1a` and must stay that way. It was
+once retargeted to sapphire so that ~220 utilities would recolor at once; the
+result was that every name, caption, and modal scrim turned blue and the site
+read as a wash of sapphire. Sapphire is opt-in, applied by name.
+
+Body copy on ivory is `text-neutral-700`. Small print, captions, dates, and
+secondary metadata are `text-neutral-500`.
+
 ## Eyebrows and badges
 
 - NO pill-shaped eyebrows, badges, or tags ANYWHERE on the site. EVER.
 - Rationale: pills look clickable and cause user confusion.
+- Pills are banned everywhere. Any element using `rounded-full` must be an icon
+  button, an avatar image, or a decorative bullet dot. Never a text label, a
+  badge, a tag, a status chip, or a category chip. Grep for `rounded-full`
+  after any visual change and check every hit against that list.
 - Alternative: small-caps text, letter-spaced (tracked), no background, no
   border, no rounded corners. Rendered in accent color when emphasis is needed.
 
@@ -45,7 +86,11 @@ sapphire.
 
 ## Hero heights
 
-- Home page: full-height hero (video background when the hero video lands).
+- Home page: video hero, 360 to 440px. Deliberately NOT full-viewport. The
+  three AUTHOR / SPEAKER / COACH door cards have to clear the fold on a laptop,
+  and a full-height hero pushed them under it. Michele is framed on the RIGHT
+  of `michele-hero.mp4` (mirrored for this reason), so the sapphire overlay is
+  strongest on the left where the text sits.
 - All other pages (Author, Speaker, Coaching, About, case studies, etc.):
   BANNER style, 280 to 320px tall. Compact, calm, doesn't demand attention.
 
@@ -53,6 +98,18 @@ sapphire.
 header rather than under it, because the header is near-black text on ivory and
 `main` already carries the padding that clears it. Below the banner, hard cut to
 warm ivory and the content starts immediately.
+
+## Header
+
+- Exactly ONE Contact button is on screen at any width. Below `sm` it lives
+  inside the hamburger panel; from `sm` up it sits right-most in the header bar
+  and the panel copy is hidden. The header once shipped two side by side (the
+  wait-list button had been relabelled "Contact" without removing it).
+- The full nav shows from `lg` (1024px). It cannot go lower: eight labels plus
+  the wordmark and the CTA need roughly 920px, and `Container` caps its
+  contents at 42rem below `lg` anyway.
+- Below `lg` the collapsed nav is a button reading "Menu", not a bare glyph.
+  A hairline icon alone was read as "there are no menu items."
 
 ## Contact
 

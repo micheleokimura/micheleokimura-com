@@ -179,7 +179,7 @@ export function GoldenThread({ children }: { children: React.ReactNode }) {
   return (
     <Container className="mt-20 sm:mt-28">
       <FadeIn>
-        <div className="rounded-3xl bg-[#ff4500]/[0.06] p-8 ring-1 ring-[#ff4500]/[0.2] sm:p-10">
+        <div className="rounded-3xl bg-[var(--color-sapphire-05)] p-8 ring-1 ring-[var(--color-sapphire-20)] sm:p-10">
           <h2 className="font-display text-xs font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
             The golden thread
           </h2>
@@ -279,7 +279,7 @@ export function Recognition({
 }) {
   return (
     <FadeIn className="mt-10 max-w-3xl">
-      <div className="rounded-3xl bg-[#ff4500]/[0.06] p-6 ring-1 ring-[#ff4500]/[0.2] sm:p-8">
+      <div className="rounded-3xl bg-[var(--color-sapphire-05)] p-6 ring-1 ring-[var(--color-sapphire-20)] sm:p-8">
         <h3 className="font-display text-xs font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
           {label}
         </h3>
@@ -288,7 +288,7 @@ export function Recognition({
             <li key={item} className="flex gap-3">
               <span
                 aria-hidden="true"
-                className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-orange)]"
+                className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-sapphire)]"
               />
               <span className="text-base leading-7 text-neutral-800">
                 {item}
@@ -322,7 +322,7 @@ export function FactList({
           <li key={item} className="flex gap-3">
             <span
               aria-hidden="true"
-              className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-orange)]"
+              className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-sapphire)]"
             />
             <span className="text-base leading-7 text-neutral-700">{item}</span>
           </li>

@@ -38,14 +38,14 @@ function categoryLabel(cat: AuthoredWork['category']): string {
 function statusBadge(work: AuthoredWork) {
   if (work.status === 'in-production') {
     return (
-      <span className="inline-block rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-medium text-amber-800">
+      <span className="font-display inline-block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-orange-ink)] uppercase">
         Coming {work.year}
       </span>
     )
   }
   if (work.status === 'active' && work.category === 'blog') {
     return (
-      <span className="inline-block rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">
+      <span className="font-display inline-block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-sapphire)] uppercase">
         Active
       </span>
     )

@@ -16,7 +16,10 @@ export function Logo({
     <span
       className={cn(
         'font-display text-xl font-semibold tracking-tight whitespace-nowrap',
-        invert ? 'text-white' : 'text-neutral-950',
+        // Sapphire on ivory is one of the few places the full-strength brand
+        // color is wanted: it is the wordmark. Everything else on an ivory
+        // ground stays near-black. See DESIGN-RULES.md.
+        invert ? 'text-white' : 'text-[var(--color-brand-sapphire)]',
         className,
       )}
     >

@@ -6,49 +6,61 @@ import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { Button } from '@/components/Button'
 import { ContactBlock } from '@/components/ContactBlock'
-import { GOLDEN_THREAD_QUOTE } from '@/lib/projects'
-import { DOORS, ENDORSEMENTS, ENDORSING_ORGS, PROOF_POINTS } from '@/lib/home-variants'
+import {
+  DOORS,
+  ENDORSEMENTS,
+  ENDORSING_ORGS,
+  FEATURED_WORKS,
+  PROOF_POINTS,
+} from '@/lib/home-variants'
 
 /**
- * Home page, positioning-forward.
+ * Home page: AUTHOR / SPEAKER / COACH clarity.
  *
- * The golden thread is the whole thesis, so it runs the hero instead of
- * arriving as a mid-page pull quote. Every section below is a restatement of
- * the same movement: restoration, healing, encouragement, brave purpose.
+ * Built for the visitor who arrived with a job to do: an event organizer
+ * checking whether Michele fits their stage, or a writer sizing up the
+ * coaching. The video hero is deliberately short so the three doors clear the
+ * fold on a laptop, and the coaching CTA is repeated at the close.
  *
- * The hero line is an adaptation written for display, and Michele's verbatim
- * wording follows immediately underneath, attributed. The two are kept
- * separate on purpose so the display line can be shaped for the page while the
- * quote itself stays exactly as she said it.
+ * The golden-thread framing that used to run this page is gone. It was
+ * reviewed and dropped; do not reintroduce it here.
  *
- * The three paths are labeled by OUTCOME rather than by job title, because a
- * page led by positioning should ask the reader where they are going rather
- * than which of Michele's hats they need.
+ * The featured-work row is a plain responsive grid rather than a rotating
+ * carousel. Michele's authored works ARE her case studies, so hiding two
+ * thirds of them behind a carousel arrow would bury the authority stack this
+ * page exists to show.
  */
 export const metadata: Metadata = {
   title: 'Speaker, author, and coach',
   description:
-    'Restoration. Healing. Encouragement. One thread runs through every book, every journal, and every classroom. Michele Okimura is an author, speaker, and coach on Oʻahu, Hawaiʻi.',
+    'Michele Okimura is an author, speaker, and coach on Oʻahu, Hawaiʻi. Two published trade books, two more in 2027, keynotes and workshops, and the Brave Purpose Author Method.',
 }
 
-/** The four movements of the thread, used as a repeating spine down the page. */
-const MOVEMENTS = ['Restoration', 'Healing', 'Encouragement', 'Brave purpose'] as const
+/**
+ * The doors section escapes Container's inner max-w-2xl cap on purpose.
+ * Container narrows its contents to 42rem below `lg`, which would leave three
+ * columns about 210px wide at a tablet width. Using the full max-w-7xl gutter
+ * instead gives roughly 226px columns at 768px, which the cards can carry.
+ */
+const WIDE = 'mx-auto max-w-7xl px-6 lg:px-8'
 
 export default function HomePage() {
   return (
     <>
       {/* ------------------------------------------------------------- hero */}
-      {/* Full-height video hero per DESIGN-RULES.md. Michele is framed on the
-          RIGHT side of michele-hero.mp4 (mirrored for exactly this reason), so
-          the sapphire overlay is strongest on the left, where the golden-thread
-          text sits, and eases to transparent on the right so her face reads
-          through clearly. Below sm there is no room for a left column next to
-          her face, so the overlay flattens to a uniform sapphire wash and the
-          text goes full-width/centered instead, with the video still playing
-          behind it as ambient motion. */}
+      {/* Video hero. Michele is framed on the RIGHT of michele-hero.mp4 (it was
+          mirrored for exactly this reason), so the sapphire overlay is
+          strongest on the left, where her name sits, and eases to transparent
+          on the right so her face reads through. Below sm there is no room for
+          a left column beside her face, so the overlay flattens to a uniform
+          sapphire wash and the text goes full-width and centered, with the
+          video still playing behind it as ambient motion.
+
+          Height is capped rather than full-viewport so the three doors below
+          clear the fold on a laptop. See DESIGN-RULES.md. */}
       <section
-        aria-label="The golden thread"
-        className="relative isolate flex min-h-[70vh] w-full items-center overflow-hidden bg-[var(--color-brand-sapphire-deep)] sm:min-h-[80vh] lg:min-h-[90vh]"
+        aria-label="Michele Okimura"
+        className="relative isolate flex min-h-[360px] w-full items-center overflow-hidden bg-[var(--color-brand-sapphire-deep)] sm:min-h-[420px] lg:min-h-[440px]"
       >
         <video
           src="/videos/michele-hero.mp4"
@@ -66,253 +78,257 @@ export default function HomePage() {
           className="absolute inset-0 bg-[var(--color-brand-sapphire-deep)]/75 sm:bg-gradient-to-r sm:from-[var(--color-brand-sapphire-deep)]/90 sm:via-[var(--color-brand-sapphire)]/55 sm:to-transparent"
         />
 
-        <Container className="relative py-20 sm:py-28 lg:py-32">
+        <Container className="relative py-14 sm:py-16">
           <FadeIn className="mx-auto max-w-xl text-center sm:mx-0 sm:max-w-lg sm:text-left lg:max-w-2xl">
-            <span className="block font-display text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-orange-on-dark)] uppercase sm:text-sm">
-              The golden thread
-            </span>
-
-            <h1 className="mt-8 font-display text-[1.75rem] leading-[1.35] font-medium text-balance text-white italic sm:text-[2.25rem] sm:leading-[1.35] lg:text-[3rem] lg:leading-[1.3]">
-              Restoration. Healing. Encouragement. One thread runs through every
-              book, every journal, and every classroom. It arrives in one place:
-              your brave purpose, lived out.
+            <h1 className="font-display text-[2.25rem] leading-[1.05] font-medium tracking-tight text-balance text-[var(--color-ivory)] sm:text-[2.75rem] lg:text-6xl">
+              Michele Okimura
             </h1>
-
-            {/* The movements rendered as a literal thread. The connecting rules
-                are decorative and appear only at lg, the first width where all
-                four pills fit on one row. Below that the row wraps, and a
-                leading connector would dangle in the whitespace. */}
-            <ul
-              role="list"
-              className="mt-10 flex flex-wrap items-center justify-center gap-x-3 gap-y-3 sm:mt-12 sm:justify-start sm:gap-x-4"
-            >
-              {MOVEMENTS.map((movement, i) => (
-                <li key={movement} className="flex items-center gap-3 sm:gap-4">
-                  {i > 0 && (
-                    <span
-                      aria-hidden="true"
-                      className="hidden h-px w-6 bg-white/30 lg:block lg:w-10"
-                    />
-                  )}
-                  <span className="rounded-full bg-white/10 px-4 py-1.5 font-display text-xs font-semibold tracking-widest text-[var(--color-brand-orange-on-dark)] uppercase sm:text-sm">
-                    {movement}
-                  </span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="mt-12">
-              <Button href="/projects" variant="secondary" tone="dark">
-                Follow the thread through the work
-              </Button>
-            </div>
+            <p className="font-display mt-4 text-lg font-semibold tracking-[0.14em] text-[var(--color-brand-orange-on-dark)] uppercase sm:mt-5 sm:text-xl lg:text-2xl">
+              Author. Speaker. Coach.
+            </p>
+            <p className="mt-5 max-w-xl text-base leading-7 text-[var(--color-ivory)]/85 sm:text-lg sm:leading-8">
+              She helps people find the shape of the work they were made to do,
+              then walks with them until it lives in the world.
+            </p>
           </FadeIn>
         </Container>
       </section>
 
-      {/* --------------------------------------------- who Michele is */}
-      <section aria-label="About Michele">
-        <Container className="mt-20 sm:mt-28 lg:mt-32">
-          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-            <FadeIn scaleIn>
-              <div className="relative mx-auto w-full max-w-xs overflow-hidden rounded-3xl shadow-xl shadow-neutral-900/10 ring-1 ring-neutral-900/5 sm:max-w-sm lg:max-w-none">
-                <Image
-                  src="/team/michele-okimura-2.jpg"
-                  alt="Michele Okimura"
-                  width={1029}
-                  height={1286}
-                  priority
-                  sizes="(min-width: 1280px) 30rem, (min-width: 1024px) 38vw, (min-width: 640px) 24rem, 20rem"
-                  className="h-auto w-full object-cover"
-                />
-              </div>
-            </FadeIn>
-
-            <FadeIn>
-              <h2 className="font-display text-3xl font-medium tracking-tight text-balance text-neutral-950 sm:text-4xl lg:text-5xl">
-                Michele Okimura
-              </h2>
-              <p className="mt-6 text-lg leading-8 text-neutral-700 sm:text-xl sm:leading-9">
-                She is an author, speaker, and coach on Oʻahu, Hawaiʻi, the
-                founder and Executive Director of Releasing Generations, and a
-                part-time pastor at the Honolulu church she and her husband Rob
-                planted in 1997. Roughly fourteen years in Hawaiʻi public
-                elementary classrooms, two published books with two more
-                releasing in 2027, and a curriculum now in secondary public
-                schools taught her the one thing she
-                keeps coming back to: people cannot chase a dream they do not
-                believe they are worth.
-              </p>
-
-              {/* Michele's own wording, verbatim, single-sourced from
-                  src/lib/projects.ts. The hero paraphrases; this does not. */}
-              <figure className="mt-9 border-l-2 border-[var(--color-brand-orange)] pl-6 sm:pl-8">
-                <blockquote className="text-base leading-7 text-neutral-700 italic sm:text-lg sm:leading-8">
-                  &ldquo;{GOLDEN_THREAD_QUOTE}&rdquo;
-                </blockquote>
-                <figcaption className="mt-4 text-sm font-medium text-neutral-500 not-italic">
-                  Michele Okimura
-                </figcaption>
-              </figure>
-
-              <div className="mt-8">
-                <Button href="/about" variant="secondary">
-                  Read her story
-                </Button>
-              </div>
-            </FadeIn>
-          </div>
-        </Container>
-      </section>
-
-      {/* ------------------------------------------------ three paths in */}
-      <section aria-label="Ways in">
-        <Container className="mt-20 sm:mt-28 lg:mt-32">
-          <FadeIn className="mx-auto max-w-3xl text-center">
-            <span className="block font-display text-sm font-semibold tracking-wider text-neutral-500 uppercase">
-              Where the thread picks you up
-            </span>
-            <h2 className="mt-6 font-display text-3xl font-medium tracking-tight text-balance text-neutral-950 sm:text-4xl lg:text-5xl">
-              Three ways in. Same destination.
-            </h2>
-          </FadeIn>
-
-          <FadeInStagger faster className="mt-12 sm:mt-16">
-            <ol
-              role="list"
-              className="grid grid-cols-1 gap-5 lg:grid-cols-3 lg:gap-8"
-            >
-              {DOORS.map((door, i) => (
-                <FadeIn as="li" key={door.key} className="flex">
-                  <Link
-                    href={door.href}
-                    aria-label={`${door.outcomeLabel}: ${door.cta}`}
-                    className="group flex w-full flex-col rounded-3xl border border-neutral-200 p-7 transition duration-300 hover:border-[var(--color-brand-orange)] hover:shadow-xl hover:shadow-neutral-900/[0.06] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-orange)] sm:flex-row sm:items-start sm:gap-8 lg:flex-col lg:gap-0 lg:p-9"
-                  >
-                    {/* Number and outcome label ride together in a left column
-                        between sm and lg, so the hook keeps a readable measure
-                        on an iPad instead of collapsing to a narrow strip. */}
-                    <div className="sm:w-56 sm:shrink-0 lg:w-auto">
+      {/* ------------------------------------------------------ three doors */}
+      {/* Directly under the video, still above the fold on a laptop. */}
+      <section aria-labelledby="three-ways-heading" className={`${WIDE} mt-10 sm:mt-12`}>
+        <h2 id="three-ways-heading" className="sr-only">
+          Three ways to work with Michele
+        </h2>
+        <FadeInStagger faster>
+          <ul
+            role="list"
+            className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5 lg:gap-8"
+          >
+            {DOORS.map((door) => (
+              <FadeIn as="li" key={door.key} className="flex">
+                <Link
+                  href={door.href}
+                  aria-label={`${door.label}: ${door.cta}`}
+                  className="group flex w-full flex-col rounded-3xl bg-[var(--color-sapphire-05)] p-6 ring-1 ring-[var(--color-sapphire-10)] transition duration-300 hover:bg-[var(--color-ivory)] hover:shadow-xl hover:shadow-[var(--color-sapphire-20)] hover:ring-[var(--color-sapphire-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-sapphire)] lg:p-8"
+                >
+                  <h3 className="font-display text-xs font-semibold tracking-[0.18em] text-[var(--color-brand-orange-ink)] uppercase">
+                    {door.label}
+                  </h3>
+                  <div className="mt-3 flex flex-auto flex-col lg:mt-4">
+                    <p className="flex-auto text-sm leading-6 text-neutral-700 lg:text-base lg:leading-7">
+                      {door.hook}
+                    </p>
+                    <span className="font-display mt-5 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-[var(--color-brand-sapphire)] underline decoration-[var(--color-brand-orange)] decoration-1 underline-offset-4 transition group-hover:decoration-2 lg:mt-6">
+                      {door.cta}
                       <span
                         aria-hidden="true"
-                        className="font-display text-sm font-semibold text-[var(--color-brand-orange-ink)]"
+                        className="transition-transform duration-200 group-hover:translate-x-0.5"
                       >
-                        {String(i + 1).padStart(2, '0')}
+                        &rarr;
                       </span>
-                      <h3 className="mt-3 font-display text-xl font-semibold tracking-tight text-balance text-neutral-950 lg:mt-4 lg:text-2xl">
-                        {door.outcomeLabel}
-                      </h3>
-                    </div>
-                    <div className="mt-4 flex flex-auto flex-col sm:mt-0 lg:mt-4">
-                      <p className="flex-auto text-base leading-7 text-neutral-600">
-                        {door.hook}
-                      </p>
-                      <span className="mt-6 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-neutral-950 underline decoration-[var(--color-brand-orange)] decoration-1 underline-offset-4 transition group-hover:decoration-2 lg:mt-7">
-                        {door.cta}
-                        <span
-                          aria-hidden="true"
-                          className="transition-transform duration-200 group-hover:translate-x-0.5"
-                        >
-                          &rarr;
-                        </span>
-                      </span>
-                    </div>
-                  </Link>
-                </FadeIn>
-              ))}
-            </ol>
-          </FadeInStagger>
+                    </span>
+                  </div>
+                </Link>
+              </FadeIn>
+            ))}
+          </ul>
+        </FadeInStagger>
+      </section>
+
+      {/* ------------------------------------------------------ who she is */}
+      <section aria-label="About Michele">
+        <Container className="mt-20 sm:mt-28 lg:mt-32">
+          <FadeIn className="flex flex-col items-center gap-8 sm:flex-row sm:items-start sm:gap-10 lg:gap-14">
+            <Image
+              src="/team/michele-okimura.jpg"
+              alt="Michele Okimura"
+              width={1029}
+              height={1286}
+              sizes="(min-width: 1024px) 14rem, (min-width: 640px) 11rem, 9rem"
+              className="h-36 w-36 shrink-0 rounded-full object-cover object-top shadow-lg shadow-[var(--color-sapphire-10)] ring-4 ring-[var(--color-ivory)] sm:h-44 sm:w-44 lg:h-56 lg:w-56"
+            />
+            <p className="max-w-2xl text-center text-lg leading-8 text-neutral-700 sm:text-left sm:text-xl sm:leading-9">
+              Founder and{' '}
+              <span className="font-semibold text-[var(--color-brand-sapphire)]">
+                Executive Director of Releasing Generations
+              </span>
+              . Part-time pastor at Lifespring Church, Honolulu. Fourteen years
+              in a Hawaiʻi public elementary classroom. Based on Oʻahu, Hawaiʻi.
+            </p>
+          </FadeIn>
         </Container>
       </section>
 
       {/* ------------------------------------------------------------ proof */}
       <section aria-label="Recognition and proof">
         <Container className="mt-20 sm:mt-28 lg:mt-32">
-          <FadeIn>
-            <div className="-mx-6 bg-neutral-950 surface-sapphire px-6 py-16 sm:mx-0 sm:rounded-4xl sm:px-12 sm:py-20 lg:px-16">
-              <div className="mx-auto max-w-4xl">
-                <h2 className="text-center font-display text-xs font-semibold tracking-[0.2em] text-white/90 uppercase">
-                  Why the thread holds
-                </h2>
+          <FadeIn className="max-w-3xl">
+            <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-orange-ink)] uppercase sm:text-sm">
+              Recognition
+            </span>
+            <h2 className="font-display mt-6 text-3xl font-medium tracking-tight text-balance text-[var(--color-brand-sapphire)] sm:text-4xl lg:text-5xl">
+              The work has been checked by people who had to be sure.
+            </h2>
+          </FadeIn>
 
-                <dl className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-10">
-                  {PROOF_POINTS.map((point) => (
-                    <div
-                      key={point.label}
-                      className="border-t border-white/15 pt-5 sm:flex sm:items-baseline sm:gap-6 lg:block"
-                    >
-                      <dt className="font-display text-xl font-semibold tracking-tight text-white sm:w-32 sm:shrink-0 lg:w-auto lg:text-2xl">
-                        {point.label}
-                      </dt>
-                      <dd className="mt-3 text-sm leading-6 text-white/80 sm:mt-0 lg:mt-3 lg:text-base lg:leading-7">
-                        {point.body}
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-
-                <ul
-                  role="list"
-                  className="mt-14 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:gap-10"
+          <FadeInStagger faster className="mt-10 sm:mt-12">
+            <dl className="grid grid-cols-1 gap-5 lg:grid-cols-3 lg:gap-8">
+              {PROOF_POINTS.map((point) => (
+                <FadeIn
+                  as="div"
+                  key={point.label}
+                  className="h-full rounded-2xl bg-[var(--color-sapphire-05)] p-6 ring-1 ring-[var(--color-sapphire-10)] sm:flex sm:items-baseline sm:gap-6 lg:block lg:p-8"
                 >
-                  {ENDORSEMENTS.slice(0, 2).map((item) => (
-                    <li key={item.name}>
-                      <figure className="flex h-full flex-col">
-                        <blockquote className="flex-auto text-base leading-7 text-white/90 italic lg:text-lg lg:leading-8">
-                          &ldquo;{item.quote}&rdquo;
-                        </blockquote>
-                        <figcaption className="mt-5 text-sm not-italic">
-                          <span className="block font-semibold text-white">
-                            {item.name}
-                          </span>
-                          <span className="mt-0.5 block text-white/70">
-                            {item.title}
-                          </span>
-                          <span className="block text-white/70">{item.org}</span>
-                        </figcaption>
-                      </figure>
-                    </li>
-                  ))}
-                </ul>
+                  <dt className="font-display text-2xl font-semibold tracking-tight text-[var(--color-brand-sapphire)] sm:w-36 sm:shrink-0 lg:w-auto lg:text-3xl">
+                    {point.label}
+                  </dt>
+                  <dd className="mt-3 text-sm leading-6 text-neutral-700 sm:mt-0 lg:mt-3 lg:text-base lg:leading-7">
+                    {point.body}
+                  </dd>
+                </FadeIn>
+              ))}
+            </dl>
+          </FadeInStagger>
 
-                <p className="mt-12 border-t border-white/15 pt-8 text-center text-sm leading-6 text-white/70">
-                  With endorsements from{' '}
-                  <span className="font-medium text-white">
-                    {ENDORSING_ORGS.join(', ')}
-                  </span>
-                  , and more.
-                </p>
-              </div>
-            </div>
+          {/* Endorsements. Wording is verbatim; attribution sits on its own
+              lines so no quote needs a dash to introduce the speaker. */}
+          <FadeInStagger faster className="mt-12 sm:mt-16">
+            <ul
+              role="list"
+              className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10"
+            >
+              {ENDORSEMENTS.map((item) => (
+                <FadeIn
+                  as="li"
+                  key={item.name}
+                  className="last:sm:col-span-2 last:lg:col-span-1"
+                >
+                  <figure className="flex h-full flex-col border-t border-[var(--color-sapphire-30)] pt-6 last:sm:max-w-md last:lg:max-w-none">
+                    <blockquote className="flex-auto text-base leading-7 text-neutral-700 italic">
+                      &ldquo;{item.quote}&rdquo;
+                    </blockquote>
+                    <figcaption className="mt-5 text-sm not-italic">
+                      <span className="block font-semibold text-neutral-900">
+                        {item.name}
+                      </span>
+                      <span className="mt-0.5 block text-neutral-500">
+                        {item.title}
+                      </span>
+                      <span className="block text-neutral-500">{item.org}</span>
+                    </figcaption>
+                  </figure>
+                </FadeIn>
+              ))}
+            </ul>
+          </FadeInStagger>
+
+          <FadeIn className="mt-10">
+            <p className="text-sm leading-6 text-neutral-500">
+              With endorsements from{' '}
+              <span className="font-medium text-neutral-700">
+                {ENDORSING_ORGS.join(', ')}
+              </span>
+              , and more.
+            </p>
           </FadeIn>
         </Container>
       </section>
 
-      {/* ---------------------------------------------------------- closing */}
-      <section aria-label="See the work">
+      {/* ---------------------------------------------------- featured work */}
+      <section aria-label="Featured work">
+        <Container className="mt-20 sm:mt-28 lg:mt-32">
+          <FadeIn className="max-w-3xl">
+            <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-orange-ink)] uppercase sm:text-sm">
+              A body of work
+            </span>
+            <h2 className="font-display mt-6 text-3xl font-medium tracking-tight text-balance text-[var(--color-brand-sapphire)] sm:text-4xl lg:text-5xl">
+              Fourteen works, and eight of them have a case study.
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-neutral-700 sm:text-xl">
+              Michele coaches this work because she has done it herself, start
+              to finish, across books, curricula, and journals.
+            </p>
+          </FadeIn>
+
+          <FadeInStagger faster className="mt-12">
+            <ul
+              role="list"
+              className="grid grid-cols-2 gap-x-5 gap-y-9 sm:grid-cols-3 xl:grid-cols-6 xl:gap-x-6"
+            >
+              {FEATURED_WORKS.map((work) => (
+                <FadeIn as="li" key={work.href}>
+                  <Link href={work.href} className="group block">
+                    <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-[var(--color-ivory)] ring-1 ring-[var(--color-sapphire-10)] transition duration-300 group-hover:ring-[var(--color-sapphire-30)]">
+                      {work.cover ? (
+                        <Image
+                          src={work.cover}
+                          alt=""
+                          fill
+                          sizes="(min-width: 1024px) 15vw, (min-width: 640px) 30vw, 45vw"
+                          className="object-contain p-3 transition duration-500 group-hover:scale-[1.04]"
+                        />
+                      ) : (
+                        <div className="flex h-full w-full flex-col items-center justify-center bg-[var(--color-sapphire-05)] p-4 text-center">
+                          <span className="font-display text-base font-medium text-balance text-[var(--color-brand-sapphire)] italic">
+                            {work.title}
+                          </span>
+                          <span className="font-display mt-3 text-xs font-semibold tracking-widest text-neutral-500 uppercase">
+                            Cover to come
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                    <p className="font-display mt-3 text-xs font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
+                      {work.kicker}
+                    </p>
+                    <h3 className="font-display mt-1 text-sm font-semibold tracking-tight text-balance text-neutral-900">
+                      {work.title}
+                    </h3>
+                  </Link>
+                </FadeIn>
+              ))}
+            </ul>
+          </FadeInStagger>
+
+          <FadeIn className="mt-10">
+            <Button href="/author" variant="secondary">
+              See every title
+            </Button>
+          </FadeIn>
+        </Container>
+      </section>
+
+      {/* ------------------------------------------------ coaching close */}
+      <section aria-label="The Brave Purpose Author Method">
         <Container className="mt-20 sm:mt-28 lg:mt-32">
           <FadeIn className="mx-auto max-w-3xl text-center">
-            <h2 className="font-display text-3xl font-medium tracking-tight text-balance text-neutral-950 sm:text-4xl lg:text-5xl">
-              Follow the thread through everything she has built.
+            <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-orange-ink)] uppercase sm:text-sm">
+              The Brave Purpose Author Method
+            </span>
+            <h2 className="font-display mt-6 text-3xl font-medium tracking-tight text-balance text-[var(--color-brand-sapphire)] sm:text-4xl lg:text-5xl">
+              A book in you. A method that gets it on the page.
             </h2>
-            <p className="mt-6 text-lg leading-8 text-neutral-600 sm:text-xl">
-              Eight case studies. Each one starts with where the idea came from
-              and ends with who it reached.
+            <p className="mt-6 text-lg leading-8 text-neutral-700 sm:text-xl">
+              Twenty-six weeks, one writer, one method. The starting posture
+              does not matter: a blank page, half a draft in three folders, or a
+              finished manuscript that will not sit still. What comes out the
+              other side is a publication-ready book that still sounds like you.
             </p>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-5">
-              <Button href="/projects">See the case studies</Button>
-              <Button href="/coaching" variant="secondary">
-                Work with Michele
+              <Button href="/coaching">Work with Michele</Button>
+              <Button href="/how-it-works" variant="secondary">
+                See how it works
               </Button>
             </div>
           </FadeIn>
         </Container>
       </section>
 
-      <ContactBlock heading="Start where you are." source="home">
+      <ContactBlock heading="Ready when you are." source="home">
         <p>
-          Michele takes on a small number of coaching clients and speaking dates
-          each year. Leave your name and she will reach out personally.
+          Whether you are booking a stage, starting a manuscript, or still
+          deciding, leave your name and Michele will reach out personally.
         </p>
       </ContactBlock>
     </>

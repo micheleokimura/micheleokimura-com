@@ -7,7 +7,6 @@ import { cn } from '@/lib/cn'
 import { Container } from '@/components/Container'
 import { Logo } from '@/components/Logo'
 import { MarkerSwipe } from '@/components/MarkerSwipe'
-import { JoinWaitListButton } from '@/components/wait-list/JoinWaitListButton'
 import { ContactPopup } from '@/components/ContactPopup'
 import { navItems, siteConfig } from '@/lib/site-config'
 
@@ -99,33 +98,36 @@ export function SiteHeader() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <JoinWaitListButton
-              source="header"
-              withArrow={false}
-              className="hidden sm:inline-flex"
-            />
-            {/* Sitewide contact CTA. Near-black rather than teal so it reads as
-                a separate action from the teal wait-list button next to it. */}
+            {/* The ONE contact CTA in the header. There used to be a second
+                button beside it (the wait-list button, whose label had already
+                been unified to "Contact"), so the header shipped two identical
+                CTAs. The wait-list flow now lives inside the contact popup, so
+                this is the only entry point and it carries the brand orange. */}
             <button
               type="button"
               onClick={() => setContactOpen(true)}
-              className="inline-flex items-center justify-center rounded-md bg-neutral-950 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--color-brand-sapphire-deep)] focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 focus-visible:outline-none sm:px-5 sm:py-2.5"
+              className="hidden items-center justify-center rounded-md bg-[var(--color-cta)] px-4 py-2 text-sm font-semibold text-[var(--color-cta-ink)] shadow-sm transition hover:bg-[var(--color-cta-hover)] focus-visible:ring-2 focus-visible:ring-[var(--color-cta-ink)] focus-visible:ring-offset-2 focus-visible:outline-none sm:inline-flex sm:px-5 sm:py-2.5"
             >
               Contact
             </button>
+            {/* Below lg this is the only way to reach the nav, so it is a
+                labelled button rather than a bare glyph. Michele and Brett
+                reported "no header menu items" at a half-screen width: the
+                nav was correctly collapsed, but a 20px hairline icon did not
+                read as a menu. The word carries it. */}
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
               aria-expanded={open}
               aria-controls="mobile-nav-panel"
-              aria-label={open ? 'Close menu' : 'Open menu'}
-              className="lg:hidden -m-2.5 rounded-md p-2.5 text-neutral-950 transition hover:bg-neutral-950/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-950"
+              className="inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-neutral-900 ring-1 ring-[var(--color-sapphire-20)] transition hover:bg-[var(--color-sapphire-05)] hover:ring-[var(--color-sapphire-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-sapphire)] lg:hidden"
             >
               {open ? (
-                <XIcon className="h-5 w-5" />
+                <XIcon className="h-4 w-4" />
               ) : (
-                <MenuIcon className="h-5 w-5" />
+                <MenuIcon className="h-4 w-4" />
               )}
+              <span>{open ? 'Close' : 'Menu'}</span>
             </button>
           </div>
         </div>
@@ -167,12 +169,21 @@ export function SiteHeader() {
                 </li>
               )
             })}
-            <li className="mt-3">
-              <JoinWaitListButton
-                source="header"
-                withArrow={false}
-                className="w-full"
-              />
+            {/* Below sm the bar has no room for the CTA beside the logo and the
+                Menu button, so Contact lives here instead. From sm up the bar
+                carries it and this is hidden: exactly one Contact button is
+                ever on screen. */}
+            <li className="mt-3 sm:hidden">
+              <button
+                type="button"
+                onClick={() => {
+                  setOpen(false)
+                  setContactOpen(true)
+                }}
+                className="inline-flex w-full items-center justify-center rounded-md bg-[var(--color-cta)] px-6 py-3 text-sm font-semibold text-[var(--color-cta-ink)] shadow-sm transition hover:bg-[var(--color-cta-hover)] focus-visible:ring-2 focus-visible:ring-[var(--color-cta-ink)] focus-visible:ring-offset-2 focus-visible:outline-none"
+              >
+                Contact
+              </button>
             </li>
           </ul>
         </Container>

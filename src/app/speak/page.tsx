@@ -174,7 +174,7 @@ const ENGAGEMENTS: Engagement[] = [
 
 function NonFaithNote() {
   return (
-    <p className="mt-5 inline-flex rounded-full bg-neutral-100 px-4 py-1.5 text-sm text-neutral-600">
+    <p className="mt-5 border-l-2 border-[var(--color-sapphire-30)] pl-4 text-sm text-neutral-600">
       Also available in a non-faith framing for schools, workplaces, and public
       events.
     </p>

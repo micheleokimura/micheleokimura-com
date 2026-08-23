@@ -575,7 +575,7 @@ export default function AuthorPage() {
                     <li key={story} className="flex gap-3">
                       <span
                         aria-hidden="true"
-                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-orange)]"
+                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-sapphire)]"
                       />
                       <span className="text-base leading-7 text-neutral-700">
                         {story}
@@ -834,7 +834,7 @@ export default function AuthorPage() {
               {/* Recognition callout. The hex mirrors --color-brand-orange; an opacity
                   modifier on a var() color is not reliable across Tailwind
                   versions, so the literal is used here. */}
-              <div className="mt-8 rounded-3xl bg-[#ff4500]/[0.06] p-6 ring-1 ring-[#ff4500]/[0.2] sm:p-8">
+              <div className="mt-8 rounded-3xl bg-[var(--color-sapphire-05)] p-6 ring-1 ring-[var(--color-sapphire-20)] sm:p-8">
                 <h4 className="font-display text-xs font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase">
                   Recognition
                 </h4>
@@ -843,7 +843,7 @@ export default function AuthorPage() {
                     <li key={item} className="flex gap-3">
                       <span
                         aria-hidden="true"
-                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-orange)]"
+                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-sapphire)]"
                       />
                       <span className="text-base leading-7 text-neutral-800">
                         {item}
@@ -937,7 +937,7 @@ export default function AuthorPage() {
                   />
                 }
               >
-                <span className="inline-flex items-center rounded-full bg-[var(--color-brand-orange)] px-3 py-1 text-xs font-semibold tracking-widest text-[var(--color-cta-ink)] uppercase">
+                <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-orange-ink)] uppercase sm:text-sm">
                   Targeted Spring 2027
                 </span>
                 <div className="mt-4">
@@ -983,7 +983,7 @@ export default function AuthorPage() {
               <Work
                 cover={<Cover alt="Brave Purpose" sizes={COVER_SIZES_MAIN} />}
               >
-                <span className="inline-flex items-center rounded-full bg-[var(--color-brand-orange)] px-3 py-1 text-xs font-semibold tracking-widest text-[var(--color-cta-ink)] uppercase">
+                <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-orange-ink)] uppercase sm:text-sm">
                   Releasing 2027
                 </span>
                 <div className="mt-4">
@@ -1065,7 +1065,7 @@ export default function AuthorPage() {
               <FadeIn as="li" scaleIn>
                 <Link
                   href="/projects"
-                  className="group flex h-full flex-col justify-between rounded-3xl bg-neutral-950 p-8 transition hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-orange)]"
+                  className="group flex h-full flex-col justify-between rounded-3xl bg-[var(--color-brand-sapphire)] p-8 transition hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-ivory)]"
                 >
                   <div>
                     <span className="text-xs font-semibold tracking-widest text-white/70 uppercase">
