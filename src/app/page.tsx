@@ -6,6 +6,7 @@ import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { Button } from '@/components/Button'
 import { ContactBlock } from '@/components/ContactBlock'
+import { LogoMarquee } from '@/components/LogoMarquee'
 import {
   DOORS,
   ENDORSEMENTS,
@@ -102,6 +103,8 @@ export default function HomePage() {
           </FadeIn>
         </Container>
       </section>
+
+      <LogoMarquee />
 
       {/* ------------------------------------------------------ three doors */}
       {/* Directly under the video, still above the fold on a laptop. */}
