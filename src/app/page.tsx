@@ -1,7 +1,3 @@
-// TODO: Hero video wiring — swap the hero image/text-only hero for the Michele
-// hero video (michele-hero.mp4 + .webm) as a background loop with the
-// golden-thread H1 overlaid. Waiting on video render.
-
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -42,14 +38,41 @@ export default function HomePage() {
   return (
     <>
       {/* ------------------------------------------------------------- hero */}
-      <section aria-label="The golden thread" className="pt-4 sm:pt-10 lg:pt-14">
-        <Container>
-          <FadeIn className="mx-auto max-w-4xl text-center">
-            <span className="block font-display text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-orange-ink)] uppercase sm:text-sm">
+      {/* Full-height video hero per DESIGN-RULES.md. Michele is framed on the
+          RIGHT side of michele-hero.mp4 (mirrored for exactly this reason), so
+          the sapphire overlay is strongest on the left, where the golden-thread
+          text sits, and eases to transparent on the right so her face reads
+          through clearly. Below sm there is no room for a left column next to
+          her face, so the overlay flattens to a uniform sapphire wash and the
+          text goes full-width/centered instead, with the video still playing
+          behind it as ambient motion. */}
+      <section
+        aria-label="The golden thread"
+        className="relative isolate flex min-h-[70vh] w-full items-center overflow-hidden bg-[var(--color-brand-sapphire-deep)] sm:min-h-[80vh] lg:min-h-[90vh]"
+      >
+        <video
+          src="/videos/michele-hero.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/team/michele-hero-canva.jpg"
+          className="absolute inset-0 h-full w-full object-cover"
+          aria-hidden="true"
+        />
+
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-[var(--color-brand-sapphire-deep)]/75 sm:bg-gradient-to-r sm:from-[var(--color-brand-sapphire-deep)]/90 sm:via-[var(--color-brand-sapphire)]/55 sm:to-transparent"
+        />
+
+        <Container className="relative py-20 sm:py-28 lg:py-32">
+          <FadeIn className="mx-auto max-w-xl text-center sm:mx-0 sm:max-w-lg sm:text-left lg:max-w-2xl">
+            <span className="block font-display text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-orange-on-dark)] uppercase sm:text-sm">
               The golden thread
             </span>
 
-            <h1 className="mt-8 font-display text-[1.75rem] leading-[1.35] font-medium text-balance text-neutral-950 italic sm:text-[2.25rem] sm:leading-[1.35] lg:text-[3rem] lg:leading-[1.3]">
+            <h1 className="mt-8 font-display text-[1.75rem] leading-[1.35] font-medium text-balance text-white italic sm:text-[2.25rem] sm:leading-[1.35] lg:text-[3rem] lg:leading-[1.3]">
               Restoration. Healing. Encouragement. One thread runs through every
               book, every journal, and every classroom. It arrives in one place:
               your brave purpose, lived out.
@@ -61,17 +84,17 @@ export default function HomePage() {
                 leading connector would dangle in the whitespace. */}
             <ul
               role="list"
-              className="mt-10 flex flex-wrap items-center justify-center gap-x-3 gap-y-3 sm:mt-12 sm:gap-x-4"
+              className="mt-10 flex flex-wrap items-center justify-center gap-x-3 gap-y-3 sm:mt-12 sm:justify-start sm:gap-x-4"
             >
               {MOVEMENTS.map((movement, i) => (
                 <li key={movement} className="flex items-center gap-3 sm:gap-4">
                   {i > 0 && (
                     <span
                       aria-hidden="true"
-                      className="hidden h-px w-6 bg-[var(--color-brand-orange)]/40 lg:block lg:w-10"
+                      className="hidden h-px w-6 bg-white/30 lg:block lg:w-10"
                     />
                   )}
-                  <span className="rounded-full bg-[#ff4500]/[0.08] px-4 py-1.5 font-display text-xs font-semibold tracking-widest text-[var(--color-brand-orange-ink)] uppercase sm:text-sm">
+                  <span className="rounded-full bg-white/10 px-4 py-1.5 font-display text-xs font-semibold tracking-widest text-[var(--color-brand-orange-on-dark)] uppercase sm:text-sm">
                     {movement}
                   </span>
                 </li>
@@ -79,7 +102,7 @@ export default function HomePage() {
             </ul>
 
             <div className="mt-12">
-              <Button href="/projects" variant="secondary">
+              <Button href="/projects" variant="secondary" tone="dark">
                 Follow the thread through the work
               </Button>
             </div>
