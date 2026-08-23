@@ -193,7 +193,7 @@ export function SiteFooter() {
                 <li>
                   {/* There is no press-kit page. The press kit is a section on
                       the speaker page, so this anchors to its heading id. */}
-                  <Link href="/speak#press-kit-heading" className={linkClass}>
+                  <Link href="/speaker#press-kit-heading" className={linkClass}>
                     Press kit
                   </Link>
                 </li>

@@ -5,7 +5,7 @@ import '@/styles/tailwind.css'
 
 import { SiteHeader } from '@/components/SiteHeader'
 import { SiteFooter } from '@/components/SiteFooter'
-import { OrganizationJsonLd, AllBooksJsonLd } from '@/components/JsonLd'
+import { SiteGraphJsonLd } from '@/components/JsonLd'
 import { SmoothScroll } from '@/components/SmoothScroll'
 import { WaitListProvider } from '@/components/wait-list/WaitListProvider'
 import { siteConfig } from '@/lib/site-config'
@@ -60,8 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
-        <OrganizationJsonLd />
-        <AllBooksJsonLd />
+        <SiteGraphJsonLd />
         <WaitListProvider>
           <SmoothScroll>
             <SiteHeader />

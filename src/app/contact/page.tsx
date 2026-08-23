@@ -8,13 +8,14 @@ import { PageIntro } from '@/components/PageIntro'
 import { JoinWaitListButton } from '@/components/wait-list/JoinWaitListButton'
 import { EmilyPortrait as MichelePortrait } from '@/components/EmilyAvatar'
 import { siteConfig } from '@/lib/site-config'
+import { pageMetadata } from '@/lib/schema'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Join the waitlist',
   description:
     'Michele takes on a small number of coaching clients and speaking dates. Join the waitlist and she will reach out personally when a spot opens.',
-  alternates: { canonical: '/contact' },
-}
+  path: '/contact',
+})
 
 export default function ContactPage() {
   return (

@@ -6,20 +6,16 @@ import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { PageIntro } from '@/components/PageIntro'
 import { ContactBlock } from '@/components/ContactBlock'
 import { getPublishableCaseStudies } from '@/lib/case-studies'
-import { siteConfig } from '@/lib/site-config'
+import { pageMetadata } from '@/lib/schema'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Case Studies',
   description:
     'Schools, churches, and organizations Michele Okimura has worked with, told by the work and the outcome.',
-  alternates: { canonical: '/case-studies' },
-  openGraph: {
-    type: 'website',
-    title: `Case Studies | ${siteConfig.brand}`,
-    description: 'Schools, churches, and organizations Michele Okimura has worked with.',
-    url: `${siteConfig.url}/case-studies`,
-  },
-}
+  path: '/case-studies',
+  ogDescription:
+    'Schools, churches, and organizations Michele Okimura has worked with.',
+})
 
 function engagementLabel(type: string) {
   return type

@@ -7,8 +7,9 @@ import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
 import { PageIntro } from '@/components/PageIntro'
 import { ContactBlock } from '@/components/ContactBlock'
-import { BookJsonLd } from '@/components/JsonLd'
-import { siteConfig, authoredWorks, type AuthoredWork } from '@/lib/site-config'
+import { WorkJsonLd } from '@/components/JsonLd'
+import { pageMetadata } from '@/lib/schema'
+import { authoredWorks, type AuthoredWork } from '@/lib/site-config'
 import { worksSlugToProject } from '@/lib/projects'
 
 export function generateStaticParams() {
@@ -23,17 +24,13 @@ export async function generateMetadata({
   const { slug } = await params
   const work = authoredWorks.find((w) => w.slug === slug)
   if (!work) return {}
-  return {
+  return pageMetadata({
     title: work.title,
     description: work.subtitle ?? `${work.title} by Michele Okimura.`,
-    alternates: { canonical: `/works/${work.slug}` },
-    openGraph: {
-      type: 'article',
-      title: `${work.title} | ${siteConfig.brand}`,
-      description: work.subtitle ?? `${work.title} by Michele Okimura.`,
-      url: `${siteConfig.url}/works/${work.slug}`,
-    },
-  }
+    path: `/works/${work.slug}`,
+    type: 'article',
+    image: work.coverImage,
+  })
 }
 
 function categoryLabel(cat: AuthoredWork['category']): string {
@@ -67,21 +64,11 @@ export default async function WorkPage({
   const work = authoredWorks.find((w) => w.slug === slug)
   if (!work) notFound()
 
-  const isBook = work.category === 'trade-book'
   const projectHref = worksSlugToProject[work.slug]
 
   return (
     <>
-      {isBook && (
-        <BookJsonLd
-          title={work.title}
-          subtitle={work.subtitle}
-          publisher={work.publisher}
-          coAuthors={work.coAuthors}
-          inLanguage={work.inLanguage}
-          isbn={work.isbn}
-        />
-      )}
+      <WorkJsonLd work={work} />
 
       <PageIntro
         eyebrow={categoryLabel(work.category)}

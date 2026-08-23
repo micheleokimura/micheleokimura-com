@@ -21,6 +21,17 @@ export const siteConfig = {
   domain: 'micheleokimura.com',
   url: 'https://micheleokimura.com',
   email: 'michele@micheleokimura.com',
+  /**
+   * Sitewide Open Graph / Twitter card image AND the `image` on Michele's
+   * Person schema, so it is the picture an answer engine attaches to her.
+   *
+   * TODO: this is the warmest photo currently in the repo (the 2023 Outstanding
+   * Advocate award). It is NOT a purpose-built card. Two things should replace
+   * it when they exist: a proper 1200x630 OG card, and a real press headshot at
+   * /images/press-kit/headshot-michele-okimura-hero.jpg. Drop either in and
+   * change this one line; every page and every schema block follows.
+   */
+  ogImage: '/images/about-timeline/about-2023-hawaii-outstanding-advocate-19.jpg',
   city: 'Honolulu',
   state: 'HI',
   designer: 'Michele Okimura',
@@ -213,15 +224,20 @@ export const authoredWorks: AuthoredWork[] = [
  * the width budget in DESIGN-RULES.md. Do not add a sixth, and do not
  * lengthen a label, without re-measuring.
  *
- * "Speaker" is the display label; the route stays /speak.
+ * Label and route now match on every item: /coach and /speaker replaced the old
+ * /coaching and /speak routes on 2026-08-23, with permanent redirects from both
+ * old paths in next.config.ts.
+ *
+ * Order is Coach, Author, Speaker: the coaching offer is the commercial ask, so
+ * it leads.
  *
  * Everything else lives in the footer. See `footerColumns` below.
  */
 export const navItems = [
   { href: '/', label: 'Home' },
-  { href: '/speak', label: 'Speaker' },
+  { href: '/coach', label: 'Coach' },
   { href: '/author', label: 'Author' },
-  { href: '/coaching', label: 'Coach' },
+  { href: '/speaker', label: 'Speaker' },
   { href: '/about', label: 'About' },
 ] as const
 
@@ -238,9 +254,9 @@ export const footerColumns = [
     heading: 'Explore',
     links: [
       { href: '/', label: 'Home' },
-      { href: '/speak', label: 'Speaker' },
+      { href: '/coach', label: 'Coach' },
       { href: '/author', label: 'Author' },
-      { href: '/coaching', label: 'Coach' },
+      { href: '/speaker', label: 'Speaker' },
       { href: '/about', label: 'About' },
       { href: '/how-it-works', label: 'How it works' },
     ],

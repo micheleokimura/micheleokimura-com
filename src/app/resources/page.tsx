@@ -6,13 +6,14 @@ import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { PageIntro } from '@/components/PageIntro'
 import { ContactBlock } from '@/components/ContactBlock'
 import { getAllPosts } from '@/lib/blog'
+import { pageMetadata } from '@/lib/schema'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Resources',
   description:
     'Writing and resources from Michele Okimura on identity, courage, healing, and brave purpose.',
-  alternates: { canonical: '/resources' },
-}
+  path: '/resources',
+})
 
 function formatDate(date: string) {
   if (!date) return ''

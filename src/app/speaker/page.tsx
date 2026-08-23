@@ -7,21 +7,18 @@ import { Border } from '@/components/Border'
 import { BannerHero } from '@/components/BannerHero'
 import { SectionIntro } from '@/components/SectionIntro'
 import { JoinWaitListButton } from '@/components/wait-list/JoinWaitListButton'
+import { WebPageJsonLd } from '@/components/JsonLd'
 import { siteConfig } from '@/lib/site-config'
+import { pageMetadata } from '@/lib/schema'
 
-export const metadata: Metadata = {
-  title: 'Speaking',
+export const metadata: Metadata = pageMetadata({
+  title: 'Speaker',
   description:
     'Michele Okimura speaks at churches, conferences, and schools, and to small groups, leadership teams, and community organizations, on brave purpose, dreaming big, creativity, identity, and healing.',
-  alternates: { canonical: '/speak' },
-  openGraph: {
-    type: 'website',
-    title: `Speaking | ${siteConfig.brand}`,
-    description:
-      'Some messages do more than inspire. They give people permission to be brave.',
-    url: `${siteConfig.url}/speak`,
-  },
-}
+  path: '/speaker',
+  ogDescription:
+    'Some messages do more than inspire. They give people permission to be brave.',
+})
 
 // Copy of record: site/content/speaker/speaker-page-copy.md (locked with Michele
 // 2026-08-22). Endorser wording is verbatim and must not be edited, including
@@ -213,9 +210,15 @@ function Endorsements({
   )
 }
 
-export default function SpeakPage() {
+export default function SpeakerPage() {
   return (
     <>
+      <WebPageJsonLd
+        path="/speaker"
+        name="Michele Okimura, speaker"
+        description="Keynotes and workshops on brave purpose, dreaming big, creativity, identity, and healing, for churches, conferences, and schools."
+      />
+
       <BannerHero
         eyebrow="Speaking"
         title="Some messages do more than inspire."

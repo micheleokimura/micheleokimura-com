@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 
+import { pageMetadata } from '@/lib/schema'
+
 import {
   BuyLinks,
   CaseStudyLayout,
@@ -15,24 +17,19 @@ import {
   type Endorsement,
 } from '@/components/CaseStudyLayout'
 import { Container } from '@/components/Container'
-import { siteConfig } from '@/lib/site-config'
 
 // Vision statement is Michele's own words. The four classroom quotes are
 // verbatim and are the same set carried on /author; edit both together.
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'The Dream Big Journals',
   description:
     'A multi-age journal curriculum in four editions, faith and non-faith, with companion teacher guides. Piloted with fourth-grade students at Kamehameha Schools, Hawaiʻi.',
-  alternates: { canonical: '/projects/dream-big-journals' },
-  openGraph: {
-    type: 'article',
-    title: `The Dream Big Journals | ${siteConfig.brand}`,
-    description:
-      'A journal curriculum for dreamers from preschool to grandparent.',
-    url: `${siteConfig.url}/projects/dream-big-journals`,
-  },
-}
+  path: '/projects/dream-big-journals',
+  type: 'article',
+  ogDescription:
+    'A journal curriculum for dreamers from preschool to grandparent.',
+})
 
 const EDITIONS = [
   {
@@ -102,6 +99,7 @@ const ENDORSEMENTS: Endorsement[] = [
 export default function DreamBigJournalsPage() {
   return (
     <CaseStudyLayout
+      workSlug="dream-big-journal-curriculum"
       eyebrow="Curriculum · Ages 4 to adult"
       title="The Dream Big Journals"
       lede={

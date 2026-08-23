@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+
+import { pageMetadata } from '@/lib/schema'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -31,11 +33,14 @@ import {
  * thirds of them behind a carousel arrow would bury the authority stack this
  * page exists to show.
  */
-export const metadata: Metadata = {
-  title: 'Speaker, author, and coach',
+export const metadata: Metadata = pageMetadata({
+  title: 'Coach, author, and speaker',
   description:
     'Michele Okimura is an author, speaker, and coach on Oʻahu, Hawaiʻi. Two published trade books, two more in 2027, keynotes and workshops, and the Brave Purpose Author Method.',
-}
+  path: '/',
+  ogDescription:
+    'Author, speaker, and coach on Oʻahu. Founder and Executive Director of Releasing Generations.',
+})
 
 /**
  * The doors section escapes Container's inner max-w-2xl cap on purpose.
@@ -328,7 +333,7 @@ export default function HomePage() {
               other side is a publication-ready book that still sounds like you.
             </p>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-5">
-              <Button href="/coaching">Work with Michele</Button>
+              <Button href="/coach">Work with Michele</Button>
               <Button href="/how-it-works" variant="secondary">
                 See how it works
               </Button>

@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 
+import { pageMetadata } from '@/lib/schema'
+
 import { BookFacts } from '@/components/BookFacts'
 import {
   BuyLinks,
@@ -14,7 +16,6 @@ import {
   VoiceNote,
   type Endorsement,
 } from '@/components/CaseStudyLayout'
-import { siteConfig } from '@/lib/site-config'
 
 // Story-behind-the-story case study for Dancing with Father (2011).
 //
@@ -27,19 +28,15 @@ import { siteConfig } from '@/lib/site-config'
 // component supplies the surrounding curly quotes, so the strings here carry no
 // outer quotation marks. Do not reword either the quotes or the attributions.
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Dancing with Father',
   description:
     'The story behind Dancing with Father: a senior prom night, a harsh word, and the healing encounter sixteen years later that Michele Okimura wrote into a poem.',
-  alternates: { canonical: '/projects/dancing-with-father' },
-  openGraph: {
-    type: 'article',
-    title: `Dancing with Father | ${siteConfig.brand}`,
-    description:
-      'The story behind Michele Okimura’s 2011 illustrated poem of healing and identity.',
-    url: `${siteConfig.url}/projects/dancing-with-father`,
-  },
-}
+  path: '/projects/dancing-with-father',
+  type: 'article',
+  ogDescription:
+    'The story behind Michele Okimura’s 2011 illustrated poem of healing and identity.',
+})
 
 const DETAILS = [
   { label: 'Published', value: '2011' },
@@ -79,6 +76,7 @@ const ENDORSEMENTS: Endorsement[] = [
 export default function DancingWithFatherProject() {
   return (
     <CaseStudyLayout
+      workSlug="dancing-with-father"
       eyebrow="Book · 2011"
       title="Dancing with Father"
       lede={

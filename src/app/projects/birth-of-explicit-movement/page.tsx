@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 
+import { pageMetadata } from '@/lib/schema'
+
 import { BookFacts } from '@/components/BookFacts'
 import {
   BuyLinks,
@@ -13,7 +15,6 @@ import {
   VoiceNote,
   type Endorsement,
 } from '@/components/CaseStudyLayout'
-import { siteConfig } from '@/lib/site-config'
 
 // Story-behind-the-story case study for The Birth of Explicit Movement (2018).
 //
@@ -26,19 +27,15 @@ import { siteConfig } from '@/lib/site-config'
 // component supplies the surrounding curly quotes, so the strings here carry no
 // outer quotation marks. Do not reword either the quotes or the attributions.
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'The Birth of Explicit Movement',
   description:
     'The story behind The Birth of Explicit Movement: three years of walking a road Michele Okimura could not see the end of, and the ministry that came of it.',
-  alternates: { canonical: '/projects/birth-of-explicit-movement' },
-  openGraph: {
-    type: 'article',
-    title: `The Birth of Explicit Movement | ${siteConfig.brand}`,
-    description:
-      'The founding story of Explicit Movement, told by Michele Okimura in her own words.',
-    url: `${siteConfig.url}/projects/birth-of-explicit-movement`,
-  },
-}
+  path: '/projects/birth-of-explicit-movement',
+  type: 'article',
+  ogDescription:
+    'The founding story of Explicit Movement, told by Michele Okimura in her own words.',
+})
 
 const DETAILS = [
   { label: 'Published', value: '2018' },
@@ -70,6 +67,7 @@ const ENDORSEMENTS: Endorsement[] = [
 export default function BirthOfExplicitMovementProject() {
   return (
     <CaseStudyLayout
+      workSlug="birth-of-explicit-movement"
       eyebrow="Book · 2018"
       title="The Birth of Explicit Movement"
       lede={

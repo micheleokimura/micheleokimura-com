@@ -12,27 +12,23 @@ import {
   VoiceNote,
   type Endorsement,
 } from '@/components/CaseStudyLayout'
-import { siteConfig } from '@/lib/site-config'
 
 // Origin story is Michele's own account, condensed for the web. The three
 // endorsements are verbatim from the Kingdom Kids Workshop endorsements docx and
-// were signed off by Michele on 2026-08-21; they also appear on /speak under
+// were signed off by Michele on 2026-08-21; they also appear on /speaker under
 // "Building a Kingdom Culture at Home and in Ministry", which is this workshop
 // under its current title. Source: content/speaker/full-endorsements.md.
+import { pageMetadata } from '@/lib/schema'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'The Kingdom Kids Workshop',
   description:
     'Ten years of testing what children can actually carry, distilled into the workshop that changed how churches see the youngest people in the room. First taught in 2008.',
-  alternates: { canonical: '/projects/kingdom-kids' },
-  openGraph: {
-    type: 'article',
-    title: `The Kingdom Kids Workshop | ${siteConfig.brand}`,
-    description:
-      'The workshop that changed how churches see the youngest people in the room.',
-    url: `${siteConfig.url}/projects/kingdom-kids`,
-  },
-}
+  path: '/projects/kingdom-kids',
+  type: 'article',
+  ogDescription:
+    'The workshop that changed how churches see the youngest people in the room.',
+})
 
 const ENDORSEMENTS: Endorsement[] = [
   {
@@ -69,6 +65,7 @@ const REACH = [
 export default function KingdomKidsPage() {
   return (
     <CaseStudyLayout
+      workSlug="raising-kingdom-kids"
       eyebrow="Workshop · Since 2008"
       title="The Kingdom Kids Workshop"
       lede={
@@ -164,7 +161,7 @@ export default function KingdomKidsPage() {
           <p>
             The workshop is offered today under the title{' '}
             <Link
-              href="/speak"
+              href="/speaker"
               className="font-medium text-neutral-950 underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition hover:decoration-2"
             >
               Building a Kingdom Culture at Home and in Ministry

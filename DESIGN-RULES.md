@@ -210,16 +210,26 @@ page body rather than stretching the banner.
 
 ## Header
 
-Locked structure, left to right. Six things, and no more:
+Locked structure, left to right. Seven things, and no more:
 
 1. the wordmark, linking to `/`
 2. **Home** → `/`
-3. **Speaker** → `/speak` (the label is "Speaker"; the route stays `/speak`)
+3. **Coach** → `/coach`
 4. **Author** → `/author`
-5. **Coach** → `/coaching`
+5. **Speaker** → `/speaker`
 6. **About** → `/about`
 7. **Contact**, the accent button on the far right. It opens the ContactPopup
    and is NOT a route link.
+
+This order is deliberate and it changed on 2026-08-23. The coaching offer is the
+commercial ask, so it now leads; the previous order ran Speaker, Author, Coach.
+
+Every label matches its route. `/coaching` and `/speak` were renamed to `/coach`
+and `/speaker` on the same date, so no nav item is a label sitting on a
+differently-named path any more. Both old paths, plus the older `/speaking`,
+`/portfolio`, and `/subscription` aliases, permanently redirect in
+`next.config.ts`. Those aliases point at the FINAL destination rather than
+chaining through the retired route, and they should stay that way.
 
 Rules that hold this together:
 
@@ -256,7 +266,7 @@ every page and does not get removed.
 The four columns, in order:
 
 1. wordmark, tagline, location, social links
-2. **Explore**: Home, Speaker, Author, Coach, About, How it works
+2. **Explore**: Home, Coach, Author, Speaker, About, How it works
 3. **Community**: Projects, Case studies, Authored works, Blog and resources,
    Contact
 4. **More from Michele**: the In a Moment podcast (plus Spotify / Apple / RSS),
@@ -266,7 +276,7 @@ Two of those destinations are not what the label implies, and both are
 deliberate. There is no `/blog` route: `src/lib/blog.ts` renders the blog at
 `/resources`, so one link covers both and is labelled "Blog and resources".
 There is no press-kit page either, only a press-kit section on the speaker
-page, so that link is the anchor `/speak#press-kit-heading`. If either ever
+page, so that link is the anchor `/speaker#press-kit-heading`. If either ever
 gets a real route, update the link rather than adding a second one.
 
 ## Contact

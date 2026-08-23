@@ -192,7 +192,7 @@
   --color-cta-ink: var(--color-coral-ink);
 
   /* ---------------------------------------------------------------------
-     COACHING PAGE PALETTE HOOK  (/coaching)
+     COACH PAGE PALETTE HOOK  (/coach)
      ---------------------------------------------------------------------
      These six tokens are the ONLY color inputs the coaching page uses.
      The palette they were waiting on has landed, so they now point at the

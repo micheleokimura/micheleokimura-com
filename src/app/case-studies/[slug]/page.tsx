@@ -6,7 +6,7 @@ import { FadeIn } from '@/components/FadeIn'
 import { PageIntro } from '@/components/PageIntro'
 import { ContactBlock } from '@/components/ContactBlock'
 import { getCaseStudyBySlug, getPublishableSlugs } from '@/lib/case-studies'
-import { siteConfig } from '@/lib/site-config'
+import { pageMetadata } from '@/lib/schema'
 
 export function generateStaticParams() {
   return getPublishableSlugs().map((slug) => ({ slug }))
@@ -20,17 +20,12 @@ export async function generateMetadata({
   const { slug } = await params
   const study = await getCaseStudyBySlug(slug)
   if (!study) return {}
-  return {
-    title: `${study.orgName} | Case Study`,
+  return pageMetadata({
+    title: `${study.orgName} · Case Study`,
     description: study.heroHeadline,
-    alternates: { canonical: `/case-studies/${study.slug}` },
-    openGraph: {
-      type: 'article',
-      title: `${study.orgName} | ${siteConfig.brand}`,
-      description: study.heroHeadline,
-      url: `${siteConfig.url}/case-studies/${study.slug}`,
-    },
-  }
+    path: `/case-studies/${study.slug}`,
+    type: 'article',
+  })
 }
 
 export default async function CaseStudyPage({

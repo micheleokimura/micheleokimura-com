@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 
+import { pageMetadata } from '@/lib/schema'
+
 import {
   CaseStudyLayout,
   CaseStudySection,
@@ -19,25 +21,20 @@ import {
 } from '@/components/CaseStudyLayout'
 import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
-import { siteConfig } from '@/lib/site-config'
 
 // Origin story is Michele's own account, condensed for the web. Endorsements are
 // verbatim and are the same set carried on /author; edit both together.
 // Recognition lines match BRAVE_RECOGNITION in src/app/author/page.tsx.
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'The Brave Series',
   description:
     'A 24-volume youth curriculum on identity, worth, and protection from exploitation. Vetted and approved by the Hawaiʻi State Department of Education for secondary public schools in 2026.',
-  alternates: { canonical: '/projects/brave-series' },
-  openGraph: {
-    type: 'article',
-    title: `The Brave Series | ${siteConfig.brand}`,
-    description:
-      'Twenty-four volumes on identity, worth, and protection from exploitation.',
-    url: `${siteConfig.url}/projects/brave-series`,
-  },
-}
+  path: '/projects/brave-series',
+  type: 'article',
+  ogDescription:
+    'Twenty-four volumes on identity, worth, and protection from exploitation.',
+})
 
 const RECOGNITION = [
   'Brave Together (non-faith version) vetted and approved by the Hawaiʻi State Department of Education for use in secondary public schools, 2026',

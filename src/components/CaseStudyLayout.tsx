@@ -5,7 +5,9 @@ import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { PageIntro } from '@/components/PageIntro'
 import { ContactBlock } from '@/components/ContactBlock'
+import { WorkJsonLd } from '@/components/JsonLd'
 import { GOLDEN_THREAD_CULMINATION, GOLDEN_THREAD_QUOTE } from '@/lib/projects'
+import { authoredWorks } from '@/lib/site-config'
 
 // Shared furniture for the project case studies at /projects/<slug>. Every page
 // in that tree is assembled from these pieces so the pages read as one set: the
@@ -27,6 +29,7 @@ export function CaseStudyLayout({
   contactHeading = 'Bring this to your people.',
   contactBody,
   contactSource,
+  workSlug,
 }: {
   eyebrow: string
   title: string
@@ -35,9 +38,20 @@ export function CaseStudyLayout({
   contactHeading?: string
   contactBody?: React.ReactNode
   contactSource?: string
+  /**
+   * Slug of the matching entry in `authoredWorks`. Emits the Book or
+   * CreativeWorkSeries node for the title this case study is about, under the
+   * same `@id` the Author page uses, so the two pages describe ONE work rather
+   * than two. An unknown slug renders nothing.
+   */
+  workSlug?: string
 }) {
+  const work = workSlug ? authoredWorks.find((w) => w.slug === workSlug) : undefined
+
   return (
     <>
+      {work && <WorkJsonLd work={work} />}
+
       <PageIntro eyebrow={eyebrow} title={title}>
         {lede}
       </PageIntro>
@@ -101,7 +115,7 @@ function BravePurposeClose() {
             If you are ready to walk this out yourself, Michele coaches authors
             through the{' '}
             <Link
-              href="/coaching"
+              href="/coach"
               className="font-medium text-neutral-950 underline decoration-[var(--color-brand-terracotta)] decoration-2 underline-offset-4 transition hover:text-[var(--color-brand-terracotta-ink)]"
             >
               Brave Purpose Author Method

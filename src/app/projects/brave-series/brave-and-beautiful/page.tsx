@@ -14,20 +14,17 @@ import {
   type Endorsement,
 } from '@/components/CaseStudyLayout'
 import { Container } from '@/components/Container'
-import { siteConfig } from '@/lib/site-config'
+import { pageMetadata } from '@/lib/schema'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Brave & Beautiful',
   description:
     'The first title in the Brave Series, published in 2022 for teen girls. Four volumes on identity, worth, healthy relationships, and protection from exploitation.',
-  alternates: { canonical: '/projects/brave-series/brave-and-beautiful' },
-  openGraph: {
-    type: 'article',
-    title: `Brave & Beautiful | ${siteConfig.brand}`,
-    description: 'Four volumes for teen girls on identity, worth, and protection.',
-    url: `${siteConfig.url}/projects/brave-series/brave-and-beautiful`,
-  },
-}
+  path: '/projects/brave-series/brave-and-beautiful',
+  type: 'article',
+  ogDescription:
+    'Four volumes for teen girls on identity, worth, and protection.',
+})
 
 const COVERS = [
   {
@@ -76,6 +73,7 @@ const ENDORSEMENTS: Endorsement[] = [
 export default function BraveAndBeautifulPage() {
   return (
     <CaseStudyLayout
+      workSlug="brave-and-beautiful"
       eyebrow="Brave Series · For teen girls"
       title="Brave & Beautiful"
       lede={

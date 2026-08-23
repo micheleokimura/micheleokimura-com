@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 
+import { pageMetadata } from '@/lib/schema'
+
 import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
 import { PageIntro } from '@/components/PageIntro'
@@ -7,16 +9,17 @@ import Image from 'next/image'
 
 import { AboutTimeline } from '@/components/AboutTimeline'
 import { ContactBlock } from '@/components/ContactBlock'
+import { WebPageJsonLd } from '@/components/JsonLd'
 import { awards, credentials } from '@/lib/credentials'
 import { OWN_BRANDS } from '@/lib/organizations'
 import { GOLDEN_THREAD_QUOTE } from '@/lib/projects'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'About Michele',
   description:
     'Michele Okimura is an author, speaker, executive director, and coach based on O\'ahu, Hawai\'i. Founder of Releasing Generations, Explicit Movement, Kingdom Families, and ReThink Creativity. 2023 Outstanding Advocate for Children and Youth of Hawai\'i.',
-  alternates: { canonical: '/about' },
-}
+  path: '/about',
+})
 
 // Voice ported from Michele's current micheleokimura.com /about page (warm,
 // vulnerable, first person, Brené Brown style); facts confirmed against the
@@ -25,6 +28,15 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
+      {/* /about is the primary page ABOUT Michele, which is what
+          Person.mainEntityOfPage in src/lib/schema.ts points at. This WebPage
+          node is the other half of that pairing. */}
+      <WebPageJsonLd
+        path="/about"
+        name="About Michele Okimura"
+        description="Author, speaker, coach, and Executive Director of Releasing Generations, based on O'ahu, Hawai'i."
+      />
+
       {/* Eyebrow is a label, not a sentence. "Maybe dreams give purpose a
           voice." moved to the subtitle, and the author/speaker/coach line that
           used to be the subtitle now opens the body copy below, where it has

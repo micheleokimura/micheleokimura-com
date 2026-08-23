@@ -15,24 +15,20 @@ import {
   type Endorsement,
 } from '@/components/CaseStudyLayout'
 import { Container } from '@/components/Container'
-import { siteConfig } from '@/lib/site-config'
 
 // The DOE approval is the headline of this page: Brave Together is the edition
 // the State of Hawai‘i vetted and approved for secondary public schools in 2026.
+import { pageMetadata } from '@/lib/schema'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Brave Together',
   description:
     'The co-ed Brave Series title, vetted and approved by the Hawaiʻi State Department of Education for use in secondary public schools in 2026. Teacher lessons by Phyllis Unebasami.',
-  alternates: { canonical: '/projects/brave-series/brave-together' },
-  openGraph: {
-    type: 'article',
-    title: `Brave Together | ${siteConfig.brand}`,
-    description:
-      'The co-ed edition approved by the Hawaiʻi Department of Education in 2026.',
-    url: `${siteConfig.url}/projects/brave-series/brave-together`,
-  },
-}
+  path: '/projects/brave-series/brave-together',
+  type: 'article',
+  ogDescription:
+    'The co-ed edition approved by the Hawaiʻi Department of Education in 2026.',
+})
 
 const RECOGNITION = [
   'Brave Together (non-faith version) vetted and approved by the Hawaiʻi State Department of Education for use in secondary public schools, 2026',
@@ -94,6 +90,7 @@ const ENDORSEMENTS: Endorsement[] = [
 export default function BraveTogetherPage() {
   return (
     <CaseStudyLayout
+      workSlug="brave-together"
       eyebrow="Brave Series · Co-ed"
       title="Brave Together"
       lede={

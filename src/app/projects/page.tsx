@@ -11,26 +11,22 @@ import {
   projectStudies,
   type ProjectStudy,
 } from '@/lib/projects'
-import { siteConfig } from '@/lib/site-config'
 
 // The case-study index. Cards are driven by the registry in src/lib/projects.ts
 // so this page, the Author page links, and the sitemap stay in step.
 //
 // Grouped rather than flat: the curricula and programs are the strongest
 // authority stack and lead, with the books following.
+import { pageMetadata } from '@/lib/schema'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Projects',
   description:
     'The story behind each thing Michele Okimura has built: the Brave Series, the Dream Big Journals, the Kingdom Kids Workshop, ReThink Creativity, and her books.',
-  alternates: { canonical: '/projects' },
-  openGraph: {
-    type: 'website',
-    title: `Projects | ${siteConfig.brand}`,
-    description: 'The story behind each thing Michele Okimura has built.',
-    url: `${siteConfig.url}/projects`,
-  },
-}
+  path: '/projects',
+  ogDescription:
+    'The story behind each thing Michele Okimura has built.',
+})
 
 function ProjectCard({ study }: { study: ProjectStudy }) {
   return (

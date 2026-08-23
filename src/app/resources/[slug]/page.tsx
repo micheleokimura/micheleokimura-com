@@ -6,8 +6,9 @@ import { FadeIn } from '@/components/FadeIn'
 import { PageIntro } from '@/components/PageIntro'
 import { ContactBlock } from '@/components/ContactBlock'
 import { ArticleByline } from '@/components/EmilyAvatar'
+import { ArticleJsonLd } from '@/components/JsonLd'
+import { pageMetadata } from '@/lib/schema'
 import { getAllPostSlugs, getPostBySlug } from '@/lib/blog'
-import { siteConfig } from '@/lib/site-config'
 
 export function generateStaticParams() {
   return getAllPostSlugs().map((slug) => ({ slug }))
@@ -21,17 +22,13 @@ export async function generateMetadata({
   const { slug } = await params
   const post = await getPostBySlug(slug)
   if (!post) return {}
-  return {
+  return pageMetadata({
     title: post.title,
     description: post.excerpt,
-    alternates: { canonical: `/resources/${post.slug}` },
-    openGraph: {
-      type: 'article',
-      title: `${post.title} | ${siteConfig.brand}`,
-      description: post.excerpt,
-      url: `${siteConfig.url}/resources/${post.slug}`,
-    },
-  }
+    path: `/resources/${post.slug}`,
+    type: 'article',
+    publishedTime: post.date || undefined,
+  })
 }
 
 function formatDate(date: string) {
@@ -53,6 +50,14 @@ export default async function PostPage({
 
   return (
     <>
+      <ArticleJsonLd
+        title={post.title}
+        description={post.excerpt}
+        slug={post.slug}
+        date={post.date}
+        tags={post.tags}
+      />
+
       <PageIntro eyebrow="Resources" title={post.title} />
 
       <Container className="mt-10 sm:mt-12">

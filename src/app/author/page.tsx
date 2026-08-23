@@ -6,7 +6,7 @@ import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { BannerHero } from '@/components/BannerHero'
 import { ContactBlock } from '@/components/ContactBlock'
-import { siteConfig } from '@/lib/site-config'
+import { AllWorksJsonLd, WebPageJsonLd } from '@/components/JsonLd'
 import {
   GOLDEN_THREAD_CULMINATION,
   GOLDEN_THREAD_LINE,
@@ -24,20 +24,16 @@ import {
 // Dancing with Father and both Brave Purpose editions still render a
 // placeholder tile until art lands; drop the file in /public/images/books
 // and set `cover`.
+import { pageMetadata } from '@/lib/schema'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Author',
   description:
     'Books, journals, and curricula by Michele Okimura. Two published trade books, a 21-day interactive journal, the multi-age Dream Big journals in faith and non-faith editions, the 24-volume Brave Series, and Brave Purpose coming 2027.',
-  alternates: { canonical: '/author' },
-  openGraph: {
-    type: 'website',
-    title: `Author | ${siteConfig.brand}`,
-    description:
-      'Books, journals, and curricula for dreamers of every age.',
-    url: `${siteConfig.url}/author`,
-  },
-}
+  path: '/author',
+  ogDescription:
+    'Books, journals, and curricula for dreamers of every age.',
+})
 
 type Endorsement = { quote: string; source: string }
 
@@ -418,6 +414,16 @@ const COVER_SIZES_GRID = '(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 15r
 export default function AuthorPage() {
   return (
     <>
+      <WebPageJsonLd
+        path="/author"
+        name="Books, journals, and curricula by Michele Okimura"
+        description="Every book, journal, and curriculum Michele Okimura has authored, from Dancing with Father to Brave Purpose."
+      />
+      {/* Book and CreativeWorkSeries nodes for every authored work. They live
+          here rather than in the layout: this is the page that is actually
+          about the works, and repeating fifteen nodes on every URL is bloat. */}
+      <AllWorksJsonLd />
+
       <BannerHero
         eyebrow="Author"
         title="Books, Journals, and Curricula for Dreamers of Every Age"

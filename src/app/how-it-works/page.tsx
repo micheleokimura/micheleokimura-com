@@ -1,17 +1,19 @@
 import type { Metadata } from 'next'
 
+import { pageMetadata } from '@/lib/schema'
+
 import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { Border } from '@/components/Border'
 import { PageIntro } from '@/components/PageIntro'
 import { ContactBlock } from '@/components/ContactBlock'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'How it works',
   description:
     'How working with Michele Okimura works, from the first conversation through the Brave Purpose Author Method.',
-  alternates: { canonical: '/how-it-works' },
-}
+  path: '/how-it-works',
+})
 
 const STEPS = [
   {

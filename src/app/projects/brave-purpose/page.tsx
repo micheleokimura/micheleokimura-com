@@ -13,7 +13,6 @@ import {
   VoiceNote,
   type Endorsement,
 } from '@/components/CaseStudyLayout'
-import { siteConfig } from '@/lib/site-config'
 
 // Story-behind-the-story case study for Brave Purpose (non-faith, 2027).
 //
@@ -30,20 +29,17 @@ import { siteConfig } from '@/lib/site-config'
 //
 // No cover art exists yet, so BookFacts renders its placeholder; drop the file
 // in /public/images/books and pass `cover` when art lands.
+import { pageMetadata } from '@/lib/schema'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Brave Purpose',
   description:
     'The story behind Brave Purpose, Michele Okimura’s 2027 non-faith guide to finding the dreams planted in you and building a life around them.',
-  alternates: { canonical: '/projects/brave-purpose' },
-  openGraph: {
-    type: 'article',
-    title: `Brave Purpose | ${siteConfig.brand}`,
-    description:
-      'Decades of walking the road of dreaming big, written into a practical guide. Coming Spring 2027.',
-    url: `${siteConfig.url}/projects/brave-purpose`,
-  },
-}
+  path: '/projects/brave-purpose',
+  type: 'article',
+  ogDescription:
+    'Decades of walking the road of dreaming big, written into a practical guide. Coming Spring 2027.',
+})
 
 const DETAILS = [
   { label: 'Release', value: 'Spring 2027' },
@@ -73,6 +69,7 @@ const ENDORSEMENTS: Endorsement[] = [
 export default function BravePurposeProject() {
   return (
     <CaseStudyLayout
+      workSlug="brave-purpose"
       eyebrow="Book · Coming 2027"
       title="Brave Purpose"
       lede={

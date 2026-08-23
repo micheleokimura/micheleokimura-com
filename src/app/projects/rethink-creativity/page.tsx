@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 
+import { pageMetadata } from '@/lib/schema'
+
 import {
   CaseStudyLayout,
   CaseStudySection,
@@ -13,25 +15,20 @@ import {
 } from '@/components/CaseStudyLayout'
 import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
-import { siteConfig } from '@/lib/site-config'
 
 // Origin story is Michele's own account, condensed for the web. Four
 // conferences to date: 2010 and 2011 in person, 2020 and 2021 online. The
 // Zechariah 1:18-21 framing is hers and is quoted directly.
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'ReThink Creativity',
   description:
     'Four conferences taking apart the lie that some people are not creative, with speakers from HGTV, Hollywood, surgery, fashion, and government. Led by Michele Okimura since 2010.',
-  alternates: { canonical: '/projects/rethink-creativity' },
-  openGraph: {
-    type: 'article',
-    title: `ReThink Creativity | ${siteConfig.brand}`,
-    description:
-      'Taking apart the lie that some people are not creative.',
-    url: `${siteConfig.url}/projects/rethink-creativity`,
-  },
-}
+  path: '/projects/rethink-creativity',
+  type: 'article',
+  ogDescription:
+    'Taking apart the lie that some people are not creative.',
+})
 
 const CONFERENCE_STATS = [
   { value: '4', label: 'Conferences led, beginning in 2010' },
@@ -58,6 +55,7 @@ const TIMELINE = [
 export default function ReThinkCreativityPage() {
   return (
     <CaseStudyLayout
+      workSlug="rethink-creativity"
       eyebrow="Conference · 2010 to present"
       title="ReThink Creativity"
       lede={

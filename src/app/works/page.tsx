@@ -7,20 +7,16 @@ import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { PageIntro } from '@/components/PageIntro'
 import { ContactBlock } from '@/components/ContactBlock'
 import { siteConfig, authoredWorks, type AuthoredWork } from '@/lib/site-config'
+import { pageMetadata } from '@/lib/schema'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Works',
   description:
     'Fifteen authored works spanning trade books, curricula, programs, and a blog. Each one is a case study of the same method Michele now teaches.',
-  alternates: { canonical: '/works' },
-  openGraph: {
-    type: 'website',
-    title: `Works | ${siteConfig.brand}`,
-    description:
-      'Books, curricula, programs, and a blog by Michele Okimura.',
-    url: `${siteConfig.url}/works`,
-  },
-}
+  path: '/works',
+  ogDescription:
+    'Books, curricula, programs, and a blog by Michele Okimura.',
+})
 
 function categoryLabel(cat: AuthoredWork['category']): string {
   switch (cat) {

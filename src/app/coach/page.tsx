@@ -8,11 +8,11 @@ import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { Border } from '@/components/Border'
 import { SectionIntro } from '@/components/SectionIntro'
 import { ContactTrigger } from '@/components/ContactTrigger'
-import { FaqJsonLd, ServiceJsonLd } from '@/components/JsonLd'
+import { FaqJsonLd, ServiceJsonLd, WebPageJsonLd } from '@/components/JsonLd'
 import { siteConfig } from '@/lib/site-config'
 
 /*
- * COACHING PAGE  (/coaching)
+ * COACH PAGE  (/coach)
  *
  * Rebuilt from the Brett + Michele voice-memo review. This page is a WAITLIST
  * LANDING PAGE, not a sales funnel: the reader decides in under sixty seconds
@@ -38,20 +38,16 @@ import { siteConfig } from '@/lib/site-config'
 const HERO_PHOTO = '/images/about-timeline/about-2023-hawaii-outstanding-advocate-19.jpg'
 /** "Why Michele" photo: her on the mic at the Releasing Generations 10th. */
 const MICHELE_PHOTO = '/images/about-timeline/about-2023-rg-10th-anniversary-20.jpg'
+import { pageMetadata } from '@/lib/schema'
 
-export const metadata: Metadata = {
-  title: 'Coaching',
+export const metadata: Metadata = pageMetadata({
+  title: 'Coach',
   description:
     'Michele Okimura turns your conversations into a manuscript. Write your book in six months through the Brave Purpose Author Method. Join the waitlist.',
-  alternates: { canonical: '/coaching' },
-  openGraph: {
-    type: 'website',
-    title: `${siteConfig.offerName} | ${siteConfig.brand}`,
-    description:
-      'You speak your book into existence. Michele Okimura turns your conversations into a manuscript in your own voice.',
-    url: `${siteConfig.url}/coaching`,
-  },
-}
+  path: '/coach',
+  ogDescription:
+    'You speak your book into existence. Michele Okimura turns your conversations into a manuscript in your own voice.',
+})
 
 type Pillar = { abbr: string; title: string; body: string }
 
@@ -167,6 +163,11 @@ function CheckMark() {
 export default function CoachingPage() {
   return (
     <>
+      <WebPageJsonLd
+        path="/coach"
+        name="Author coaching with Michele Okimura"
+        description="The Brave Purpose Author Method: a 26-week engagement that turns your conversations into a manuscript in your own voice."
+      />
       <ServiceJsonLd />
       <FaqJsonLd faqs={FAQS} />
 
