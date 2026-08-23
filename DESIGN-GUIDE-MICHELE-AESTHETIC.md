@@ -121,6 +121,33 @@ photography with no rounded corners or drop shadows, and generous white space.
   is Brave & Beautiful Vol 4, which duotones photographs in coral for its heaviest chapter.
   That is a deliberate signal for difficult subject matter, and it should stay rare.
 
+
+### Relationship to DESIGN-RULES.md
+
+`DESIGN-RULES.md` locks a different set of hexes: teal `#0F766E`, terracotta `#D4735A`,
+warm cream `#F5F1E8`. That is not a competing claim, and it should win for anything that
+ships.
+
+The two files are doing different jobs:
+
+- **This file holds the source palette.** It is sampled directly off Michele's printed
+  books and it describes what her work actually looks like. Its job is fidelity.
+- **`DESIGN-RULES.md` holds the implementation palette.** Its job is contrast, and it is
+  right that several of the print values fail on the web. `#00B09F` is lighter than the
+  site teal and does not reach WCAG AA as text on any light ground. The same is true of
+  coral `#F15C3D` and gold `#E9AE3F` as text.
+
+The hue families agree, which is the important part: teal, a warm orange-red, and a gold,
+on a light ground with near-black ink. Use the print values for large fields, photographic
+areas, banner art, and ornament, where contrast ratios do not apply. Use the
+`DESIGN-RULES.md` values for anything a person has to read or click. When the two conflict
+on a text colour, `DESIGN-RULES.md` wins.
+
+One genuine divergence worth a decision from Brett and Michele: her books ground on **true
+black or blush**, and the site currently grounds on **warm cream**. Cream is a third thing
+that appears nowhere in the seven books. That is a legitimate choice for a website, and it
+is worth making deliberately rather than by drift.
+
 ---
 
 ## 3. Typography
