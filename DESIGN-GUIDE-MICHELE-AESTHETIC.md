@@ -1,258 +1,443 @@
 # Michele's Design Aesthetic - North-Star Style Guide
 
-Derived from print-ready PDFs Michele art-directed for the Brave Series, principally
-**Brave Together Hawai'i, Volume 4, Classic** (2026, "Daring Pursuit"), with
-**Brave Together Volume 3, Classic** ("Develop Foundation") as a cross-check that the
-system is consistent across volumes rather than a one-off.
+Derived from seven print-ready PDFs Michele art-directed, 315 spreads in all. This is the
+complete style-guide reference set. Nothing else is needed.
 
-Reference page renders live in `design-references/pdf-pages/` (300 DPI, reference only, never deployed).
-Extracted photography lives in `public/images/lifestyle/`.
+Page renders live in `design-references/pages-web/`. Extracted photography lives in
+`public/images/lifestyle/`. Cover and section-opener art lives in `public/images/banner-art/`.
+
+## The corpus
+
+**Brave & Beautiful family** (4 books, broad graphic vocabulary)
+
+| File | Sheets | Slug |
+|---|---|---|
+| `23BraveBeautiful_Journey_Sec_Vol_01_v5.pdf` | 45 | `bb-journey-vol1` |
+| `23BraveBeautiful_Book_Vol_02_Sec_v5.pdf` | 39 | `bb-vol2` |
+| `23BraveBeautiful_Book_Vol_03_Sec_v5.pdf` | 39 | `bb-vol3` |
+| `23BraveBeautiful_Book_Vol_04_Sec_v5.pdf` | 36 | `bb-vol4` |
+
+**Brave Together family** (3 books, tropical lean, long-form editorial)
+
+| File | Sheets | Slug |
+|---|---|---|
+| `26BTHawaii_Volume_4_Classic_v4_1_1.pdf` | 13 | `bt-hawaii-vol4` |
+| `25BT_Volume_2_Classic_v2.pdf` | 53 | `bt-vol2-classic` |
+| `25BT_Volume_3_Faith_v8.pdf` | 90 | `bt-vol3-faith` |
+
+Interiors are two-up spreads at 5100x3300 (300 DPI), except `bt-vol3-faith`, which is
+single pages throughout. Covers are single 2550x3300 pages.
 
 ---
 
-## 1. The one-sentence read
+## 1. Two families, one designer
 
-**Black is the ground. Photography is the light. Everything else gets out of the way.**
+Michele works in two distinct registers, and the difference is not decoration. It is
+structural.
 
-Michele's books do not decorate. They set a heavy black or white field, drop in one
-photograph that carries the entire emotional load, and set type with real editorial
-discipline around it. The result reads like a well-made magazine that happens to be
-about hard subjects, and it is unmistakably Hawai'i without ever resorting to hibiscus
-clip art.
+**Brave Together is subtractive.** Black or white ground, one photograph carrying the
+whole emotional load, editorial type discipline, almost no ornament. The kapa band is
+practically the only graphic element in the book. It reads like a well-made magazine.
+
+**Brave & Beautiful is additive.** Blush ground, navy ink, dense botanical illustration,
+circular photo masks, polaroid stickers, confetti dots, dotted paths, flat vector people,
+hand-lettering, line-art motifs. It reads like a beautifully made workbook that wants to
+be written in.
+
+Both are hers. The site should use both, and the choice per page should follow the job
+that page is doing: **Brave Together for arrival and authority, Brave & Beautiful for
+invitation and participation.**
+
+### Where they overlap
+
+Three accent colours are shared almost exactly across both families, which is what makes
+a single site palette possible:
+
+- Coral `#F15C3D` (identical in both)
+- Gold `#E9AE3F` / `#F0B44B` (a hair warmer in Brave & Beautiful)
+- Teal `#00B09F` / `#00AC9B` (the Brave Series signature; appears on the Journey cover)
+
+Both families also share: a heavy neo-grotesque display sans for headlines, a
+high-contrast serif for long-form reading, coral-tab section markers, hard-edged
+photography with no rounded corners or drop shadows, and generous white space.
+
+### Where they diverge
+
+| | Brave Together | Brave & Beautiful |
+|---|---|---|
+| Ground | True black `#000000` / pure white | Blush `#FDEAE7` |
+| Ink | Black | Navy `#1F2744` |
+| Ornament | Kapa band only | Botanical pattern, dots, line art, stickers |
+| Photo shape | Full bleed or hard rectangle | Also circles, polaroids, arch masks |
+| Illustration | Rare (the tree-on-soil motif) | Constant, flat vector, a co-equal voice |
+| Voice | Grown-up, editorial, unhurried | Warm, participatory, energetic |
+| Reader posture | Reading | Reading and writing |
 
 ---
 
 ## 2. Locked palette
 
-### Primary
+### Shared core
 
-| Token | Hex | Where it came from | Use |
-|---|---|---|---|
-| `ink` | `#000000` | Cover field, section grounds | The dominant surface. True black, not off-black. |
-| `paper` | `#FFFFFF` | Text pages, half-spreads | The other dominant surface. Pure white, high contrast. |
-| `teal` | `#00B09F` | Cover "Hawai'i" script, Vol 3 volume badge | The signature accent. Sampled at `#00B09F` on Vol 4 and `#00AC9B` on Vol 3, so the family is stable. |
-| `coral` | `#F15C3D` | Article accent tabs, subheads, callout box | The workhorse accent for editorial furniture. |
-| `gold` | `#E9AE3F` | "The Global Crisis" tab, spread footer bar | The second accent, used for weight and warmth. |
+| Token | Hex | Use |
+|---|---|---|
+| `coral` | `#F15C3D` | The primary accent in both families. Section tabs, subheads, callouts. |
+| `gold` | `#E9AE3F` | Second accent. Bars, badges, ornament. |
+| `teal` | `#00B09F` | Brave Series signature. Sparing. |
 
-### Secondary, drawn from the photography
+### Brave Together
 
 | Token | Hex | Source |
 |---|---|---|
+| `ink` | `#000000` | Cover field, section grounds |
+| `paper` | `#FFFFFF` | Text pages |
 | `deep-sea` | `#233D38` | Nā Pali cliffs in shadow |
 | `sea-green` | `#4F6E68` | Nā Pali mid-tones |
 | `valley` | `#6E8055` | Waterfall valley greenery |
 | `black-sand` | `#2D2C32` | Volcanic shore |
 | `shell` | `#E8E0CC` | Sea foam and warm sand |
-| `brave-blue` | `#135DAB` | Brave Series one-pager field |
+
+### Brave & Beautiful
+
+| Token | Hex | Source |
+|---|---|---|
+| `blush` | `#FDEAE7` | The ground on all four covers |
+| `navy` | `#1F2744` | Botanical line work, body ink |
+| `rose` | `#F8B6C3` | Vol 2 cover florals |
+| `sun` | `#F8CD4F` | Vol 2 cover florals |
+| `terracotta` | `#E47249` | Vol 3 geometric shape spreads |
+| `dusty-rose` | `#E99794` | Vol 3 geometric shape spreads |
+| `forest` | `#3F503D` | Vol 3 geometric shape spreads |
+| `brave-blue` | `#0B5DA9` | Journey cover, Brave Series collateral |
 
 ### Rules of use
 
-- Black and white do the structural work. Teal, coral, and gold appear in small doses:
-  a rule, a tab, one word in a headline, a quotation mark.
+- Pick one family per page and stay inside it. Mixing black ground with blush ground on
+  one screen breaks both.
+- Ground and ink do the structural work. Accents appear in small doses: a rule, a tab, one
+  word in a headline, an oversized quotation mark.
 - Never run two accents at full strength in the same block. The books pick one per spread.
-- `brave-blue` belongs to Brave Series marketing collateral. Treat it as a sibling brand
-  colour, and keep it off the Michele Okimura personal pages unless the page is about the curriculum.
-- The photography supplies every other colour. Do not tint or overlay it.
+- The photography supplies every other colour. Do not tint or overlay it. The one exception
+  is Brave & Beautiful Vol 4, which duotones photographs in coral for its heaviest chapter.
+  That is a deliberate signal for difficult subject matter, and it should stay rare.
 
 ---
 
 ## 3. Typography
 
-Michele's system runs four voices. Getting the count right matters more than matching
-the exact foundry file.
+Both families run the same four-voice system with different emphasis.
 
-### 3.1 Display sans (the spine of the system)
+### 3.1 Display sans (the spine)
 
 Wide, heavy neo-grotesque. Flat apex on the A, straight angled leg on the R, tight
 letterspacing at large sizes. Used for `BRAVE`, all article headlines, and reverse type
-over photographs.
+over photographs. Identical across both families.
 
 - **Likely original:** Helvetica Now Display Bold/Black, or Neue Haas Grotesk Display.
-- **Web substitutes, in order:** `Archivo` / `Archivo Expanded` (closest proportions),
-  `Inter Tight` Bold, `Anton` for poster-weight only.
+- **Web substitutes:** `Archivo` / `Archivo Expanded` (closest proportions), `Inter Tight`
+  Bold, `Anton` for poster weight only.
 - **Behaviour:** ALL CAPS or sentence case, never title case. Tracking tightens as size
-  grows. Headlines break across two or three short lines and sit hard against the left margin.
+  grows. Headlines break across two or three short lines, hard against the left margin.
 
 ### 3.2 Body serif (the reading voice)
 
 High-contrast transitional serif with ball terminals and a high x-height. Carries every
-long-form article and every pull quote. This is the choice that makes the books feel
-grown-up rather than youth-ministry.
+long-form article and every pull quote in both families.
 
 - **Likely original:** Freight Text Pro, or Chronicle Text.
 - **Web substitutes:** `Source Serif 4`, `Newsreader`, `Spectral`, `Crimson Pro`.
 - **Behaviour:** justified in narrow editorial columns, first-line indents rather than
-  paragraph spacing, italic used for emphasis inside running text.
+  paragraph spacing, italic for emphasis inside running text.
 
-### 3.3 Blackletter (the ceremonial voice)
+### 3.3 Display serif (Brave & Beautiful only)
 
-Textura blackletter for chapter openers and moments of weight: "Hawai'i Journey",
-"Become a Freedom Fighter", "Passing On Your Wisdom." This is the single most distinctive
-and most easily botched element in the system. It reads as Hawai'i street and tattoo
-culture rather than as medieval pastiche.
+The `Brave & Beautiful.` wordmark is a high-contrast Didone with fine hairlines and a
+crisp ball terminal on the ampersand. This is the single most elegant thing in the corpus
+and the strongest candidate for a site wordmark treatment.
+
+- **Likely original:** Playfair Display, Prata, or Canela.
+- **Web substitutes:** `Playfair Display`, `Prata`, `Bodoni Moda`.
+- **Behaviour:** sentence case with a full stop. Always ends in a period. Set large, set
+  once, never for body copy.
+
+Related: the `She Arises.` / `She Blooms.` section openers use the same serif at display
+size, sometimes in a red script-serif variant (`blooming in your season.`) that reads as
+a warmer cousin. `Playfair Display` italic covers that.
+
+### 3.4 Blackletter (Brave Together only)
+
+Textura blackletter for chapter openers and moments of weight: "Hawai'i Journey", "Become
+a Freedom Fighter", "Values to Live By". Reads as Hawai'i street and tattoo culture rather
+than medieval pastiche. Easily botched.
 
 - **Web substitutes:** `Grenze Gotisch`, `Pirata One`, `UnifrakturCook`.
-- **Behaviour:** one line, one moment per spread. Never for body copy, never for navigation.
+- **Behaviour:** one line, one moment per spread. Never for body copy or navigation.
 
-### 3.4 Brush script (the signature)
+### 3.5 Script and hand (both families)
 
-Heavy connected retro brush script, used once, for the word "Hawai'i" on the cover lockup.
+Brave Together uses a heavy retro brush script once per surface, for the word "Hawai'i" on
+the cover. Brave & Beautiful uses an all-caps marker hand constantly, for margin notes,
+activity prompts, and pull quotes over photographs ("LOVE EVERYONE, BUT DON'T GIVE YOUR
+HEART TO JUST ANYONE"), plus a looser lowercase script for section labels
+("your creative flow", "letting go:").
 
-- **Web substitutes:** `Yellowtail`, `Kaushan Script`, `Streetwear`.
-- **Behaviour:** exactly one appearance per surface, always as a place or personal name,
-  always overlapping the sans lockup slightly.
-
-A fifth voice, an all-caps marker hand, appears in Volume 3 for margin notes and activity
-prompts. `Caveat` or `Permanent Marker` covers it. Use it only for genuinely handwritten-feeling
-asides.
+- **Brush script substitutes:** `Yellowtail`, `Kaushan Script`, `Streetwear`.
+- **Marker hand substitutes:** `Caveat`, `Permanent Marker`, `Architects Daughter`.
+- **Behaviour:** the marker hand is the reader's voice, so it belongs on prompts and
+  asides. Never use it for anything the site itself is asserting.
 
 ---
 
-## 4. Photo treatment
+## 4. Graphic design elements
 
-The photography is **naturalistic and ungraded**. There is no unified filter, no warm LUT,
-no fade. Michele lets each photograph keep its own temperature, and the tension between
+This is the vocabulary Brett asked to be catalogued. Almost all of it is Brave & Beautiful.
+
+**Botanical pattern band.** Dense flat-vector florals and leaves in a repeating band,
+navy line work over blush, with coral, gold, and sage fills. It frames every cover and
+every section opener. This is the single most reusable element in the corpus: it works as
+a page header, a footer, a divider, or a full banner ground.
+
+**Kapa band.** Brave Together's counterpart. A repeating Polynesian triangle and chevron
+motif used as a horizontal rule at the top or bottom of a page. It is a rule, never a
+background.
+
+**Circular photo mask.** Photographs cropped to perfect circles and dropped into text
+columns. Used constantly in Brave & Beautiful. Reads warm and editorial.
+
+**Polaroid sticker.** Photographs with a thick white border, slightly rotated, sometimes
+overlapping each other, occasionally with a drawn pushpin or tape. Used for the informal,
+scrapbook register.
+
+**Bleeding accent tab.** A small solid coral or gold rectangle bleeding off the left edge
+beside an article headline. Present in both families. Cheap, effective, and the easiest
+thing to carry to the web as a section marker.
+
+**Confetti dots and sparkles.** Small navy or gold four-point stars and filled circles
+scattered near headlines. Sparing, always in threes or fives.
+
+**Dotted path.** A dotted or beaded line running horizontally across a spread, sometimes
+with small circular nodes, used as a soft divider or as a timeline.
+
+**Flat vector people.** Simplified figures with no facial detail, in the blush and navy
+palette, illustrating activities. They carry the workbook prompts.
+
+**Line-art motifs.** Single-weight outline drawings at large scale, half off the page:
+a lightbulb, a hot air balloon, a birdcage, a tree with visible roots. Usually gold or
+navy, always behind or beside the text rather than under it.
+
+**Geometric shape composition.** Vol 3 pages 42-43 build a whole spread from overlapping
+circles, half-rounds, and rectangles in terracotta, dusty rose, and forest green, with
+type set inside the shapes. This is the boldest layout in the corpus and would make a
+striking interactive section on the web.
+
+**Cloud and blob shapes.** Soft organic white shapes overlaying photographs to carry text,
+instead of dimming the photo.
+
+**Journal furniture.** Dotted rules for handwriting, tan and cream boxes for prompts,
+checkbox lists, and date blanks. Only relevant if the site ever ships a worksheet.
+
+**The tree on soil.** A white or navy line-drawn tree with exposed roots against a dark
+soil photograph. Appears in both Brave Together Hawai'i and Vol 2 Classic. The closest
+thing to a house illustration.
+
+---
+
+## 5. Photo treatment
+
+The photography is **naturalistic and ungraded** in both families. No unified filter, no
+warm LUT, no fade. Each photograph keeps its own temperature, and the tension between
 temperatures is the point.
 
 Two families run side by side:
 
 - **Cool and moody.** Nā Pali cliffs under overcast light, the waterfall valley, black
-  volcanic sand. Desaturated greens and teals, soft contrast, weather in the frame.
+  volcanic sand, an ocean swell at dusk, a lake dock at last light. Desaturated greens and
+  teals, soft contrast, weather in the frame.
 - **Hot and saturated.** The turquoise wave barrel, palms against a blown-out sun, red
-  ʻōhiʻa lehua on grey lava, a fence of surfboards. Full saturation, hard light.
+  ʻōhiʻa lehua on grey lava, a fence of painted surfboards, a wall of pink roses. Full
+  saturation, hard light.
 
 Human moments are shot at golden hour or in open shade, close in, faces filling the frame.
+Brave & Beautiful leans harder on hands than on faces: hands clasped, hands reaching,
+hands planting, hands stacked.
 
 ### The signature POV pair
 
-The books repeatedly use two camera positions, and this is worth carrying to the site:
+Both families repeatedly use two camera positions, and this is the most distinctive thing
+about Michele's photo editing:
 
-1. **Looking straight up** (palms into the sun, the canopy).
-2. **Looking straight down at your own feet** (slippers in wet grass, bare feet on black sand).
+1. **Looking straight up** (palms into the sun, a canopy, a lightbulb).
+2. **Looking straight down at your own feet** (slippers in wet grass, bare feet on black
+   sand, boots among autumn leaves, feet in a stream, feet among scattered paper).
 
 Sky above you, ground under you. It puts the reader inside the frame instead of in front
-of it. Two of the extracted assets are exactly this pair.
+of it. Six of the extracted assets are this pair, five of them in `lifestyle/details/`.
 
 ### Rules
 
-- No overlays, no gradient scrims, no duotone on real photographs.
-- When type must sit on a photo, find a genuinely quiet region of the image and put it
-  there. The books never dim a photo to make text work.
-- Photos either bleed fully off the page edge, or sit as a hard-edged rectangle inside a
-  black field with clear margin. There is no third treatment, and there are no rounded
-  corners or drop shadows anywhere in the source.
+- No overlays, no gradient scrims, no duotone on real photographs. The Vol 4 coral duotone
+  is the deliberate exception, reserved for the hardest subject matter.
+- When type must sit on a photo, find a genuinely quiet region and put it there, or float
+  it on a white cloud shape. The books never dim a photo to make text work.
+- Photos either bleed fully off the page edge, sit as a hard-edged rectangle with clear
+  margin, or take a circular or polaroid mask. No rounded corners, no drop shadows.
 - Botanical macro against hard texture is a recurring pairing: soft flower, hard lava.
 
 ---
 
-## 5. Layout patterns
+## 6. Interior page banner heroes - cover art mapping
 
-1. **Half-and-half spread.** Full-bleed photograph occupying one half, generous empty
-   white on the other, with a small text block set toward the outer edge. The white is not
-   filler. It is roughly 50% of the spread and it is doing the work.
-2. **Framed window on black.** Cover pattern. Black field, type lockup centred, photograph
-   inset as a hard rectangle with margin on all sides. The photo reads as a window cut into the dark.
-3. **Kapa band.** A repeating Polynesian triangle and chevron motif used as a horizontal
-   rule, running the full measure at the top or bottom of a page. This is the cultural
-   signature of the series and appears on both volumes. It is a rule, never a background.
-4. **Bleeding accent tab.** A small solid rectangle of coral or gold that bleeds off the
-   left edge, sitting beside an article headline. Cheap, effective, very reusable as a
-   section marker on the web.
-5. **Reverse type, bottom-left.** White display sans anchored to the lower left of a
-   full-bleed photograph, with a small italic credit line under it.
-6. **Editorial column grid.** Three to four narrow justified serif columns with coral sans
-   subheads. Real magazine density. Michele is comfortable with a lot of words on a page.
-7. **Centred pull quote.** High-contrast serif, centred, with an oversized coral quotation
-   mark above it and the final word set in italic and in the accent colour.
-8. **Type on a path.** Copy set along a large curve across a full-bleed photograph. Used
-   once, as a set piece.
+Home page keeps the video hero. These are for interior pages. All assets are 1920px wide,
+quality 88, in `public/images/banner-art/`.
+
+- **/author → `brave-beautiful-journey-vol1-cover.jpg`** because the `Brave & Beautiful.`
+  Didone wordmark is the most book-like, most authored thing in the corpus, and the Journey
+  cover is the richest of the four colourways (it carries both the brave-blue and the teal).
+  It says "this person makes books" before a word is read.
+
+- **/speak → `opener-she-arises.jpg`** because the section openers are built as wide bands
+  with a single large word, which is exactly a banner's geometry, and "arises" carries the
+  platform energy without shouting. Runner-up: `opener-she-celebrates.jpg` for a warmer,
+  more event-flavoured read.
+
+- **/coaching → `journey-map-wayfinding.jpg`** because the wayfinding map spread literally
+  depicts a guided route from one place to another, which is the Brave Purpose Author Method
+  in one image. Runner-up: `opener-she-creates.jpg` if the map reads too busy at banner crop.
+
+- **/about → `brave-together-hawaii-vol4-cover.jpg`** because the black ground, the kapa
+  band, and the teal "Hawai'i" script place her geographically and personally in one frame.
+  This is the page where the tropical family should win.
+
+- **/projects → `opener-she-releases-stands-cries.jpg`** because it carries three words in
+  the botanical band, which signals range and multiplicity, and the projects index is about
+  breadth. Runner-up: `brave-beautiful-vol2-cover.jpg`.
+
+- **Case study pages → match the subject.** A Brave & Beautiful case study takes its own
+  cover (`brave-beautiful-vol2/3/4-cover.jpg`). A Brave Together case study takes
+  `brave-together-vol2-classic-cover.jpg` or `brave-together-vol3-faith-cover.jpg`. A
+  Hawai'i or place-based study takes `brave-together-hawaii-vol4-cover.jpg`. For the two
+  2027 Brave Purpose books, which have no cover yet, use `opener-she-dreams.jpg`.
+
+Remaining openers held in reserve: `opener-she-loves`, `opener-she-gives`,
+`opener-she-protects`, `opener-she-blooms`, `opener-she-perseveres`,
+`opener-she-discovers`, `opener-brave-and-beautiful-wordmark`, `opener-listen-coral`.
+
+Note on crop: the openers are full two-up spreads at roughly 1.55:1. At a 280-320px banner
+height they will need a focal crop rather than a squash. The big word sits centre-left on
+most of them, so crop from the right.
 
 ---
 
-## 6. Applying it to the site
+## 7. Applying it to the site
 
-### Hero style
+### Which family drives which surface
 
-Full-bleed photograph, no scrim, no overlay. Prefer `waterfall-valley-green-ridges.jpg`
-or `palms-looking-up-sunburst.jpg` at full viewport width. Headline in the display sans,
-white, anchored bottom-left with a generous margin, broken across two or three short
-lines, tracking tight. One line of body sans beneath it at roughly a quarter the headline
-size. A kapa band as a hairline rule directly under the hero, full width, black on white.
-No buttons floating over the photograph. The call to action sits in the white band below.
+| Surface | Family | Why |
+|---|---|---|
+| Home hero | Brave Together | Full-bleed tropical photography, black ground, arrival and authority |
+| /about | Brave Together | Place and person |
+| /author | Brave & Beautiful | Editorial, book-like, the Didone wordmark |
+| /speak | Brave & Beautiful | Section-opener banners, warmth, energy |
+| /coaching | Brave & Beautiful | Participatory, workbook register, the journey map |
+| /projects index | Brave & Beautiful | Breadth, pattern, colour range |
+| Case studies | Match the book | The case study is the book |
+| Long-form articles and blog | Brave Together | Editorial column discipline, serif body |
 
-An alternative hero, closer to the cover: black field, headline centred, and a single
-hard-edged photograph inset below it with clear black margin on all four sides.
+### Hero style (Brave Together)
+
+Full-bleed photograph, no scrim, no overlay. Prefer `tropical/waterfall-valley-green-ridges.jpg`
+or `tropical/palms-looking-up-sunburst.jpg` at full viewport width. Headline in the display
+sans, white, anchored bottom-left with a generous margin, broken across two or three short
+lines, tracking tight. One line of body sans beneath at roughly a quarter the headline size.
+A kapa band as a hairline rule directly under the hero, full width, black on white. No
+buttons floating over the photograph; the call to action sits in the white band below.
+
+### Banner hero style (Brave & Beautiful)
+
+280-320px tall, cover or opener art as the ground, botanical band bleeding to both edges,
+page title in the display sans reversed out or in navy depending on the artwork's value at
+that point. No pills, matching the existing `BannerHero` component convention.
 
 ### Content section style
 
-White ground. Section marked by a coral or gold tab bleeding off the left edge, with the
-section label in small caps display sans beside it. Body copy in the serif at a
-comfortable reading measure of 62 to 70 characters, with first-line indents. Photographs
-break the column as half-width hard-edged rectangles with real white space beside them,
-never as full-width bands with text on top.
+White or blush ground depending on family. Section marked by a coral or gold tab bleeding
+off the left edge, with the section label in small-caps display sans beside it. Body copy
+in the serif at 62 to 70 characters, first-line indents. Photographs break the column as
+half-width hard-edged rectangles with real white space beside them.
 
-Pull quotes get their own full-width white block: centred serif, oversized coral quotation
-mark, final phrase in accent-coloured italic.
+For Brave & Beautiful surfaces, add: circular photo masks in text columns, a dotted-path
+divider between major sections, and confetti dots near headlines in threes.
+
+Pull quotes get their own full-width block: centred serif, oversized coral quotation mark,
+final phrase in accent-coloured italic.
 
 ### What to carry over, and what to leave in print
 
-**Carry over:** black as a real surface colour, the kapa band as a divider, the bleeding
-accent tab, the half-and-half photo-and-whitespace spread, the display-sans-plus-serif
-pairing, the ungraded photography, the up-and-down POV pair.
+**Carry over:** black as a real surface colour, the kapa band and the botanical band as
+dividers, the bleeding accent tab, circular photo masks, the half-and-half photo-and-whitespace
+spread, the display-sans-plus-serif pairing, the Didone wordmark, ungraded photography, the
+up-and-down POV pair, line-art motifs at large scale.
 
 **Leave in print:** justified multi-column text, type on a curved path, blackletter for
-anything a user has to click, and the marker hand for anything longer than a phrase.
+anything a user has to click, the marker hand for anything longer than a phrase, journal
+furniture (dotted writing rules, checkboxes), and the polaroid rotation, which reads as
+dated on screen.
 
 ### Voice check
 
-The one-pager in the source set opens with "Unlock Purpose." That word is on the
-banned list in `CLAUDE.md`. The design system here is sound and worth following closely;
-the print copy is not a copy reference. Keep taking layout, colour, and type from these
-PDFs, and keep taking words from `content/brand/voice-guide.md`.
+The Brave Series one-pager opens with "Unlock Purpose", and Brave & Beautiful Vol 3 uses
+"leverage" in running text. Both are on the banned list in `CLAUDE.md`. The design system
+in these PDFs is sound and worth following closely; the print copy is not a copy reference.
+Take layout, colour, and type from these books, and take words from
+`content/brand/voice-guide.md`.
 
 ---
 
-## 7. Asset inventory
+## 8. Asset inventory
 
-18 photographs extracted, each at 1600px on the long side (quality 85) plus an 800px
-mobile variant (quality 82), in `public/images/lifestyle/`.
+**48 photographs**, each 1600px on the long side (quality 85) plus an 800px mobile variant
+(quality 82), under `public/images/lifestyle/`.
 
-**Island and landscape:** `napali-coast-cliffs-turquoise`, `waterfall-valley-green-ridges`,
-`wave-barrel-turquoise`, `ocean-sunrise-glow`, `palms-looking-up-sunburst`,
-`black-sand-shorebreak-foam`, `hikers-ridge-golden-light`
+| Folder | Count | Contents |
+|---|---|---|
+| `tropical/` | 15 | Hawai'i, ocean, sky, palms, beach, and wider natural landscape |
+| `details/` | 11 | Hands, feet, still-life vignettes, the POV-down shots |
+| `people/` | 9 | Warm human moments, hands, portraits |
+| `botanical/` | 6 | Plants, flowers, close-up growth |
+| `textures/` | 7 | Abstract, painted, atmospheric, background |
 
-**Botanical and texture:** `ohia-lehua-blossom-lava`, `tropical-grass-fallen-leaves`
+Note on `tropical/`: it is the natural-landscape bucket, so it holds ocean, sky, palms, and
+beach as specified, plus non-Hawai'i landscape (a lake dock, a ridge hike) that had nowhere
+better to live and reads the same way in a hero slot.
 
-**Place and object:** `surfboard-fence-beach`, `friends-walking-palm-street`
+**21 banner-art assets**, 1920px wide at quality 88, under `public/images/banner-art/`:
+7 book covers and 14 section-opener or illustrated spreads.
 
-**Human moments:** `youth-circle-maile-lei`, `hands-stacked-together`,
-`hands-planting-garden-warm`, `volleyball-golden-hour`, `portrait-quiet-strength-bw`
-
-**The POV pair:** `feet-slippers-plumeria-grass`, `feet-black-sand-beach`
-
-Every crop was visually checked and re-cut where a caption or headline intruded, so all
-18 are clean photography with no type in frame.
+Every crop was inspected on a contact sheet and re-cut where a headline, caption, folio, or
+page furniture intruded. Several went through three passes. All 48 are clean photography
+with no type in frame. Seven candidates were cut rather than shipped with type in them.
 
 ### Provenance and rights
 
-The Vol 4 colophon credits photography to Unsplash and Shutterstock, with art direction
-and graphic design by Sakura Reese. Confirm the Shutterstock licence covers web use before
-any of these ship to production. `youth-circle-maile-lei` and `portrait-quiet-strength-bw`
-show identifiable faces and need a release check in particular.
+The Brave Together Vol 4 colophon credits photography to Unsplash and Shutterstock, with
+art direction and graphic design by Sakura Reese. The Brave & Beautiful books credit
+individual photographers in captions (for example "Peaceful Ocean by Asia Brynne Anderson")
+and at least one painting to Francis Oda.
 
----
+**Confirm licensing before any of these ship to production.** Three specific flags:
 
-## 8. Sources processed
+1. Shutterstock standard licences often exclude web use at scale. Check the actual licence.
+2. Named contributor work (Asia Brynne Anderson's photograph, Francis Oda's painting) is
+   credited in print and needs either the same credit on the web or explicit permission.
+3. These images show identifiable faces and want a release check:
+   `people/youth-circle-maile-lei`, `people/portrait-quiet-strength-bw`,
+   `people/young-man-framing-hands`, `people/volleyball-golden-hour`,
+   `people/hands-planting-garden-warm`, `botanical/eye-through-agave-leaves`,
+   `tropical/palm-street-mist`.
 
-| File | Pages | Role |
-|---|---|---|
-| `26BTHawaii_Volume_4_Classic_v4_1_1.pdf` | 13 spreads (24 book pages) | Primary north star |
-| `25BT_Volume_3_Classic_v1.pdf` | 46 spreads | Cross-check, plus 5 photographs |
-| `Brave-Series-One-Pager.pdf` | 1 | Brand-blue sample, no usable photography |
+### Reproducing this work
 
-A parallel task was writing more Brave Series PDFs to the shared Drive folder
-`Claude-Workspace/projects/michele-okimura-llc/press-kit-assets/brave-series-source-pdfs/`.
-At the time of writing, four further filenames were present but still zero bytes:
-`Brave-Beautiful-Fac-Guide-Vol-1-Classic.pdf`, `Brave-Together-One-Page.pdf`,
-`Brave-Together-One-Pagers.pdf`, `Brave-Together-Vol4-Ch2-Be-a-Safe-Place.pdf`.
-Re-run the extraction against those once they finish landing.
+This Mac has no Homebrew, poppler, Ghostscript, ImageMagick, or Python PIL, and `sips`
+renders only page one of a PDF. All rendering, cropping, palette sampling, and contact-sheet
+generation was done with a small Swift tool built against PDFKit and ImageIO, which ship
+with the macOS command line tools. See `design-references/README.md`.
