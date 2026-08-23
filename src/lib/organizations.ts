@@ -86,7 +86,7 @@ export const LOGO_ORGS: LogoOrg[] = [
     name: 'Island Pacific Academy',
     logo: '/org-logos/island-pacific-academy.png',
     logoDark: '/org-logos/island-pacific-academy-white.png',
-    href: null,
+    href: '/case-studies/island-pacific-academy',
   },
 ]
 
