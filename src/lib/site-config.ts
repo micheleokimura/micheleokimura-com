@@ -203,44 +203,55 @@ export const authoredWorks: AuthoredWork[] = [
 ]
 
 /**
- * Header nav. FOUR links, plus the Contact button the header renders itself.
- * That cap is the point: the previous eight-item nav could not fit beside the
- * wordmark and the CTA until 1024px, so every laptop-half-screen visitor saw a
- * bare hamburger and reported "there are no menu items". Four labels fit from
- * 768px. Do not add a fifth without re-measuring.
+ * Header nav, locked order. FIVE links, plus the Contact button the header
+ * renders itself (a popup trigger, not a route).
+ *
+ * The cap matters. The old eight-item nav could not fit beside the wordmark
+ * and the CTA until 1024px, so every laptop half-screen visitor saw a bare
+ * hamburger and reported "there are no menu items". Five labels fit from
+ * 768px only because the nav runs at 13px with px-2 between 768 and 1024; see
+ * the width budget in DESIGN-RULES.md. Do not add a sixth, and do not
+ * lengthen a label, without re-measuring.
+ *
+ * "Speaker" is the display label; the route stays /speak.
  *
  * Everything else lives in the footer. See `footerColumns` below.
  */
 export const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/speak', label: 'Speaker' },
   { href: '/author', label: 'Author' },
-  { href: '/speak', label: 'Speak' },
   { href: '/coaching', label: 'Coach' },
   { href: '/about', label: 'About' },
 ] as const
 
 /**
- * Footer navigation. This is where the pages that came out of the header went,
- * so nothing became unreachable when the nav was cut to four.
+ * Footer navigation. This is where everything cut from the header went, so
+ * nothing became unreachable.
+ *
+ * Two destinations are not what their labels suggest, and both are deliberate:
+ * the blog has no /blog route (src/lib/blog.ts renders it at /resources), and
+ * there is no press-kit page, only a press-kit section on the speaker page.
  */
 export const footerColumns = [
   {
     heading: 'Explore',
     links: [
       { href: '/', label: 'Home' },
+      { href: '/speak', label: 'Speaker' },
       { href: '/author', label: 'Author' },
-      { href: '/speak', label: 'Speaking' },
-      { href: '/coaching', label: 'Coaching' },
+      { href: '/coaching', label: 'Coach' },
+      { href: '/about', label: 'About' },
       { href: '/how-it-works', label: 'How it works' },
-      { href: '/works', label: 'Authored works' },
     ],
   },
   {
     heading: 'Community',
     links: [
-      { href: '/about', label: 'About Michele' },
       { href: '/projects', label: 'Projects' },
       { href: '/case-studies', label: 'Case studies' },
-      { href: '/resources', label: 'Resources' },
+      { href: '/works', label: 'Authored works' },
+      { href: '/resources', label: 'Blog and resources' },
       { href: '/contact', label: 'Contact' },
     ],
   },

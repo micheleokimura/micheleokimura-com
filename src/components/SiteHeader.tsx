@@ -54,14 +54,20 @@ export function SiteHeader() {
           <Link
             href="/"
             aria-label={`${siteConfig.brand} home`}
-            className="rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-neutral-950"
+            className="shrink-0 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-neutral-950"
           >
             <Logo />
           </Link>
 
+          {/* Five labels plus the wordmark and the CTA are a tight fit in the
+              672px Container gives us at 768px, so between md and lg the nav
+              runs at 13px with px-2 and a half-step gap. That lands the row at
+              roughly 630px and leaves the rest as breathing room. It relaxes
+              to 14px / px-4 at lg. Re-measure before adding a sixth item or a
+              longer label; the budget is written out in DESIGN-RULES.md. */}
           <nav
             aria-label="Primary"
-            className="hidden md:flex items-center gap-1"
+            className="hidden items-center gap-0.5 md:flex lg:gap-2"
           >
             {navItems.map((item) => {
               const active = pathname === item.href
@@ -70,7 +76,7 @@ export function SiteHeader() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    'group relative isolate inline-flex items-center px-3 py-2 text-sm font-medium transition lg:px-4',
+                    'group relative isolate inline-flex items-center px-2 py-2 text-[13px] font-medium whitespace-nowrap transition lg:px-4 lg:text-sm',
                     active
                       ? 'text-neutral-950'
                       : 'text-neutral-700 hover:text-neutral-950',
@@ -97,7 +103,7 @@ export function SiteHeader() {
             })}
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex shrink-0 items-center gap-3">
             {/* The ONE contact CTA in the header. There used to be a second
                 button beside it (the wait-list button, whose label had already
                 been unified to "Contact"), so the header shipped two identical
@@ -106,7 +112,7 @@ export function SiteHeader() {
             <button
               type="button"
               onClick={() => setContactOpen(true)}
-              className="hidden items-center justify-center rounded-md bg-[var(--color-cta)] px-4 py-2 text-sm font-semibold text-[var(--color-cta-ink)] shadow-sm transition hover:bg-[var(--color-cta-hover)] focus-visible:ring-2 focus-visible:ring-[var(--color-cta-ink)] focus-visible:ring-offset-2 focus-visible:outline-none sm:inline-flex sm:px-5 sm:py-2.5"
+              className="hidden items-center justify-center rounded-md bg-[var(--color-cta)] px-4 py-2 text-sm font-semibold whitespace-nowrap text-[var(--color-cta-ink)] shadow-sm transition hover:bg-[var(--color-cta-hover)] focus-visible:ring-2 focus-visible:ring-[var(--color-cta-ink)] focus-visible:ring-offset-2 focus-visible:outline-none sm:inline-flex lg:px-5 lg:py-2.5"
             >
               Contact
             </button>
@@ -114,9 +120,9 @@ export function SiteHeader() {
                 labelled button rather than a bare glyph. Michele and Brett
                 reported "no header menu items" at a half-screen width: the
                 nav was correctly collapsed, but a 20px hairline icon did not
-                read as a menu. The word carries it. Cutting the nav to four
-                links also let the full nav come down from lg to md, so the
-                half-screen case now shows real links rather than this. */}
+                read as a menu. The word carries it. Cutting the nav from eight
+                links to five also let the full nav come down from lg to md, so
+                the half-screen case now shows real links rather than this. */}
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}

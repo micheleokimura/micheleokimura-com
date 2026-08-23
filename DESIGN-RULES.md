@@ -155,11 +155,19 @@ page body rather than stretching the banner.
 
 ## Header
 
-- The header carries FOUR links plus Contact, and no more: Author, Speak,
-  Coach, About. That cap is load-bearing. The previous eight-item nav could not
-  fit beside the wordmark and the CTA until 1024px, so every laptop
-  half-screen visitor saw a bare hamburger and reported "there are no menu
-  items". Four labels fit from 768px. Do not add a fifth without re-measuring.
+Locked structure, left to right. Six things, and no more:
+
+1. the wordmark, linking to `/`
+2. **Home** → `/`
+3. **Speaker** → `/speak` (the label is "Speaker"; the route stays `/speak`)
+4. **Author** → `/author`
+5. **Coach** → `/coaching`
+6. **About** → `/about`
+7. **Contact**, the accent button on the far right. It opens the ContactPopup
+   and is NOT a route link.
+
+Rules that hold this together:
+
 - Everything else lives in the footer, in `footerColumns` in
   `src/lib/site-config.ts`. Cutting a link from the header means moving it
   there, never dropping it.
@@ -171,16 +179,40 @@ page body rather than stretching the banner.
   and the panel copy is hidden. The header once shipped two side by side (the
   wait-list button had been relabelled "Contact" without removing it).
 
+**The width budget.** `Container` narrows the header to 672px below `lg`, and
+at 768px five labels plus the wordmark and the CTA only fit because the nav
+runs at 13px with `px-2` and `gap-0.5` between `md` and `lg`, relaxing to 14px
+and `px-4` at `lg`. Roughly: wordmark 200, nav 210, CTA 92, two 24px gaps, so
+about 630px inside 672px. The old eight-item nav needed roughly 920px, which is
+why it could not appear until 1024px and why half-screen visitors saw nothing
+but a hamburger. Adding a sixth item or a longer label spends slack that is not
+there. Re-measure first.
+
 ## Footer
 
 Full-bleed `--color-brand-teal-deep`, cream text, per the Living in Duvall
 reference. This is the one place the brand fills the whole viewport width,
 which is what lets the rest of the site stay cream and quiet.
 
-Structure, top to bottom: a newsletter/wait-list block, then four columns
-(Explore / Community / Built by Michele / wordmark + tagline), then the bottom
-bar with the copyright and the 988 crisis line. The 988 line ships on every
-page and does not get removed.
+Structure, top to bottom: a newsletter/wait-list block, then four columns, then
+the bottom bar with the copyright and the 988 crisis line. The 988 line ships on
+every page and does not get removed.
+
+The four columns, in order:
+
+1. wordmark, tagline, location, social links
+2. **Explore**: Home, Speaker, Author, Coach, About, How it works
+3. **Community**: Projects, Case studies, Authored works, Blog and resources,
+   Contact
+4. **More from Michele**: the In a Moment podcast (plus Spotify / Apple / RSS),
+   the press kit, and her email
+
+Two of those destinations are not what the label implies, and both are
+deliberate. There is no `/blog` route: `src/lib/blog.ts` renders the blog at
+`/resources`, so one link covers both and is labelled "Blog and resources".
+There is no press-kit page either, only a press-kit section on the speaker
+page, so that link is the anchor `/speak#press-kit-heading`. If either ever
+gets a real route, update the link rather than adding a second one.
 
 ## Contact
 

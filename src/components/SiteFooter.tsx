@@ -100,7 +100,41 @@ export function SiteFooter() {
           </div>
 
           {/* -------------------------------------------- four columns */}
+          {/* Order: brand + socials, Explore, Community, More from Michele. */}
           <div className="grid grid-cols-2 gap-x-8 gap-y-12 py-14 sm:py-16 lg:grid-cols-4">
+            {/* Wordmark, tagline, location, socials. Cream on teal. */}
+            <div className="col-span-2 lg:col-span-1">
+              <Link href="/" aria-label={`${siteConfig.brand} home`} className="inline-block">
+                <span className="font-display text-xl font-semibold tracking-tight whitespace-nowrap text-[var(--color-cream)]">
+                  Michele Okimura
+                  <span className="text-[var(--color-brand-terracotta-on-dark)]">.</span>
+                </span>
+              </Link>
+              <p className="mt-5 max-w-xs text-sm leading-6 text-[var(--color-cream)]/75">
+                Speaker, author, and coach. Helping people turn their hardest
+                stories into the purpose they were carrying all along.
+              </p>
+              <p className="mt-5 text-sm text-[var(--color-cream)]/60">
+                {siteConfig.city}, {siteConfig.state}
+              </p>
+              <div className="mt-6 flex gap-4">
+                {socials.map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={item.label}
+                    className="text-[var(--color-cream)]/60 transition hover:text-[var(--color-cream)]"
+                  >
+                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d={item.path} />
+                    </svg>
+                  </a>
+                ))}
+              </div>
+            </div>
+
             {footerColumns.map((column) => (
               <nav key={column.heading} aria-label={`${column.heading} navigation`}>
                 <h2 className={headingClass}>{column.heading}</h2>
@@ -116,9 +150,9 @@ export function SiteFooter() {
               </nav>
             ))}
 
-            {/* Built By: the podcast, the socials, and how to reach her. */}
-            <div>
-              <h2 className={headingClass}>Built by Michele</h2>
+            {/* More from Michele: the podcast, the press kit, and her inbox. */}
+            <div className="col-span-2 lg:col-span-1">
+              <h2 className={headingClass}>More from Michele</h2>
 
               <a
                 href={podcast.url}
@@ -156,45 +190,18 @@ export function SiteFooter() {
 
               <ul className="mt-6 space-y-3 text-sm">
                 <li>
+                  {/* There is no press-kit page. The press kit is a section on
+                      the speaker page, so this anchors to its heading id. */}
+                  <Link href="/speak#press-kit-heading" className={linkClass}>
+                    Press kit
+                  </Link>
+                </li>
+                <li>
                   <a href={`mailto:${siteConfig.email}`} className={linkClass}>
                     {siteConfig.email}
                   </a>
                 </li>
               </ul>
-
-              <div className="mt-6 flex gap-4">
-                {socials.map((item) => (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={item.label}
-                    className="text-[var(--color-cream)]/60 transition hover:text-[var(--color-cream)]"
-                  >
-                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path d={item.path} />
-                    </svg>
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            {/* Wordmark + tagline. Cream on teal, so the Logo runs inverted. */}
-            <div className="col-span-2 lg:col-span-1">
-              <Link href="/" aria-label={`${siteConfig.brand} home`} className="inline-block">
-                <span className="font-display text-xl font-semibold tracking-tight whitespace-nowrap text-[var(--color-cream)]">
-                  Michele Okimura
-                  <span className="text-[var(--color-brand-terracotta-on-dark)]">.</span>
-                </span>
-              </Link>
-              <p className="mt-5 max-w-xs text-sm leading-6 text-[var(--color-cream)]/75">
-                Speaker, author, and coach. Helping people turn their hardest
-                stories into the purpose they were carrying all along.
-              </p>
-              <p className="mt-5 text-sm text-[var(--color-cream)]/60">
-                {siteConfig.city}, {siteConfig.state}
-              </p>
             </div>
           </div>
 
