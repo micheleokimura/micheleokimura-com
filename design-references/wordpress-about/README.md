@@ -124,3 +124,14 @@ legible. The scrim dims the photograph, it does not hide it. An opaque panel
 is the wrong reading of this reference.
 
 Corner radius is 0 on every tile.
+
+## Why the rebuilt captions are blank
+
+By direction, 2026-08-23. `AboutMosaic.tsx` ships with `caption: ''` on every
+tile except Renaissance, whose copy was confirmed separately. Blank means the
+tile renders no hover overlay at all.
+
+The verbatim copy for all 24 tiles is in `mosaic-tiles.json` above and is not
+lost. Do not silently wire it back in. Michele is sending per-tile caption text,
+and her copy will supersede what is in that file, which still carries the
+defects listed earlier on this page.
