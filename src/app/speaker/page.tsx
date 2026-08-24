@@ -292,8 +292,20 @@ export default function SpeakerPage() {
                         <Icon className="h-7 w-7" strokeWidth={1.5} />
                       </span>
 
+                      {/* The secondary line lives INSIDE the h3 rather than
+                          beside it, the same way the banner keeps its eyebrow
+                          inside the h1: it is part of the message's name, so
+                          it belongs to the heading. Smaller, regular weight
+                          and 85% white, which is the card's own supporting
+                          type. Measured at 6.11:1 on the worst accent and
+                          10.30:1 on this card's violet. */}
                       <h3 className="font-display text-xl font-semibold tracking-tight text-balance">
                         {message.cardTitle ?? message.title}
+                        {message.subtitle && (
+                          <span className="mt-1.5 block text-sm font-normal tracking-normal text-white/85">
+                            {message.subtitle}
+                          </span>
+                        )}
                       </h3>
 
                       <p className="text-sm leading-6 text-white">

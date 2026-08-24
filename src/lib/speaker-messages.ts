@@ -18,10 +18,14 @@
  * the message page and every heading show.
  *
  * ####################### NEEDS MICHELE ############################
- * Three cardTitles below are my shortenings of her own titles, not hers:
- * "Building a Kingdom Culture", "Heart Wide Open", and "Identity, Healing,
- * and Brave Purpose". They need her sign-off or her own shorter wording.
- * Delete the field and the tile falls back to the full title.
+ * Two cardTitles below are my shortenings of her own titles, not hers:
+ * "Building a Kingdom Culture" and "Identity, Healing, and Brave Purpose".
+ * They need her sign-off or her own shorter wording. Delete the field and
+ * the tile falls back to the full title.
+ *
+ * "Heart Wide Open" came off this list on 2026-08-24. It is no longer a
+ * shortening of anything: Michele rewrote that message's name herself, and
+ * it is now the `subtitle` under a main line she wrote.
  * ##################################################################
  */
 
@@ -64,6 +68,17 @@ export type SpeakerMessage = {
   slug: string
   number: string
   title: string
+  /**
+   * Secondary line under the title, on the card AND on the message page.
+   *
+   * This is for a message that has both a NAME and a promise, where the
+   * promise is what a reader is actually scanning for. "Heart Wide Open" was
+   * the whole title until 2026-08-24; Michele flipped it so the card leads
+   * with "Build a Strong Connection with Your Child" and the programme name
+   * sits underneath in smaller, lighter type. Metadata and schema still get
+   * both, joined as "<subtitle>: <title>", so the name stays searchable.
+   */
+  subtitle?: string
   /** Short label for the tile grid. Falls back to `title` when absent. */
   cardTitle?: string
   /** One or two sentences, trimmed from `body`. Shown on the tile only. */
@@ -168,8 +183,14 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
   {
     slug: 'heart-wide-open',
     number: '05',
-    title: 'Heart Wide Open: Building a Strong Connection with Your Child',
-    cardTitle: 'Heart Wide Open',
+    // Flipped 2026-08-24 at Michele's instruction. It was
+    // "Heart Wide Open: Building a Strong Connection with Your Child", one
+    // long line led by the programme name. The promise leads now and the name
+    // is the secondary line. `cardTitle` came off with it: the new main line
+    // is already short enough for a card, so there is nothing to shorten.
+    // The slug does NOT change, so every existing link still resolves.
+    title: 'Build a Strong Connection with Your Child',
+    subtitle: 'Heart Wide Open',
     teaser:
       "Your child's heart has a door, and you hold the key. Michele equips parents to become the safe haven their children run toward.",
     accent: 'violet',
@@ -221,4 +242,18 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
 
 export function getSpeakerMessage(slug: string): SpeakerMessage | undefined {
   return SPEAKER_MESSAGES.find((message) => message.slug === slug)
+}
+
+/**
+ * The one-string form of a message's name, for a <title> tag, an og:title, or
+ * a schema `name`. A message with a secondary line reads "<subtitle>: <title>"
+ * here, which is the order its title was written in before the card layout
+ * flipped it. The visual layering is a reading decision for the card and the
+ * banner; a search result or a knowledge panel still wants the programme name
+ * first, because that is the string people search for.
+ */
+export function speakerMessageFullTitle(message: SpeakerMessage): string {
+  return message.subtitle
+    ? `${message.subtitle}: ${message.title}`
+    : message.title
 }

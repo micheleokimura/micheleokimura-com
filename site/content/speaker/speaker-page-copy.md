@@ -57,7 +57,12 @@ How do we shape environments that foster a resilient, deep-rooted, fully alive f
 >
 > Rebecca Furuhashi, Principal, Christian Academy
 
-### 5. Heart Wide Open: Building a Strong Connection with Your Child
+### 5. Build a Strong Connection with Your Child
+
+*Heart Wide Open* (secondary line under the title, on the card and on the
+message page. Renamed by Michele 2026-08-24: it read "Heart Wide Open:
+Building a Strong Connection with Your Child" until then, led by the
+programme name. The promise leads now. The slug stays `heart-wide-open`.)
 
 Your child's heart has a door, and you hold the key. In this transformative workshop, Michele equips parents to become the safe haven their children run toward. Through real-life storytelling, you will gain practical keys to validate feelings, speak unique love languages, turn everyday interactions into lasting deposits of trust, and more.
 

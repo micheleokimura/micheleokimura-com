@@ -8,7 +8,11 @@ import { BannerHero } from '@/components/BannerHero'
 import { ContactTrigger } from '@/components/ContactTrigger'
 import { WebPageJsonLd } from '@/components/JsonLd'
 import { pageMetadata } from '@/lib/schema'
-import { SPEAKER_MESSAGES, getSpeakerMessage } from '@/lib/speaker-messages'
+import {
+  SPEAKER_MESSAGES,
+  getSpeakerMessage,
+  speakerMessageFullTitle,
+} from '@/lib/speaker-messages'
 
 /**
  * One page per speaking message. Created 2026-08-23, when Michele asked for
@@ -45,8 +49,11 @@ export async function generateMetadata({
 
   if (!message) return {}
 
+  // The FULL name here, "<subtitle>: <title>", not the card's layered form.
+  // A tab, a search result and an og:card all want one string, and they want
+  // the programme name in it.
   return pageMetadata({
-    title: message.title,
+    title: speakerMessageFullTitle(message),
     description: message.teaser,
     path: `/speaker/messages/${message.slug}`,
   })
@@ -66,15 +73,21 @@ export default async function SpeakerMessagePage({
     <>
       <WebPageJsonLd
         path={`/speaker/messages/${message.slug}`}
-        name={message.title}
+        name={speakerMessageFullTitle(message)}
         description={message.teaser}
       />
 
       {/* Violet banner, same as /speaker, so a message page reads as part of
-          the speaking section rather than as a loose page. */}
+          the speaking section rather than as a loose page.
+
+          A message with a secondary line lays it out the same way its card
+          does: promise on the H1, programme name underneath. BannerHero's
+          `subtitle` slot is already the smaller, lighter cream line, so the
+          two layouts match without a special case here. */}
       <BannerHero
         eyebrow="A message I speak on"
         title={message.title}
+        subtitle={message.subtitle}
         surface="violet"
         balanceTitle={false}
       />
