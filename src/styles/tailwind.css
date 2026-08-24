@@ -396,6 +396,145 @@ html {
   );
 }
 
+/* ---------------------------------------------------------------------
+   SPEAKER MESSAGE CARDS  (/speaker)
+   ---------------------------------------------------------------------
+   Brett, on the site reading flat: "it lacks colour and vibrancy." The
+   keynote grid is where the colour lives now, and it is meant to be the
+   visual anchor of the page. The pattern is the "Most-Used Services" grid
+   on livingin-platform.vercel.app/services, rebuilt on Michele's palette.
+
+   Three stacked background layers per card, composed through custom
+   properties so colour and texture stay independent:
+
+     --msg-texture  a hairline pattern in white at 5 to 9 percent. Pure
+                    decoration. Rotate it so neighbouring cards differ.
+     --msg-glow     ONE soft radial tint, in the TOP corner.
+     --msg-base     linear-gradient(160deg, LIGHT 0%, DARK 100%).
+
+   THE GRADIENT RUNS LIGHT AT THE TOP AND DARK AT THE BOTTOM, and the glow
+   sits at the top. That is a contrast decision, not a taste one. Built the
+   other way round first, copying the reference (dark top, lit bottom
+   corner), and the two things that live low on a card, the teaser and the
+   "Learn more" control, both landed on its brightest pixel: white measured
+   3.96:1 on the coral teaser and 3.18:1 on its control, so two of the three
+   text layers failed AA. Flipped, the bright zone carries only the icon and
+   every text layer sits on deepening colour.
+
+   Measured, white on each zone, worst card of the five:
+     title,  45% down      7.86:1
+     teaser, 65% down      9.00:1
+     "Learn more" label    6.93:1   (on the white/16 control ground)
+     icon ring, top+glow   3.72:1   non-text, needs 3:1 under WCAG 1.4.11
+
+   None of the five colours is the raw palette hex. Bright teal #00B09F is
+   2.72:1 against white and coral #F15C3D is 3.31:1, so neither can be a
+   ground for white text; gold #E9AE3F cannot carry white at all. Each card
+   is that hue taken down until white clears AA at every point, which is the
+   same move --color-teal-text and --color-coral-text already make. The
+   violet is the Speaker hero's own colour, so the grid ties back to the
+   banner above it. Re-measure with the glow blended in if you retune one.
+   --------------------------------------------------------------------- */
+.msg-card {
+  background-image: var(--msg-texture, none), var(--msg-glow, none),
+    var(--msg-base);
+}
+
+.msg-teal {
+  --msg-base: linear-gradient(160deg, #0c6a61 0%, #073f3a 100%);
+  --msg-glow: radial-gradient(
+    68% 55% at 82% 8%,
+    rgba(0, 176, 159, 0.22) 0%,
+    rgba(0, 176, 159, 0) 64%
+  );
+}
+
+.msg-coral {
+  --msg-base: linear-gradient(160deg, #b8371a 0%, #71190c 100%);
+  --msg-glow: radial-gradient(
+    68% 55% at 82% 8%,
+    rgba(233, 174, 63, 0.22) 0%,
+    rgba(233, 174, 63, 0) 64%
+  );
+}
+
+.msg-gold {
+  --msg-base: linear-gradient(160deg, #8c5807 0%, #4e2f02 100%);
+  --msg-glow: radial-gradient(
+    68% 55% at 82% 8%,
+    rgba(241, 92, 61, 0.24) 0%,
+    rgba(241, 92, 61, 0) 64%
+  );
+}
+
+.msg-navy {
+  --msg-base: linear-gradient(160deg, #38456f 0%, #1a2138 100%);
+  --msg-glow: radial-gradient(
+    68% 55% at 82% 8%,
+    rgba(159, 232, 223, 0.2) 0%,
+    rgba(159, 232, 223, 0) 64%
+  );
+}
+
+.msg-violet {
+  --msg-base: linear-gradient(160deg, #3b2c74 0%, #1e163f 100%);
+  --msg-glow: radial-gradient(
+    68% 55% at 82% 8%,
+    rgba(62, 0, 157, 0.38) 0%,
+    rgba(62, 0, 157, 0) 64%
+  );
+}
+
+/* Textures. Decoration only, so they carry no contrast budget of their own;
+   keep every one of them under 10 percent white or it starts competing with
+   the copy. `dots` is the only one that needs a background-size, and it must
+   list one value PER LAYER, because background-size applies to the whole
+   stack rather than to the layer it sits next to. */
+.msg-tex-lines {
+  --msg-texture: repeating-linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.055) 0px,
+    rgba(255, 255, 255, 0.055) 2px,
+    rgba(255, 255, 255, 0) 2px,
+    rgba(255, 255, 255, 0) 16px
+  );
+}
+
+.msg-tex-rings {
+  --msg-texture: repeating-radial-gradient(
+    circle at 84% 6%,
+    rgba(255, 255, 255, 0.075) 0px,
+    rgba(255, 255, 255, 0.075) 1px,
+    rgba(255, 255, 255, 0) 1px,
+    rgba(255, 255, 255, 0) 14px
+  );
+}
+
+.msg-tex-grid {
+  --msg-texture: repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.05) 0px,
+      rgba(255, 255, 255, 0.05) 1px,
+      rgba(255, 255, 255, 0) 1px,
+      rgba(255, 255, 255, 0) 18px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.05) 0px,
+      rgba(255, 255, 255, 0.05) 1px,
+      rgba(255, 255, 255, 0) 1px,
+      rgba(255, 255, 255, 0) 18px
+    );
+}
+
+.msg-tex-dots {
+  --msg-texture: radial-gradient(
+    rgba(255, 255, 255, 0.1) 1px,
+    rgba(255, 255, 255, 0) 1.6px
+  );
+  background-size: 14px 14px, auto, auto;
+}
+
 h1,
 h2,
 h3,

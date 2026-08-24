@@ -31,6 +31,35 @@ export type Endorsement = {
   role: string
 }
 
+/**
+ * Card colour on the /speaker grid. Each one is a Michele palette hue taken
+ * down until white clears AA on it; the raw hexes cannot carry white text.
+ * Violet is the Speaker hero's own colour. Defined as `.msg-<accent>` in
+ * tailwind.css, where the measured contrast lives.
+ *
+ * Assign so that no two cards touching in the 3-up grid share an accent.
+ */
+export type MessageAccent = 'teal' | 'coral' | 'gold' | 'navy' | 'violet'
+
+/** Hairline pattern behind the colour. Neighbours never share one either. */
+export type MessageTexture = 'lines' | 'rings' | 'grid' | 'dots'
+
+/**
+ * Which lucide-react icon the card shows. Kept as a string rather than a
+ * component so this file stays a plain .ts module; the map from name to
+ * component is ICONS in src/app/speaker/page.tsx. Every name below is
+ * verified against the installed lucide-react (note it exports `House`, not
+ * `Home`, and has no `Waves`).
+ */
+export type MessageIcon =
+  | 'compass'
+  | 'sparkles'
+  | 'palette'
+  | 'house'
+  | 'heart'
+  | 'sunrise'
+  | 'waveform'
+
 export type SpeakerMessage = {
   slug: string
   number: string
@@ -39,6 +68,9 @@ export type SpeakerMessage = {
   cardTitle?: string
   /** One or two sentences, trimmed from `body`. Shown on the tile only. */
   teaser: string
+  accent: MessageAccent
+  texture: MessageTexture
+  icon: MessageIcon
   body: string[]
   /** Shown when the message also travels without the faith framing. */
   nonFaith?: boolean
@@ -54,6 +86,9 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     title: 'Finding Your Brave Purpose',
     teaser:
       'The leap from a God-given dream to a courageous "yes" can feel impossible. Audiences leave with a teachable, practical framework to finally step into their own brave purpose.',
+    accent: 'teal',
+    texture: 'lines',
+    icon: 'compass',
     body: [
       'The leap from a God-given dream to a courageous "yes" can feel impossible. In her signature keynote, Michele shares the raw, true story of founding Releasing Generations: the initial fears, the false starts, and the exact moment she stopped talking about her calling and started walking in it. Audiences leave with a teachable, practical framework to finally step into their own brave purpose. Delivered at churches, conferences, and leadership events for over a decade.',
     ],
@@ -64,6 +99,9 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     title: 'Dreaming Big With God',
     teaser:
       "God's vision for your life is beautifully larger than the one you are comfortable praying for. This message expands your faith to embrace what is truly possible.",
+    accent: 'coral',
+    texture: 'rings',
+    icon: 'sparkles',
     body: [
       'God’s vision for your life is beautifully larger than the one you are comfortable praying for. Perfect for audiences standing at the threshold of a new season, Michele explores how to surrender your fears, your history, and your "what-ifs" to God. Whether you are carrying a quiet dream or feeling a persistent nudge, this message expands your faith to embrace what is truly possible.',
     ],
@@ -83,6 +121,9 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     title: 'Activating Your Creativity',
     teaser:
       'You were purposefully created by the Creator to create. Michele expands the definition of creativity to reach anyone who has ever felt unqualified.',
+    accent: 'navy',
+    texture: 'grid',
+    icon: 'palette',
     body: [
       'You were purposefully created by the Creator to create. Moving far beyond traditional fine arts, Michele expands the definition of creativity to reach anyone who has ever felt unqualified. This message equips audiences to rise beyond their insecurities, giving them permission to bring their unique ideas, businesses, and extraordinary solutions into the light. She has led four Rethink Creativity conferences on this theme, activating people in every sphere of influence.',
     ],
@@ -95,6 +136,9 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     cardTitle: 'Building a Kingdom Culture',
     teaser:
       'How do we shape environments that foster a resilient, deep-rooted, fully alive faith in our children and youth? Michele offers a highly interactive experience for parents and leaders.',
+    accent: 'gold',
+    texture: 'dots',
+    icon: 'house',
     body: [
       'How do we shape environments that foster a resilient, deep-rooted, fully alive faith in our children and youth? Drawing on decades of experience, Michele offers a highly interactive experience for parents and leaders. Through engaging stories and interactive activities, she helps you build homes and healing, positive spaces for the younger saints where the next generation experiences God as undeniably real, personal, and worthy of their entire lives. Taught at conferences, in an eight-hour workshop format, and inside an e-course.',
     ],
@@ -128,6 +172,9 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     cardTitle: 'Heart Wide Open',
     teaser:
       "Your child's heart has a door, and you hold the key. Michele equips parents to become the safe haven their children run toward.",
+    accent: 'violet',
+    texture: 'lines',
+    icon: 'heart',
     body: [
       'Your child’s heart has a door, and you hold the key. In this transformative workshop, Michele equips parents to become the safe haven their children run toward. Through real-life storytelling, you will gain practical keys to validate feelings, speak unique love languages, turn everyday interactions into lasting deposits of trust, and more.',
     ],
@@ -140,6 +187,9 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     cardTitle: 'Identity, Healing, and Brave Purpose',
     teaser:
       'A message Michele is often invited to bring in women’s ministry settings and churches. She walks women through the truth of their identity in Christ, and the healing God offers.',
+    accent: 'teal',
+    texture: 'rings',
+    icon: 'sunrise',
     body: [
       'A message Michele is often invited to bring in women’s ministry settings and churches. She walks women through the truth of their identity in Christ, and the healing God offers for the trauma, wounds, and hindrances that quietly hold them back from walking in confidence and joy. Rooted in her own journey and years of ministering to women in faith communities.',
     ],
@@ -150,6 +200,9 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     title: 'How to Hear God’s Voice',
     teaser:
       'For children, youth, and adults ready to grow their two-way relationship with God. This workshop teaches discernment, builds faith through testimony, and gives every participant practical activities to practice hearing God’s voice in real time.',
+    accent: 'coral',
+    texture: 'grid',
+    icon: 'waveform',
     body: [
       'For children, youth, and adults ready to grow their two-way relationship with God. Beyond the ways most Christians know God speaks (through Scripture, sermons, music), Michele opens the door to the other ways God is already speaking: through a thought, a vision, a picture, a circumstance. This workshop teaches discernment, builds faith through testimony, and gives every participant practical activities to practice hearing God’s voice in real time.',
       'Michele also unpacks the invitation of 1 Corinthians 14:1 ("eagerly desire spiritual gifts, especially the gift of prophecy"), helping listeners grow the prophetic in their homes, their churches, and the encouragement they bring to others.',

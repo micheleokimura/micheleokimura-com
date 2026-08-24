@@ -2,6 +2,16 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import {
+  AudioWaveform,
+  Compass,
+  Heart,
+  House,
+  Palette,
+  Sparkles,
+  Sunrise,
+} from 'lucide-react'
+
 import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { BannerHero } from '@/components/BannerHero'
@@ -9,7 +19,12 @@ import { SectionIntro } from '@/components/SectionIntro'
 import { ContactTrigger } from '@/components/ContactTrigger'
 import { WebPageJsonLd } from '@/components/JsonLd'
 import { pageMetadata } from '@/lib/schema'
-import { SPEAKER_MESSAGES } from '@/lib/speaker-messages'
+import {
+  SPEAKER_MESSAGES,
+  type MessageAccent,
+  type MessageIcon,
+  type MessageTexture,
+} from '@/lib/speaker-messages'
 
 /**
  * Speaker page. Rebuilt 2026-08-23 against Michele and Brett's walkthrough.
@@ -32,12 +47,22 @@ import { SPEAKER_MESSAGES } from '@/lib/speaker-messages'
  * photo first and most readers never reached the copy.
  *
  * MESSAGES. What was a seven-deep vertical stack of full descriptions and
- * endorsements is a 3-up grid of tiles. Each tile is a title, a teaser, and a
- * link to /speaker/messages/<slug>, which is where the full description and
- * that message's endorsements now live. Michele: shorter, easier to scan.
- * The Gerald Teramae endorsement moved to the Dreaming Big With God page, and
- * the "also available in a non-faith framing" line moved to the pages of the
- * two messages it applies to.
+ * endorsements is a 3-up grid of cards. Each card is an icon, a title, a
+ * teaser, and a link to /speaker/messages/<slug>, which is where the full
+ * description and that message's endorsements now live. Michele: shorter,
+ * easier to scan. The Gerald Teramae endorsement moved to the Dreaming Big
+ * With God page, and the "also available in a non-faith framing" line moved
+ * to the pages of the two messages it applies to.
+ *
+ * THE CARDS ARE THE PAGE'S COLOUR, which is the point of them. Brett, on the
+ * site reading flat: "it lacks colour and vibrancy." Each card takes a
+ * different Michele hue and a different hairline texture, following the
+ * "Most-Used Services" grid on livingin-platform.vercel.app. The colour, the
+ * texture and the icon are fields on the message in
+ * src/lib/speaker-messages.ts; the surfaces and every measured contrast
+ * figure are in the SPEAKER MESSAGE CARDS block in tailwind.css. Read that
+ * block before changing a colour: the gradient runs light at the top and dark
+ * at the bottom for a contrast reason, not a stylistic one.
  *
  * SECTION BANDS. Every section is full-bleed and sits on its own ground, same
  * convention the home page established. Neighbours never share a band.
@@ -89,6 +114,42 @@ const BAND = 'w-full py-14 sm:py-24 lg:py-28'
  * If Michele ever settles on six, this evaluates false and does nothing.
  */
 const ORPHAN_IN_LAST_ROW = SPEAKER_MESSAGES.length % 3 === 1
+
+/**
+ * Message name to lucide component. Every name here is verified against the
+ * installed lucide-react: it exports `House` (`Home` is only an alias) and it
+ * has no `Waves`, so the voice card uses `AudioWaveform`.
+ *
+ * These are abstract rather than literal on purpose. The icon is a way to tell
+ * one card from another at a glance, not an illustration of the talk.
+ */
+// Typed off one of the icons rather than off lucide's own `LucideIcon`.
+// lucide-react 1.24 declares that type but does not export it, so importing
+// it fails the build; `typeof Compass` is the same shape and always correct.
+const ICONS: Record<MessageIcon, typeof Compass> = {
+  compass: Compass,
+  sparkles: Sparkles,
+  palette: Palette,
+  house: House,
+  heart: Heart,
+  sunrise: Sunrise,
+  waveform: AudioWaveform,
+}
+
+const ACCENT_CLASS: Record<MessageAccent, string> = {
+  teal: 'msg-teal',
+  coral: 'msg-coral',
+  gold: 'msg-gold',
+  navy: 'msg-navy',
+  violet: 'msg-violet',
+}
+
+const TEXTURE_CLASS: Record<MessageTexture, string> = {
+  lines: 'msg-tex-lines',
+  rings: 'msg-tex-rings',
+  grid: 'msg-tex-grid',
+  dots: 'msg-tex-dots',
+}
 
 type Engagement = {
   event: string
@@ -201,11 +262,12 @@ export default function SpeakerPage() {
           <FadeInStagger faster>
             <ul
               role="list"
-              className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
+              className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-7"
             >
               {SPEAKER_MESSAGES.map((message, index) => {
                 const isOrphan =
                   ORPHAN_IN_LAST_ROW && index === SPEAKER_MESSAGES.length - 1
+                const Icon = ICONS[message.icon]
 
                 return (
                   <FadeIn
@@ -213,36 +275,43 @@ export default function SpeakerPage() {
                     key={message.slug}
                     className={isOrphan ? 'lg:col-start-2' : undefined}
                   >
-                    {/* The whole tile is the link, so the target is the card
-                        and not a four-word phrase at the bottom of it. */}
+                    {/* The whole card is the link, so the target is the card
+                        and not a two-word phrase at the bottom of it. The
+                        "Learn more" control below is decorative for that
+                        reason: it is inside the anchor, never a second one. */}
                     <Link
                       href={`/speaker/messages/${message.slug}`}
-                      className="group flex h-full flex-col rounded-3xl bg-[var(--color-cream)] p-6 ring-1 ring-[var(--color-navy-10)] transition duration-300 hover:shadow-xl hover:shadow-[var(--color-teal-20)] hover:ring-[var(--color-teal-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus-ring)] lg:p-8"
+                      className={`msg-card ${ACCENT_CLASS[message.accent]} ${
+                        TEXTURE_CLASS[message.texture]
+                      } group flex h-full flex-col items-center gap-4 rounded-3xl px-6 py-9 text-center text-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[var(--color-navy-20)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus-ring)] sm:px-7 sm:py-10`}
                     >
-                      <p
+                      <span
                         aria-hidden="true"
-                        className="font-display text-sm font-semibold tracking-[0.22em] text-[var(--color-brand-terracotta-ink)] uppercase"
+                        className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-white/15 ring-1 ring-inset ring-white/25 transition duration-300 group-hover:bg-white/25"
                       >
-                        {message.number}
-                      </p>
+                        <Icon className="h-7 w-7" strokeWidth={1.5} />
+                      </span>
 
-                      <h3 className="font-display mt-4 text-xl font-semibold tracking-tight text-balance text-neutral-950">
+                      <h3 className="font-display text-xl font-semibold tracking-tight text-balance">
                         {message.cardTitle ?? message.title}
                       </h3>
 
-                      <p className="mt-3 text-base leading-7 text-neutral-600">
+                      <p className="text-sm leading-6 text-white">
                         {message.teaser}
                       </p>
 
-                      {/* Pushed to the bottom so every tile's link line sits
-                          on the same baseline regardless of teaser length. */}
-                      <span className="mt-auto pt-6 text-sm font-semibold text-neutral-950">
-                        Learn more{' '}
-                        <span
-                          aria-hidden="true"
-                          className="inline-block transition-transform duration-200 group-hover:translate-x-0.5"
-                        >
-                          &rarr;
+                      {/* Pushed to the bottom so every card's control sits on
+                          the same baseline whatever the teaser's length, and
+                          on the darkest part of the gradient. */}
+                      <span className="mt-auto pt-3">
+                        <span className="font-display inline-flex items-center gap-1.5 rounded-full bg-white/15 px-5 py-2 text-xs font-semibold tracking-[0.14em] uppercase ring-1 ring-inset ring-white/30 transition duration-300 group-hover:bg-white/25">
+                          Learn more
+                          <span
+                            aria-hidden="true"
+                            className="transition-transform duration-200 group-hover:translate-x-0.5"
+                          >
+                            &rarr;
+                          </span>
                         </span>
                       </span>
                     </Link>
