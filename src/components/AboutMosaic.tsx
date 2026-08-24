@@ -22,9 +22,12 @@ import { FadeIn } from '@/components/FadeIn'
  *
  *   1. Two columns at `sm`. WordPress jumps 1 -> 3, which turns an iPad into
  *      three narrow strips inside this site's container.
- *   2. The scrim is navy rather than black, at 90%, with cream text on it.
- *      That is the house palette and it measures ~11:1. Black/0.6 was
- *      WordPress's own value, not a brand decision.
+ *   2. The scrim is navy rather than black, at 75%, with cream text on it.
+ *      Navy is the house palette. 75% is the lightest alpha that still holds
+ *      cream at 5.3:1 over a white photo, which is the worst case, and it
+ *      leaves the photograph legible underneath the way the reference does.
+ *      Michele's screenshot of the Renaissance tile is the check here: the
+ *      poster type reads straight through the scrim. An opaque panel is wrong.
  *   3. Below `sm` the caption sits in an always-visible gradient band at the
  *      bottom of the tile instead of a hover scrim, because an opacity-only
  *      hover is unreachable on a touch screen. From `sm` up it is the
@@ -174,7 +177,7 @@ function MosaicTile({ tile }: { tile: Tile }) {
           Focus ring follows the house pattern used on every card on the site. */}
       <figure
         tabIndex={0}
-        className="group relative block aspect-square w-full overflow-hidden rounded-xl bg-[var(--color-navy-10)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus-ring)]"
+        className="group relative block aspect-square w-full overflow-hidden bg-[var(--color-navy-10)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus-ring)]"
       >
         <Image
           src={tile.src}
@@ -192,7 +195,7 @@ function MosaicTile({ tile }: { tile: Tile }) {
             'pointer-events-none absolute inset-0 flex flex-col justify-end whitespace-pre-line p-4 text-sm leading-snug text-[var(--color-cream)]',
             'bg-gradient-to-t from-[var(--color-navy)] via-[var(--color-navy)]/65 to-transparent',
             'sm:items-center sm:justify-center sm:bg-none sm:p-5 sm:text-center sm:text-base sm:leading-normal',
-            'sm:bg-[var(--color-navy)]/90 sm:opacity-0 sm:transition-opacity sm:duration-[400ms] sm:ease-in-out',
+            'sm:bg-[var(--color-navy)]/75 sm:opacity-0 sm:transition-opacity sm:duration-[400ms] sm:ease-in-out',
             'sm:group-hover:opacity-100 sm:group-focus-visible:opacity-100',
             'sm:motion-reduce:transition-none',
           ].join(' ')}
