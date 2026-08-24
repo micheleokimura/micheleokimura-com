@@ -113,6 +113,21 @@ export function Cover({
   )
 }
 
+/**
+ * Flat, tracked small-caps label for a title that has not shipped. Deliberately
+ * not a pill: DESIGN-RULES bans badges outright because they read as clickable.
+ * On a tile it sits directly under the title, which is where Brett asked for
+ * it. The Living in Duvall reference puts a coloured status pill in the same
+ * role; that part is not borrowed.
+ */
+export function Forthcoming() {
+  return (
+    <span className="font-display block text-[11px] font-semibold tracking-[0.22em] text-[var(--color-brand-terracotta-ink)] uppercase">
+      Forthcoming
+    </span>
+  )
+}
+
 /** Verbatim endorser quotes. Never edit one to make it fit. */
 export function Endorsements({
   items,
