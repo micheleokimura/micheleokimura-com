@@ -81,11 +81,21 @@ export const HERO = {
   h1: 'Hi, I’m Michele Okimura',
   /** Middle dots, not periods. Michele was specific about this. */
   roles: ['Speaker', 'Author', 'Coach'] as const,
-  // FINAL, both sentences, verbatim. Michele settled the Releasing Generations
-  // clause on 2026-08-23; it is no longer a placeholder. "Mānoa" stays out:
-  // the location is Honolulu, Hawaiʻi and nothing narrower.
+  // FINAL, both sentences, verbatim, 2026-08-24. Michele leads with the idea
+  // rather than the credential now.
+  //
+  // RELEASING GENERATIONS IS DELIBERATELY ABSENT HERE. An earlier subhead ran
+  // "I'm also the founder and executive director of Releasing Generations, a
+  // Christian nonprofit that helps people of all ages know their identity and
+  // step into their God-given purpose", and that clause was cut on purpose, not
+  // lost in an edit. The nonprofit is named in the award line directly below
+  // and again on the About page, so the hero does not need to carry it a third
+  // time. Do not restore it here.
+  //
+  // "Mānoa" also stays out: the location is Honolulu, Hawaiʻi and nothing
+  // narrower.
   subhead:
-    'I’m a speaker, author, and writing coach based in Honolulu, Hawaiʻi. I’m also the founder and executive director of Releasing Generations, a Christian nonprofit that helps people of all ages know their identity and step into their God-given purpose.',
+    'Every person’s story matters and is the launchpad for brave purpose. I’m a speaker, author, and writing coach based in Honolulu, Hawaiʻi.',
   /**
    * THE AWARD WENT TO THE ORGANIZATION, NOT TO MICHELE. Final wording,
    * supplied verbatim by Michele 2026-08-23.
@@ -97,17 +107,21 @@ export const HERO = {
    * author/page.tsx and the Brave Series pages (which credit Releasing
    * Generations): both were right about the same organization.
    *
-   * What is still NOT true is that Michele won it personally. "led by Michele
-   * Okimura" is the whole of her connection to it and is as far as this goes.
-   * Do not compress this into anything that reads as her award.
+   * What is still NOT true is that Michele won it personally. "under Michele's
+   * leadership" is the whole of her connection to it and is as far as this
+   * goes. Do not compress this into anything that reads as her award.
+   *
+   * Final wording, verbatim, 2026-08-24. It replaces a longer sentence that
+   * ended "...for its work with young people of Hawaiʻi and the creation of the
+   * Brave Series"; that detail now lives only on the pages about the work.
    *
    * The three parts concatenate into exactly her sentence, split only so the
    * honour itself can carry emphasis. Keep the wording; restyle freely.
    */
   award: {
-    lead: 'Releasing Generations, led by Michele Okimura, was awarded the ',
-    honor: '2023 Outstanding Advocate for Children and Youth',
-    tail: ' (State of Hawaiʻi) for its work with young people of Hawaiʻi and the creation of the Brave Series.',
+    lead: 'Releasing Generations, under Michele’s leadership, won the ',
+    honor: '2023 Outstanding Advocate for the Children and Youth of Hawaiʻi',
+    tail: ' state award.',
   },
   cta: 'Get in touch',
 } as const
