@@ -91,8 +91,12 @@ const OTHER_PROJECTS = projectStudies.filter((project) =>
 
 /* ---------------------------------------------------------------- pieces */
 
+// `w-full` is load-bearing. The <li> is `display:flex` so the tile can stretch
+// to the row height, which makes the tile a flex ITEM: without an explicit
+// width it shrinks to its content, and the Preschool tile (a two-word label
+// under a cover) came out half the width of its neighbours.
 const TILE_CLASS =
-  'group flex h-full flex-col rounded-3xl bg-[var(--color-band-3)] p-5 ring-1 ring-[var(--color-navy-10)] transition duration-300 hover:shadow-xl hover:shadow-[var(--color-teal-20)] hover:ring-[var(--color-teal-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)] lg:p-6'
+  'group flex h-full w-full flex-col rounded-3xl bg-[var(--color-band-3)] p-5 ring-1 ring-[var(--color-navy-10)] transition duration-300 hover:shadow-xl hover:shadow-[var(--color-teal-20)] hover:ring-[var(--color-teal-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)] lg:p-6'
 
 function LearnMore() {
   return (
