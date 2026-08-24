@@ -114,6 +114,33 @@
   --color-band-2: #f5f3ec;
   --color-band-3: #f2ecdf;
 
+  /* ---------------------------------------------------------------------
+     AUTHOR HERO WASH
+     ---------------------------------------------------------------------
+     The one per-page hero ground on the site, added 2026-08-23 on Brett and
+     Michele's Author review: "pull the dominant colour from Michele's hero
+     photo and use it as a wash for the hero section."
+
+     It is sampled, not chosen. A 200-point downsample of
+     /public/images/michele/author-hero.jpg, with the near-white paper and the
+     shadows dropped, clusters hardest at #DBA686 (hue 22, sat 0.39): the warm
+     blush that runs through the florals on her dress and the wood behind her.
+     These two are that colour lightened until it stops being a panel and
+     starts being a ground.
+
+     THE RANGE IS A CONTRAST BUDGET. Nothing in this section may go darker
+     than --color-author-wash-base, because that is the floor where the tracked
+     small-caps eyebrow, which is --color-brand-terracotta-ink #B8431F, still
+     clears AA at 4.64:1. Navy body copy holds 12.5:1 there and the H1 has room
+     to spare. If you deepen the wash, re-measure the eyebrow first; it is the
+     colour that fails, not the heading.
+
+     Do NOT reach for these anywhere else. DESIGN-RULES bans coral-tinted
+     panels, and this is deliberately the single exception Michele asked for
+     rather than the start of a set. */
+  --color-author-wash-top: #fcf7f3;
+  --color-author-wash-base: #f6ebe2;
+
   --color-teal-text: #0f766e;
   --color-teal-on-dark: #9fe8df;
   --color-coral-text: #b8431f;
@@ -295,6 +322,33 @@ html {
       ellipse 110% 150% at 50% 50%,
       #243052 0%,
       var(--color-navy) 78%
+    );
+}
+
+/* The Author hero ground. Warm blush pulled from Michele's own hero photo, so
+   the section reads as an extension of the picture sitting in it rather than
+   as a tinted box behind it.
+
+   Two layers. A soft ellipse warms the right side, which is where the portrait
+   sits, and a top-to-bottom gradient carries the rest. Both stops live inside
+   the range set by --color-author-wash-top and --color-author-wash-base, so the
+   darkest pixel anywhere in the section is the base and every text colour on it
+   is measured against that. See the token block in this file.
+
+   This is the ONLY per-page hero background on the site. Every other interior
+   page uses .surface-teal-banner, and that is still the identity. */
+.surface-author-wash {
+  background-color: var(--color-author-wash-top);
+  background-image:
+    radial-gradient(
+      ellipse 60% 120% at 78% 40%,
+      var(--color-author-wash-base) 0%,
+      rgba(246, 235, 226, 0) 70%
+    ),
+    linear-gradient(
+      to bottom,
+      var(--color-author-wash-top) 0%,
+      var(--color-author-wash-base) 100%
     );
 }
 
