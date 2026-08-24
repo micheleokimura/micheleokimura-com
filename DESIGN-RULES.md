@@ -163,6 +163,16 @@ they are off-palette and read as extra brand colors.
   after any visual change and check every hit against that list.
 - Alternative: small-caps text, letter-spaced (tracked), no background, no
   border, no rounded corners. Rendered in accent color when emphasis is needed.
+- **A BUTTON IS NOT AN EXCEPTION.** Tested 2026-08-24: the Speaker keynote
+  cards were built from a reference whose card CTA is a pill, and the argument
+  for keeping it was that the rule's stated reason ("pills look clickable")
+  does not apply to something that genuinely IS the click target. Michele held
+  the rule. It is permanent and it outranks any reference. Every button on the
+  site is `rounded-md`, card CTAs included.
+- The `rounded-full` that ARE allowed, and the only ones: a circular icon
+  holder (the keynote cards' icon), an avatar, a decorative bullet dot, and
+  the rounded ends on a hairline rule (the header's 2px nav underline). Each
+  is a shape, never a text label.
 
 The house pattern is:
 

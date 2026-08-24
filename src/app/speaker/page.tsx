@@ -302,9 +302,18 @@ export default function SpeakerPage() {
 
                       {/* Pushed to the bottom so every card's control sits on
                           the same baseline whatever the teaser's length, and
-                          on the darkest part of the gradient. */}
+                          on the darkest part of the gradient.
+
+                          `rounded-md`, NOT the reference's pill. Michele held
+                          the sitewide no-pills rule over the reference on
+                          2026-08-24: it is a permanent rule and it wins. md is
+                          also the radius every other button on the site uses,
+                          so this control now matches the header CTA and
+                          ContactTrigger rather than being its own shape. The
+                          circle above it stays round, which the rule allows
+                          for an icon holder. Do not put the pill back. */}
                       <span className="mt-auto pt-3">
-                        <span className="font-display inline-flex items-center gap-1.5 rounded-full bg-white/15 px-5 py-2 text-xs font-semibold tracking-[0.14em] uppercase ring-1 ring-inset ring-white/30 transition duration-300 group-hover:bg-white/25">
+                        <span className="font-display inline-flex items-center gap-1.5 rounded-md bg-white/15 px-5 py-2 text-xs font-semibold tracking-[0.14em] uppercase ring-1 ring-inset ring-white/30 transition duration-300 group-hover:bg-white/25">
                           Learn more
                           <span
                             aria-hidden="true"
