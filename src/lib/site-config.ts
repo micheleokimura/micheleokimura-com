@@ -49,12 +49,43 @@ export const siteConfig = {
     'ReThink Creativity',
     'The Brave Series',
   ] as const,
+  /**
+   * THIS AWARD IS THE ORGANIZATION'S, NOT MICHELE'S. Releasing Generations
+   * received it; Explicit Movement, which releasinggenerations.org credits, is
+   * a DBA of Releasing Generations rather than a separate body, so both names
+   * point at the same legal entity. Michele led the organization that won it
+   * and does not claim it personally.
+   *
+   * `awardRecipient` is here so the fact travels with the fields rather than
+   * living in someone's memory. Nothing currently reads these (the home hero
+   * uses HERO.award in home-variants.ts, the graph uses schema.ts, and /about
+   * uses credentials.ts), but they read like a personal credential, and the
+   * next person to wire them into a bio would reintroduce the misattribution.
+   * If you use them, name the recipient.
+   */
   award: 'Outstanding Advocate for Children and Youth of Hawai\'i (2023)',
-  awardIssuer: 'Governor Josh Green and Mayor Rick Blangiardi',
+  awardRecipient: 'Releasing Generations, led by Michele Okimura',
+  awardIssuer: 'State of Hawai\'i, in honor of Children and Youth Day 2023',
+  awardConferredBy: 'Governor Josh Green and Mayor Rick Blangiardi',
+  awardFor: 'work with the young people of Hawai\'i and the creation of the Brave Series',
+  /**
+   * A `null` here means "we do not have the handle yet". The footer skips any
+   * social whose URL is null rather than guessing one, so an unfilled entry
+   * costs a missing icon and never a link to a stranger's account.
+   *
+   * ############ PLACEHOLDER: substack and youtube ############
+   * Michele asked for both icons in the footer on 2026-08-23 and said to use
+   * placeholders if the handles were not already in the repo. They are not.
+   * Put the real profile URLs in and the icons appear on their own; nothing
+   * else needs touching.
+   * ###########################################################
+   */
   socials: {
     linkedin: 'https://www.linkedin.com/in/michele-okimura-36861951',
     facebook: 'https://www.facebook.com/michele.okimura',
     instagram: 'https://www.instagram.com/michele_okimura/',
+    substack: null as string | null,
+    youtube: null as string | null,
   },
   wikidataId: null as string | null,
   podcast: {

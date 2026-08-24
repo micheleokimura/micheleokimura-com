@@ -2,13 +2,15 @@ import Link from 'next/link'
 import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
 import { PodcastSeriesJsonLd } from '@/components/JsonLd'
-import { JoinWaitListButton } from '@/components/wait-list/JoinWaitListButton'
 import { footerColumns, siteConfig } from '@/lib/site-config'
 
 /**
- * Site footer: a full-bleed navy surface carrying a newsletter block on top
- * and a four-column nav underneath (Explore / Community / Built By /
- * wordmark + tagline), per the Living in Duvall reference.
+ * Site footer: a full-bleed navy surface carrying a four-column nav
+ * (wordmark + tagline + socials / Explore / Community / More from Michele).
+ *
+ * It used to open with a newsletter block above those columns. Michele cut it
+ * on 2026-08-23, along with the podcast platform row, her email address, and
+ * the 988 crisis-line notice. See the comments at each removal site.
  *
  * It is dark on purpose. The footer is the one place the brand gets to fill
  * the whole viewport width, which is why the rest of the site can stay cream
@@ -27,6 +29,12 @@ const headingClass =
 const linkClass =
   'text-[var(--color-cream)]/75 transition hover:text-[var(--color-cream)] hover:underline underline-offset-4 decoration-[var(--color-teal-on-dark)]'
 
+/**
+ * Socials. Substack and YouTube were added on Michele's 2026-08-23 review.
+ * Entries whose `href` is null are filtered out below rather than rendered as
+ * dead icons, so the two placeholders in site-config stay invisible until she
+ * supplies the handles. See the note on `siteConfig.socials`.
+ */
 const socials = [
   {
     href: siteConfig.socials.linkedin,
@@ -43,7 +51,19 @@ const socials = [
     label: 'Michele on Facebook',
     path: 'M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z',
   },
-]
+  {
+    href: siteConfig.socials.substack,
+    label: 'Michele on Substack',
+    path: 'M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z',
+  },
+  {
+    href: siteConfig.socials.youtube,
+    label: 'Michele on YouTube',
+    path: 'M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z',
+  },
+].filter((item): item is { href: string; label: string; path: string } =>
+  Boolean(item.href),
+)
 
 function MicIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -58,14 +78,19 @@ function MicIcon(props: React.SVGProps<SVGSVGElement>) {
 export function SiteFooter() {
   const podcast = siteConfig.podcast
 
-  const podcastLinks = [
-    { href: podcast.spotify, label: 'Spotify' },
-    { href: podcast.apple, label: 'Apple Podcasts' },
-    { href: podcast.rss, label: 'RSS' },
-  ]
-
   return (
-    <footer className="mt-24 w-full bg-[var(--color-navy)] sm:mt-32 lg:mt-40" data-surface="dark">
+    // The gap above the footer is PADDING ON A PAINTED BAND, not a margin.
+    //
+    // It used to be `mt-24 sm:mt-32 lg:mt-40` on the footer itself, which left
+    // 96-160px of unpainted page ground between the last section and the navy.
+    // That gap always rendered in the LIGHTEST shade on the site, whatever the
+    // section above it was, so the end of the page went light-to-dark with a
+    // mismatched strip in between and every page had to end on band-1 to hide
+    // it. Painting the run-in with band-4, the deepest neutral, makes the close
+    // a descent instead: section -> deeper -> navy. It also frees every page to
+    // end on whatever band its own rhythm wants.
+    <div className="bg-[var(--color-band-4)] pt-24 sm:pt-28 lg:pt-32">
+      <footer className="w-full bg-[var(--color-navy)]" data-surface="dark">
       {/* The podcast lives in the footer, so its structured data travels with
           it and ships on every page instead of only the home page. */}
       <PodcastSeriesJsonLd
@@ -78,27 +103,12 @@ export function SiteFooter() {
 
       <Container>
         <FadeIn>
-          {/* ------------------------------------------------ newsletter */}
-          <div className="border-b border-[var(--color-cream)]/15 py-14 sm:py-16">
-            <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[1fr_auto] lg:gap-16">
-              <div className="max-w-xl">
-                <h2 className={headingClass}>Stay in touch</h2>
-                <p className="font-display mt-4 text-2xl leading-tight font-medium text-balance text-[var(--color-cream)] sm:text-3xl">
-                  Michele takes a small number of coaching clients and speaking
-                  dates each year.
-                </p>
-                <p className="mt-4 max-w-md text-base leading-7 text-[var(--color-cream)]/75">
-                  Leave your info and she will reach out personally when a spot
-                  opens.
-                </p>
-              </div>
-              <div className="lg:justify-self-end">
-                {/* `primary` is the filled coral button. JoinWaitListButton
-                    has no `solid` variant; that belongs to Button. */}
-                <JoinWaitListButton source="footer" variant="primary" tone="dark" />
-              </div>
-            </div>
-          </div>
+          {/* The "Stay in touch" newsletter block that used to sit here (the
+              "Michele takes a small number of coaching clients and speaking
+              dates each year" headline and its wait-list button) was removed on
+              2026-08-23 at Michele's instruction. The footer opens straight on
+              the columns now. Contact still has a route in the Community
+              column and a button in the header. */}
 
           {/* -------------------------------------------- four columns */}
           {/* Order: brand + socials, Explore, Community, More from Michele. */}
@@ -151,7 +161,14 @@ export function SiteFooter() {
               </nav>
             ))}
 
-            {/* More from Michele: the podcast, the press kit, and her inbox. */}
+            {/* More from Michele. Two entries and nothing else, per Michele
+                2026-08-23. Three things came out of this column in that pass:
+                the "In a moment with Brett K. Moore" co-host line under the
+                podcast title, the Spotify / Apple / RSS row beneath it, and her
+                michele@micheleokimura.com address, which she had asked to have
+                removed once before. The podcast's own page carries the platform
+                links, and the JSON-LD block at the top of this footer still
+                ships the full podcast metadata on every page. */}
             <div className="col-span-2 lg:col-span-1">
               <h2 className={headingClass}>More from Michele</h2>
 
@@ -159,48 +176,23 @@ export function SiteFooter() {
                 href={podcast.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group mt-6 flex items-start gap-3"
+                className="group mt-6 flex items-center gap-3"
               >
-                <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--color-cream)]/10 text-[var(--color-cream)] transition group-hover:bg-[var(--color-cta)] group-hover:text-[var(--color-cta-ink)]">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--color-cream)]/10 text-[var(--color-cream)] transition group-hover:bg-[var(--color-cta)] group-hover:text-[var(--color-cta-ink)]">
                   <MicIcon className="h-4 w-4" />
                 </span>
-                <span>
-                  <span className="font-display block text-base font-semibold text-[var(--color-cream)] decoration-[var(--color-teal-on-dark)] underline-offset-4 group-hover:underline">
-                    {podcast.name}
-                  </span>
-                  <span className="mt-0.5 block text-xs text-[var(--color-cream)]/60">
-                    With {podcast.coHost}
-                  </span>
+                <span className="font-display text-base font-semibold text-[var(--color-cream)] decoration-[var(--color-teal-on-dark)] underline-offset-4 group-hover:underline">
+                  {podcast.name}
                 </span>
               </a>
 
-              <ul className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
-                {podcastLinks.map((item, i) => (
-                  <li key={item.href} className="flex items-center gap-3">
-                    {i > 0 ? (
-                      <span aria-hidden="true" className="text-[var(--color-cream)]/30">
-                        &middot;
-                      </span>
-                    ) : null}
-                    <a href={item.href} target="_blank" rel="noopener noreferrer" className={linkClass}>
-                      {item.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-
-              <ul className="mt-6 space-y-3 text-sm">
+              <ul className="mt-5 space-y-3 text-sm">
                 <li>
                   {/* There is no press-kit page. The press kit is a section on
                       the speaker page, so this anchors to its heading id. */}
                   <Link href="/speaker#press-kit-heading" className={linkClass}>
                     Press kit
                   </Link>
-                </li>
-                <li>
-                  <a href={`mailto:${siteConfig.email}`} className={linkClass}>
-                    {siteConfig.email}
-                  </a>
                 </li>
               </ul>
             </div>
@@ -213,26 +205,16 @@ export function SiteFooter() {
               reserved.
             </p>
 
-            {/* Mental-health resource. The site tells stories that touch on
-                crisis, so the way out stays one tap away on every page. */}
-            <p className="mt-6 max-w-2xl text-xs leading-5 text-[var(--color-cream)]/60">
-              If you&rsquo;re in crisis, please reach out.{' '}
-              <a href="tel:988" className="text-[var(--color-cream)]/85 underline underline-offset-2 hover:text-[var(--color-cream)]">
-                988 Suicide &amp; Crisis Lifeline (call or text 988)
-              </a>{' '}
-              <span aria-hidden="true" className="text-[var(--color-cream)]/30">&middot;</span>{' '}
-              <a
-                href="https://988lifeline.org"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[var(--color-cream)]/85 underline underline-offset-2 hover:text-[var(--color-cream)]"
-              >
-                988lifeline.org
-              </a>
-            </p>
+            {/* The 988 Suicide & Crisis Lifeline block that used to sit here was
+                removed on 2026-08-23. Michele had asked for it twice. It is
+                recorded here so the next person to think "this site talks about
+                trauma, it should carry a crisis line" knows the omission is her
+                decision and not an oversight, and takes it back to her rather
+                than re-adding it. */}
           </div>
         </FadeIn>
       </Container>
-    </footer>
+      </footer>
+    </div>
   )
 }

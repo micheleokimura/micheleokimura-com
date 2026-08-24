@@ -8,9 +8,11 @@ import { CLIENT_LOGOS, type ClientLogo } from '@/lib/client-logos'
 /**
  * LogoMarquee — single-row, right-to-left auto-scroll below the home hero.
  * Reuses the .marquee-track / .marquee-band CSS from tailwind.css (defined
- * for OrgCarousel) but overrides the animation duration inline: that shared
- * class runs a slow 135s two-row cycle, while this single row of 17 logos
- * wants a snappier pass.
+ * for OrgCarousel) but overrides the animation duration inline.
+ *
+ * Reworked 2026-08-23 on Michele's review: logos at 2x, full colour at rest
+ * (they were grayscale and dimmed), and the drift slowed to half its former
+ * pixel speed. See the notes at the tile and at the duration.
  *
  * Three tile shapes come out of the registry:
  *  - a logo that links to a case study,
@@ -21,7 +23,7 @@ import { CLIENT_LOGOS, type ClientLogo } from '@/lib/client-logos'
 function LogoArt({ item }: { item: ClientLogo }) {
   if (!item.logo) {
     return (
-      <span className="font-display px-1 text-center text-sm leading-tight font-semibold tracking-[0.14em] text-neutral-500 uppercase transition duration-300 group-hover:text-[var(--color-brand-teal)]">
+      <span className="font-display px-1 text-center text-base leading-tight font-semibold tracking-[0.14em] text-neutral-700 uppercase transition duration-300 group-hover:text-[var(--color-brand-teal)]">
         {item.name}
       </span>
     )
@@ -32,12 +34,18 @@ function LogoArt({ item }: { item: ClientLogo }) {
       src={item.logo}
       alt={item.name}
       fill
-      sizes="160px"
+      sizes="320px"
       className={[
-        'object-contain opacity-60 transition duration-300 group-hover:opacity-100',
-        // Inverted art is monochrome to begin with, so it keeps no grayscale
-        // pass; the other logos desaturate and come back to colour on hover.
-        item.invert ? 'invert' : 'grayscale group-hover:grayscale-0',
+        // FULL COLOUR AT REST, per Michele 2026-08-23. These logos used to sit
+        // at opacity-60 with a grayscale pass and only came back to colour on
+        // hover, which on a touch screen meant never. They are her clients'
+        // actual marks and she wants them seen as they are. Do not reintroduce
+        // `grayscale` or an opacity dim here.
+        'object-contain transition duration-300',
+        // `invert` art still has to flip: those files ship white-on-transparent
+        // and would otherwise be invisible on a light band. That is a
+        // legibility fix, not a desaturation, so it stays.
+        item.invert ? 'invert' : '',
         item.matte ? 'mix-blend-multiply' : '',
       ]
         .filter(Boolean)
@@ -49,17 +57,21 @@ function LogoArt({ item }: { item: ClientLogo }) {
 function LogoTile({ item }: { item: ClientLogo }) {
   const inner = (
     <>
-      <span className="relative flex h-12 w-full items-center justify-center">
+      {/* 2x the old tile, per Michele 2026-08-23: the art box went h-12 -> h-24
+          and the tile w-36/sm:w-40 -> w-72/sm:w-80. The name under it steps up
+          with it so the caption does not look orphaned beside a logo twice its
+          old size. */}
+      <span className="relative flex h-24 w-full items-center justify-center">
         <LogoArt item={item} />
       </span>
-      <span className="text-center text-xs text-neutral-500 transition group-hover:text-neutral-800">
+      <span className="text-center text-sm text-neutral-600 transition group-hover:text-neutral-900">
         {item.name}
       </span>
     </>
   )
 
   const className =
-    'group flex w-36 shrink-0 flex-col items-center gap-2 px-4 sm:w-40'
+    'group flex w-72 shrink-0 flex-col items-center gap-3 px-6 sm:w-80'
 
   if (!item.href) {
     return (
@@ -88,7 +100,7 @@ export function LogoMarquee() {
   return (
     <section
       aria-label="Organizations Michele has worked with"
-      className="bg-[var(--color-cream)] py-16 lg:py-24"
+      className="bg-[var(--color-band-2)] py-20 sm:py-24 lg:py-28"
     >
       <Container>
         <FadeIn>
@@ -103,9 +115,17 @@ export function LogoMarquee() {
 
       <FadeIn>
         <div className="marquee-band mt-12 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
+          {/* 192s, and the number is arithmetic rather than taste. Michele
+              asked for the scroll to be ~50% slower. The tiles also doubled in
+              width in the same pass, which on its own would have DOUBLED the
+              pixel speed at an unchanged duration. So the old 48s has to be
+              multiplied twice: x2 to absorb the wider track, then x2 again for
+              the requested slowdown. The track travels 50% of its own width per
+              cycle, so this is ~26 px/s against the old ~51 px/s. Re-derive
+              this if the tile width changes again. */}
           <div
             className="marquee-track marquee-rtl"
-            style={{ animationDuration: '48s' }}
+            style={{ animationDuration: '192s' }}
           >
             {items.map((item, i) => (
               <LogoTile key={`${item.slug}-${i}`} item={item} />

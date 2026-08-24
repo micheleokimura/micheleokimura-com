@@ -1,45 +1,90 @@
 import type { Metadata } from 'next'
 
 import { pageMetadata } from '@/lib/schema'
-import Image from 'next/image'
 import Link from 'next/link'
+import { BookOpen, MessageCircle, Mic } from 'lucide-react'
 
 import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { Button } from '@/components/Button'
-import { ContactBlock } from '@/components/ContactBlock'
+import { ContactTrigger } from '@/components/ContactTrigger'
 import { LogoMarquee } from '@/components/LogoMarquee'
 import {
   DOORS,
-  ENDORSEMENTS,
-  ENDORSING_ORGS,
-  FEATURED_WORKS,
-  PROOF_POINTS,
+  FRIENDS_SAY_BOTTOM,
+  FRIENDS_SAY_TOP,
+  HERO,
+  PULL_QUOTE,
+  type Door,
+  type Testimonial,
 } from '@/lib/home-variants'
 
 /**
- * Home page: AUTHOR / SPEAKER / COACH clarity.
+ * Home page. Rebuilt 2026-08-23 against Michele's walkthrough of the live site.
  *
- * Built for the visitor who arrived with a job to do: an event organizer
- * checking whether Michele fits their stage, or a writer sizing up the
- * coaching. The video hero is deliberately short so the three doors clear the
- * fold on a laptop, and the coaching CTA is repeated at the close.
+ * She reads this page in FIRST PERSON now. The H1 is "Hi, I'm Michele Okimura",
+ * the three cards say "Book me to speak" / "See my body of work" / "See my
+ * method", and the old third-person hero line ("She helps people find the shape
+ * of the work they were made to do...") is deleted at her instruction. Do not
+ * reintroduce third-person copy on this page.
  *
- * The golden-thread framing that used to run this page is gone. It was
- * reviewed and dropped; do not reintroduce it here.
+ * SECTION BANDS. Michele, on the page running as one flat colour: "I'm just
+ * staring into a void and I don't know when a thought's completed and it's
+ * ready. I'm ready to move on somewhere else." Every section below is
+ * full-bleed, sits on one of --color-band-1/2/3, and carries its own vertical
+ * padding instead of the old margin stack.
  *
- * The featured-work row is a plain responsive grid rather than a rotating
- * carousel. Michele's authored works ARE her case studies, so hiding two
- * thirds of them behind a carousel arrow would bury the authority stack this
- * page exists to show.
+ * The order down the page, which is a rhythm rather than a strict A/B:
+ *
+ *   hero          navy video
+ *   marquee       band-2   (set on the section in LogoMarquee.tsx)
+ *   three doors   band-1
+ *   pull quote    band-3   deepest, most padding, the pause
+ *   the Method    band-2
+ *   postures      band-1
+ *   footer run-in band-4   (painted by SiteFooter, not by this file)
+ *
+ * Two rules hold it together. Neighbours never share a band, because a repeated
+ * ground is exactly the seam that goes missing. And a CARD never takes a band:
+ * tiles use --color-cream, which is warm and lifts off any of these neutrals,
+ * whereas a band on a band would be a 5-point difference nobody can see.
+ *
+ * "Friends say" sits on band-1 between the quote (band-3) and the Method
+ * (band-2). Both neighbours differ from it, so the rhythm is unchanged.
+ *
+ * THE THREE ROLE CARDS ARE THE EXCEPTION to "a card never takes a band". They
+ * are not neutral tiles at all now: each one is a coloured gradient using the
+ * shared .msg-card system (see tailwind.css), so they sit ON band-1 as
+ * saturated objects rather than as a five-point shade difference. The rule
+ * still holds for every other card on the page.
+ *
+ * Padding is py-20/24/28 (80/96/112px) as standard, and more on the quote. The
+ * shade change only registers if there is enough quiet either side of it.
+ *
+ * Sections deleted in this pass, all at Michele's instruction, none to be
+ * restored without her:
+ *  - "Recognition" ("the work has been checked by people who had to be sure",
+ *    plus the 2023 / 2026 / 14-works tiles),
+ *  - the founder-and-executive-director blurb under the hero, replaced by the
+ *    pull quote,
+ *  - "Ready when you are", the ContactBlock that used to close the page. The
+ *    page now runs straight from the Method into the footer,
+ *  - "A body of work" in full: the heading, the six-cover grid, and the "See
+ *    every title" link. /author carries the books, and the Author card in the
+ *    three doors is now the only route to them from here.
+ *
+ * "Things my friends say about me" is LIVE, with Michele's curated list of
+ * fifteen quotes signed off 2026-08-24. It was parked twice on the way here;
+ * the list itself is now settled, so treat the arrays in home-variants.ts as
+ * approved copy rather than a working set.
  */
 export const metadata: Metadata = pageMetadata({
   title: 'Coach, author, and speaker',
   description:
-    'Michele Okimura is an author, speaker, and coach on Oʻahu, Hawaiʻi. Two published trade books, two more in 2027, keynotes and workshops, and the Brave Purpose Author Method.',
+    'Michele Okimura is an author, speaker, and coach in Honolulu, Hawaiʻi. Two published trade books, two more in 2027, keynotes and workshops, and the Brave Purpose Author Method.',
   path: '/',
   ogDescription:
-    'Author, speaker, and coach on Oʻahu. Founder and Executive Director of Releasing Generations.',
+    'Author, speaker, and coach in Honolulu. Founder and Executive Director of Releasing Generations.',
 })
 
 /**
@@ -50,32 +95,151 @@ export const metadata: Metadata = pageMetadata({
  */
 const WIDE = 'mx-auto max-w-7xl px-6 lg:px-8'
 
+/**
+ * Role-card icons. Names verified against the installed lucide-react, which is
+ * strict about them: that package exports `House` rather than `Home` and has no
+ * `Waves`, so /speaker had to reach for `AudioWaveform`. `Mic`, `BookOpen` and
+ * `MessageCircle` all exist. Typed off one of the icons rather than lucide's
+ * own `LucideIcon`, which the package declares but does not export.
+ */
+const DOOR_ICONS: Record<Door['icon'], typeof Mic> = {
+  mic: Mic,
+  book: BookOpen,
+  message: MessageCircle,
+}
+
+/**
+ * One card in the two scrolling endorsement rows.
+ *
+ * BODY TYPE IS 17px, up from the 15px this ran at before it was parked.
+ * Michele's note: older readers matter. The card widened with it so the measure
+ * stays readable rather than the copy just reflowing into a taller column.
+ *
+ * The horizontal space between cards is `mx` on the card, NOT `gap` on the
+ * track. The marquee keyframes wrap by translating exactly -50% of the track,
+ * and a flex `gap` adds a gap BETWEEN the two copies as well as inside them, so
+ * -50% lands half a gap short and the loop hitches once per cycle. LogoMarquee
+ * uses px-6 on its tiles for the same reason.
+ */
+function TestimonialCard({ item }: { item: Testimonial }) {
+  return (
+    <figure className="mx-3 flex w-[21rem] shrink-0 flex-col rounded-2xl bg-[var(--color-cream)] p-7 ring-1 ring-[var(--color-navy-10)] sm:w-[27rem] sm:p-8">
+      <blockquote className="flex-auto text-[1.0625rem] leading-7 text-neutral-800">
+        &ldquo;{item.quote}&rdquo;
+      </blockquote>
+      <figcaption className="mt-6 border-t border-[var(--color-navy-10)] pt-5 text-[0.9375rem]">
+        <span className="block font-semibold text-neutral-900">{item.name}</span>
+        {item.title ? (
+          <span className="mt-0.5 block leading-5 text-neutral-600">
+            {item.title}
+          </span>
+        ) : null}
+        {item.work ? (
+          <span className="font-display mt-1.5 block text-xs font-semibold tracking-wider text-[var(--color-brand-terracotta-ink)] uppercase">
+            On {item.work}
+          </span>
+        ) : null}
+      </figcaption>
+    </figure>
+  )
+}
+
+/**
+ * One scrolling row. `.marquee-track` and its keyframes come from tailwind.css;
+ * the array is rendered twice inside the track because the keyframes translate
+ * by exactly -50% for a seamless wrap.
+ *
+ * `duration` is Michele's spec on restore: 80 to 100s per full loop, up from
+ * the 55/62s this ran at before. The two rows run at slightly different speeds
+ * and in opposite directions so they never lock into step and read as one
+ * block. Hovering anywhere in a row pauses it, and prefers-reduced-motion stops
+ * both outright.
+ */
+function TestimonialRow({
+  items,
+  direction,
+  duration,
+}: {
+  items: Testimonial[]
+  direction: 'ltr' | 'rtl'
+  duration: string
+}) {
+  const doubled = [...items, ...items]
+
+  return (
+    <div className="marquee-band overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+      <div
+        className={`marquee-track items-stretch ${
+          direction === 'ltr' ? 'marquee-ltr' : 'marquee-rtl'
+        }`}
+        style={{ animationDuration: duration }}
+      >
+        {doubled.map((item, i) => (
+          <TestimonialCard key={`${item.name}-${item.work ?? ''}-${i}`} item={item} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export default function HomePage() {
   return (
     <>
       {/* ------------------------------------------------------------- hero */}
-      {/* Video hero. Michele is framed on the RIGHT of michele-hero.mp4 (it was
-          mirrored for exactly this reason), so the navy overlay is
-          strongest on the left, where her name sits, and eases to transparent
-          on the right so her face reads through. Below sm there is no room for
-          a left column beside her face, so the overlay flattens to a uniform
-          navy wash and the text goes full-width and centered, with the
-          video still playing behind it as ambient motion.
+      {/* TRUE 16:9, from sm up. The source file is 1920x1080, but the section
+          used to be a fixed 360-440px band, which cropped it to roughly 3.3:1
+          and cut the audience out of frame. `aspect-[16/9]` lets the whole
+          frame through, which is what Michele asked for and what keeps her AND
+          the room visible.
 
-          The middle stop is navy/80, and it must stay navy. It used to be
-          teal/55, which measured 1.98:1 against the cream H1 over a bright
-          video frame. Teal cannot hold this stop at ANY opacity: even at 90%
-          it only reaches 3.81:1, because the teal itself is too light. Navy
-          at 80% gives the H1 6.56:1 and the eyebrow 5.55:1 on a white frame,
-          which is the worst case the video can produce. The text column runs
-          to roughly 52% of the width on a wide screen, so it genuinely
-          overlaps this stop.
+          Below sm the ratio is dropped for a min-height instead: 16:9 on a
+          375px phone is 211px tall, which cannot hold the H1, the subhead, the
+          award line and a button. There the video is ambient background behind
+          stacked copy.
 
-          Height is capped rather than full-viewport so the three doors below
-          clear the fold on a laptop. See DESIGN-RULES.md. */}
+          The max-height is VIEWPORT-RELATIVE, and the distinction matters. An
+          earlier cut used a fixed 900px, which engaged on any viewport wider
+          than 1600px: Michele's own display is 1710 CSS px, so the one person
+          who asked for 16:9 would have been served 1.90:1 on her own screen.
+          That cap was removed.
+
+          `calc(100svh-4.75rem)` is a different thing. 4.75rem is the header, so
+          this caps the hero at exactly the space left on screen, and it can
+          only ever engage when honest 16:9 would push the hero PAST the fold,
+          which is the one case where the ratio and Michele's "the award has to
+          be visible above the fold" cannot both be satisfied. On her 1710x1073
+          display 16:9 is 962px against 997px available, so nothing clamps and
+          she sees true 16:9. On a shorter laptop the hero gives up a little
+          height rather than dropping the award and the CTA off the screen.
+
+          If she would rather have pure 16:9 everywhere and accept the CTA
+          falling below the fold on small laptops, delete the max-h and nothing
+          else changes.
+
+          OVERLAY. Two layers, and they do different jobs. See the notes on each
+          one below; the short version is a 25% flat wash over the whole frame
+          plus a scrim that only exists behind the copy.
+
+          The scrim is what was actually wrong before. The wash was already 35%,
+          but the scrim under it ran to 95% navy across the bottom THREE
+          QUARTERS of the frame, so the majority of the hero composited to
+          roughly 97% navy and the picture only survived in a thin band up top.
+          Michele reported the hero as reading solid navy, and she was right.
+          Both numbers came down, and the scrim is now bound to the text rather
+          than to a fraction of the hero.
+
+          WHAT IS IN THE VIDEO, because it changes what any of this can achieve.
+          The clip is 16s and cuts between stage shots of Michele and shots of
+          the audience. The stage footage is heavily out of focus: she reads as
+          a soft figure at any overlay value, and no amount of lightening will
+          sharpen her. The audience footage is sharp and much brighter, and it
+          is the reason the scrim cannot go lower than it does. If a sharper
+          stage clip ever replaces this file, re-run the measurement in the
+          commit for this change; a brighter clip needs more scrim, a sharper
+          one needs none of this reasoning revisited. */}
       <section
         aria-label="Michele Okimura"
-        className="relative isolate flex min-h-[360px] w-full items-center overflow-hidden bg-[var(--color-navy)] sm:min-h-[420px] lg:min-h-[440px]"
+        className="relative isolate min-h-[32rem] w-full overflow-hidden bg-[var(--color-navy)] sm:min-h-0 sm:aspect-[16/9] sm:max-h-[calc(100svh-4.75rem)]"
       >
         <video
           src="/videos/michele-hero.mp4"
@@ -88,266 +252,409 @@ export default function HomePage() {
           aria-hidden="true"
         />
 
+        {/* The flat wash over the WHOLE frame: 25%, the light end of the range
+            Michele asked for. This is the only thing covering the top of the
+            picture, which is where she is: in every stage frame she stands in
+            the upper-middle, so her head and shoulders sit at roughly 10-25% of
+            the frame height and are darkened by this and nothing else.
+
+            25% rather than 40% because the footage is already dark. Measured
+            over 65 frames, the mean relative luminance behind the copy is
+            0.089, so this clip has very little brightness to give away. */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[var(--color-navy)]/75 sm:bg-gradient-to-r sm:from-[var(--color-navy)]/90 sm:via-[var(--color-navy)]/80 sm:to-transparent"
+          className="absolute inset-0 bg-[var(--color-navy)]/25"
         />
 
-        <Container className="relative py-14 sm:py-16">
-          <FadeIn className="mx-auto max-w-xl text-center sm:mx-0 sm:max-w-lg sm:text-left lg:max-w-2xl">
-            <h1 className="font-display text-[2.25rem] leading-[1.05] font-medium tracking-tight text-balance text-[var(--color-cream)] sm:text-[2.75rem] lg:text-6xl">
-              Michele Okimura
+        {/* The legibility scrim, and it is attached to the COPY rather than to
+            a fraction of the hero. That distinction is load-bearing: the hero
+            is 16:9 but clamps to the viewport on a short screen, so a
+            percentage-height scrim slides out from under the text exactly when
+            the hero gets shorter. This element wraps the copy, so its height is
+            always the text plus the `pt` fade zone, at every breakpoint.
+
+            The stops are derived, not eyeballed. Sampling every 0.25s across
+            the clip and compositing cream #F2ECDF over navy at each candidate
+            alpha, the copy needs an effective alpha of 0.54 under the H1 (large
+            text, 3:1) and 0.62 under the subhead (body text, 4.5:1) for ZERO
+            failing pixels in the worst frame. The clip is mostly dark, but two
+            audience shots run to a near-white luminance of 0.95 right where the
+            text sits, and those are what set the floor.
+
+            Measured result of the shipped stack, worst case across the clip,
+            zero failing pixels in every band:
+
+              H1        effective 0.630   4.13:1  (floor 3.0)
+              roles     effective 0.692   5.04:1  (floor 4.5)
+              subhead   effective 0.722   5.16:1  (floor 4.5)
+              award     effective 0.792   5.15:1  (floor 4.5)
+              top of frame, where Michele is:  0.25, the wash alone
+
+            Re-run the measurement if the video is ever replaced; a brighter
+            clip needs more scrim. The script is in the commit for this change. */}
+        <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,rgba(31,39,68,0.78)_0%,rgba(31,39,68,0.70)_40%,rgba(31,39,68,0.52)_70%,rgba(31,39,68,0)_100%)] pt-40 sm:pt-48 lg:pt-56">
+        <Container className="pb-9 sm:pb-10 lg:pb-14">
+          <FadeIn className="max-w-2xl">
+            <h1 className="font-display text-[2rem] leading-[1.05] font-medium tracking-tight text-balance text-[var(--color-cream)] sm:text-[2.5rem] lg:text-6xl">
+              {HERO.h1}
             </h1>
-            <p className="font-display mt-4 text-lg font-semibold tracking-[0.14em] text-[var(--color-teal-on-dark)] uppercase sm:mt-5 sm:text-xl lg:text-2xl">
-              Author. Speaker. Coach.
+
+            {/* Middle dots, not periods. Michele was specific.
+
+                CREAM, not the pale teal --color-teal-on-dark that every other
+                eyebrow on a dark surface uses. That token is specified against
+                FLAT navy, where it holds 7.71:1. Over video it does not: at the
+                overlay this hero now runs, the measurement put it at 4.26:1
+                with ~100 failing pixels in the bright audience frames, and the
+                only ways to rescue it were to darken the hero further (which is
+                the opposite of what this change is for) or to brighten the ink.
+                Cream is the brighter ink and lands at 5.04:1. If the teal
+                eyebrow is wanted back here, the video has to get darker. */}
+            <p className="font-display mt-3 text-sm font-semibold tracking-[0.16em] text-[var(--color-cream)] uppercase sm:mt-4 sm:text-base lg:text-lg">
+              {HERO.roles.join(' · ')}
             </p>
-            <p className="mt-5 max-w-xl text-base leading-7 text-[var(--color-cream)]/85 sm:text-lg sm:leading-8">
-              She helps people find the shape of the work they were made to do,
-              then walks with them until it lives in the world.
+
+            {/* Solid cream, not cream/90. The 10% transparency blended the
+                glyphs toward the video behind them and cost about half a point
+                of contrast: 4.05:1 measured, which fails AA, against 5.16:1
+                solid. Do not reintroduce an opacity here. */}
+            <p className="mt-4 max-w-xl text-[0.9375rem] leading-7 text-[var(--color-cream)] sm:mt-5 sm:text-base sm:leading-7 lg:text-lg lg:leading-8">
+              {HERO.subhead}
             </p>
-          </FadeIn>
-        </Container>
-      </section>
 
-      <LogoMarquee />
+            {/* Award. A line with a hairline rule, NOT a pill: Michele banned
+                pill-shaped badges sitewide in this same review.
 
-      {/* ------------------------------------------------------ three doors */}
-      {/* Directly under the video, still above the fold on a laptop. */}
-      <section aria-labelledby="three-ways-heading" className={`${WIDE} mt-10 sm:mt-12`}>
-        <h2 id="three-ways-heading" className="sr-only">
-          Three ways to work with Michele
-        </h2>
-        <FadeInStagger faster>
-          <ul
-            role="list"
-            className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5 lg:gap-8"
-          >
-            {DOORS.map((door) => (
-              <FadeIn as="li" key={door.key} className="flex">
-                <Link
-                  href={door.href}
-                  aria-label={`${door.label}: ${door.cta}`}
-                  className="group flex w-full flex-col rounded-3xl bg-[var(--color-teal-05)] p-6 ring-1 ring-[var(--color-teal-10)] transition duration-300 hover:bg-[var(--color-cream)] hover:shadow-xl hover:shadow-[var(--color-teal-20)] hover:ring-[var(--color-teal-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)] lg:p-8"
-                >
-                  <h3 className="font-display text-xs font-semibold tracking-[0.18em] text-[var(--color-brand-terracotta-ink)] uppercase">
-                    {door.label}
-                  </h3>
-                  <div className="mt-3 flex flex-auto flex-col lg:mt-4">
-                    <p className="flex-auto text-sm leading-6 text-neutral-700 lg:text-base lg:leading-7">
-                      {door.hook}
-                    </p>
-                    <span className="font-display mt-5 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition group-hover:decoration-2 lg:mt-6">
-                      {door.cta}
-                      <span
-                        aria-hidden="true"
-                        className="transition-transform duration-200 group-hover:translate-x-0.5"
-                      >
-                        &rarr;
-                      </span>
-                    </span>
-                  </div>
-                </Link>
-              </FadeIn>
-            ))}
-          </ul>
-        </FadeInStagger>
-      </section>
+                THE ORGANIZATION IS THE SUBJECT OF THE SENTENCE, AND THAT IS THE
+                WHOLE POINT OF THIS BLOCK. The award went to Releasing
+                Generations (Explicit Movement is its DBA), not to Michele. An
+                earlier version led with the honour, which sitting under her name
+                in her own hero read as a personal award.
 
-      {/* ------------------------------------------------------ who she is */}
-      <section aria-label="About Michele">
-        <Container className="mt-20 sm:mt-28 lg:mt-32">
-          <FadeIn className="flex flex-col items-center gap-8 sm:flex-row sm:items-start sm:gap-10 lg:gap-14">
-            <Image
-              src="/team/michele-okimura.jpg"
-              alt="Michele Okimura"
-              width={1029}
-              height={1286}
-              sizes="(min-width: 1024px) 14rem, (min-width: 640px) 11rem, 9rem"
-              className="h-36 w-36 shrink-0 rounded-full object-cover object-top shadow-lg shadow-[var(--color-teal-10)] ring-4 ring-[var(--color-cream)] sm:h-44 sm:w-44 lg:h-56 lg:w-56"
-            />
-            <p className="max-w-2xl text-center text-lg leading-8 text-neutral-700 sm:text-left sm:text-xl sm:leading-9">
-              Founder and{' '}
-              <span className="font-semibold text-[var(--color-brand-teal)]">
-                Executive Director of Releasing Generations
+                So: do not rewrite this to start with Michele, and do not trim it
+                down to just the honour to save a line. If it is ever too long
+                for the layout, take it out of the hero altogether rather than
+                shortening it back into a personal claim. See HERO.award. */}
+            <p className="mt-4 flex items-start gap-3 text-xs leading-5 text-[var(--color-cream)]/75 sm:mt-5 sm:text-[0.8125rem]">
+              <span
+                aria-hidden="true"
+                className="mt-2 h-px w-6 shrink-0 bg-[var(--color-teal-on-dark)] sm:w-8"
+              />
+              <span className="max-w-lg">
+                {HERO.award.lead}
+                <span className="font-semibold text-[var(--color-cream)]">
+                  {HERO.award.honor}
+                </span>
+                {HERO.award.tail}
               </span>
-              . Part-time pastor at Lifespring Church, Honolulu. Fourteen years
-              in a Hawaiʻi public elementary classroom. Based on Oʻahu, Hawaiʻi.
             </p>
-          </FadeIn>
-        </Container>
-      </section>
 
-      {/* ------------------------------------------------------------ proof */}
-      <section aria-label="Recognition and proof">
-        <Container className="mt-20 sm:mt-28 lg:mt-32">
-          <FadeIn className="max-w-3xl">
-            <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-terracotta-ink)] uppercase sm:text-sm">
-              Recognition
-            </span>
-            <h2 className="font-display mt-6 text-3xl font-medium tracking-tight text-balance text-[var(--color-brand-teal)] sm:text-4xl lg:text-5xl">
-              The work has been checked by people who had to be sure.
-            </h2>
-          </FadeIn>
-
-          <FadeInStagger faster className="mt-10 sm:mt-12">
-            <dl className="grid grid-cols-1 gap-5 lg:grid-cols-3 lg:gap-8">
-              {PROOF_POINTS.map((point) => (
-                <FadeIn
-                  as="div"
-                  key={point.label}
-                  className="h-full rounded-2xl bg-[var(--color-teal-05)] p-6 ring-1 ring-[var(--color-teal-10)] sm:flex sm:items-baseline sm:gap-6 lg:block lg:p-8"
-                >
-                  <dt className="font-display text-2xl font-semibold tracking-tight text-[var(--color-brand-teal)] sm:w-36 sm:shrink-0 lg:w-auto lg:text-3xl">
-                    {point.label}
-                  </dt>
-                  <dd className="mt-3 text-sm leading-6 text-neutral-700 sm:mt-0 lg:mt-3 lg:text-base lg:leading-7">
-                    {point.body}
-                  </dd>
-                </FadeIn>
-              ))}
-            </dl>
-          </FadeInStagger>
-
-          {/* Endorsements. Wording is verbatim; attribution sits on its own
-              lines so no quote needs a dash to introduce the speaker. */}
-          <FadeInStagger faster className="mt-12 sm:mt-16">
-            <ul
-              role="list"
-              className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10"
-            >
-              {ENDORSEMENTS.map((item) => (
-                <FadeIn
-                  as="li"
-                  key={item.name}
-                  className="last:sm:col-span-2 last:lg:col-span-1"
-                >
-                  <figure className="flex h-full flex-col border-t border-[var(--color-teal-30)] pt-6 last:sm:max-w-md last:lg:max-w-none">
-                    <blockquote className="flex-auto text-base leading-7 text-neutral-700 italic">
-                      &ldquo;{item.quote}&rdquo;
-                    </blockquote>
-                    <figcaption className="mt-5 text-sm not-italic">
-                      <span className="block font-semibold text-neutral-900">
-                        {item.name}
-                      </span>
-                      <span className="mt-0.5 block text-neutral-500">
-                        {item.title}
-                      </span>
-                      <span className="block text-neutral-500">{item.org}</span>
-                    </figcaption>
-                  </figure>
-                </FadeIn>
-              ))}
-            </ul>
-          </FadeInStagger>
-
-          <FadeIn className="mt-10">
-            <p className="text-sm leading-6 text-neutral-500">
-              With endorsements from{' '}
-              <span className="font-medium text-neutral-700">
-                {ENDORSING_ORGS.join(', ')}
-              </span>
-              , and more.
-            </p>
-          </FadeIn>
-        </Container>
-      </section>
-
-      {/* ---------------------------------------------------- featured work */}
-      <section aria-label="Featured work">
-        <Container className="mt-20 sm:mt-28 lg:mt-32">
-          <FadeIn className="max-w-3xl">
-            <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-terracotta-ink)] uppercase sm:text-sm">
-              A body of work
-            </span>
-            <h2 className="font-display mt-6 text-3xl font-medium tracking-tight text-balance text-[var(--color-brand-teal)] sm:text-4xl lg:text-5xl">
-              Fourteen works, and eight of them have a case study.
-            </h2>
-            <p className="mt-6 text-lg leading-8 text-neutral-700 sm:text-xl">
-              Michele coaches this work because she has done it herself, start
-              to finish, across books, curricula, and journals.
-            </p>
-          </FadeIn>
-
-          <FadeInStagger faster className="mt-12">
-            <ul
-              role="list"
-              className="grid grid-cols-2 gap-x-5 gap-y-9 sm:grid-cols-3 xl:grid-cols-6 xl:gap-x-6"
-            >
-              {FEATURED_WORKS.map((work) => (
-                <FadeIn as="li" key={work.href}>
-                  <Link href={work.href} className="group block">
-                    <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-[var(--color-cream)] ring-1 ring-[var(--color-teal-10)] transition duration-300 group-hover:ring-[var(--color-teal-30)]">
-                      {work.cover ? (
-                        <Image
-                          src={work.cover}
-                          alt=""
-                          fill
-                          sizes="(min-width: 1024px) 15vw, (min-width: 640px) 30vw, 45vw"
-                          className="object-contain p-3 transition duration-500 group-hover:scale-[1.04]"
-                        />
-                      ) : (
-                        <div className="flex h-full w-full flex-col items-center justify-center bg-[var(--color-teal-05)] p-4 text-center">
-                          <span className="font-display text-base font-medium text-balance text-[var(--color-brand-teal)] italic">
-                            {work.title}
-                          </span>
-                          <span className="font-display mt-3 text-xs font-semibold tracking-widest text-neutral-500 uppercase">
-                            Cover to come
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                    <p className="font-display mt-3 text-xs font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
-                      {work.kicker}
-                    </p>
-                    <h3 className="font-display mt-1 text-sm font-semibold tracking-tight text-balance text-neutral-900">
-                      {work.title}
-                    </h3>
-                  </Link>
-                </FadeIn>
-              ))}
-            </ul>
-          </FadeInStagger>
-
-          <FadeIn className="mt-10">
-            <Button href="/author" variant="secondary">
-              See every title
-            </Button>
-          </FadeIn>
-        </Container>
-      </section>
-
-      {/* ------------------------------------------------ coaching close */}
-      <section aria-label="The Brave Purpose Author Method">
-        <Container className="mt-20 sm:mt-28 lg:mt-32">
-          <FadeIn className="mx-auto max-w-3xl text-center">
-            <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-terracotta-ink)] uppercase sm:text-sm">
-              The Brave Purpose Author Method
-            </span>
-            <h2 className="font-display mt-6 text-3xl font-medium tracking-tight text-balance text-[var(--color-brand-teal)] sm:text-4xl lg:text-5xl">
-              A book in you. A method that gets it on the page.
-            </h2>
-            <p className="mt-6 text-lg leading-8 text-neutral-700 sm:text-xl">
-              Twenty-six weeks, one writer, one method. The starting posture
-              does not matter: a blank page, half a draft in three folders, or a
-              finished manuscript that will not sit still. What comes out the
-              other side is a publication-ready book that still sounds like you.
-            </p>
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-5">
-              <Button href="/coach">Work with Michele</Button>
-              <Button href="/how-it-works" variant="secondary">
-                See how it works
-              </Button>
+            <div className="mt-6 sm:mt-7">
+              <ContactTrigger className="px-5 py-3 text-sm sm:px-6 sm:py-3.5 sm:text-base">
+                {HERO.cta}
+              </ContactTrigger>
             </div>
           </FadeIn>
         </Container>
+        </div>
       </section>
 
-      <ContactBlock heading="Ready when you are." source="home">
-        <p>
-          Whether you are booking a stage, starting a manuscript, or still
-          deciding, leave your name and Michele will reach out personally.
-        </p>
-      </ContactBlock>
+      {/* band 3 */}
+      <LogoMarquee />
+
+      {/* ------------------------------------------------------ three doors */}
+      {/* Speaker, Author, Coach, left to right. Order is locked in DOORS. */}
+      <section
+        aria-labelledby="three-ways-heading"
+        className="bg-[var(--color-band-1)] py-20 sm:py-24 lg:py-28"
+      >
+        <div className={WIDE}>
+          <h2 id="three-ways-heading" className="sr-only">
+            Three ways to work with Michele
+          </h2>
+          {/* TWO COLUMNS AT md, THREE ONLY AT lg, and the breakpoint is
+              measured. Three columns from md gave each card 200px of inside
+              width, and the CTA labels need 209px ("Book me to speak") and
+              238px ("See my body of work"), so two of the three wrapped their
+              button onto a second line and the Author card's copy ran to eight
+              lines. Two-up at md gives 302px inside and everything fits.
+
+              Three cards over two columns leaves the last one alone on its own
+              row, so it spans both and is held to one column's width. Centred
+              reads as deliberate; flush left reads as a missing tile. Same
+              treatment /speaker gives its orphan. */}
+          <FadeInStagger faster>
+            <ul
+              role="list"
+              className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-8"
+            >
+              {DOORS.map((door, i) => {
+                const Icon = DOOR_ICONS[door.icon]
+                const isOrphan = i === DOORS.length - 1 && DOORS.length % 2 === 1
+                return (
+                  <FadeIn
+                    as="li"
+                    key={door.key}
+                    className={
+                      isOrphan
+                        ? 'flex md:col-span-2 md:mx-auto md:w-[calc(50%-0.625rem)] lg:col-span-1 lg:mx-0 lg:w-auto'
+                        : 'flex'
+                    }
+                  >
+                    {/* The whole card is the link, so the target is the card
+                        rather than a two-word phrase at the bottom of it. The
+                        CTA below is therefore decorative: it lives inside this
+                        anchor and is never a second one. */}
+                    <Link
+                      href={door.href}
+                      aria-label={`${door.label}: ${door.cta}`}
+                      className={`msg-card msg-${door.accent} msg-tex-${door.texture} group flex w-full flex-col items-center gap-4 rounded-3xl px-6 py-9 text-center text-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[var(--color-navy-20)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus-ring)] sm:px-7 sm:py-10`}
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-white/15 ring-1 ring-inset ring-white/25 transition duration-300 group-hover:bg-white/25"
+                      >
+                        <Icon className="h-7 w-7" strokeWidth={1.5} />
+                      </span>
+
+                      <h3 className="font-display text-xs font-semibold tracking-[0.18em] text-white/85 uppercase">
+                        {door.label}
+                      </h3>
+
+                      {door.headline ? (
+                        <p className="font-display text-lg leading-7 font-semibold tracking-tight text-balance text-white">
+                          {door.headline}
+                        </p>
+                      ) : null}
+
+                      {door.body ? (
+                        <p
+                          className={
+                            door.headline
+                              ? 'text-sm leading-6 text-white/85'
+                              : 'font-display text-base leading-7 font-medium text-balance text-white'
+                          }
+                        >
+                          {door.body}
+                        </p>
+                      ) : null}
+
+                      {/* Pushed to the bottom so every card's control sits on
+                          the same baseline whatever the copy length, and on the
+                          darkest part of the gradient. `rounded-md`, never a
+                          pill: the sitewide no-pills rule wins over the
+                          reference design. The icon circle above is allowed to
+                          be round because it holds an icon, not a label. */}
+                      <span className="mt-auto pt-3">
+                        {/* px-4 rather than the /speaker chip's px-5. The
+                            longest label here, "See my body of work", is 176px
+                            of glyphs plus the arrow, and at lg the card has
+                            248px inside; px-5 leaves 10px of slack and px-4
+                            leaves 18px, which is the difference between fitting
+                            and fitting reliably across font loading. */}
+                        <span className="font-display inline-flex items-center gap-1.5 rounded-md bg-white/15 px-4 py-2 text-xs font-semibold tracking-[0.14em] uppercase ring-1 ring-inset ring-white/30 transition duration-300 group-hover:bg-white/25">
+                          {door.cta}
+                          <span
+                            aria-hidden="true"
+                            className="transition-transform duration-200 group-hover:translate-x-0.5"
+                          >
+                            &rarr;
+                          </span>
+                        </span>
+                      </span>
+                    </Link>
+                  </FadeIn>
+                )
+              })}
+            </ul>
+          </FadeInStagger>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------- pull quote */}
+      {/* This is the slot the founder / executive-director blurb used to hold.
+          Display type, centred, generous padding, teal from the book palette.
+          The teal here is --color-brand-teal (#0F766E), not the bright brand
+          teal: #00B09F is 2.31:1 on this ground and fails even the large-text
+          floor, so it can never spell a word. See tailwind.css. */}
+      {/* Band-3, the deepest of the content grounds, and the most padding on
+          the page. This is the one place the scroll is meant to slow down. */}
+      <section
+        aria-label="In Michele's words"
+        className="bg-[var(--color-band-3)] py-24 sm:py-28 lg:py-36"
+      >
+        <Container>
+          <FadeIn>
+            {/* max-w-5xl, not 4xl, and the number is measured. Michele asked
+                for one sentence per visual line. At the lg display size the
+                longer sentence renders 978px wide unwrapped; max-w-4xl is
+                896px, so it wrapped and the quote came out as three ragged
+                lines instead of two. 5xl is 1024px, which clears it with room,
+                and Container allows 1216px at lg so nothing overflows. */}
+            <figure className="mx-auto max-w-5xl text-center">
+              {/* No quotation marks. At this size a pair of curly quotes just
+                  hangs two heavy marks in the corners; the display setting
+                  already reads as a quote. Michele asked for it this way.
+
+                  One sentence per line, as separate blocks rather than a <br>.
+                  A <br> would force a break even where the line then wraps
+                  anyway on a narrow screen, giving three ragged lines; a block
+                  per sentence breaks between them and lets each wrap on its own
+                  terms. text-balance then evens out whichever one does wrap. */}
+              {/* The sm step (text-4xl, 32px) is deliberately absent. Between
+                  640px and lg, Container caps its own contents at max-w-2xl
+                  (672px), and the longer sentence needs 711px at 32px, so that
+                  step was the one width where it wrapped no matter what this
+                  figure's max-w said. At 28px it needs 622px and fits. The type
+                  therefore holds 28px until lg and then goes to 44px, which
+                  keeps one sentence per line at every width. */}
+              <blockquote className="font-display text-[1.75rem] leading-[1.15] font-medium tracking-tight text-balance text-[var(--color-brand-teal)] lg:text-5xl">
+                {PULL_QUOTE.lines.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
+              </blockquote>
+              <figcaption className="font-display mt-8 text-xs font-semibold tracking-[0.18em] text-neutral-600 uppercase sm:mt-10 sm:text-sm">
+                <span aria-hidden="true">&mdash; </span>
+                {PULL_QUOTE.attribution}
+              </figcaption>
+            </figure>
+          </FadeIn>
+        </Container>
+      </section>
+
+      {/* --------------------------------------- things my friends say */}
+      {/* Restored 2026-08-24 after Michele reversed the decision to leave
+          testimonials off the home page. Back on band-1, between the quote on
+          band-3 and the Method on band-2, which is exactly where it sat before.
+          Slower and larger than the parked version; see the row and the card. */}
+      <section
+        aria-labelledby="friends-say-heading"
+        className="overflow-hidden bg-[var(--color-band-1)] py-20 sm:py-24 lg:py-28"
+      >
+        <Container>
+          <FadeIn>
+            <h2
+              id="friends-say-heading"
+              className="font-display text-center text-3xl font-medium tracking-tight text-balance text-[var(--color-brand-teal)] sm:text-4xl"
+            >
+              Things my friends say about me.
+            </h2>
+          </FadeIn>
+        </Container>
+
+        <FadeIn className="mt-12 flex flex-col gap-6 sm:mt-14">
+          <TestimonialRow items={FRIENDS_SAY_TOP} direction="rtl" duration="88s" />
+          <TestimonialRow
+            items={FRIENDS_SAY_BOTTOM}
+            direction="ltr"
+            duration="96s"
+          />
+        </FadeIn>
+      </section>
+
+      {/* The "A body of work" section stood here and is gone entirely, at
+          Michele's instruction on 2026-08-23: the heading, the six-cover grid,
+          and the "See every title" link. Her reasoning was that /author already
+          carries the books, so the home page does not need a shelf of its own.
+          The first pass only cut the "fourteen works, eight case studies"
+          framing from the heading; this cut is the whole block. The Author
+          card in the three doors above is now the only route to the books from
+          this page, and that is deliberate. */}
+
+      {/* ------------------------------------------------ the Method */}
+      {/* Two bands, not one. Michele's note was that consecutive ideas ran
+          together into one scroll, so the pitch and the three starting
+          postures sit on different grounds with their own padding. Each band is
+          sized to land inside a laptop screen on its own. */}
+      <section
+        aria-labelledby="method-heading"
+        className="bg-[var(--color-band-2)] py-20 sm:py-24 lg:py-28"
+      >
+        <Container>
+          {/* max-w-4xl, not 3xl. "A method that gets it on the page." measures
+              about 780px at the lg heading size and 3xl is 768px, so the second
+              sentence would have wrapped and undone the split. The body copy
+              under it keeps its own narrower measure. */}
+          <FadeIn className="mx-auto max-w-4xl text-center">
+            <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-terracotta-ink)] uppercase sm:text-sm">
+              The Brave Purpose Author Method
+            </span>
+            {/* One sentence per line, as blocks rather than a <br>, the same
+                way the pull quote does it. The break is now structural, so the
+                heading cannot wrap mid-sentence the way Michele objected to.
+
+                The `text-balance` CLASS is gone but balancing is not: there is
+                a global `h1,h2,h3,h4 { text-wrap: balance }` in tailwind.css
+                that still inherits into these spans. That is harmless and
+                wanted here, because it only does anything if one sentence is
+                itself too long for the measure, in which case evening out its
+                two lines is the right behaviour. */}
+            <h2
+              id="method-heading"
+              className="font-display mt-6 text-3xl font-medium tracking-tight text-[var(--color-brand-teal)] sm:text-4xl lg:text-5xl"
+            >
+              <span className="block">A book in you.</span>
+              <span className="block">A method that gets it on the page.</span>
+            </h2>
+            {/* Held at max-w-3xl so widening the wrapper for the heading does
+                not stretch the body copy's measure with it. */}
+            <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-neutral-700 sm:text-xl">
+              Twenty-six weeks, one writer, one method. What comes out the other
+              side is a publication-ready book that still sounds like you.
+            </p>
+          </FadeIn>
+        </Container>
+      </section>
+
+      {/* The last section on the page. It no longer has to be band-1: the
+          footer used to sit below an UNPAINTED margin, so any band here left a
+          strip of page ground above the navy. SiteFooter now paints its own
+          run-in with band-4, so this is free to take whatever the rhythm wants
+          and the descent into the footer is 1 -> 4 -> navy. */}
+      <section
+        aria-label="Where writers start"
+        className="bg-[var(--color-band-1)] py-20 sm:py-24 lg:py-28"
+      >
+        <div className={WIDE}>
+          <FadeIn>
+            <h3 className="font-display text-center text-xl font-medium tracking-tight text-balance text-neutral-900 sm:text-2xl">
+              The starting posture does not matter.
+            </h3>
+          </FadeIn>
+
+          <FadeInStagger faster className="mt-10 sm:mt-12">
+            <ul
+              role="list"
+              className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5 lg:gap-8"
+            >
+              {[
+                'A blank page.',
+                'Half a draft in three folders.',
+                'A finished manuscript that will not sit still.',
+              ].map((posture) => (
+                <FadeIn as="li" key={posture} className="flex">
+                  <p className="font-display flex w-full items-center justify-center rounded-2xl bg-[var(--color-cream)] p-8 text-center text-lg leading-7 font-medium text-balance text-neutral-800 ring-1 ring-[var(--color-navy-10)]">
+                    {posture}
+                  </p>
+                </FadeIn>
+              ))}
+            </ul>
+          </FadeInStagger>
+
+          <FadeIn className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-5 sm:mt-14">
+            <Button href="/coach">Work with Michele</Button>
+            <Button href="/how-it-works" variant="secondary">
+              See how it works
+            </Button>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* No closing CTA block. Michele cut "Ready when you are" entirely and
+          asked to run straight from the Method into the footer. The footer
+          carries the contact routes. */}
     </>
   )
 }
