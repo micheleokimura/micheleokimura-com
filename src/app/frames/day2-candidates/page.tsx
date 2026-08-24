@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'Day 2 pt 2 frame candidates',
-  description: 'Internal review page. Eight candidate stills pulled from Day 2 pt 2.',
+  description: 'Internal review page. Stage stills pulled from Day 2 pt 2.',
   robots: { index: false, follow: false },
 }
 
@@ -32,7 +32,7 @@ const stageFrames: Frame[] = [
   {
     time: '0:00:45',
     file: 'frame-0-00-45.png',
-    description: 'At podium, warm smile (currently the top pick for hero)',
+    description: 'At podium, warm smile (current top pick)',
   },
   {
     time: '0:00:50',
@@ -46,16 +46,26 @@ const stageFrames: Frame[] = [
   },
 ]
 
-const interviewFrames: Frame[] = [
+const newStageFrames: Frame[] = [
   {
-    time: '0:12:10',
-    file: 'frame-0-12-10.png',
-    description: 'Michele speaking, hand open mid-gesture',
+    time: '0:34:15',
+    file: 'frame-0-34-15.png',
+    description: 'Podium, open palm, mid-sentence',
   },
   {
-    time: '0:12:20',
-    file: 'frame-0-12-20.png',
-    description: 'Similar gesture, slightly different expression',
+    time: '0:34:25',
+    file: 'frame-0-34-25.png',
+    description: 'Podium, hand raised high',
+  },
+  {
+    time: '0:34:35',
+    file: 'frame-0-34-35.png',
+    description: 'Podium, finger raised, making a point',
+  },
+  {
+    time: '0:34:45',
+    file: 'frame-0-34-45.png',
+    description: 'Podium, centered and settled, easy smile',
   },
 ]
 
@@ -90,11 +100,12 @@ export default function Day2CandidatesPage() {
           Internal review
         </p>
         <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-neutral-950">
-          Day 2 pt 2: frame candidates
+          Day 2 pt 2: stage frame candidates
         </h1>
         <p className="mt-6 text-base leading-7 text-neutral-600">
-          Eight stills pulled from Day 2 pt 2. Scroll, compare, and pick the ones
-          worth keeping. Nothing here is wired into the Speaker page yet.
+          Ten stills of Michele speaking on stage at the Day 2 conference.
+          Scroll, compare, and pick the ones worth keeping. Nothing here is
+          wired into the Speaker page yet.
         </p>
       </header>
 
@@ -114,19 +125,20 @@ export default function Day2CandidatesPage() {
 
       <section className="mt-20">
         <h2 className="font-display text-2xl font-semibold tracking-tight text-neutral-950">
-          Interview shots
+          More from the 34-minute segment
         </h2>
         <div className="mt-6 rounded-lg border-l-4 border-neutral-300 bg-neutral-50 px-5 py-4">
           <p className="text-base leading-7 text-neutral-700">
-            Heads up: these last two are seated interview footage with a
-            bookshelf backdrop, from the 12-minute window Michele asked about.
-            They read as a different visual register from the stage shots above,
-            so they probably work as a pair or as a section of their own rather
-            than mixed in with the podium frames.
+            Four extra frames from the same podium segment as 0:34:30. That
+            segment runs from about 0:34:15 to 0:35:00, and it is the last stage
+            footage in the file: everything after 0:35:05 is the Explicit
+            Movement title card and then the Zoom webinar, all the way to the
+            end at 2:32:34. So these ten are the complete set of pure-stage
+            candidates this recording has.
           </p>
         </div>
         <div className="mt-10">
-          {interviewFrames.map((frame) => (
+          {newStageFrames.map((frame) => (
             <FrameCard key={frame.file} frame={frame} />
           ))}
         </div>
