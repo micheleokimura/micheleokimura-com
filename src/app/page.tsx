@@ -8,14 +8,7 @@ import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { Button } from '@/components/Button'
 import { ContactTrigger } from '@/components/ContactTrigger'
 import { LogoMarquee } from '@/components/LogoMarquee'
-import {
-  DOORS,
-  FRIENDS_SAY_BOTTOM,
-  FRIENDS_SAY_TOP,
-  HERO,
-  PULL_QUOTE,
-  type Testimonial,
-} from '@/lib/home-variants'
+import { DOORS, HERO, PULL_QUOTE } from '@/lib/home-variants'
 
 /**
  * Home page. Rebuilt 2026-08-23 against Michele's walkthrough of the live site.
@@ -38,7 +31,6 @@ import {
  *   marquee       band-2   (set on the section in LogoMarquee.tsx)
  *   three doors   band-1
  *   pull quote    band-3   deepest, most padding, the pause
- *   friends say   band-1
  *   the Method    band-2
  *   postures      band-1
  *   footer run-in band-4   (painted by SiteFooter, not by this file)
@@ -47,6 +39,12 @@ import {
  * ground is exactly the seam that goes missing. And a CARD never takes a band:
  * tiles use --color-cream, which is warm and lifts off any of these neutrals,
  * whereas a band on a band would be a 5-point difference nobody can see.
+ *
+ * The removed "friends say" section was band-1 and sat between the quote and
+ * the Method. Taking it out left band-3 next to band-2, which is still a change
+ * of ground, so the rhythm closed over the gap and nothing needed renumbering.
+ * If it ever comes back it has to be band-1 again, or one of its new neighbours
+ * has to move.
  *
  * Padding is py-20/24/28 (80/96/112px) as standard, and more on the quote. The
  * shade change only registers if there is enough quiet either side of it.
@@ -62,6 +60,11 @@ import {
  *  - "A body of work" in full: the heading, the six-cover grid, and the "See
  *    every title" link. /author carries the books, and the Author card in the
  *    three doors is now the only route to them from here.
+ *
+ * NOT deleted but NOT BUILT, which is a different thing: "Things my friends say
+ * about me". Michele held it back on 2026-08-23 pending a decision with Brett
+ * about whether the home page carries testimonials at all. Do not add it back
+ * on your own initiative, and do not stub it.
  */
 export const metadata: Metadata = pageMetadata({
   title: 'Coach, author, and speaker',
@@ -80,70 +83,18 @@ export const metadata: Metadata = pageMetadata({
  */
 const WIDE = 'mx-auto max-w-7xl px-6 lg:px-8'
 
-/** One card in the two scrolling testimonial rows. */
-function TestimonialCard({ item }: { item: Testimonial }) {
-  return (
-    // The horizontal space between cards is `mx`, NOT a `gap` on the track.
-    // The marquee keyframes wrap by translating exactly -50% of the track, and
-    // a flex `gap` puts a gap BETWEEN the two copies as well as inside them, so
-    // -50% would land half a gap short of the second copy and the loop would
-    // visibly hitch once per cycle. Margins are part of each item's own width,
-    // so the two halves stay exactly equal. LogoMarquee does the same thing
-    // with px-6 for the same reason.
-    <figure className="mx-2.5 flex w-80 shrink-0 flex-col rounded-2xl bg-[var(--color-cream)] p-6 ring-1 ring-[var(--color-navy-10)] sm:w-96 sm:p-7">
-      <blockquote className="flex-auto text-[0.9375rem] leading-7 text-neutral-800">
-        &ldquo;{item.quote}&rdquo;
-      </blockquote>
-      <figcaption className="mt-5 border-t border-[var(--color-navy-10)] pt-4 text-sm">
-        <span className="block font-semibold text-neutral-900">{item.name}</span>
-        <span className="mt-0.5 block leading-5 text-neutral-600">
-          {item.title}
-        </span>
-        {item.work ? (
-          <span className="font-display mt-1.5 block text-xs font-semibold tracking-wider text-[var(--color-brand-terracotta-ink)] uppercase">
-            On {item.work}
-          </span>
-        ) : null}
-      </figcaption>
-    </figure>
-  )
-}
+/* TestimonialCard and TestimonialRow lived here and are removed with the
+   section they served (see the note further down, in place of the section).
+   They are not kept as dead code: nothing else renders a testimonial, and a
+   pair of unused components is exactly the thing that quietly drifts out of
+   step with the design. Both are recoverable from git at eb58550.
 
-/**
- * One scrolling row. `.marquee-track` and its keyframes come from
- * tailwind.css; the array is rendered twice inside the track because the
- * keyframes translate by exactly -50% for a seamless wrap.
- *
- * `duration` is Michele's spec: roughly 40-60s per full loop, slow enough to
- * read a card as it goes by. The two rows run at slightly different speeds and
- * in opposite directions so they never lock into step and read as one block.
- */
-function TestimonialRow({
-  items,
-  direction,
-  duration,
-}: {
-  items: Testimonial[]
-  direction: 'ltr' | 'rtl'
-  duration: string
-}) {
-  const doubled = [...items, ...items]
-
-  return (
-    <div className="marquee-band overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
-      <div
-        className={`marquee-track items-stretch ${
-          direction === 'ltr' ? 'marquee-ltr' : 'marquee-rtl'
-        }`}
-        style={{ animationDuration: duration }}
-      >
-        {doubled.map((item, i) => (
-          <TestimonialCard key={`${item.name}-${item.work ?? ''}-${i}`} item={item} />
-        ))}
-      </div>
-    </div>
-  )
-}
+   One thing worth carrying forward if they come back: the horizontal space
+   between the cards has to be `mx` on the card, NOT `gap` on the track. The
+   marquee keyframes wrap by translating exactly -50% of the track, and a flex
+   `gap` adds a gap BETWEEN the two copies as well as inside them, so -50%
+   lands half a gap short and the loop hitches once per cycle. LogoMarquee uses
+   px-6 on its tiles for the same reason. */
 
 export default function HomePage() {
   return (
@@ -346,39 +297,22 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* --------------------------------------- things my friends say */}
-      {/* Replaced the Recognition section. Two rows running against each other,
-          slowly, so the page has motion without a carousel to click. Hovering
-          anywhere in a row pauses it (.marquee-band:hover in tailwind.css), and
-          prefers-reduced-motion stops both outright. */}
-      <section
-        aria-labelledby="friends-say-heading"
-        className="overflow-hidden bg-[var(--color-band-1)] py-20 sm:py-24 lg:py-28"
-      >
-        <Container>
-          <FadeIn>
-            <h2
-              id="friends-say-heading"
-              className="font-display text-center text-3xl font-medium tracking-tight text-balance text-[var(--color-brand-teal)] sm:text-4xl"
-            >
-              Things my friends say about me.
-            </h2>
-          </FadeIn>
-        </Container>
+      {/* "Things my friends say about me", the two counter-scrolling rows of
+          endorsements, stood here and is NOT built. Michele pulled it on
+          2026-08-23 while she and Brett decide whether the home page should
+          carry testimonials at all, since the same quotes already run on the
+          individual book, coach, and speaker pages. She is leaning toward no.
 
-        <FadeIn className="mt-12 flex flex-col gap-5 sm:mt-14">
-          <TestimonialRow
-            items={FRIENDS_SAY_TOP}
-            direction="rtl"
-            duration="55s"
-          />
-          <TestimonialRow
-            items={FRIENDS_SAY_BOTTOM}
-            direction="ltr"
-            duration="62s"
-          />
-        </FadeIn>
-      </section>
+          It is omitted rather than stubbed, deliberately: no placeholder box,
+          no reserved space, and the band rhythm closes over the gap (the quote
+          on band-3 now runs straight into the Method on band-2, which is still
+          a change of ground, so no seam is lost). Nothing on this page is
+          designed around its return.
+
+          The copy is not lost. FRIENDS_SAY_TOP and FRIENDS_SAY_BOTTOM are still
+          in home-variants.ts, marked unused, and the card and row components
+          are in this file's git history at eb58550. Wiring it back is a
+          follow-up, not a rebuild. */}
 
       {/* The "A body of work" section stood here and is gone entirely, at
           Michele's instruction on 2026-08-23: the heading, the six-cover grid,

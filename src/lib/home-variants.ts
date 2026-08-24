@@ -173,6 +173,21 @@ export const PULL_QUOTE = {
  * "Things my friends say about me" — the two scrolling rows that replaced the
  * Recognition section.
  *
+ * ############ CURRENTLY UNUSED ############
+ * The section is NOT on the home page. Michele held it back on 2026-08-23 while
+ * she and Brett decide whether the home page should carry testimonials at all,
+ * given the same quotes already run on the individual book, coach, and speaker
+ * pages. She is leaning toward leaving them off.
+ *
+ * The arrays stay because they are curated, verbatim, signed-off copy that took
+ * real work to assemble and verify, and because reinstating the section is a
+ * plausible next step. If the answer comes back "no testimonials on the home
+ * page", delete both arrays and the type: every quote in here also exists at
+ * its own source (author/page.tsx per-book constants, and
+ * site/content/speaker/full-endorsements.md), so nothing is lost by removing
+ * this copy, and two copies of a verbatim quote is how one of them drifts.
+ * ##########################################
+ *
  * HARD RULE, inherited from the top of this file and from
  * site/content/speaker/full-endorsements.md: every quote here is VERBATIM. Do
  * not shorten one to make a card fit, do not fix an endorser's grammar, and do
