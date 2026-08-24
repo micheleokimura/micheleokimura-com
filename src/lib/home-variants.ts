@@ -249,7 +249,6 @@ export const PULL_QUOTE = {
  * set, once for a leadership session and once for Brave Purpose, and the two
  * are kept in DIFFERENT rows so his name never scrolls past twice together.
  * Keep that property if you rebalance the rows.
- * ###############################################################
  *
  * HARD RULE, inherited from the top of this file and from
  * site/content/speaker/full-endorsements.md: every quote here is VERBATIM. Do
