@@ -337,7 +337,13 @@ export default function HomePage() {
       >
         <Container>
           <FadeIn>
-            <figure className="mx-auto max-w-4xl text-center">
+            {/* max-w-5xl, not 4xl, and the number is measured. Michele asked
+                for one sentence per visual line. At the lg display size the
+                longer sentence renders 978px wide unwrapped; max-w-4xl is
+                896px, so it wrapped and the quote came out as three ragged
+                lines instead of two. 5xl is 1024px, which clears it with room,
+                and Container allows 1216px at lg so nothing overflows. */}
+            <figure className="mx-auto max-w-5xl text-center">
               {/* No quotation marks. At this size a pair of curly quotes just
                   hangs two heavy marks in the corners; the display setting
                   already reads as a quote. Michele asked for it this way.
@@ -347,7 +353,14 @@ export default function HomePage() {
                   anyway on a narrow screen, giving three ragged lines; a block
                   per sentence breaks between them and lets each wrap on its own
                   terms. text-balance then evens out whichever one does wrap. */}
-              <blockquote className="font-display text-[1.75rem] leading-[1.18] font-medium tracking-tight text-balance text-[var(--color-brand-teal)] sm:text-4xl sm:leading-[1.15] lg:text-5xl">
+              {/* The sm step (text-4xl, 32px) is deliberately absent. Between
+                  640px and lg, Container caps its own contents at max-w-2xl
+                  (672px), and the longer sentence needs 711px at 32px, so that
+                  step was the one width where it wrapped no matter what this
+                  figure's max-w said. At 28px it needs 622px and fits. The type
+                  therefore holds 28px until lg and then goes to 44px, which
+                  keeps one sentence per line at every width. */}
+              <blockquote className="font-display text-[1.75rem] leading-[1.15] font-medium tracking-tight text-balance text-[var(--color-brand-teal)] lg:text-5xl">
                 {PULL_QUOTE.lines.map((line) => (
                   <span key={line} className="block">
                     {line}
