@@ -70,7 +70,16 @@ const WIDE = 'mx-auto max-w-7xl px-6 lg:px-8'
 /** Section rhythm, from Brett's note: 60-80px desktop, 40-60px mobile. */
 const SECTION = 'py-12 sm:py-16 lg:py-20'
 
-const TILE_SIZES = '(max-width: 640px) 42vw, (max-width: 1024px) 28vw, 20rem'
+const TILE_SIZES = '(max-width: 640px) 40vw, 12rem'
+
+/**
+ * The cover sits in a capped, centred column inside the tile rather than
+ * filling it. Brett asked for a SMALL cover on each tile, and a three-column
+ * grid at max-w-7xl hands every tile 384px, which turned each cover into a
+ * 512px-tall poster and each tile into a 671px block. 12rem is the same scale
+ * the approved cover row on the home page runs at, where the same art sits six
+ * across at xl. The tile keeps its full width for the title and the teaser. */
+const COVER_COLUMN = 'mx-auto w-full max-w-[12rem]'
 
 /**
  * Programs that have a case study but no title on the shelf. Card copy is read
@@ -111,7 +120,9 @@ function BookTile({
 }) {
   return (
     <Link href={`/author/books/${book.slug}`} className={TILE_CLASS}>
-      <Cover src={book.cover} alt={book.coverAlt} sizes={TILE_SIZES} />
+      <div className={COVER_COLUMN}>
+        <Cover src={book.cover} alt={book.coverAlt} sizes={TILE_SIZES} />
+      </div>
       <Heading
         className={`font-display mt-5 leading-snug font-semibold tracking-tight text-neutral-950 ${headingClass}`}
       >
@@ -149,7 +160,9 @@ function EditionTile({
 }) {
   return (
     <Link href={href} className={TILE_CLASS}>
-      <Cover src={src} alt={alt} sizes={TILE_SIZES} />
+      <div className={COVER_COLUMN}>
+        <Cover src={src} alt={alt} sizes={TILE_SIZES} />
+      </div>
       <h4 className="font-display mt-5 text-base leading-snug font-semibold tracking-tight text-neutral-950">
         {label}
       </h4>
