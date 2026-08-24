@@ -120,10 +120,10 @@ export function Cover({
  * it. The Living in Duvall reference puts a coloured status pill in the same
  * role; that part is not borrowed.
  */
-export function Forthcoming() {
+export function Forthcoming({ label = 'Forthcoming' }: { label?: string }) {
   return (
     <span className="font-display block text-[11px] font-semibold tracking-[0.22em] text-[var(--color-brand-terracotta-ink)] uppercase">
-      Forthcoming
+      {label}
     </span>
   )
 }

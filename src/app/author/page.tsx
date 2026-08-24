@@ -153,10 +153,13 @@ function BookTile({
   book,
   headingClass = 'text-lg',
   as: Heading = 'h3',
+  showLearnMore = true,
 }: {
   book: AuthorBook
   headingClass?: string
   as?: 'h3' | 'h4'
+  /** Off inside a curriculum family, which carries one link on its heading. */
+  showLearnMore?: boolean
 }) {
   return (
     <Link href={`/author/books/${book.slug}`} className={TILE_CLASS}>
@@ -170,13 +173,13 @@ function BookTile({
         {/* Under the title, by direction, and flat text rather than a tag. */}
         {book.forthcoming ? (
           <span className="mt-1.5 block">
-            <Forthcoming />
+            <Forthcoming label={book.forthcoming} />
           </span>
         ) : null}
         <p className="mt-1.5 line-clamp-4 text-xs leading-5 text-neutral-600 sm:text-sm sm:leading-5">
           {book.teaser}
         </p>
-        <LearnMore />
+        {showLearnMore ? <LearnMore /> : null}
       </div>
     </Link>
   )
@@ -206,7 +209,6 @@ function EditionTile({
         <h4 className="font-display line-clamp-2 text-base leading-tight font-semibold tracking-tight text-neutral-950 transition-colors group-hover:text-[var(--color-brand-teal)]">
           {label}
         </h4>
-        <LearnMore />
       </div>
     </Link>
   )
@@ -228,19 +230,29 @@ function FamilyHeading({
 }) {
   return (
     <FadeIn>
+      {/* Plain text, not a link. The one link for the whole family is the
+          "Learn more" directly under it. Michele's note on 2026-08-24 was that
+          every tile in a curriculum family pointed at the same overview page,
+          so the section repeated one destination six or eight times. Linking
+          the heading as well would put two links to the same page one line
+          apart, which is the repetition this change exists to remove. */}
       <h3 className="font-display text-2xl leading-tight font-medium tracking-tight text-neutral-950 sm:text-3xl">
-        <Link
-          href={href}
-          className="underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-[6px] transition hover:decoration-2"
-        >
-          {title}
-        </Link>
+        {title}
       </h3>
       {subtitle ? (
         <p className="mt-2 text-sm tracking-wide text-neutral-600 italic">
           {subtitle}
         </p>
       ) : null}
+      {/* Deliberately larger than the per-tile link: this one is carrying a
+          whole curriculum rather than a single title. */}
+      <Link
+        href={href}
+        className="font-display mt-4 inline-flex items-center gap-2 text-base font-semibold text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-2 underline-offset-[6px] transition hover:text-[var(--color-brand-terracotta-ink)] sm:text-lg"
+      >
+        Learn more
+        <span aria-hidden="true">&rarr;</span>
+      </Link>
     </FadeIn>
   )
 }
@@ -318,7 +330,7 @@ export default function AuthorPage() {
                   </span>
                   <span className="sr-only"> - </span>
                   <span className="font-display mt-4 block text-[2rem] leading-[1.1] font-medium tracking-tight text-balance text-neutral-950 sm:mt-5 sm:text-[2.5rem] lg:text-5xl lg:leading-[1.08]">
-                    Books, Journals, and Curricula for Dreamers of Every Age
+                    Books, journals, and curricula for every age
                   </span>
                 </h1>
                 {/* Michele's approved subhead. Keep it verbatim. */}
@@ -406,6 +418,7 @@ export default function AuthorPage() {
                                 book={child}
                                 as="h4"
                                 headingClass="text-base"
+                                showLearnMore={false}
                               />
                             </FadeIn>
                           )

@@ -52,8 +52,13 @@ export type AuthorBook = {
   title: string
   /** Edition, year, or role. Sits under the title on the detail page. */
   meta?: string
-  /** Renders a flat "Forthcoming" label. Never a pill. */
-  forthcoming?: boolean
+  /**
+   * The flat pre-release label, and its exact wording. Never a pill.
+   * Michele set this to "Forthcoming Spring 2027" on both Brave Purpose
+   * editions on 2026-08-24. It is a string rather than a flag so the two
+   * editions cannot end up announcing two different dates.
+   */
+  forthcoming?: string
   /** Cover art, or undefined for a titled placeholder tile. */
   cover?: string
   coverAlt: string
@@ -223,7 +228,7 @@ export const AUTHOR_BOOKS: AuthorBook[] = [
     slug: 'brave-purpose-with-god',
     title: 'Brave Purpose with God',
     meta: 'Faith edition · Targeted Spring 2027',
-    forthcoming: true,
+    forthcoming: 'Forthcoming Spring 2027',
     coverAlt: 'Brave Purpose with God',
     teaser: 'For anyone longing to dream big with God.',
     description: [
@@ -242,7 +247,7 @@ export const AUTHOR_BOOKS: AuthorBook[] = [
     slug: 'brave-purpose',
     title: 'Brave Purpose',
     meta: 'Non-faith edition · Releasing 2027',
-    forthcoming: true,
+    forthcoming: 'Forthcoming Spring 2027',
     coverAlt: 'Brave Purpose',
     teaser:
       'For anyone ready to dream big and step into the life they were designed for.',

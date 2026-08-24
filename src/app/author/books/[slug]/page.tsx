@@ -129,7 +129,7 @@ export default async function AuthorBookPage({
           <div>
             {book.forthcoming ? (
               <div className="mb-5">
-                <Forthcoming />
+                <Forthcoming label={book.forthcoming} />
               </div>
             ) : null}
 
