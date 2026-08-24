@@ -21,6 +21,13 @@ import { FadeIn } from '@/components/FadeIn'
  * field deepening at the edges. Defined once in tailwind.css so it cannot
  * drift between pages.
  *
+ * `surface="violet"` is the one sanctioned exception, added 2026-08-23. It
+ * swaps in `.surface-violet-banner`, whose hue is sampled from the stage
+ * photograph on /speaker. This is the banner half of the photo-derived-wash
+ * convention written up in tailwind.css; read that block before adding a
+ * third surface, because each one owes a measured contrast budget. The
+ * default stays teal, so a page has to ask for this.
+ *
  * The eyebrow is plain tracked small caps. No pill, no badge, no border, no
  * rounded corners, anywhere, ever. Pills read as buttons and people click them.
  *
@@ -34,6 +41,8 @@ export function BannerHero({
   title,
   subtitle,
   centered = false,
+  surface = 'teal',
+  balanceTitle = true,
   children,
 }: {
   eyebrow?: string
@@ -42,29 +51,66 @@ export function BannerHero({
   subtitle?: React.ReactNode
   /** Centers the banner text. Off by default. */
   centered?: boolean
+  /** Banner ground. `violet` is /speaker's photo-derived field; see above. */
+  surface?: 'teal' | 'violet'
+  /**
+   * Whether the H1 may use `text-wrap: balance`.
+   *
+   * base.css balances every h1 through h4 globally, which is right for a
+   * heading sitting in a column of text and wrong for a two-line banner
+   * headline: balance evens the two lines out, the ragged right edge that
+   * says "this is left-aligned" disappears, and the block reads as centred
+   * even though it is not. Michele read the Speaker banner exactly that way
+   * on 2026-08-23 and asked for it to be left-justified, though its left edge
+   * already measured flush with the wordmark. Pass `false` to fall back to
+   * `text-wrap: pretty`, which fills each line and leaves the rag.
+   */
+  balanceTitle?: boolean
   /** Optional CTA row. Coaching uses it; Author and Speak do not. */
   children?: React.ReactNode
 }) {
+  const eyebrowColor =
+    surface === 'violet'
+      ? 'text-[var(--color-speaker-eyebrow)]'
+      : 'text-[var(--color-teal-on-dark)]'
+
   return (
     <section
       data-surface="dark"
-      className="surface-teal-banner relative isolate flex min-h-[280px] w-full items-center overflow-hidden py-12 sm:min-h-[300px] sm:py-14 lg:min-h-[320px]"
+      className={`${
+        surface === 'violet'
+          ? 'surface-violet-banner'
+          : 'surface-teal-banner'
+      } relative isolate flex min-h-[280px] w-full items-center overflow-hidden py-12 sm:min-h-[300px] sm:py-14 lg:min-h-[320px]`}
     >
-      <Container>
+      {/* `w-full` is load-bearing and this is the bug Michele was pointing at.
+          The section is `display: flex` so that `items-center` can hold the
+          copy in the middle of the band vertically. That makes Container a
+          FLEX ITEM, and a flex item with `width: auto` shrinks to fit its
+          content rather than filling the line. Container's own `mx-auto` then
+          centred that shrunk box, so at 1440px the banner copy started at
+          336px while the wordmark above it started at 112px. It only looked
+          right at narrower widths, where the content happened to fill the
+          line and shrink-to-fit came out the same as full width. `w-full`
+          makes it fill the line again, `max-w-7xl` still caps it, and the
+          banner now shares its left edge with the header on every page. */}
+      <Container className="w-full">
         <FadeIn className={centered ? 'text-center' : undefined}>
           <h1>
             {eyebrow ? (
               <>
-                <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-teal-on-dark)] uppercase sm:text-sm">
+                <span
+                  className={`font-display block text-xs font-semibold tracking-[0.22em] uppercase sm:text-sm ${eyebrowColor}`}
+                >
                   {eyebrow}
                 </span>
                 <span className="sr-only"> - </span>
               </>
             ) : null}
             <span
-              className={`font-display mt-4 block max-w-3xl text-[2rem] leading-[1.1] font-medium tracking-tight text-balance text-[var(--color-cream)] sm:mt-5 sm:text-[2.5rem] lg:text-5xl lg:leading-[1.08] ${
-                centered ? 'mx-auto' : ''
-              }`}
+              className={`font-display mt-4 block max-w-3xl text-[2rem] leading-[1.1] font-medium tracking-tight text-[var(--color-cream)] sm:mt-5 sm:text-[2.5rem] lg:text-5xl lg:leading-[1.08] ${
+                balanceTitle ? 'text-balance' : 'text-pretty'
+              } ${centered ? 'mx-auto' : 'text-left'}`}
             >
               {title}
             </span>
@@ -73,7 +119,7 @@ export function BannerHero({
           {subtitle ? (
             <div
               className={`font-display mt-4 max-w-2xl text-lg leading-7 font-medium text-[var(--color-cream)]/85 sm:text-xl sm:leading-8 ${
-                centered ? 'mx-auto' : ''
+                centered ? 'mx-auto' : 'text-left'
               }`}
             >
               {subtitle}

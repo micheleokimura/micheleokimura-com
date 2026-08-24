@@ -3,6 +3,7 @@ import { siteConfig, authoredWorks } from '@/lib/site-config'
 import { getPublishableSlugs } from '@/lib/case-studies'
 import { projectRoutes } from '@/lib/projects'
 import { getAllPostSlugs, getPostBySlug } from '@/lib/blog'
+import { SPEAKER_MESSAGES } from '@/lib/speaker-messages'
 
 /**
  * Priority is a RELATIVE ranking within this one site, not a score Google
@@ -57,6 +58,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: PRIORITY.caseStudy,
     }))
 
+  // One page per speaking message, added 2026-08-23 when /speaker became a
+  // grid of tiles linking out to them. They sit at case-study priority: each
+  // one is a real landing page an event organizer can be sent straight to.
+  const messageEntries: MetadataRoute.Sitemap = SPEAKER_MESSAGES.map((message) => ({
+    url: `${siteConfig.url}/speaker/messages/${message.slug}`,
+    lastModified,
+    changeFrequency: 'monthly',
+    priority: PRIORITY.caseStudy,
+  }))
+
   const worksEntries: MetadataRoute.Sitemap = authoredWorks.map((work) => ({
     url: `${siteConfig.url}/works/${work.slug}`,
     lastModified,
@@ -90,6 +101,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     ...baseEntries,
+    ...messageEntries,
     ...projectEntries,
     ...worksEntries,
     ...caseStudyEntries,

@@ -9,6 +9,17 @@ import { Logo } from '@/components/Logo'
 import { ContactPopup } from '@/components/ContactPopup'
 import { navItems, siteConfig } from '@/lib/site-config'
 
+/**
+ * Whether a nav item is the page you are on. An exact match, plus anything
+ * nested underneath it, so /speaker stays lit while you are reading
+ * /speaker/messages/how-to-hear-gods-voice. Home is exact-only, because every
+ * path starts with "/" and it would otherwise light up everywhere.
+ */
+function isActive(pathname: string, href: string) {
+  if (href === '/') return pathname === '/'
+  return pathname === href || pathname.startsWith(`${href}/`)
+}
+
 function MenuIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" {...props}>
@@ -88,7 +99,7 @@ export function SiteHeader() {
             className="ml-auto hidden items-center gap-0.5 md:flex lg:gap-1"
           >
             {navItems.map((item) => {
-              const active = pathname === item.href
+              const active = isActive(pathname, item.href)
               return (
                 <Link
                   key={item.href}
@@ -181,7 +192,7 @@ export function SiteHeader() {
         <Container className="py-6">
           <ul className="flex flex-col gap-1">
             {navItems.map((item) => {
-              const active = pathname === item.href
+              const active = isActive(pathname, item.href)
               return (
                 <li key={item.href}>
                   <Link
