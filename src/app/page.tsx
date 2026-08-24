@@ -309,15 +309,35 @@ export default function HomePage() {
           <h2 id="three-ways-heading" className="sr-only">
             Three ways to work with Michele
           </h2>
+          {/* TWO COLUMNS AT md, THREE ONLY AT lg, and the breakpoint is
+              measured. Three columns from md gave each card 200px of inside
+              width, and the CTA labels need 209px ("Book me to speak") and
+              238px ("See my body of work"), so two of the three wrapped their
+              button onto a second line and the Author card's copy ran to eight
+              lines. Two-up at md gives 302px inside and everything fits.
+
+              Three cards over two columns leaves the last one alone on its own
+              row, so it spans both and is held to one column's width. Centred
+              reads as deliberate; flush left reads as a missing tile. Same
+              treatment /speaker gives its orphan. */}
           <FadeInStagger faster>
             <ul
               role="list"
-              className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5 lg:gap-8"
+              className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-8"
             >
-              {DOORS.map((door) => {
+              {DOORS.map((door, i) => {
                 const Icon = DOOR_ICONS[door.icon]
+                const isOrphan = i === DOORS.length - 1 && DOORS.length % 2 === 1
                 return (
-                  <FadeIn as="li" key={door.key} className="flex">
+                  <FadeIn
+                    as="li"
+                    key={door.key}
+                    className={
+                      isOrphan
+                        ? 'flex md:col-span-2 md:mx-auto md:w-[calc(50%-0.625rem)] lg:col-span-1 lg:mx-0 lg:w-auto'
+                        : 'flex'
+                    }
+                  >
                     {/* The whole card is the link, so the target is the card
                         rather than a two-word phrase at the bottom of it. The
                         CTA below is therefore decorative: it lives inside this
@@ -363,7 +383,13 @@ export default function HomePage() {
                           reference design. The icon circle above is allowed to
                           be round because it holds an icon, not a label. */}
                       <span className="mt-auto pt-3">
-                        <span className="font-display inline-flex items-center gap-1.5 rounded-md bg-white/15 px-5 py-2 text-xs font-semibold tracking-[0.14em] uppercase ring-1 ring-inset ring-white/30 transition duration-300 group-hover:bg-white/25">
+                        {/* px-4 rather than the /speaker chip's px-5. The
+                            longest label here, "See my body of work", is 176px
+                            of glyphs plus the arrow, and at lg the card has
+                            248px inside; px-5 leaves 10px of slack and px-4
+                            leaves 18px, which is the difference between fitting
+                            and fitting reliably across font loading. */}
+                        <span className="font-display inline-flex items-center gap-1.5 rounded-md bg-white/15 px-4 py-2 text-xs font-semibold tracking-[0.14em] uppercase ring-1 ring-inset ring-white/30 transition duration-300 group-hover:bg-white/25">
                           {door.cta}
                           <span
                             aria-hidden="true"
