@@ -469,6 +469,36 @@ export default function CoachingPage() {
           </div>
         </FadeIn>
       </Container>
+
+      {/* ---------------- 9. NOT JUST BOOKS ---------------- */}
+      {/* The soft-panel pattern from section 4, reused so this reads as a warm
+          aside rather than a second offer. interest="other" (not "coaching")
+          so these land separately from the book wait-list. */}
+      <section aria-labelledby="not-just-books-heading">
+        <Container className="mt-16 sm:mt-20">
+          <FadeIn>
+            <div className="rounded-4xl bg-[var(--color-coach-surface-soft)] p-8 ring-1 ring-neutral-900/10 ring-inset sm:p-12">
+              <h2
+                id="not-just-books-heading"
+                className="font-display text-2xl font-semibold tracking-tight text-neutral-950 sm:text-3xl"
+              >
+                Not just books.
+              </h2>
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-700">
+                Most of my coaching is with authors, but not all of it. One
+                pastor asked me to coach him on hearing God&rsquo;s voice, and
+                that&rsquo;s become part of what I do. If you&rsquo;re working
+                on something that isn&rsquo;t a book, whether a season of life,
+                a calling, or a spiritual practice, reach out. If it&rsquo;s a
+                fit, we&rsquo;ll talk.
+              </p>
+              <div className="mt-8">
+                <ContactTrigger interest="other">Get in touch</ContactTrigger>
+              </div>
+            </div>
+          </FadeIn>
+        </Container>
+      </section>
     </>
   )
 }
