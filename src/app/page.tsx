@@ -73,10 +73,10 @@ import {
  *    every title" link. /author carries the books, and the Author card in the
  *    three doors is now the only route to them from here.
  *
- * "Things my friends say about me" is LIVE, with Michele's curated list of
- * fifteen quotes signed off 2026-08-24. It was parked twice on the way here;
- * the list itself is now settled, so treat the arrays in home-variants.ts as
- * approved copy rather than a working set.
+ * "Things my friends say about me and my work" is LIVE, with Michele's curated
+ * list of fifteen quotes signed off 2026-08-24. It was parked twice on the way
+ * here; the list itself is now settled, so treat the arrays in home-variants.ts
+ * as approved copy rather than a working set.
  */
 export const metadata: Metadata = pageMetadata({
   title: 'Coach, author, and speaker',
@@ -539,7 +539,7 @@ export default function HomePage() {
               id="friends-say-heading"
               className="font-display text-center text-3xl font-medium tracking-tight text-balance text-[var(--color-brand-teal)] sm:text-4xl"
             >
-              Things my friends say about me.
+              Things my friends say about me and my work.
             </h2>
           </FadeIn>
         </Container>

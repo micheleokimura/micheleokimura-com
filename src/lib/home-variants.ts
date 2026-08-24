@@ -232,7 +232,7 @@ export const PULL_QUOTE = {
 } as const
 
 /**
- * "Things my friends say about me" — the two scrolling rows that replaced the
+ * "Things my friends say about me and my work" — the two scrolling rows that replaced the
  * Recognition section.
  *
  * LIVE, AND THE LIST IS SIGNED OFF. Michele curated it on 2026-08-24: fifteen
