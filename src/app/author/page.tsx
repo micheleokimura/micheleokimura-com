@@ -70,16 +70,7 @@ const WIDE = 'mx-auto max-w-7xl px-6 lg:px-8'
 /** Section rhythm, from Brett's note: 60-80px desktop, 40-60px mobile. */
 const SECTION = 'py-12 sm:py-16 lg:py-20'
 
-const TILE_SIZES = '(max-width: 640px) 40vw, 12rem'
-
-/**
- * The cover sits in a capped, centred column inside the tile rather than
- * filling it. Brett asked for a SMALL cover on each tile, and a three-column
- * grid at max-w-7xl hands every tile 384px, which turned each cover into a
- * 512px-tall poster and each tile into a 671px block. 12rem is the same scale
- * the approved cover row on the home page runs at, where the same art sits six
- * across at xl. The tile keeps its full width for the title and the teaser. */
-const COVER_COLUMN = 'mx-auto w-full max-w-[12rem]'
+const TILE_SIZES = '(max-width: 640px) 6rem, (max-width: 1024px) 30vw, 24rem'
 
 /**
  * Programs that have a case study but no title on the shelf. Card copy is read
@@ -91,16 +82,61 @@ const OTHER_PROJECTS = projectStudies.filter((project) =>
 
 /* ---------------------------------------------------------------- pieces */
 
-// `w-full` is load-bearing. The <li> is `display:flex` so the tile can stretch
-// to the row height, which makes the tile a flex ITEM: without an explicit
-// width it shrinks to its content, and the Preschool tile (a two-word label
-// under a cover) came out half the width of its neighbours.
+/**
+ * THE TILE, matched to Brett's reference: the Living in Duvall listing card at
+ * livingin-platform.vercel.app/listings. What is borrowed, element by element:
+ *
+ *   reference                                 here
+ *   ----------------------------------------  --------------------------------
+ *   flex h-full flex-row xs:flex-col          same, swapping at sm
+ *   overflow-hidden rounded-2xl               same
+ *   border + bg-surface + shadow-sm           ring-1 navy/10, cream, shadow-sm
+ *   hover:-translate-y-0.5                    same
+ *   hover:border-primary hover:shadow-md      hover ring goes teal, shadow-md
+ *   image band flush to the card edge         same
+ *   group-hover:scale-105 on the image        same
+ *   body p-2.5 xs:p-4                         same
+ *   serif title, leading-tight, ~18px         font-display at the same size
+ *   group-hover:text-primary on the title     title goes teal on hover
+ *   muted 14px/20px teaser, line-clamp-2      same colour and size, clamp-4
+ *   mt-auto footer row, pt-1.5 xs:pt-4        same
+ *
+ * Two deliberate departures, both forced by what the card is carrying.
+ *
+ * The title clamps at TWO lines, not one. Duvall lists business names, which
+ * fit on a line; "The Birth of Explicit Movement: Discover Keys to Fulfilling
+ * Your Purpose" does not, and a truncated book title is a worse card than a
+ * two-line one.
+ *
+ * The teaser clamps at FOUR lines, not two. Every teaser on this shelf is
+ * approved copy lifted whole from the book's own description, and clamping at
+ * two would put an ellipsis through the middle of six of them. Four clears all
+ * the current copy while keeping the clamp there as a guard, so a longer teaser
+ * added later still cannot blow the card out.
+ *
+ * The reference's second footer element, a coloured "Open" status pill, is NOT
+ * borrowed. DESIGN-RULES bans pills outright because they read as clickable, so
+ * the footer row carries "Learn more" alone.
+ *
+ * `w-full` is load-bearing. The <li> is `display:flex` so the tile can stretch
+ * to the row height, which makes the tile a flex ITEM: without an explicit
+ * width it shrinks to its content, and the Preschool tile (a two-word label
+ * under a cover) came out half the width of its neighbours.
+ */
 const TILE_CLASS =
-  'group flex h-full w-full flex-col rounded-3xl bg-[var(--color-band-3)] p-5 ring-1 ring-[var(--color-navy-10)] transition duration-300 hover:shadow-xl hover:shadow-[var(--color-teal-20)] hover:ring-[var(--color-teal-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)] lg:p-6'
+  'group flex h-full w-full flex-row overflow-hidden rounded-2xl bg-[var(--color-band-3)] shadow-sm ring-1 ring-[var(--color-navy-10)] transition duration-300 hover:-translate-y-0.5 hover:shadow-md hover:ring-[var(--color-teal-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)] sm:flex-col'
 
+/** Card body. Reference: `flex min-w-0 flex-1 flex-col p-2.5 xs:p-4`. */
+const BODY_CLASS = 'flex min-w-0 flex-1 flex-col p-2.5 sm:p-4'
+
+/**
+ * The footer row, pinned to the bottom of the body with `mt-auto` so it lines
+ * up across a row of cards whatever the teaser length. Reference spacing:
+ * `pt-1.5 xs:pt-4`.
+ */
 function LearnMore() {
   return (
-    <span className="font-display mt-4 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition group-hover:decoration-2">
+    <span className="font-display mt-auto inline-flex items-center gap-1.5 self-start pt-1.5 text-sm font-semibold text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition group-hover:decoration-2 sm:pt-4">
       Learn more
       <span
         aria-hidden="true"
@@ -124,23 +160,24 @@ function BookTile({
 }) {
   return (
     <Link href={`/author/books/${book.slug}`} className={TILE_CLASS}>
-      <div className={COVER_COLUMN}>
-        <Cover src={book.cover} alt={book.coverAlt} sizes={TILE_SIZES} />
+      <Cover src={book.cover} alt={book.coverAlt} sizes={TILE_SIZES} flush />
+      <div className={BODY_CLASS}>
+        <Heading
+          className={`font-display leading-tight font-semibold tracking-tight text-neutral-950 transition-colors group-hover:text-[var(--color-brand-teal)] line-clamp-2 ${headingClass}`}
+        >
+          {book.title}
+        </Heading>
+        {/* Under the title, by direction, and flat text rather than a tag. */}
+        {book.forthcoming ? (
+          <span className="mt-1.5 block">
+            <Forthcoming />
+          </span>
+        ) : null}
+        <p className="mt-1.5 line-clamp-4 text-xs leading-5 text-neutral-600 sm:text-sm sm:leading-5">
+          {book.teaser}
+        </p>
+        <LearnMore />
       </div>
-      <Heading
-        className={`font-display mt-5 leading-snug font-semibold tracking-tight text-neutral-950 ${headingClass}`}
-      >
-        {book.title}
-      </Heading>
-      {book.forthcoming ? (
-        <span className="mt-1.5 block">
-          <Forthcoming />
-        </span>
-      ) : null}
-      <p className="mt-3 flex-auto text-sm leading-6 text-neutral-700">
-        {book.teaser}
-      </p>
-      <LearnMore />
     </Link>
   )
 }
@@ -164,14 +201,13 @@ function EditionTile({
 }) {
   return (
     <Link href={href} className={TILE_CLASS}>
-      <div className={COVER_COLUMN}>
-        <Cover src={src} alt={alt} sizes={TILE_SIZES} />
+      <Cover src={src} alt={alt} sizes={TILE_SIZES} flush />
+      <div className={BODY_CLASS}>
+        <h4 className="font-display line-clamp-2 text-base leading-tight font-semibold tracking-tight text-neutral-950 transition-colors group-hover:text-[var(--color-brand-teal)]">
+          {label}
+        </h4>
+        <LearnMore />
       </div>
-      <h4 className="font-display mt-5 text-base leading-snug font-semibold tracking-tight text-neutral-950">
-        {label}
-      </h4>
-      <div className="flex-auto" />
-      <LearnMore />
     </Link>
   )
 }
@@ -234,10 +270,14 @@ function TileGrid({
 }) {
   return (
     <FadeInStagger faster>
+      {/* Reference grid: `grid gap-3 sm:grid-cols-3 sm:gap-5`. One column below
+          sm, where the card is horizontal, then three across. The four-column
+          variant is for the Dream Big age brackets only, which are a set of
+          four and were established as one row by the previous pass. */}
       <ul
         role="list"
-        className={`grid grid-cols-2 gap-4 sm:gap-5 lg:gap-8 ${
-          columns === 4 ? 'lg:grid-cols-4' : 'md:grid-cols-3'
+        className={`grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-5 ${
+          columns === 4 ? 'lg:grid-cols-4' : ''
         }`}
       >
         {children}
@@ -444,7 +484,7 @@ export default function AuthorPage() {
                 <FadeIn as="li" key={project.href} scaleIn className="flex">
                   <Link
                     href={project.href}
-                    className="group flex h-full w-full flex-col rounded-3xl bg-[var(--color-band-1)] p-6 ring-1 ring-[var(--color-navy-10)] transition duration-300 hover:shadow-xl hover:shadow-[var(--color-teal-20)] hover:ring-[var(--color-teal-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)] lg:p-8"
+                    className="group flex h-full w-full flex-col rounded-2xl bg-[var(--color-band-1)] p-6 shadow-sm ring-1 ring-[var(--color-navy-10)] transition duration-300 hover:-translate-y-0.5 hover:shadow-md hover:ring-[var(--color-teal-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)] lg:p-8"
                   >
                     <span className="font-display text-xs font-semibold tracking-[0.18em] text-[var(--color-brand-terracotta-ink)] uppercase">
                       {project.kicker}
