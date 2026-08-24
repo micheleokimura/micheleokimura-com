@@ -14,26 +14,56 @@ import {
   projectStudies,
 } from '@/lib/projects'
 
-// Author page, rendered 2026-08-22 from the locked copy at
-// content/author/author-page-copy.md. Endorser quotes are verbatim and must
-// stay that way; edit the markdown and this file together.
+// Author page. Endorser quotes are verbatim and must stay that way.
 //
-// Covers currently in the repo: The Birth of Explicit Movement, the Explicit
-// Movement 21-Day Journal, the four Dream Big with God (Faith) journals and
-// their four teacher guides, one Classic Dream Big journal (Youth & Adults),
-// Raising Kingdom Kids, and the Brave Series (Brave & Beautiful Vol. 1 Faith
-// Journey cover, extracted 2026-08-23).
+// The shelf runs in ONE continuous order, set by Michele 2026-08-23, and the
+// order is the point. Do not resort it alphabetically or by date, and do not
+// reintroduce a divider between her own titles and the Releasing Generations
+// curriculum: she asked for one list.
 //
-// Still rendering a placeholder tile until art lands: Dancing with Father,
-// both Brave Purpose editions, and the Classic Dream Big journals for
-// Preschool, Younger Elementary, and Older Elementary. Drop the file in
-// /public/images/journals or /public/images/books and fill in the field.
+//   1 Brave Purpose with God   5 Brave Series Curriculum
+//   2 Brave Purpose                (Beautiful / Bold / Together sub-blocks)
+//   3 Dream Big Journals        6 Dancing with Father
+//     Curriculum                7 The Birth of Explicit Movement
+//       (Journals + Teacher     8 Explicit Movement 21-Day Journal
+//        Guides sub-blocks)
+//   4 Raising Kingdom Kids Curriculum
+//
+// Sub-block headings are short on purpose. They sit under a parent that
+// already names the curriculum, so "Journals" and "Teacher Guides" carry it.
+//
+// The faith edition leads at 1, by direction.
+//
+// NAMING, decided 2026-08-25 on Michele's "use your best judgment":
+//
+//   "Raising Kingdom Kids Curriculum" takes the Curriculum suffix, matching
+//   the two parents either side of it. Michele asked for it twice and it now
+//   reads as one naming system rather than one exception.
+//
+//   "Dancing with Father" keeps the lowercase "with". The cover art sets the
+//   word as "With", but that is display typography; the endorsement quotes ON
+//   THIS PAGE say "Dancing with Father", and so do the case study, the project
+//   registry, the About timeline, and the JSON-LD. Changing it is a sitewide
+//   pass, not a one-page edit. Do it everywhere or nowhere.
+//
+// Wording: this page says "Non-Faith" where the rest of the site still says
+// "Classic". That is Michele's call for the customer-facing shelf. The Brave
+// Series tiles get there through the `editionLabels` prop rather than by
+// editing lib/brave-series-covers, which four other pages also read.
+//
+// Covers in the repo: Dancing with Father, The Birth of Explicit Movement, the
+// Explicit Movement 21-Day Journal, the four Dream Big (Faith) journals and
+// their four teacher guides, Raising Kingdom Kids, and the twelve Brave Series
+// volumes.
+//
+// Still rendering a placeholder tile until art lands: both Brave Purpose
+// editions. Drop the file in /public/images/books and fill in the src.
 import { pageMetadata } from '@/lib/schema'
 
 export const metadata: Metadata = pageMetadata({
   title: 'Author',
   description:
-    'Books, journals, and curricula by Michele Okimura. Two published trade books, a 21-day interactive journal, the multi-age Dream Big journals in Faith and Classic editions, the Raising Kingdom Kids lesson book, the 24-volume Brave Series, and Brave Purpose coming 2027.',
+    'Books, journals, and curricula by Michele Okimura. Two published trade books, a 21-day interactive journal, the multi-age Dream Big Journals in Faith and Non-Faith versions, the Raising Kingdom Kids lesson book, the 24-volume Brave Series, and Brave Purpose coming 2027.',
   path: '/author',
   ogDescription:
     'Books, journals, and curricula for dreamers of every age.',
@@ -50,6 +80,45 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
     <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
       {children}
     </h2>
+  )
+}
+
+/**
+ * Heading for a sub-block: a set of covers sitting under a parent work, with
+ * no cover column of its own. Same tracked small-caps the cover grids on this
+ * page already use, with the subtitle on its own italic line. BraveSeriesCovers
+ * renders its three title sub-blocks to match.
+ */
+function ShelfGroupTitle({
+  title,
+  subtitle,
+}: {
+  title: string
+  subtitle?: string
+}) {
+  return (
+    <>
+      <h4 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
+        {title}
+      </h4>
+      {subtitle ? (
+        <p className="mt-2 text-sm tracking-wide text-neutral-500 italic">
+          {subtitle}
+        </p>
+      ) : null}
+    </>
+  )
+}
+
+/**
+ * Flat, tracked small-caps label for a title that has not shipped. Deliberately
+ * not a pill: DESIGN-RULES bans badges outright because they read as clickable.
+ */
+function Forthcoming() {
+  return (
+    <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-terracotta-ink)] uppercase sm:text-sm">
+      Forthcoming
+    </span>
   )
 }
 
@@ -307,43 +376,49 @@ const DREAM_BIG_ENDORSEMENTS: Endorsement[] = [
 ]
 
 /**
- * The four age brackets, youngest first, each in both editions plus its
- * companion teacher guide. A missing `classic` cover renders the Cover
- * placeholder rather than dropping the tile, so the shelf always shows the
- * full 4 x 2 set. Drop the art in /public/images/journals and fill the field.
+ * The four age brackets, youngest first, with the journal cover and its
+ * companion teacher guide. One cover per bracket, not two: Michele cut the
+ * second row of Non-Faith covers on 2026-08-23 because the two versions are
+ * the same art and the doubled grid read as eight different journals. The
+ * subtitle on each group carries the "both versions available" fact instead.
  */
 const DREAM_BIG_EDITIONS = [
   {
     label: 'Preschool',
-    faith: '/images/journals/dream-big-with-god-journal-preschool@2x.jpg',
-    classic: null,
+    journal: '/images/journals/dream-big-with-god-journal-preschool@2x.jpg',
     guide: '/images/journals/dream-big-with-god-teacher-guide-preschool@2x.jpg',
   },
   {
     label: 'Younger Elementary, grades 1-2',
-    faith:
+    journal:
       '/images/journals/dream-big-with-god-journal-younger-elementary@2x.jpg',
-    classic: null,
     guide:
       '/images/journals/dream-big-with-god-teacher-guide-younger-elementary@2x.jpg',
   },
   {
     label: 'Older Elementary, grades 3-5',
-    faith:
+    journal:
       '/images/journals/dream-big-with-god-journal-older-elementary@2x.jpg',
-    classic: null,
     guide:
       '/images/journals/dream-big-with-god-teacher-guide-older-elementary@2x.jpg',
   },
   {
     label: 'Youth & Adults, “Keys to Unlock Your Dreams”',
-    faith:
+    journal:
       '/images/journals/dream-big-with-god-journal-youth-and-adults@2x.jpg',
-    classic: '/images/journals/dream-big-journal-youth-and-adults@2x.jpg',
     guide:
       '/images/journals/dream-big-with-god-teacher-guide-youth-and-adults@2x.jpg',
   },
 ]
+
+/** Both Dream Big groups and the Brave Series shelf print the same line. */
+const BOTH_VERSIONS = 'Faith and Non-Faith Versions Available'
+
+/**
+ * Author-page wording for the Brave Series editions. `Classic` is still the
+ * internal name in lib/brave-series-covers and on the project pages.
+ */
+const AUTHOR_EDITION_LABELS = { Classic: 'Non-Faith' } as const
 
 const RAISING_KINGDOM_KIDS_TOPICS = [
   'Identity in Christ',
@@ -364,12 +439,6 @@ const RAISING_KINGDOM_KIDS_ENDORSEMENTS: Endorsement[] = [
 const BRAVE_RECOGNITION = [
   'Brave Together (non-faith version) vetted and approved by the Hawai‘i State Department of Education for use in secondary public schools, 2026',
   '2023 Outstanding Advocate for the Children and Youth of Hawai‘i, awarded to Releasing Generations by Hawai‘i’s Governor and Honolulu’s Mayor for the development of the Brave Series',
-]
-
-const BRAVE_TITLES = [
-  { title: 'Brave & Beautiful', audience: 'for teen girls' },
-  { title: 'Brave & Bold', audience: 'for teen boys' },
-  { title: 'Brave Together', audience: 'for co-ed audiences' },
 ]
 
 const BRAVE_ENDORSEMENTS: Endorsement[] = [
@@ -454,9 +523,16 @@ export default function AuthorPage() {
           about the works, and repeating fifteen nodes on every URL is bloat. */}
       <AllWorksJsonLd />
 
+      {/* Michele's line, 2026-08-25, VERBATIM including the closing period.
+          It is the H1 rather than the banner subtitle because it says the same
+          thing the old headline said ("Books, Journals, and Curricula ... of
+          Every Age") and adds the reason why, so stacking both read as an
+          editing slip. The eyebrow already names the category, so the headline
+          does not have to. BannerHero still has a `subtitle` prop if a second
+          line is ever wanted here. */}
       <BannerHero
         eyebrow="Author"
-        title="Books, Journals, and Curricula for Dreamers of Every Age"
+        title="Books, journals, and curricula that call out purpose and passion at every age."
       />
 
       {/* The intro paragraph that used to sit inside the tall hero. It reads as
@@ -465,7 +541,7 @@ export default function AuthorPage() {
         <FadeIn>
           <p className="max-w-3xl text-xl leading-9 text-neutral-600">
             From published books to a 24-volume teen curriculum to multi-age
-            journals in both faith and non-faith editions, Michele&rsquo;s body
+            journals in both faith and non-faith versions, Michele&rsquo;s body
             of work walks readers through the practice of dreaming big and
             stepping into brave purpose. Whether you&rsquo;re a preschooler with
             a first dream, an adult moving into a new season, or a leader
@@ -518,17 +594,499 @@ export default function AuthorPage() {
         </FadeIn>
       </Container>
 
-      {/* ------------------------------------------------ published books */}
-      <section aria-labelledby="published-books">
+      {/* --------------------------------------------- the shelf, 1 to 8 */}
+      {/* ONE continuous list, no group divider: Michele's order of 2026-08-23,
+          which does not separate her own titles from the Releasing Generations
+          curriculum. There is no VISIBLE heading over the list either, so the
+          h2 below is sr-only and exists to keep the outline h1 > h2 > h3. */}
+      <section aria-labelledby="michele-titles">
+        <h2 id="michele-titles" className="sr-only">
+          Books and curricula by Michele Okimura
+        </h2>
         <Container className="mt-16 sm:mt-24">
           <FadeIn>
-            <SectionHeading>
-              <span id="published-books">Published books</span>
-            </SectionHeading>
+            <p className="max-w-3xl font-display text-xl leading-9 text-neutral-800 italic sm:text-2xl sm:leading-10">
+              Brave Purpose is Michele&rsquo;s forthcoming book, releasing in
+              two editions: one faith, one non-faith. Both share the same core
+              message: you were made to step off the rock and into the current
+              of the life you were designed for. Each edition is voiced for its
+              audience.
+            </p>
           </FadeIn>
 
-          <div className="mt-10 space-y-20 sm:mt-12 sm:space-y-28">
-            {/* The Birth of Explicit Movement */}
+          <div className="mt-14 space-y-20 sm:mt-16 sm:space-y-28">
+
+            {/* 1. Brave Purpose with God */}
+            <Work
+              cover={
+                <Cover alt="Brave Purpose with God" sizes={COVER_SIZES_MAIN} />
+              }
+            >
+              <Forthcoming />
+              <div className="mt-4">
+                <WorkTitle
+                  title="Brave Purpose with God"
+                  meta="Faith edition · Targeted Spring 2027"
+                />
+              </div>
+              <Prose>
+                <p>
+                  For anyone longing to dream big with God. Michele lays out
+                  the Brave Purpose Framework: 15 steps in three movements
+                  (Uncover, Recover, Ignite) that walk readers through
+                  discovering the God-breathed dreams He has planted within
+                  them, dealing with the fears and voices that have held them
+                  back, and taking real next steps of obedience. Written for
+                  the young adult finding first footing, the middle-aged
+                  reader navigating the sustained trek, and the senior
+                  stepping into a golden legacy. Includes a companion
+                  workbook.
+                </p>
+              </Prose>
+              <Endorsements
+                items={BRAVE_PURPOSE_FAITH_ENDORSEMENTS}
+                label="Early praise"
+              />
+              <ReadTheStory
+                href="/projects/brave-purpose-with-god"
+                label="Brave Purpose with God"
+              />
+              <div className="mt-8">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-1.5 font-display text-base font-semibold text-neutral-950 underline decoration-[var(--color-brand-terracotta)] decoration-2 underline-offset-4 transition hover:text-[var(--color-brand-terracotta-ink)]"
+                >
+                  Contact Michele for release updates
+                  <span aria-hidden="true">&rarr;</span>
+                </Link>
+                <p className="mt-2 text-sm text-neutral-500 italic">
+                  Launch email list coming soon.
+                </p>
+              </div>
+            </Work>
+
+
+            {/* 2. Brave Purpose */}
+            <Work
+              cover={<Cover alt="Brave Purpose" sizes={COVER_SIZES_MAIN} />}
+            >
+              <Forthcoming />
+              <div className="mt-4">
+                <WorkTitle
+                  title="Brave Purpose"
+                  meta="Non-faith edition · Releasing 2027"
+                />
+              </div>
+              <Prose>
+                <p>
+                  For anyone ready to dream big and step into the life they
+                  were designed for. Same 15-step Brave Purpose Framework,
+                  same three movements, voiced without the faith framing.
+                  Includes a companion workbook.
+                </p>
+              </Prose>
+              <Endorsements
+                items={BRAVE_PURPOSE_SECULAR_ENDORSEMENTS}
+                label="Early praise"
+              />
+              <ReadTheStory
+                href="/projects/brave-purpose"
+                label="Brave Purpose"
+              />
+              <div className="mt-8">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-1.5 font-display text-base font-semibold text-neutral-950 underline decoration-[var(--color-brand-terracotta)] decoration-2 underline-offset-4 transition hover:text-[var(--color-brand-terracotta-ink)]"
+                >
+                  Contact Michele for release updates
+                  <span aria-hidden="true">&rarr;</span>
+                </Link>
+                <p className="mt-2 text-sm text-neutral-500 italic">
+                  Launch email list coming soon.
+                </p>
+              </div>
+            </Work>
+
+            {/* 3. Dream Big Journals. The parent block carries the story; the
+                two cover sets sit under it as labelled sub-blocks, each one
+                noting that both versions ship. */}
+            <div>
+              <Work
+                cover={
+                  <Cover
+                    src="/images/journals/dream-big-with-god-journal-youth-and-adults@2x.jpg"
+                    alt="Dream Big Journal, Youth & Adults"
+                    sizes={COVER_SIZES_MAIN}
+                  />
+                }
+              >
+                {/* The parent does NOT repeat the versions line: both
+                    sub-blocks below carry it, and three copies on one screen
+                    read as three different facts. */}
+                <WorkTitle
+                  title="Dream Big Journals Curriculum"
+                  meta="Published 2023-2025 · Sole author: Michele Okimura"
+                />
+                <Prose>
+                  <p>
+                    A multi-age curriculum designed to walk readers through the
+                    practice of dreaming big, in shorter, age-appropriate
+                    journals that meet each reader where they are. As children
+                    work through the pages, parents and teachers discover
+                    what&rsquo;s alive in their kids&rsquo; hearts and gain the
+                    language to nurture those dreams before the world quiets them.
+                    Many of the adult callings we eventually walk in were first
+                    planted in us as children.
+                  </p>
+                  <p>
+                    In a world that too often teaches us to shrink our vision,
+                    these journals do the opposite. Seniors in their twilight
+                    years have used them to reignite vision for their season of
+                    life with great joy and excitement. How wonderful it would be
+                    to raise a generation of dreamers of all ages who would impact
+                    the world we live in for good.
+                  </p>
+                  <p className="text-base text-neutral-600 italic">
+                    Piloted with fourth-grade students at Kamehameha Schools,
+                    Hawai&lsquo;i.
+                  </p>
+                </Prose>
+
+                <p className="mt-8 text-base leading-7 text-neutral-700">
+                  <strong className="font-semibold text-neutral-950">
+                    Available in four age brackets:
+                  </strong>{' '}
+                  Preschool, Younger Elementary (grades 1-2), Older Elementary
+                  (grades 3-5), Youth &amp; Adults (&ldquo;Keys to Unlock Your
+                  Dreams&rdquo;). Every bracket comes in a Faith version and a
+                  Non-Faith version. The Non-Faith version is the one that goes
+                  into public school classrooms and secular leadership rooms.
+                </p>
+
+                <Endorsements
+                  items={DREAM_BIG_ENDORSEMENTS}
+                  label="Voices from the classroom"
+                />
+                <AvailableAt links={[{ text: 'micheleokimura.com/store' }]} />
+                <ReadTheStory
+                  href="/projects/dream-big-journals"
+                  label="the Dream Big Journals"
+                />
+              </Work>
+
+              {/* Sub-block A, "Journals". Headings here are deliberately
+                  short: the parent above already says Dream Big Journals, so
+                  repeating it read as two different products. One row of four,
+                  one per age bracket. The second row of Non-Faith covers and
+                  the standalone full-size tile that used to close this section
+                  were both cut on 2026-08-23. */}
+              <div className="mt-14 sm:mt-16">
+                <FadeIn>
+                  <ShelfGroupTitle title="Journals" subtitle={BOTH_VERSIONS} />
+                </FadeIn>
+                <FadeInStagger faster className="mt-6">
+                  <ul
+                    role="list"
+                    className="grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-8"
+                  >
+                    {DREAM_BIG_EDITIONS.map((edition) => (
+                      <FadeIn as="li" key={edition.label} scaleIn>
+                        <Cover
+                          src={edition.journal}
+                          alt={`Dream Big Journal, ${edition.label}`}
+                          sizes={COVER_SIZES_GRID}
+                          caption={edition.label}
+                        />
+                      </FadeIn>
+                    ))}
+                  </ul>
+                </FadeInStagger>
+              </div>
+
+              {/* Sub-block B, "Teacher Guides". Same four brackets. */}
+              <div className="mt-14 sm:mt-16">
+                <FadeIn>
+                  <ShelfGroupTitle
+                    title="Teacher Guides"
+                    subtitle={BOTH_VERSIONS}
+                  />
+                </FadeIn>
+                <FadeInStagger faster className="mt-6">
+                  <ul
+                    role="list"
+                    className="grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-8"
+                  >
+                    {DREAM_BIG_EDITIONS.map((edition) => (
+                      <FadeIn as="li" key={edition.label} scaleIn>
+                        <Cover
+                          src={edition.guide}
+                          alt={`Dream Big Teacher Guide, ${edition.label}`}
+                          sizes={COVER_SIZES_GRID}
+                          caption={edition.label}
+                        />
+                      </FadeIn>
+                    ))}
+                  </ul>
+                </FadeInStagger>
+              </div>
+            </div>
+
+            {/* 4. Raising Kingdom Kids. The lesson book behind the Kingdom Kids
+                Workshop, and a title on the shelf in its own right. */}
+            <Work
+              cover={
+                <Cover
+                  src="/images/books/kingdom-kids.webp"
+                  alt="Raising Kingdom Kids"
+                  sizes={COVER_SIZES_MAIN}
+                />
+              }
+            >
+              <WorkTitle
+                title="Raising Kingdom Kids Curriculum"
+                meta="A lesson book for equipping the next generation · More than 100 lessons"
+              />
+              <Prose>
+                <p>
+                  A compilation of over 100 proven, true lessons Michele
+                  developed across ten years of active children&rsquo;s ministry
+                  and youth ministry work. Every lesson in the book was taught
+                  in a real room with real kids before it was written down.
+                  Nothing here is theory.
+                </p>
+                <p>
+                  The book was built for children&rsquo;s ministry leaders and
+                  parents, and the range turned out to be much wider than that.
+                  Many of the lessons carry straight across every age group,
+                  adults included, which is how churches have ended up teaching
+                  them from the main platform.
+                </p>
+              </Prose>
+
+              <div className="mt-8">
+                <h4 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
+                  What the lessons cover
+                </h4>
+                <ul
+                  role="list"
+                  className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2"
+                >
+                  {RAISING_KINGDOM_KIDS_TOPICS.map((topic) => (
+                    <li key={topic} className="flex gap-3">
+                      <span
+                        aria-hidden="true"
+                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-teal)]"
+                      />
+                      <span className="text-base leading-7 text-neutral-700">
+                        {topic}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <Endorsements
+                items={RAISING_KINGDOM_KIDS_ENDORSEMENTS}
+                label="What churches say"
+              />
+              <AvailableAt links={[{ text: 'micheleokimura.com/store' }]} />
+              <ReadTheStory
+                href="/projects/raising-kingdom-kids"
+                label="Raising Kingdom Kids"
+              />
+            </Work>
+
+            {/* 5. Brave Series Curriculum. Parent block, then the three titles as
+                sub-blocks, each with its audience as the subtitle. */}
+            <div>
+              <FadeIn>
+                <h3 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
+                  Directed as Chief Editor, Creative Director &amp; Contributing
+                  Author
+                </h3>
+              </FadeIn>
+              <div className="mt-8">
+                <Work
+                  cover={
+                    <Cover
+                      src="/images/brave-series/brave-and-beautiful-vol1-faith-journey@2x.jpg"
+                      alt="Brave & Beautiful, Volume 1 (Faith Journey edition)"
+                      sizes={COVER_SIZES_MAIN}
+                    />
+                  }
+                >
+                  <WorkTitle
+                    title="Brave Series Curriculum"
+                    meta={BOTH_VERSIONS}
+                  />
+                  <p className="mt-6 font-display text-xl leading-8 text-neutral-800 italic sm:text-2xl">
+                    Every page is a work of art. Just as every child is.
+                  </p>
+                  <Prose>
+                    <p>
+                      The Brave Series is a three-title youth curriculum that
+                      develops emotional health, builds self-worth and healthy
+                      relationships, imparts wisdom for life and leadership, and
+                      empowers readers to protect themselves from exploitation. A
+                      powerful preventative resource, available in both faith and
+                      non-faith versions. Michele led the series as{' '}
+                      <strong className="font-semibold text-neutral-950">
+                        Chief Editor, Creative Director, and Contributing Author
+                      </strong>
+                      . Twenty-four volumes in all: three titles, four-volume sets
+                      each, faith and non-faith versions.
+                    </p>
+                  </Prose>
+
+                  {/* Recognition callout. The token is navy at low opacity
+                      despite the legacy teal name, so this stays a quiet panel
+                      rather than a second brand color. */}
+                  <div className="mt-8 rounded-3xl bg-[var(--color-teal-05)] p-6 ring-1 ring-[var(--color-teal-20)] sm:p-8">
+                    <h4 className="font-display text-xs font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
+                      Recognition
+                    </h4>
+                    <ul role="list" className="mt-5 space-y-4">
+                      {BRAVE_RECOGNITION.map((item) => (
+                        <li key={item} className="flex gap-3">
+                          <span
+                            aria-hidden="true"
+                            className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-teal)]"
+                          />
+                          <span className="text-base leading-7 text-neutral-800">
+                            {item}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* The "Titles" card grid that used to sit here was cut on
+                      2026-08-25. It listed the three titles with their
+                      audiences in bordered boxes, and the three cover
+                      sub-blocks directly below now print exactly the same
+                      title-plus-audience pairs, with the covers attached. Two
+                      copies of one list on a single screen. If the cards ever
+                      come back, they should replace the sub-block headings
+                      rather than sit above them. */}
+
+                  <Prose>
+                    <p>
+                      While written for youth, the Brave Series has been adopted by
+                      church leaders for leadership development, and by women and
+                      men of all ages, from young adults to seniors, who have found
+                      their own healing, empowerment, and vision inside the
+                      material.
+                    </p>
+                    <p className="text-base text-neutral-600 italic">
+                      Brave Together Faith version shipping in the next month; all
+                      other volumes available now.
+                    </p>
+                  </Prose>
+
+                  <Endorsements items={BRAVE_ENDORSEMENTS} />
+                  <AvailableAt
+                    label="Buy at"
+                    links={[
+                      {
+                        text: 'thebraveseries.com',
+                        href: 'https://thebraveseries.com',
+                      },
+                    ]}
+                  />
+                  <ReadTheStory
+                    href="/projects/brave-series"
+                    label="the Brave Series"
+                  />
+                </Work>
+              </div>
+
+              {/* Twelve covers, four volumes per title, Faith and Non-Faith
+                  alternating across each row. All 24 are not shown here, by
+                  direction. Source: lib/brave-series-covers, relabelled for
+                  this page only. */}
+              <div className="mt-16 sm:mt-20">
+                <FadeIn>
+                  <h4 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
+                    The twelve volumes
+                  </h4>
+                  <p className="mt-3 max-w-2xl text-base leading-7 text-neutral-600">
+                    Four volumes in each title, shown here in a mix of the Faith
+                    and Non-Faith versions. Every volume ships in both.
+                  </p>
+                </FadeIn>
+                <div className="mt-8">
+                  <BraveSeriesCovers editionLabels={AUTHOR_EDITION_LABELS} />
+                </div>
+              </div>
+            </div>
+
+            {/* 6. Dancing with Father. Cover art is the clean crop rather than
+                the full-page scan, which carries a grey scanner bed. */}
+            <Work
+              cover={
+                <Cover
+                  src="/images/books/dancing-with-father.webp"
+                  alt="Dancing with Father"
+                  sizes={COVER_SIZES_MAIN}
+                />
+              }
+            >
+              <WorkTitle title="Dancing with Father" meta="Published 2011" />
+              <Prose>
+                <p>
+                  A book of poetry, reflection, and beautiful painted
+                  illustrations. Michele wrote it out of her own difficult
+                  journey through youth, as a way for anyone else walking a
+                  similar path to know they are seen, pursued, and loved by God
+                  as Father. Short enough to read in one sitting. The kind of
+                  book readers keep close and return to again and again. Come
+                  dance with the One who joys over you with singing.
+                </p>
+                <p className="text-base text-neutral-600 italic">
+                  Also available as an audiobook, produced in radio-drama style.
+                </p>
+              </Prose>
+
+              <Endorsements items={DANCING_ENDORSEMENTS} />
+
+              <div className="mt-10">
+                <h4 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
+                  Reader impact
+                </h4>
+                <p className="mt-2 text-sm text-neutral-500 italic">
+                  From testimonies Michele has received.
+                </p>
+                <ul
+                  role="list"
+                  className="mt-5 space-y-4 border-t border-neutral-200 pt-5"
+                >
+                  {DANCING_READER_IMPACT.map((story) => (
+                    <li key={story} className="flex gap-3">
+                      <span
+                        aria-hidden="true"
+                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-teal)]"
+                      />
+                      <span className="text-base leading-7 text-neutral-700">
+                        {story}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <AvailableAt
+                links={[
+                  { text: 'micheleokimura.com/store (book, audiobook)' },
+                ]}
+              />
+              <ReadTheStory
+                href="/projects/dancing-with-father"
+                label="Dancing with Father"
+              />
+            </Work>
+
+
+            {/* 7. The Birth of Explicit Movement */}
             <Work
               cover={
                 <Cover
@@ -589,80 +1147,8 @@ export default function AuthorPage() {
               />
             </Work>
 
-            {/* Dancing with Father */}
-            <Work
-              cover={
-                <Cover alt="Dancing with Father" sizes={COVER_SIZES_MAIN} />
-              }
-            >
-              <WorkTitle title="Dancing with Father" meta="Published 2011" />
-              <Prose>
-                <p>
-                  A book of poetry, reflection, and beautiful painted
-                  illustrations. Michele wrote it out of her own difficult
-                  journey through youth, as a way for anyone else walking a
-                  similar path to know they are seen, pursued, and loved by God
-                  as Father. Short enough to read in one sitting. The kind of
-                  book readers keep close and return to again and again. Come
-                  dance with the One who joys over you with singing.
-                </p>
-                <p className="text-base text-neutral-600 italic">
-                  Also available as an audiobook, produced in radio-drama style.
-                </p>
-              </Prose>
 
-              <Endorsements items={DANCING_ENDORSEMENTS} />
-
-              <div className="mt-10">
-                <h4 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
-                  Reader impact
-                </h4>
-                <p className="mt-2 text-sm text-neutral-500 italic">
-                  From testimonies Michele has received.
-                </p>
-                <ul
-                  role="list"
-                  className="mt-5 space-y-4 border-t border-neutral-200 pt-5"
-                >
-                  {DANCING_READER_IMPACT.map((story) => (
-                    <li key={story} className="flex gap-3">
-                      <span
-                        aria-hidden="true"
-                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-teal)]"
-                      />
-                      <span className="text-base leading-7 text-neutral-700">
-                        {story}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <AvailableAt
-                links={[
-                  { text: 'micheleokimura.com/store (book, audiobook)' },
-                ]}
-              />
-              <ReadTheStory
-                href="/projects/dancing-with-father"
-                label="Dancing with Father"
-              />
-            </Work>
-          </div>
-        </Container>
-      </section>
-
-      {/* ----------------------------------------- journals and curricula */}
-      <section aria-labelledby="journals-curricula">
-        <Container className="mt-24 sm:mt-32">
-          <FadeIn>
-            <SectionHeading>
-              <span id="journals-curricula">Journals &amp; curricula</span>
-            </SectionHeading>
-          </FadeIn>
-
-          <div className="mt-10 space-y-20 sm:mt-12 sm:space-y-28">
-            {/* 21-Day Interactive Journal */}
+            {/* 8. The Explicit Movement 21-Day Interactive Journal */}
             <Work
               cover={
                 <Cover
@@ -706,492 +1192,11 @@ export default function AuthorPage() {
               />
             </Work>
 
-            {/* Dream Big with God Journals (faith) */}
-            <Work
-              cover={
-                <Cover
-                  src="/images/journals/dream-big-with-god-journal-youth-and-adults@2x.jpg"
-                  alt="Dream Big with God Journal, Youth & Adults edition"
-                  sizes={COVER_SIZES_MAIN}
-                />
-              }
-            >
-              <WorkTitle
-                title="Dream Big with God Journals"
-                meta="Faith edition · Published 2023-2025 · Sole author: Michele Okimura"
-              />
-              <Prose>
-                <p>
-                  A multi-age curriculum designed to walk readers through the
-                  practice of dreaming big with God, in shorter, age-appropriate
-                  journals that meet each reader where they are. As children
-                  work through the pages, parents and teachers discover
-                  what&rsquo;s alive in their kids&rsquo; hearts and gain the
-                  language to nurture those dreams before the world quiets them.
-                  Many of the adult callings we eventually walk in were first
-                  planted in us as children.
-                </p>
-                <p>
-                  In a world that too often teaches us to shrink our vision,
-                  these journals do the opposite. Seniors in their twilight
-                  years have used them to reignite vision for their season of
-                  life with great joy and excitement. How wonderful it would be
-                  to raise a generation of dreamers of all ages who would impact
-                  the world we live in for good.
-                </p>
-                <p className="text-base text-neutral-600 italic">
-                  Piloted with fourth-grade students at Kamehameha Schools,
-                  Hawai&lsquo;i.
-                </p>
-              </Prose>
 
-              <p className="mt-8 text-base leading-7 text-neutral-700">
-                <strong className="font-semibold text-neutral-950">
-                  Available in four age brackets:
-                </strong>{' '}
-                Preschool, Younger Elementary (grades 1-2), Older Elementary
-                (grades 3-5), Youth &amp; Adults (&ldquo;Keys to Unlock Your
-                Dreams&rdquo;). Every bracket comes in a Faith edition and a
-                Classic edition, eight journals in all.{' '}
-                <strong className="font-semibold text-neutral-950">
-                  Companion teacher guides
-                </strong>{' '}
-                for classroom and small-group use in all four editions.
-              </p>
-
-              <Endorsements
-                items={DREAM_BIG_ENDORSEMENTS}
-                label="Voices from the classroom"
-              />
-              <AvailableAt links={[{ text: 'micheleokimura.com/store' }]} />
-              <ReadTheStory
-                href="/projects/dream-big-journals"
-                label="the Dream Big Journals"
-              />
-            </Work>
-          </div>
-
-          {/* Full-width cover gallery: the four age brackets in the Faith
-              edition, the same four in the Classic edition, then the four
-              teacher guides. Eight journal covers in all. */}
-          <div className="mt-16 sm:mt-20">
-            <FadeIn>
-              <h4 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
-                Faith edition, four age brackets
-              </h4>
-            </FadeIn>
-            <FadeInStagger faster className="mt-6">
-              <ul
-                role="list"
-                className="grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-8"
-              >
-                {DREAM_BIG_EDITIONS.map((edition) => (
-                  <FadeIn as="li" key={edition.label} scaleIn>
-                    <Cover
-                      src={edition.faith}
-                      alt={`Dream Big with God Journal, ${edition.label}`}
-                      sizes={COVER_SIZES_GRID}
-                      caption={edition.label}
-                    />
-                  </FadeIn>
-                ))}
-              </ul>
-            </FadeInStagger>
-
-            <FadeIn className="mt-12">
-              <h4 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
-                Classic edition, four age brackets
-              </h4>
-            </FadeIn>
-            <FadeInStagger faster className="mt-6">
-              <ul
-                role="list"
-                className="grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-8"
-              >
-                {DREAM_BIG_EDITIONS.map((edition) => (
-                  <FadeIn as="li" key={`classic-${edition.label}`} scaleIn>
-                    <Cover
-                      src={edition.classic ?? undefined}
-                      alt={`Dream Big Journal, ${edition.label}`}
-                      sizes={COVER_SIZES_GRID}
-                      caption={edition.label}
-                    />
-                  </FadeIn>
-                ))}
-              </ul>
-            </FadeInStagger>
-
-            <FadeIn className="mt-12">
-              <h4 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
-                Companion teacher guides
-              </h4>
-            </FadeIn>
-            <FadeInStagger faster className="mt-6">
-              <ul
-                role="list"
-                className="grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-8"
-              >
-                {DREAM_BIG_EDITIONS.map((edition) => (
-                  <FadeIn as="li" key={edition.label} scaleIn>
-                    <Cover
-                      src={edition.guide}
-                      alt={`Dream Big with God Teacher Guide, ${edition.label}`}
-                      sizes={COVER_SIZES_GRID}
-                      caption={edition.label}
-                    />
-                  </FadeIn>
-                ))}
-              </ul>
-            </FadeInStagger>
-          </div>
-
-          {/* Dream Big Journals (non-faith) */}
-          <div className="mt-20 sm:mt-28">
-            <Work
-              cover={
-                <Cover
-                  src="/images/journals/dream-big-journal-youth-and-adults@2x.jpg"
-                  alt="Dream Big Journal, Youth & Adults edition"
-                  sizes={COVER_SIZES_MAIN}
-                />
-              }
-            >
-              <WorkTitle
-                title="Dream Big Journals"
-                meta="Classic edition · Published 2023-2025 · Sole author: Michele Okimura"
-              />
-              <Prose>
-                <p>
-                  Same curriculum, same four age brackets, God language removed.
-                  The Classic edition is the one that goes into public school
-                  classrooms and secular leadership rooms. Companion teacher
-                  guides in every bracket.
-                </p>
-              </Prose>
-              <AvailableAt links={[{ text: 'micheleokimura.com/store' }]} />
-            </Work>
-          </div>
-
-          {/* Raising Kingdom Kids. The lesson book behind the Kingdom Kids
-              Workshop, and a title on the shelf in its own right. */}
-          <div className="mt-20 sm:mt-28">
-            <Work
-              cover={
-                <Cover
-                  src="/images/books/kingdom-kids.webp"
-                  alt="Raising Kingdom Kids"
-                  sizes={COVER_SIZES_MAIN}
-                />
-              }
-            >
-              <WorkTitle
-                title="Raising Kingdom Kids"
-                meta="A lesson book for equipping the next generation · More than 100 lessons"
-              />
-              <Prose>
-                <p>
-                  A compilation of over 100 proven, true lessons Michele
-                  developed across ten years of active children&rsquo;s ministry
-                  and youth ministry work. Every lesson in the book was taught
-                  in a real room with real kids before it was written down.
-                  Nothing here is theory.
-                </p>
-                <p>
-                  The book was built for children&rsquo;s ministry leaders and
-                  parents, and the range turned out to be much wider than that.
-                  Many of the lessons carry straight across every age group,
-                  adults included, which is how churches have ended up teaching
-                  them from the main platform.
-                </p>
-              </Prose>
-
-              <div className="mt-8">
-                <h4 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
-                  What the lessons cover
-                </h4>
-                <ul
-                  role="list"
-                  className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2"
-                >
-                  {RAISING_KINGDOM_KIDS_TOPICS.map((topic) => (
-                    <li key={topic} className="flex gap-3">
-                      <span
-                        aria-hidden="true"
-                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-teal)]"
-                      />
-                      <span className="text-base leading-7 text-neutral-700">
-                        {topic}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <Endorsements
-                items={RAISING_KINGDOM_KIDS_ENDORSEMENTS}
-                label="What churches say"
-              />
-              <AvailableAt links={[{ text: 'micheleokimura.com/store' }]} />
-              <ReadTheStory
-                href="/projects/raising-kingdom-kids"
-                label="Raising Kingdom Kids"
-              />
-            </Work>
           </div>
         </Container>
       </section>
 
-      {/* ---------------------------------------------------- Brave Series */}
-      <section aria-labelledby="brave-series">
-        <Container className="mt-24 sm:mt-32">
-          <FadeIn>
-            <SectionHeading>
-              <span id="brave-series">
-                Directed as Chief Editor, Creative Director &amp; Contributing
-                Author
-              </span>
-            </SectionHeading>
-          </FadeIn>
-
-          <div className="mt-10 sm:mt-12">
-            <Work
-              cover={
-                <Cover
-                  src="/images/brave-series/brave-and-beautiful-vol1-faith-journey@2x.jpg"
-                  alt="Brave & Beautiful, Volume 1 (Faith Journey edition)"
-                  sizes={COVER_SIZES_MAIN}
-                />
-              }
-            >
-              <WorkTitle title="The Brave Series" />
-              <p className="mt-4 font-display text-xl leading-8 text-neutral-800 italic sm:text-2xl">
-                Every page is a work of art. Just as every child is.
-              </p>
-              <Prose>
-                <p>
-                  The Brave Series is a three-title youth curriculum that
-                  develops emotional health, builds self-worth and healthy
-                  relationships, imparts wisdom for life and leadership, and
-                  empowers readers to protect themselves from exploitation. A
-                  powerful preventative resource, available in both faith and
-                  non-faith editions. Michele led the series as{' '}
-                  <strong className="font-semibold text-neutral-950">
-                    Chief Editor, Creative Director, and Contributing Author
-                  </strong>
-                  . Twenty-four volumes in all: three titles, four-volume sets
-                  each, faith and non-faith editions.
-                </p>
-              </Prose>
-
-              {/* Recognition callout. The hex mirrors --color-brand-terracotta; an opacity
-                  modifier on a var() color is not reliable across Tailwind
-                  versions, so the literal is used here. */}
-              <div className="mt-8 rounded-3xl bg-[var(--color-teal-05)] p-6 ring-1 ring-[var(--color-teal-20)] sm:p-8">
-                <h4 className="font-display text-xs font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
-                  Recognition
-                </h4>
-                <ul role="list" className="mt-5 space-y-4">
-                  {BRAVE_RECOGNITION.map((item) => (
-                    <li key={item} className="flex gap-3">
-                      <span
-                        aria-hidden="true"
-                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-teal)]"
-                      />
-                      <span className="text-base leading-7 text-neutral-800">
-                        {item}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="mt-10">
-                <h4 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
-                  Titles
-                </h4>
-                <ul
-                  role="list"
-                  className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-3"
-                >
-                  {BRAVE_TITLES.map((item) => (
-                    <li
-                      key={item.title}
-                      className="rounded-2xl border border-neutral-200 bg-white p-5"
-                    >
-                      <p className="font-display text-lg font-semibold tracking-tight text-neutral-950">
-                        {item.title}
-                      </p>
-                      <p className="mt-1 text-sm text-neutral-600">
-                        {item.audience}
-                      </p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <Prose>
-                <p>
-                  While written for youth, the Brave Series has been adopted by
-                  church leaders for leadership development, and by women and
-                  men of all ages, from young adults to seniors, who have found
-                  their own healing, empowerment, and vision inside the
-                  material.
-                </p>
-                <p className="text-base text-neutral-600 italic">
-                  Brave Together Faith edition shipping in the next month; all
-                  other volumes available now.
-                </p>
-              </Prose>
-
-              <Endorsements items={BRAVE_ENDORSEMENTS} />
-              <AvailableAt
-                label="Buy at"
-                links={[
-                  {
-                    text: 'thebraveseries.com',
-                    href: 'https://thebraveseries.com',
-                  },
-                ]}
-              />
-              <ReadTheStory
-                href="/projects/brave-series"
-                label="the Brave Series"
-              />
-            </Work>
-          </div>
-
-          {/* Twelve covers, four volumes per title, Faith and Classic
-              alternating across each row. The full 24-edition set is
-              deliberately not shown here. Source: lib/brave-series-covers. */}
-          <div className="mt-16 sm:mt-20">
-            <FadeIn>
-              <h4 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
-                The twelve volumes
-              </h4>
-              <p className="mt-3 max-w-2xl text-base leading-7 text-neutral-600">
-                Four volumes in each title, shown here in a mix of the Faith and
-                Classic editions. Every volume ships in both.
-              </p>
-            </FadeIn>
-            <div className="mt-8">
-              <BraveSeriesCovers />
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* ---------------------------------------------------- coming 2027 */}
-      <section aria-labelledby="coming-2027" className="mt-24 sm:mt-32">
-        <div className="bg-neutral-50 py-20 sm:py-28">
-          <Container>
-            <FadeIn className="mx-auto max-w-3xl text-center">
-              <SectionHeading>
-                <span id="coming-2027">Coming 2027</span>
-              </SectionHeading>
-              <p className="mt-6 font-display text-xl leading-9 text-neutral-800 italic sm:text-2xl sm:leading-10">
-                Brave Purpose is Michele&rsquo;s forthcoming book, releasing in
-                two editions: one faith, one non-faith. Both share the same core
-                message: you were made to step off the rock and into the current
-                of the life you were designed for. Each edition is voiced for
-                its audience.
-              </p>
-            </FadeIn>
-
-            <div className="mt-16 space-y-20 sm:mt-20 sm:space-y-28">
-              {/* Brave Purpose with God */}
-              <Work
-                cover={
-                  <Cover
-                    alt="Brave Purpose with God"
-                    sizes={COVER_SIZES_MAIN}
-                  />
-                }
-              >
-                <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-terracotta-ink)] uppercase sm:text-sm">
-                  Targeted Spring 2027
-                </span>
-                <div className="mt-4">
-                  <WorkTitle title="Brave Purpose with God" meta="Faith edition" />
-                </div>
-                <Prose>
-                  <p>
-                    For anyone longing to dream big with God. Michele lays out
-                    the Brave Purpose Framework: 15 steps in three movements
-                    (Uncover, Recover, Ignite) that walk readers through
-                    discovering the God-breathed dreams He has planted within
-                    them, dealing with the fears and voices that have held them
-                    back, and taking real next steps of obedience. Written for
-                    the young adult finding first footing, the middle-aged
-                    reader navigating the sustained trek, and the senior
-                    stepping into a golden legacy. Includes a companion
-                    workbook.
-                  </p>
-                </Prose>
-                <Endorsements
-                  items={BRAVE_PURPOSE_FAITH_ENDORSEMENTS}
-                  label="Early praise"
-                />
-                <ReadTheStory
-                  href="/projects/brave-purpose-with-god"
-                  label="Brave Purpose with God"
-                />
-                <div className="mt-8">
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center gap-1.5 font-display text-base font-semibold text-neutral-950 underline decoration-[var(--color-brand-terracotta)] decoration-2 underline-offset-4 transition hover:text-[var(--color-brand-terracotta-ink)]"
-                  >
-                    Contact Michele for release updates
-                    <span aria-hidden="true">&rarr;</span>
-                  </Link>
-                  <p className="mt-2 text-sm text-neutral-500 italic">
-                    Launch email list coming soon.
-                  </p>
-                </div>
-              </Work>
-
-              {/* Brave Purpose */}
-              <Work
-                cover={<Cover alt="Brave Purpose" sizes={COVER_SIZES_MAIN} />}
-              >
-                <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-terracotta-ink)] uppercase sm:text-sm">
-                  Releasing 2027
-                </span>
-                <div className="mt-4">
-                  <WorkTitle title="Brave Purpose" meta="Non-faith edition" />
-                </div>
-                <Prose>
-                  <p>
-                    For anyone ready to dream big and step into the life they
-                    were designed for. Same 15-step Brave Purpose Framework,
-                    same three movements, voiced without the faith framing.
-                    Includes a companion workbook.
-                  </p>
-                </Prose>
-                <Endorsements
-                  items={BRAVE_PURPOSE_SECULAR_ENDORSEMENTS}
-                  label="Early praise"
-                />
-                <ReadTheStory
-                  href="/projects/brave-purpose"
-                  label="Brave Purpose"
-                />
-                <div className="mt-8">
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center gap-1.5 font-display text-base font-semibold text-neutral-950 underline decoration-[var(--color-brand-terracotta)] decoration-2 underline-offset-4 transition hover:text-[var(--color-brand-terracotta-ink)]"
-                  >
-                    Contact Michele for release updates
-                    <span aria-hidden="true">&rarr;</span>
-                  </Link>
-                  <p className="mt-2 text-sm text-neutral-500 italic">
-                    Launch email list coming soon.
-                  </p>
-                </div>
-              </Work>
-            </div>
-          </Container>
-        </div>
-      </section>
 
       {/* ------------------------------------------------- other projects */}
       {/* Kingdom Kids and ReThink Creativity are programs rather than titles,

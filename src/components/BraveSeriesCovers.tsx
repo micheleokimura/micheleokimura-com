@@ -4,25 +4,35 @@ import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import {
   BRAVE_SERIES_TITLES,
   type BraveCover,
+  type BraveEdition,
   type BraveTitle,
 } from '@/lib/brave-series-covers'
 
+/** What each edition is called in the caption and the alt text. */
+export type BraveEditionLabels = Partial<Record<BraveEdition, string>>
+
 /**
  * The Brave Series cover shelf: four volumes per title, one tile each, with
- * the Faith and Classic editions alternating across the row. Twelve tiles when
- * all three titles are passed, four when a single title page passes its own.
+ * the two editions alternating across the row. Twelve tiles when all three
+ * titles are passed, four when a single title page passes its own.
  *
  * A volume with no usable art yet renders a typographic placeholder rather
  * than dropping out, so a row is always four wide.
  */
-function Tile({ cover }: { cover: BraveCover }) {
+function Tile({
+  cover,
+  editionLabel,
+}: {
+  cover: BraveCover
+  editionLabel: string
+}) {
   return (
     <figure>
       {cover.src ? (
         <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-neutral-100 ring-1 ring-neutral-900/5">
           <Image
             src={cover.src}
-            alt={cover.alt}
+            alt={`${cover.title}, Volume ${cover.volume}, ${editionLabel} edition`}
             fill
             sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 15rem"
             className="object-contain"
@@ -42,7 +52,8 @@ function Tile({ cover }: { cover: BraveCover }) {
         </div>
       )}
       <figcaption className="mt-3 text-center text-sm leading-6 text-neutral-600">
-        {cover.caption}
+        Vol. {cover.volume} <span className="text-neutral-300">&middot;</span>{' '}
+        {editionLabel}
       </figcaption>
     </figure>
   )
@@ -51,10 +62,16 @@ function Tile({ cover }: { cover: BraveCover }) {
 export function BraveSeriesCovers({
   titles = BRAVE_SERIES_TITLES,
   showTitleLabels = true,
+  editionLabels,
 }: {
   titles?: BraveTitle[]
   /** Off for a single-title page, where the page heading already names it. */
   showTitleLabels?: boolean
+  /**
+   * Rename an edition for this shelf only. The Author page passes
+   * `{ Classic: 'Non-Faith' }`; everywhere else prints the internal names.
+   */
+  editionLabels?: BraveEditionLabels
 }) {
   return (
     <div className="space-y-12">
@@ -64,10 +81,13 @@ export function BraveSeriesCovers({
             <FadeIn>
               <h3 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
                 {title.title}
-                <span className="ml-2 font-normal text-neutral-400 normal-case">
-                  {title.audience}
-                </span>
               </h3>
+              {/* Audience sits on its own italic line rather than inline after
+                  the title, so these sub-blocks match the heading-plus-subtitle
+                  pattern the rest of the Author page uses. */}
+              <p className="mt-2 text-sm tracking-wide text-neutral-500 italic">
+                {title.audience}
+              </p>
             </FadeIn>
           ) : null}
           <FadeInStagger faster className={showTitleLabels ? 'mt-5' : ''}>
@@ -77,7 +97,12 @@ export function BraveSeriesCovers({
             >
               {title.covers.map((cover) => (
                 <FadeIn as="li" key={`${title.slug}-${cover.volume}`} scaleIn>
-                  <Tile cover={cover} />
+                  <Tile
+                    cover={cover}
+                    editionLabel={
+                      editionLabels?.[cover.edition] ?? cover.edition
+                    }
+                  />
                 </FadeIn>
               ))}
             </ul>
