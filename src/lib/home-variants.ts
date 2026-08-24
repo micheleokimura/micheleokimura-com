@@ -95,7 +95,7 @@ export const HERO = {
   // "Mānoa" also stays out: the location is Honolulu, Hawaiʻi and nothing
   // narrower.
   subhead:
-    'Every person’s story matters and is the launchpad for brave purpose. I’m a speaker, author, and writing coach based in Honolulu, Hawaiʻi.',
+    'Every person’s story matters and is the launchpad for their brave purpose. I’m a speaker, author, and writing coach based in Honolulu, Hawaiʻi.',
   /**
    * THE AWARD WENT TO THE ORGANIZATION, NOT TO MICHELE. Final wording,
    * supplied verbatim by Michele 2026-08-23.
@@ -177,9 +177,18 @@ export const NONPROFIT_ROOM = {
  * centred setting already read as a quote, and adding curly quotes to type this
  * large just puts two heavy marks in the corners. The attribution below is
  * deliberately much smaller so the line itself carries the section.
+ *
+ * `lines` is an ARRAY because Michele wants one sentence per visual line rather
+ * than a single flowing paragraph. Keeping them as separate strings means the
+ * break is structural instead of a <br> the copy has to carry, so each sentence
+ * can still wrap on its own on a narrow screen without the break being lost.
+ * Do not rejoin these into one string.
  */
 export const PULL_QUOTE = {
-  text: 'You were created with brave purpose. My work is helping you live in the fullness of it.',
+  lines: [
+    'You were created with brave purpose.',
+    'My work is helping you live in the fullness of it.',
+  ] as const,
   attribution: 'Michele Okimura',
 } as const
 

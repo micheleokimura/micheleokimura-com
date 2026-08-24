@@ -340,9 +340,19 @@ export default function HomePage() {
             <figure className="mx-auto max-w-4xl text-center">
               {/* No quotation marks. At this size a pair of curly quotes just
                   hangs two heavy marks in the corners; the display setting
-                  already reads as a quote. Michele asked for it this way. */}
+                  already reads as a quote. Michele asked for it this way.
+
+                  One sentence per line, as separate blocks rather than a <br>.
+                  A <br> would force a break even where the line then wraps
+                  anyway on a narrow screen, giving three ragged lines; a block
+                  per sentence breaks between them and lets each wrap on its own
+                  terms. text-balance then evens out whichever one does wrap. */}
               <blockquote className="font-display text-[1.75rem] leading-[1.18] font-medium tracking-tight text-balance text-[var(--color-brand-teal)] sm:text-4xl sm:leading-[1.15] lg:text-5xl">
-                {PULL_QUOTE.text}
+                {PULL_QUOTE.lines.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
               </blockquote>
               <figcaption className="font-display mt-8 text-xs font-semibold tracking-[0.18em] text-neutral-600 uppercase sm:mt-10 sm:text-sm">
                 <span aria-hidden="true">&mdash; </span>
