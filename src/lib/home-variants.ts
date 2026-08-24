@@ -83,23 +83,39 @@ export const HERO = {
   roles: ['Speaker', 'Author', 'Coach'] as const,
   // "Mānoa" was dropped on Michele's follow-up: the location is Honolulu,
   // Hawaiʻi and nothing narrower. Do not put the neighbourhood back.
+  //
+  // ###### PLACEHOLDER: the Releasing Generations clause ######
+  // Michele is choosing between wordings. The clause from "a Christian
+  // nonprofit" onward is the current stand-in and is expected to be swapped
+  // once she picks. The first sentence is settled and is not part of this.
+  // ###########################################################
   subhead:
-    'I’m a speaker, author, and writing coach based in Honolulu, Hawaiʻi. I’m also the founder and executive director of Releasing Generations, a Honolulu nonprofit that helps people of all ages know their identity and value and thrive in their God-given purpose.',
+    'I’m a speaker, author, and writing coach based in Honolulu, Hawaiʻi. I’m also the founder and executive director of Releasing Generations, a Christian nonprofit that helps people of all ages know their identity and step into their God-given purpose.',
   /**
-   * Award name is verbatim from WIKIPEDIA-DRAFT-MICHELE-OKIMURA.md, which is
-   * the most carefully sourced wording in the repo.
+   * THE AWARD WENT TO THE ORGANIZATION, NOT TO MICHELE.
    *
-   * NOTE ON THE RECIPIENT: the repo does not agree with itself on who received
-   * this. The Wikipedia draft says Michele, "together with the Explicit
-   * Movement team"; content/copywriting/about.md says it was given to Explicit
-   * Movement with Michele accepting it; src/app/author/page.tsx says it was
-   * awarded to Releasing Generations. The line below therefore names the award,
-   * the year, and the issuing body and stops there, which every one of those
-   * three sources supports. Do not upgrade it to a sole personal award without
-   * a primary source.
+   * Settled 2026-08-23 against releasinggenerations.org, which is the primary
+   * source and says: "Explicit Movement was awarded 'Outstanding Advocate for
+   * Children and Youth' by the state of Hawaii in honor of Children and Youth
+   * Day 2023!" Michele accepted it as director. She does not claim it
+   * personally and has asked explicitly that this site not claim it for her.
+   *
+   * This corrects earlier wording here that named only the award and the
+   * issuer, which read as a personal honour by sitting under her name in the
+   * hero. Several files in this repo still disagree with each other about the
+   * recipient (WIKIPEDIA-DRAFT says Michele "together with the Explicit
+   * Movement team"; author/page.tsx says Releasing Generations). The RG site
+   * wins. If you touch any of those, match this.
+   *
+   * The three parts render as one comma-joined line, exactly the phrasing
+   * Michele supplied: role first, so the award is plainly the org's and her
+   * connection to it is stated rather than implied.
    */
-  award: '2023 Outstanding Advocate for the Children and Youth of Hawaiʻi',
-  awardIssuer: 'State of Hawaiʻi',
+  award: {
+    role: 'Director of Explicit Movement',
+    honor: '2023 Outstanding Advocate for Children and Youth',
+    issuer: 'State of Hawaiʻi',
+  },
   cta: 'Get in touch',
 } as const
 
@@ -146,9 +162,9 @@ export const NONPROFIT_ROOM = {
 /**
  * The pull quote that replaced the founder blurb below the hero.
  *
- * This is Michele's own line, lightly rewritten for cadence, and she has
- * approved it in principle. She may still swap it for another variant, so treat
- * the wording as settled but not frozen.
+ * FINAL. Michele approved this wording outright on 2026-08-23 (it was her
+ * option C). It is not a placeholder and it is not awaiting a variant. Treat
+ * the two sentences as verbatim: do not re-cut them for length or rhythm.
  *
  * The two sentences render WITHOUT quotation marks. The display size and the
  * centred setting already read as a quote, and adding curly quotes to type this

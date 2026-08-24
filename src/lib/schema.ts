@@ -102,7 +102,26 @@ export function personSchema(): Json {
     ],
     founder: [
       orgRef,
-      { '@type': 'Organization', name: 'Explicit Movement', url: 'https://www.explicitmovement.org' },
+      {
+        '@type': 'Organization',
+        name: 'Explicit Movement',
+        url: 'https://www.explicitmovement.org',
+        /**
+         * The award lives HERE, on the organization, because the organization
+         * is who received it. Primary source, releasinggenerations.org:
+         * "Explicit Movement was awarded 'Outstanding Advocate for Children and
+         * Youth' by the state of Hawaii in honor of Children and Youth Day
+         * 2023!" Michele accepted it as director.
+         *
+         * It used to sit on the Person node below as `award`, which asserted to
+         * every search engine and answer engine that Michele had won it
+         * personally. She has said plainly that she has not. Do not move it
+         * back onto the Person, and do not add a duplicate copy there.
+         */
+        award: [
+          "Outstanding Advocate for Children and Youth, State of Hawaii (2023, in honor of Children and Youth Day)",
+        ],
+      },
       { '@type': 'Organization', name: 'Kingdom Families' },
       { '@type': 'Organization', name: 'ReThink Creativity' },
       {
@@ -124,9 +143,19 @@ export function personSchema(): Json {
         sameAs: 'https://en.wikipedia.org/wiki/Kalani_High_School',
       },
     ],
-    award: [
-      'State of Hawaii Outstanding Advocate for Children and Youth (2023, conferred by Governor Josh Green and Mayor Rick Blangiardi)',
-    ],
+    /**
+     * There is deliberately NO `award` on this Person node.
+     *
+     * It carried the 2023 Outstanding Advocate award until 2026-08-23, which
+     * told every consumer of this graph that Michele had won it personally. The
+     * award went to Explicit Movement; see the `award` on that organization in
+     * `founder` above. Michele asked directly that this site stop attributing
+     * it to her, and structured data is the version that ends up in knowledge
+     * panels, so it matters more here than in the visible copy.
+     *
+     * If Michele receives a personal honour later, this is the right place for
+     * it. This one is not that.
+     */
     address: {
       '@type': 'PostalAddress',
       addressLocality: siteConfig.city,

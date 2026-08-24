@@ -220,19 +220,33 @@ export default function HomePage() {
             </p>
 
             {/* Award. A line with a hairline rule, NOT a pill: Michele banned
-                pill-shaped badges sitewide in this same review. */}
+                pill-shaped badges sitewide in this same review.
+
+                THE ROLE COMES FIRST, AND THAT IS THE WHOLE POINT OF THIS BLOCK.
+                The award went to Explicit Movement, not to Michele. An earlier
+                version led with the honour, which sitting under her name in her
+                own hero read as a personal award. Leading with "Director of
+                Explicit Movement" makes the recipient the organization and
+                states her connection to it instead of implying one.
+
+                So: do not reorder these three parts, and do not drop the role
+                to save a line. If the line is ever too long for the layout,
+                take the award out of the hero altogether rather than trimming
+                it back into a personal claim. See the note on HERO.award. */}
             <p className="mt-4 flex items-start gap-3 text-xs leading-5 text-[var(--color-cream)]/80 sm:mt-5 sm:text-[0.8125rem]">
               <span
                 aria-hidden="true"
                 className="mt-2 h-px w-6 shrink-0 bg-[var(--color-teal-on-dark)] sm:w-8"
               />
               <span>
+                <span className="text-[var(--color-cream)]/70">
+                  {HERO.award.role},{' '}
+                </span>
                 <span className="font-semibold text-[var(--color-teal-on-dark)]">
-                  {HERO.award}
+                  {HERO.award.honor}
                 </span>
                 <span className="text-[var(--color-cream)]/70">
-                  {' · '}
-                  {HERO.awardIssuer}
+                  , {HERO.award.issuer}
                 </span>
               </span>
             </p>

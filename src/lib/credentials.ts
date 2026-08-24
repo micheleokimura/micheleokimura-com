@@ -8,7 +8,12 @@ export type Award = {
   grantor: string
   /** Year awarded. */
   year: number | null
-  /** Who was recognized (the award went to Michele + her team). */
+  /**
+   * Who was recognized. For the 2023 award this is the ORGANIZATION. Corrected
+   * 2026-08-23: this field used to read "Michele Okimura and the Explicit
+   * Movement team", and Michele asked that the award stop being attributed to
+   * her individually. See the entry below.
+   */
   recipient?: string
   /** Link to the dedicated story (the featured launch blog post). */
   href?: string
@@ -22,9 +27,13 @@ export const awards: Award[] = [
     grantor:
       'Hawai‘i Children and Youth Day, presented by Governor Josh Green and Mayor Rick Blangiardi',
     year: 2023,
-    recipient: 'Michele Okimura and the Explicit Movement team',
+    // Primary source, releasinggenerations.org: "Explicit Movement was awarded
+    // 'Outstanding Advocate for Children and Youth' by the state of Hawaii in
+    // honor of Children and Youth Day 2023!" Michele accepted it as director.
+    // The recipient is the organization. Do not put her name back in here.
+    recipient: 'Explicit Movement, accepted by Michele Okimura as director',
     href: '/resources/2026-michele-okimura-hawaii-governor-award',
-    sourceUrl: 'https://www.explicitmovement.org/about/leadership-team',
+    sourceUrl: 'https://www.releasinggenerations.org/',
   },
 ]
 

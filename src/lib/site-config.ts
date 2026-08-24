@@ -49,8 +49,24 @@ export const siteConfig = {
     'ReThink Creativity',
     'The Brave Series',
   ] as const,
+  /**
+   * THIS AWARD IS EXPLICIT MOVEMENT'S, NOT MICHELE'S. Per
+   * releasinggenerations.org: "Explicit Movement was awarded 'Outstanding
+   * Advocate for Children and Youth' by the state of Hawaii in honor of
+   * Children and Youth Day 2023!" Michele accepted it as director and does not
+   * claim it personally.
+   *
+   * `awardRecipient` is here so the fact travels with the fields rather than
+   * living in someone's memory. Nothing currently reads these three (the home
+   * hero uses HERO.award in home-variants.ts and the graph uses schema.ts), but
+   * they read like a personal credential, and the next person to wire them into
+   * a bio would introduce the misattribution all over again. If you use them,
+   * name the recipient.
+   */
   award: 'Outstanding Advocate for Children and Youth of Hawai\'i (2023)',
-  awardIssuer: 'Governor Josh Green and Mayor Rick Blangiardi',
+  awardRecipient: 'Explicit Movement',
+  awardIssuer: 'State of Hawai\'i, in honor of Children and Youth Day 2023',
+  awardConferredBy: 'Governor Josh Green and Mayor Rick Blangiardi',
   /**
    * A `null` here means "we do not have the handle yet". The footer skips any
    * social whose URL is null rather than guessing one, so an unfilled entry
