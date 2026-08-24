@@ -65,56 +65,49 @@ export const DOORS: Door[] = [
 ]
 
 /**
- * HERO COPY.
+ * HERO COPY. Every string in here is FINAL and VERBATIM from Michele, signed
+ * off 2026-08-23. There are no placeholders left on this page.
  *
- * `subhead` is VERBATIM from Michele 2026-08-23 up to the Releasing Generations
- * clause, which she left as "[ONE-SENTENCE DESCRIPTION TBD]" and asked to have
- * sourced from her dossier rather than invented. The clause below is built from
- * Releasing Generations' own published mission ("to empower people of all ages
- * to thrive in their God-given purpose while knowing their identity and
- * value"), recorded in michele-personal-context.md. It is restructured only far
- * enough to drop "empower", which is on the banned-vocabulary list in
- * CLAUDE.md. Nothing in it is invented. Michele still has final say on the
- * wording.
+ * The Releasing Generations clause in `subhead` went through a stand-in built
+ * from the org's published mission while she chose between wordings; the
+ * wording below is the one she picked, and it supersedes that. The award
+ * sentence is likewise her own, and its recipient question is settled: see the
+ * note on `award`.
+ *
+ * Treat these as copy under sign-off. Restyle them freely, but do not re-cut
+ * the words for length, rhythm, or to fit a layout.
  */
 export const HERO = {
   h1: 'Hi, I’m Michele Okimura',
   /** Middle dots, not periods. Michele was specific about this. */
   roles: ['Speaker', 'Author', 'Coach'] as const,
-  // "Mānoa" was dropped on Michele's follow-up: the location is Honolulu,
-  // Hawaiʻi and nothing narrower. Do not put the neighbourhood back.
-  //
-  // ###### PLACEHOLDER: the Releasing Generations clause ######
-  // Michele is choosing between wordings. The clause from "a Christian
-  // nonprofit" onward is the current stand-in and is expected to be swapped
-  // once she picks. The first sentence is settled and is not part of this.
-  // ###########################################################
+  // FINAL, both sentences, verbatim. Michele settled the Releasing Generations
+  // clause on 2026-08-23; it is no longer a placeholder. "Mānoa" stays out:
+  // the location is Honolulu, Hawaiʻi and nothing narrower.
   subhead:
     'I’m a speaker, author, and writing coach based in Honolulu, Hawaiʻi. I’m also the founder and executive director of Releasing Generations, a Christian nonprofit that helps people of all ages know their identity and step into their God-given purpose.',
   /**
-   * THE AWARD WENT TO THE ORGANIZATION, NOT TO MICHELE.
+   * THE AWARD WENT TO THE ORGANIZATION, NOT TO MICHELE. Final wording,
+   * supplied verbatim by Michele 2026-08-23.
    *
-   * Settled 2026-08-23 against releasinggenerations.org, which is the primary
-   * source and says: "Explicit Movement was awarded 'Outstanding Advocate for
-   * Children and Youth' by the state of Hawaii in honor of Children and Youth
-   * Day 2023!" Michele accepted it as director. She does not claim it
-   * personally and has asked explicitly that this site not claim it for her.
+   * The recipient question is now closed. Explicit Movement is a DBA of
+   * Releasing Generations, so the two names are one legal entity and naming
+   * Releasing Generations is accurate. That also retires the apparent conflict
+   * between releasinggenerations.org (which credits Explicit Movement) and
+   * author/page.tsx and the Brave Series pages (which credit Releasing
+   * Generations): both were right about the same organization.
    *
-   * This corrects earlier wording here that named only the award and the
-   * issuer, which read as a personal honour by sitting under her name in the
-   * hero. Several files in this repo still disagree with each other about the
-   * recipient (WIKIPEDIA-DRAFT says Michele "together with the Explicit
-   * Movement team"; author/page.tsx says Releasing Generations). The RG site
-   * wins. If you touch any of those, match this.
+   * What is still NOT true is that Michele won it personally. "led by Michele
+   * Okimura" is the whole of her connection to it and is as far as this goes.
+   * Do not compress this into anything that reads as her award.
    *
-   * The three parts render as one comma-joined line, exactly the phrasing
-   * Michele supplied: role first, so the award is plainly the org's and her
-   * connection to it is stated rather than implied.
+   * The three parts concatenate into exactly her sentence, split only so the
+   * honour itself can carry emphasis. Keep the wording; restyle freely.
    */
   award: {
-    role: 'Director of Explicit Movement',
+    lead: 'Releasing Generations, led by Michele Okimura, was awarded the ',
     honor: '2023 Outstanding Advocate for Children and Youth',
-    issuer: 'State of Hawaiʻi',
+    tail: ' (State of Hawaiʻi) for its work with young people of Hawaiʻi and the creation of the Brave Series.',
   },
   cta: 'Get in touch',
 } as const

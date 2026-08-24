@@ -102,26 +102,15 @@ export function personSchema(): Json {
     ],
     founder: [
       orgRef,
-      {
-        '@type': 'Organization',
-        name: 'Explicit Movement',
-        url: 'https://www.explicitmovement.org',
-        /**
-         * The award lives HERE, on the organization, because the organization
-         * is who received it. Primary source, releasinggenerations.org:
-         * "Explicit Movement was awarded 'Outstanding Advocate for Children and
-         * Youth' by the state of Hawaii in honor of Children and Youth Day
-         * 2023!" Michele accepted it as director.
-         *
-         * It used to sit on the Person node below as `award`, which asserted to
-         * every search engine and answer engine that Michele had won it
-         * personally. She has said plainly that she has not. Do not move it
-         * back onto the Person, and do not add a duplicate copy there.
-         */
-        award: [
-          "Outstanding Advocate for Children and Youth, State of Hawaii (2023, in honor of Children and Youth Day)",
-        ],
-      },
+      /**
+       * Explicit Movement is a DBA of Releasing Generations, not a separate
+       * organization, so it is listed here by name only. The 2023 award lives
+       * on the Releasing Generations NGO node in organizationSchema() below,
+       * which is the legal entity that received it. Adding a copy here would
+       * claim the same honour twice in one graph, for what a consumer would
+       * read as two different founders.
+       */
+      { '@type': 'Organization', name: 'Explicit Movement', url: 'https://www.explicitmovement.org' },
       { '@type': 'Organization', name: 'Kingdom Families' },
       { '@type': 'Organization', name: 'ReThink Creativity' },
       {
@@ -194,8 +183,27 @@ export function organizationSchema(): Json {
     '@type': 'NGO',
     '@id': ORG_ID,
     name: siteConfig.nonprofit,
+    /**
+     * Explicit Movement is a DBA of Releasing Generations, confirmed by Michele
+     * 2026-08-23. Stating it as an alternateName (alongside the existing
+     * sameAs) is what tells a consumer the two names are one entity, which is
+     * also what makes the award below consistent with releasinggenerations.org
+     * crediting "Explicit Movement" for it.
+     */
+    alternateName: 'Explicit Movement',
     url: siteConfig.nonprofitUrl,
     founder: personRef,
+    /**
+     * THE AWARD LIVES HERE, ON THE ORGANIZATION, because the organization
+     * received it. It sat on Michele's Person node until 2026-08-23, which
+     * asserted to every search engine and answer engine that she had won it
+     * personally. She has said plainly that she did not: she led the
+     * organization that did. Do not move this onto the Person node, and do not
+     * add a second copy to the Explicit Movement entry in her `founder` list.
+     */
+    award: [
+      'Outstanding Advocate for Children and Youth, State of Hawaii (2023), for work with the young people of Hawaii and the creation of the Brave Series',
+    ],
     foundingLocation: { '@type': 'Place', name: 'Honolulu, Hawaii, USA' },
     areaServed: { '@type': 'Place', name: "Hawai'i, United States" },
     sameAs: ['https://www.explicitmovement.org'],

@@ -160,13 +160,24 @@ export default function HomePage() {
           award line and a button. There the video is ambient background behind
           stacked copy.
 
-          There is deliberately NO max-height. An earlier cut of this capped it
-          at 900px, which sounds harmless and is not: the cap engages on any
-          viewport wider than 1600px, and Michele's own display is 1710 CSS px,
-          so the one person who asked for 16:9 would have been served 1.90:1 on
-          her own screen. If a cap is ever wanted back, it has to be tall enough
-          to clear the widest display anyone reviews this on, or it quietly
-          undoes the whole change.
+          The max-height is VIEWPORT-RELATIVE, and the distinction matters. An
+          earlier cut used a fixed 900px, which engaged on any viewport wider
+          than 1600px: Michele's own display is 1710 CSS px, so the one person
+          who asked for 16:9 would have been served 1.90:1 on her own screen.
+          That cap was removed.
+
+          `calc(100svh-4.75rem)` is a different thing. 4.75rem is the header, so
+          this caps the hero at exactly the space left on screen, and it can
+          only ever engage when honest 16:9 would push the hero PAST the fold,
+          which is the one case where the ratio and Michele's "the award has to
+          be visible above the fold" cannot both be satisfied. On her 1710x1073
+          display 16:9 is 962px against 997px available, so nothing clamps and
+          she sees true 16:9. On a shorter laptop the hero gives up a little
+          height rather than dropping the award and the CTA off the screen.
+
+          If she would rather have pure 16:9 everywhere and accept the CTA
+          falling below the fold on small laptops, delete the max-h and nothing
+          else changes.
 
           OVERLAY, halved on Michele's note that it was too heavy. It used to be
           a flat navy/75 rising to navy/90. It is now a 35% wash over the WHOLE
@@ -182,7 +193,7 @@ export default function HomePage() {
           edge, if you retune either number. */}
       <section
         aria-label="Michele Okimura"
-        className="relative isolate min-h-[32rem] w-full overflow-hidden bg-[var(--color-navy)] sm:min-h-0 sm:aspect-[16/9]"
+        className="relative isolate min-h-[32rem] w-full overflow-hidden bg-[var(--color-navy)] sm:min-h-0 sm:aspect-[16/9] sm:max-h-[calc(100svh-4.75rem)]"
       >
         <video
           src="/videos/michele-hero.mp4"
@@ -222,32 +233,27 @@ export default function HomePage() {
             {/* Award. A line with a hairline rule, NOT a pill: Michele banned
                 pill-shaped badges sitewide in this same review.
 
-                THE ROLE COMES FIRST, AND THAT IS THE WHOLE POINT OF THIS BLOCK.
-                The award went to Explicit Movement, not to Michele. An earlier
-                version led with the honour, which sitting under her name in her
-                own hero read as a personal award. Leading with "Director of
-                Explicit Movement" makes the recipient the organization and
-                states her connection to it instead of implying one.
+                THE ORGANIZATION IS THE SUBJECT OF THE SENTENCE, AND THAT IS THE
+                WHOLE POINT OF THIS BLOCK. The award went to Releasing
+                Generations (Explicit Movement is its DBA), not to Michele. An
+                earlier version led with the honour, which sitting under her name
+                in her own hero read as a personal award.
 
-                So: do not reorder these three parts, and do not drop the role
-                to save a line. If the line is ever too long for the layout,
-                take the award out of the hero altogether rather than trimming
-                it back into a personal claim. See the note on HERO.award. */}
-            <p className="mt-4 flex items-start gap-3 text-xs leading-5 text-[var(--color-cream)]/80 sm:mt-5 sm:text-[0.8125rem]">
+                So: do not rewrite this to start with Michele, and do not trim it
+                down to just the honour to save a line. If it is ever too long
+                for the layout, take it out of the hero altogether rather than
+                shortening it back into a personal claim. See HERO.award. */}
+            <p className="mt-4 flex items-start gap-3 text-xs leading-5 text-[var(--color-cream)]/75 sm:mt-5 sm:text-[0.8125rem]">
               <span
                 aria-hidden="true"
                 className="mt-2 h-px w-6 shrink-0 bg-[var(--color-teal-on-dark)] sm:w-8"
               />
-              <span>
-                <span className="text-[var(--color-cream)]/70">
-                  {HERO.award.role},{' '}
-                </span>
-                <span className="font-semibold text-[var(--color-teal-on-dark)]">
+              <span className="max-w-lg">
+                {HERO.award.lead}
+                <span className="font-semibold text-[var(--color-cream)]">
                   {HERO.award.honor}
                 </span>
-                <span className="text-[var(--color-cream)]/70">
-                  , {HERO.award.issuer}
-                </span>
+                {HERO.award.tail}
               </span>
             </p>
 

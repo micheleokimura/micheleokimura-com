@@ -27,11 +27,12 @@ export const awards: Award[] = [
     grantor:
       'Hawai‘i Children and Youth Day, presented by Governor Josh Green and Mayor Rick Blangiardi',
     year: 2023,
-    // Primary source, releasinggenerations.org: "Explicit Movement was awarded
-    // 'Outstanding Advocate for Children and Youth' by the state of Hawaii in
-    // honor of Children and Youth Day 2023!" Michele accepted it as director.
-    // The recipient is the organization. Do not put her name back in here.
-    recipient: 'Explicit Movement, accepted by Michele Okimura as director',
+    // The recipient is the ORGANIZATION. Explicit Movement is a DBA of
+    // Releasing Generations, so the two names are one legal entity and either
+    // is accurate; Michele's final framing (2026-08-23) names Releasing
+    // Generations. What is not accurate is her name alone, which is what this
+    // field used to hold. Do not put it back.
+    recipient: 'Releasing Generations, led by Michele Okimura',
     href: '/resources/2026-michele-okimura-hawaii-governor-award',
     sourceUrl: 'https://www.releasinggenerations.org/',
   },
