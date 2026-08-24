@@ -146,9 +146,13 @@ export default function HomePage() {
           award line and a button. There the video is ambient background behind
           stacked copy.
 
-          The 900px cap only engages above a ~1600px viewport, where honest
-          16:9 would be 900px+ of hero and push everything else off the screen.
-          It is the one place this deliberately stops being 16:9.
+          There is deliberately NO max-height. An earlier cut of this capped it
+          at 900px, which sounds harmless and is not: the cap engages on any
+          viewport wider than 1600px, and Michele's own display is 1710 CSS px,
+          so the one person who asked for 16:9 would have been served 1.90:1 on
+          her own screen. If a cap is ever wanted back, it has to be tall enough
+          to clear the widest display anyone reviews this on, or it quietly
+          undoes the whole change.
 
           OVERLAY, halved on Michele's note that it was too heavy. It used to be
           a flat navy/75 rising to navy/90. It is now a 35% wash over the WHOLE
@@ -164,7 +168,7 @@ export default function HomePage() {
           edge, if you retune either number. */}
       <section
         aria-label="Michele Okimura"
-        className="relative isolate min-h-[32rem] w-full overflow-hidden bg-[var(--color-navy)] sm:min-h-0 sm:aspect-[16/9] sm:max-h-[900px]"
+        className="relative isolate min-h-[32rem] w-full overflow-hidden bg-[var(--color-navy)] sm:min-h-0 sm:aspect-[16/9]"
       >
         <video
           src="/videos/michele-hero.mp4"
