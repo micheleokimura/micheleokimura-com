@@ -37,13 +37,11 @@ export default function AboutPage() {
         description="Author, speaker, coach, and Executive Director of Releasing Generations, based on O'ahu, Hawai'i."
       />
 
-      {/* Eyebrow is a label, not a sentence. "Maybe dreams give purpose a
-          voice." moved to the subtitle, and the author/speaker/coach line that
-          used to be the subtitle now opens the body copy below, where it has
-          room to breathe. No words were cut. */}
-      <PageIntro eyebrow="About" title="About Michele.">
-        <p>Maybe dreams give purpose a voice.</p>
-      </PageIntro>
+      {/* Banner runs with no subtitle. It used to carry "Maybe dreams give
+          purpose a voice.", which Michele cut on 2026-08-23 because the pull
+          quote further down says the same thing better: "I believe dreams give
+          purpose a voice." Do not reinstate one without retiring the other. */}
+      <PageIntro eyebrow="About" title="About Michele." />
 
       <Container className="mt-14 sm:mt-16">
         <FadeIn>
