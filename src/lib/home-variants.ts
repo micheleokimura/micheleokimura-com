@@ -235,11 +235,24 @@ export const PULL_QUOTE = {
  * "Things my friends say about me" — the two scrolling rows that replaced the
  * Recognition section.
  *
- * IN USE AGAIN. This was parked on 2026-08-23 while Michele and Brett decided
- * whether the home page should carry testimonials at all; she reversed that on
- * 2026-08-24 and the section is back in its original band. The arrays were kept
- * rather than deleted precisely because the decision might swing back, which it
- * did.
+ * ############ CURRENTLY UNUSED — AWAITING CURATION ############
+ * The section is NOT on the home page. Parked 2026-08-23, restored 2026-08-24,
+ * parked again the same day, and the reason changed on that last move.
+ *
+ * It is no longer a question of whether the home page carries testimonials at
+ * all. Michele is CURATING this list: deciding which quotes to keep, which to
+ * swap out, and which to edit. The section goes live once she has, so this is a
+ * hold rather than a cancellation.
+ *
+ * DO NOT reorder, trim, or "tidy" these entries in the meantime. She is
+ * reviewing this list as it stands, and a well-meant cleanup would mean she
+ * approves one set and a different set ships. The one change that IS in here
+ * since she last saw it is the Ted Vail opening, which she authorized directly;
+ * see the note on that entry.
+ *
+ * The rendering work is done and waiting at commit d114922, with the 17px type
+ * and the 88s/96s scroll. Restore from there and change only the contents.
+ * ###############################################################
  *
  * HARD RULE, inherited from the top of this file and from
  * site/content/speaker/full-endorsements.md: every quote here is VERBATIM. Do
