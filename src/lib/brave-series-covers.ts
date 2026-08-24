@@ -17,6 +17,14 @@
 //
 // Do NOT point these at the `*-digital.png` files. Those are screenshots of a
 // PDF viewer and carry the reader's dark chrome and zoom slider.
+//
+// === EDITION NAMING ===
+// The `Classic` edition value is the internal name and it is what the project
+// pages still print. The Author page renders the same data with the customer
+// facing wording Michele asked for, "Non-Faith", by passing `editionLabels` to
+// BraveSeriesCovers. Captions and alt text are composed at render time from
+// that label, which is why neither lives in this file any more. To rename the
+// edition everywhere, change the labels here and drop the override.
 
 export type BraveEdition = 'Faith' | 'Classic'
 
@@ -24,10 +32,10 @@ export type BraveCover = {
   /** 1 through 4. */
   volume: number
   edition: BraveEdition
+  /** The title this volume belongs to, so the tile can compose its own alt. */
+  title: string
   /** Optimized 600x800 cover, or null when no usable art exists yet. */
   src: string | null
-  alt: string
-  caption: string
 }
 
 export type BraveTitle = {
@@ -48,9 +56,8 @@ function cover(
   return {
     volume,
     edition,
+    title,
     src: `${DIR}/${titleSlug}-vol${volume}.jpg`,
-    alt: `${title}, Volume ${volume}, ${edition} edition`,
-    caption: `Vol. ${volume} · ${edition}`,
   }
 }
 
