@@ -173,7 +173,7 @@ export default function CoachingPage() {
       <BannerHero
         eyebrow={siteConfig.offerName}
         title="Write your book in six months."
-        subtitle="I turn your conversations into a manuscript."
+        subtitle="Let’s talk. Then we’ll turn your conversations into a manuscript."
       >
         <ContactTrigger interest="coaching" tone="dark">
           Join the waitlist
