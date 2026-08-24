@@ -387,14 +387,26 @@ export default function CoachingPage() {
           deleted "Why Michele" section used to hold, and the portrait is the
           one that used to sit in the hero, circle-cropped.
 
-          QUOTE PROVENANCE. Brett's first choice was "You were created with
-          brave purpose. My work is helping you live in the fullness of it.",
-          with the instruction to pick something else if it was already the home
-          hero pull quote. It is: see PULL_QUOTE in src/lib/home-variants.ts.
-          This is his named alternative. Note for Brett: the same line currently
-          also stands on its own mid-page on /about (src/app/about/page.tsx), so
-          one of the two pages should probably give it up. Nothing here is
-          invented; both candidates were Michele's approved lines. */}
+          QUOTE PROVENANCE, and please read this before swapping the line.
+          Michele signed off on best judgment here; Brett set the order of
+          preference and it resolved down the list:
+
+            1. "You were created with brave purpose. My work is helping you
+               live in the fullness of it." RULED OUT: it is the home page hero
+               pull quote. See PULL_QUOTE in src/lib/home-variants.ts.
+            2. "I believe dreams give purpose a voice." RULED OUT: it is the
+               centred pull quote on /about. See src/app/about/page.tsx.
+            3. The line below, which is Michele's own raw statement, carried
+               verbatim. Brett offered a shortened form that drops "My purpose
+               is to"; the full sentence is used because the trim leaves a
+               subjectless fragment, which reads oddly standing alone under a
+               portrait. No word of it is rewritten.
+
+          It shares its vocabulary with the home hero (both reach for "brave
+          purpose" and "the fullness of"), which is the same thought in
+          Michele's own two phrasings rather than a repeated line. Flagged for
+          Brett rather than quietly reworded, because rewriting her words to
+          spread the vocabulary out is exactly what the voice rules forbid. */}
       <section
         aria-label="In Michele's words"
         className="surface-coach-quote w-full py-16 sm:py-20 lg:py-24"
@@ -422,8 +434,9 @@ export default function CoachingPage() {
                     page pull quote. Navy, not teal-text: teal-text lands at
                     4.45:1 on this wash and would be leaning on the large-text
                     floor. */}
-                <blockquote className="font-display text-[1.75rem] leading-[1.18] font-medium tracking-tight text-balance text-[var(--color-navy)] sm:text-4xl sm:leading-[1.15] lg:text-[2.75rem]">
-                  I believe dreams give purpose a voice.
+                <blockquote className="font-display mx-auto max-w-[22ch] text-[1.5rem] leading-[1.25] font-medium tracking-tight text-balance text-[var(--color-navy)] sm:max-w-[26ch] sm:text-[1.875rem] sm:leading-[1.22] lg:mx-0 lg:max-w-[30ch] lg:text-[2.25rem] lg:leading-[1.2]">
+                  My purpose is to help people live in the fullness of who they
+                  were created to be with brave purpose.
                 </blockquote>
                 {/* No dash before the name. The home-page pull quote still
                     carries a decorative &mdash; in this slot; Brett's rule for
