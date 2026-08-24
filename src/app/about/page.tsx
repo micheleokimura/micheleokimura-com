@@ -37,13 +37,11 @@ export default function AboutPage() {
         description="Author, speaker, coach, and Executive Director of Releasing Generations, based on O'ahu, Hawai'i."
       />
 
-      {/* Eyebrow is a label, not a sentence. "Maybe dreams give purpose a
-          voice." moved to the subtitle, and the author/speaker/coach line that
-          used to be the subtitle now opens the body copy below, where it has
-          room to breathe. No words were cut. */}
-      <PageIntro eyebrow="About" title="About Michele.">
-        <p>Maybe dreams give purpose a voice.</p>
-      </PageIntro>
+      {/* Banner runs with no subtitle. It used to carry "Maybe dreams give
+          purpose a voice.", which Michele cut on 2026-08-23 because the pull
+          quote further down says the same thing better: "I believe dreams give
+          purpose a voice." Do not reinstate one without retiring the other. */}
+      <PageIntro eyebrow="About" title="About Michele." />
 
       <Container className="mt-14 sm:mt-16">
         <FadeIn>
@@ -135,13 +133,28 @@ export default function AboutPage() {
         </FadeIn>
       </Container>
 
+      {/* Michele's line, standing on its own between Meet Michele and the
+          mosaic. Its py- carries the separation for both, which is why the
+          mosaic Container below has no top margin of its own.
+          Teal is --color-teal-text, NOT --color-teal: the bright token measures
+          2.31:1 on cream and misses even the 3:1 large-text floor, so it cannot
+          carry a word at any size. See DESIGN-RULES.md. No quote marks, no
+          italics, no background, per direction. */}
+      <Container className="py-20 sm:py-28">
+        <FadeIn>
+          <p className="font-display mx-auto max-w-4xl text-center text-[2rem] leading-[1.1] font-medium tracking-tight text-balance text-[var(--color-teal-text)] sm:text-[2.5rem] lg:text-5xl lg:leading-[1.08]">
+            I believe dreams give purpose a voice.
+          </p>
+        </FadeIn>
+      </Container>
+
       {/* "My Story": one unbroken square mosaic, captions revealed on hover.
           Rebuilt on 2026-08-23 to match Michele's live WordPress About page,
           which she asked for directly. This replaced AboutTimeline, the
           seven-era layout with prose blocks and always-visible caption bands.
           That component and its era prose are in git history if they are ever
           wanted back. See design-references/wordpress-about/. */}
-      <Container className="mt-16 sm:mt-24">
+      <Container>
         <AboutMosaic />
       </Container>
 

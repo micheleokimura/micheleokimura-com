@@ -99,3 +99,39 @@ Four of the 24 tiles have no equivalent in `public/images/about-timeline/`:
 | 20 | `ReThink-Creativity-2020-and-2021-scaled.jpeg` | Online Creativity Conferences 2020 and 2021 |
 
 Their URLs are in `mosaic-tiles.json` if they are ever pulled across.
+
+## Michele's own screenshots, 2026-08-23
+
+`michele-screenshot-1-rows-1-to-3.png` and
+`michele-screenshot-2-renaissance-hover.png` are the two captures Michele sent.
+They are contiguous: the cropped sliver along the top of the second is the
+bottom edge of row 3 (Aaron, Jessica, Lifespring), not a separate row of
+dance photos.
+
+They confirm the measurements taken off the live DOM, and settle two questions.
+
+**Gutters are 20px, not hairlines.** Measured in screenshot 1, tiles run about
+565px wide with 31px between them. That is 5.5%. The live page runs 366.66px
+tiles with a 20px gap, which is also 5.5%. The gutters look thin next to a
+2560px photo, but relative to the tile they are substantial, and a 2px gutter
+would be a quarter the size and read as a completely different grid.
+
+**The hover scrim is translucent.** On the Renaissance tile in screenshot 2 the
+poster underneath stays readable straight through the overlay: "DISCOVER why
+you were created uniquely for this time and place in history", the
+"Renaissance: a Journey to Creativity" title, and "JULY 8-9, 2011" are all
+legible. The scrim dims the photograph, it does not hide it. An opaque panel
+is the wrong reading of this reference.
+
+Corner radius is 0 on every tile.
+
+## Why the rebuilt captions are blank
+
+By direction, 2026-08-23. `AboutMosaic.tsx` ships with `caption: ''` on every
+tile except Renaissance, whose copy was confirmed separately. Blank means the
+tile renders no hover overlay at all.
+
+The verbatim copy for all 24 tiles is in `mosaic-tiles.json` above and is not
+lost. Do not silently wire it back in. Michele is sending per-tile caption text,
+and her copy will supersede what is in that file, which still carries the
+defects listed earlier on this page.

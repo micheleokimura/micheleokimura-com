@@ -22,7 +22,7 @@ export const metadata: Metadata = pageMetadata({
 })
 
 /** Hero photo: Michele mid-message on stage, Day 1 26:31.5, open palm gesture. */
-const HERO_PHOTO = '/images/michele/speaker-hero.jpg'
+const HERO_PHOTO = '/images/michele/speaker-hero-day2.jpg'
 
 // Copy of record: site/content/speaker/speaker-page-copy.md (locked with Michele
 // 2026-08-22). Endorser wording is verbatim and must not be edited, including
@@ -248,7 +248,7 @@ export default function SpeakerPage() {
               <div className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl bg-neutral-100">
                 <Image
                   src={HERO_PHOTO}
-                  alt="Michele Okimura speaking on stage, microphone in hand"
+                  alt="Michele Okimura speaking on stage"
                   fill
                   priority
                   sizes="(min-width: 1024px) 28rem, 100vw"
