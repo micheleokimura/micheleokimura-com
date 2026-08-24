@@ -315,6 +315,50 @@ html {
     );
 }
 
+/* ---------------------------------------------------------------------
+   COACH PAGE SURFACES  (/coach)
+   ---------------------------------------------------------------------
+   Brett's walkthrough: the coaching hero should NOT be the sitewide navy
+   banner. It gets its own ground, drawn from Michele's book palette, so the
+   page opens warm instead of dark. Two surfaces, both light, both deliberately
+   quiet. Everything else on the page runs on the band-1/2/3 scale.
+
+   .surface-coach-hero  a coral wash over a warm blush cream. Coral is the
+   loudest colour in the palette, so it appears here only as a low-opacity
+   glow, capped at 13%. At the centre of the glow the field blends to #F6DCD0,
+   where navy body copy holds 11.2:1 and the cream-era neutral ramp is
+   unaffected. The eyebrow on this ground is NAVY, not coral-text: coral-text
+   #B8431F measures 3.91:1 here and misses AA for small text, and teal-text is
+   no better at 3.93:1. Neither of the accent text colours can spell a word on
+   this wash, which is the whole reason the eyebrow is navy.
+
+   The coral CTA that sits on this wash measures 2.54:1 against it as a shape.
+   That is a hair below the 2.82:1 the same button gets on plain cream and is
+   the same site-wide condition every coral-on-light button already has; it is
+   not introduced here. If the button boundary is ever tightened, tighten it
+   site-wide rather than on this page alone.
+
+   .surface-coach-quote  the soft teal wash behind the Michele quote banner.
+   Flat, no gradient: it is one full-bleed strip and a gradient would fight the
+   circular portrait sitting on it. Navy on it is 11.9:1 and neutral-600 is
+   6.3:1. The quote itself is navy rather than teal-text, which lands at 4.45:1
+   here and would be relying on the large-text floor.
+
+   Coral opens the page, teal closes the middle of it, and neither repeats. */
+.surface-coach-hero {
+  background-color: #f7efe6;
+  background-image: radial-gradient(
+    ellipse 90% 140% at 20% 50%,
+    rgba(241, 92, 61, 0.13) 0%,
+    rgba(241, 92, 61, 0.05) 50%,
+    rgba(241, 92, 61, 0) 78%
+  );
+}
+
+.surface-coach-quote {
+  background-color: #dcebe7;
+}
+
 h1,
 h2,
 h3,
