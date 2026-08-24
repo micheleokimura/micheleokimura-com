@@ -320,8 +320,8 @@ html {
    ---------------------------------------------------------------------
    Brett's walkthrough: the coaching hero should NOT be the sitewide navy
    banner. It gets its own ground, drawn from Michele's book palette, so the
-   page opens warm instead of dark. Two surfaces, both light, both deliberately
-   quiet. Everything else on the page runs on the band-1/2/3 scale.
+   page opens warm instead of dark. One surface, light and deliberately quiet.
+   Everything else on the page runs on the band-1/2/3 scale.
 
    .surface-coach-hero  a coral wash over a warm blush cream. Coral is the
    loudest colour in the palette, so it appears here only as a low-opacity
@@ -338,13 +338,9 @@ html {
    not introduced here. If the button boundary is ever tightened, tighten it
    site-wide rather than on this page alone.
 
-   .surface-coach-quote  the soft teal wash behind the Michele quote banner.
-   Flat, no gradient: it is one full-bleed strip and a gradient would fight the
-   circular portrait sitting on it. Navy on it is 11.9:1 and neutral-600 is
-   6.3:1. The quote itself is navy rather than teal-text, which lands at 4.45:1
-   here and would be relying on the large-text floor.
-
-   Coral opens the page, teal closes the middle of it, and neither repeats. */
+   There was a second surface here, `.surface-coach-quote`, a soft teal wash
+   behind a Michele quote banner. Michele moved that banner to the Speaker page
+   and the wash went with it, so only the hero is left. */
 .surface-coach-hero {
   background-color: #f7efe6;
   background-image: radial-gradient(
@@ -353,10 +349,6 @@ html {
     rgba(241, 92, 61, 0.05) 50%,
     rgba(241, 92, 61, 0) 78%
   );
-}
-
-.surface-coach-quote {
-  background-color: #dcebe7;
 }
 
 /* ---------------------------------------------------------------------

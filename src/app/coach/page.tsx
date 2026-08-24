@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import { Check, FingerprintPattern, MessagesSquare } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
@@ -37,23 +36,25 @@ import { pageMetadata } from '@/lib/schema'
  *  - the closing "I would love to hear about your book" panel, which was also
  *    the last place on the site that printed an email address.
  *  - the "What happens if I miss a week" FAQ.
+ *  - the full-bleed Michele quote banner, portrait and all. It ran here
+ *    briefly; Michele moved it to the Speaker page. Its teal wash went with
+ *    it, so there is no `.surface-coach-quote` in tailwind.css any more.
  *
  * COLOR. The page runs on the site band scale (band-1/2/3, see tailwind.css)
- * with two surfaces of its own: `.surface-coach-hero`, a coral wash, and
- * `.surface-coach-quote`, a soft teal wash behind the portrait banner. Brett
- * asked for the hero to stop being the sitewide navy banner, and for the quote
- * banner to take a palette colour that appears nowhere else on the page.
- * Neighbouring sections never share a ground. No navy panel appears anywhere
- * below the header: dark navy is the footer's, and the footer's only.
+ * with one surface of its own, `.surface-coach-hero`, a coral wash. Brett
+ * asked for the hero to stop being the sitewide navy banner. The bands then
+ * run 1, 2, 1, 2, 3 down the page and neighbours never share a ground, which
+ * still holds now that the quote banner has been cut from between the
+ * deliverables panel and the FAQ. No navy panel appears anywhere below the
+ * header: dark navy is the footer's, and the footer's only.
+ *
+ * The one saturated moment left is the TST/UAV pair, and that is deliberate:
+ * see the .coach-card block in tailwind.css.
  *
  * The five --color-coach-* tokens still drive the accents (numerals,
  * checkmarks, panel fills). Nothing here hardcodes a hex; the two washes are
  * measured and commented in tailwind.css.
  */
-
-/** Michele at home with her coffee mug. Moved out of the hero in this pass and
- *  circle-cropped inside the quote banner, per Brett. */
-const MICHELE_PORTRAIT = '/images/michele/coach-hero.jpg'
 
 export const metadata: Metadata = pageMetadata({
   title: 'Coach',
@@ -382,76 +383,7 @@ export default function CoachingPage() {
         </Container>
       </section>
 
-      {/* ----------------------------------------- 5. MICHELE QUOTE BANNER */}
-      {/* Full-bleed, edge to edge, on the soft teal wash. This is the slot the
-          deleted "Why Michele" section used to hold, and the portrait is the
-          one that used to sit in the hero, circle-cropped.
-
-          QUOTE PROVENANCE, and please read this before swapping the line.
-          Michele signed off on best judgment here; Brett set the order of
-          preference and it resolved down the list:
-
-            1. "You were created with brave purpose. My work is helping you
-               live in the fullness of it." RULED OUT: it is the home page hero
-               pull quote. See PULL_QUOTE in src/lib/home-variants.ts.
-            2. "I believe dreams give purpose a voice." RULED OUT: it is the
-               centred pull quote on /about. See src/app/about/page.tsx.
-            3. The line below, which is Michele's own raw statement, carried
-               verbatim. Brett offered a shortened form that drops "My purpose
-               is to"; the full sentence is used because the trim leaves a
-               subjectless fragment, which reads oddly standing alone under a
-               portrait. No word of it is rewritten.
-
-          It shares its vocabulary with the home hero (both reach for "brave
-          purpose" and "the fullness of"), which is the same thought in
-          Michele's own two phrasings rather than a repeated line. Flagged for
-          Brett rather than quietly reworded, because rewriting her words to
-          spread the vocabulary out is exactly what the voice rules forbid. */}
-      <section
-        aria-label="In Michele's words"
-        className="surface-coach-quote w-full py-16 sm:py-20 lg:py-24"
-      >
-        <Container>
-          <FadeIn>
-            <figure className="flex flex-col items-center gap-10 text-center lg:flex-row lg:gap-16 lg:text-left">
-              {/* Fixed pixel box rather than a percentage, so the circle stays
-                  a circle at every width instead of squashing into an oval in
-                  the flex row. */}
-              <div className="relative h-[250px] w-[250px] flex-none overflow-hidden rounded-full bg-neutral-100 ring-1 ring-[var(--color-navy-10)] sm:h-[300px] sm:w-[300px]">
-                <Image
-                  src={MICHELE_PORTRAIT}
-                  alt="Michele Okimura at home in Honolulu"
-                  fill
-                  sizes="300px"
-                  className="object-cover object-[center_20%]"
-                />
-              </div>
-
-              <div>
-                {/* No quotation marks. At this size a pair of curly quotes just
-                    hangs two heavy marks in the corners, and the display
-                    setting already reads as a quote. Same call as the home
-                    page pull quote. Navy, not teal-text: teal-text lands at
-                    4.45:1 on this wash and would be leaning on the large-text
-                    floor. */}
-                <blockquote className="font-display mx-auto max-w-[22ch] text-[1.5rem] leading-[1.25] font-medium tracking-tight text-balance text-[var(--color-navy)] sm:max-w-[26ch] sm:text-[1.875rem] sm:leading-[1.22] lg:mx-0 lg:max-w-[30ch] lg:text-[2.25rem] lg:leading-[1.2]">
-                  My purpose is to help people live in the fullness of who they
-                  were created to be with brave purpose.
-                </blockquote>
-                {/* No dash before the name. The home-page pull quote still
-                    carries a decorative &mdash; in this slot; Brett's rule for
-                    this page is no em dash anywhere, so the attribution here is
-                    the name alone. Worth settling one way for both pages. */}
-                <figcaption className="font-display mt-6 text-xs font-semibold tracking-[0.18em] text-neutral-600 uppercase sm:mt-8 sm:text-sm">
-                  Michele Okimura
-                </figcaption>
-              </div>
-            </figure>
-          </FadeIn>
-        </Container>
-      </section>
-
-      {/* ------------------------------------------------------------ 6. FAQ */}
+      {/* ------------------------------------------------------------ 5. FAQ */}
       {/* band-2, so the FAQ separates from the teal banner above it and the
           band-3 aside below it. Three questions, answers verbatim. */}
       <section
@@ -488,7 +420,7 @@ export default function CoachingPage() {
         </Container>
       </section>
 
-      {/* -------------------------------------------------- 7. NOT JUST BOOKS */}
+      {/* -------------------------------------------------- 6. NOT JUST BOOKS */}
       {/* Kept from the previous coaching pass, wording untouched. The soft
           panel is reused from section 4 so this reads as a warm aside rather
           than a second offer, and interest="other" (not "coaching") keeps these
