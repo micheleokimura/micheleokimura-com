@@ -7,7 +7,7 @@ import { FadeIn } from '@/components/FadeIn'
 import { PageIntro } from '@/components/PageIntro'
 import Image from 'next/image'
 
-import { AboutTimeline } from '@/components/AboutTimeline'
+import { AboutMosaic } from '@/components/AboutMosaic'
 import { ContactBlock } from '@/components/ContactBlock'
 import { WebPageJsonLd } from '@/components/JsonLd'
 import { awards, credentials } from '@/lib/credentials'
@@ -135,11 +135,14 @@ export default function AboutPage() {
         </FadeIn>
       </Container>
 
-      {/* Photo timeline: seven eras, 21 photos, 1962 to today. Captions sit in an
-          always-visible band on each photo, so they read the same on a phone as
-          they do on a desktop. */}
+      {/* "My Story": one unbroken square mosaic, captions revealed on hover.
+          Rebuilt on 2026-08-23 to match Michele's live WordPress About page,
+          which she asked for directly. This replaced AboutTimeline, the
+          seven-era layout with prose blocks and always-visible caption bands.
+          That component and its era prose are in git history if they are ever
+          wanted back. See design-references/wordpress-about/. */}
       <Container className="mt-16 sm:mt-24">
-        <AboutTimeline />
+        <AboutMosaic />
       </Container>
 
       {/* The work Michele leads — her own brand family (own surface, not endorsers) */}
