@@ -64,7 +64,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <WaitListProvider>
           <SmoothScroll>
             <SiteHeader />
-            <main id="main" className="flex-auto pt-28 sm:pt-32">
+            {/* The header is absolutely positioned, so this pad is what keeps
+                page content out from under it. It tracks the header's height:
+                py-3 + a ~42px row lands the bar at roughly 66px, py-4 at 74px.
+                Cut from pt-28/sm:pt-32 on 2026-08-23 when the header padding
+                came down. Re-measure both together. */}
+            <main id="main" className="flex-auto pt-20 sm:pt-24">
               {children}
             </main>
             <SiteFooter />

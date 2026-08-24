@@ -3,9 +3,13 @@
 // This file originally backed three design-variant routes (home-v1-narrative,
 // home-v2-clarity, home-v3-golden-thread) so Michele could compare directions
 // side by side. Golden-thread (v3) was promoted to `/` and then rejected in
-// review; the clarity direction (v2) is what `/` renders now. It uses DOORS,
-// PROOF_POINTS, ENDORSEMENTS, ENDORSING_ORGS, and FEATURED_WORKS. Only
-// NONPROFIT_ROOM is currently unreferenced; it is kept for the About page work.
+// review; the clarity direction (v2) is what `/` renders now.
+//
+// After Michele's 2026-08-23 rebuild the page uses HERO, DOORS, PULL_QUOTE,
+// FRIENDS_SAY_TOP, FRIENDS_SAY_BOTTOM, and FEATURED_WORKS. PROOF_POINTS,
+// ENDORSEMENTS, and ENDORSING_ORGS were deleted with the sections they fed;
+// see the notes further down. NONPROFIT_ROOM is still unreferenced and is kept
+// for the About page work.
 //
 // HARD RULE: endorser wording is verbatim. Do not edit a quote to make it fit.
 // Trim only by dropping whole sentences, and only where an existing signed-off
@@ -23,22 +27,32 @@ export type Door = {
   cta: string
 }
 
+/**
+ * Locked order, set by Michele 2026-08-23: Speaker, Author, Coach, left to
+ * right. It is not the old Author-first order and it is not the nav's
+ * Coach-first order.
+ *
+ * The CTAs are FIRST PERSON and verbatim from her review: "Book me to speak",
+ * "See my body of work", "See my method". The hooks are deliberately
+ * pronoun-free so the whole card sits in her voice rather than switching to
+ * "she" halfway down.
+ */
 export const DOORS: Door[] = [
-  {
-    key: 'author',
-    label: 'Author',
-    outcomeLabel: 'Read her books',
-    href: '/author',
-    hook: 'Two published trade books, two more releasing in 2027, a teen leadership curriculum in 24 volumes, and journals for every age from preschool to adult.',
-    cta: 'See the body of work',
-  },
   {
     key: 'speaker',
     label: 'Speaker',
     outcomeLabel: 'Bring her to your event',
     href: '/speaker',
     hook: 'Keynotes and workshops on dreaming, purpose, healing, creativity, and courage. Delivered in Hawaiʻi, across the mainland, and in the Philippines and Singapore.',
-    cta: 'Book Michele to speak',
+    cta: 'Book me to speak',
+  },
+  {
+    key: 'author',
+    label: 'Author',
+    outcomeLabel: 'Read her books',
+    href: '/author',
+    hook: 'Two published trade books, two more releasing in 2027, a teen leadership curriculum in 24 volumes, and journals for every age from preschool to adult.',
+    cta: 'See my body of work',
   },
   {
     key: 'coach',
@@ -46,9 +60,46 @@ export const DOORS: Door[] = [
     outcomeLabel: 'Walk it out with her coaching',
     href: '/coach',
     hook: 'The Brave Purpose Author Method. Twenty-six weeks, one writer, and a finished manuscript that still sounds like you.',
-    cta: 'See the Method',
+    cta: 'See my method',
   },
 ]
+
+/**
+ * HERO COPY.
+ *
+ * `subhead` is VERBATIM from Michele 2026-08-23 up to the Releasing Generations
+ * clause, which she left as "[ONE-SENTENCE DESCRIPTION TBD]" and asked to have
+ * sourced from her dossier rather than invented. The clause below is built from
+ * Releasing Generations' own published mission ("to empower people of all ages
+ * to thrive in their God-given purpose while knowing their identity and
+ * value"), recorded in michele-personal-context.md. It is restructured only far
+ * enough to drop "empower", which is on the banned-vocabulary list in
+ * CLAUDE.md. Nothing in it is invented. Michele still has final say on the
+ * wording.
+ */
+export const HERO = {
+  h1: 'Hi, I’m Michele Okimura',
+  /** Middle dots, not periods. Michele was specific about this. */
+  roles: ['Speaker', 'Author', 'Coach'] as const,
+  subhead:
+    'I’m a speaker, author, and writing coach based in Mānoa, Honolulu, Hawaiʻi. I’m also the founder and executive director of Releasing Generations, a Honolulu nonprofit that helps people of all ages know their identity and value and thrive in their God-given purpose.',
+  /**
+   * Award name is verbatim from WIKIPEDIA-DRAFT-MICHELE-OKIMURA.md, which is
+   * the most carefully sourced wording in the repo.
+   *
+   * NOTE ON THE RECIPIENT: the repo does not agree with itself on who received
+   * this. The Wikipedia draft says Michele, "together with the Explicit
+   * Movement team"; content/copywriting/about.md says it was given to Explicit
+   * Movement with Michele accepting it; src/app/author/page.tsx says it was
+   * awarded to Releasing Generations. The line below therefore names the award,
+   * the year, and the issuing body and stops there, which every one of those
+   * three sources supports. Do not upgrade it to a sole personal award without
+   * a primary source.
+   */
+  award: '2023 Outstanding Advocate for the Children and Youth of Hawaiʻi',
+  awardIssuer: 'State of Hawaiʻi',
+  cta: 'Get in touch',
+} as const
 
 /**
  * The fourth hat. CLAUDE.md treats Michele as a four-role figure (author,
@@ -65,61 +116,173 @@ export const NONPROFIT_ROOM = {
   cta: 'Visit Releasing Generations',
 } as const
 
-/** Verbatim endorsements. Attribution renders on its own line, never after a dash. */
-export type Endorsement = {
+/**
+ * ENDORSEMENTS and ENDORSING_ORGS lived here and backed the three-quote grid
+ * plus the "with endorsements from ..." strip inside the deleted Recognition
+ * section. Both are gone with it. Their wording was not lost: every quote they
+ * held is carried verbatim in FRIENDS_SAY_TOP / FRIENDS_SAY_BOTTOM below, and
+ * the full archive is site/content/speaker/full-endorsements.md. Keeping a
+ * second copy here would have given the same quotes two sources of truth.
+ *
+ * One quote did NOT survive the move and it is worth naming: Glenn T. Stanton's
+ * "We serve a BIG God ..." blurb. His other blurb, the one about The Birth of
+ * Explicit Movement, is in the top row instead, because that one is tied to a
+ * named title and this site attributes book blurbs to the book. If Michele
+ * wants the "BIG God" wording back, it is in full-endorsements.md and in this
+ * file's git history, and it needs a title attached before it goes up.
+ */
+
+/**
+ * PROOF_POINTS is gone. It backed the home page's "Recognition" section (the
+ * "work has been checked by people who had to be sure" headline plus the 2023,
+ * 2026, and "14 works" tiles), and Michele deleted that whole section on
+ * 2026-08-23. The facts themselves are not lost: the 2023 award now runs in the
+ * hero, the 2026 DOE approval runs on the author page under BRAVE_RECOGNITION,
+ * and the works count is on /works. Do not reinstate the section here.
+ */
+
+/**
+ * The pull quote that replaced the founder blurb below the hero.
+ *
+ * ############ PLACEHOLDER ############
+ * Michele is sending her own line. Until it lands this renders the fallback she
+ * nominated in her review, and it is HER OWN sentence, not a fabrication. Swap
+ * `text` for the real quote when it arrives and delete this block.
+ * #####################################
+ */
+export const PULL_QUOTE = {
+  text: 'I believe dreams give purpose a voice.',
+  attribution: 'Michele Okimura',
+  isPlaceholder: true,
+} as const
+
+/**
+ * "Things my friends say about me" — the two scrolling rows that replaced the
+ * Recognition section.
+ *
+ * HARD RULE, inherited from the top of this file and from
+ * site/content/speaker/full-endorsements.md: every quote here is VERBATIM. Do
+ * not shorten one to make a card fit, do not fix an endorser's grammar, and do
+ * not swap a word because it appears on the banned-vocabulary list in
+ * CLAUDE.md. That list governs Michele's voice; these are other people's.
+ *
+ * Provenance, so nothing here has to be taken on trust:
+ *  - the book blurbs come from the per-book endorsement constants in
+ *    src/app/author/page.tsx, and `work` names the title each one is about;
+ *  - the workshop and speaking quotes come from
+ *    site/content/speaker/full-endorsements.md, where Michele signed the
+ *    Teramae / Cal Chinen / Deguchi / Furuhashi wording off on 2026-08-21;
+ *  - the Pimental card uses the SHORTER SIGNED-OFF TRIM already running on
+ *    /speaker, not the full letter. Michele directed that trim. Use this
+ *    version, never a fresh cut of the original.
+ */
+export type Testimonial = {
   quote: string
   name: string
+  /** Role and organization, rendered on one line under the name. */
   title: string
-  org: string
+  /** The book or curriculum the blurb is about, when it is a book blurb. */
+  work?: string
 }
 
-export const ENDORSEMENTS: Endorsement[] = [
+/** Top row. Scrolls right to left. */
+export const FRIENDS_SAY_TOP: Testimonial[] = [
   {
     quote:
-      'We serve a BIG God, the Lord of every square inch of creation, who has very big and very personal dreams for us as His beloved children. I don’t know of anyone who lives more fully and boldly as a beautiful daughter of the King than Michele Okimura. She shares her profound and practical wisdom in this exciting new book.',
+      'Michele is a remarkably gifted woman with an unbounded mother’s heart for the incredibly talented and passionate young people she draws into God’s Kingdom. This small book will bring huge encouragement to you, revealing that God is still intimately active in the world and in the hearts of humble and unlikely heroes like Michele.',
     name: 'Glenn T. Stanton',
-    title: 'Director of Global Family Formation Studies',
-    org: 'Focus on the Family',
+    title: 'Director of Global Family Formation Studies, Focus on the Family',
+    work: 'The Birth of Explicit Movement',
+  },
+  {
+    quote:
+      'Michele Okimura has touched a topic that is discussed very little. She invites the reader to share her tragedy and triumph by capturing that experience in Dancing with Father. This poem can be an instrument to bridge the gap in the healing process for others who have had a difficult journey through their youth.',
+    name: 'Gary and Norma Smalley',
+    title: 'President and Founder, Smalley Relationship Center',
+    work: 'Dancing with Father',
   },
   {
     quote:
       'Michele was able to rekindle and inspire the need and desire to reignite and inspire our Leadership Team that it is never too late to become a ‘dreamer’ and make a positive impact and difference in the world.',
     name: 'Gerald Teramae',
-    title: 'Head of School',
-    org: 'Island Pacific Academy',
+    title: 'Head of School, Island Pacific Academy',
+  },
+  {
+    quote:
+      'There is a lack of practical tools that can assist young adults in discovering the direction that God wants their life to take. This book fills that void. Writing with a positive and uplifting tone, Michele provides practical advice on how to connect with one’s life purpose, no matter what adult life stage you are in.',
+    name: 'Ted Esler',
+    title: 'President and CEO, Missio Nexus',
+    work: 'Brave Purpose with God',
+  },
+  {
+    quote:
+      'When I read Dancing with the Father my heart was deeply touched. I know this deeply artistic, poetic work will touch many deeply.',
+    name: 'Patricia King',
+    title: 'President and Founder, Extreme Prophetic Ministries',
+    work: 'Dancing with Father',
+  },
+  {
+    quote:
+      'She just did a session at Native Camp in Montana and it was excellent, the most impactful session of the whole camp. We had 19 FMI workers there. Every person had an experience of how to prophesy over each other. Simple, practical, and powerful. I saw it all personally. Now many children in our church prophesy and unashamedly pray for healing, all because of Michele.',
+    name: 'Pastor Kihāpiʻilani Pimental',
+    title: 'Worker Supervisor, Foursquare Missions International',
+  },
+  {
+    quote:
+      'When first introduced to the materials, I found them breathtaking and unlike anything I had seen. The Brave Series equips young people with the tools to navigate challenges, make informed decisions, and step confidently into their potential by addressing critical topics like self-worth, healthy relationships, and personal responsibility.',
+    name: 'Phyllis Unebasami',
+    title: 'Retired Deputy Superintendent, Hawaiʻi Department of Education',
+    work: 'The Brave Series',
+  },
+]
+
+/** Bottom row. Scrolls left to right, against the top row. */
+export const FRIENDS_SAY_BOTTOM: Testimonial[] = [
+  {
+    quote:
+      'Just as David wrote his Psalms, so has Michele found a voice for deeper longings of God. This is truly a soul’s cry that rings victorious. I believe Michele has found a voice for so many.',
+    name: 'Dr. Wayne Cordeiro',
+    title: 'Founding Pastor, New Hope Christian Fellowship, Honolulu',
+    work: 'Dancing with Father',
   },
   {
     quote:
       'The Kingdom Kids Workshop has been the single most powerful equipping workshop for the parents and children’s ministry workers in our church. It gave them practical tools, and it imparted a living and powerful love and excitement for God.',
     name: 'Cal Chinen',
-    title: 'Senior Pastor',
-    org: 'Moanalua Gardens Missionary Church, Honolulu',
-  },
-]
-
-/** Organizations named in the endorsement strip under the pull quotes. */
-export const ENDORSING_ORGS = [
-  'Focus on the Family',
-  'Missio Nexus',
-  'Foursquare Missions International',
-  'Island Pacific Academy',
-] as const
-
-/** Short factual proof points. No pricing, per the credentials rule. */
-export type ProofPoint = { label: string; body: string }
-
-export const PROOF_POINTS: ProofPoint[] = [
-  {
-    label: '2023',
-    body: 'Michele and the Explicit Movement team named Outstanding Advocate for Children and Youth of Hawaiʻi, presented by Governor Josh Green and Mayor Rick Blangiardi.',
+    title: 'Senior Pastor, Moanalua Gardens Missionary Church, Honolulu',
   },
   {
-    label: '2026',
-    body: 'Brave Together, the non-faith edition of the Brave Series, vetted and approved by the Hawaiʻi State Department of Education for secondary public schools.',
+    quote:
+      'Brave Purpose is not simply a book, it is a sacred invitation. From the first page, you feel gently yet firmly called out of hiding and into the courageous work of becoming who you were always meant to be. This is the kind of book you don’t just read, you experience.',
+    name: 'Gerald Teramae',
+    title: 'Head of School, Island Pacific Academy',
+    work: 'Brave Purpose',
   },
   {
-    label: '14 works',
-    body: 'Trade books, curricula, journals, and programs authored or shepherded into the world, the earliest of them first taught in 2008.',
+    quote:
+      'Our experience with Kingdom Kids was amazing. Michele’s ministry sparked and stirred the faith of our entire church. Her creative, innovative, inspired approach enabled our children and youth to experience biblical truths and the Lord Himself in a very powerful way.',
+    name: 'Barry Deguchi',
+    title: 'Lead Pastor, Catalyst Christian Community, Long Beach, CA',
+  },
+  {
+    quote:
+      'Okimura masterfully connects the prophetic and the artistic with the dusty, everyday path we actually walk. Readers will come away not just encouraged but awakened as travelers ready to follow God’s clues toward the treasure He has prepared.',
+    name: 'Ted Vail, D.I.S.',
+    title: 'Senior Vice President of Mission, The Foursquare Church',
+    work: 'Brave Purpose with God',
+  },
+  {
+    quote:
+      'Her creative and visually-exciting presentations have challenged us and our students to directly download from the Father Heart of God. We are now seeing children as young as five praying bold and encouraging words over other children and even their teachers. Our entire campus culture has changed. Our school will never be the same.',
+    name: 'Rebecca Furuhashi',
+    title: 'Principal, Christian Academy',
+  },
+  {
+    quote:
+      'Brave Purpose is a wonderful resource in the midst of all this, helping us reflect on our identity, our potential, and our direction. The intent is for us to find our true purpose and meaning, and to live the unique life we were inherently designed for.',
+    name: 'Edwin Keh',
+    title: 'CEO, HKRITA; former Senior Vice President and COO, Walmart Global Procurement',
+    work: 'Brave Purpose',
   },
 ]
 

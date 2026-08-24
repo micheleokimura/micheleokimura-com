@@ -93,6 +93,27 @@
   --color-coral: #f15c3d;
   --color-gold: #e9ae3f;
 
+  /* ---------------------------------------------------------------------
+     SECTION BANDS
+     ---------------------------------------------------------------------
+     Michele's home-page note: "the sections all blend into one continuous
+     scroll and it's hard to tell where one thought ends and the next begins."
+     These are the three grounds a full-bleed section may sit on, lightest
+     first. Alternate them down the page; never run two of the same in a row,
+     because a repeated band is exactly the seam that goes missing.
+
+       --color-band-1  the default ground (same value as --color-white)
+       --color-band-2  a half-step warmer, for the section in between
+       --color-band-3  cream, the warmest tile, for the feature bands
+
+     The steps are deliberately small. This is meant to be felt as a section
+     boundary rather than seen as a colored panel. All three are light enough
+     that navy body copy clears AA on every one: navy #1F2744 scores 13.7:1 on
+     band-1, 13.0:1 on band-2, and 12.5:1 on band-3. */
+  --color-band-1: #fafaf8;
+  --color-band-2: #f5f3ec;
+  --color-band-3: #f2ecdf;
+
   --color-teal-text: #0f766e;
   --color-teal-on-dark: #9fe8df;
   --color-coral-text: #b8431f;
@@ -151,9 +172,22 @@
      uses coral-text at 4.62:1. Same identity, legally visible. */
   --color-focus-ring: var(--color-coral-text);
 
-  /* Tailwind's own `white` is retargeted to cream so the ~220 existing
-     bg-white / text-white utilities pick up the warm ground site-wide.
-     Anything that genuinely needs pure white must say #ffffff explicitly.
+  /* Tailwind's own `white` is retargeted to the site ground so the ~220
+     existing bg-white / text-white utilities pick it up site-wide. Anything
+     that genuinely needs pure white must say #ffffff explicitly.
+
+     GROUND CHANGED 2026-08-23 (Michele's home-page review). This used to be
+     cream #F2ECDF, and she read the whole site as "too tan". The ground is now
+     an off-white #FAFAF8: still not pure white, but far closer to it. Cream is
+     NOT retired -- it stayed at --color-cream and is now a deliberate tinted
+     PANEL color rather than the default ground, which is what gives the home
+     page its band-to-band shade variation.
+
+     Every contrast figure quoted in this file was measured against cream. They
+     all survive the move, because the ground got LIGHTER: dark ink on #FAFAF8
+     scores higher than the same ink on #F2ECDF, never lower. The three derived
+     text colors keep their AA passes with room to spare (teal-text 4.65 -> 5.05,
+     coral-text 4.62 -> 5.02, field-border 3.09 -> 3.36).
 
      `neutral-950` IS navy now. Body copy, major headings and every dark UI
      surface are the same locked navy, which is what the palette asks for.
@@ -170,7 +204,7 @@
      on cream: 950 12.46:1, 700 9.34:1, 600 6.53:1, 500 4.97:1. 400 and
      lighter are decorative (rules, dividers, disabled) and must not carry
      body text. */
-  --color-white: #f2ecdf;
+  --color-white: #fafaf8;
   --color-neutral-950: #1f2744;
   --color-neutral-900: #252d4b;
   --color-neutral-800: #2b3352;
