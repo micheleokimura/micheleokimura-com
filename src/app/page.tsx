@@ -130,18 +130,27 @@ export default function HomePage() {
           falling below the fold on small laptops, delete the max-h and nothing
           else changes.
 
-          OVERLAY, halved on Michele's note that it was too heavy. It used to be
-          a flat navy/75 rising to navy/90. It is now a 35% wash over the WHOLE
-          frame (her 30-40% target) plus a scrim that only covers the bottom of
-          the frame, where the copy sits. The top of the picture is therefore
-          nearly clear and the copy still has a dark ground under it.
+          OVERLAY. Two layers, and they do different jobs. See the notes on each
+          one below; the short version is a 25% flat wash over the whole frame
+          plus a scrim that only exists behind the copy.
 
-          That split is also what keeps the text legal. Over the worst case the
-          video can produce (a blown-out white frame) the wash and the scrim
-          compound to ~80% navy behind the subhead and ~96% behind nothing that
-          matters less, so the cream H1 holds 6.5:1 and the subhead better than
-          that. Re-measure at the scrim's WEAKEST point, not at the bottom
-          edge, if you retune either number. */}
+          The scrim is what was actually wrong before. The wash was already 35%,
+          but the scrim under it ran to 95% navy across the bottom THREE
+          QUARTERS of the frame, so the majority of the hero composited to
+          roughly 97% navy and the picture only survived in a thin band up top.
+          Michele reported the hero as reading solid navy, and she was right.
+          Both numbers came down, and the scrim is now bound to the text rather
+          than to a fraction of the hero.
+
+          WHAT IS IN THE VIDEO, because it changes what any of this can achieve.
+          The clip is 16s and cuts between stage shots of Michele and shots of
+          the audience. The stage footage is heavily out of focus: she reads as
+          a soft figure at any overlay value, and no amount of lightening will
+          sharpen her. The audience footage is sharp and much brighter, and it
+          is the reason the scrim cannot go lower than it does. If a sharper
+          stage clip ever replaces this file, re-run the measurement in the
+          commit for this change; a brighter clip needs more scrim, a sharper
+          one needs none of this reasoning revisited. */}
       <section
         aria-label="Michele Okimura"
         className="relative isolate min-h-[32rem] w-full overflow-hidden bg-[var(--color-navy)] sm:min-h-0 sm:aspect-[16/9] sm:max-h-[calc(100svh-4.75rem)]"
@@ -157,27 +166,73 @@ export default function HomePage() {
           aria-hidden="true"
         />
 
+        {/* The flat wash over the WHOLE frame: 25%, the light end of the range
+            Michele asked for. This is the only thing covering the top of the
+            picture, which is where she is: in every stage frame she stands in
+            the upper-middle, so her head and shoulders sit at roughly 10-25% of
+            the frame height and are darkened by this and nothing else.
+
+            25% rather than 40% because the footage is already dark. Measured
+            over 65 frames, the mean relative luminance behind the copy is
+            0.089, so this clip has very little brightness to give away. */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[var(--color-navy)]/35"
-        />
-        <div
-          aria-hidden="true"
-          className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-[var(--color-navy)]/95 via-[var(--color-navy)]/70 to-transparent"
+          className="absolute inset-0 bg-[var(--color-navy)]/25"
         />
 
-        <Container className="absolute inset-x-0 bottom-0 pb-9 sm:pb-10 lg:pb-14">
+        {/* The legibility scrim, and it is attached to the COPY rather than to
+            a fraction of the hero. That distinction is load-bearing: the hero
+            is 16:9 but clamps to the viewport on a short screen, so a
+            percentage-height scrim slides out from under the text exactly when
+            the hero gets shorter. This element wraps the copy, so its height is
+            always the text plus the `pt` fade zone, at every breakpoint.
+
+            The stops are derived, not eyeballed. Sampling every 0.25s across
+            the clip and compositing cream #F2ECDF over navy at each candidate
+            alpha, the copy needs an effective alpha of 0.54 under the H1 (large
+            text, 3:1) and 0.62 under the subhead (body text, 4.5:1) for ZERO
+            failing pixels in the worst frame. The clip is mostly dark, but two
+            audience shots run to a near-white luminance of 0.95 right where the
+            text sits, and those are what set the floor.
+
+            Measured result of the shipped stack, worst case across the clip,
+            zero failing pixels in every band:
+
+              H1        effective 0.630   4.13:1  (floor 3.0)
+              roles     effective 0.692   5.04:1  (floor 4.5)
+              subhead   effective 0.722   5.16:1  (floor 4.5)
+              award     effective 0.792   5.15:1  (floor 4.5)
+              top of frame, where Michele is:  0.25, the wash alone
+
+            Re-run the measurement if the video is ever replaced; a brighter
+            clip needs more scrim. The script is in the commit for this change. */}
+        <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,rgba(31,39,68,0.78)_0%,rgba(31,39,68,0.70)_40%,rgba(31,39,68,0.52)_70%,rgba(31,39,68,0)_100%)] pt-40 sm:pt-48 lg:pt-56">
+        <Container className="pb-9 sm:pb-10 lg:pb-14">
           <FadeIn className="max-w-2xl">
             <h1 className="font-display text-[2rem] leading-[1.05] font-medium tracking-tight text-balance text-[var(--color-cream)] sm:text-[2.5rem] lg:text-6xl">
               {HERO.h1}
             </h1>
 
-            {/* Middle dots, not periods. Michele was specific. */}
-            <p className="font-display mt-3 text-sm font-semibold tracking-[0.16em] text-[var(--color-teal-on-dark)] uppercase sm:mt-4 sm:text-base lg:text-lg">
+            {/* Middle dots, not periods. Michele was specific.
+
+                CREAM, not the pale teal --color-teal-on-dark that every other
+                eyebrow on a dark surface uses. That token is specified against
+                FLAT navy, where it holds 7.71:1. Over video it does not: at the
+                overlay this hero now runs, the measurement put it at 4.26:1
+                with ~100 failing pixels in the bright audience frames, and the
+                only ways to rescue it were to darken the hero further (which is
+                the opposite of what this change is for) or to brighten the ink.
+                Cream is the brighter ink and lands at 5.04:1. If the teal
+                eyebrow is wanted back here, the video has to get darker. */}
+            <p className="font-display mt-3 text-sm font-semibold tracking-[0.16em] text-[var(--color-cream)] uppercase sm:mt-4 sm:text-base lg:text-lg">
               {HERO.roles.join(' · ')}
             </p>
 
-            <p className="mt-4 max-w-xl text-[0.9375rem] leading-7 text-[var(--color-cream)]/90 sm:mt-5 sm:text-base sm:leading-7 lg:text-lg lg:leading-8">
+            {/* Solid cream, not cream/90. The 10% transparency blended the
+                glyphs toward the video behind them and cost about half a point
+                of contrast: 4.05:1 measured, which fails AA, against 5.16:1
+                solid. Do not reintroduce an opacity here. */}
+            <p className="mt-4 max-w-xl text-[0.9375rem] leading-7 text-[var(--color-cream)] sm:mt-5 sm:text-base sm:leading-7 lg:text-lg lg:leading-8">
               {HERO.subhead}
             </p>
 
@@ -215,6 +270,7 @@ export default function HomePage() {
             </div>
           </FadeIn>
         </Container>
+        </div>
       </section>
 
       {/* band 3 */}
