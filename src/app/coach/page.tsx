@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
+import { Check, FingerprintPattern, MessagesSquare } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 
 import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
@@ -62,21 +64,57 @@ export const metadata: Metadata = pageMetadata({
     'You speak your book into existence. Michele Okimura turns your conversations into a manuscript in your own voice.',
 })
 
-type Pillar = { abbr: string; title: string; body: string }
+type Pillar = {
+  abbr: string
+  title: string
+  body: string
+  icon: LucideIcon
+  /** Inline custom properties consumed by `.coach-card` in tailwind.css. */
+  style: React.CSSProperties
+}
 
-/** The two named parts of the method, as cards rather than prose. */
+/*
+ * The two named parts of the method, as the saturated gradient tiles Brett
+ * pulled from the "Most-Used Services" row on livingin-platform.vercel.app.
+ *
+ * One colour each, and they are the two loudest in Michele's palette: teal for
+ * the talking, coral for the voice. Each carries a different texture so the
+ * pair does not read as one repeated tile. Every value below is measured; see
+ * the .coach-card block in tailwind.css before changing a stop.
+ */
 const PILLARS: Pillar[] = [
   {
     abbr: 'TST',
     title: 'Talk Story Sessions',
     body:
       'We sit down and you tell me about your book the way you would tell a friend over coffee. I ask questions, you talk, and I record the whole conversation. What you said comes back to you as manuscript pages in your own words, ready to read and react to.',
+    icon: MessagesSquare,
+    style: {
+      // Teal. Rings, because a Talk Story Session is a conversation widening
+      // out from one question.
+      '--coach-card-a': '#06302c',
+      '--coach-card-b': '#0f5f58',
+      '--coach-card-glow': 'rgba(0, 176, 159, 0.45)',
+      '--coach-card-pattern':
+        'repeating-radial-gradient(circle at 82% 6%, rgba(255,255,255,0.075) 0 1px, rgba(255,255,255,0) 1px 14px), radial-gradient(70% 55% at 12% 100%, rgba(0,176,159,0.18) 0%, rgba(0,176,159,0) 64%)',
+    } as React.CSSProperties,
   },
   {
     abbr: 'UAV',
     title: 'Unique Author Voice',
     body:
       'Before we draft a single chapter I build your Unique Author Voice: a 46-dimension read of how you use grammar, logic and rhetoric, rooted in the classical Trivium. Every page we write gets measured against that profile. Your book sounds like you on your best day.',
+    icon: FingerprintPattern,
+    style: {
+      // Coral, with the palette's gold banked into the far corner as pure
+      // decoration. Diagonal hatching, so it reads as a hand rather than an
+      // echo of the rings next to it.
+      '--coach-card-a': '#5e1e0c',
+      '--coach-card-b': '#a63a19',
+      '--coach-card-glow': 'rgba(241, 92, 61, 0.45)',
+      '--coach-card-pattern':
+        'repeating-linear-gradient(115deg, rgba(255,255,255,0.06) 0 2px, rgba(255,255,255,0) 2px 16px), radial-gradient(58% 52% at 86% 94%, rgba(233,174,63,0.16) 0%, rgba(233,174,63,0) 64%)',
+    } as React.CSSProperties,
   },
 ]
 
@@ -121,15 +159,23 @@ const FAQS: { question: string; answer: string }[] = [
   },
 ]
 
+/**
+ * The tick in "In six months, you get". A small round well rather than a bare
+ * glyph, so the checklist picks up the icon treatment from the TST and UAV
+ * cards above it at a quieter scale. The teal disc is 3.77:1 against the panel
+ * behind it, which clears the 3:1 a non-text graphic owes under WCAG 1.4.11.
+ */
 function CheckMark() {
   return (
-    <svg
+    <span
       aria-hidden="true"
-      viewBox="0 0 20 20"
-      className="mt-1 h-5 w-5 flex-none fill-[var(--color-coach-accent)]"
+      className="mt-0.5 flex h-9 w-9 flex-none items-center justify-center rounded-full bg-[var(--color-teal)]/15 ring-1 ring-[var(--color-teal)]/25"
     >
-      <path d="M7.6 15.2 2.4 10l1.7-1.7 3.5 3.5 8-8L17.3 5.5z" />
-    </svg>
+      <Check
+        className="h-5 w-5 text-[var(--color-teal-text)]"
+        strokeWidth={2.5}
+      />
+    </span>
   )
 }
 
@@ -213,29 +259,46 @@ export default function CoachingPage() {
             </p>
           </FadeIn>
 
-          {/* TST and UAV as tiles. Cards take --color-cream, which is warm and
-              lifts off the neutral band underneath; a band on a band is a
-              5-point difference nobody can see. Two up at lg, stacked below. */}
+          {/* TST and UAV as saturated gradient tiles, built to the
+              "Most-Used Services" pattern Brett sent from
+              livingin-platform.vercel.app/services: texture over a gradient, a
+              round icon well at the top, then label and copy. Colours, tint
+              caps and the contrast measurements live in the .coach-card block
+              in tailwind.css. Two up at lg, stacked below.
+
+              These are the only loud tiles on the page, and that is the point:
+              the 01/02 cards in the next section stay quiet cream so the two
+              sections do not compete. */}
           <FadeInStagger faster className="mt-12 sm:mt-14">
             <ul role="list" className="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-8">
-              {PILLARS.map((item) => (
-                <FadeIn as="li" key={item.abbr} className="flex">
-                  <div className="flex w-full flex-col rounded-3xl bg-[var(--color-cream)] p-7 ring-1 ring-[var(--color-navy-10)] sm:p-9">
-                    <p
-                      aria-hidden="true"
-                      className="font-display text-3xl font-semibold tracking-tight text-[var(--color-coach-accent-text)]"
+              {PILLARS.map((item) => {
+                const Icon = item.icon
+                return (
+                  <FadeIn as="li" key={item.abbr} className="flex">
+                    <div
+                      className="coach-card flex w-full flex-col items-center rounded-3xl px-7 py-10 text-center sm:px-10 sm:py-12"
+                      style={item.style}
                     >
-                      {item.abbr}
-                    </p>
-                    <h3 className="font-display mt-4 text-2xl font-semibold tracking-tight text-neutral-950">
-                      {item.title}
-                    </h3>
-                    <p className="mt-4 text-base leading-7 text-neutral-700">
-                      {item.body}
-                    </p>
-                  </div>
-                </FadeIn>
-              ))}
+                      <span className="coach-card-ring flex h-16 w-16 items-center justify-center rounded-full sm:h-[4.5rem] sm:w-[4.5rem]">
+                        <Icon
+                          aria-hidden="true"
+                          strokeWidth={1.6}
+                          className="h-8 w-8 text-[var(--color-cream)] sm:h-9 sm:w-9"
+                        />
+                      </span>
+                      <p className="font-display mt-6 text-sm font-semibold tracking-[0.22em] text-[var(--color-cream)]/75 uppercase">
+                        {item.abbr}
+                      </p>
+                      <h3 className="font-display mt-2 text-2xl font-semibold tracking-tight text-[var(--color-cream)] sm:text-[1.75rem]">
+                        {item.title}
+                      </h3>
+                      <p className="mt-5 max-w-md text-base leading-7 text-[var(--color-cream)]/85">
+                        {item.body}
+                      </p>
+                    </div>
+                  </FadeIn>
+                )
+              })}
             </ul>
           </FadeInStagger>
         </Container>
@@ -306,7 +369,7 @@ export default function CoachingPage() {
               </h2>
               <ul role="list" className="mt-8 max-w-3xl space-y-7 sm:mt-10 sm:space-y-8">
                 {DELIVERABLES.map((item) => (
-                  <li key={item} className="flex gap-x-4">
+                  <li key={item} className="flex items-start gap-x-4 sm:gap-x-5">
                     <CheckMark />
                     <span className="text-lg leading-8 text-neutral-800">
                       {item}
