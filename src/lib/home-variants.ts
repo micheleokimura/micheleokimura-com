@@ -81,8 +81,10 @@ export const HERO = {
   h1: 'Hi, I’m Michele Okimura',
   /** Middle dots, not periods. Michele was specific about this. */
   roles: ['Speaker', 'Author', 'Coach'] as const,
+  // "Mānoa" was dropped on Michele's follow-up: the location is Honolulu,
+  // Hawaiʻi and nothing narrower. Do not put the neighbourhood back.
   subhead:
-    'I’m a speaker, author, and writing coach based in Mānoa, Honolulu, Hawaiʻi. I’m also the founder and executive director of Releasing Generations, a Honolulu nonprofit that helps people of all ages know their identity and value and thrive in their God-given purpose.',
+    'I’m a speaker, author, and writing coach based in Honolulu, Hawaiʻi. I’m also the founder and executive director of Releasing Generations, a Honolulu nonprofit that helps people of all ages know their identity and value and thrive in their God-given purpose.',
   /**
    * Award name is verbatim from WIKIPEDIA-DRAFT-MICHELE-OKIMURA.md, which is
    * the most carefully sourced wording in the repo.
@@ -144,16 +146,18 @@ export const NONPROFIT_ROOM = {
 /**
  * The pull quote that replaced the founder blurb below the hero.
  *
- * ############ PLACEHOLDER ############
- * Michele is sending her own line. Until it lands this renders the fallback she
- * nominated in her review, and it is HER OWN sentence, not a fabrication. Swap
- * `text` for the real quote when it arrives and delete this block.
- * #####################################
+ * This is Michele's own line, lightly rewritten for cadence, and she has
+ * approved it in principle. She may still swap it for another variant, so treat
+ * the wording as settled but not frozen.
+ *
+ * The two sentences render WITHOUT quotation marks. The display size and the
+ * centred setting already read as a quote, and adding curly quotes to type this
+ * large just puts two heavy marks in the corners. The attribution below is
+ * deliberately much smaller so the line itself carries the section.
  */
 export const PULL_QUOTE = {
-  text: 'I believe dreams give purpose a voice.',
+  text: 'You were created with brave purpose. My work is helping you live in the fullness of it.',
   attribution: 'Michele Okimura',
-  isPlaceholder: true,
 } as const
 
 /**
@@ -287,6 +291,19 @@ export const FRIENDS_SAY_BOTTOM: Testimonial[] = [
 ]
 
 /**
+ * ############ CURRENTLY UNUSED ############
+ * Michele deleted the entire "A body of work" section from the home page on
+ * 2026-08-23 (the heading, the six-cover grid, and the "See every title" link),
+ * on the grounds that /author already carries the books. Nothing renders
+ * FEATURED_WORKS today.
+ *
+ * It is kept rather than deleted because it was cut in a live review and is a
+ * plausible thing to want back, and because the href/cover pairs below were
+ * checked by hand against the project routes. If it is still unused the next
+ * time someone touches this file, delete it: /author builds its shelf from its
+ * own constants, so this is not the source of truth for anything.
+ * ##########################################
+ *
  * Cover art for the featured-work rows. Aspect ratios vary a lot across these
  * files (0.65 portrait through 1.33 landscape), so every consumer renders them
  * with `object-contain` inside a fixed-ratio card rather than cropping.

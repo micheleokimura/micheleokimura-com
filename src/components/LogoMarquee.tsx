@@ -100,7 +100,7 @@ export function LogoMarquee() {
   return (
     <section
       aria-label="Organizations Michele has worked with"
-      className="bg-[var(--color-band-3)] py-16 lg:py-24"
+      className="bg-[var(--color-band-2)] py-20 sm:py-24 lg:py-28"
     >
       <Container>
         <FadeIn>

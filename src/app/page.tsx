@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 
 import { pageMetadata } from '@/lib/schema'
-import Image from 'next/image'
 import Link from 'next/link'
 
 import { Container } from '@/components/Container'
@@ -11,7 +10,6 @@ import { ContactTrigger } from '@/components/ContactTrigger'
 import { LogoMarquee } from '@/components/LogoMarquee'
 import {
   DOORS,
-  FEATURED_WORKS,
   FRIENDS_SAY_BOTTOM,
   FRIENDS_SAY_TOP,
   HERO,
@@ -28,12 +26,30 @@ import {
  * of the work they were made to do...") is deleted at her instruction. Do not
  * reintroduce third-person copy on this page.
  *
- * SECTION BANDS. Michele's structural note was that "the sections all blend
- * into one continuous scroll and it's hard to tell where one thought ends and
- * the next begins." Every section below is therefore full-bleed and sits on one
- * of --color-band-1/2/3, alternating the whole way down, and each carries its
- * own vertical padding instead of the old margin stack. Never put two
- * same-band sections next to each other; the seam is the entire point.
+ * SECTION BANDS. Michele, on the page running as one flat colour: "I'm just
+ * staring into a void and I don't know when a thought's completed and it's
+ * ready. I'm ready to move on somewhere else." Every section below is
+ * full-bleed, sits on one of --color-band-1/2/3, and carries its own vertical
+ * padding instead of the old margin stack.
+ *
+ * The order down the page, which is a rhythm rather than a strict A/B:
+ *
+ *   hero          navy video
+ *   marquee       band-2   (set on the section in LogoMarquee.tsx)
+ *   three doors   band-1
+ *   pull quote    band-3   deepest, most padding, the pause
+ *   friends say   band-1
+ *   the Method    band-2
+ *   postures      band-1
+ *   footer run-in band-4   (painted by SiteFooter, not by this file)
+ *
+ * Two rules hold it together. Neighbours never share a band, because a repeated
+ * ground is exactly the seam that goes missing. And a CARD never takes a band:
+ * tiles use --color-cream, which is warm and lifts off any of these neutrals,
+ * whereas a band on a band would be a 5-point difference nobody can see.
+ *
+ * Padding is py-20/24/28 (80/96/112px) as standard, and more on the quote. The
+ * shade change only registers if there is enough quiet either side of it.
  *
  * Sections deleted in this pass, all at Michele's instruction, none to be
  * restored without her:
@@ -42,17 +58,15 @@ import {
  *  - the founder-and-executive-director blurb under the hero, replaced by the
  *    pull quote,
  *  - "Ready when you are", the ContactBlock that used to close the page. The
- *    page now runs straight from the Method into the footer.
- *
- * The featured-work row is a plain responsive grid rather than a rotating
- * carousel. Michele's authored works ARE her case studies, so hiding two
- * thirds of them behind a carousel arrow would bury the authority stack this
- * page exists to show.
+ *    page now runs straight from the Method into the footer,
+ *  - "A body of work" in full: the heading, the six-cover grid, and the "See
+ *    every title" link. /author carries the books, and the Author card in the
+ *    three doors is now the only route to them from here.
  */
 export const metadata: Metadata = pageMetadata({
   title: 'Coach, author, and speaker',
   description:
-    'Michele Okimura is an author, speaker, and coach in Mānoa, Honolulu, Hawaiʻi. Two published trade books, two more in 2027, keynotes and workshops, and the Brave Purpose Author Method.',
+    'Michele Okimura is an author, speaker, and coach in Honolulu, Hawaiʻi. Two published trade books, two more in 2027, keynotes and workshops, and the Brave Purpose Author Method.',
   path: '/',
   ogDescription:
     'Author, speaker, and coach in Honolulu. Founder and Executive Director of Releasing Generations.',
@@ -76,7 +90,7 @@ function TestimonialCard({ item }: { item: Testimonial }) {
     // visibly hitch once per cycle. Margins are part of each item's own width,
     // so the two halves stay exactly equal. LogoMarquee does the same thing
     // with px-6 for the same reason.
-    <figure className="mx-2.5 flex w-80 shrink-0 flex-col rounded-2xl bg-[var(--color-band-3)] p-6 ring-1 ring-[var(--color-navy-10)] sm:w-96 sm:p-7">
+    <figure className="mx-2.5 flex w-80 shrink-0 flex-col rounded-2xl bg-[var(--color-cream)] p-6 ring-1 ring-[var(--color-navy-10)] sm:w-96 sm:p-7">
       <blockquote className="flex-auto text-[0.9375rem] leading-7 text-neutral-800">
         &ldquo;{item.quote}&rdquo;
       </blockquote>
@@ -239,7 +253,7 @@ export default function HomePage() {
       {/* Speaker, Author, Coach, left to right. Order is locked in DOORS. */}
       <section
         aria-labelledby="three-ways-heading"
-        className="bg-[var(--color-band-1)] py-16 sm:py-20 lg:py-24"
+        className="bg-[var(--color-band-1)] py-20 sm:py-24 lg:py-28"
       >
         <div className={WIDE}>
           <h2 id="three-ways-heading" className="sr-only">
@@ -255,7 +269,7 @@ export default function HomePage() {
                   <Link
                     href={door.href}
                     aria-label={`${door.label}: ${door.cta}`}
-                    className="group flex w-full flex-col rounded-3xl bg-[var(--color-band-3)] p-6 ring-1 ring-[var(--color-navy-10)] transition duration-300 hover:shadow-xl hover:shadow-[var(--color-teal-20)] hover:ring-[var(--color-teal-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)] lg:p-8"
+                    className="group flex w-full flex-col rounded-3xl bg-[var(--color-cream)] p-6 ring-1 ring-[var(--color-navy-10)] transition duration-300 hover:shadow-xl hover:shadow-[var(--color-teal-20)] hover:ring-[var(--color-teal-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)] lg:p-8"
                   >
                     <h3 className="font-display text-xs font-semibold tracking-[0.18em] text-[var(--color-brand-terracotta-ink)] uppercase">
                       {door.label}
@@ -288,17 +302,22 @@ export default function HomePage() {
           The teal here is --color-brand-teal (#0F766E), not the bright brand
           teal: #00B09F is 2.31:1 on this ground and fails even the large-text
           floor, so it can never spell a word. See tailwind.css. */}
+      {/* Band-3, the deepest of the content grounds, and the most padding on
+          the page. This is the one place the scroll is meant to slow down. */}
       <section
         aria-label="In Michele's words"
-        className="bg-[var(--color-band-2)] py-20 sm:py-24 lg:py-32"
+        className="bg-[var(--color-band-3)] py-24 sm:py-28 lg:py-36"
       >
         <Container>
           <FadeIn>
             <figure className="mx-auto max-w-4xl text-center">
-              <blockquote className="font-display text-3xl leading-[1.15] font-medium tracking-tight text-balance text-[var(--color-brand-teal)] sm:text-4xl lg:text-5xl">
-                &ldquo;{PULL_QUOTE.text}&rdquo;
+              {/* No quotation marks. At this size a pair of curly quotes just
+                  hangs two heavy marks in the corners; the display setting
+                  already reads as a quote. Michele asked for it this way. */}
+              <blockquote className="font-display text-[1.75rem] leading-[1.18] font-medium tracking-tight text-balance text-[var(--color-brand-teal)] sm:text-4xl sm:leading-[1.15] lg:text-5xl">
+                {PULL_QUOTE.text}
               </blockquote>
-              <figcaption className="font-display mt-8 text-sm font-semibold tracking-[0.18em] text-neutral-600 uppercase sm:mt-10">
+              <figcaption className="font-display mt-8 text-xs font-semibold tracking-[0.18em] text-neutral-600 uppercase sm:mt-10 sm:text-sm">
                 <span aria-hidden="true">&mdash; </span>
                 {PULL_QUOTE.attribution}
               </figcaption>
@@ -314,7 +333,7 @@ export default function HomePage() {
           prefers-reduced-motion stops both outright. */}
       <section
         aria-labelledby="friends-say-heading"
-        className="overflow-hidden bg-[var(--color-band-1)] py-16 sm:py-20 lg:py-24"
+        className="overflow-hidden bg-[var(--color-band-1)] py-20 sm:py-24 lg:py-28"
       >
         <Container>
           <FadeIn>
@@ -341,70 +360,14 @@ export default function HomePage() {
         </FadeIn>
       </section>
 
-      {/* ---------------------------------------------------- featured work */}
-      <section
-        aria-labelledby="books-heading"
-        className="bg-[var(--color-band-2)] py-16 sm:py-20 lg:py-24"
-      >
-        <Container>
-          <FadeIn className="max-w-3xl">
-            <h2
-              id="books-heading"
-              className="font-display text-3xl font-medium tracking-tight text-balance text-[var(--color-brand-teal)] sm:text-4xl lg:text-5xl"
-            >
-              Check out some of my books.
-            </h2>
-          </FadeIn>
-
-          <FadeInStagger faster className="mt-10 sm:mt-12">
-            <ul
-              role="list"
-              className="grid grid-cols-2 gap-x-5 gap-y-9 sm:grid-cols-3 xl:grid-cols-6 xl:gap-x-6"
-            >
-              {FEATURED_WORKS.map((work) => (
-                <FadeIn as="li" key={work.href}>
-                  <Link href={work.href} className="group block">
-                    <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-[var(--color-band-1)] ring-1 ring-[var(--color-navy-10)] transition duration-300 group-hover:ring-[var(--color-teal-30)]">
-                      {work.cover ? (
-                        <Image
-                          src={work.cover}
-                          alt=""
-                          fill
-                          sizes="(min-width: 1024px) 15vw, (min-width: 640px) 30vw, 45vw"
-                          className="object-contain p-3 transition duration-500 group-hover:scale-[1.04]"
-                        />
-                      ) : (
-                        <div className="flex h-full w-full flex-col items-center justify-center bg-[var(--color-band-3)] p-4 text-center">
-                          <span className="font-display text-base font-medium text-balance text-[var(--color-brand-teal)] italic">
-                            {work.title}
-                          </span>
-                          <span className="font-display mt-3 text-xs font-semibold tracking-widest text-neutral-500 uppercase">
-                            Cover to come
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                    <p className="font-display mt-3 text-xs font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
-                      {work.kicker}
-                    </p>
-                    <h3 className="font-display mt-1 text-sm font-semibold tracking-tight text-balance text-neutral-900">
-                      {work.title}
-                    </h3>
-                  </Link>
-                </FadeIn>
-              ))}
-            </ul>
-          </FadeInStagger>
-
-          {/* Centred, per Michele. It used to sit alone in the bottom-left
-              corner, which read as an orphan under a six-up grid. */}
-          <FadeIn className="mt-12 flex justify-center">
-            <Button href="/author" variant="secondary">
-              See every title
-            </Button>
-          </FadeIn>
-        </Container>
-      </section>
+      {/* The "A body of work" section stood here and is gone entirely, at
+          Michele's instruction on 2026-08-23: the heading, the six-cover grid,
+          and the "See every title" link. Her reasoning was that /author already
+          carries the books, so the home page does not need a shelf of its own.
+          The first pass only cut the "fourteen works, eight case studies"
+          framing from the heading; this cut is the whole block. The Author
+          card in the three doors above is now the only route to the books from
+          this page, and that is deliberate. */}
 
       {/* ------------------------------------------------ the Method */}
       {/* Two bands, not one. Michele's note was that consecutive ideas ran
@@ -413,7 +376,7 @@ export default function HomePage() {
           sized to land inside a laptop screen on its own. */}
       <section
         aria-labelledby="method-heading"
-        className="bg-[var(--color-band-3)] py-20 sm:py-24 lg:py-28"
+        className="bg-[var(--color-band-2)] py-20 sm:py-24 lg:py-28"
       >
         <Container>
           <FadeIn className="mx-auto max-w-3xl text-center">
@@ -434,15 +397,14 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* Deliberately band-1, the same ground `html` carries. This is the last
-          section on the page, and the footer sits below it with a top margin
-          of its own. Any other band here would leave that margin showing as a
-          strip of mismatched colour just above the navy footer, which reads as
-          a bug rather than as breathing room. If you reorder these sections,
-          whatever ends up last has to be band-1 for the same reason. */}
+      {/* The last section on the page. It no longer has to be band-1: the
+          footer used to sit below an UNPAINTED margin, so any band here left a
+          strip of page ground above the navy. SiteFooter now paints its own
+          run-in with band-4, so this is free to take whatever the rhythm wants
+          and the descent into the footer is 1 -> 4 -> navy. */}
       <section
         aria-label="Where writers start"
-        className="bg-[var(--color-band-1)] py-16 sm:py-20 lg:py-24"
+        className="bg-[var(--color-band-1)] py-20 sm:py-24 lg:py-28"
       >
         <div className={WIDE}>
           <FadeIn>
@@ -462,7 +424,7 @@ export default function HomePage() {
                 'A finished manuscript that will not sit still.',
               ].map((posture) => (
                 <FadeIn as="li" key={posture} className="flex">
-                  <p className="font-display flex w-full items-center justify-center rounded-2xl bg-[var(--color-band-3)] p-8 text-center text-lg leading-7 font-medium text-balance text-neutral-800 ring-1 ring-[var(--color-navy-10)]">
+                  <p className="font-display flex w-full items-center justify-center rounded-2xl bg-[var(--color-cream)] p-8 text-center text-lg leading-7 font-medium text-balance text-neutral-800 ring-1 ring-[var(--color-navy-10)]">
                     {posture}
                   </p>
                 </FadeIn>

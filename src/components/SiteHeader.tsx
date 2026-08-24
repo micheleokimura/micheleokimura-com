@@ -53,7 +53,16 @@ export function SiteHeader() {
     // and nothing underneath. It is now a symmetric py-3 / sm:py-4, which lands
     // the bar at roughly 68px: an ordinary site-header height. `main` in
     // layout.tsx pads down to clear it, so re-measure that pt if this changes.
-    <header className="absolute top-0 right-0 left-0 z-40 py-3 sm:py-4">
+    // The bar takes an explicit band-1 ground and a navy hairline, so it reads
+    // as its own strip rather than as type floating on the page. Same principle
+    // as the section bands below it: mark the boundary, do not shout about it.
+    // The hairline is doing most of the work, since band-1 is also the page
+    // ground on most routes; what it separates the header from is whatever the
+    // page opens with, which is a dark hero or banner on every route today.
+    //
+    // `absolute`, not `fixed`: this scrolls away, and `main` in layout.tsx pads
+    // down to clear it, so an opaque background here never covers content.
+    <header className="absolute top-0 right-0 left-0 z-40 border-b border-[var(--color-navy)]/8 bg-[var(--color-band-1)] py-3 sm:py-4">
       <Container>
         {/* The nav takes `ml-auto` rather than the row taking `justify-between`.
             Michele read the old spacing as centered and disliked it; pushing

@@ -79,7 +79,18 @@ export function SiteFooter() {
   const podcast = siteConfig.podcast
 
   return (
-    <footer className="mt-24 w-full bg-[var(--color-navy)] sm:mt-32 lg:mt-40" data-surface="dark">
+    // The gap above the footer is PADDING ON A PAINTED BAND, not a margin.
+    //
+    // It used to be `mt-24 sm:mt-32 lg:mt-40` on the footer itself, which left
+    // 96-160px of unpainted page ground between the last section and the navy.
+    // That gap always rendered in the LIGHTEST shade on the site, whatever the
+    // section above it was, so the end of the page went light-to-dark with a
+    // mismatched strip in between and every page had to end on band-1 to hide
+    // it. Painting the run-in with band-4, the deepest neutral, makes the close
+    // a descent instead: section -> deeper -> navy. It also frees every page to
+    // end on whatever band its own rhythm wants.
+    <div className="bg-[var(--color-band-4)] pt-24 sm:pt-28 lg:pt-32">
+      <footer className="w-full bg-[var(--color-navy)]" data-surface="dark">
       {/* The podcast lives in the footer, so its structured data travels with
           it and ships on every page instead of only the home page. */}
       <PodcastSeriesJsonLd
@@ -203,6 +214,7 @@ export function SiteFooter() {
           </div>
         </FadeIn>
       </Container>
-    </footer>
+      </footer>
+    </div>
   )
 }
