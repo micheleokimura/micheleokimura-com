@@ -2,13 +2,22 @@ import type { Metadata } from 'next'
 
 import { pageMetadata } from '@/lib/schema'
 import Link from 'next/link'
+import { BookOpen, MessageCircle, Mic } from 'lucide-react'
 
 import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { Button } from '@/components/Button'
 import { ContactTrigger } from '@/components/ContactTrigger'
 import { LogoMarquee } from '@/components/LogoMarquee'
-import { DOORS, HERO, PULL_QUOTE } from '@/lib/home-variants'
+import {
+  DOORS,
+  FRIENDS_SAY_BOTTOM,
+  FRIENDS_SAY_TOP,
+  HERO,
+  PULL_QUOTE,
+  type Door,
+  type Testimonial,
+} from '@/lib/home-variants'
 
 /**
  * Home page. Rebuilt 2026-08-23 against Michele's walkthrough of the live site.
@@ -40,11 +49,15 @@ import { DOORS, HERO, PULL_QUOTE } from '@/lib/home-variants'
  * tiles use --color-cream, which is warm and lifts off any of these neutrals,
  * whereas a band on a band would be a 5-point difference nobody can see.
  *
- * The removed "friends say" section was band-1 and sat between the quote and
- * the Method. Taking it out left band-3 next to band-2, which is still a change
- * of ground, so the rhythm closed over the gap and nothing needed renumbering.
- * If it ever comes back it has to be band-1 again, or one of its new neighbours
- * has to move.
+ * "Friends say" is back on band-1, between the quote (band-3) and the Method
+ * (band-2), which is where it was before it was parked. Both neighbours differ
+ * from it, so the rhythm is unchanged.
+ *
+ * THE THREE ROLE CARDS ARE THE EXCEPTION to "a card never takes a band". They
+ * are not neutral tiles at all now: each one is a coloured gradient using the
+ * shared .msg-card system (see tailwind.css), so they sit ON band-1 as
+ * saturated objects rather than as a five-point shade difference. The rule
+ * still holds for every other card on the page.
  *
  * Padding is py-20/24/28 (80/96/112px) as standard, and more on the quote. The
  * shade change only registers if there is enough quiet either side of it.
@@ -61,10 +74,9 @@ import { DOORS, HERO, PULL_QUOTE } from '@/lib/home-variants'
  *    every title" link. /author carries the books, and the Author card in the
  *    three doors is now the only route to them from here.
  *
- * NOT deleted but NOT BUILT, which is a different thing: "Things my friends say
- * about me". Michele held it back on 2026-08-23 pending a decision with Brett
- * about whether the home page carries testimonials at all. Do not add it back
- * on your own initiative, and do not stub it.
+ * "Things my friends say about me" was parked on 2026-08-23 and RESTORED on
+ * 2026-08-24 when Michele reversed that decision. It is slower and larger than
+ * the version that was parked; see the notes on the row and the card.
  */
 export const metadata: Metadata = pageMetadata({
   title: 'Coach, author, and speaker',
@@ -83,18 +95,90 @@ export const metadata: Metadata = pageMetadata({
  */
 const WIDE = 'mx-auto max-w-7xl px-6 lg:px-8'
 
-/* TestimonialCard and TestimonialRow lived here and are removed with the
-   section they served (see the note further down, in place of the section).
-   They are not kept as dead code: nothing else renders a testimonial, and a
-   pair of unused components is exactly the thing that quietly drifts out of
-   step with the design. Both are recoverable from git at eb58550.
+/**
+ * Role-card icons. Names verified against the installed lucide-react, which is
+ * strict about them: that package exports `House` rather than `Home` and has no
+ * `Waves`, so /speaker had to reach for `AudioWaveform`. `Mic`, `BookOpen` and
+ * `MessageCircle` all exist. Typed off one of the icons rather than lucide's
+ * own `LucideIcon`, which the package declares but does not export.
+ */
+const DOOR_ICONS: Record<Door['icon'], typeof Mic> = {
+  mic: Mic,
+  book: BookOpen,
+  message: MessageCircle,
+}
 
-   One thing worth carrying forward if they come back: the horizontal space
-   between the cards has to be `mx` on the card, NOT `gap` on the track. The
-   marquee keyframes wrap by translating exactly -50% of the track, and a flex
-   `gap` adds a gap BETWEEN the two copies as well as inside them, so -50%
-   lands half a gap short and the loop hitches once per cycle. LogoMarquee uses
-   px-6 on its tiles for the same reason. */
+/**
+ * One card in the two scrolling endorsement rows.
+ *
+ * BODY TYPE IS 17px, up from the 15px this ran at before it was parked.
+ * Michele's note: older readers matter. The card widened with it so the measure
+ * stays readable rather than the copy just reflowing into a taller column.
+ *
+ * The horizontal space between cards is `mx` on the card, NOT `gap` on the
+ * track. The marquee keyframes wrap by translating exactly -50% of the track,
+ * and a flex `gap` adds a gap BETWEEN the two copies as well as inside them, so
+ * -50% lands half a gap short and the loop hitches once per cycle. LogoMarquee
+ * uses px-6 on its tiles for the same reason.
+ */
+function TestimonialCard({ item }: { item: Testimonial }) {
+  return (
+    <figure className="mx-3 flex w-[21rem] shrink-0 flex-col rounded-2xl bg-[var(--color-cream)] p-7 ring-1 ring-[var(--color-navy-10)] sm:w-[27rem] sm:p-8">
+      <blockquote className="flex-auto text-[1.0625rem] leading-7 text-neutral-800">
+        &ldquo;{item.quote}&rdquo;
+      </blockquote>
+      <figcaption className="mt-6 border-t border-[var(--color-navy-10)] pt-5 text-[0.9375rem]">
+        <span className="block font-semibold text-neutral-900">{item.name}</span>
+        <span className="mt-0.5 block leading-5 text-neutral-600">
+          {item.title}
+        </span>
+        {item.work ? (
+          <span className="font-display mt-1.5 block text-xs font-semibold tracking-wider text-[var(--color-brand-terracotta-ink)] uppercase">
+            On {item.work}
+          </span>
+        ) : null}
+      </figcaption>
+    </figure>
+  )
+}
+
+/**
+ * One scrolling row. `.marquee-track` and its keyframes come from tailwind.css;
+ * the array is rendered twice inside the track because the keyframes translate
+ * by exactly -50% for a seamless wrap.
+ *
+ * `duration` is Michele's spec on restore: 80 to 100s per full loop, up from
+ * the 55/62s this ran at before. The two rows run at slightly different speeds
+ * and in opposite directions so they never lock into step and read as one
+ * block. Hovering anywhere in a row pauses it, and prefers-reduced-motion stops
+ * both outright.
+ */
+function TestimonialRow({
+  items,
+  direction,
+  duration,
+}: {
+  items: Testimonial[]
+  direction: 'ltr' | 'rtl'
+  duration: string
+}) {
+  const doubled = [...items, ...items]
+
+  return (
+    <div className="marquee-band overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+      <div
+        className={`marquee-track items-stretch ${
+          direction === 'ltr' ? 'marquee-ltr' : 'marquee-rtl'
+        }`}
+        style={{ animationDuration: duration }}
+      >
+        {doubled.map((item, i) => (
+          <TestimonialCard key={`${item.name}-${item.work ?? ''}-${i}`} item={item} />
+        ))}
+      </div>
+    </div>
+  )
+}
 
 export default function HomePage() {
   return (
@@ -291,33 +375,69 @@ export default function HomePage() {
               role="list"
               className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5 lg:gap-8"
             >
-              {DOORS.map((door) => (
-                <FadeIn as="li" key={door.key} className="flex">
-                  <Link
-                    href={door.href}
-                    aria-label={`${door.label}: ${door.cta}`}
-                    className="group flex w-full flex-col rounded-3xl bg-[var(--color-cream)] p-6 ring-1 ring-[var(--color-navy-10)] transition duration-300 hover:shadow-xl hover:shadow-[var(--color-teal-20)] hover:ring-[var(--color-teal-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)] lg:p-8"
-                  >
-                    <h3 className="font-display text-xs font-semibold tracking-[0.18em] text-[var(--color-brand-terracotta-ink)] uppercase">
-                      {door.label}
-                    </h3>
-                    <div className="mt-3 flex flex-auto flex-col lg:mt-4">
-                      <p className="flex-auto text-sm leading-6 text-neutral-700 lg:text-base lg:leading-7">
-                        {door.hook}
-                      </p>
-                      <span className="font-display mt-5 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition group-hover:decoration-2 lg:mt-6">
-                        {door.cta}
-                        <span
-                          aria-hidden="true"
-                          className="transition-transform duration-200 group-hover:translate-x-0.5"
+              {DOORS.map((door) => {
+                const Icon = DOOR_ICONS[door.icon]
+                return (
+                  <FadeIn as="li" key={door.key} className="flex">
+                    {/* The whole card is the link, so the target is the card
+                        rather than a two-word phrase at the bottom of it. The
+                        CTA below is therefore decorative: it lives inside this
+                        anchor and is never a second one. */}
+                    <Link
+                      href={door.href}
+                      aria-label={`${door.label}: ${door.cta}`}
+                      className={`msg-card msg-${door.accent} msg-tex-${door.texture} group flex w-full flex-col items-center gap-4 rounded-3xl px-6 py-9 text-center text-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[var(--color-navy-20)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus-ring)] sm:px-7 sm:py-10`}
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-white/15 ring-1 ring-inset ring-white/25 transition duration-300 group-hover:bg-white/25"
+                      >
+                        <Icon className="h-7 w-7" strokeWidth={1.5} />
+                      </span>
+
+                      <h3 className="font-display text-xs font-semibold tracking-[0.18em] text-white/85 uppercase">
+                        {door.label}
+                      </h3>
+
+                      {door.headline ? (
+                        <p className="font-display text-lg leading-7 font-semibold tracking-tight text-balance text-white">
+                          {door.headline}
+                        </p>
+                      ) : null}
+
+                      {door.body ? (
+                        <p
+                          className={
+                            door.headline
+                              ? 'text-sm leading-6 text-white/85'
+                              : 'font-display text-base leading-7 font-medium text-balance text-white'
+                          }
                         >
-                          &rarr;
+                          {door.body}
+                        </p>
+                      ) : null}
+
+                      {/* Pushed to the bottom so every card's control sits on
+                          the same baseline whatever the copy length, and on the
+                          darkest part of the gradient. `rounded-md`, never a
+                          pill: the sitewide no-pills rule wins over the
+                          reference design. The icon circle above is allowed to
+                          be round because it holds an icon, not a label. */}
+                      <span className="mt-auto pt-3">
+                        <span className="font-display inline-flex items-center gap-1.5 rounded-md bg-white/15 px-5 py-2 text-xs font-semibold tracking-[0.14em] uppercase ring-1 ring-inset ring-white/30 transition duration-300 group-hover:bg-white/25">
+                          {door.cta}
+                          <span
+                            aria-hidden="true"
+                            className="transition-transform duration-200 group-hover:translate-x-0.5"
+                          >
+                            &rarr;
+                          </span>
                         </span>
                       </span>
-                    </div>
-                  </Link>
-                </FadeIn>
-              ))}
+                    </Link>
+                  </FadeIn>
+                )
+              })}
             </ul>
           </FadeInStagger>
         </div>
@@ -376,22 +496,35 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* "Things my friends say about me", the two counter-scrolling rows of
-          endorsements, stood here and is NOT built. Michele pulled it on
-          2026-08-23 while she and Brett decide whether the home page should
-          carry testimonials at all, since the same quotes already run on the
-          individual book, coach, and speaker pages. She is leaning toward no.
+      {/* --------------------------------------- things my friends say */}
+      {/* Restored 2026-08-24 after Michele reversed the decision to leave
+          testimonials off the home page. Back on band-1, between the quote on
+          band-3 and the Method on band-2, which is exactly where it sat before.
+          Slower and larger than the parked version; see the row and the card. */}
+      <section
+        aria-labelledby="friends-say-heading"
+        className="overflow-hidden bg-[var(--color-band-1)] py-20 sm:py-24 lg:py-28"
+      >
+        <Container>
+          <FadeIn>
+            <h2
+              id="friends-say-heading"
+              className="font-display text-center text-3xl font-medium tracking-tight text-balance text-[var(--color-brand-teal)] sm:text-4xl"
+            >
+              Things my friends say about me.
+            </h2>
+          </FadeIn>
+        </Container>
 
-          It is omitted rather than stubbed, deliberately: no placeholder box,
-          no reserved space, and the band rhythm closes over the gap (the quote
-          on band-3 now runs straight into the Method on band-2, which is still
-          a change of ground, so no seam is lost). Nothing on this page is
-          designed around its return.
-
-          The copy is not lost. FRIENDS_SAY_TOP and FRIENDS_SAY_BOTTOM are still
-          in home-variants.ts, marked unused, and the card and row components
-          are in this file's git history at eb58550. Wiring it back is a
-          follow-up, not a rebuild. */}
+        <FadeIn className="mt-12 flex flex-col gap-6 sm:mt-14">
+          <TestimonialRow items={FRIENDS_SAY_TOP} direction="rtl" duration="88s" />
+          <TestimonialRow
+            items={FRIENDS_SAY_BOTTOM}
+            direction="ltr"
+            duration="96s"
+          />
+        </FadeIn>
+      </section>
 
       {/* The "A body of work" section stood here and is gone entirely, at
           Michele's instruction on 2026-08-23: the heading, the six-cover grid,
@@ -412,17 +545,34 @@ export default function HomePage() {
         className="bg-[var(--color-band-2)] py-20 sm:py-24 lg:py-28"
       >
         <Container>
-          <FadeIn className="mx-auto max-w-3xl text-center">
+          {/* max-w-4xl, not 3xl. "A method that gets it on the page." measures
+              about 780px at the lg heading size and 3xl is 768px, so the second
+              sentence would have wrapped and undone the split. The body copy
+              under it keeps its own narrower measure. */}
+          <FadeIn className="mx-auto max-w-4xl text-center">
             <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-terracotta-ink)] uppercase sm:text-sm">
               The Brave Purpose Author Method
             </span>
+            {/* One sentence per line, as blocks rather than a <br>, the same
+                way the pull quote does it. The break is now structural, so the
+                heading cannot wrap mid-sentence the way Michele objected to.
+
+                The `text-balance` CLASS is gone but balancing is not: there is
+                a global `h1,h2,h3,h4 { text-wrap: balance }` in tailwind.css
+                that still inherits into these spans. That is harmless and
+                wanted here, because it only does anything if one sentence is
+                itself too long for the measure, in which case evening out its
+                two lines is the right behaviour. */}
             <h2
               id="method-heading"
-              className="font-display mt-6 text-3xl font-medium tracking-tight text-balance text-[var(--color-brand-teal)] sm:text-4xl lg:text-5xl"
+              className="font-display mt-6 text-3xl font-medium tracking-tight text-[var(--color-brand-teal)] sm:text-4xl lg:text-5xl"
             >
-              A book in you. A method that gets it on the page.
+              <span className="block">A book in you.</span>
+              <span className="block">A method that gets it on the page.</span>
             </h2>
-            <p className="mt-6 text-lg leading-8 text-neutral-700 sm:text-xl">
+            {/* Held at max-w-3xl so widening the wrapper for the heading does
+                not stretch the body copy's measure with it. */}
+            <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-neutral-700 sm:text-xl">
               Twenty-six weeks, one writer, one method. What comes out the other
               side is a publication-ready book that still sounds like you.
             </p>

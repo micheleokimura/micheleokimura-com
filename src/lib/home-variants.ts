@@ -23,8 +23,28 @@ export type Door = {
   /** Outcome-first label, used by the golden-thread variant. */
   outcomeLabel: string
   href: string
+  /**
+   * `headline` + `body` are a STRUCTURAL SPLIT of `hook`, not new copy.
+   * Concatenating them with a single space reproduces `hook` exactly, and the
+   * split is always at a sentence boundary. The card renders the two at
+   * different sizes; `hook` is kept as the single source of truth so nobody has
+   * to reconcile three strings.
+   *
+   * Author has no `headline` because its hook is one long sentence with no
+   * boundary to split on. Splitting it would have meant turning a comma into a
+   * full stop, which is an edit to Michele's copy, so the whole hook renders as
+   * body on that card instead. If she supplies three short card headlines, add
+   * them here and give Author one too.
+   */
   hook: string
+  headline?: string
+  body?: string
   cta: string
+  /** Card ground. Maps to the .msg-* classes in tailwind.css. */
+  accent: 'violet' | 'coral' | 'teal'
+  /** Hairline pattern. Neighbours must differ so the grid reads varied. */
+  texture: 'lines' | 'rings' | 'grid' | 'dots'
+  icon: 'mic' | 'book' | 'message'
 }
 
 /**
@@ -44,7 +64,16 @@ export const DOORS: Door[] = [
     outcomeLabel: 'Bring her to your event',
     href: '/speaker',
     hook: 'Keynotes and workshops on dreaming, purpose, healing, creativity, and courage. Delivered in Hawaiʻi, across the mainland, and in the Philippines and Singapore.',
+    headline:
+      'Keynotes and workshops on dreaming, purpose, healing, creativity, and courage.',
+    body: 'Delivered in Hawaiʻi, across the mainland, and in the Philippines and Singapore.',
     cta: 'Book me to speak',
+    // Violet is the Speaker page's own colour, sampled from the stage
+    // photograph on that page, and it is also the purple in the hero video
+    // directly above this grid. The card therefore ties to both.
+    accent: 'violet',
+    texture: 'lines',
+    icon: 'mic',
   },
   {
     key: 'author',
@@ -52,7 +81,12 @@ export const DOORS: Door[] = [
     outcomeLabel: 'Read her books',
     href: '/author',
     hook: 'Two published trade books, two more releasing in 2027, a teen leadership curriculum in 24 volumes, and journals for every age from preschool to adult.',
+    // No headline: one sentence, no boundary to split on. See the Door type.
+    body: 'Two published trade books, two more releasing in 2027, a teen leadership curriculum in 24 volumes, and journals for every age from preschool to adult.',
     cta: 'See my body of work',
+    accent: 'coral',
+    texture: 'rings',
+    icon: 'book',
   },
   {
     key: 'coach',
@@ -60,7 +94,12 @@ export const DOORS: Door[] = [
     outcomeLabel: 'Walk it out with her coaching',
     href: '/coach',
     hook: 'The Brave Purpose Author Method. Twenty-six weeks, one writer, and a finished manuscript that still sounds like you.',
+    headline: 'The Brave Purpose Author Method.',
+    body: 'Twenty-six weeks, one writer, and a finished manuscript that still sounds like you.',
     cta: 'See my method',
+    accent: 'teal',
+    texture: 'grid',
+    icon: 'message',
   },
 ]
 
@@ -196,20 +235,11 @@ export const PULL_QUOTE = {
  * "Things my friends say about me" — the two scrolling rows that replaced the
  * Recognition section.
  *
- * ############ CURRENTLY UNUSED ############
- * The section is NOT on the home page. Michele held it back on 2026-08-23 while
- * she and Brett decide whether the home page should carry testimonials at all,
- * given the same quotes already run on the individual book, coach, and speaker
- * pages. She is leaning toward leaving them off.
- *
- * The arrays stay because they are curated, verbatim, signed-off copy that took
- * real work to assemble and verify, and because reinstating the section is a
- * plausible next step. If the answer comes back "no testimonials on the home
- * page", delete both arrays and the type: every quote in here also exists at
- * its own source (author/page.tsx per-book constants, and
- * site/content/speaker/full-endorsements.md), so nothing is lost by removing
- * this copy, and two copies of a verbatim quote is how one of them drifts.
- * ##########################################
+ * IN USE AGAIN. This was parked on 2026-08-23 while Michele and Brett decided
+ * whether the home page should carry testimonials at all; she reversed that on
+ * 2026-08-24 and the section is back in its original band. The arrays were kept
+ * rather than deleted precisely because the decision might swing back, which it
+ * did.
  *
  * HARD RULE, inherited from the top of this file and from
  * site/content/speaker/full-endorsements.md: every quote here is VERBATIM. Do
@@ -316,8 +346,23 @@ export const FRIENDS_SAY_BOTTOM: Testimonial[] = [
     title: 'Lead Pastor, Catalyst Christian Community, Long Beach, CA',
   },
   {
+    /**
+     * DELIBERATE EDIT TO AN ENDORSER'S WORDS, authorized by Michele
+     * 2026-08-24, and the ONLY one in this file.
+     *
+     * Ted Vail's original opens "Okimura masterfully connects...", using her
+     * surname alone the way a book review would. Out of the context of a review
+     * and set as a standalone card, that reads as though it is about someone
+     * else, so "Michele " is prepended to make it "Michele Okimura
+     * masterfully...". One word added, nothing removed, nothing reworded.
+     *
+     * This is an exception to the hard rule above, not a loosening of it. Every
+     * other quote in this file is untouched, and the next one needs Michele's
+     * explicit say-so too. The original wording is in
+     * src/app/author/page.tsx under BRAVE_PURPOSE_FAITH_ENDORSEMENTS.
+     */
     quote:
-      'Okimura masterfully connects the prophetic and the artistic with the dusty, everyday path we actually walk. Readers will come away not just encouraged but awakened as travelers ready to follow God’s clues toward the treasure He has prepared.',
+      'Michele Okimura masterfully connects the prophetic and the artistic with the dusty, everyday path we actually walk. Readers will come away not just encouraged but awakened as travelers ready to follow God’s clues toward the treasure He has prepared.',
     name: 'Ted Vail, D.I.S.',
     title: 'Senior Vice President of Mission, The Foursquare Church',
     work: 'Brave Purpose with God',
