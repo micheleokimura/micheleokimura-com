@@ -235,23 +235,20 @@ export const PULL_QUOTE = {
  * "Things my friends say about me" — the two scrolling rows that replaced the
  * Recognition section.
  *
- * ############ CURRENTLY UNUSED — AWAITING CURATION ############
- * The section is NOT on the home page. Parked 2026-08-23, restored 2026-08-24,
- * parked again the same day, and the reason changed on that last move.
+ * LIVE, AND THE LIST IS SIGNED OFF. Michele curated it on 2026-08-24: fifteen
+ * quotes, eight in the top row and seven in the bottom. What she changed in
+ * that pass, so nobody undoes it thinking it was a mistake:
  *
- * It is no longer a question of whether the home page carries testimonials at
- * all. Michele is CURATING this list: deciding which quotes to keep, which to
- * swap out, and which to edit. The section goes live once she has, so this is a
- * hold rather than a cancellation.
+ *  - Patricia King's Dancing with Father blurb was DROPPED.
+ *  - Kihāpiʻilani Pimental's Native Camp quote was REPLACED with his blurb for
+ *    The Birth of Explicit Movement. The old wording still runs on /speaker,
+ *    where it is the right quote for that context; the two are not in conflict.
+ *  - An unnamed workshop attendee and Dr. Marion Ingegneri were ADDED.
  *
- * DO NOT reorder, trim, or "tidy" these entries in the meantime. She is
- * reviewing this list as it stands, and a well-meant cleanup would mean she
- * approves one set and a different set ships. The one change that IS in here
- * since she last saw it is the Ted Vail opening, which she authorized directly;
- * see the note on that entry.
- *
- * The rendering work is done and waiting at commit d114922, with the 17px type
- * and the 88s/96s scroll. Restore from there and change only the contents.
+ * The eight/seven split is not arbitrary: Gerald Teramae appears twice in this
+ * set, once for a leadership session and once for Brave Purpose, and the two
+ * are kept in DIFFERENT rows so his name never scrolls past twice together.
+ * Keep that property if you rebalance the rows.
  * ###############################################################
  *
  * HARD RULE, inherited from the top of this file and from
@@ -273,8 +270,13 @@ export const PULL_QUOTE = {
 export type Testimonial = {
   quote: string
   name: string
-  /** Role and organization, rendered on one line under the name. */
-  title: string
+  /**
+   * Role and organization, rendered on one line under the name. OPTIONAL,
+   * because one endorsement is an unnamed workshop attendee whose whole
+   * attribution is "Workshop attendee". Do not invent a title to fill the gap;
+   * the card renders the line only when there is one.
+   */
+  title?: string
   /** The book or curriculum the blurb is about, when it is a book blurb. */
   work?: string
 }
@@ -309,17 +311,42 @@ export const FRIENDS_SAY_TOP: Testimonial[] = [
     work: 'Brave Purpose with God',
   },
   {
+    /**
+     * REPLACES the Native Camp quote this slot used to hold ("She just did a
+     * session at Native Camp in Montana..."). Michele swapped it on 2026-08-24
+     * for this one, which is about the book rather than a session, so the card
+     * now carries a `work`. The old wording is not retired from the repo: it is
+     * still the version running on /speaker under topic 7, where it is the
+     * right quote for that context. Do not reconcile the two.
+     */
     quote:
-      'When I read Dancing with the Father my heart was deeply touched. I know this deeply artistic, poetic work will touch many deeply.',
-    name: 'Patricia King',
-    title: 'President and Founder, Extreme Prophetic Ministries',
-    work: 'Dancing with Father',
+      'Get ready to be inspired! He is the God of the Old Testament, and yet he is active now and speaks to his servants. Michele is one of those servant saints. It is unmistakable. What you hold before you is a roadmap of her journey of an intimate relationship with the Father. Explicit Movement is a book for all ages, but especially for the next generation.',
+    name: 'Pastor Kihāpiʻilani Pimental',
+    title: 'Worker Supervisor, Foursquare Missions International',
+    work: 'The Birth of Explicit Movement',
+  },
+  {
+    /**
+     * Unattributed by design. The whole attribution is "Workshop attendee", so
+     * this entry has no `title`; the card omits that line rather than showing
+     * an empty one. Do not invent an affiliation for this person.
+     *
+     * EM DASHES REPLACED WITH COMMAS. Michele's source text used them and the
+     * site rule in CLAUDE.md bans them outright, so they came out. No words
+     * were changed, added, or removed. This is the only quote in the curated
+     * set that needed it; every other one was already clean.
+     */
+    quote:
+      'For me, I have never experienced a conference that was presented the way Michele did it. I have learned so much, fire was placed on my heart and spirit! She presented each lesson in a tangible way, it made me excited to implement it in my own home and in our Sunday School classes! Awesome! Awesome! Awesome!',
+    name: 'Workshop attendee',
   },
   {
     quote:
-      'She just did a session at Native Camp in Montana and it was excellent, the most impactful session of the whole camp. We had 19 FMI workers there. Every person had an experience of how to prophesy over each other. Simple, practical, and powerful. I saw it all personally. Now many children in our church prophesy and unashamedly pray for healing, all because of Michele.',
-    name: 'Pastor Kihāpiʻilani Pimental',
-    title: 'Worker Supervisor, Foursquare Missions International',
+      'Brave Purpose with God is more than an inspiring book. It is a summons to adventure. I believe this message releases a new generation of explorers ready to step into the destiny God has prepared for them.',
+    name: 'Dr. Marion Ingegneri',
+    title:
+      'President, Ministry Leader Network; Global Director, Day of Prayer for the Peace of Jerusalem',
+    work: 'Brave Purpose with God',
   },
   {
     quote:

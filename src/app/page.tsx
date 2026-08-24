@@ -9,7 +9,15 @@ import { FadeIn, FadeInStagger } from '@/components/FadeIn'
 import { Button } from '@/components/Button'
 import { ContactTrigger } from '@/components/ContactTrigger'
 import { LogoMarquee } from '@/components/LogoMarquee'
-import { DOORS, HERO, PULL_QUOTE, type Door } from '@/lib/home-variants'
+import {
+  DOORS,
+  FRIENDS_SAY_BOTTOM,
+  FRIENDS_SAY_TOP,
+  HERO,
+  PULL_QUOTE,
+  type Door,
+  type Testimonial,
+} from '@/lib/home-variants'
 
 /**
  * Home page. Rebuilt 2026-08-23 against Michele's walkthrough of the live site.
@@ -41,10 +49,8 @@ import { DOORS, HERO, PULL_QUOTE, type Door } from '@/lib/home-variants'
  * tiles use --color-cream, which is warm and lifts off any of these neutrals,
  * whereas a band on a band would be a 5-point difference nobody can see.
  *
- * "Friends say" would sit on band-1 between the quote (band-3) and the Method
- * (band-2). It is not built at the moment, so band-3 runs straight into band-2,
- * which is still a change of ground and needs no renumbering. If it returns it
- * has to be band-1 again, or one of its neighbours has to move.
+ * "Friends say" sits on band-1 between the quote (band-3) and the Method
+ * (band-2). Both neighbours differ from it, so the rhythm is unchanged.
  *
  * THE THREE ROLE CARDS ARE THE EXCEPTION to "a card never takes a band". They
  * are not neutral tiles at all now: each one is a coloured gradient using the
@@ -67,11 +73,10 @@ import { DOORS, HERO, PULL_QUOTE, type Door } from '@/lib/home-variants'
  *    every title" link. /author carries the books, and the Author card in the
  *    three doors is now the only route to them from here.
  *
- * "Things my friends say about me" is ON HOLD, not cancelled. Michele is
- * curating which quotes to keep, swap, or edit before it goes live. The built
- * version, with the larger type and slower scroll she asked for, is at commit
- * d114922; restore from there rather than rebuilding. See the note at the point
- * in the page where it belongs.
+ * "Things my friends say about me" is LIVE, with Michele's curated list of
+ * fifteen quotes signed off 2026-08-24. It was parked twice on the way here;
+ * the list itself is now settled, so treat the arrays in home-variants.ts as
+ * approved copy rather than a working set.
  */
 export const metadata: Metadata = pageMetadata({
   title: 'Coach, author, and speaker',
@@ -103,21 +108,79 @@ const DOOR_ICONS: Record<Door['icon'], typeof Mic> = {
   message: MessageCircle,
 }
 
-/* TestimonialCard and TestimonialRow lived here and are removed again with the
-   section they served (see the note in place of the section below).
+/**
+ * One card in the two scrolling endorsement rows.
+ *
+ * BODY TYPE IS 17px, up from the 15px this ran at before it was parked.
+ * Michele's note: older readers matter. The card widened with it so the measure
+ * stays readable rather than the copy just reflowing into a taller column.
+ *
+ * The horizontal space between cards is `mx` on the card, NOT `gap` on the
+ * track. The marquee keyframes wrap by translating exactly -50% of the track,
+ * and a flex `gap` adds a gap BETWEEN the two copies as well as inside them, so
+ * -50% lands half a gap short and the loop hitches once per cycle. LogoMarquee
+ * uses px-6 on its tiles for the same reason.
+ */
+function TestimonialCard({ item }: { item: Testimonial }) {
+  return (
+    <figure className="mx-3 flex w-[21rem] shrink-0 flex-col rounded-2xl bg-[var(--color-cream)] p-7 ring-1 ring-[var(--color-navy-10)] sm:w-[27rem] sm:p-8">
+      <blockquote className="flex-auto text-[1.0625rem] leading-7 text-neutral-800">
+        &ldquo;{item.quote}&rdquo;
+      </blockquote>
+      <figcaption className="mt-6 border-t border-[var(--color-navy-10)] pt-5 text-[0.9375rem]">
+        <span className="block font-semibold text-neutral-900">{item.name}</span>
+        {item.title ? (
+          <span className="mt-0.5 block leading-5 text-neutral-600">
+            {item.title}
+          </span>
+        ) : null}
+        {item.work ? (
+          <span className="font-display mt-1.5 block text-xs font-semibold tracking-wider text-[var(--color-brand-terracotta-ink)] uppercase">
+            On {item.work}
+          </span>
+        ) : null}
+      </figcaption>
+    </figure>
+  )
+}
 
-   They are not kept as dead code: nothing else on the site renders a
-   testimonial, and an unused pair of components is exactly the thing that
-   quietly drifts out of step with the design. Both are recoverable from git at
-   d114922, which is the revision to start from when the section returns, since
-   it already carries the larger type and the slower scroll Michele asked for.
+/**
+ * One scrolling row. `.marquee-track` and its keyframes come from tailwind.css;
+ * the array is rendered twice inside the track because the keyframes translate
+ * by exactly -50% for a seamless wrap.
+ *
+ * `duration` is Michele's spec on restore: 80 to 100s per full loop, up from
+ * the 55/62s this ran at before. The two rows run at slightly different speeds
+ * and in opposite directions so they never lock into step and read as one
+ * block. Hovering anywhere in a row pauses it, and prefers-reduced-motion stops
+ * both outright.
+ */
+function TestimonialRow({
+  items,
+  direction,
+  duration,
+}: {
+  items: Testimonial[]
+  direction: 'ltr' | 'rtl'
+  duration: string
+}) {
+  const doubled = [...items, ...items]
 
-   One thing worth carrying forward: the horizontal space between the cards has
-   to be `mx` on the card, NOT `gap` on the track. The marquee keyframes wrap by
-   translating exactly -50% of the track, and a flex `gap` adds a gap BETWEEN
-   the two copies as well as inside them, so -50% lands half a gap short and the
-   loop hitches once per cycle. LogoMarquee uses px-6 on its tiles for the same
-   reason. */
+  return (
+    <div className="marquee-band overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+      <div
+        className={`marquee-track items-stretch ${
+          direction === 'ltr' ? 'marquee-ltr' : 'marquee-rtl'
+        }`}
+        style={{ animationDuration: duration }}
+      >
+        {doubled.map((item, i) => (
+          <TestimonialCard key={`${item.name}-${item.work ?? ''}-${i}`} item={item} />
+        ))}
+      </div>
+    </div>
+  )
+}
 
 export default function HomePage() {
   return (
@@ -461,26 +524,35 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* "Things my friends say about me", the two counter-scrolling rows of
-          endorsements, belongs here and is NOT built.
+      {/* --------------------------------------- things my friends say */}
+      {/* Restored 2026-08-24 after Michele reversed the decision to leave
+          testimonials off the home page. Back on band-1, between the quote on
+          band-3 and the Method on band-2, which is exactly where it sat before.
+          Slower and larger than the parked version; see the row and the card. */}
+      <section
+        aria-labelledby="friends-say-heading"
+        className="overflow-hidden bg-[var(--color-band-1)] py-20 sm:py-24 lg:py-28"
+      >
+        <Container>
+          <FadeIn>
+            <h2
+              id="friends-say-heading"
+              className="font-display text-center text-3xl font-medium tracking-tight text-balance text-[var(--color-brand-teal)] sm:text-4xl"
+            >
+              Things my friends say about me.
+            </h2>
+          </FadeIn>
+        </Container>
 
-          It was parked on 2026-08-23, restored on 2026-08-24, and parked again
-          the same day. The reason changed on the last move and it matters: this
-          is no longer a question of whether the home page carries testimonials
-          at all. Michele wants to CURATE the list first, deciding which quotes
-          to keep, swap, or edit, and it goes up once she has.
-
-          So this is a hold, not a cancellation, and the work is already done
-          and waiting at commit d114922: the larger 17px type, the wider cards,
-          and the 88s/96s scroll she asked for are all in that revision. When
-          the curated list arrives, restore from there rather than rebuilding,
-          and change only the array contents.
-
-          Omitted rather than stubbed: no placeholder box, no reserved space.
-          The band rhythm closes over the gap on its own, because the quote on
-          band-3 then runs straight into the Method on band-2, which is still a
-          change of ground. If the section comes back it has to be band-1 again,
-          or one of its neighbours has to move. */}
+        <FadeIn className="mt-12 flex flex-col gap-6 sm:mt-14">
+          <TestimonialRow items={FRIENDS_SAY_TOP} direction="rtl" duration="88s" />
+          <TestimonialRow
+            items={FRIENDS_SAY_BOTTOM}
+            direction="ltr"
+            duration="96s"
+          />
+        </FadeIn>
+      </section>
 
       {/* The "A body of work" section stood here and is gone entirely, at
           Michele's instruction on 2026-08-23: the heading, the six-cover grid,
