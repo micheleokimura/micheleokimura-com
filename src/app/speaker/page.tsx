@@ -218,9 +218,13 @@ export default function SpeakerPage() {
                 first, and at lg the two-column track puts the photo on the
                 right without reordering anything. */}
             <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1fr_minmax(0,28rem)] lg:gap-16">
+              {/* First sentence is Michele's approved rewrite, 2026-08-24,
+                  verbatim: conferences and workshops lead now, and the second
+                  list keeps its comma before "and to" so the two groups read
+                  as separate. The sentence that follows is unchanged. */}
               <p className="max-w-3xl text-xl leading-9 text-neutral-600">
-                Michele Okimura speaks at churches, conferences, and schools,
-                and to small groups, leadership teams, and community
+                Michele Okimura speaks at conferences, workshops, churches, and
+                schools, and to small groups, leadership teams, and community
                 organizations. Whether you are gathering a crowd or an intimate
                 team, she brings messages that build brave purpose in homes,
                 workplaces, ministries, and teams, and help people find the

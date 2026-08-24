@@ -135,12 +135,17 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     number: '03',
     title: 'Activating Your Creativity',
     teaser:
-      'You were purposefully created by the Creator to create. Michele expands the definition of creativity to reach anyone who has ever felt unqualified.',
+      'You are purposely created by the creator to create. Michele expands the definition of creativity, connecting to every sphere of influence in a person’s life. Everyone is a creative genius. Learn why.',
     accent: 'navy',
     texture: 'grid',
     icon: 'palette',
     body: [
-      'You were purposefully created by the Creator to create. Moving far beyond traditional fine arts, Michele expands the definition of creativity to reach anyone who has ever felt unqualified. This message equips audiences to rise beyond their insecurities, giving them permission to bring their unique ideas, businesses, and extraordinary solutions into the light. She has led four Rethink Creativity conferences on this theme, activating people in every sphere of influence.',
+      // Michele's approved rewrite, 2026-08-24, verbatim. It replaced a
+      // longer paragraph. The Rethink Creativity count below is the one fact
+      // that paragraph carried which hers does not, so it is kept as its own
+      // line rather than dropped silently.
+      'You are purposely created by the creator to create. Michele expands the definition of creativity, connecting to every sphere of influence in a person’s life. Everyone is a creative genius. Learn why.',
+      'She has led four Rethink Creativity conferences on this theme.',
     ],
     nonFaith: true,
   },
@@ -150,12 +155,16 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     title: 'Building a Kingdom Culture at Home and in Ministry',
     cardTitle: 'Building a Kingdom Culture',
     teaser:
-      'How do we shape environments that foster a resilient, deep-rooted, fully alive faith in our children and youth? Michele offers a highly interactive experience for parents and leaders.',
+      'How do we shape a culture that fosters a resilient, deep-rooted, fully alive faith in our children and youth? Michele offers a highly interactive experience for parents and leaders, imparting keys to transformation.',
     accent: 'gold',
     texture: 'dots',
     icon: 'house',
     body: [
-      'How do we shape environments that foster a resilient, deep-rooted, fully alive faith in our children and youth? Drawing on decades of experience, Michele offers a highly interactive experience for parents and leaders. Through engaging stories and interactive activities, she helps you build homes and healing, positive spaces for the younger saints where the next generation experiences God as undeniably real, personal, and worthy of their entire lives. Taught at conferences, in an eight-hour workshop format, and inside an e-course.',
+      // Michele's approved rewrite, 2026-08-24, verbatim. The delivery
+      // formats below are what the replaced paragraph carried that hers does
+      // not, and an event organiser needs them, so they stay.
+      'How do we shape a culture that fosters a resilient, deep-rooted, fully alive faith in our children and youth? Michele offers a highly interactive experience for parents and leaders, imparting keys to transformation.',
+      'Taught at conferences, in an eight-hour workshop format, and inside an e-course.',
     ],
     endorsementsNote:
       'The endorsements below are from Michele’s Kingdom Kids Workshops, the flagship workshop within this topic. Same content, previously offered under that title.',
@@ -192,12 +201,12 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     title: 'Build a Strong Connection with Your Child',
     subtitle: 'Heart Wide Open',
     teaser:
-      "Your child's heart has a door, and you hold the key. Michele equips parents to become the safe haven their children run toward.",
+      'Gain practical keys to build strong emotional connections within your family. Your child’s heart has a door, and you hold the key. Michele equips parents to become the safe haven their children run toward.',
     accent: 'violet',
     texture: 'lines',
     icon: 'heart',
     body: [
-      'Your child’s heart has a door, and you hold the key. In this transformative workshop, Michele equips parents to become the safe haven their children run toward. Through real-life storytelling, you will gain practical keys to validate feelings, speak unique love languages, turn everyday interactions into lasting deposits of trust, and more.',
+      'Gain practical keys to build strong emotional connections within your family. Your child’s heart has a door, and you hold the key. In this transformative workshop, Michele equips parents to become the safe haven their children run toward. Through real-life storytelling, you will gain practical keys to validate feelings, speak unique love languages, turn everyday interactions into lasting deposits of trust, and more.',
     ],
   },
   {
@@ -207,12 +216,20 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
       'Identity, Healing, and Walking in the Fullness of Who God Made You with Brave Purpose',
     cardTitle: 'Identity, Healing, and Brave Purpose',
     teaser:
-      'A message Michele is often invited to bring in women’s ministry settings and churches. She walks women through the truth of their identity in Christ, and the healing God offers.',
+      'A message Michele is often invited to bring in women’s ministry settings and churches. She walks women through the truth of their identity in Christ, the healing God offers, and the joy-filled freedom Christ gives.',
     accent: 'teal',
     texture: 'rings',
     icon: 'sunrise',
     body: [
-      'A message Michele is often invited to bring in women’s ministry settings and churches. She walks women through the truth of their identity in Christ, and the healing God offers for the trauma, wounds, and hindrances that quietly hold them back from walking in confidence and joy. Rooted in her own journey and years of ministering to women in faith communities.',
+      // Michele's approved sentence, 2026-08-24, closes this. She asked for
+      // it to be ADDED at the end, but it is a rewrite of the sentence that
+      // already sat there, so appending it would have opened two consecutive
+      // sentences with "She walks women through the truth of their identity
+      // in Christ". The superseded sentence came out instead, which also
+      // drops "for the trauma, wounds, and hindrances that quietly hold them
+      // back from walking in confidence and joy". Flagged to her; restore it
+      // as its own sentence if she wants it back.
+      'A message Michele is often invited to bring in women’s ministry settings and churches, rooted in her own journey and years of ministering to women in faith communities. She walks women through the truth of their identity in Christ, the healing God offers, and the joy-filled freedom Christ gives.',
     ],
   },
   {
@@ -220,12 +237,17 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     number: '07',
     title: 'How to Hear God’s Voice',
     teaser:
-      'For children, youth, and adults ready to grow their two-way relationship with God. This workshop teaches discernment, builds faith through testimony, and gives every participant practical activities to practice hearing God’s voice in real time.',
+      'For youth and adults of all ages who are ready to grow in their two-way relationship with God, this workshop builds faith through testimony, teaches discernment, and gives each participant practical activities to hear God’s voice in real time. Be prepared to encounter God in this time.',
     accent: 'coral',
     texture: 'grid',
     icon: 'waveform',
     body: [
-      'For children, youth, and adults ready to grow their two-way relationship with God. Beyond the ways most Christians know God speaks (through Scripture, sermons, music), Michele opens the door to the other ways God is already speaking: through a thought, a vision, a picture, a circumstance. This workshop teaches discernment, builds faith through testimony, and gives every participant practical activities to practice hearing God’s voice in real time.',
+      // Michele's approved rewrite, 2026-08-24, verbatim. The "beyond the
+      // ways most Christians know God speaks" line below is what the replaced
+      // paragraph carried that hers does not, and it is the substance of the
+      // workshop, so it stays as its own paragraph.
+      'For youth and adults of all ages who are ready to grow in their two-way relationship with God, this workshop builds faith through testimony, teaches discernment, and gives each participant practical activities to hear God’s voice in real time. Be prepared to encounter God in this time.',
+      'Beyond the ways most Christians know God speaks (through Scripture, sermons, music), Michele opens the door to the other ways God is already speaking: through a thought, a vision, a picture, a circumstance.',
       'Michele also unpacks the invitation of 1 Corinthians 14:1 ("eagerly desire spiritual gifts, especially the gift of prophecy"), helping listeners grow the prophetic in their homes, their churches, and the encouragement they bring to others.',
       'Delivered for children, teens, families, ministry teams, and pastors. Watching people realize "I can hear God’s voice" is what keeps Michele coming back to this one.',
     ],
