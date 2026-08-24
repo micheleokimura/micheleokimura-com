@@ -88,6 +88,19 @@ Delivered for children, teens, families, ministry teams, and pastors. Watching p
 >
 > Pastor Kihāpiʻilani Pimental, Worker Supervisor, Foursquare Missions International
 
+## QUOTE BANNER
+
+Full-bleed periwinkle strip between the messages grid and the stages list,
+carrying Michele's portrait circle-cropped on the left.
+
+> My purpose is to help people live in the fullness of who they were created to be with brave purpose.
+
+MICHELE OKIMURA
+
+Moved here from the coaching page 2026-08-24. The quote is Michele's own raw
+statement, carried verbatim. The background is sampled from the sapphire
+flowers in the dress in the photograph beside it.
+
 ## WHERE I'VE SPOKEN
 
 - Arise Native American Leaders Camp · Montana, August 2026

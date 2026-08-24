@@ -67,6 +67,14 @@ import {
  * SECTION BANDS. Every section is full-bleed and sits on its own ground, same
  * convention the home page established. Neighbours never share a band.
  *
+ * QUOTE BANNER. Moved here from /coach on 2026-08-24, which dropped it in the
+ * same pass. It sits between the keynote grid and the stages list: a breath
+ * between the two densest blocks on the page, and "here is why I speak on
+ * these" landing right after what she speaks on. Its periwinkle is sampled
+ * from the sapphire flowers in the dress in the photograph it carries, which
+ * is the same photo-derived convention the banner at the top of this page
+ * follows.
+ *
  * CLOSING CTA. The dark navy "Book Michele" panel is gone, along with the
  * michele@micheleokimura.com link inside it. Michele: no dark blue text boxes
  * anywhere except the footer, and no email address on any client-facing page.
@@ -93,6 +101,19 @@ export const metadata: Metadata = pageMetadata({
  * get their colour, so swapping this photo means re-sampling those tokens.
  */
 const HERO_PHOTO = '/images/michele/speaker-hero-day2.jpg'
+
+/**
+ * Michele at home in Honolulu, in the floral dress, holding a mug. Shown
+ * circle-cropped in the quote banner.
+ *
+ * The filename says `coach-hero` because that is where this photograph was
+ * first used and /coach still points its own hero at the same file. It is NOT
+ * a stray reference. Do not rename it to match this page without checking
+ * /coach first. The sapphire flowers in this dress are where the quote
+ * banner's periwinkle was sampled from, so re-sample
+ * `.surface-speaker-quote` in tailwind.css if this photograph is swapped.
+ */
+const MICHELE_PORTRAIT = '/images/michele/coach-hero.jpg'
 
 /**
  * Grids escape Container's inner max-w-2xl cap on purpose. Container narrows
@@ -346,6 +367,62 @@ export default function SpeakerPage() {
             </ul>
           </FadeInStagger>
         </div>
+      </section>
+
+      {/* --------------------------------------------------- quote banner */}
+      {/* Moved here from /coach on 2026-08-24, which dropped it in the same
+          pass. Placed between the keynote grid and the stages list on purpose:
+          it is a breath between the two densest blocks on the page, seven
+          saturated cards above and a twelve-row list below, and it lands
+          "here is why I speak on these" right after the reader has taken in
+          what she speaks on. The run that closes the page stays intact that
+          way too, stages into press kit into the ask, which is the order an
+          event organiser reads in.
+
+          Periwinkle, sampled from the sapphire flowers in the dress in this
+          very photograph. The numbers and the contrast budget are in the
+          SPEAKER QUOTE BANNER block in tailwind.css. */}
+      <section
+        aria-label="In Michele's words"
+        className={`surface-speaker-quote ${BAND}`}
+      >
+        <Container>
+          <FadeIn>
+            <figure className="flex flex-col items-center gap-10 text-center lg:flex-row lg:gap-16 lg:text-left">
+              {/* A fixed pixel box rather than a percentage, so the circle
+                  stays a circle at every width instead of squashing to an
+                  oval in the flex row. */}
+              <div className="relative h-[250px] w-[250px] flex-none overflow-hidden rounded-full bg-neutral-100 ring-1 ring-[var(--color-navy-10)] sm:h-[300px] sm:w-[300px] lg:h-[340px] lg:w-[340px]">
+                <Image
+                  src={MICHELE_PORTRAIT}
+                  alt="Michele Okimura at home in Honolulu"
+                  fill
+                  sizes="(min-width: 1024px) 340px, (min-width: 640px) 300px, 250px"
+                  className="object-cover object-[center_20%]"
+                />
+              </div>
+
+              <div>
+                {/* No quotation marks. At this size a pair of curly quotes
+                    just hangs two heavy marks in the corners, and the display
+                    setting already reads as a quote. Navy rather than
+                    teal-text, which measures 3.96:1 on this wash and fails. */}
+                <blockquote className="font-display mx-auto max-w-[22ch] text-[1.5rem] leading-[1.25] font-medium tracking-tight text-balance text-[var(--color-navy)] sm:max-w-[26ch] sm:text-[1.875rem] sm:leading-[1.22] lg:mx-0 lg:max-w-[30ch] lg:text-[2.25rem] lg:leading-[1.2]">
+                  My purpose is to help people live in the fullness of who they
+                  were created to be with brave purpose.
+                </blockquote>
+                {/* No dash before the name: the house rule for this page is no
+                    em dash anywhere, so the attribution is the name alone.
+                    neutral-600 is the only secondary that clears AA on the
+                    periwinkle; coral-text, the usual house eyebrow colour,
+                    lands at 3.93:1 here. */}
+                <figcaption className="font-display mt-6 text-xs font-semibold tracking-[0.18em] text-neutral-600 uppercase sm:mt-8 sm:text-sm">
+                  Michele Okimura
+                </figcaption>
+              </div>
+            </figure>
+          </FadeIn>
+        </Container>
       </section>
 
       {/* ----------------------------------------------------- past events */}
