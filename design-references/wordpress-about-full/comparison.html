@@ -1,0 +1,269 @@
+<title>About page: WordPress vs new build</title>
+<style>
+:root{--bg:#fafaf8;--fg:#1f2744;--mut:#5b6178;--line:#dfdfd8;--edit:#8a5a2b;--ok:#2f6b4f}
+body{margin:0;padding:2rem 1.5rem 5rem;background:var(--bg);color:var(--fg);
+ font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+h1{font-size:1.7rem;margin:0 0 .3rem} h2{font-size:1.15rem;margin:2.5rem 0 .6rem}
+p.sub{color:var(--mut);margin:0 0 1.6rem;max-width:60rem}
+a{color:#2f6b4f}
+.links{display:flex;gap:1.5rem;flex-wrap:wrap;margin:0 0 1.6rem;font-size:.92rem}
+.wrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:#fff}
+table{border-collapse:collapse;width:100%;min-width:60rem}
+th,td{border-bottom:1px solid var(--line);padding:.6rem .7rem;vertical-align:top;text-align:left}
+th{position:sticky;top:0;background:#f0f0ea;font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--mut)}
+td.n{font-variant-numeric:tabular-nums;color:var(--mut);width:2.2rem}
+td img{width:120px;height:120px;object-fit:cover;display:block;background:#eee}
+.fn{font:11px/1.3 ui-monospace,Menlo,monospace;color:var(--mut);margin-top:.3rem;max-width:120px;word-break:break-all}
+td.cap{font-size:.86rem;max-width:23rem;white-space:pre-line}
+td.cap.edited{color:var(--edit)} td.v{font-size:.75rem;color:var(--mut);white-space:nowrap}
+.same{color:var(--ok)}
+.note{background:#fff;border:1px solid var(--line);border-left:3px solid var(--edit);
+ border-radius:6px;padding:.9rem 1.1rem;margin:1.2rem 0;max-width:60rem;font-size:.92rem}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:70rem}
+.hero figure{margin:0} .hero img{width:100%;border:1px solid var(--line);border-radius:6px;display:block}
+figcaption{font-size:.78rem;color:var(--mut);margin-top:.4rem}
+@media(max-width:760px){.hero{grid-template-columns:1fr}}
+</style>
+
+<h1>About page: live WordPress vs the new build</h1>
+<p class="sub">Every photograph and every line of copy on <code>/about</code>, put next to its source on
+<code>micheleokimura.com/about/</code>. The left image column loads from WordPress; the right loads from the
+branch preview. If a row's two pictures differ, the mirror is wrong.</p>
+
+<div class="links">
+  <a href="https://micheleokimura.com/about/" target="_blank" rel="noreferrer">Live WordPress /about/</a>
+  <a href="https://micheleokimura-com-git-about-wp-mirror-michele-1448s-projects.vercel.app/about" target="_blank" rel="noreferrer">Branch preview /about</a>
+</div>
+
+<h2>Hero photograph</h2>
+<p class="sub">Not an <code>&lt;img&gt;</code> on WordPress: a <code>background-image</code> on the Elementor hero
+container, which is why a markup-only crawl missed it on the first pass.</p>
+<div class="hero">
+  <figure><img src="https://micheleokimura.com/wp-content/uploads/2025/09/Untitled-1920-x-640-px-1.jpg" alt="">
+    <figcaption>WordPress, 1920&times;640, shown at min-height 500px</figcaption></figure>
+  <figure><img src="https://micheleokimura-com-git-about-wp-mirror-michele-1448s-projects.vercel.app/images/about/wordpress-mirror/00-hero-banner.jpg" alt="">
+    <figcaption>New build, same file, band height 220 / 300 / 380px</figcaption></figure>
+</div>
+
+<h2>Body copy, in WordPress order</h2>
+<div class="wrap"><table>
+<thead><tr><th style="width:50%">WordPress, verbatim</th><th style="width:50%">New build</th><th>Edit</th></tr></thead>
+<tbody><tr><td class="cap">My story has been an adventure in finding purpose, and it began with my own healing journey. Transforming feelings of worthlessness into a deep sense of value ignited a fire in me—a passion to help others discover the same strength within themselves.</td><td class="cap edited">My story has been an adventure in finding purpose, and it began with my own healing journey. Transforming feelings of worthlessness into a deep sense of value ignited a fire in me, a passion to help others discover the same strength within themselves.</td><td class="v">em dash removed</td></tr><tr><td class="cap">Here’s the official part: I’m an author, speaker, and chairman of Releasing Generations, a non-profit that empowers children, youth, and adults through workshops, retreats, and creative sessions. I was awarded the “Outstanding Advocate for the Children and Youth in the State of Hawaii” award in 2023 by Hawaii’s Governor Green and Mayor Blangiardi. I’ve written multiple books and curricula on creativity, inner healing, and the empowerment of future generations.</td><td class="cap edited">Here’s the official part: I’m an author, speaker, and chairman of Releasing Generations, a non-profit that empowers children, youth, and adults through workshops, retreats, and creative sessions. I was awarded the “Outstanding Advocate for the Children and Youth in the State of Hawaiʻi” award in 2023 by Hawaiʻi’s Governor Green and Mayor Blangiardi. I’ve written multiple books and curricula on creativity, inner healing, and the empowerment of future generations.</td><td class="v">ʻokina ×2</td></tr><tr><td class="cap">For 15 years, I was an elementary school teacher, and for 23 years, I served as a pastor alongside my husband, which gave me a profound compassion for people from all walks of life.</td><td class="cap same">For 15 years, I was an elementary school teacher, and for 23 years, I served as a pastor alongside my husband, which gave me a profound compassion for people from all walks of life.</td><td class="v">identical</td></tr><tr><td class="cap">I’ve poured my heart into my books to share the keys I’ve discovered along the way: from my healing journey in Dancing with Father, to pursuing big dreams in The Birth of Explicit Movement: Discover Keys to Fulfilling Your Purpose, and empowering the next generation with the Dream Big Journal and the Brave Series curricula.</td><td class="cap same">I’ve poured my heart into my books to share the keys I’ve discovered along the way: from my healing journey in Dancing with Father, to pursuing big dreams in The Birth of Explicit Movement: Discover Keys to Fulfilling Your Purpose, and empowering the next generation with the Dream Big Journal and the Brave Series curricula.</td><td class="v">identical</td></tr><tr><td class="cap">Everything I do is focused on helping others flourish in life and live out loud to their fullest potential.</td><td class="cap same">Everything I do is focused on helping others flourish in life and live out loud to their fullest potential.</td><td class="v">identical</td></tr><tr><td class="cap">Established in 2017, Michele Okimura Consulting has expanded my capacity to live my purpose through the power of writing and by equipping others through workshops, conferences, retreats, and coaching.</td><td class="cap same">Established in 2017, Michele Okimura Consulting has expanded my capacity to live my purpose through the power of writing and by equipping others through workshops, conferences, retreats, and coaching.</td><td class="v">identical</td></tr><tr><td class="cap">My firm belief is that every person’s story—even the broken ones—can become a launchpad into a future full of freedom, wonder, and limitless possibilities.</td><td class="cap edited">My firm belief is that every person’s story, even the broken ones, can become a launchpad into a future full of freedom, wonder, and limitless possibilities.</td><td class="v">em dash ×2 removed</td></tr><tr><td class="cap">When I’m not writing, you’ll find me with my two amazing “twin-like” kids, Aaron and Jessica, or gardening with my husband, Rob, my best friend and the love of my life.</td><td class="cap same">When I’m not writing, you’ll find me with my two amazing “twin-like” kids, Aaron and Jessica, or gardening with my husband, Rob, my best friend and the love of my life.</td><td class="v">identical</td></tr></tbody></table></div>
+
+<div class="note"><strong>Wording kept verbatim although it contradicts the repo.</strong>
+WordPress says &ldquo;chairman of Releasing Generations&rdquo; where CLAUDE.md says Founder and Executive
+Director; &ldquo;Michele Okimura Consulting&rdquo; where CLAUDE.md says Michele Okimura LLC; and
+&ldquo;For 15 years, I was an elementary school teacher&rdquo; where <code>credentials.ts</code> says 17 years.
+That last one now shows up twice on the same page, a few screens apart. None of these were reconciled:
+they are Michele&rsquo;s to rule on.</div>
+
+<h2>The 24 mosaic tiles</h2>
+<p class="sub">Captions are verbatim. 2 of 24 carry a house-rule edit (ʻokina, tab, or em dash);
+the rest are byte-identical. Known defects in the source copy are preserved on purpose.</p>
+<div class="wrap"><table>
+<thead><tr><th>#</th><th>WordPress photo</th><th>New build photo</th>
+<th style="width:32%">WordPress caption, verbatim</th><th style="width:32%">New build caption</th><th>Edit</th></tr></thead>
+<tbody>
+<tr>
+  <td class="n">1</td>
+  <td><img loading="lazy" src="https://micheleokimura.com/wp-content/uploads/2025/09/1-mom-and-dad-scaled.jpeg" alt=""><div class="fn">1-mom-and-dad-scaled.jpeg</div></td>
+  <td><img loading="lazy" src="https://micheleokimura-com-git-about-wp-mirror-michele-1448s-projects.vercel.app/images/about/wordpress-mirror/01-1962-born-honolulu.jpeg" alt=""><div class="fn">01-1962-born-honolulu.jpeg</div></td>
+  <td class="cap">1962: Born in Honolulu, Hawaii.
+(My parents, grandma, and I)</td>
+  <td class="cap edited">1962: Born in Honolulu, Hawaiʻi.
+(My parents, grandma, and I)</td>
+  <td class="v">house rule</td>
+</tr>
+<tr>
+  <td class="n">2</td>
+  <td><img loading="lazy" src="https://micheleokimura.com/wp-content/uploads/2025/09/2-sisters--scaled.jpeg" alt=""><div class="fn">2-sisters--scaled.jpeg</div></td>
+  <td><img loading="lazy" src="https://micheleokimura-com-git-about-wp-mirror-michele-1448s-projects.vercel.app/images/about/wordpress-mirror/02-sisters.jpeg" alt=""><div class="fn">02-sisters.jpeg</div></td>
+  <td class="cap">1955: Oldest of two beautiful younger sisters.                        </td>
+  <td class="cap same">1955: Oldest of two beautiful younger sisters.</td>
+  <td class="v">identical</td>
+</tr>
+<tr>
+  <td class="n">3</td>
+  <td><img loading="lazy" src="https://micheleokimura.com/wp-content/uploads/2025/09/3-MIss-Teen-USA-scaled.jpeg" alt=""><div class="fn">3-MIss-Teen-USA-scaled.jpeg</div></td>
+  <td><img loading="lazy" src="https://micheleokimura-com-git-about-wp-mirror-michele-1448s-projects.vercel.app/images/about/wordpress-mirror/03-1979-miss-teen-usa.jpeg" alt=""><div class="fn">03-1979-miss-teen-usa.jpeg</div></td>
+  <td class="cap">1979:  Miss Teen USA Finalist I didn’t win. But loved the experience!</td>
+  <td class="cap same">1979:  Miss Teen USA Finalist I didn’t win. But loved the experience!</td>
+  <td class="v">identical</td>
+</tr>
+<tr>
+  <td class="n">4</td>
+  <td><img loading="lazy" src="https://micheleokimura.com/wp-content/uploads/2025/09/4-HS-Graduation-scaled.jpeg" alt=""><div class="fn">4-HS-Graduation-scaled.jpeg</div></td>
+  <td><img loading="lazy" src="https://micheleokimura-com-git-about-wp-mirror-michele-1448s-projects.vercel.app/images/about/wordpress-mirror/04-1979-high-school-graduation.jpeg" alt=""><div class="fn">04-1979-high-school-graduation.jpeg</div></td>
+  <td class="cap">1979: Graduated from high school</td>
+  <td class="cap same">1979: Graduated from high school</td>
+  <td class="v">identical</td>
+</tr>
+<tr>
+  <td class="n">5</td>
+  <td><img loading="lazy" src="https://micheleokimura.com/wp-content/uploads/2025/09/5-UH-graduation.jpeg" alt=""><div class="fn">5-UH-graduation.jpeg</div></td>
+  <td><img loading="lazy" src="https://micheleokimura-com-git-about-wp-mirror-michele-1448s-projects.vercel.app/images/about/wordpress-mirror/05-1984-college-graduation.jpeg" alt=""><div class="fn">05-1984-college-graduation.jpeg</div></td>
+  <td class="cap">1984: Graduated from college with a bachelor’s degree in Elementary Education.</td>
+  <td class="cap same">1984: Graduated from college with a bachelor’s degree in Elementary Education.</td>
+  <td class="v">identical</td>
+</tr>
+<tr>
+  <td class="n">6</td>
+  <td><img loading="lazy" src="https://micheleokimura.com/wp-content/uploads/2025/09/6-wedding-scaled.jpeg" alt=""><div class="fn">6-wedding-scaled.jpeg</div></td>
+  <td><img loading="lazy" src="https://micheleokimura-com-git-about-wp-mirror-michele-1448s-projects.vercel.app/images/about/wordpress-mirror/06-1984-wedding-rob.jpeg" alt=""><div class="fn">06-1984-wedding-rob.jpeg</div></td>
+  <td class="cap">1984: Married Rob after dating for three years. The love of my life and best friend.</td>
+  <td class="cap same">1984: Married Rob after dating for three years. The love of my life and best friend.</td>
+  <td class="v">identical</td>
+</tr>
+<tr>
+  <td class="n">7</td>
+  <td><img loading="lazy" src="https://micheleokimura.com/wp-content/uploads/2025/09/7-Aaron-scaled.jpeg" alt=""><div class="fn">7-Aaron-scaled.jpeg</div></td>
+  <td><img loading="lazy" src="https://micheleokimura-com-git-about-wp-mirror-michele-1448s-projects.vercel.app/images/about/wordpress-mirror/07-1991-son-aaron.jpeg" alt=""><div class="fn">07-1991-son-aaron.jpeg</div></td>
+  <td class="cap">1991:  Overflowing joy! Adopted our son Aaron.</td>
+  <td class="cap same">1991:  Overflowing joy! Adopted our son Aaron.</td>
+  <td class="v">identical</td>
+</tr>
+<tr>
+  <td class="n">8</td>
+  <td><img loading="lazy" src="https://micheleokimura.com/wp-content/uploads/2025/09/8-Jessica-joned--scaled.jpeg" alt=""><div class="fn">8-Jessica-joned--scaled.jpeg</div></td>
+  <td><img loading="lazy" src="https://micheleokimura-com-git-about-wp-mirror-michele-1448s-projects.vercel.app/images/about/wordpress-mirror/08-1993-daughter-jessica.jpeg" alt=""><div class="fn">08-1993-daughter-jessica.jpeg</div></td>
+  <td class="cap">1993: More rivers of joy!  Adopted our daughter Jessica…who happened to be 9 days older than than Aaron! My twin-like sweeties. </td>
+  <td class="cap same">1993: More rivers of joy!  Adopted our daughter Jessica…who happened to be 9 days older than than Aaron! My twin-like sweeties.</td>
+  <td class="v">identical</td>
+</tr>
+<tr>
+  <td class="n">9</td>
+  <td><img loading="lazy" src="https://micheleokimura.com/wp-content/uploads/2025/09/9-LIfespring-Church.png" alt=""><div class="fn">9-LIfespring-Church.png</div></td>
+  <td><img loading="lazy" src="https://micheleokimura-com-git-about-wp-mirror-michele-1448s-projects.vercel.app/images/about/wordpress-mirror/09-1997-lifespring-church.png" alt=""><div class="fn">09-1997-lifespring-church.png</div></td>
+  <td class="cap">1997: Rob and I founded Lifespring Church. I was unconventionally qualified to be a pastor by comedian Jim Carrey, but that is another story for another time.</td>
+  <td class="cap same">1997: Rob and I founded Lifespring Church. I was unconventionally qualified to be a pastor by comedian Jim Carrey, but that is another story for another time.</td>
+  <td class="v">identical</td>
+</tr>
+<tr>
+  <td class="n">10</td>
+  <td><img loading="lazy" src="https://micheleokimura.com/wp-content/uploads/2025/09/Renaissance-2010-and-2011-scaled.jpeg" alt=""><div class="fn">Renaissance-2010-and-2011-scaled.jpeg</div></td>
+  <td><img loading="lazy" src="https://micheleokimura-com-git-about-wp-mirror-michele-1448s-projects.vercel.app/images/about/wordpress-mirror/10-renaissance-conferences.jpeg" alt=""><div class="fn">10-renaissance-conferences.jpeg</div></td>
+  <td class="cap">Renaissance Conferences in 2010 and 2011: my first two arts conferences to release people into greater creativity!</td>
+  <td class="cap same">Renaissance Conferences in 2010 and 2011: my first two arts conferences to release people into greater creativity!</td>
+  <td class="v">identical</td>
+</tr>
+<tr>
+  <td class="n">11</td>
+  <td><img loading="lazy" src="https://micheleokimura.com/wp-content/uploads/2025/09/10-Dancing-with-Father-scaled.jpeg" alt=""><div class="fn">10-Dancing-with-Father-scaled.jpeg</div></td>
+  <td><img loading="lazy" src="https://micheleokimura-com-git-about-wp-mirror-michele-1448s-projects.vercel.app/images/about/wordpress-mirror/11-2011-dancing-with-father.jpeg" alt=""><div class="fn">11-2011-dancing-with-father.jpeg</div></td>
+  <td class="cap">2011: Published Dancing with Father. Let’s heal  hearts.</td>
+  <td class="cap same">2011: Published Dancing with Father. Let’s heal  hearts.</td>
+  <td class="v">identical</td>
+</tr>
+<tr>
+  <td class="n">12</td>
+  <td><img loading="lazy" src="https://micheleokimura.com/wp-content/uploads/2025/09/11-2014-EX-conference-.jpeg" alt=""><div class="fn">11-2014-EX-conference-.jpeg</div></td>
+  <td><img loading="lazy" src="https://micheleokimura-com-git-about-wp-mirror-michele-1448s-projects.vercel.app/images/about/wordpress-mirror/12-2014-first-islandwide-conference.jpeg" alt=""><div class="fn">12-2014-first-islandwide-conference.jpeg</div></td>
+  <td class="cap">2014: Our first island-wide youth and parent conference. Little did I know then that it would grow into a movement.</td>
+  <td class="cap same">2014: Our first island-wide youth and parent conference. Little did I know then that it would grow into a movement.</td>
+  <td class="v">identical</td>
+</tr>
+<tr>
+  <td class="n">13</td>
+  <td><img loading="lazy" src="https://micheleokimura.com/wp-content/uploads/2025/09/12-Middle-School-Conf.jpeg" alt=""><div class="fn">12-Middle-School-Conf.jpeg</div></td>
+  <td><img loading="lazy" src="https://micheleokimura-com-git-about-wp-mirror-michele-1448s-projects.vercel.app/images/about/wordpress-mirror/13-2015-middle-school-conference.jpeg" alt=""><div class="fn">13-2015-middle-school-conference.jpeg</div></td>
+  <td class="cap">2015: Unexpected curve ball! Explicit Conferences grew into a non-profit organization. And we held our first middle school, young adult, and parent conferences AND repeated our! high school conference. How ever did we do 4 in one year?!!</td>
+  <td class="cap same">2015: Unexpected curve ball! Explicit Conferences grew into a non-profit organization. And we held our first middle school, young adult, and parent conferences AND repeated our! high school conference. How ever did we do 4 in one year?!!</td>
+  <td class="v">identical</td>
+</tr>
+<tr>
+  <td class="n">14</td>
+  <td><img loading="lazy" src="https://micheleokimura.com/wp-content/uploads/2025/09/13-Philippines.jpeg" alt=""><div class="fn">13-Philippines.jpeg</div></td>
+  <td><img loading="lazy" src="https://micheleokimura-com-git-about-wp-mirror-michele-1448s-projects.vercel.app/images/about/wordpress-mirror/14-2016-philippines.jpeg" alt=""><div class="fn">14-2016-philippines.jpeg</div></td>
+  <td class="cap">2016: Another shocker… going global! Philippines Conferences in Manila and Baguio.</td>
+  <td class="cap same">2016: Another shocker… going global! Philippines Conferences in Manila and Baguio.</td>
+  <td class="v">identical</td>
+</tr>
+<tr>
+  <td class="n">15</td>
+  <td><img loading="lazy" src="https://micheleokimura.com/wp-content/uploads/2025/09/14-Singapore.jpeg" alt=""><div class="fn">14-Singapore.jpeg</div></td>
+  <td><img loading="lazy" src="https://micheleokimura-com-git-about-wp-mirror-michele-1448s-projects.vercel.app/images/about/wordpress-mirror/15-2016-singapore.jpeg" alt=""><div class="fn">15-2016-singapore.jpeg</div></td>
+  <td class="cap">2016: Asia here we come!  Youth and Parent Conference in Singapore!</td>
+  <td class="cap same">2016: Asia here we come!  Youth and Parent Conference in Singapore!</td>
+  <td class="v">identical</td>
+</tr>
+<tr>
+  <td class="n">16</td>
+  <td><img loading="lazy" src="https://micheleokimura.com/wp-content/uploads/2025/09/15-PACRIM.png" alt=""><div class="fn">15-PACRIM.png</div></td>
+  <td><img loading="lazy" src="https://micheleokimura-com-git-about-wp-mirror-michele-1448s-projects.vercel.app/images/about/wordpress-mirror/16-2018-university-course.png" alt=""><div class="fn">16-2018-university-course.png</div></td>
+  <td class="cap">2018: Teaching my first  University course. </td>
+  <td class="cap same">2018: Teaching my first  University course.</td>
+  <td class="v">identical</td>
+</tr>
+<tr>
+  <td class="n">17</td>
+  <td><img loading="lazy" src="https://micheleokimura.com/wp-content/uploads/2025/09/16-EX-books-scaled.jpeg" alt=""><div class="fn">16-EX-books-scaled.jpeg</div></td>
+  <td><img loading="lazy" src="https://micheleokimura-com-git-about-wp-mirror-michele-1448s-projects.vercel.app/images/about/wordpress-mirror/17-2018-explicit-movement-books.jpeg" alt=""><div class="fn">17-2018-explicit-movement-books.jpeg</div></td>
+  <td class="cap">2018: Published  2018: Published The Birth of Explicit Movement:  Discover Keys to Fulfilling Your Purpose and  the Explicit Movement 21-Day Journal.</td>
+  <td class="cap same">2018: Published  2018: Published The Birth of Explicit Movement:  Discover Keys to Fulfilling Your Purpose and  the Explicit Movement 21-Day Journal.</td>
+  <td class="v">identical</td>
+</tr>
+<tr>
+  <td class="n">18</td>
+  <td><img loading="lazy" src="https://micheleokimura.com/wp-content/uploads/2025/09/17-SoCal-scaled.jpeg" alt=""><div class="fn">17-SoCal-scaled.jpeg</div></td>
+  <td><img loading="lazy" src="https://micheleokimura-com-git-about-wp-mirror-michele-1448s-projects.vercel.app/images/about/wordpress-mirror/18-2018-socal-conference.jpeg" alt=""><div class="fn">18-2018-socal-conference.jpeg</div></td>
+  <td class="cap">2018: Hello SoCal! The first California Youth and Parent Conference. </td>
+  <td class="cap same">2018: Hello SoCal! The first California Youth and Parent Conference.</td>
+  <td class="v">identical</td>
+</tr>
+<tr>
+  <td class="n">19</td>
+  <td><img loading="lazy" src="https://micheleokimura.com/wp-content/uploads/2025/09/Kingdom-Kids-Workshops.jpeg" alt=""><div class="fn">Kingdom-Kids-Workshops.jpeg</div></td>
+  <td><img loading="lazy" src="https://micheleokimura-com-git-about-wp-mirror-michele-1448s-projects.vercel.app/images/about/wordpress-mirror/19-2019-kingdom-kids-workshops.jpeg" alt=""><div class="fn">19-2019-kingdom-kids-workshops.jpeg</div></td>
+  <td class="cap">2019: Began launching equipping events for parents, teachers, and leaders in raising healthy and flourishing children and youth!</td>
+  <td class="cap same">2019: Began launching equipping events for parents, teachers, and leaders in raising healthy and flourishing children and youth!</td>
+  <td class="v">identical</td>
+</tr>
+<tr>
+  <td class="n">20</td>
+  <td><img loading="lazy" src="https://micheleokimura.com/wp-content/uploads/2025/09/ReThink-Creativity-2020-and-2021-scaled.jpeg" alt=""><div class="fn">ReThink-Creativity-2020-and-2021-scaled.jpeg</div></td>
+  <td><img loading="lazy" src="https://micheleokimura-com-git-about-wp-mirror-michele-1448s-projects.vercel.app/images/about/wordpress-mirror/20-rethink-creativity-conferences.jpeg" alt=""><div class="fn">20-rethink-creativity-conferences.jpeg</div></td>
+  <td class="cap">MY GREAT JOY! Online Creativity Conferences in 2020 and 2021, hosting global speakers!</td>
+  <td class="cap same">MY GREAT JOY! Online Creativity Conferences in 2020 and 2021, hosting global speakers!</td>
+  <td class="v">identical</td>
+</tr>
+<tr>
+  <td class="n">21</td>
+  <td><img loading="lazy" src="https://micheleokimura.com/wp-content/uploads/2025/09/18-B-and-Beautiful-.jpeg" alt=""><div class="fn">18-B-and-Beautiful-.jpeg</div></td>
+  <td><img loading="lazy" src="https://micheleokimura-com-git-about-wp-mirror-michele-1448s-projects.vercel.app/images/about/wordpress-mirror/21-2022-brave-and-beautiful.jpeg" alt=""><div class="fn">21-2022-brave-and-beautiful.jpeg</div></td>
+  <td class="cap">2022: Published the Brave &amp; Beautiful Curriculum. Empowering teen girls and women with confidence, purpose, and tools to  protect themselves from exploitation.</td>
+  <td class="cap same">2022: Published the Brave &amp; Beautiful Curriculum. Empowering teen girls and women with confidence, purpose, and tools to  protect themselves from exploitation.</td>
+  <td class="v">identical</td>
+</tr>
+<tr>
+  <td class="n">22</td>
+  <td><img loading="lazy" src="https://micheleokimura.com/wp-content/uploads/2025/09/19-award.jpeg" alt=""><div class="fn">19-award.jpeg</div></td>
+  <td><img loading="lazy" src="https://micheleokimura-com-git-about-wp-mirror-michele-1448s-projects.vercel.app/images/about/wordpress-mirror/22-2023-outstanding-advocate-award.jpeg" alt=""><div class="fn">22-2023-outstanding-advocate-award.jpeg</div></td>
+  <td class="cap">2023: SURPRISE! Awarded the Hawaii State’s 2023 ‘Outstanding Advocate for the Children and Youth in The State of Hawaii Award’ by Mayor Blangiardi and Governor Green.	Humbled greatly.  I didn’t even know we were nominated!</td>
+  <td class="cap edited">2023: SURPRISE! Awarded the Hawaiʻi State’s 2023 ‘Outstanding Advocate for the Children and Youth in The State of Hawaiʻi Award’ by Mayor Blangiardi and Governor Green. Humbled greatly.  I didn’t even know we were nominated!</td>
+  <td class="v">house rule</td>
+</tr>
+<tr>
+  <td class="n">23</td>
+  <td><img loading="lazy" src="https://micheleokimura.com/wp-content/uploads/2025/09/20-10th-Annniversary-scaled.jpeg" alt=""><div class="fn">20-10th-Annniversary-scaled.jpeg</div></td>
+  <td><img loading="lazy" src="https://micheleokimura-com-git-about-wp-mirror-michele-1448s-projects.vercel.app/images/about/wordpress-mirror/23-2023-rg-10th-anniversary.jpeg" alt=""><div class="fn">23-2023-rg-10th-anniversary.jpeg</div></td>
+  <td class="cap">2023: Happy 10th Birthday to our non- profit organization Releasing Generations. Overwhelmed with gratitude for the journey. </td>
+  <td class="cap same">2023: Happy 10th Birthday to our non- profit organization Releasing Generations. Overwhelmed with gratitude for the journey.</td>
+  <td class="v">identical</td>
+</tr>
+<tr>
+  <td class="n">24</td>
+  <td><img loading="lazy" src="https://micheleokimura.com/wp-content/uploads/2025/09/21-dream-books-scaled.jpeg" alt=""><div class="fn">21-dream-books-scaled.jpeg</div></td>
+  <td><img loading="lazy" src="https://micheleokimura-com-git-about-wp-mirror-michele-1448s-projects.vercel.app/images/about/wordpress-mirror/24-dream-big-journals.jpeg" alt=""><div class="fn">24-dream-big-journals.jpeg</div></td>
+  <td class="cap">2023-2025: Published the Dream Big Journals curriculum. Versions created for Preschoolers  through adults.</td>
+  <td class="cap same">2023-2025: Published the Dream Big Journals curriculum. Versions created for Preschoolers  through adults.</td>
+  <td class="v">identical</td>
+</tr></tbody></table></div>
+
+<div class="note"><strong>Preserved defects, for Michele to rule on.</strong>
+Tile 2 dates the sisters photo to 1955 though Michele was born in 1962. Tile 8 says &ldquo;older than than
+Aaron&rdquo;. Tile 13 says &ldquo;repeated our! high school conference&rdquo;. Tile 17 repeats
+&ldquo;2018: Published&rdquo;. Tile 23 says &ldquo;non- profit&rdquo;. All left exactly as WordPress has them.</div>
+
+<div class="note"><strong>Low resolution at source.</strong> Tiles 5 and 16 are 225&times;225 on WordPress,
+which is the largest size that install holds for them. They will look soft at any display size until
+Michele re-uploads them. Nothing was substituted.</div>
