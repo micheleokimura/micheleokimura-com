@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import { Fragment } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
@@ -13,6 +15,7 @@ import {
   getSpeakerMessage,
   speakerMessageFullTitle,
   type MessageBlock,
+  type MessageInlineImage,
 } from '@/lib/speaker-messages'
 
 /**
@@ -51,18 +54,41 @@ import {
  * Index is a safe React key here: these arrays are static content in
  * src/lib/speaker-messages.ts and are never reordered or filtered.
  */
-function BodyBlocks({ blocks }: { blocks: MessageBlock[] }) {
+function BodyBlocks({
+  blocks,
+  inlineImage,
+}: {
+  blocks: MessageBlock[]
+  inlineImage?: MessageInlineImage
+}) {
+  // The supporting photograph is spliced BETWEEN blocks, at the break the
+  // writer picked, rather than appended after the copy. 3:2 and the width of
+  // the measure, so it reads as supporting the sentence above it; the hero is
+  // 16:9 and wider, so it reads as the page.
+  const plate = (index: number) =>
+    inlineImage && inlineImage.afterBlock === index + 1 ? (
+      <figure className="relative mt-10 aspect-[3/2] w-full overflow-hidden rounded-2xl bg-neutral-100 ring-1 ring-[var(--color-navy-10)] sm:mt-12">
+        <Image
+          src={inlineImage.src}
+          alt={inlineImage.alt}
+          fill
+          sizes="(min-width: 768px) 48rem, 100vw"
+          className="object-cover"
+        />
+      </figure>
+    ) : null
+
   return (
     <>
       {blocks.map((block, index) => {
         if (block.kind === 'heading') {
           return (
-            <h2
-              key={index}
-              className="font-display mt-10 text-xl font-semibold tracking-tight text-neutral-950 first:mt-0 sm:text-2xl"
-            >
-              {block.text}
-            </h2>
+            <Fragment key={index}>
+              <h2 className="font-display mt-10 text-xl font-semibold tracking-tight text-neutral-950 first:mt-0 sm:text-2xl">
+                {block.text}
+              </h2>
+              {plate(index)}
+            </Fragment>
           )
         }
 
@@ -73,8 +99,8 @@ function BodyBlocks({ blocks }: { blocks: MessageBlock[] }) {
             // lines, so at the tighter spacing the rows start running together.
             // A plain list of one-line items does not have that problem and
             // stays as it was.
+            <Fragment key={index}>
             <ul
-              key={index}
               role="list"
               className={`mt-6 first:mt-0 ${
                 block.termed ? 'space-y-5' : 'space-y-3'
@@ -107,21 +133,29 @@ function BodyBlocks({ blocks }: { blocks: MessageBlock[] }) {
                 )
               })}
             </ul>
+            {plate(index)}
+            </Fragment>
           )
         }
 
         return (
-          <p
-            key={index}
-            className="mt-6 text-lg leading-8 text-neutral-600 first:mt-0"
-          >
-            {block.text}
-          </p>
+          <Fragment key={index}>
+            <p className="mt-6 text-lg leading-8 text-neutral-600 first:mt-0">
+              {block.text}
+            </p>
+            {plate(index)}
+          </Fragment>
         )
       })}
     </>
   )
 }
+
+/**
+ * Escapes Container's inner max-w-2xl cap so the hero can run the full width
+ * of the page gutter. Same constant, same reason, as /speaker.
+ */
+const WIDE = 'mx-auto max-w-7xl px-6 lg:px-8'
 
 export function generateStaticParams() {
   return SPEAKER_MESSAGES.map((message) => ({ slug: message.slug }))
@@ -180,7 +214,40 @@ export default async function SpeakerMessagePage({
         balanceTitle={false}
       />
 
-      <section className="surface-violet-wash w-full py-14 sm:py-24 lg:py-28">
+      {/* The description sits on the message's OWN ground: a pale tint
+          sampled from its hero photograph, so picture and page read as one
+          thing. See MessageHero in src/lib/speaker-messages.ts for the
+          sampling and the measured contrast. A message with no photograph
+          keeps the violet wash, which is /speaker's own colour. */}
+      <section
+        className={`w-full py-14 sm:py-24 lg:py-28 ${
+          message.hero ? '' : 'surface-violet-wash'
+        }`}
+        style={
+          message.hero ? { backgroundColor: message.hero.wash } : undefined
+        }
+      >
+        {/* The hero runs at CONTAINER width, wider than the measure the copy
+            takes, with the wash showing around it. Generous air above and
+            below; nothing here is allowed to feel cramped. */}
+        {message.hero && (
+          <div className={`${WIDE} mb-14 sm:mb-20`}>
+            <FadeIn>
+              <div className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl bg-neutral-100 shadow-sm ring-1 ring-[var(--color-navy-10)]">
+                <Image
+                  src={message.hero.src}
+                  alt={message.hero.alt}
+                  fill
+                  priority
+                  sizes="(min-width: 1280px) 76rem, 100vw"
+                  className="object-cover"
+                  style={{ objectPosition: message.hero.focal ?? 'center' }}
+                />
+              </div>
+            </FadeIn>
+          </div>
+        )}
+
         <Container>
           <FadeIn>
             <div className="max-w-3xl">
@@ -207,7 +274,10 @@ export default async function SpeakerMessagePage({
                 </div>
               )}
 
-              <BodyBlocks blocks={message.body} />
+              <BodyBlocks
+                blocks={message.body}
+                inlineImage={message.inlineImage}
+              />
 
               {message.nonFaith && (
                 // This note came off the /speaker index on Michele's

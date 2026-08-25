@@ -100,6 +100,52 @@ export type MessageSubtopic = {
   body: MessageBlock[]
 }
 
+/**
+ * A message page's hero photograph and the ground its copy sits on.
+ *
+ * `wash` is the PHOTO-DERIVED SECTION WASH convention applied per message:
+ * a pale tint of a hue actually present in the photograph, so the picture and
+ * the page read as one thing. The hue was sampled from each file rather than
+ * guessed (histogram over 30-degree buckets, weighted by saturation and value,
+ * ignoring pixels below 10% value or 15% saturation), then lifted to roughly
+ * s 0.10-0.17, v 0.96 so navy body copy clears AA on it with room to spare.
+ *
+ * Measured on every wash below: --color-navy is 11.6:1 at worst and
+ * text-neutral-600 is 6.07:1 at worst. Re-measure if you retint one.
+ *
+ * A caution about the sampling. Five of these six photographs are dominated by
+ * warm hues because they are pictures of PEOPLE and skin sits at 10-30 degrees,
+ * so a naive "take the peak" would have produced six near-identical beige
+ * washes. Each wash below is a hue genuinely present in its own photo but
+ * chosen to be the one that characterises it: the Milky Way's rose band rather
+ * than the gold airglow beneath it, the park's green rather than the shirt.
+ *
+ * `focal` is the object-position for the 16:9 crop. Set it whenever the
+ * subject is not dead centre, which is most of the time.
+ */
+export type MessageHero = {
+  src: string
+  alt: string
+  wash: string
+  focal?: string
+}
+
+/**
+ * A supporting photograph placed INSIDE the copy rather than after it.
+ *
+ * `afterBlock` is how many body blocks precede it, so the picture lands at a
+ * narrative break the writer chose instead of being dumped at the bottom.
+ * Inline images run at 3:2 and at text-column width; heroes run at 16:9 and at
+ * container width. That difference is the visual grammar: a wide 16:9 plate
+ * means "this is the page", a 3:2 inside the measure means "this supports the
+ * sentence you just read".
+ */
+export type MessageInlineImage = {
+  src: string
+  alt: string
+  afterBlock: number
+}
+
 export type SpeakerMessage = {
   slug: string
   number: string
@@ -123,6 +169,10 @@ export type SpeakerMessage = {
   texture: MessageTexture
   icon: MessageIcon
   body: MessageBlock[]
+  /** Hero photograph, and the wash its description sits on. */
+  hero?: MessageHero
+  /** One supporting photograph, placed at a break inside `body`. */
+  inlineImage?: MessageInlineImage
   /** Further offerings under this same keynote. Rendered below `body`. */
   subtopics?: MessageSubtopic[]
   /**
@@ -178,6 +228,14 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
   },
   {
     slug: 'dreaming-big-with-god',
+    hero: {
+      src: '/images/keynotes/dream-big-hero.jpg',
+      alt: 'A lone figure standing on a ridge, looking up at the Milky Way arching across a star-filled sky',
+      // Rose band of the galaxy itself, 330 deg, 12% of the frame. The larger
+      // gold airglow low in the picture would have read as another beige.
+      wash: '#F6DDF2',
+      focal: 'center 60%',
+    },
     number: '02',
     title: 'Dreaming Big With God',
     teaser:
@@ -205,6 +263,13 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
   },
   {
     slug: 'activating-your-creativity',
+    hero: {
+      src: '/images/keynotes/creativity-hero.jpg',
+      alt: 'Hand-drawn light bulbs and looping scribbles bursting upward from the top of a person’s head',
+      // Warm yellow-white: the lit page the drawing sits on, and the bulbs.
+      wash: '#FBF4E5',
+      focal: 'center 42%',
+    },
     number: '03',
     title: 'Activating Your Creativity',
     teaser:
@@ -277,6 +342,13 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
   },
   {
     slug: 'building-a-kingdom-culture',
+    hero: {
+      src: '/images/keynotes/kingdom-culture-hero.jpg',
+      alt: 'A family in a bright living room, two parents leaning together while their daughter talks and their son listens',
+      // Warm cream of the room, held near grey so it does not read peach.
+      wash: '#F7EFE9',
+      focal: 'center 45%',
+    },
     number: '04',
     title: 'Building a Kingdom Culture at Home and in Ministry',
     cardTitle: 'Building a Kingdom Culture',
@@ -361,6 +433,20 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
   },
   {
     slug: 'heart-wide-open',
+    hero: {
+      src: '/images/keynotes/connect-with-child-hero.jpg',
+      alt: 'A father holding his young son close on a beach at sunset, both smiling with their eyes closed',
+      // Sunset gold behind the palms, 30 deg, 29% of the frame.
+      wash: '#F6E5D1',
+      focal: 'center 35%',
+    },
+    inlineImage: {
+      src: '/images/keynotes/connect-with-child-secondary.jpg',
+      alt: 'A girl hugging her mother tightly, eyes closed and smiling, in warm afternoon light',
+      // After the first paragraph, which ends on becoming the safe haven a
+      // child runs toward. The picture is that sentence.
+      afterBlock: 1,
+    },
     number: '05',
     // Flipped 2026-08-24 at Michele's instruction. It was
     // "Heart Wide Open: Building a Strong Connection with Your Child", one
@@ -395,6 +481,19 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
   },
   {
     slug: 'identity-healing-and-brave-purpose',
+    hero: {
+      src: '/images/keynotes/identity-healing-hero.jpg',
+      alt: 'A woman lifting a jewelled gold crown onto her own head, looking up and smiling in warm garden light',
+      // Sunlit golden-green of the garden behind her.
+      wash: '#F2F4CA',
+      focal: 'center 40%',
+    },
+    inlineImage: {
+      src: '/images/keynotes/identity-healing-secondary.jpg',
+      alt: 'Green butterflies rising out of an open glass jar into a moonlit blue meadow',
+      // After the second paragraph, which is the one about freedom and joy.
+      afterBlock: 2,
+    },
     number: '06',
     title:
       'Identity, Healing, and Walking in the Fullness of Who God Made You with Brave Purpose',
@@ -418,7 +517,10 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     body: [
       {
         kind: 'paragraph',
-        text: 'For too many women, hidden struggles with self-worth, unresolved pain, and quiet insecurity hold back the brilliant calling God has placed on their lives. Rooted in her own journey of transformation and years of ministering to faith communities, Michele brings a powerful, liberating message designed to break off limitation and elevate women into their true identity in Christ.',
+        // Opening line added 2026-08-24, verbatim. It answers the hero
+        // photograph directly above it, where she is lifting a crown onto her
+        // own head.
+        text: 'You were crowned with purpose. For too many women, hidden struggles with self-worth, unresolved pain, and quiet insecurity hold back the brilliant calling God has placed on their lives. Rooted in her own journey of transformation and years of ministering to faith communities, Michele brings a powerful, liberating message designed to break off limitation and elevate women into their true identity in Christ.',
       },
       {
         kind: 'paragraph',
@@ -438,6 +540,13 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
   },
   {
     slug: 'how-to-hear-gods-voice',
+    hero: {
+      src: '/images/keynotes/hear-gods-voice-hero.jpg',
+      alt: 'A man in a park cupping a hand behind his ear to listen, smiling and looking upward',
+      // Sunlit green of the park canopy, 60-90 deg, half the frame.
+      wash: '#EBF5D3',
+      focal: 'center 35%',
+    },
     number: '07',
     title: 'How to Hear God’s Voice',
     teaser:
