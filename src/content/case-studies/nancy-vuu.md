@@ -13,14 +13,24 @@ completion-date: 2026-08
 
 ## The Organization
 
-Nancy Vuu is a couture designer and the Visionary Director of The House of Nancy Vuu and Maison Arise. Her atelier in San Jose, California grew from a specialized tailoring house into a full couture house, and her work runs from bespoke bridal gowns to the Seth Eden line of tailored suits to ready-to-wear collections, jewelry, and crowns. Her own site describes her as an author and a strategic advisor to world leaders, dignitaries, and high-stakes innovators. Alongside the design work she runs The House of Vuu Foundation, which she calls the philanthropic heart of the institution, dedicated to the systemic restoration of human dignity on a global scale, with human trafficking squarely in its sights.
+Nancy Vuu is a couture designer and the Visionary Director of The House of Nancy Vuu and Maison Arise. Her San Jose, California atelier has grown into a full couture house offering bespoke bridal gowns, the Seth Eden line of tailored suits, ready-to-wear collections, jewelry, and crowns. Described as an author and strategic advisor to world leaders and high-stakes innovators, Nancy also leads The House of Vuu Foundation. This organization serves as the philanthropic heart of her institution, dedicated to the systemic global restoration of human dignity and squarely focused on combating human trafficking.
 
 ## The Engagement
 
-Michele and Nancy met when Nancy spoke at Michele's ReThink Creativity Conference in 2021, and the friendship has been a working one ever since. They founded and now lead the Crowning Initiative together, a shared expression of Nancy's crowning work and Michele's message about identity and worth. They co-lead dream retreats, and they have spoken together at conferences and workshops on "Dreaming Big For Your Life," including a trip to the East Coast for a dream summit at a large church.
+**Initial Connection:** Michele and Nancy's close personal and working friendship began when Nancy spoke at Michele's ReThink Creativity Conference in 2021.
 
-Nancy founded the first Dream Expo in Hawaiʻi, built for the marketplace and the body of Christ statewide, and brought Michele in as keynote speaker. Michele returned the welcome by taking part in the grand opening of the Nancy Vuu Atelier in California and sharing in the national-press program around it. Underneath all of it sits a passion both women hold: ending sex trafficking.
+**Ongoing Collaborations:** They frequently partner on Nancy's Crowning Initiative, perfectly blending Nancy's crowning work with Michele's message about identity and worth.
 
-## The Outcome
+**Shared Platforms:** They co-lead dream retreats and have spoken together on "Dreaming Big For Your Life" at various events, including an East Coast church dream summit and as co-keynotes at the 2024 Hawaiʻi Catholic Schools educators' gathering.
 
-The collaboration keeps producing new rooms. Nancy made the introduction that opened [Hawaiʻi Catholic Schools](/case-studies/hawaii-catholic-schools), where the two of them were both keynote speakers at the 2024 annual gathering. They co-led the engagement at [Kupu Center](/case-studies/kupu-center) with high-risk youth, and Nancy collaborates on the crowning ceremony for graduating seniors at [Christian Academy](/case-studies/christian-academy). The philanthropic collaboration is ongoing.
+**Major Milestones:** Nancy brought Michele in as a keynote speaker and vendor for the inaugural Dream Expo for the State of Hawaiʻi. Likewise, Michele partnered in the national-press grand opening of Nancy's California atelier to highlight their joint philanthropic initiative against human trafficking.
+
+## The Outcome & Foreword
+
+Their philanthropic collaboration and deep friendship continue to thrive today. Nancy also wrote the foreword for Michele's books, *Brave Purpose* and *Brave Purpose with God*. Here are a few powerful excerpts from Nancy's foreword:
+
+> "To walk alongside Michele Okimura is to witness a rare and beautiful phenomenon: someone who consistently sees the 'gold' in every person she encounters... Our journey together has been a tapestry of shared vision and divine collaboration... helping others move from 'Dream Big' to 'Dream Again,' and ultimately to 'Dreams Realized.'"
+
+> "In these pages, Michele invites you into her own powerful story... She speaks directly to the soul of anyone who has ever whispered, 'I am not enough,' offering a roadmap to recover the divine potential woven into their very being... *Brave Purpose* has the power to change the trajectory of your life, your community, and truly, the world."
+
+> "It is my honor to endorse my dear friend and sister, Michele Okimura. Your hiding days are over. It is time to dream again, bigger than you ever imagined."
