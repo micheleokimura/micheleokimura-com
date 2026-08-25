@@ -423,15 +423,47 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     accent: 'coral',
     texture: 'grid',
     icon: 'waveform',
+    // Michele's full description, 2026-08-24. Her draft was voice-typed, so
+    // she asked for light polish: paragraph breaks, punctuation, grammar. The
+    // content is hers and unchanged. Three fixes were made and no others:
+    // the em dash after "traditional channels" and the one after "your
+    // audience" are commas, and "keeps Michele coming backto" became "keeps
+    // her coming back to", which fixes the run-together typo and the third
+    // mention of her name in one sentence.
+    //
+    // This replaces all four of the paragraphs that were here and loses
+    // nothing: her text carries the other ways God speaks, the 1 Corinthians
+    // 14:1 unpacking, the audience list and the closing line. It also settles
+    // something flagged in the last pass, where her shorter copy said "youth
+    // and adults of all ages" while the delivery line underneath still listed
+    // children. Elementary children are back in the audience here.
     body: [
-      // Michele's approved rewrite, 2026-08-24, verbatim. The "beyond the
-      // ways most Christians know God speaks" line below is what the replaced
-      // paragraph carried that hers does not, and it is the substance of the
-      // workshop, so it stays as its own paragraph.
-      { kind: 'paragraph', text: 'For youth and adults of all ages who are ready to grow in their two-way relationship with God, this workshop builds faith through testimony, teaches discernment, and gives each participant practical activities to hear God’s voice in real time. Be prepared to encounter God in this time.' },
-      { kind: 'paragraph', text: 'Beyond the ways most Christians know God speaks (through Scripture, sermons, music), Michele opens the door to the other ways God is already speaking: through a thought, a vision, a picture, a circumstance.' },
-      { kind: 'paragraph', text: 'Michele also unpacks the invitation of 1 Corinthians 14:1 ("eagerly desire spiritual gifts, especially the gift of prophecy"), helping listeners grow the prophetic in their homes, their churches, and the encouragement they bring to others.' },
-      { kind: 'paragraph', text: 'Delivered for children, teens, families, ministry teams, and pastors. Watching people realize "I can hear God’s voice" is what keeps Michele coming back to this one.' },
+      {
+        kind: 'paragraph',
+        text: 'God is constantly speaking, but many believers miss His whisper simply because they haven’t learned to recognize the sound of His voice. Designed with the flexibility to serve elementary children, youth, adults, families, or full ministry teams, this transformative experience moves faith from a one-sided conversation into a dynamic, two-way relationship with the Spirit.',
+      },
+      {
+        kind: 'paragraph',
+        text: 'Michele expands your spiritual awareness beyond traditional channels, showing you how God speaks through spontaneous thoughts, visions, inner impressions, and everyday circumstances. Unpacking 1 Corinthians 14:1 with clarity and simplicity, she demystifies the gift of prophecy, equipping you to discern God’s voice, release timely encouragement, and build a culture of prophetic hearing in your home and church.',
+      },
+      {
+        kind: 'heading',
+        text: 'In this activation experience, participants will:',
+      },
+      {
+        kind: 'list',
+        termed: true,
+        items: [
+          'Recognize the Spectrum of God’s Voice: Learn how to tune into God’s everyday visual, intuitive, and relational prompts.',
+          'Master Real-Time Discernment: Gain tools and real-time activations to test and confirm what you hear.',
+          'Demystify Prophetic Encouragement: Step confidently into 1 Corinthians 14:1 to speak life, strength, and hope into those around you.',
+        ],
+      },
+      { kind: 'heading', text: 'Tailored for Every Generation' },
+      {
+        kind: 'paragraph',
+        text: 'Michele customizes this message and its practical exercises specifically for your audience, whether for elementary-age kids, youth, adults, multigenerational families, or pastors and ministry teams. Watching people of any age realize "I can hear God’s voice" is what Michele loves most and is what keeps her coming back to this one.',
+      },
     ],
     endorsements: [
       {

@@ -139,13 +139,23 @@ In this uplifting and deeply restorative message, Michele walks women through th
 
 ### 7. How to Hear God's Voice
 
-For youth and adults of all ages who are ready to grow in their two-way relationship with God, this workshop builds faith through testimony, teaches discernment, and gives each participant practical activities to hear God's voice in real time. Be prepared to encounter God in this time.
+**Card teaser.** For youth and adults of all ages who are ready to grow in their two-way relationship with God, this workshop builds faith through testimony, teaches discernment, and gives each participant practical activities to hear God's voice in real time. Be prepared to encounter God in this time.
 
-Beyond the ways most Christians know God speaks (through Scripture, sermons, music), Michele opens the door to the other ways God is already speaking: through a thought, a vision, a picture, a circumstance.
+**Full description.**
 
-Michele also unpacks the invitation of 1 Corinthians 14:1 ("eagerly desire spiritual gifts, especially the gift of prophecy"), helping listeners grow the prophetic in their homes, their churches, and the encouragement they bring to others.
+God is constantly speaking, but many believers miss His whisper simply because they haven't learned to recognize the sound of His voice. Designed with the flexibility to serve elementary children, youth, adults, families, or full ministry teams, this transformative experience moves faith from a one-sided conversation into a dynamic, two-way relationship with the Spirit.
 
-Delivered for children, teens, families, ministry teams, and pastors. Watching people realize "I can hear God's voice" is what keeps Michele coming back to this one.
+Michele expands your spiritual awareness beyond traditional channels, showing you how God speaks through spontaneous thoughts, visions, inner impressions, and everyday circumstances. Unpacking 1 Corinthians 14:1 with clarity and simplicity, she demystifies the gift of prophecy, equipping you to discern God's voice, release timely encouragement, and build a culture of prophetic hearing in your home and church.
+
+#### In this activation experience, participants will:
+
+- Recognize the Spectrum of God's Voice: Learn how to tune into God's everyday visual, intuitive, and relational prompts.
+- Master Real-Time Discernment: Gain tools and real-time activations to test and confirm what you hear.
+- Demystify Prophetic Encouragement: Step confidently into 1 Corinthians 14:1 to speak life, strength, and hope into those around you.
+
+#### Tailored for Every Generation
+
+Michele customizes this message and its practical exercises specifically for your audience, whether for elementary-age kids, youth, adults, multigenerational families, or pastors and ministry teams. Watching people of any age realize "I can hear God's voice" is what Michele loves most and is what keeps her coming back to this one.
 
 > "She just did a session at Native Camp in Montana and it was excellent, the most impactful session of the whole camp. We had 19 FMI workers there. Every person had an experience of how to prophesy over each other. Simple, practical, and powerful. I saw it all personally. Now many children in our church prophesy and unashamedly pray for healing, all because of Michele."
 >

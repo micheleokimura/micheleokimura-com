@@ -28,14 +28,12 @@ import {
  * routes.
  *
  * ####################### PLACEHOLDER ##############################
- * Six of the seven now carry Michele's full description (brave purpose,
- * dreaming big, creativity, kingdom culture, heart wide open, identity, all
- * 2026-08-24). ONE still runs on the short paragraph the card teaser was cut
- * from and is waiting on her longer text:
+ * ALL SEVEN now carry Michele's full description, delivered 2026-08-24. None
+ * is running on placeholder copy any more, and the card teasers on /speaker
+ * are deliberately shorter than these rather than out of date.
  *
- *   how-to-hear-gods-voice
- *
- * Four of the seven carry no endorsement at all, and five more endorsers are
+ * What is still missing is material, not words. Four of the seven carry no
+ * endorsement at all, and five more endorsers are
  * named for kingdom-culture whose quotes have not been captured; see the TODO
  * in src/lib/speaker-messages.ts. No page carries a photograph, a video clip,
  * a run sheet, or a technical rider. Michele has that material; it has not
