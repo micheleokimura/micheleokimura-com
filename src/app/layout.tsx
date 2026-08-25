@@ -31,11 +31,27 @@ export const metadata: Metadata = {
     siteName: siteConfig.brand,
     locale: 'en_US',
     url: siteConfig.url,
+    /**
+     * The sitewide fallback card. Every route that builds its metadata through
+     * pageMetadata() sets its own copy of this, so what inherits from here is
+     * the home page plus anything that ever forgets to. Without it a scraper
+     * picks its own image off the page, which is how a State of Hawai'i seal
+     * ended up as the preview in iMessage.
+     */
+    images: [
+      {
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.brand}, speaker, author, and writing coach`,
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: `${siteConfig.brand} · Speaker, author, and coach`,
     description: siteConfig.description,
+    images: [siteConfig.ogImage],
   },
   alternates: {
     canonical: '/',

@@ -25,13 +25,24 @@ export const siteConfig = {
    * Sitewide Open Graph / Twitter card image AND the `image` on Michele's
    * Person schema, so it is the picture an answer engine attaches to her.
    *
-   * TODO: this is the warmest photo currently in the repo (the 2023 Outstanding
-   * Advocate award). It is NOT a purpose-built card. Two things should replace
-   * it when they exist: a proper 1200x630 OG card, and a real press headshot at
-   * /images/press-kit/headshot-michele-okimura-hero.jpg. Drop either in and
-   * change this one line; every page and every schema block follows.
+   * A purpose-built 1200x630 card, built by scripts/build-og-card.swift from
+   * scripts/og-card.html. Edit the HTML and re-run the script to change it.
+   *
+   * It replaced the 2023 Outstanding Advocate snapshot, which was the wrong
+   * picture twice over: it is a square casual photo of Michele AND Rob, and the
+   * State of Hawai'i seal on his cap is what iMessage kept pulling out and
+   * showing as the preview for links to this site.
    */
-  ogImage: '/images/about-timeline/about-2023-hawaii-outstanding-advocate-19.jpg',
+  ogImage: '/og-image.jpg',
+  /**
+   * A clean photograph of Michele, with no card furniture over it. This is what
+   * her Person entity points at, because an answer engine drawing a knowledge
+   * panel wants her face, and `ogImage` is a composed card with type on it.
+   *
+   * The 6000x4000 original it was resized from sits next to it as
+   * michele-headshot-og-source.jpg, and is also what the OG card is built from.
+   */
+  headshot: '/images/press-kit/michele-okimura-headshot.jpg',
   city: 'Honolulu',
   state: 'HI',
   designer: 'Michele Okimura',

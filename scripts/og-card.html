@@ -1,0 +1,75 @@
+<!doctype html>
+<meta charset="utf-8">
+<!--
+  Source of truth for /public/og-image.jpg, the sitewide social card.
+  Rendered by scripts/build-og-card.swift. See the header there for why this is
+  HTML rather than a drawing script: it lets the card use the real Mona Sans
+  variable font and the real brand hexes off the palette.
+-->
+<style>
+  @font-face {
+    font-family: 'Mona Sans';
+    src: url('../src/fonts/Mona-Sans.var.woff2') format('woff2-variations');
+    font-weight: 200 900;
+    font-style: normal;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 2400px; height: 1260px; overflow: hidden; background: #fff; }
+
+  .card {
+    width: 1200px; height: 630px;
+    transform: scale(2); transform-origin: top left;
+    position: relative; display: flex;
+    font-family: 'Mona Sans', ui-sans-serif, system-ui, sans-serif;
+    background: linear-gradient(160deg, #fcfaf6 0%, #f7f2e8 55%, #f2ecdf 100%);
+    overflow: hidden;
+  }
+
+  /* Photo panel, left. Michele's face lands left of the card's centre line,
+     which is what leaves the right side clear for the text block. */
+  .photo { position: relative; width: 540px; height: 630px; flex: none; }
+  .photo img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: 24% 50%;
+    display: block;
+  }
+  /* Softens the cut from the dark green wood into the cream. */
+  .photo::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(31,39,68,0) 78%, rgba(242,236,223,0.28) 100%);
+  }
+  .seam {
+    position: absolute; top: 0; left: 540px; width: 6px; height: 630px;
+    background: #b8431f;
+  }
+
+  .text {
+    flex: 1; display: flex; flex-direction: column; justify-content: center;
+    padding: 0 72px 0 66px;
+  }
+  .name {
+    font-variation-settings: 'wdth' 125;
+    font-weight: 700; font-size: 62px; line-height: 1.04;
+    letter-spacing: -0.018em; color: #1f2744;
+  }
+  .rule { width: 68px; height: 4px; background: #b8431f; margin: 26px 0 24px; }
+  .roles {
+    font-weight: 600; font-size: 26px; line-height: 1.35;
+    letter-spacing: 0.005em; color: #b8431f;
+  }
+  .place {
+    margin-top: 16px;
+    font-weight: 500; font-size: 21px; letter-spacing: 0.005em;
+    color: rgba(31,39,68,0.58);
+  }
+</style>
+<div class="card">
+  <div class="photo"><img src="../public/images/press-kit/michele-headshot-og-source.jpg" alt=""></div>
+  <div class="seam"></div>
+  <div class="text">
+    <div class="name">Michele<br>Okimura</div>
+    <div class="rule"></div>
+    <div class="roles">Speaker &middot; Author &middot; Writing Coach</div>
+    <div class="place">Honolulu, Hawai&#x02BB;i</div>
+  </div>
+</div>

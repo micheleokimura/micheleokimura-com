@@ -74,7 +74,7 @@ export function personSchema(): Json {
     mainEntityOfPage: `${siteConfig.url}/about`,
     email: siteConfig.email,
     description: siteConfig.description,
-    image: `${siteConfig.url}${siteConfig.ogImage}`,
+    image: `${siteConfig.url}${siteConfig.headshot}`,
     gender: 'Female',
     nationality: 'American',
     birthPlace: { '@type': 'Place', name: 'Honolulu, Hawaii, USA' },
@@ -417,13 +417,25 @@ export function pageMetadata({
   const fullTitle = `${title} · ${siteConfig.brand}`
   const social = ogDescription ?? description
 
+  /**
+   * Only the sitewide card is known to be 1200x630. Callers that pass their own
+   * `image` pass a book cover, which is portrait, and stating landscape
+   * dimensions for it makes Facebook and LinkedIn lay out a landscape box and
+   * then crop the cover to fit. Leaving them off lets the scraper read the real
+   * ones off the file.
+   */
+  const ogImageEntry: { url: string; alt: string; width?: number; height?: number } =
+    image === undefined
+      ? { url: ogImage, alt: siteConfig.brand, width: 1200, height: 630 }
+      : { url: ogImage, alt: title }
+
   const ogBase = {
     title: fullTitle,
     description: social,
     url,
     siteName: siteConfig.brand,
     locale: 'en_US',
-    images: [{ url: ogImage, width: 1200, height: 630, alt: siteConfig.brand }],
+    images: [ogImageEntry],
   }
 
   // Next's OpenGraph type is a discriminated union on `type`, so the object has
