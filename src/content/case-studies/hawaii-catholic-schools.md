@@ -13,19 +13,22 @@ completion-date: 2026-08
 
 ## The Organization
 
-Hawaiʻi Catholic Schools is the network of Catholic schools across the islands, led by Superintendent Dr. Llewellyn Young. Its annual gathering is the one event that brings staff from every Catholic campus in the state into a single room, which makes it the natural place to put something in front of the whole network at once.
+Hawaiʻi Catholic Schools is a statewide network of campuses led by Superintendent Dr. Llewellyn Young. Their annual gathering is a unique and powerful event, bringing together staff from every Catholic campus across the islands into a single room. This convergence makes it the ideal venue to introduce new initiatives and resources to the entire network at once.
 
 ## The Engagement
 
-The introduction came through Nancy Vuu. In 2024 Michele and Nancy were both keynote speakers at the annual gathering of all Catholic schools' staff, and Michele led workshops there in 2024 and again in 2025. Superintendent Young has been a strong supporter of the Brave Series since.
+**Initial Connection:** The working relationship began after Michele met in person with Superintendent Dr. Young.
 
-A newer thread is forming with Dr. Brandy Ann Sato, President of Sacred Hearts Academy, the Catholic all-girls school in Honolulu. Michele and Dr. Sato are planning a Brave & Beautiful conference for spring 2027, built as a community-wide Oʻahu event open to Catholic leaders, educators, and parents, and widened to the broader community and state educators.
+**Keynote & Workshops:** In 2024, Michele and Nancy co-delivered the keynote address at the annual all-staff gathering, Mass of the Holy Spirit. Michele also led dedicated workshops on nurturing creativity in the classroom and empowering students to dream big for their lives during the 2024 event and returned to lead them again in 2025.
+
+**Ongoing Support:** Since these initial engagements, Superintendent Young has remained a supporter of the Brave Series.
 
 ## The Outcome
 
-The network is now exploring what it would look like to implement the Brave Series across Hawaiʻi's Catholic schools. Dr. Sato, after a planning meeting in June 2026:
+**A New Partnership:** An exciting new collaboration is currently forming with Dr. Brandy Ann Sato, Principal of Sacred Hearts Academy, an all-girls Catholic school in Honolulu.
 
-> "Mahalo, Michele, for your time today. As always, I left inspired! I already spoke to our Director of Special Events and our Director of Admissions, and they are supportive."
-> Dr. Brandy Ann Sato, President, Sacred Hearts Academy
+**Spring 2027 Conference:** Michele and Dr. Sato are actively planning a Brave & Beautiful conference scheduled for the spring of 2027.
 
-The relationship traces back to [Nancy Vuu](/case-studies/nancy-vuu), who opened the door in the first place.
+**Community Impact:** This gathering is being built as a community-wide Oʻahu event. It will be open to Catholic leaders, educators, and parents, and widened to include the broader community and state educators to raise awareness for the Brave Series and directly empower all attendees.
+
+**Future Vision:** Michele hopes this conference marks a beautiful beginning to a long-term journey of supporting students across Hawaiʻi's Catholic Schools.
