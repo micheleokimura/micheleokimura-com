@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
-import { Cover, Forthcoming } from '@/components/AuthorBookParts'
+import { Cover, Forthcoming, SquareButton } from '@/components/AuthorBookParts'
 import { AllWorksJsonLd, WebPageJsonLd } from '@/components/JsonLd'
 import {
   DREAM_BIG_EDITIONS,
@@ -12,6 +12,7 @@ import {
   getAuthorBook,
   type AuthorBook,
 } from '@/lib/author-books'
+import { SQUARE_STORE_URL, getSquareLink } from '@/data/square-store-links'
 import { projectStudies } from '@/lib/projects'
 import { pageMetadata } from '@/lib/schema'
 
@@ -132,13 +133,16 @@ const TILE_CLASS =
 const BODY_CLASS = 'flex min-w-0 flex-1 flex-col p-2.5 sm:p-4'
 
 /**
- * The footer row, pinned to the bottom of the body with `mt-auto` so it lines
- * up across a row of cards whatever the teaser length. Reference spacing:
- * `pt-1.5 xs:pt-4`.
+ * The "Learn more" half of the tile footer.
+ *
+ * The `mt-auto` that used to pin this to the bottom of the body now lives on
+ * TILE_FOOTER, which wraps this and the Square button together so the pair
+ * lines up across a row of cards whatever the teaser length. Reference
+ * spacing: `pt-1.5 xs:pt-4`.
  */
 function LearnMore() {
   return (
-    <span className="font-display mt-auto inline-flex items-center gap-1.5 self-start pt-1.5 text-sm font-semibold text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition group-hover:decoration-2 sm:pt-4">
+    <span className="font-display inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition group-hover:decoration-2">
       Learn more
       <span
         aria-hidden="true"
@@ -150,7 +154,31 @@ function LearnMore() {
   )
 }
 
-/** A title on the shelf: cover, title, forthcoming tag, teaser, learn more. */
+/** Holds "Learn more" and the Square button on one baseline at the card foot. */
+const TILE_FOOTER =
+  'mt-auto flex flex-wrap items-center gap-x-3 gap-y-2 pt-1.5 sm:pt-4'
+
+/**
+ * A title on the shelf: cover, title, forthcoming tag, teaser, and a footer
+ * carrying "Learn more" and, where the title is stocked, "Buy on Square".
+ *
+ * WHY THIS IS A DIV WRAPPING AN OVERLAY LINK RATHER THAN A LINK WRAPPING
+ * EVERYTHING. The tile used to be one <Link> around the whole card. The Square
+ * button is an <a> of its own, and an anchor nested inside an anchor is invalid
+ * HTML: the browser closes the outer one early and the card splits into two
+ * link boxes with the teaser stranded between them. So the card is a plain div,
+ * and the link to /author/books/<slug> is a transparent sibling stretched over
+ * it with `absolute inset-0`. The button then sits above that overlay on `z-10`
+ * and takes its own clicks, which is exactly the brief: the tile goes to the
+ * book's page, the button goes to Square.
+ *
+ * The overlay carries the tile's focus ring, drawn INSIDE the border with
+ * `-outline-offset-2` because TILE_CLASS is `overflow-hidden` and would
+ * otherwise clip a normal outward offset to nothing.
+ *
+ * `group` stays on the div, so every `group-hover:` in here still fires, and
+ * hovering the button lifts the whole card the way hovering the cover does.
+ */
 function BookTile({
   book,
   headingClass = 'text-lg',
@@ -163,8 +191,21 @@ function BookTile({
   /** Off inside a curriculum family, which carries one link on its heading. */
   showLearnMore?: boolean
 }) {
+  const squareHref = getSquareLink(book.slug)
+  /* The three Brave Series child tiles carry neither, and an empty footer
+     would still spend its `pt-4` on nothing. */
+  const hasFooter = showLearnMore || Boolean(squareHref)
+
   return (
-    <Link href={`/author/books/${book.slug}`} className={TILE_CLASS}>
+    <div className={`${TILE_CLASS} relative`}>
+      <Link
+        href={`/author/books/${book.slug}`}
+        className="absolute inset-0 z-0 rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[var(--color-brand-teal)]"
+      >
+        {/* The card's visible text is not inside the anchor any more, so the
+            link needs a name of its own. */}
+        <span className="sr-only">{book.title}</span>
+      </Link>
       <Cover src={book.cover} alt={book.coverAlt} sizes={TILE_SIZES} flush />
       <div className={BODY_CLASS}>
         <Heading
@@ -181,9 +222,30 @@ function BookTile({
         <p className="mt-1.5 line-clamp-5 text-xs leading-5 text-neutral-600 sm:text-sm sm:leading-5">
           {book.teaser}
         </p>
-        {showLearnMore ? <LearnMore /> : null}
+        {hasFooter ? (
+          <div className={TILE_FOOTER}>
+            {showLearnMore ? <LearnMore /> : null}
+            {/* No button and no substitute label when there is no listing.
+                The brief asked for a "Coming soon" here, and the two titles it
+                would land on are the two Brave Purpose editions, which already
+                carry "Forthcoming Spring 2027" three lines up in Michele's own
+                wording. A generic second label under it says the same thing
+                twice, less precisely. The other unlinked titles must not get
+                one at all: the Brave Series sells through thebraveseries.com
+                and The Birth of Explicit Movement has been out since 2018, so
+                "coming soon" on either would be false. See
+                src/data/square-store-links.ts. */}
+            {squareHref ? (
+              <SquareButton
+                href={squareHref}
+                forTitle={book.title}
+                className="relative z-10"
+              />
+            ) : null}
+          </div>
+        ) : null}
       </div>
-    </Link>
+    </div>
   )
 }
 
@@ -225,10 +287,15 @@ function FamilyHeading({
   title,
   subtitle,
   href,
+  squareHref,
+  forTitle,
 }: {
   title: string
   subtitle?: string
   href: string
+  /** Square link for the whole curriculum, when there is one. */
+  squareHref?: string | null
+  forTitle?: string
 }) {
   return (
     <FadeIn>
@@ -247,14 +314,26 @@ function FamilyHeading({
         </p>
       ) : null}
       {/* Deliberately larger than the per-tile link: this one is carrying a
-          whole curriculum rather than a single title. */}
-      <Link
-        href={href}
-        className="font-display mt-4 inline-flex items-center gap-2 text-base font-semibold text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-2 underline-offset-[6px] transition hover:text-[var(--color-brand-terracotta-ink)] sm:text-lg"
-      >
-        Learn more
-        <span aria-hidden="true">&rarr;</span>
-      </Link>
+          whole curriculum rather than a single title.
+
+          The Square button sits HERE rather than on the eight edition tiles
+          below it. Every bracket of the Dream Big curriculum is one product on
+          Square with the age group as a dropdown, so a button per tile would
+          be the same URL eight times over. That is the exact repetition
+          Michele's 2026-08-24 note asked to remove, and it applies to a buy
+          link as much as to a "Learn more". */}
+      <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-3">
+        <Link
+          href={href}
+          className="font-display inline-flex items-center gap-2 text-base font-semibold text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-2 underline-offset-[6px] transition hover:text-[var(--color-brand-terracotta-ink)] sm:text-lg"
+        >
+          Learn more
+          <span aria-hidden="true">&rarr;</span>
+        </Link>
+        {squareHref ? (
+          <SquareButton href={squareHref} forTitle={forTitle ?? title} />
+        ) : null}
+      </div>
     </FadeIn>
   )
 }
@@ -410,6 +489,8 @@ export default function AuthorPage() {
                     title={parent.title}
                     subtitle={block.subtitle}
                     href={`/author/books/${parent.slug}`}
+                    squareHref={getSquareLink(parent.slug)}
+                    forTitle={parent.title}
                   />
 
                   {/* Children that are titles in their own right. */}
@@ -476,6 +557,27 @@ export default function AuthorPage() {
               )
             })}
           </div>
+
+          {/* Closes the shelf with the one route that covers everything.
+              Several titles carry no button of their own (the Brave Series
+              sells through thebraveseries.com, Brave Purpose is not out), so
+              a reader who wants to browse rather than buy one title has
+              somewhere to go. A text link, not a button: the buttons above are
+              the calls to action and a second filled control down here would
+              compete with them. */}
+          <FadeIn>
+            <p className="mt-14 sm:mt-16">
+              <a
+                href={SQUARE_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-display inline-flex items-center gap-2 text-base font-semibold text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-2 underline-offset-[6px] transition hover:text-[var(--color-brand-terracotta-ink)] sm:text-lg"
+              >
+                Shop all books on Square
+                <span aria-hidden="true">&rarr;</span>
+              </a>
+            </p>
+          </FadeIn>
         </div>
       </section>
 

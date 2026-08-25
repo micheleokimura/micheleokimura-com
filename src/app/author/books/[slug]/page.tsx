@@ -12,6 +12,7 @@ import {
   Cover,
   Endorsements,
   Forthcoming,
+  SquareButton,
 } from '@/components/AuthorBookParts'
 import { WebPageJsonLd } from '@/components/JsonLd'
 import {
@@ -19,6 +20,7 @@ import {
   AUTHOR_EDITION_LABELS,
   getAuthorBook,
 } from '@/lib/author-books'
+import { getSquareLink } from '@/data/square-store-links'
 import { pageMetadata } from '@/lib/schema'
 
 /**
@@ -228,6 +230,8 @@ export default async function AuthorBookPage({
   const book = getAuthorBook(slug)
   if (!book) notFound()
 
+  const squareHref = getSquareLink(slug)
+
   return (
     <>
       <WebPageJsonLd
@@ -263,6 +267,33 @@ export default async function AuthorBookPage({
                 priority
               />
             )}
+
+            {/* The buy CTA, directly under the cover and above the fold.
+
+                It is up here rather than beside the BuyLink panel further down
+                because those are two different destinations doing two
+                different jobs: BuyLink is the branded storefront a title was
+                already sold through, this is Michele's own Square store. No
+                title carries both today (see the Brave Series note in
+                src/data/square-store-links.ts), so the two never stack.
+
+                Nothing renders in place of the button when there is no
+                listing. The brief asked for a "Coming soon" stand-in, but the
+                forthcoming titles already print "Forthcoming Spring 2027" at
+                the head of the column beside this one, and the titles that are
+                simply not stocked on Square are on sale elsewhere: calling The
+                Birth of Explicit Movement "coming soon" in 2026 would be
+                flatly untrue. */}
+            {squareHref ? (
+              <div className="mt-6">
+                <SquareButton
+                  href={squareHref}
+                  forTitle={book.title}
+                  size="page"
+                  className="w-full"
+                />
+              </div>
+            ) : null}
           </div>
 
           <div>
