@@ -39,6 +39,10 @@ export const metadata: Metadata = pageMetadata({
  *   2. an H2 "My Story" over the 24-tile photo mosaic
  *   3. nothing else
  *
+ * plus a 1920x640 hero photograph, which is a background-image on the hero
+ * container rather than an <img>, so it does not appear in a markup-only
+ * crawl. It is mirrored here as its own band.
+ *
  * The ONLY edits to that copy are the two the house rules require:
  *   - em dashes removed (paragraphs 1 and 7)
  *   - "Hawaii" -> "Hawaiʻi" (paragraph 2, twice)
@@ -74,8 +78,11 @@ export const metadata: Metadata = pageMetadata({
  *
  * BANDS. Every section is full-bleed on one of --color-band-1/2/3 and carries
  * its own padding, and neighbours never share a band. Top to bottom:
- * banner (navy) / welcome band-1 / pull line band-3 / story band-2 /
- * mosaic band-1 / honors band-2 / footer run-in band-4 (painted by SiteFooter).
+ * banner (navy) / hero photo + welcome band-1 / pull line band-3 /
+ * story band-2 / mosaic band-1 / honors band-2 / footer run-in band-4
+ * (painted by SiteFooter). The photo band and the Welcome copy share band-1
+ * on purpose: they read as one surface, and the photograph itself is the
+ * separation.
  */
 export default function AboutPage() {
   return (
@@ -96,35 +103,46 @@ export default function AboutPage() {
           below, and promoting it would reorder her copy. */}
       <PageIntro eyebrow="About" title="About Michele Okimura" />
 
-      {/* WordPress: H2 "Welcome." and the one-line lead. Verbatim.
-          The portrait has no WordPress counterpart, since that page carries no
-          photograph outside the mosaic. It is an existing approved site asset,
-          held to 18rem so it sits beside the copy rather than dominating it. */}
+      {/* The WordPress hero photograph, which is the one image on that page
+          outside the mosaic. It is not an <img> there, it is a background-image
+          on the Elementor hero container, which is why the first crawl of the
+          markup missed it: 1920x640, background-size cover, min-height 500px.
+          The URL is in the reference README.
+
+          Run here as its own band under the banner rather than at 500px, per
+          Brett: right-sized, not oversized. Michele sits just right of centre
+          in the frame, so the crop holds at 50% horizontally and lifts to 42%
+          vertically to keep her face out of the lower third at wide sizes. */}
+      <section className="bg-[var(--color-band-1)]">
+        <div className="relative h-[220px] w-full sm:h-[300px] lg:h-[380px]">
+          <Image
+            src="/images/about/wordpress-mirror/00-hero-banner.jpg"
+            alt="Michele Okimura in a garden above Honolulu"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[50%_42%]"
+          />
+        </div>
+      </section>
+
+      {/* WordPress: H2 "Welcome." and the one-line lead. Verbatim. Single
+          column, as it is there. The portrait that used to sit beside this is
+          gone: it was /images/michele/about-hero.jpg, a site asset with no
+          WordPress counterpart, and the band above now carries Michele's own
+          hero photograph instead. */}
       <section className="bg-[var(--color-band-1)] py-12 sm:py-16 lg:py-20">
         <Container>
           <FadeIn>
-            <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_minmax(0,18rem)] lg:items-center lg:gap-16">
-              <div className="max-w-2xl">
-                <h2 className="font-display text-3xl font-medium tracking-tight text-neutral-950 sm:text-4xl">
-                  Welcome.
-                </h2>
-                <p className="mt-5 text-lg leading-8 text-neutral-700 sm:text-xl sm:leading-9">
-                  I&rsquo;m an author and speaker who has spent the last four
-                  decades inspiring courage, vulnerability, healing, and
-                  creativity.
-                </p>
-              </div>
-
-              <div className="relative order-first aspect-[4/5] w-full max-w-[15rem] overflow-hidden rounded-3xl bg-[var(--color-navy-10)] sm:max-w-[17rem] lg:order-last lg:max-w-none">
-                <Image
-                  src="/images/michele/about-hero.jpg"
-                  alt="Michele Okimura in Hawaiʻi"
-                  fill
-                  priority
-                  sizes="(min-width: 1024px) 18rem, 17rem"
-                  className="object-cover object-[62%_28%]"
-                />
-              </div>
+            <div className="max-w-2xl">
+              <h2 className="font-display text-3xl font-medium tracking-tight text-neutral-950 sm:text-4xl">
+                Welcome.
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-neutral-700 sm:text-xl sm:leading-9">
+                I&rsquo;m an author and speaker who has spent the last four
+                decades inspiring courage, vulnerability, healing, and
+                creativity.
+              </p>
             </div>
           </FadeIn>
         </Container>

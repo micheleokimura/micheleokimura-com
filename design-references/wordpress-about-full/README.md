@@ -34,9 +34,25 @@ Three things, in this order, and nothing else:
 2. An `<h2>My Story</h2>` over the 24-tile photo mosaic.
 3. The theme footer.
 
-There is **no** "Honors & Recognition" section, **no** "Roles & Work" section,
-and **no** photograph anywhere outside the mosaic. The only other image on the
-page is the header wordmark. Those two sections on the rebuilt page are this
+Plus a hero photograph above all of it. It is NOT an `<img>`: it is a
+`background-image` on the hero container, so a markup-only crawl misses it
+entirely. It is declared in `post-202.css`:
+
+```
+.elementor-202 .elementor-element.elementor-element-84b19fb { --min-height: 500px }
+  background-image: url(".../2025/09/Untitled-1920-x-640-px-1.jpg");
+  background-size: cover;
+  background-position: -422px 0px;
+```
+
+Source: `https://micheleokimura.com/wp-content/uploads/2025/09/Untitled-1920-x-640-px-1.jpg`
+(1920x640, HTTP 200). Local: `public/images/about/wordpress-mirror/00-hero-banner.jpg`.
+The rebuild runs it as its own band under the banner at 220/300/380px rather
+than 500px, per Brett: right-sized, not oversized.
+
+There is **no** "Honors & Recognition" section and **no** "Roles & Work"
+section. Apart from the hero photograph and the mosaic, the only other image on
+the page is the header wordmark. Those two sections on the rebuilt page are this
 site's own and have no WordPress counterpart.
 
 ## The layout, measured off the live DOM
@@ -83,7 +99,7 @@ The rebuild pins captions visible below `sm` for that reason.
 
 ## Photos
 
-All 24 pulled 2026-08-25. Every one returned HTTP 200. Nothing 404ed, nothing
+All 24 mosaic tiles plus the hero photograph pulled 2026-08-25. Every one returned HTTP 200. Nothing 404ed, nothing
 was substituted. Local copies are in `public/images/about/wordpress-mirror/`,
 named by mosaic position so the order is readable on disk.
 
@@ -146,6 +162,8 @@ rebuilt `/about`, a few screens apart.
 
 - The Instagram icon in the WordPress hero. The rebuilt site puts social links
   in the footer. Say the word if it should sit in the hero too.
+- WordPress centres the hero eyebrow, "Welcome.", and the lead. The rebuild
+  left-justifies them to the wordmark, per Brett's explicit instruction.
 
 ## Michele's own screenshots, 2026-08-23
 
