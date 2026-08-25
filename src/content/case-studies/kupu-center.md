@@ -13,12 +13,18 @@ completion-date: pending
 
 ## The Organization
 
-Kupu Center is a community-based Hawaiʻi organization serving high-risk youth, including young people who are homeless and young people carrying trauma. The work is close to the ground and relational, with a leadership team that knows the kids by name.
+Kupu Center is a community-based organization in Hawaiʻi dedicated to serving high-risk youth, including those experiencing homelessness and young people carrying trauma. Their work is profoundly relational and deeply rooted in the community, guided by a caring and impactful leadership team.
 
 ## The Engagement
 
-Michele partnered with [Nancy Vuu](/case-studies/nancy-vuu) on this one, and the two of them spoke together to the youth about dreaming big for their lives. It is a message that asks something real of a room where many of the young people have had good reason to stop expecting much. Alongside the speaking, Michele introduced Brave & Beautiful and Brave & Bold to the Kupu Center leadership team as resources the staff could carry forward after the session ended.
+**Strategic Partnership:** For this engagement, Michele partnered with [Nancy Vuu](/case-studies/nancy-vuu), a globally renowned fashion designer with a shared passion for imparting vision and hope to young people.
+
+**Inspiring Message:** Together, they spoke to the youth about the importance of dreaming big for their lives. This was a deeply impactful message that asked something real of a room where many young people have had good reason to stop hoping for more.
+
+**Equipping Leaders:** Alongside the speaking session, Michele introduced Brave & Beautiful and Brave & Bold to the Kupu Center leadership team, providing staff with tangible resources to carry the momentum forward after the event concluded.
 
 ## The Outcome
 
-A senior decision-maker at Kupu Center is planning to run Brave & Bold with the boys and is evaluating the Brave & Beautiful edition for the girls. Michele's friendship with the leadership team continues past the engagement itself, which is usually the sign that the material fit the room rather than being handed to it.
+**Program Evaluation:** A senior decision-maker at the Kupu Center is currently evaluating the curricula, with the hope of running Brave & Bold with the boys and reviewing the Brave & Beautiful edition for the girls.
+
+**Ongoing Connection:** Beyond the engagement itself, Michele maintains a continued friendship with the leadership team, carrying a deep honor and respect for the vital work they do.
