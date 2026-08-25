@@ -402,14 +402,19 @@ html {
    The periwinkle strip behind Michele's portrait and her purpose line. Moved
    here from /coach on 2026-08-24, where it sat on a soft teal.
 
-   The colour is sampled from the photograph it carries, which is the same
-   convention the banner at the top of this page follows. Michele asked for
-   "periwinkle, a lighter sapphire, matching the sapphire flowers in the
-   dress, and don't make it too dark". The flowers in
-   public/images/michele/coach-hero.jpg average #28326A across 954 pixels once
+   Michele asked for "periwinkle, a lighter sapphire, matching the sapphire
+   flowers in the dress, and don't make it too dark". Those flowers, in
+   public/images/michele/coach-hero.jpg, average #28326A across 954 pixels once
    the pale fabric and the shadow are thrown out: hue 230, s 0.62, v 0.42. A
    true sapphire. This wash is that hue held exactly and lifted to s 0.13,
    v 0.96, which keeps the flower's colour and none of its weight.
+
+   THE PHOTOGRAPH CHANGED on 2026-08-24 and the wash did not. The floral dress
+   moved to /author and the banner now carries Michele on the beach in the
+   black dress. The colour still belongs to the picture rather than surviving
+   out of habit: the new frame's dominant hue is its sky and ocean at 218
+   degrees against this wash's 228, ten degrees apart. If the photograph is
+   swapped again, re-sample and check that it is still in family.
 
    Flat, no gradient. It is one full-bleed strip and a gradient would fight
    the circular portrait sitting on it.

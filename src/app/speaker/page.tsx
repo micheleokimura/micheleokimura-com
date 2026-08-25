@@ -103,17 +103,19 @@ export const metadata: Metadata = pageMetadata({
 const HERO_PHOTO = '/images/michele/speaker-hero-day2.jpg'
 
 /**
- * Michele at home in Honolulu, in the floral dress, holding a mug. Shown
+ * Michele on the beach in the black dress, beside the tree. Shown
  * circle-cropped in the quote banner.
  *
- * The filename says `coach-hero` because that is where this photograph was
- * first used and /coach still points its own hero at the same file. It is NOT
- * a stray reference. Do not rename it to match this page without checking
- * /coach first. The sapphire flowers in this dress are where the quote
- * banner's periwinkle was sampled from, so re-sample
- * `.surface-speaker-quote` in tailwind.css if this photograph is swapped.
+ * Swapped in 2026-08-24. The floral-dress photograph that was here (and the
+ * "my purpose is to help people live in the fullness" line that went with it)
+ * moved to /author. This is the same file /about uses for its own hero, which
+ * is deliberate reuse, not a stray reference.
+ *
+ * It is a PORTRAIT source, 800x1200, where the last one was landscape, so the
+ * circle needs a focal point: at 25% the face sits high in the crop instead of
+ * the frame filling up with sand.
  */
-const MICHELE_PORTRAIT = '/images/michele/coach-hero.jpg'
+const MICHELE_PORTRAIT = '/images/michele/about-hero.jpg'
 
 /**
  * Grids escape Container's inner max-w-2xl cap on purpose. Container narrows
@@ -379,9 +381,14 @@ export default function SpeakerPage() {
           way too, stages into press kit into the ask, which is the order an
           event organiser reads in.
 
-          Periwinkle, sampled from the sapphire flowers in the dress in this
-          very photograph. The numbers and the contrast budget are in the
-          SPEAKER QUOTE BANNER block in tailwind.css. */}
+          Periwinkle. It was sampled from the sapphire flowers in the floral
+          dress that used to be the photograph here; that photo moved to
+          /author on 2026-08-24 and the wash stayed, at Michele's instruction.
+          It still belongs to the picture: this frame's dominant hue is the sky
+          and the ocean at 218 degrees, and the wash sits at 228, so the tie
+          survived the swap rather than being kept out of habit. The numbers
+          and the contrast budget are in the SPEAKER QUOTE BANNER block in
+          tailwind.css. */}
       <section
         aria-label="In Michele's words"
         className={`surface-speaker-quote ${BAND}`}
@@ -395,10 +402,10 @@ export default function SpeakerPage() {
               <div className="relative h-[250px] w-[250px] flex-none overflow-hidden rounded-full bg-neutral-100 ring-1 ring-[var(--color-navy-10)] sm:h-[300px] sm:w-[300px] lg:h-[340px] lg:w-[340px]">
                 <Image
                   src={MICHELE_PORTRAIT}
-                  alt="Michele Okimura at home in Honolulu"
+                  alt="Michele Okimura on a beach in Hawaiʻi, leaning against a palm trunk with the ocean behind her"
                   fill
                   sizes="(min-width: 1024px) 340px, (min-width: 640px) 300px, 250px"
-                  className="object-cover object-[center_20%]"
+                  className="object-cover object-[center_25%]"
                 />
               </div>
 
@@ -408,8 +415,9 @@ export default function SpeakerPage() {
                     setting already reads as a quote. Navy rather than
                     teal-text, which measures 3.96:1 on this wash and fails. */}
                 <blockquote className="font-display mx-auto max-w-[22ch] text-[1.5rem] leading-[1.25] font-medium tracking-tight text-balance text-[var(--color-navy)] sm:max-w-[26ch] sm:text-[1.875rem] sm:leading-[1.22] lg:mx-0 lg:max-w-[30ch] lg:text-[2.25rem] lg:leading-[1.2]">
-                  My purpose is to help people live in the fullness of who they
-                  were created to be with brave purpose.
+                  Let&rsquo;s become a community of dreamers where we
+                  don&rsquo;t compete, but instead celebrate and support one
+                  another
                 </blockquote>
                 {/* No dash before the name: the house rule for this page is no
                     em dash anywhere, so the attribution is the name alone.

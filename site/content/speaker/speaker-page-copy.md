@@ -166,13 +166,21 @@ Michele customizes this message and its practical exercises specifically for you
 Full-bleed periwinkle strip between the messages grid and the stages list,
 carrying Michele's portrait circle-cropped on the left.
 
-> My purpose is to help people live in the fullness of who they were created to be with brave purpose.
+> Let's become a community of dreamers where we don't compete, but instead celebrate and support one another
 
 MICHELE OKIMURA
 
-Moved here from the coaching page 2026-08-24. The quote is Michele's own raw
-statement, carried verbatim. The background is sampled from the sapphire
-flowers in the dress in the photograph beside it.
+The banner came here from the coaching page 2026-08-24 and was re-cast the
+same day. It carried the floral-dress photograph and the line "my purpose is
+to help people live in the fullness of who they were created to be with brave
+purpose"; both moved on to the author page. The photograph is now Michele on
+the beach in the black dress, the same file /about uses for its hero, and the
+quote above is verbatim.
+
+The periwinkle wash did not change with the photograph. It was sampled from
+the sapphire flowers in the old dress, and it still belongs to the new picture:
+that frame's dominant hue is its sky and ocean at 218 degrees against the
+wash's 228.
 
 ## WHERE I'VE SPOKEN
 
