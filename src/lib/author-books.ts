@@ -591,9 +591,38 @@ export const AUTHOR_BOOKS: AuthorBook[] = [
     meta: 'Published 2011',
     cover: '/images/books/dancing-with-father.webp',
     coverAlt: 'Dancing with Father',
-    teaser: 'A book of poetry, reflection, and beautiful painted illustrations.',
+    teaser:
+      'A rich blend of poetry, personal reflection, and vibrant painted illustrations, Dancing with Father was born out of Michele\u2019s own journey through deep youth pain into radical, lingering healing.',
+    // Michele's copy, 2026-08-24, verbatim. It arrived opening "A rich
+    // tapestry of poetry"; she replaced "tapestry" with "blend" herself before
+    // it shipped. Do not reach for a third word: this reads exactly as she
+    // wants it.
     description: [
-      'A book of poetry, reflection, and beautiful painted illustrations. Michele wrote it out of her own difficult journey through youth, as a way for anyone else walking a similar path to know they are seen, pursued, and loved by God as Father. Short enough to read in one sitting. The kind of book readers keep close and return to again and again. Come dance with the One who joys over you with singing.',
+      'A rich blend of poetry, personal reflection, and vibrant painted illustrations, Dancing with Father was born out of Michele\u2019s own journey through deep youth pain into radical, lingering healing. Written as a tender lifeline for anyone walking through seasons of heartache or brokenness, this book imparts a profound message of hope, restoring the heart to know it is intimately seen, pursued, and cherished by God as Father.',
+      'Designed as a comforting \u201cgo-to\u201d resource, its beauty lies in its accessible, deeply moving brevity. Perfect for reading in a single sitting, it serves as a spiritual sanctuary that readers keep close on their nightstands and return to again and again whenever they need to soak in the Father\u2019s love once more.',
+    ],
+    sections: [
+      {
+        heading: 'Why Readers Keep Returning to Dancing with Father',
+        items: [
+          {
+            label: 'A Journey of True Healing',
+            text: 'Reflects a powerful testimony of overcoming personal pain, offering a proven pathway to emotional and spiritual restoration.',
+          },
+          {
+            label: 'Poetic & Visual Sanctuary',
+            text: 'Combines heart-stirring poetry with original, beautiful painted artwork that brings God\u2019s presence into vivid focus.',
+          },
+          {
+            label: 'Quick to Read, Deep to Soak In',
+            text: 'Short enough to finish in one sitting, yet rich enough to re-read continuously for fresh peace and encouragement.',
+          },
+          {
+            label: 'An Invitation to Joy',
+            text: 'Encourages you to step out of fear and heaviness to come dance with the One who rejoices over you with singing.',
+          },
+        ],
+      },
     ],
     notes: ['Also available as an audiobook, produced in radio-drama style.'],
     // Michele's own Short, on her own channel, embedded rather than re-hosted.
@@ -625,9 +654,46 @@ export const AUTHOR_BOOKS: AuthorBook[] = [
     cover: '/images/books/birth-of-explicit-movement-cover@2x.jpg',
     coverAlt: 'The Birth of Explicit Movement',
     teaser:
-      'Michele’s founding story, told in full. Written as both testimony and reflection guide, this is the personal account behind Explicit Movement.',
+      'Part inspiring memoir and part transformative leadership tool, Birth of Explicit Movement tells Michele\u2019s full founding story, packed with profound and practical keys to following God and fulfilling your divine purpose.',
+    // Michele's copy, 2026-08-24, verbatim.
+    //
+    // NAMING. Her prose says "Birth of Explicit Movement" with no leading
+    // "The", while the official title above keeps it. That is deliberate and it
+    // is hers. Do not "fix" the body copy to match the title, and do not strip
+    // the "The" from the title to match the body.
     description: [
-      'Michele’s founding story, told in full. Written as both testimony and reflection guide, this is the personal account behind Explicit Movement. Each chapter closes with reflection sections that turn her story into a personal guide for readers learning to hear God’s voice and take their own steps of obedience. The Speaker keynote “Finding Your Brave Purpose” is drawn from this book.',
+      'Part inspiring memoir and part transformative leadership tool, Birth of Explicit Movement tells Michele\u2019s full founding story, packed with profound and practical keys to following God and fulfilling your divine purpose.',
+      'Each chapter opens with an extraordinary, supernatural God story that draws you in and sets the stage for high-impact teachable moments. Written as both a personal testimony and a practical reflection guide, every chapter closes with structured reflection sections designed to help readers hear God\u2019s voice, apply wisdom, and take bold steps of obedience.',
+    ],
+    sections: [
+      {
+        // Long on purpose: it repeats the book's subtitle, which is Michele's
+        // phrasing. Left exactly as she wrote it.
+        heading:
+          'Why Birth of Explicit Movement: Discover Keys to Fulfilling Your Purpose Resonates So Deeply',
+        items: [
+          {
+            label: 'Profound & Practical Keys',
+            text: 'Unpacks actionable truths for discerning God\u2019s calling and walking it out in everyday life.',
+          },
+          {
+            label: 'Tested Leadership Resource',
+            text: 'Proven across all levels of ministry, as a senior pastor even used this book to mentor and align his core leadership teams.',
+          },
+          {
+            label: 'Supernatural Testimony',
+            text: 'Features real, awe-inspiring stories of God\u2019s guidance that build faith and impart courage.',
+          },
+          {
+            label: 'Interactive Reflection Sections',
+            text: 'Turns Michele\u2019s personal account into an interactive blueprint for your own spiritual journey.',
+          },
+          {
+            label: 'The Keynote Foundation',
+            text: 'Serves as the rich foundational material for Michele\u2019s signature speaker keynote, \u201cFinding Your Brave Purpose.\u201d',
+          },
+        ],
+      },
     ],
     panel: {
       heading: 'About Explicit Movement',
@@ -650,9 +716,32 @@ export const AUTHOR_BOOKS: AuthorBook[] = [
     cover: '/images/books/explicit-movement-21-day-journal-cover@2x.jpg',
     coverAlt: 'The Explicit Movement 21-Day Interactive Journal',
     teaser:
-      'A three-week guided journey for readers ready to sit with the questions that shape identity, healing, and purpose.',
+      'Will you live fearless and free? The Explicit Movement 21-Day Journal is an invitation to embark on an unforgettable three-week adventure into the heart of God.',
+    // Michele's copy, 2026-08-24, verbatim.
     description: [
-      'A three-week guided journey for readers ready to sit with the questions that shape identity, healing, and purpose. Each day pairs a reflection prompt with space to write, drawing from the truths that anchor the Explicit Movement teaching: your value, your identity in Christ, and the life God has invited you into. Designed for individual or small-group use. Written by the Explicit Movement team, together with friends and family of the movement. Michele served as Director and Contributing Author.',
+      'Will you live fearless and free? The Explicit Movement 21-Day Journal is an invitation to embark on an unforgettable three-week adventure into the heart of God. Written by the Explicit Movement team alongside friends and family of the movement, with Michele serving as Director and Contributing Author, this interactive resource bridges vulnerable, raw human experience with life-changing truth.',
+      'Through a powerful collection of truthful memoirs, storytellers open up with incredible vulnerability to touch the heart and engage the mind. Designed for both individual quiet times and small-group discussions, each day pairs a high-impact reflection prompt with generous journaling space, anchoring your daily walk in your true value, your identity in Christ, and the abundant life God invites you into.',
+    ],
+    sections: [
+      {
+        heading: 'The Three Pillars of the 21-Day Journey',
+        items: [
+          {
+            label: 'Real',
+            text: 'Real people share about real hurt, deep pain, and consequences, as well as the real wholeness, healing, and hope found on the other side.',
+          },
+          {
+            label: 'Raw',
+            text: 'Courageous contributors honestly share what they have walked through, refusing to shrink back from tough topics like relational and sexual brokenness, and identity struggles.',
+          },
+          {
+            label: 'Relevant',
+            text: 'Crucial topics are explored heart-to-heart, proving that you are never alone in the struggle.',
+          },
+        ],
+        outro:
+          'Discover how God\u2019s grace and truth can restore your hope, heal your heart, and reignite your joy. If you are ready to sit with the questions that shape identity, healing, and purpose, start your 21-day adventure today and step into God\u2019s wondrous design for your life.',
+      },
     ],
     // TODO(endorsements): no endorsements exist for this title yet. The detail
     // page renders nothing rather than borrowing a quote from another book.
