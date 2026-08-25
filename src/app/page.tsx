@@ -230,13 +230,22 @@ export default function HomePage() {
 
           WHAT IS IN THE VIDEO, because it changes what any of this can achieve.
           The clip is 16s and cuts between stage shots of Michele and shots of
-          the audience. The stage footage is heavily out of focus: she reads as
-          a soft figure at any overlay value, and no amount of lightening will
-          sharpen her. The audience footage is sharp and much brighter, and it
-          is the reason the scrim cannot go lower than it does. If a sharper
-          stage clip ever replaces this file, re-run the measurement in the
-          commit for this change; a brighter clip needs more scrim, a sharper
-          one needs none of this reasoning revisited. */}
+          the audience. The stage footage is SHARP as of 2026-08-25. It used to
+          carry a 9px gaussian blur, added to soften the guitars, stools and mic
+          stands behind her, and that blur softened Michele along with them.
+          Michele asked for it gone, so the clip was re-rendered without it and
+          she is in focus now. The instruments and stools are visible as a
+          result; that is the trade she chose, and her face is the priority.
+
+          The scrim numbers below still hold, because sharpening changed detail
+          rather than brightness: mean relative luminance behind the copy moved
+          0.056 -> 0.055 across 65 frames, and the peak frame is unchanged at
+          0.123. The audience footage is still the brightest thing in the clip
+          and is still the reason the scrim cannot go lower than it does.
+
+          If this file is ever replaced again, re-measure. A brighter clip needs
+          more scrim. Do not re-introduce blur to hide the stage: that is the
+          exact thing Michele rejected. */}
       <section
         aria-label="Michele Okimura"
         className="relative isolate min-h-[32rem] w-full overflow-hidden bg-[var(--color-navy)] sm:min-h-0 sm:aspect-[16/9] sm:max-h-[calc(100svh-4.75rem)]"
