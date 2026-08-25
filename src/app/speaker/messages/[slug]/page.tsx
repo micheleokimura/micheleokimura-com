@@ -35,10 +35,12 @@ import {
  * What is still missing is material, not words. Four of the seven carry no
  * endorsement at all, and five more endorsers are
  * named for kingdom-culture whose quotes have not been captured; see the TODO
- * in src/lib/speaker-messages.ts. No page carries a photograph, a video clip,
- * a run sheet, or a technical rider. Michele has that material; it has not
- * been collected. The layout leaves room for it between the description and
- * the CTA.
+ * in src/lib/speaker-messages.ts. On material: brave-purpose now opens with
+ * a licensed stock clip, added 2026-08-24, and the `video` field on
+ * SpeakerMessage is there for the other six. Still absent everywhere are a
+ * photograph, a run sheet, and a technical rider. Michele has that material;
+ * it has not been collected. The layout leaves room for it between the
+ * description and the CTA.
  * ##################################################################
  */
 
@@ -182,6 +184,29 @@ export default async function SpeakerMessagePage({
         <Container>
           <FadeIn>
             <div className="max-w-3xl">
+              {message.video && (
+                // Above the copy, deliberately. The clip sets the image the
+                // keynote runs on before a word of it is read.
+                //
+                // The source is silent, so this behaves like the home page
+                // hero: autoplay, muted, looping, inline on iOS. No controls,
+                // because there is nothing to hear and nothing to seek to.
+                // Navy underneath covers the moment before the poster paints.
+                <div className="relative mb-10 aspect-[16/9] w-full overflow-hidden rounded-2xl bg-[var(--color-navy)] sm:mb-12">
+                  <video
+                    src={message.video.src}
+                    poster={message.video.poster}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    aria-label={message.video.description}
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                </div>
+              )}
+
               <BodyBlocks blocks={message.body} />
 
               {message.nonFaith && (

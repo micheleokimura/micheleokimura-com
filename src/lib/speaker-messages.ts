@@ -125,6 +125,18 @@ export type SpeakerMessage = {
   body: MessageBlock[]
   /** Further offerings under this same keynote. Rendered below `body`. */
   subtopics?: MessageSubtopic[]
+  /**
+   * Ambient clip that runs above the description on the message page.
+   *
+   * Optional, and only "Finding Your Brave Purpose" carries one so far. The
+   * clips are silent, so they play the way the home page hero does: autoplay,
+   * muted, looping. `description` is the text equivalent a screen reader gets.
+   */
+  video?: {
+    src: string
+    poster: string
+    description: string
+  }
   /** Shown when the message also travels without the faith framing. */
   nonFaith?: boolean
   /** Context the reader needs before the endorsements underneath. */
@@ -153,6 +165,16 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
         text: 'The distance between a God-given dream and a courageous "yes" often feels like an insurmountable chasm. In her signature keynote, Michele pulls back the curtain on the raw, unfiltered story of founding Releasing Generations, confronting the paralyzing fears, overcoming the false starts, and capturing the exact moment she stopped dreaming about her calling and started walking in it. For over a decade at conferences, churches, and leadership events, this transformative message has awakened audiences to the "more" God has waiting for them. You won’t just walk away inspired; you will leave equipped with a clear, practical framework to step into your own brave purpose and live it out loud.',
       },
     ],
+    // Shutterstock 1059019742, licensed. Sun breaking through a forest with
+    // the camera moving toward the light, which is this keynote's own image:
+    // the walk from a God-given dream to a courageous "yes". The source is a
+    // silent 4K master; what ships is 1080p at about 8 MB.
+    video: {
+      src: '/videos/brave-purpose-keynote.mp4',
+      poster: '/videos/brave-purpose-keynote-poster.jpg',
+      description:
+        'Sunlight breaking through the trees of a forest clearing, the camera moving slowly toward the light.',
+    },
   },
   {
     slug: 'dreaming-big-with-god',
