@@ -17,17 +17,18 @@ Transform Our World is a global network founded and led by Dr. Ed Silvoso, gathe
 
 ## The Engagement
 
-Michele has been an active member of the global network since 2013, thirteen years and counting. In Hawaiʻi she meets weekly with five senior Missionary Church leaders in the regional chapter, and she has been the main speaker at multiple local Transform Our World events across the islands.
+Michele has been a dedicated, active member of the Transform Our World (TOW) global network since 2013, a commitment spanning over thirteen years. Her involvement ranges from foundational local leadership to significant global contributions:
 
-On the global stage she has given the keynote three or four times at the Transform Our World global conference and led workshops there. At one of those global conferences she ran the entire children's program, partnering with another teacher to build it.
+**Local Leadership:** In Hawaiʻi, she meets weekly with a large group of marketplace and church leaders and has served as the main speaker at multiple local TOW events across the islands. The TOW Hawaiʻi network includes a few thousand followers.
 
-Her working relationship with Ed Silvoso is direct. He mentions Michele in his book *Ekklesia*, which carries her name into the network's global readership, and he endorsed her book *The Birth of Explicit Movement*.
+**Global Platform:** On the global stage, Michele has delivered short keynotes at three or four international TOW conferences and led specialized workshops. At one of these global events, she partnered with another teacher to successfully build and run the entire children's program.
+
+**Direct Partnership:** She maintains an ongoing relationship with Ed Silvoso. He highlights Michele in his book, *Ekklesia*, introducing her to the network's global readership, and provided an endorsement for her book, *The Birth of Explicit Movement*.
 
 ## The Outcome
 
-Transform Our World Hawaiʻi is a major financial donor to Releasing Generations, so the relationship carries the ministry as well as the message. Ed Silvoso, on Michele's work:
+Transform Our World Hawaiʻi is a major supporter of Releasing Generations, ensuring that the partnership champions both the ministry and its broader message. Additionally, the growing group of marketplace and church leaders who gather at Transform Our World Hawaiʻi's weekly table is deeply passionate about bringing positive change to Hawaiʻi and beyond.
 
-> "Michele said, 'Yes, Lord!' and today she is leading the Explicit Movement that is bringing a message of sexual purity, and along with it hope and healing, to thousands of children and young people in the islands of Hawaii and beyond. You will be inspired and challenged to surrender your own life, just as Michele did, and follow the Lord into the purpose and destiny He has for you."
-> Dr. Ed Silvoso, Founder and President of Harvest Evangelism and the International Transformation Network
+The profound nature of this collaboration is best summarized by Dr. Ed Silvoso, Founder and President of Harvest Evangelism and the International Transformation Network:
 
-The five Hawaiʻi pastors around that weekly table are the same lead pastors described in the [Missionary Church Hawaiʻi story](/case-studies/missionary-church-hawaii).
+> "Michele said, 'Yes, Lord!' and today she is leading the Explicit Movement that is bringing a message of hope and healing to thousands of children and young people in the islands of Hawaiʻi and beyond. You will be inspired and challenged to surrender your own life, just as Michele did, and follow the Lord into the purpose and destiny He has for you."
