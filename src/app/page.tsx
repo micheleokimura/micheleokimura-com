@@ -121,11 +121,38 @@ const DOOR_ICONS: Record<Door['icon'], typeof Mic> = {
  * -50% lands half a gap short and the loop hitches once per cycle. LogoMarquee
  * uses px-6 on its tiles for the same reason.
  */
+/**
+ * Renders a quote, setting a book title inside it in italics when the entry
+ * names one. Splits on the substring rather than storing the quote pre-broken,
+ * so `quote` stays a single verbatim string in the data.
+ *
+ * `split` handles a title that occurs more than once, and an absent or
+ * misspelled `italicize` falls through to the plain quote instead of throwing.
+ */
+function QuoteBody({ item }: { item: Testimonial }) {
+  const title = item.italicize
+  if (!title || !item.quote.includes(title)) return <>{item.quote}</>
+
+  return (
+    <>
+      {item.quote.split(title).map((chunk, i) => (
+        <span key={i}>
+          {i > 0 ? <em className="italic">{title}</em> : null}
+          {chunk}
+        </span>
+      ))}
+    </>
+  )
+}
+
 function TestimonialCard({ item }: { item: Testimonial }) {
   return (
     <figure className="mx-3 flex w-[21rem] shrink-0 flex-col rounded-2xl bg-[var(--color-cream)] p-7 ring-1 ring-[var(--color-navy-10)] sm:w-[27rem] sm:p-8">
+      {/* Quote marks kept hard against the component on one line. JSX would
+          strip the whitespace if they were on their own lines, but relying on
+          that is a footgun for the next person who reformats this file. */}
       <blockquote className="flex-auto text-[1.0625rem] leading-7 text-neutral-800">
-        &ldquo;{item.quote}&rdquo;
+        &ldquo;<QuoteBody item={item} />&rdquo;
       </blockquote>
       <figcaption className="mt-6 border-t border-[var(--color-navy-10)] pt-5 text-[0.9375rem]">
         <span className="block font-semibold text-neutral-900">{item.name}</span>

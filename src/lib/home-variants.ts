@@ -278,6 +278,17 @@ export type Testimonial = {
   title?: string
   /** The book or curriculum the blurb is about, when it is a book blurb. */
   work?: string
+  /**
+   * A book title that appears INSIDE `quote` and should be set in italics, per
+   * the usual editorial convention for titles in quoted prose.
+   *
+   * Deliberately a substring of `quote` rather than a split-up quote. `quote`
+   * stays one verbatim string, which is what makes it greppable and checkable
+   * against the source; the card finds this substring at render time and wraps
+   * it. If the string does not occur, the card renders the quote unchanged
+   * rather than throwing, so a typo here degrades to plain text.
+   */
+  italicize?: string
 }
 
 /** Top row. Scrolls right to left. */
@@ -318,11 +329,19 @@ export const FRIENDS_SAY_TOP: Testimonial[] = [
      * still the version running on /speaker under topic 7, where it is the
      * right quote for that context. Do not reconcile the two.
      */
+    /**
+     * The book title in the last sentence was "Explicit Movement" and is now
+     * the full "The Birth of Explicit Movement". Michele caught it on
+     * 2026-08-24: the short form is the name of the MOVEMENT, and the sentence
+     * is about the book, so the two read as different things. This is a
+     * correction to a title, not a rewrite of the endorsement.
+     */
     quote:
-      'Get ready to be inspired! He is the God of the Old Testament, and yet he is active now and speaks to his servants. Michele is one of those servant saints. It is unmistakable. What you hold before you is a roadmap of her journey of an intimate relationship with the Father. Explicit Movement is a book for all ages, but especially for the next generation.',
+      'Get ready to be inspired! He is the God of the Old Testament, and yet he is active now and speaks to his servants. Michele is one of those servant saints. It is unmistakable. What you hold before you is a roadmap of her journey of an intimate relationship with the Father. The Birth of Explicit Movement is a book for all ages, but especially for the next generation.',
     name: 'Pastor Kihāpiʻilani Pimental',
     title: 'Worker Supervisor, Foursquare Missions International',
     work: 'The Birth of Explicit Movement',
+    italicize: 'The Birth of Explicit Movement',
   },
   {
     /**
