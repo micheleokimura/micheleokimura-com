@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
 import { PodcastSeriesJsonLd } from '@/components/JsonLd'
+import { Logo } from '@/components/Logo'
 import { footerColumns, siteConfig } from '@/lib/site-config'
 
 /**
@@ -15,8 +16,12 @@ import { footerColumns, siteConfig } from '@/lib/site-config'
  * It is dark on purpose. The footer is the one place the brand gets to fill
  * the whole viewport width, which is why the rest of the site can stay cream
  * and quiet. Everything in here is cream text on --color-navy, measured at
- * 12.46:1. Column headings and the wordmark's accent dot are pale teal
- * (--color-teal-on-dark) at 10.53:1.
+ * 12.46:1. Column headings are pale teal (--color-teal-on-dark) at 10.53:1.
+ *
+ * The wordmark is Michele's script logo, taking its white file here because
+ * this surface is navy. It used to be a second, hand-typeset copy of the mark
+ * living inline in this file; it is the shared <Logo> now, so the header and
+ * the footer cannot drift apart again.
  *
  * This is also where the pages cut from the header nav live. The header is
  * capped at four links plus Contact; Explore and Community below carry the
@@ -113,13 +118,11 @@ export function SiteFooter() {
           {/* -------------------------------------------- four columns */}
           {/* Order: brand + socials, Explore, Community, More from Michele. */}
           <div className="grid grid-cols-2 gap-x-8 gap-y-12 py-14 sm:py-16 lg:grid-cols-4">
-            {/* Wordmark, tagline, location, socials. Cream on navy. */}
+            {/* Wordmark, tagline, location, socials. The white script logo
+                and cream text, both on navy. */}
             <div className="col-span-2 lg:col-span-1">
               <Link href="/" aria-label={`${siteConfig.brand} home`} className="inline-block">
-                <span className="font-display text-xl font-semibold tracking-tight whitespace-nowrap text-[var(--color-cream)]">
-                  Michele Okimura
-                  <span className="text-[var(--color-teal-on-dark)]">.</span>
-                </span>
+                <Logo invert />
               </Link>
               <p className="mt-5 max-w-xs text-sm leading-6 text-[var(--color-cream)]/75">
                 Speaker, author, and coach. Helping people turn their hardest
