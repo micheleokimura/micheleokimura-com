@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next'
 import { siteConfig, authoredWorks } from '@/lib/site-config'
 import { getPublishableSlugs } from '@/lib/case-studies'
 import { projectRoutes } from '@/lib/projects'
+import { authorBookSlugs } from '@/lib/author-books'
 import { getAllPostSlugs, getPostBySlug } from '@/lib/blog'
 import { SPEAKER_MESSAGES } from '@/lib/speaker-messages'
 
@@ -68,6 +69,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: PRIORITY.caseStudy,
   }))
 
+  // One page per title on the Author shelf. Added 2026-08-23 with the tile
+  // rebuild: /author is a grid now and each tile has a real URL behind it, so
+  // those URLs have to be crawlable in their own right.
+  const authorBookEntries: MetadataRoute.Sitemap = authorBookSlugs.map((slug) => ({
+    url: `${siteConfig.url}/author/books/${slug}`,
+    lastModified,
+    changeFrequency: 'monthly',
+    priority: PRIORITY.caseStudy,
+  }))
+
   const worksEntries: MetadataRoute.Sitemap = authoredWorks.map((work) => ({
     url: `${siteConfig.url}/works/${work.slug}`,
     lastModified,
@@ -102,6 +113,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     ...baseEntries,
     ...messageEntries,
+    ...authorBookEntries,
     ...projectEntries,
     ...worksEntries,
     ...caseStudyEntries,

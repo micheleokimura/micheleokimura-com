@@ -4,88 +4,265 @@ import Link from 'next/link'
 
 import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
-import { BannerHero } from '@/components/BannerHero'
-import { BraveSeriesCovers } from '@/components/BraveSeriesCovers'
-import { ContactBlock } from '@/components/ContactBlock'
+import { Cover, Forthcoming } from '@/components/AuthorBookParts'
 import { AllWorksJsonLd, WebPageJsonLd } from '@/components/JsonLd'
 import {
-  GOLDEN_THREAD_CULMINATION,
-  GOLDEN_THREAD_LINE,
-  projectStudies,
-} from '@/lib/projects'
-
-// Author page. Endorser quotes are verbatim and must stay that way.
-//
-// The shelf runs in ONE continuous order, set by Michele 2026-08-23, and the
-// order is the point. Do not resort it alphabetically or by date, and do not
-// reintroduce a divider between her own titles and the Releasing Generations
-// curriculum: she asked for one list.
-//
-//   1 Brave Purpose with God   5 Brave Series Curriculum
-//   2 Brave Purpose                (Beautiful / Bold / Together sub-blocks)
-//   3 Dream Big Journals        6 Dancing with Father
-//     Curriculum                7 The Birth of Explicit Movement
-//       (Journals + Teacher     8 Explicit Movement 21-Day Journal
-//        Guides sub-blocks)
-//   4 Raising Kingdom Kids
-//
-// Sub-block headings are short on purpose. They sit under a parent that
-// already names the curriculum, so "Journals" and "Teacher Guides" carry it.
-//
-// The faith edition leads at 1, by direction.
-//
-// Wording: this page says "Non-Faith" where the rest of the site still says
-// "Classic". That is Michele's call for the customer-facing shelf. The Brave
-// Series tiles get there through the `editionLabels` prop rather than by
-// editing lib/brave-series-covers, which four other pages also read.
-//
-// Covers in the repo: Dancing with Father, The Birth of Explicit Movement, the
-// Explicit Movement 21-Day Journal, the four Dream Big (Faith) journals and
-// their four teacher guides, Raising Kingdom Kids, and the twelve Brave Series
-// volumes.
-//
-// Still rendering a placeholder tile until art lands: both Brave Purpose
-// editions. Drop the file in /public/images/books and fill in the src.
+  DREAM_BIG_EDITIONS,
+  SHELF,
+  getAuthorBook,
+  type AuthorBook,
+} from '@/lib/author-books'
+import { projectStudies } from '@/lib/projects'
 import { pageMetadata } from '@/lib/schema'
 
+/**
+ * The Author page. Rebuilt 2026-08-23 on Brett's design walkthrough, on top of
+ * the content reorder Michele signed off the same day.
+ *
+ * WHAT CHANGED, AND WHY IT SHOULD NOT CHANGE BACK.
+ *
+ * The books are the point of this page. It used to open with a photo-and-quote
+ * block about the golden thread, then run each title as a full two-column
+ * essay, which put the second book somewhere around the fourth screen. Brett's
+ * note was blunt: the golden-thread framing "gets in the way" and pushes the
+ * books below the fold. So:
+ *
+ *  - the golden-thread section is DELETED, not moved,
+ *  - the shelf is a grid of tiles that starts immediately under the hero, with
+ *    no block in between,
+ *  - every title's long copy now lives on its own page under
+ *    /author/books/<slug>, and the tile links there.
+ *
+ * Also deleted, all by direction: the "Stay close to the next release"
+ * ContactBlock that used to close the page, and the navy "Every story in one
+ * place" card in the projects row. Michele's rule is that dark blue is the
+ * footer's colour and nothing else's, and the page is meant to run straight
+ * into the footer, which carries its own contact route.
+ *
+ * ORDER. The running order of the shelf is Michele's and it is locked. It is
+ * declared once in src/lib/author-books.ts as SHELF, along with the reasoning.
+ * Do not resort it here.
+ *
+ * HERO. This is the one page on the site that does not use BannerHero, and the
+ * one page with a background of its own. The wash is sampled from
+ * author-hero.jpg; see .surface-author-wash in tailwind.css for the sampling
+ * and the contrast budget. Everything else still uses the navy banner, and
+ * that is still the site identity.
+ *
+ * BANDS. Sections alternate --color-band-1 / band-2 the way the home page
+ * does, so each one reads as a finished thought. The LAST section has to be
+ * band-1: SiteFooter carries a top margin, and any other band would leave a
+ * strip of mismatched colour above the navy footer.
+ */
 export const metadata: Metadata = pageMetadata({
   title: 'Author',
   description:
     'Books, journals, and curricula by Michele Okimura. Two published trade books, a 21-day interactive journal, the multi-age Dream Big Journals in Faith and Non-Faith versions, the Raising Kingdom Kids lesson book, the 24-volume Brave Series, and Brave Purpose coming 2027.',
   path: '/author',
-  ogDescription:
-    'Books, journals, and curricula for dreamers of every age.',
+  ogDescription: 'Books, journals, and curricula for dreamers of every age.',
 })
 
-type Endorsement = { quote: string; source: string }
+/** The home page's full-width wrapper. Container caps its children at max-w-2xl
+ *  below lg, which turns a three-column grid into three narrow strips on a
+ *  tablet. Grids use this; running text uses Container. */
+const WIDE = 'mx-auto max-w-7xl px-6 lg:px-8'
 
-type AvailableLink = { text: string; href?: string }
+/** Section rhythm, from Brett's note: 60-80px desktop, 40-60px mobile. */
+const SECTION = 'py-12 sm:py-16 lg:py-20'
+
+const TILE_SIZES = '(max-width: 640px) 6rem, (max-width: 1024px) 30vw, 24rem'
+
+/**
+ * Programs that have a case study but no title on the shelf. Card copy is read
+ * from the project registry so these and the /projects index never drift apart.
+ */
+const OTHER_PROJECTS = projectStudies.filter((project) =>
+  ['kingdom-kids', 'rethink-creativity'].includes(project.slug),
+)
 
 /* ---------------------------------------------------------------- pieces */
 
-function SectionHeading({ children }: { children: React.ReactNode }) {
+/**
+ * THE TILE, matched to Brett's reference: the Living in Duvall listing card at
+ * livingin-platform.vercel.app/listings. What is borrowed, element by element:
+ *
+ *   reference                                 here
+ *   ----------------------------------------  --------------------------------
+ *   flex h-full flex-row xs:flex-col          same, swapping at sm
+ *   overflow-hidden rounded-2xl               same
+ *   border + bg-surface + shadow-sm           ring-1 navy/10, cream, shadow-sm
+ *   hover:-translate-y-0.5                    same
+ *   hover:border-primary hover:shadow-md      hover ring goes teal, shadow-md
+ *   image band flush to the card edge         same
+ *   group-hover:scale-105 on the image        same
+ *   body p-2.5 xs:p-4                         same
+ *   serif title, leading-tight, ~18px         font-display at the same size
+ *   group-hover:text-primary on the title     title goes teal on hover
+ *   muted 14px/20px teaser, line-clamp-2      same colour and size, clamp-5
+ *   mt-auto footer row, pt-1.5 xs:pt-4        same
+ *
+ * Two deliberate departures, both forced by what the card is carrying.
+ *
+ * The title clamps at TWO lines, not one. Duvall lists business names, which
+ * fit on a line; "The Birth of Explicit Movement: Discover Keys to Fulfilling
+ * Your Purpose" does not, and a truncated book title is a worse card than a
+ * two-line one.
+ *
+ * The teaser clamps at FIVE lines, not two. Every teaser on this shelf is
+ * approved copy lifted whole from the book's own description, and clamping at
+ * two would put an ellipsis through the middle of most of them. It was four
+ * until 2026-08-24, when three descriptions were replaced and two of the new
+ * opening sentences ran past four lines in a 24rem column. Five clears all the
+ * current copy while keeping the clamp there as a guard, so a longer teaser
+ * added later still cannot blow the card out. Re-measure before lowering it.
+ *
+ * The reference's second footer element, a coloured "Open" status pill, is NOT
+ * borrowed. DESIGN-RULES bans pills outright because they read as clickable, so
+ * the footer row carries "Learn more" alone.
+ *
+ * `w-full` is load-bearing. The <li> is `display:flex` so the tile can stretch
+ * to the row height, which makes the tile a flex ITEM: without an explicit
+ * width it shrinks to its content, and the Preschool tile (a two-word label
+ * under a cover) came out half the width of its neighbours.
+ */
+const TILE_CLASS =
+  'group flex h-full w-full flex-row overflow-hidden rounded-2xl bg-[var(--color-band-3)] shadow-sm ring-1 ring-[var(--color-navy-10)] transition duration-300 hover:-translate-y-0.5 hover:shadow-md hover:ring-[var(--color-teal-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)] sm:flex-col'
+
+/** Card body. Reference: `flex min-w-0 flex-1 flex-col p-2.5 xs:p-4`. */
+const BODY_CLASS = 'flex min-w-0 flex-1 flex-col p-2.5 sm:p-4'
+
+/**
+ * The footer row, pinned to the bottom of the body with `mt-auto` so it lines
+ * up across a row of cards whatever the teaser length. Reference spacing:
+ * `pt-1.5 xs:pt-4`.
+ */
+function LearnMore() {
   return (
-    <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
-      {children}
-    </h2>
+    <span className="font-display mt-auto inline-flex items-center gap-1.5 self-start pt-1.5 text-sm font-semibold text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition group-hover:decoration-2 sm:pt-4">
+      Learn more
+      <span
+        aria-hidden="true"
+        className="transition-transform duration-200 group-hover:translate-x-0.5"
+      >
+        &rarr;
+      </span>
+    </span>
+  )
+}
+
+/** A title on the shelf: cover, title, forthcoming tag, teaser, learn more. */
+function BookTile({
+  book,
+  headingClass = 'text-lg',
+  as: Heading = 'h3',
+  showLearnMore = true,
+}: {
+  book: AuthorBook
+  headingClass?: string
+  as?: 'h3' | 'h4'
+  /** Off inside a curriculum family, which carries one link on its heading. */
+  showLearnMore?: boolean
+}) {
+  return (
+    <Link href={`/author/books/${book.slug}`} className={TILE_CLASS}>
+      <Cover src={book.cover} alt={book.coverAlt} sizes={TILE_SIZES} flush />
+      <div className={BODY_CLASS}>
+        <Heading
+          className={`font-display leading-tight font-semibold tracking-tight text-neutral-950 transition-colors group-hover:text-[var(--color-brand-teal)] line-clamp-2 ${headingClass}`}
+        >
+          {book.title}
+        </Heading>
+        {/* Under the title, by direction, and flat text rather than a tag. */}
+        {book.forthcoming ? (
+          <span className="mt-1.5 block">
+            <Forthcoming label={book.forthcoming} />
+          </span>
+        ) : null}
+        <p className="mt-1.5 line-clamp-5 text-xs leading-5 text-neutral-600 sm:text-sm sm:leading-5">
+          {book.teaser}
+        </p>
+        {showLearnMore ? <LearnMore /> : null}
+      </div>
+    </Link>
   )
 }
 
 /**
- * Heading for a sub-block: a set of covers sitting under a parent work, with
- * no cover column of its own. Same tracked small-caps the cover grids on this
- * page already use, with the subtitle on its own italic line. BraveSeriesCovers
- * renders its three title sub-blocks to match.
+ * An edition tile: one age bracket of the Dream Big curriculum. Cover and
+ * label, and no teaser. These are eight printings of one curriculum rather
+ * than eight books, and no approved one-line description exists for a single
+ * bracket. See the TODO on DREAM_BIG_EDITIONS before writing one here.
  */
-function ShelfGroupTitle({
+function EditionTile({
+  href,
+  src,
+  alt,
+  label,
+}: {
+  href: string
+  src: string
+  alt: string
+  label: string
+}) {
+  return (
+    <Link href={href} className={TILE_CLASS}>
+      <Cover src={src} alt={alt} sizes={TILE_SIZES} flush />
+      <div className={BODY_CLASS}>
+        <h4 className="font-display line-clamp-2 text-base leading-tight font-semibold tracking-tight text-neutral-950 transition-colors group-hover:text-[var(--color-brand-teal)]">
+          {label}
+        </h4>
+      </div>
+    </Link>
+  )
+}
+
+/**
+ * The heading over a family of tiles: a parent work with children under it.
+ * Linked, because the parent is a title in its own right with a page of its
+ * own. Flat tracked small-caps subtitle, never a pill.
+ */
+function FamilyHeading({
   title,
   subtitle,
+  href,
 }: {
   title: string
   subtitle?: string
+  href: string
 }) {
   return (
-    <>
+    <FadeIn>
+      {/* Plain text, not a link. The one link for the whole family is the
+          "Learn more" directly under it. Michele's note on 2026-08-24 was that
+          every tile in a curriculum family pointed at the same overview page,
+          so the section repeated one destination six or eight times. Linking
+          the heading as well would put two links to the same page one line
+          apart, which is the repetition this change exists to remove. */}
+      <h3 className="font-display text-2xl leading-tight font-medium tracking-tight text-neutral-950 sm:text-3xl">
+        {title}
+      </h3>
+      {subtitle ? (
+        <p className="mt-2 text-sm tracking-wide text-neutral-600 italic">
+          {subtitle}
+        </p>
+      ) : null}
+      {/* Deliberately larger than the per-tile link: this one is carrying a
+          whole curriculum rather than a single title. */}
+      <Link
+        href={href}
+        className="font-display mt-4 inline-flex items-center gap-2 text-base font-semibold text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-2 underline-offset-[6px] transition hover:text-[var(--color-brand-terracotta-ink)] sm:text-lg"
+      >
+        Learn more
+        <span aria-hidden="true">&rarr;</span>
+      </Link>
+    </FadeIn>
+  )
+}
+
+/** Sub-block label inside a family: "Journals", "Teacher Guides". */
+function GroupTitle({ title, subtitle }: { title: string; subtitle?: string }) {
+  return (
+    <FadeIn>
       <h4 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
         {title}
       </h4>
@@ -94,413 +271,34 @@ function ShelfGroupTitle({
           {subtitle}
         </p>
       ) : null}
-    </>
-  )
-}
-
-/**
- * Flat, tracked small-caps label for a title that has not shipped. Deliberately
- * not a pill: DESIGN-RULES bans badges outright because they read as clickable.
- */
-function Forthcoming() {
-  return (
-    <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-terracotta-ink)] uppercase sm:text-sm">
-      Forthcoming
-    </span>
-  )
-}
-
-/**
- * Cover tile. Ratios across the supplied art run from 2:3 to about 3:4, so the
- * tile holds a fixed 3:4 box and contains the image inside it. No cropping, no
- * distortion, and a missing cover falls back to a titled placeholder rather
- * than a broken tile.
- */
-function Cover({
-  src,
-  alt,
-  sizes,
-  caption,
-}: {
-  src?: string
-  alt: string
-  sizes: string
-  caption?: string
-}) {
-  return (
-    <figure>
-      {src ? (
-        <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-neutral-100 ring-1 ring-neutral-900/5">
-          <Image
-            src={src}
-            alt={alt}
-            fill
-            sizes={sizes}
-            className="object-contain"
-          />
-        </div>
-      ) : (
-        <div className="flex aspect-[3/4] w-full flex-col items-center justify-center rounded-2xl bg-neutral-50 p-6 text-center border border-dashed border-neutral-300">
-          <span className="font-display text-lg leading-tight font-semibold tracking-tight text-neutral-500">
-            {alt}
-          </span>
-          <span className="mt-3 text-xs tracking-widest text-neutral-400 uppercase">
-            Cover coming soon
-          </span>
-        </div>
-      )}
-      {caption ? (
-        <figcaption className="mt-3 text-center text-sm leading-6 text-neutral-600">
-          {caption}
-        </figcaption>
-      ) : null}
-    </figure>
-  )
-}
-
-function Endorsements({
-  items,
-  label = 'What readers say',
-}: {
-  items: Endorsement[]
-  label?: string
-}) {
-  return (
-    <div className="mt-10">
-      <h4 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
-        {label}
-      </h4>
-      <div className="mt-5 space-y-6">
-        {items.map((item, i) => (
-          <figure
-            key={`${item.source}-${i}`}
-            className="border-l-2 border-[var(--color-brand-terracotta)] pl-5"
-          >
-            <blockquote className="text-base leading-7 text-neutral-700 italic">
-              {item.quote}
-            </blockquote>
-            <figcaption className="mt-2 text-sm font-medium text-neutral-500 not-italic">
-              {item.source}
-            </figcaption>
-          </figure>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-/**
- * "Available at" row. External storefronts open in a new tab. The
- * micheleokimura.com/store destination is printed as text until the store
- * route ships; swap in a Link then.
- */
-function AvailableAt({
-  label = 'Available at',
-  links,
-}: {
-  label?: string
-  links: AvailableLink[]
-}) {
-  return (
-    <p className="mt-8 text-sm leading-7 text-neutral-600">
-      <span className="font-display font-semibold tracking-widest text-neutral-500 uppercase">
-        {label}
-      </span>{' '}
-      {links.map((link, i) => (
-        <span key={link.text}>
-          {i > 0 ? <span className="text-neutral-300"> &middot; </span> : null}
-          {link.href ? (
-            <a
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-neutral-950 underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition hover:decoration-2"
-            >
-              {link.text}
-            </a>
-          ) : (
-            <span className="font-medium text-neutral-950">{link.text}</span>
-          )}
-        </span>
-      ))}
-    </p>
-  )
-}
-
-/** Two-column work layout: cover on the left at lg+, stacked on mobile. */
-function Work({
-  cover,
-  children,
-}: {
-  cover: React.ReactNode
-  children: React.ReactNode
-}) {
-  return (
-    <FadeIn className="grid grid-cols-1 gap-10 lg:grid-cols-[20rem_1fr] lg:gap-16">
-      <div className="mx-auto w-full max-w-[16rem] lg:mx-0 lg:max-w-none">
-        {cover}
-      </div>
-      <div>{children}</div>
     </FadeIn>
   )
 }
 
-function WorkTitle({
-  title,
-  meta,
+function TileGrid({
+  children,
+  columns = 3,
 }: {
-  title: string
-  meta?: string
+  children: React.ReactNode
+  columns?: 3 | 4
 }) {
   return (
-    <>
-      <h3 className="font-display text-3xl leading-tight font-medium tracking-tight text-neutral-950 sm:text-4xl">
-        {title}
-      </h3>
-      {meta ? (
-        <p className="mt-3 text-sm tracking-wide text-neutral-500 italic">
-          {meta}
-        </p>
-      ) : null}
-    </>
-  )
-}
-
-function Prose({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="mt-6 space-y-5 text-lg leading-8 text-neutral-700">
-      {children}
-    </div>
-  )
-}
-
-/**
- * Link from a work on this page to its full case study under /projects. This
- * page is the shelf; the case study is the story behind the item on it.
- */
-function ReadTheStory({ href, label }: { href: string; label: string }) {
-  return (
-    <div className="mt-8">
-      <Link
-        href={href}
-        className="group inline-flex items-center gap-2 font-display text-base font-semibold text-neutral-950 underline decoration-[var(--color-brand-terracotta)] decoration-2 underline-offset-4 transition hover:text-[var(--color-brand-terracotta-ink)]"
+    <FadeInStagger faster>
+      {/* Reference grid: `grid gap-3 sm:grid-cols-3 sm:gap-5`. One column below
+          sm, where the card is horizontal, then three across. The four-column
+          variant is for the Dream Big age brackets only, which are a set of
+          four and were established as one row by the previous pass. */}
+      <ul
+        role="list"
+        className={`grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-5 ${
+          columns === 4 ? 'lg:grid-cols-4' : ''
+        }`}
       >
-        Read the story of {label}
-        <span aria-hidden="true">&rarr;</span>
-      </Link>
-    </div>
+        {children}
+      </ul>
+    </FadeInStagger>
   )
 }
-
-/* ------------------------------------------------------------------ copy */
-
-const EXPLICIT_MOVEMENT_ENDORSEMENTS: Endorsement[] = [
-  {
-    quote:
-      '“Michele is a remarkably gifted woman with an unbounded mother’s heart for the incredibly talented and passionate young people she draws into God’s Kingdom. This small book will bring huge encouragement to you, revealing that God is still intimately active in the world and in the hearts of humble and unlikely heroes like Michele.”',
-    source:
-      'Glenn T. Stanton, Director of Global Family Formation Studies, Focus on the Family',
-  },
-  {
-    quote:
-      '“Michele said, ‘Yes, Lord!’ and today she is leading the Explicit Movement that is bringing a message of sexual purity, and along with it hope and healing, to thousands of children and young people in the islands of Hawaii and beyond. You will be inspired and challenged to surrender your own life, just as Michele did, and follow the Lord into the purpose and destiny He has for you.”',
-    source:
-      'Dr. Ed Silvoso, Founder and President of Harvest Evangelism and the International Transformation Network',
-  },
-  {
-    quote:
-      '“Michele Okimura and her team minister healing and freedom to those in pain. If you have been abused or know anyone who has been a victim of abuse, and all of us do, you need to read this book that will give you hope.”',
-    source: 'Dr. Caroline Ward Oda, Ph.D.',
-  },
-]
-
-const DANCING_ENDORSEMENTS: Endorsement[] = [
-  {
-    quote:
-      '“Michele Okimura has touched a topic that is discussed very little. She invites the reader to share her tragedy and triumph by capturing that experience in Dancing with Father. This poem can be an instrument to bridge the gap in the healing process for others who have had a difficult journey through their youth.”',
-    source:
-      'Gary and Norma Smalley, President and Founder, Smalley Relationship Center',
-  },
-  {
-    quote:
-      '“Just as David wrote his Psalms, so has Michele found a voice for deeper longings of God. This is truly a soul’s cry that rings victorious. I believe Michele has found a voice for so many.”',
-    source:
-      'Dr. Wayne Cordeiro, Founding Pastor, New Hope Christian Fellowship, Honolulu',
-  },
-  {
-    quote:
-      '“When I read Dancing with the Father my heart was deeply touched. I know this deeply artistic, poetic work will touch many deeply.”',
-    source:
-      'Patricia King, President and Founder of Extreme Prophetic Ministries',
-  },
-]
-
-const DANCING_READER_IMPACT = [
-  'A woman in her darkest moment saw the book on her dining table, a gift from a friend. She picked it up, was met by God as she read, and instead of what she had planned, went to church the next morning. She later found Michele at a conference to tell her the book had saved her life.',
-  'A woman driving cross-country to escape abuse played the audiobook on repeat for hours. Tears and healing came, mile after mile, page after page.',
-  'The book has reached readers around the world, including as far as Norway and the Philippines.',
-]
-
-const DREAM_BIG_ENDORSEMENTS: Endorsement[] = [
-  {
-    quote:
-      '“I dream bigger. It helped change my fixed mindset, and now I can be more creative and grow my confidence.”',
-    source: 'Fourth-grade student',
-  },
-  {
-    quote:
-      '“It helped me to grow and find myself and my interests by reflecting on the past and planning for the future.”',
-    source: 'Fourth-grade student',
-  },
-  {
-    quote: '“The teacher guide was gold. Love the extensions.”',
-    source: 'Teacher',
-  },
-  {
-    quote:
-      '“The Dream Big Journal booklet provided an excellent resource to allow our Leadership Team to revisit our ‘dreams and aspirations’ in a safe and nurturing environment through the guidance and support of Michele Okimura.”',
-    source: 'Gerald Teramae, Head of School, Island Pacific Academy',
-  },
-]
-
-/**
- * The four age brackets, youngest first, with the journal cover and its
- * companion teacher guide. One cover per bracket, not two: Michele cut the
- * second row of Non-Faith covers on 2026-08-23 because the two versions are
- * the same art and the doubled grid read as eight different journals. The
- * subtitle on each group carries the "both versions available" fact instead.
- */
-const DREAM_BIG_EDITIONS = [
-  {
-    label: 'Preschool',
-    journal: '/images/journals/dream-big-with-god-journal-preschool@2x.jpg',
-    guide: '/images/journals/dream-big-with-god-teacher-guide-preschool@2x.jpg',
-  },
-  {
-    label: 'Younger Elementary, grades 1-2',
-    journal:
-      '/images/journals/dream-big-with-god-journal-younger-elementary@2x.jpg',
-    guide:
-      '/images/journals/dream-big-with-god-teacher-guide-younger-elementary@2x.jpg',
-  },
-  {
-    label: 'Older Elementary, grades 3-5',
-    journal:
-      '/images/journals/dream-big-with-god-journal-older-elementary@2x.jpg',
-    guide:
-      '/images/journals/dream-big-with-god-teacher-guide-older-elementary@2x.jpg',
-  },
-  {
-    label: 'Youth & Adults, “Keys to Unlock Your Dreams”',
-    journal:
-      '/images/journals/dream-big-with-god-journal-youth-and-adults@2x.jpg',
-    guide:
-      '/images/journals/dream-big-with-god-teacher-guide-youth-and-adults@2x.jpg',
-  },
-]
-
-/** Both Dream Big groups and the Brave Series shelf print the same line. */
-const BOTH_VERSIONS = 'Faith and Non-Faith Versions Available'
-
-/**
- * Author-page wording for the Brave Series editions. `Classic` is still the
- * internal name in lib/brave-series-covers and on the project pages.
- */
-const AUTHOR_EDITION_LABELS = { Classic: 'Non-Faith' } as const
-
-const RAISING_KINGDOM_KIDS_TOPICS = [
-  'Identity in Christ',
-  'Hearing God’s voice',
-  'Raising children leaders',
-  'Giving children a voice',
-  'Healing hearts',
-]
-
-const RAISING_KINGDOM_KIDS_ENDORSEMENTS: Endorsement[] = [
-  {
-    quote:
-      '“We purchased your curriculum because it was so amazing! We absolutely love your curriculum! We actually use it churchwide at times. So much of the curriculum is easily taught to all ages.”',
-    source: 'Children’s ministry customer',
-  },
-]
-
-const BRAVE_RECOGNITION = [
-  'Brave Together (non-faith version) vetted and approved by the Hawai‘i State Department of Education for use in secondary public schools, 2026',
-  '2023 Outstanding Advocate for the Children and Youth of Hawai‘i, awarded to Releasing Generations by Hawai‘i’s Governor and Honolulu’s Mayor for the development of the Brave Series',
-]
-
-const BRAVE_TITLES = [
-  { title: 'Brave & Beautiful', audience: 'for teen girls' },
-  { title: 'Brave & Bold', audience: 'for teen boys' },
-  { title: 'Brave Together', audience: 'for co-ed audiences' },
-]
-
-const BRAVE_ENDORSEMENTS: Endorsement[] = [
-  {
-    quote:
-      '“The Brave Series is a groundbreaking, survivor-informed resource that empowers youth with confidence, resilience, and the tools to safeguard themselves from exploitation. Its engaging, age-appropriate approach builds self-worth and inspires leadership, making it an essential prevention tool for protecting and uplifting the next generation.”',
-    source:
-      'Rachel Fisher, National and International Anti-Trafficking Consultant, Nurse, and Survivor',
-  },
-  {
-    quote:
-      '“When first introduced to the materials, I found them breathtaking and unlike anything I had seen. The Brave Series equips young people with the tools to navigate challenges, make informed decisions, and step confidently into their potential by addressing critical topics like self-worth, healthy relationships, and personal responsibility.”',
-    source:
-      'Phyllis Unebasami, Retired Hawai‘i Deputy Superintendent of the Department of Education',
-  },
-  {
-    quote:
-      '“This book has helped me not only to have a brighter mindset but to love myself and be confident in who I am and what I stand for. This book is so simple yet so empowering in every word and detail!”',
-    source: 'Malia Colburn, Teenage Girl',
-  },
-]
-
-const BRAVE_PURPOSE_FAITH_ENDORSEMENTS: Endorsement[] = [
-  {
-    quote:
-      '“There is a lack of practical tools that can assist young adults in discovering the direction that God wants their life to take. This book fills that void. Writing with a positive and uplifting tone, Michele provides practical advice on how to connect with one’s life purpose, no matter what adult life stage you are in.”',
-    source:
-      'Ted Esler, President and CEO of Missio Nexus (the largest North American mission network)',
-  },
-  {
-    quote:
-      '“Brave Purpose with God is a wonderful resource, helping us reflect on who we are, what we can achieve, and where to go from here. Listen for that divine voice of calm and clarity rising above the noise as we explore Brave Purpose with God together.”',
-    source:
-      'Edwin Keh, CEO of HKRITA; former Senior Vice President and COO of Walmart Global Procurement; Faculty at the Wharton School of the University of Pennsylvania, and A3 Christian Ministry',
-  },
-  {
-    quote:
-      '“Okimura masterfully connects the prophetic and the artistic with the dusty, everyday path we actually walk. Readers will come away not just encouraged but awakened as travelers ready to follow God’s clues toward the treasure He has prepared.”',
-    source:
-      'Ted Vail, D.I.S., Senior Vice President of Mission, The Foursquare Church',
-  },
-]
-
-const BRAVE_PURPOSE_SECULAR_ENDORSEMENTS: Endorsement[] = [
-  {
-    quote:
-      '“Brave Purpose is a wonderful resource in the midst of all this, helping us reflect on our identity, our potential, and our direction. The intent is for us to find our true purpose and meaning, and to live the unique life we were inherently designed for.”',
-    source:
-      'Edwin Keh, CEO of HKRITA; former Senior Vice President and COO of Walmart Global Procurement; Faculty at the Wharton School of the University of Pennsylvania',
-  },
-  {
-    quote:
-      '“Brave Purpose is not simply a book, it is a sacred invitation. From the first page, you feel gently yet firmly called out of hiding and into the courageous work of becoming who you were always meant to be. This is the kind of book you don’t just read, you experience.”',
-    source: 'Gerald Teramae, Head of School, Island Pacific Academy',
-  },
-]
-
-/**
- * Programs that have a case study but no titled entry on the shelf above. Card
- * copy is read from the project registry so these and the /projects index never
- * drift apart.
- */
-const OTHER_PROJECTS = projectStudies.filter((project) =>
-  ['kingdom-kids', 'rethink-creativity'].includes(project.slug),
-)
-
-const COVER_SIZES_MAIN = '(max-width: 1024px) 16rem, 20rem'
-const COVER_SIZES_GRID = '(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 15rem'
 
 /* ------------------------------------------------------------------ page */
 
@@ -517,772 +315,303 @@ export default function AuthorPage() {
           about the works, and repeating fifteen nodes on every URL is bloat. */}
       <AllWorksJsonLd />
 
-      <BannerHero
-        eyebrow="Author"
-        title="Books, Journals, and Curricula for Dreamers of Every Age"
-      />
-
-      {/* The intro paragraph that used to sit inside the tall hero. It reads as
-          the lead now, on cream, straight under the banner. */}
-      <Container className="mt-12 sm:mt-16">
-        <FadeIn>
-          <p className="max-w-3xl text-xl leading-9 text-neutral-600">
-            From published books to a 24-volume teen curriculum to multi-age
-            journals in both faith and non-faith versions, Michele&rsquo;s body
-            of work walks readers through the practice of dreaming big and
-            stepping into brave purpose. Whether you&rsquo;re a preschooler with
-            a first dream, an adult moving into a new season, or a leader
-            shaping the next generation, there&rsquo;s a doorway here for you.
-          </p>
-        </FadeIn>
-      </Container>
-
-      {/* The golden thread, stated once at the top so the works below read as
-          one body of work rather than a catalogue. Wording is single-sourced
-          from src/lib/projects.ts, which every case study also quotes.
-          Paired with Michele's headshot, added 2026-08-23. */}
-      <Container className="mt-10 sm:mt-12">
-        <FadeIn>
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,20rem)_1fr] lg:items-center lg:gap-16">
-            <div className="relative order-first aspect-[4/5] w-full max-w-xs overflow-hidden rounded-3xl bg-neutral-100 sm:max-w-sm lg:order-last lg:max-w-none">
-              <Image
-                src="/images/michele/author-hero.jpg"
-                alt="Michele Okimura with her coffee mug at home"
-                fill
-                sizes="(min-width: 1024px) 20rem, 60vw"
-                className="object-cover"
-              />
-            </div>
-
-            <div>
-              <p className="max-w-3xl border-l-2 border-[var(--color-brand-terracotta)] pl-6 font-display text-xl leading-9 text-neutral-800 italic sm:text-2xl sm:leading-10">
-                {GOLDEN_THREAD_LINE}
-              </p>
-              <figure className="mt-8 max-w-3xl">
-                <blockquote className="text-base leading-7 text-neutral-700 italic">
-                  &ldquo;{GOLDEN_THREAD_CULMINATION}&rdquo;
-                </blockquote>
-                <figcaption className="mt-2 text-sm font-medium text-neutral-500 not-italic">
-                  Michele Okimura
-                </figcaption>
-              </figure>
-              <p className="mt-8 max-w-3xl text-base leading-7 text-neutral-600">
-                Every title here has a story behind it. You can read them all on the{' '}
-                <Link
-                  href="/projects"
-                  className="font-medium text-neutral-950 underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition hover:decoration-2"
-                >
-                  projects page
-                </Link>
-                .
-              </p>
-            </div>
-          </div>
-        </FadeIn>
-      </Container>
-
-      {/* --------------------------------------------- the shelf, 1 to 8 */}
-      {/* ONE continuous list, no group divider: Michele's order of 2026-08-23,
-          which does not separate her own titles from the Releasing Generations
-          curriculum. There is no VISIBLE heading over the list either, so the
-          h2 below is sr-only and exists to keep the outline h1 > h2 > h3. */}
-      <section aria-labelledby="michele-titles">
-        <h2 id="michele-titles" className="sr-only">
-          Books and curricula by Michele Okimura
-        </h2>
-        <Container className="mt-16 sm:mt-24">
+      {/* ------------------------------------------------------------ hero */}
+      {/* Left-justified to the wordmark. Container is what the site header
+          uses, so the eyebrow, the H1 and the wordmark all sit on one left
+          edge at every width. The portrait is small on purpose: it was a
+          full-height editorial photo and Brett asked for a portrait treatment
+          instead, so the books get the space. */}
+      <section className="surface-author-wash">
+        <Container className={SECTION}>
           <FadeIn>
-            <p className="max-w-3xl font-display text-xl leading-9 text-neutral-800 italic sm:text-2xl sm:leading-10">
-              Brave Purpose is Michele&rsquo;s forthcoming book, releasing in
-              two editions: one faith, one non-faith. Both share the same core
-              message: you were made to step off the rock and into the current
-              of the life you were designed for. Each edition is voiced for its
-              audience.
-            </p>
+            <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_minmax(0,38rem)] lg:items-center lg:gap-12">
+              <div className="max-w-2xl">
+                <h1>
+                  <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-terracotta-ink)] uppercase sm:text-sm">
+                    Author
+                  </span>
+                  <span className="sr-only"> - </span>
+                  <span className="font-display mt-4 block text-[2rem] leading-[1.1] font-medium tracking-tight text-balance text-neutral-950 sm:mt-5 sm:text-[2.5rem] lg:text-5xl lg:leading-[1.08]">
+                    Books, journals, and curricula for every age
+                  </span>
+                </h1>
+                {/* Michele's approved subhead. Keep it verbatim. */}
+                <p className="font-display mt-4 max-w-xl text-lg leading-7 font-medium text-neutral-700 sm:text-xl sm:leading-8">
+                  Books, journals, and curricula that call out purpose and
+                  passion at every age.
+                </p>
+              </div>
+
+              {/* Her own covers, fanned. Built by scripts/build-books-hero.swift
+                  from the same art the tiles below use, so it can be rebuilt
+                  whenever a cover changes or the two Brave Purpose editions
+                  finally have art. Transparent PNG on purpose: a baked-in
+                  background would put a rectangle edge across the wash.
+
+                  This slot used to hold a small portrait of Michele. It moved
+                  out on 2026-08-24, when she asked for "a photograph of books"
+                  because the page read bland, and it is not a loss: her
+                  portrait now closes the page, circle-cropped and much larger,
+                  on the quote banner. Two photographs of her on one page was
+                  the note I had already flagged. */}
+              <div className="relative aspect-[1920/1040] w-full">
+                <Image
+                  src="/images/author/books-hero.png"
+                  alt="A fan of Michele Okimura's books and journals: Dancing with Father, The Birth of Explicit Movement, the Brave Series, the Dream Big Journals, and Raising Kingdom Kids"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 38rem, 100vw"
+                  className="object-contain"
+                />
+              </div>
+            </div>
           </FadeIn>
-
-          <div className="mt-14 space-y-20 sm:mt-16 sm:space-y-28">
-
-            {/* 1. Brave Purpose with God */}
-            <Work
-              cover={
-                <Cover alt="Brave Purpose with God" sizes={COVER_SIZES_MAIN} />
-              }
-            >
-              <Forthcoming />
-              <div className="mt-4">
-                <WorkTitle
-                  title="Brave Purpose with God"
-                  meta="Faith edition · Targeted Spring 2027"
-                />
-              </div>
-              <Prose>
-                <p>
-                  For anyone longing to dream big with God. Michele lays out
-                  the Brave Purpose Framework: 15 steps in three movements
-                  (Uncover, Recover, Ignite) that walk readers through
-                  discovering the God-breathed dreams He has planted within
-                  them, dealing with the fears and voices that have held them
-                  back, and taking real next steps of obedience. Written for
-                  the young adult finding first footing, the middle-aged
-                  reader navigating the sustained trek, and the senior
-                  stepping into a golden legacy. Includes a companion
-                  workbook.
-                </p>
-              </Prose>
-              <Endorsements
-                items={BRAVE_PURPOSE_FAITH_ENDORSEMENTS}
-                label="Early praise"
-              />
-              <ReadTheStory
-                href="/projects/brave-purpose-with-god"
-                label="Brave Purpose with God"
-              />
-              <div className="mt-8">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-1.5 font-display text-base font-semibold text-neutral-950 underline decoration-[var(--color-brand-terracotta)] decoration-2 underline-offset-4 transition hover:text-[var(--color-brand-terracotta-ink)]"
-                >
-                  Contact Michele for release updates
-                  <span aria-hidden="true">&rarr;</span>
-                </Link>
-                <p className="mt-2 text-sm text-neutral-500 italic">
-                  Launch email list coming soon.
-                </p>
-              </div>
-            </Work>
-
-
-            {/* 2. Brave Purpose */}
-            <Work
-              cover={<Cover alt="Brave Purpose" sizes={COVER_SIZES_MAIN} />}
-            >
-              <Forthcoming />
-              <div className="mt-4">
-                <WorkTitle
-                  title="Brave Purpose"
-                  meta="Non-faith edition · Releasing 2027"
-                />
-              </div>
-              <Prose>
-                <p>
-                  For anyone ready to dream big and step into the life they
-                  were designed for. Same 15-step Brave Purpose Framework,
-                  same three movements, voiced without the faith framing.
-                  Includes a companion workbook.
-                </p>
-              </Prose>
-              <Endorsements
-                items={BRAVE_PURPOSE_SECULAR_ENDORSEMENTS}
-                label="Early praise"
-              />
-              <ReadTheStory
-                href="/projects/brave-purpose"
-                label="Brave Purpose"
-              />
-              <div className="mt-8">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-1.5 font-display text-base font-semibold text-neutral-950 underline decoration-[var(--color-brand-terracotta)] decoration-2 underline-offset-4 transition hover:text-[var(--color-brand-terracotta-ink)]"
-                >
-                  Contact Michele for release updates
-                  <span aria-hidden="true">&rarr;</span>
-                </Link>
-                <p className="mt-2 text-sm text-neutral-500 italic">
-                  Launch email list coming soon.
-                </p>
-              </div>
-            </Work>
-
-            {/* 3. Dream Big Journals. The parent block carries the story; the
-                two cover sets sit under it as labelled sub-blocks, each one
-                noting that both versions ship. */}
-            <div>
-              <Work
-                cover={
-                  <Cover
-                    src="/images/journals/dream-big-with-god-journal-youth-and-adults@2x.jpg"
-                    alt="Dream Big Journal, Youth & Adults"
-                    sizes={COVER_SIZES_MAIN}
-                  />
-                }
-              >
-                {/* The parent does NOT repeat the versions line: both
-                    sub-blocks below carry it, and three copies on one screen
-                    read as three different facts. */}
-                <WorkTitle
-                  title="Dream Big Journals Curriculum"
-                  meta="Published 2023-2025 · Sole author: Michele Okimura"
-                />
-                <Prose>
-                  <p>
-                    A multi-age curriculum designed to walk readers through the
-                    practice of dreaming big, in shorter, age-appropriate
-                    journals that meet each reader where they are. As children
-                    work through the pages, parents and teachers discover
-                    what&rsquo;s alive in their kids&rsquo; hearts and gain the
-                    language to nurture those dreams before the world quiets them.
-                    Many of the adult callings we eventually walk in were first
-                    planted in us as children.
-                  </p>
-                  <p>
-                    In a world that too often teaches us to shrink our vision,
-                    these journals do the opposite. Seniors in their twilight
-                    years have used them to reignite vision for their season of
-                    life with great joy and excitement. How wonderful it would be
-                    to raise a generation of dreamers of all ages who would impact
-                    the world we live in for good.
-                  </p>
-                  <p className="text-base text-neutral-600 italic">
-                    Piloted with fourth-grade students at Kamehameha Schools,
-                    Hawai&lsquo;i.
-                  </p>
-                </Prose>
-
-                <p className="mt-8 text-base leading-7 text-neutral-700">
-                  <strong className="font-semibold text-neutral-950">
-                    Available in four age brackets:
-                  </strong>{' '}
-                  Preschool, Younger Elementary (grades 1-2), Older Elementary
-                  (grades 3-5), Youth &amp; Adults (&ldquo;Keys to Unlock Your
-                  Dreams&rdquo;). Every bracket comes in a Faith version and a
-                  Non-Faith version. The Non-Faith version is the one that goes
-                  into public school classrooms and secular leadership rooms.
-                </p>
-
-                <Endorsements
-                  items={DREAM_BIG_ENDORSEMENTS}
-                  label="Voices from the classroom"
-                />
-                <AvailableAt links={[{ text: 'micheleokimura.com/store' }]} />
-                <ReadTheStory
-                  href="/projects/dream-big-journals"
-                  label="the Dream Big Journals"
-                />
-              </Work>
-
-              {/* Sub-block A, "Journals". Headings here are deliberately
-                  short: the parent above already says Dream Big Journals, so
-                  repeating it read as two different products. One row of four,
-                  one per age bracket. The second row of Non-Faith covers and
-                  the standalone full-size tile that used to close this section
-                  were both cut on 2026-08-23. */}
-              <div className="mt-14 sm:mt-16">
-                <FadeIn>
-                  <ShelfGroupTitle title="Journals" subtitle={BOTH_VERSIONS} />
-                </FadeIn>
-                <FadeInStagger faster className="mt-6">
-                  <ul
-                    role="list"
-                    className="grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-8"
-                  >
-                    {DREAM_BIG_EDITIONS.map((edition) => (
-                      <FadeIn as="li" key={edition.label} scaleIn>
-                        <Cover
-                          src={edition.journal}
-                          alt={`Dream Big Journal, ${edition.label}`}
-                          sizes={COVER_SIZES_GRID}
-                          caption={edition.label}
-                        />
-                      </FadeIn>
-                    ))}
-                  </ul>
-                </FadeInStagger>
-              </div>
-
-              {/* Sub-block B, "Teacher Guides". Same four brackets. */}
-              <div className="mt-14 sm:mt-16">
-                <FadeIn>
-                  <ShelfGroupTitle
-                    title="Teacher Guides"
-                    subtitle={BOTH_VERSIONS}
-                  />
-                </FadeIn>
-                <FadeInStagger faster className="mt-6">
-                  <ul
-                    role="list"
-                    className="grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-8"
-                  >
-                    {DREAM_BIG_EDITIONS.map((edition) => (
-                      <FadeIn as="li" key={edition.label} scaleIn>
-                        <Cover
-                          src={edition.guide}
-                          alt={`Dream Big Teacher Guide, ${edition.label}`}
-                          sizes={COVER_SIZES_GRID}
-                          caption={edition.label}
-                        />
-                      </FadeIn>
-                    ))}
-                  </ul>
-                </FadeInStagger>
-              </div>
-            </div>
-
-            {/* 4. Raising Kingdom Kids. The lesson book behind the Kingdom Kids
-                Workshop, and a title on the shelf in its own right. */}
-            <Work
-              cover={
-                <Cover
-                  src="/images/books/kingdom-kids.webp"
-                  alt="Raising Kingdom Kids"
-                  sizes={COVER_SIZES_MAIN}
-                />
-              }
-            >
-              <WorkTitle
-                title="Raising Kingdom Kids"
-                meta="A lesson book for equipping the next generation · More than 100 lessons"
-              />
-              <Prose>
-                <p>
-                  A compilation of over 100 proven, true lessons Michele
-                  developed across ten years of active children&rsquo;s ministry
-                  and youth ministry work. Every lesson in the book was taught
-                  in a real room with real kids before it was written down.
-                  Nothing here is theory.
-                </p>
-                <p>
-                  The book was built for children&rsquo;s ministry leaders and
-                  parents, and the range turned out to be much wider than that.
-                  Many of the lessons carry straight across every age group,
-                  adults included, which is how churches have ended up teaching
-                  them from the main platform.
-                </p>
-              </Prose>
-
-              <div className="mt-8">
-                <h4 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
-                  What the lessons cover
-                </h4>
-                <ul
-                  role="list"
-                  className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2"
-                >
-                  {RAISING_KINGDOM_KIDS_TOPICS.map((topic) => (
-                    <li key={topic} className="flex gap-3">
-                      <span
-                        aria-hidden="true"
-                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-teal)]"
-                      />
-                      <span className="text-base leading-7 text-neutral-700">
-                        {topic}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <Endorsements
-                items={RAISING_KINGDOM_KIDS_ENDORSEMENTS}
-                label="What churches say"
-              />
-              <AvailableAt links={[{ text: 'micheleokimura.com/store' }]} />
-              <ReadTheStory
-                href="/projects/raising-kingdom-kids"
-                label="Raising Kingdom Kids"
-              />
-            </Work>
-
-            {/* 5. Brave Series Curriculum. Parent block, then the three titles as
-                sub-blocks, each with its audience as the subtitle. */}
-            <div>
-              <FadeIn>
-                <h3 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
-                  Directed as Chief Editor, Creative Director &amp; Contributing
-                  Author
-                </h3>
-              </FadeIn>
-              <div className="mt-8">
-                <Work
-                  cover={
-                    <Cover
-                      src="/images/brave-series/brave-and-beautiful-vol1-faith-journey@2x.jpg"
-                      alt="Brave & Beautiful, Volume 1 (Faith Journey edition)"
-                      sizes={COVER_SIZES_MAIN}
-                    />
-                  }
-                >
-                  <WorkTitle
-                    title="Brave Series Curriculum"
-                    meta={BOTH_VERSIONS}
-                  />
-                  <p className="mt-6 font-display text-xl leading-8 text-neutral-800 italic sm:text-2xl">
-                    Every page is a work of art. Just as every child is.
-                  </p>
-                  <Prose>
-                    <p>
-                      The Brave Series is a three-title youth curriculum that
-                      develops emotional health, builds self-worth and healthy
-                      relationships, imparts wisdom for life and leadership, and
-                      empowers readers to protect themselves from exploitation. A
-                      powerful preventative resource, available in both faith and
-                      non-faith versions. Michele led the series as{' '}
-                      <strong className="font-semibold text-neutral-950">
-                        Chief Editor, Creative Director, and Contributing Author
-                      </strong>
-                      . Twenty-four volumes in all: three titles, four-volume sets
-                      each, faith and non-faith versions.
-                    </p>
-                  </Prose>
-
-                  {/* Recognition callout. The token is navy at low opacity
-                      despite the legacy teal name, so this stays a quiet panel
-                      rather than a second brand color. */}
-                  <div className="mt-8 rounded-3xl bg-[var(--color-teal-05)] p-6 ring-1 ring-[var(--color-teal-20)] sm:p-8">
-                    <h4 className="font-display text-xs font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
-                      Recognition
-                    </h4>
-                    <ul role="list" className="mt-5 space-y-4">
-                      {BRAVE_RECOGNITION.map((item) => (
-                        <li key={item} className="flex gap-3">
-                          <span
-                            aria-hidden="true"
-                            className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-teal)]"
-                          />
-                          <span className="text-base leading-7 text-neutral-800">
-                            {item}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="mt-10">
-                    <h4 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
-                      Titles
-                    </h4>
-                    <ul
-                      role="list"
-                      className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-3"
-                    >
-                      {BRAVE_TITLES.map((item) => (
-                        <li
-                          key={item.title}
-                          className="rounded-2xl border border-neutral-200 bg-white p-5"
-                        >
-                          <p className="font-display text-lg font-semibold tracking-tight text-neutral-950">
-                            {item.title}
-                          </p>
-                          <p className="mt-1 text-sm text-neutral-600">
-                            {item.audience}
-                          </p>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <Prose>
-                    <p>
-                      While written for youth, the Brave Series has been adopted by
-                      church leaders for leadership development, and by women and
-                      men of all ages, from young adults to seniors, who have found
-                      their own healing, empowerment, and vision inside the
-                      material.
-                    </p>
-                    <p className="text-base text-neutral-600 italic">
-                      Brave Together Faith version shipping in the next month; all
-                      other volumes available now.
-                    </p>
-                  </Prose>
-
-                  <Endorsements items={BRAVE_ENDORSEMENTS} />
-                  <AvailableAt
-                    label="Buy at"
-                    links={[
-                      {
-                        text: 'thebraveseries.com',
-                        href: 'https://thebraveseries.com',
-                      },
-                    ]}
-                  />
-                  <ReadTheStory
-                    href="/projects/brave-series"
-                    label="the Brave Series"
-                  />
-                </Work>
-              </div>
-
-              {/* Twelve covers, four volumes per title, Faith and Non-Faith
-                  alternating across each row. All 24 are not shown here, by
-                  direction. Source: lib/brave-series-covers, relabelled for
-                  this page only. */}
-              <div className="mt-16 sm:mt-20">
-                <FadeIn>
-                  <h4 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
-                    The twelve volumes
-                  </h4>
-                  <p className="mt-3 max-w-2xl text-base leading-7 text-neutral-600">
-                    Four volumes in each title, shown here in a mix of the Faith
-                    and Non-Faith versions. Every volume ships in both.
-                  </p>
-                </FadeIn>
-                <div className="mt-8">
-                  <BraveSeriesCovers editionLabels={AUTHOR_EDITION_LABELS} />
-                </div>
-              </div>
-            </div>
-
-            {/* 6. Dancing with Father. Cover art is the clean crop rather than
-                the full-page scan, which carries a grey scanner bed. */}
-            <Work
-              cover={
-                <Cover
-                  src="/images/books/dancing-with-father.webp"
-                  alt="Dancing with Father"
-                  sizes={COVER_SIZES_MAIN}
-                />
-              }
-            >
-              <WorkTitle title="Dancing with Father" meta="Published 2011" />
-              <Prose>
-                <p>
-                  A book of poetry, reflection, and beautiful painted
-                  illustrations. Michele wrote it out of her own difficult
-                  journey through youth, as a way for anyone else walking a
-                  similar path to know they are seen, pursued, and loved by God
-                  as Father. Short enough to read in one sitting. The kind of
-                  book readers keep close and return to again and again. Come
-                  dance with the One who joys over you with singing.
-                </p>
-                <p className="text-base text-neutral-600 italic">
-                  Also available as an audiobook, produced in radio-drama style.
-                </p>
-              </Prose>
-
-              <Endorsements items={DANCING_ENDORSEMENTS} />
-
-              <div className="mt-10">
-                <h4 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
-                  Reader impact
-                </h4>
-                <p className="mt-2 text-sm text-neutral-500 italic">
-                  From testimonies Michele has received.
-                </p>
-                <ul
-                  role="list"
-                  className="mt-5 space-y-4 border-t border-neutral-200 pt-5"
-                >
-                  {DANCING_READER_IMPACT.map((story) => (
-                    <li key={story} className="flex gap-3">
-                      <span
-                        aria-hidden="true"
-                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-teal)]"
-                      />
-                      <span className="text-base leading-7 text-neutral-700">
-                        {story}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <AvailableAt
-                links={[
-                  { text: 'micheleokimura.com/store (book, audiobook)' },
-                ]}
-              />
-              <ReadTheStory
-                href="/projects/dancing-with-father"
-                label="Dancing with Father"
-              />
-            </Work>
-
-
-            {/* 7. The Birth of Explicit Movement */}
-            <Work
-              cover={
-                <Cover
-                  src="/images/books/birth-of-explicit-movement-cover@2x.jpg"
-                  alt="The Birth of Explicit Movement"
-                  sizes={COVER_SIZES_MAIN}
-                />
-              }
-            >
-              <WorkTitle
-                title="The Birth of Explicit Movement: Discover Keys to Fulfilling Your Purpose"
-                meta="Published 2018"
-              />
-              <Prose>
-                <p>
-                  Michele&rsquo;s founding story, told in full. Written as both
-                  testimony and reflection guide, this is the personal account
-                  behind Explicit Movement. Each chapter closes with reflection
-                  sections that turn her story into a personal guide for readers
-                  learning to hear God&rsquo;s voice and take their own steps of
-                  obedience. The Speaker keynote &ldquo;Finding Your Brave
-                  Purpose&rdquo; is drawn from this book.
-                </p>
-              </Prose>
-
-              <div className="mt-8 rounded-3xl bg-neutral-50 p-6 sm:p-8">
-                <h4 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
-                  About Explicit Movement
-                </h4>
-                <p className="mt-4 text-base leading-7 text-neutral-700">
-                  Explicit Movement equips parents, church leaders, and young
-                  people themselves through events, courses, and resources on
-                  topics such as pornography addiction, sexual violence, and
-                  healthy relationships. With a compassionate, grace-filled
-                  approach rooted in God&rsquo;s truth, the ministry helps young
-                  people find hope and healing, know their value and identity in
-                  Christ, and walk in sexual integrity as they step into the
-                  fullness of who God created them to be.
-                </p>
-              </div>
-
-              <Endorsements items={EXPLICIT_MOVEMENT_ENDORSEMENTS} />
-              <AvailableAt
-                links={[
-                  {
-                    text: 'explicitmovement.org',
-                    href: 'https://explicitmovement.org',
-                  },
-                  {
-                    text: 'releasinggenerations.org',
-                    href: 'https://releasinggenerations.org',
-                  },
-                ]}
-              />
-              <ReadTheStory
-                href="/projects/birth-of-explicit-movement"
-                label="The Birth of Explicit Movement"
-              />
-            </Work>
-
-
-            {/* 8. The Explicit Movement 21-Day Interactive Journal */}
-            <Work
-              cover={
-                <Cover
-                  src="/images/books/explicit-movement-21-day-journal-cover@2x.jpg"
-                  alt="The Explicit Movement 21-Day Interactive Journal"
-                  sizes={COVER_SIZES_MAIN}
-                />
-              }
-            >
-              <WorkTitle
-                title="The Explicit Movement 21-Day Interactive Journal"
-                meta="Published 2018"
-              />
-              <Prose>
-                <p>
-                  A three-week guided journey for readers ready to sit with the
-                  questions that shape identity, healing, and purpose. Each day
-                  pairs a reflection prompt with space to write, drawing from
-                  the truths that anchor the Explicit Movement teaching: your
-                  value, your identity in Christ, and the life God has invited
-                  you into. Designed for individual or small-group use. Written
-                  by the Explicit Movement team, together with friends and
-                  family of the movement. Michele served as{' '}
-                  <strong className="font-semibold text-neutral-950">
-                    Director and Contributing Author
-                  </strong>
-                  .
-                </p>
-              </Prose>
-              <AvailableAt
-                links={[
-                  {
-                    text: 'explicitmovement.org',
-                    href: 'https://explicitmovement.org',
-                  },
-                  {
-                    text: 'releasinggenerations.org (book and e-book)',
-                    href: 'https://releasinggenerations.org',
-                  },
-                ]}
-              />
-            </Work>
-
-
-          </div>
         </Container>
       </section>
 
+      {/* ----------------------------------------------------------- shelf */}
+      {/* ONE continuous list, no divider between Michele's own titles and the
+          Releasing Generations curriculum: she asked for one list. There is no
+          VISIBLE heading over it either, so the h2 is sr-only and exists to
+          keep the outline h1 > h2 > h3. */}
+      <section
+        aria-labelledby="shelf-heading"
+        className={`bg-[var(--color-band-1)] ${SECTION}`}
+      >
+        <div className={WIDE}>
+          <h2 id="shelf-heading" className="sr-only">
+            Books and curricula by Michele Okimura
+          </h2>
+
+          <div className="space-y-14 sm:space-y-16 lg:space-y-20">
+            {SHELF.map((block, blockIndex) => {
+              if (block.kind === 'books') {
+                return (
+                  <TileGrid key={`books-${blockIndex}`}>
+                    {block.slugs.map((slug) => {
+                      const book = getAuthorBook(slug)
+                      if (!book) return null
+                      return (
+                        <FadeIn as="li" key={slug} scaleIn className="flex">
+                          <BookTile book={book} />
+                        </FadeIn>
+                      )
+                    })}
+                  </TileGrid>
+                )
+              }
+
+              const parent = getAuthorBook(block.slug)
+              if (!parent) return null
+
+              return (
+                <div key={block.slug}>
+                  <FamilyHeading
+                    title={parent.title}
+                    subtitle={block.subtitle}
+                    href={`/author/books/${parent.slug}`}
+                  />
+
+                  {/* Children that are titles in their own right. */}
+                  {block.childSlugs ? (
+                    <div className="mt-8">
+                      <TileGrid>
+                        {block.childSlugs.map((slug) => {
+                          const child = getAuthorBook(slug)
+                          if (!child) return null
+                          return (
+                            <FadeIn
+                              as="li"
+                              key={slug}
+                              scaleIn
+                              className="flex"
+                            >
+                              <BookTile
+                                book={child}
+                                as="h4"
+                                headingClass="text-base"
+                                showLearnMore={false}
+                              />
+                            </FadeIn>
+                          )
+                        })}
+                      </TileGrid>
+                    </div>
+                  ) : null}
+
+                  {/* Children that are editions of the parent: one row of four
+                      per group, youngest bracket first. */}
+                  {block.editions?.map((group) => (
+                    <div key={group.title} className="mt-10 sm:mt-12">
+                      <GroupTitle
+                        title={group.title}
+                        subtitle={group.subtitle}
+                      />
+                      <div className="mt-6">
+                        <TileGrid columns={4}>
+                          {DREAM_BIG_EDITIONS.map((edition) => (
+                            <FadeIn
+                              as="li"
+                              key={edition.label}
+                              scaleIn
+                              className="flex"
+                            >
+                              <EditionTile
+                                href={`/author/books/${parent.slug}`}
+                                src={edition[group.field]}
+                                alt={`${
+                                  group.field === 'journal'
+                                    ? 'Dream Big Journal'
+                                    : 'Dream Big Teacher Guide'
+                                }, ${edition.label}`}
+                                label={edition.label}
+                              />
+                            </FadeIn>
+                          ))}
+                        </TileGrid>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------- quote banner */}
+      {/* The banner that was on /speaker, and on /coach before that. It
+          replaces the photo-and-quote block that used to close this page:
+          same job, much stronger, and it carries Michele's purpose line
+          rather than a line about dreamers.
+
+          ORDER. It sits ABOVE "Also built by Michele" rather than dead last,
+          and that is a footer constraint, not a preference. SiteFooter carries
+          a top margin of its own, so the last section on a page has to be
+          band-1: any other ground leaves a strip of mismatched colour between
+          the section and the navy footer. A periwinkle band last would show a
+          near-white stripe above the footer and read as a bug. Landing it here
+          is also exactly what /speaker does with the same banner, where it is
+          a breath between the two densest blocks on the page.
+
+          Periwinkle is sampled from the sapphire flowers in the dress in this
+          very photograph. Numbers and the contrast budget are in the QUOTE
+          BANNER block in tailwind.css. Only navy and neutral-600 clear AA on
+          this wash. */}
+      <section
+        aria-label="In Michele's words"
+        className="surface-speaker-quote w-full py-14 sm:py-24 lg:py-28"
+      >
+        <Container>
+          <FadeIn>
+            <figure className="flex flex-col items-center gap-10 text-center lg:flex-row lg:gap-16 lg:text-left">
+              {/* A fixed pixel box rather than a percentage, so the circle
+                  stays a circle at every width instead of squashing to an
+                  oval in the flex row. */}
+              <div className="relative h-[250px] w-[250px] flex-none overflow-hidden rounded-full bg-neutral-100 ring-1 ring-[var(--color-navy-10)] sm:h-[300px] sm:w-[300px] lg:h-[340px] lg:w-[340px]">
+                <Image
+                  src="/images/michele/coach-hero.jpg"
+                  alt="Michele Okimura at home in Honolulu"
+                  fill
+                  sizes="(min-width: 1024px) 340px, (min-width: 640px) 300px, 250px"
+                  className="object-cover object-[center_20%]"
+                />
+              </div>
+
+              <div>
+                {/* No quotation marks. At this size a pair of curly quotes
+                    just hangs two heavy marks in the corners, and the display
+                    setting already reads as a quote. Navy rather than
+                    teal-text, which measures 3.96:1 on this wash and fails. */}
+                <blockquote className="font-display mx-auto max-w-[22ch] text-[1.5rem] leading-[1.25] font-medium tracking-tight text-balance text-[var(--color-navy)] sm:max-w-[26ch] sm:text-[1.875rem] sm:leading-[1.22] lg:mx-0 lg:max-w-[30ch] lg:text-[2.25rem] lg:leading-[1.2]">
+                  My purpose is to help people live in the fullness of who they
+                  were created to be with brave purpose.
+                </blockquote>
+                {/* No dash before the name: no em dash anywhere on this site,
+                    so the attribution is the name alone. neutral-600 is the
+                    only secondary that clears AA on the periwinkle;
+                    coral-text, the usual house eyebrow colour, is 3.93:1. */}
+                <figcaption className="font-display mt-6 text-xs font-semibold tracking-[0.18em] text-neutral-600 uppercase sm:mt-8 sm:text-sm">
+                  Michele Okimura
+                </figcaption>
+              </div>
+            </figure>
+          </FadeIn>
+        </Container>
+      </section>
 
       {/* ------------------------------------------------- other projects */}
       {/* Kingdom Kids and ReThink Creativity are programs rather than titles,
-          so they have no shelf entry above. They belong to the same body of
-          work, so they get cards here and a route into the full index. */}
-      <section aria-labelledby="other-projects">
-        <Container className="mt-24 sm:mt-32">
+          so they have no tile on the shelf. They belong to the same body of
+          work, so they get cards here and a route into the full index.
+
+          The navy "Every story in one place" card that used to close this row
+          is gone: Michele's rule is that dark blue belongs to the footer and
+          nowhere else. The route into /projects is a plain link now. */}
+      {/* Band-1, and it has to be: this is the last section, and SiteFooter
+          carries a top margin, so any other ground would show as a strip of
+          mismatched colour above the navy footer. The cards take cream for the
+          same reason the shelf tiles do, so they still lift off the ground. */}
+      <section
+        aria-labelledby="other-projects"
+        className={`bg-[var(--color-band-1)] ${SECTION}`}
+      >
+        <div className={WIDE}>
           <FadeIn>
-            <SectionHeading>
-              <span id="other-projects">Also built by Michele</span>
-            </SectionHeading>
+            <h2
+              id="other-projects"
+              className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase"
+            >
+              Also built by Michele
+            </h2>
           </FadeIn>
           <FadeInStagger faster className="mt-8">
             <ul
               role="list"
-              className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
+              className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
             >
               {OTHER_PROJECTS.map((project) => (
-                <FadeIn as="li" key={project.href} scaleIn>
+                <FadeIn as="li" key={project.href} scaleIn className="flex">
                   <Link
                     href={project.href}
-                    className="group flex h-full flex-col rounded-3xl bg-white p-8 ring-1 ring-neutral-900/5 transition hover:shadow-lg hover:ring-neutral-900/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus-ring)]"
+                    className="group flex h-full w-full flex-col rounded-2xl bg-[var(--color-band-3)] p-6 shadow-sm ring-1 ring-[var(--color-navy-10)] transition duration-300 hover:-translate-y-0.5 hover:shadow-md hover:ring-[var(--color-teal-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)] lg:p-8"
                   >
-                    <span className="text-xs font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
+                    <span className="font-display text-xs font-semibold tracking-[0.18em] text-[var(--color-brand-terracotta-ink)] uppercase">
                       {project.kicker}
                     </span>
-                    <h3 className="mt-3 font-display text-xl font-semibold tracking-tight text-neutral-950">
+                    <h3 className="font-display mt-3 text-xl font-semibold tracking-tight text-neutral-950">
                       {project.title}
                     </h3>
-                    <p className="mt-4 flex-1 text-base leading-7 text-neutral-600">
+                    <p className="mt-4 flex-auto text-base leading-7 text-neutral-700">
                       {project.blurb}
                     </p>
-                    <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-neutral-950">
+                    <span className="font-display mt-6 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition group-hover:decoration-2">
                       Read the story
-                      <span aria-hidden="true">&rarr;</span>
+                      <span
+                        aria-hidden="true"
+                        className="transition-transform duration-200 group-hover:translate-x-0.5"
+                      >
+                        &rarr;
+                      </span>
                     </span>
                   </Link>
                 </FadeIn>
               ))}
-
-              <FadeIn as="li" scaleIn>
-                <Link
-                  href="/projects"
-                  className="group flex h-full flex-col justify-between rounded-3xl bg-[var(--color-brand-teal)] p-8 transition hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-cream)]"
-                >
-                  <div>
-                    <span className="text-xs font-semibold tracking-widest text-white/70 uppercase">
-                      All projects
-                    </span>
-                    <h3 className="mt-3 font-display text-xl font-semibold tracking-tight text-white">
-                      Every story in one place
-                    </h3>
-                    <p className="mt-4 text-base leading-7 text-neutral-300">
-                      The origin, the making, and the reach of each book,
-                      curriculum, and program.
-                    </p>
-                  </div>
-                  <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white">
-                    Browse the projects
-                    <span aria-hidden="true">&rarr;</span>
-                  </span>
-                </Link>
-              </FadeIn>
             </ul>
           </FadeInStagger>
-        </Container>
+
+          <FadeIn className="mt-10">
+            <Link
+              href="/projects"
+              className="font-display inline-flex items-center gap-1.5 text-base font-semibold text-neutral-950 underline decoration-[var(--color-brand-terracotta)] decoration-2 underline-offset-4 transition hover:text-[var(--color-brand-terracotta-ink)]"
+            >
+              Every story in one place
+              <span aria-hidden="true">&rarr;</span>
+            </Link>
+          </FadeIn>
+        </div>
       </section>
 
-      {/* ---------------------------------------------- closing invitation */}
-      <Container className="mt-24 sm:mt-32">
-        <FadeIn className="mx-auto max-w-4xl text-center">
-          <blockquote className="font-display text-3xl leading-tight font-medium text-balance text-neutral-950 italic sm:text-4xl sm:leading-tight">
-            Let&rsquo;s become a community of dreamers where we don&rsquo;t
-            compete but instead celebrate and support one another.
-          </blockquote>
-        </FadeIn>
-      </Container>
-
-      <ContactBlock heading="Stay close to the next release." source="author">
-        <p>
-          Brave Purpose arrives in 2027 in both editions. Leave your name and
-          email and Michele will let you know when it is ready.
-        </p>
-      </ContactBlock>
     </>
   )
 }

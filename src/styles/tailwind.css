@@ -131,6 +131,33 @@
   --color-band-3: #efefea;
   --color-band-4: #e9e9e2;
 
+  /* ---------------------------------------------------------------------
+     AUTHOR HERO WASH
+     ---------------------------------------------------------------------
+     The one per-page hero ground on the site, added 2026-08-23 on Brett and
+     Michele's Author review: "pull the dominant colour from Michele's hero
+     photo and use it as a wash for the hero section."
+
+     It is sampled, not chosen. A 200-point downsample of
+     /public/images/michele/author-hero.jpg, with the near-white paper and the
+     shadows dropped, clusters hardest at #DBA686 (hue 22, sat 0.39): the warm
+     blush that runs through the florals on her dress and the wood behind her.
+     These two are that colour lightened until it stops being a panel and
+     starts being a ground.
+
+     THE RANGE IS A CONTRAST BUDGET. Nothing in this section may go darker
+     than --color-author-wash-base, because that is the floor where the tracked
+     small-caps eyebrow, which is --color-brand-terracotta-ink #B8431F, still
+     clears AA at 4.64:1. Navy body copy holds 12.5:1 there and the H1 has room
+     to spare. If you deepen the wash, re-measure the eyebrow first; it is the
+     colour that fails, not the heading.
+
+     Do NOT reach for these anywhere else. DESIGN-RULES bans coral-tinted
+     panels, and this is deliberately the single exception Michele asked for
+     rather than the start of a set. */
+  --color-author-wash-top: #fcf7f3;
+  --color-author-wash-base: #f6ebe2;
+
   --color-teal-text: #0f766e;
   --color-teal-on-dark: #9fe8df;
   --color-coral-text: #b8431f;
@@ -397,14 +424,19 @@ html {
 }
 
 /* ---------------------------------------------------------------------
-   SPEAKER QUOTE BANNER  (/speaker)
+   QUOTE BANNER  (/speaker and /author)
    ---------------------------------------------------------------------
-   The periwinkle strip behind Michele's portrait and her purpose line. Moved
-   here from /coach on 2026-08-24, where it sat on a soft teal.
+   The periwinkle strip behind Michele's portrait and her purpose line. It
+   started on /coach, moved to /speaker on 2026-08-24, and landed on /author
+   the same day. The class name still says speaker because /speaker is where
+   it was defined. Both branches have now landed on main, so this is the one
+   declaration and it serves both pages. Re-measure against both photographs
+   before recolouring it.
 
-   Michele asked for "periwinkle, a lighter sapphire, matching the sapphire
-   flowers in the dress, and don't make it too dark". Those flowers, in
-   public/images/michele/coach-hero.jpg, average #28326A across 954 pixels once
+   The colour is sampled from the photograph it carries. Michele asked for
+   "periwinkle, a lighter sapphire, matching the sapphire flowers in the
+   dress, and don't make it too dark". The flowers in
+   public/images/michele/coach-hero.jpg average #28326A across 954 pixels once
    the pale fabric and the shadow are thrown out: hue 230, s 0.62, v 0.42. A
    true sapphire. This wash is that hue held exactly and lifted to s 0.13,
    v 0.96, which keeps the flower's colour and none of its weight.
@@ -577,6 +609,33 @@ html {
     rgba(255, 255, 255, 0) 1.6px
   );
   background-size: 14px 14px, auto, auto;
+}
+
+/* The Author hero ground. Warm blush pulled from Michele's own hero photo, so
+   the section reads as an extension of the picture sitting in it rather than
+   as a tinted box behind it.
+
+   Two layers. A soft ellipse warms the right side, which is where the portrait
+   sits, and a top-to-bottom gradient carries the rest. Both stops live inside
+   the range set by --color-author-wash-top and --color-author-wash-base, so the
+   darkest pixel anywhere in the section is the base and every text colour on it
+   is measured against that. See the token block in this file.
+
+   This is the ONLY per-page hero background on the site. Every other interior
+   page uses .surface-teal-banner, and that is still the identity. */
+.surface-author-wash {
+  background-color: var(--color-author-wash-top);
+  background-image:
+    radial-gradient(
+      ellipse 60% 120% at 78% 40%,
+      var(--color-author-wash-base) 0%,
+      rgba(246, 235, 226, 0) 70%
+    ),
+    linear-gradient(
+      to bottom,
+      var(--color-author-wash-top) 0%,
+      var(--color-author-wash-base) 100%
+    );
 }
 
 h1,

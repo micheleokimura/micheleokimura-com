@@ -151,11 +151,30 @@ export function SiteHeader() {
                 button beside it (the wait-list button, whose label had already
                 been unified to "Contact"), so the header shipped two identical
                 CTAs. The wait-list flow now lives inside the contact popup, so
-                this is the only entry point and it carries the coral. */}
+                this is the only entry point.
+
+                OUTLINE, NOT FILLED, changed 2026-08-23 on Michele's note that
+                the button "looks off" against the header. Both were tried. The
+                solid coral block was the only saturated thing left in the bar
+                once the nav lost its coral highlighter, and at that size it
+                read as the loudest element on the page rather than as one item
+                in a row of six. The outline sits at the same weight as the nav
+                labels, and the coral is not lost: it arrives on hover, which is
+                where the palette says a CTA hover belongs.
+
+                Measured: navy label on the band-1 bar is 14.0:1. The boundary
+                is --color-field-border, the token that exists because WCAG
+                holds a control's edge to 3:1 and a hairline of navy at low
+                alpha does not get there. On hover the fill is coral and the
+                label switches to --color-cta-ink for 4.75:1; plain navy on
+                coral is 4.43:1 and misses, which is the trap DESIGN-RULES
+                calls out. The mobile panel keeps the filled treatment: it is a
+                full-width block standing alone in a sheet, and an outline at
+                that size reads as disabled. */}
             <button
               type="button"
               onClick={() => setContactOpen(true)}
-              className="hidden items-center justify-center rounded-md bg-[var(--color-cta)] px-4 py-2 text-sm font-semibold whitespace-nowrap text-[var(--color-cta-ink)] shadow-sm transition hover:bg-[var(--color-cta-hover)] focus-visible:ring-2 focus-visible:ring-[var(--color-cta-ink)] focus-visible:ring-offset-2 focus-visible:outline-none sm:inline-flex lg:px-5 lg:py-2.5"
+              className="hidden items-center justify-center rounded-md px-4 py-2 text-sm font-semibold whitespace-nowrap text-[var(--color-navy)] ring-1 ring-[var(--color-field-border)] transition hover:bg-[var(--color-cta)] hover:text-[var(--color-cta-ink)] hover:ring-[var(--color-cta)] focus-visible:ring-2 focus-visible:ring-[var(--color-cta-ink)] focus-visible:ring-offset-2 focus-visible:outline-none sm:inline-flex lg:px-5 lg:py-2.5"
             >
               Contact
             </button>
