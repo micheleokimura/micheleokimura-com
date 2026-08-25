@@ -28,10 +28,12 @@ import { FadeIn } from '@/components/FadeIn'
  *      does. Michele's screenshot of the Renaissance tile is the check here:
  *      the poster type reads straight through the scrim. An opaque panel is
  *      the wrong reading of the reference.
- *   3. Below `sm` the caption sits in an always-visible band at the bottom of
- *      the tile instead of a hover scrim, because an opacity-only hover is
- *      unreachable on a touch screen. From `sm` up it is the WordPress
- *      full-tile behaviour.
+ *   3. The always-visible bottom band is the DEFAULT, and the WordPress
+ *      hide-until-hover scrim is opt-in, gated on `(hover: hover)` as well as
+ *      on `sm`. An opacity-only hover is unreachable on a touch screen, and a
+ *      touch TABLET is wide enough to match `sm`, so keying the fallback to
+ *      width alone hides the caption forever on an iPad. See `.about-caption`
+ *      in tailwind.css, which carries the whole overlay.
  *
  * EVERY TILE CARRIES ITS CAPTION. This is the fix Brett asked for. The
  * previous pass shipped `caption: ''` on 23 of the 24 tiles by a direction
@@ -247,7 +249,7 @@ function MosaicTile({ tile }: { tile: Tile }) {
           caption is available to someone not using a mouse on desktop. */}
       <figure
         tabIndex={0}
-        className="group relative block aspect-square w-full overflow-hidden bg-[var(--color-navy-10)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus-ring)]"
+        className="about-tile group relative block aspect-square w-full overflow-hidden bg-[var(--color-navy-10)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus-ring)]"
       >
         <Image
           src={tile.src}
@@ -257,31 +259,16 @@ function MosaicTile({ tile }: { tile: Tile }) {
           className="object-cover"
         />
 
-        {/* Below sm: a solid band pinned to the bottom, always visible, because
-            an opacity-only hover cannot be reached on a touch screen.
-            From sm up: the WordPress full-tile scrim, revealed on hover or
-            keyboard focus.
-
-            The scrim colour is written as a literal rgba rather than
-            `bg-[var(--color-navy)]/78`. The opacity modifier on an arbitrary
-            CSS variable compiles to a color-mix() that has to resolve the
-            variable at paint time, and a literal cannot fail. This overlay is
-            the thing that was reported broken, so it is worth being blunt
-            about. --color-navy is #1F2744. */}
-        <figcaption
-          className={[
-            'pointer-events-none absolute inset-0 flex flex-col justify-end p-4',
-            'text-sm leading-snug whitespace-pre-line text-[var(--color-cream)]',
-            'bg-gradient-to-t from-[rgba(31,39,68,0.92)] via-[rgba(31,39,68,0.62)] to-transparent',
-            'sm:items-center sm:justify-center sm:p-5 sm:text-center sm:text-base sm:leading-normal',
-            'sm:bg-[rgba(31,39,68,0.78)] sm:bg-none',
-            'sm:opacity-0 sm:transition-opacity sm:duration-[400ms] sm:ease-in-out',
-            'sm:group-hover:opacity-100 sm:group-focus-visible:opacity-100',
-            'motion-reduce:transition-none',
-          ].join(' ')}
-        >
-          {tile.caption}
-        </figcaption>
+        {/* This overlay's whole appearance is `.about-caption` in tailwind.css.
+            Plain CSS on purpose, and worth reading that comment before
+            touching it: the reveal has to be gated on whether the pointer can
+            HOVER, not on how wide the screen is. Tailwind's `group-hover:`
+            already compiles inside `@media (hover: hover)`, so writing this
+            as `sm:opacity-0 sm:group-hover:opacity-100` leaves a touch tablet
+            at 820px matching the hide half and never the reveal half, and the
+            caption never appears at all. That was live on this branch until
+            2026-08-25. */}
+        <figcaption className="about-caption">{tile.caption}</figcaption>
       </figure>
     </li>
   )

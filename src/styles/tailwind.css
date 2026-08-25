@@ -897,6 +897,71 @@ html.lenis body {
   }
 }
 
+/* About page "My Story" caption overlay (src/components/AboutMosaic.tsx).
+
+   Plain CSS rather than a stack of Tailwind variants, for one reason: the
+   reveal has to be keyed to whether the pointer can HOVER, not to how wide the
+   screen is, and Tailwind's `group-hover:` compiles to a rule wrapped in
+   `@media (hover: hover)`. Written the Tailwind way, an iPad at 820px would
+   match `sm:` and take `opacity: 0`, then never match `(hover: hover)` and so
+   never take `opacity: 1`. The caption would be permanently invisible on every
+   touch tablet, which is the exact failure the mobile fallback exists to
+   prevent, and it would only show up on a real device. Verified in Chrome
+   2026-08-25.
+
+   So: the always-visible bottom band is the DEFAULT, and the WordPress
+   hide-until-hover behaviour is opt-in, gated on a real hover pointer AND a
+   multi-column grid. A touch device gets readable captions at every width.
+
+   Colours are literal rgba of --color-navy (#1F2744). The scrim is 78%, the
+   lightest alpha that still holds cream at better than 5:1 over a white
+   photograph, which is the worst case here. It deliberately leaves the picture
+   legible underneath, the way Michele's WordPress reference does. */
+.about-caption {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1rem;
+  color: var(--color-cream);
+  white-space: pre-line;
+  font-size: 0.875rem;
+  line-height: 1.375;
+  pointer-events: none;
+  background-image: linear-gradient(
+    to top,
+    rgba(31, 39, 68, 0.92) 0%,
+    rgba(31, 39, 68, 0.62) 50%,
+    rgba(31, 39, 68, 0) 100%
+  );
+}
+
+@media (min-width: 40rem) and (hover: hover) {
+  .about-caption {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1.25rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    background-image: none;
+    background-color: rgba(31, 39, 68, 0.78);
+    opacity: 0;
+    transition: opacity 400ms ease-in-out;
+  }
+  .about-tile:hover > .about-caption,
+  .about-tile:focus-visible > .about-caption {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-caption {
+    transition: none;
+  }
+}
+
 /* Article body styling for /resources/[slug] pages */
 .prose-blog {
   color: var(--color-neutral-800);
