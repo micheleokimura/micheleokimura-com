@@ -124,7 +124,7 @@ The Brave Series is a three-title youth curriculum that develops emotional healt
 
 **Recognition:**
 
-- Brave Together (non-faith version) vetted and approved by the Hawai'i State Department of Education for use in secondary public schools, 2026
+- The Hawai'i Brave Together three-article booklet was reviewed and approved by the Hawai'i Department of Education for the state's Sexual Violence Prevention Initiative.
 - 2023 Outstanding Advocate for the Children and Youth of Hawai'i, awarded to Releasing Generations by Hawai'i's Governor and Honolulu's Mayor for the development of the Brave Series
 
 **Titles:**

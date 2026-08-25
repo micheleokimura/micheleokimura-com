@@ -514,7 +514,7 @@ export const AUTHOR_BOOKS: AuthorBook[] = [
     panel: {
       heading: 'Recognition',
       items: [
-        'Brave Together (non-faith version) vetted and approved by the Hawaiʻi State Department of Education for use in secondary public schools, 2026',
+        'The Hawaiʻi Brave Together three-article booklet was reviewed and approved by the Hawaiʻi Department of Education for the state’s Sexual Violence Prevention Initiative.',
         '2023 Outstanding Advocate for the Children and Youth of Hawaiʻi, awarded to Releasing Generations by Hawaiʻi’s Governor and Honolulu’s Mayor for the development of the Brave Series',
       ],
     },
@@ -578,7 +578,7 @@ export const AUTHOR_BOOKS: AuthorBook[] = [
       'Co-ed teen leadership curriculum focused on shared identity and mission. One of the three titles in the Brave Series, in a four-volume set, available in both faith and non-faith versions.',
     ],
     notes: [
-      'The non-faith version was vetted and approved by the Hawaiʻi State Department of Education for use in secondary public schools in 2026. The faith version ships in the next month.',
+      'The Hawaiʻi Brave Together three-article booklet was reviewed and approved by the Hawaiʻi Department of Education for the state’s Sexual Violence Prevention Initiative. The faith version ships in the next month.',
     ],
     // TODO(copy): see the note on brave-and-beautiful.
     // Same prominent treatment as the parent series page. Michele's note was

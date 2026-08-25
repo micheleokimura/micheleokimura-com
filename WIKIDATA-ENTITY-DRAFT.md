@@ -25,7 +25,7 @@ Two rules will decide whether the item survives:
    may get merged or deleted. The reference column below is not optional.
 2. **A subject's own website is a weak but acceptable source on Wikidata** for
    uncontroversial self-descriptive facts (occupation, employer, official
-   website). It is not acceptable for the award or the DOE approval. Those need
+   website). It is not acceptable for the award or the DOE booklet approval. Those need
    the third-party sources flagged below.
 
 **Conflict of interest.** If Michele creates the item herself she should say so
@@ -137,9 +137,10 @@ really the evidence base for the individual statements.
   organization. **An independent source is needed** — a state or City and County
   of Honolulu proclamation, a Children and Youth Day programme, or press
   coverage. Ask Michele whether she holds the physical proclamation.
-- **Brave Together (non-faith edition) vetted and approved by the Hawaiʻi State
-  Department of Education** for use in secondary public schools, 2026. Teacher
-  lessons written by Phyllis Unebasami, retired Hawaiʻi Deputy Superintendent.
+- **The Hawaiʻi Brave Together three-article booklet was reviewed and approved by
+  the Hawaiʻi Department of Education** for the state's Sexual Violence
+  Prevention Initiative. Teacher lessons written by Phyllis Unebasami, retired
+  Hawaiʻi Deputy Superintendent.
   *Sourcing status:* strong claim, currently sourced only to the site. **A DOE
   approval letter or listing would make this the strongest fact in the item.**
 - **Published books with ISBNs.** *Dancing with Father* (Xulon Press, 2011,
@@ -176,7 +177,7 @@ really the evidence base for the individual statements.
 
 1. Resolve the name question (Flag 2) with Michele.
 2. Decide the date-of-birth privacy question with Michele.
-3. Chase one independent source for the award and one for the DOE approval.
+3. Chase one independent source for the award and one for the DOE booklet approval.
 4. Create the item with the High-confidence statements only.
 5. Add the Verify-marked statements after checking each QID.
 6. Copy the QID into `wikidataId` in `src/lib/site-config.ts`.

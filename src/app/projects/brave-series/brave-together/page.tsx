@@ -16,8 +16,10 @@ import {
 import { BraveSeriesCovers } from '@/components/BraveSeriesCovers'
 import { Container } from '@/components/Container'
 
-// The DOE approval is the headline of this page: Brave Together is the edition
-// the State of Hawai‘i vetted and approved for secondary public schools in 2026.
+// The DOE review is the headline of this page. Keep the claim narrow: what the
+// Hawai‘i Department of Education reviewed and approved is the Hawai‘i Brave
+// Together three-article booklet, for the state's Sexual Violence Prevention
+// Initiative. It is not a statewide approval of the curriculum for schools.
 import { BRAVE_SERIES_TITLES } from '@/lib/brave-series-covers'
 import { pageMetadata } from '@/lib/schema'
 
@@ -26,28 +28,28 @@ const braveTitle = BRAVE_SERIES_TITLES.find((t) => t.slug === 'brave-together')!
 export const metadata: Metadata = pageMetadata({
   title: 'Brave Together',
   description:
-    'The co-ed Brave Series title, vetted and approved by the Hawaiʻi State Department of Education for use in secondary public schools in 2026. Teacher lessons by Phyllis Unebasami.',
+    'The co-ed Brave Series title. The Hawaiʻi Brave Together three-article booklet was reviewed and approved by the Hawaiʻi Department of Education for the state’s Sexual Violence Prevention Initiative. Teacher lessons by Phyllis Unebasami.',
   path: '/projects/brave-series/brave-together',
   type: 'article',
   ogDescription:
-    'The co-ed edition approved by the Hawaiʻi Department of Education in 2026.',
+    'The co-ed edition behind the booklet the Hawaiʻi Department of Education reviewed and approved.',
 })
 
 const RECOGNITION = [
-  'Brave Together (non-faith version) vetted and approved by the Hawaiʻi State Department of Education for use in secondary public schools, 2026',
+  'The Hawaiʻi Brave Together three-article booklet was reviewed and approved by the Hawaiʻi Department of Education for the state’s Sexual Violence Prevention Initiative.',
   'Teacher lessons written by Phyllis Unebasami, retired Hawaiʻi Deputy Superintendent of the Department of Education and a leading curriculum designer in the state',
   '2023 Outstanding Advocate for the Children and Youth of Hawaiʻi, awarded to Releasing Generations by Hawaiʻi’s Governor and Honolulu’s Mayor for the development of the Brave Series',
 ]
 
 const DETAIL = [
-  'Written for co-ed classrooms, which is what made a statewide public school rollout possible.',
+  'Written for co-ed classrooms, because public schools do not separate boys and girls.',
   'Volumes 1 through 3 build identity, emotional health, self-worth, healthy relationships, and vision for your life.',
   'Volume 4 covers pornography, sexual violence, and sex trafficking in age-appropriate ways.',
-  'More than 80 lessons with slide decks, in a faith edition and a non-faith edition. The non-faith edition is the one the Department of Education approved.',
+  'More than 80 lessons with slide decks, in a faith edition and a non-faith edition. The non-faith edition is the one behind the booklet the Department of Education reviewed and approved.',
 ]
 
 const ADOPTION = [
-  'Approved for use in Hawaiʻi secondary public schools, 2026.',
+  'The Hawaiʻi Brave Together three-article booklet was reviewed and approved by the Hawaiʻi Department of Education for the state’s Sexual Violence Prevention Initiative.',
   'Piloted in the Philippines, at a South Carolina Christian school, and at a Native American reservation school.',
   'Used by safe houses that rehabilitate and restore trafficked victims, as a resource for healing and restoration with traumatized youth and adults.',
 ]
@@ -75,20 +77,23 @@ export default function BraveTogetherPage() {
       title="Brave Together"
       lede={
         <p>
-          The co-ed edition, and the one the State of Hawaiʻi vetted and
-          approved for its secondary public schools in 2026. It exists because a
-          retired Deputy Superintendent believed every public school student in
-          the state needed this material, and public schools do not separate
-          boys and girls.
+          The co-ed edition. The Hawaiʻi Brave Together three-article booklet
+          was reviewed and approved by the Hawaiʻi Department of Education for
+          the state&rsquo;s Sexual Violence Prevention Initiative. It exists
+          because a retired Deputy Superintendent believed every public school
+          student in the state needed this material, and public schools do not
+          separate boys and girls.
         </p>
       }
       contactHeading="Bring Brave Together to your school."
       contactSource="project-brave-together"
       contactBody={
         <p>
-          Brave Together is approved for Hawaiʻi secondary public schools and is
-          being piloted internationally. Tell Michele about your school or
-          district and she will walk you through it.
+          The Hawaiʻi Brave Together three-article booklet was reviewed and
+          approved by the Hawaiʻi Department of Education for the state&rsquo;s
+          Sexual Violence Prevention Initiative, and the curriculum is being
+          piloted internationally. Tell Michele about your school or district
+          and she will walk you through it.
         </p>
       }
     >
@@ -113,9 +118,9 @@ export default function BraveTogetherPage() {
             For a whole year Phyllis Unebasami joined our team and wrote all of
             the teacher lessons for the Brave Together co-ed version. She is a
             top curriculum designer in our state, and a wonderful Christian
-            woman. In the summer of 2026, Brave Together was vetted and approved
-            by the state of Hawaiʻi for use in public secondary
-            schools.&rdquo;
+            woman. The Hawaiʻi Brave Together three-article booklet was reviewed
+            and approved by the Hawaiʻi Department of Education for the
+            state&rsquo;s Sexual Violence Prevention Initiative.&rdquo;
           </p>
         </Prose>
         <Recognition items={RECOGNITION} />

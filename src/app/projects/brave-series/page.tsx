@@ -27,7 +27,7 @@ import { Container } from '@/components/Container'
 export const metadata: Metadata = pageMetadata({
   title: 'The Brave Series',
   description:
-    'A 24-volume youth curriculum on identity, worth, and protection from exploitation. Vetted and approved by the Hawaiʻi State Department of Education for secondary public schools in 2026.',
+    'A 24-volume youth curriculum on identity, worth, and protection from exploitation. The Hawaiʻi Brave Together three-article booklet was reviewed and approved by the Hawaiʻi Department of Education for the state’s Sexual Violence Prevention Initiative.',
   path: '/projects/brave-series',
   type: 'article',
   ogDescription:
@@ -35,7 +35,7 @@ export const metadata: Metadata = pageMetadata({
 })
 
 const RECOGNITION = [
-  'Brave Together (non-faith version) vetted and approved by the Hawaiʻi State Department of Education for use in secondary public schools, 2026',
+  'The Hawaiʻi Brave Together three-article booklet was reviewed and approved by the Hawaiʻi Department of Education for the state’s Sexual Violence Prevention Initiative.',
   '2023 Outstanding Advocate for the Children and Youth of Hawaiʻi, awarded to Releasing Generations by Hawaiʻi’s Governor and Honolulu’s Mayor for the development of the Brave Series',
 ]
 
@@ -74,7 +74,7 @@ const TITLES = [
   {
     href: '/projects/brave-series/brave-together',
     title: 'Brave Together',
-    audience: 'Co-ed. The edition Hawaiʻi approved for public schools.',
+    audience: 'Co-ed. The edition behind the booklet the Hawaiʻi Department of Education approved.',
   },
 ]
 
@@ -108,8 +108,8 @@ export default function BraveSeriesPage() {
           Three titles, four volumes each, in faith and non-faith editions.
           Built to develop emotional health, build self-worth and healthy
           relationships, and give young people the tools to protect themselves
-          from exploitation. It started with a vision in a shower and ended up
-          approved by the State of Hawaiʻi.
+          from exploitation. It started with a vision in a shower and ended up in
+          front of the Hawaiʻi Department of Education.
         </p>
       }
       contactHeading="Bring the Brave Series to your school or organization."
@@ -239,8 +239,9 @@ export default function BraveSeriesPage() {
             For a whole year Phyllis Unebasami joined our team and wrote all of
             the teacher lessons for the Brave Together co-ed version. She is a
             top curriculum designer in our state, and a wonderful Christian
-            woman. In the summer of 2026, Brave Together was vetted and approved
-            by the state of Hawaiʻi for use in public secondary schools.
+            woman. The Hawaiʻi Brave Together three-article booklet was reviewed
+            and approved by the Hawaiʻi Department of Education for the
+            state&rsquo;s Sexual Violence Prevention Initiative.
           </p>
           <p>
             After finishing Brave Together non-faith in October 2025, we went

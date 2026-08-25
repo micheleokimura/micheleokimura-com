@@ -59,7 +59,7 @@ export const projectStudies: ProjectStudy[] = [
     title: 'The Brave Series',
     kicker: 'Curriculum · 24 volumes',
     blurb:
-      'A vision in the shower became a 24-volume youth curriculum on identity, worth, and protection from exploitation. Approved by the Hawaiʻi State Department of Education in 2026.',
+      'A vision in the shower became a 24-volume youth curriculum on identity, worth, and protection from exploitation. The Hawaiʻi Brave Together three-article booklet was reviewed and approved by the Hawaiʻi Department of Education for the state’s Sexual Violence Prevention Initiative.',
     group: 'curricula-and-programs',
   },
   {

@@ -23,16 +23,16 @@ Against that test, the current evidence base is:
 | Asset | Counts toward notability? |
 | ----- | ------------------------- |
 | 2023 state Outstanding Advocate award | **Potentially yes**, if independent coverage of it exists. The award itself is a strong signal; right now the only citation is her own organization's site. |
-| Hawaiʻi DOE approval of Brave Together | **Potentially yes**, with a DOE document or news report. Strong, unusual, verifiable in principle. |
+| Hawaiʻi DOE approval of the Hawaiʻi Brave Together booklet | **Potentially yes**, with a DOE document or news report. Strong, unusual, verifiable in principle. |
 | Two published trade books | Weak on their own. *Dancing with Father* was published by Xulon Press, a **paid self-publishing imprint**, which Wikipedia treats as self-published. Books need independent reviews to count. |
-| Curricula (Brave Series, Dream Big) | Only via the DOE adoption. |
+| Curricula (Brave Series, Dream Big) | Only via the DOE booklet approval. |
 | Missio Nexus podcast appearance | **No.** Interviews are not independent coverage. |
 | Speaking engagements and endorsements | **No.** |
 | Ed Silvoso connection | **Not usable.** See the sourcing note below. |
 
 **Conclusion: one or two more independent secondary sources would likely make
-the difference.** The realistic path is press coverage of the DOE curriculum
-adoption or of the 2023 award, in outlets like the Honolulu Star-Advertiser,
+the difference.** The realistic path is press coverage of the DOE booklet
+approval or of the 2023 award, in outlets like the Honolulu Star-Advertiser,
 Hawaii Business Magazine, Civil Beat, KHON2, or Hawaii News Now. The repo already
 identifies these as a target (`research/05-google-knowledge-panel-strategy.md`),
 where they are listed as not yet done. Two solid articles and this draft becomes
@@ -104,10 +104,10 @@ Curriculum, the Raising Kingdom Kids Lesson Book, and the Brave Series, a
 teen leadership curriculum comprising *Brave & Beautiful*, *Brave & Bold*, and
 *Brave Together*.[2]
 
-In 2026, the non-faith edition of *Brave Together* was vetted and approved by the
-Hawaiʻi State Department of Education for use in secondary public schools. Its
-teacher lessons were written by Phyllis Unebasami, a retired deputy
-superintendent of the department.[4]
+The Hawaiʻi Brave Together three-article booklet was reviewed and approved by the
+Hawaiʻi Department of Education for the state's Sexual Violence Prevention
+Initiative. Its teacher lessons were written by Phyllis Unebasami, a retired
+deputy superintendent of the department.[4]
 
 ### Recognition
 
@@ -138,7 +138,7 @@ Okimura LLC, through which she offers author coaching.[1]
 | 1 | micheleokimura.com/about | No | Acceptable for uncontroversial self-descriptive detail only. Cannot carry the article. |
 | 2 | micheleokimura.com/author | No | Same. |
 | 3 | *Dancing with Father*, ISBN 978-1613792711 | Partly | Verifiable through library catalogues. Note the self-publishing imprint. |
-| 4 | Hawaiʻi DOE approval of *Brave Together* | **Needed** | **The single most valuable source to obtain.** A DOE letter, listing, or news report. |
+| 4 | Hawaiʻi DOE approval of the Hawaiʻi Brave Together booklet | **Needed** | **The single most valuable source to obtain.** A DOE letter, listing, or news report. |
 | 5 | 2023 Outstanding Advocate award | **Needed** | Currently cited only to explicitmovement.org. Seek the state or city proclamation, the Children and Youth Day programme, or press coverage. |
 | 6 | releasinggenerations.org | No | Self-published. |
 
@@ -150,7 +150,7 @@ that would fix it.
 
 ## Next steps
 
-1. Obtain documentation of the DOE approval (source 4).
+1. Obtain documentation of the DOE booklet approval (source 4).
 2. Obtain an independent record of the 2023 award (source 5).
 3. Pursue Hawaiʻi press coverage, already scoped in
    `research/05-google-knowledge-panel-strategy.md`.
