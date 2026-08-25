@@ -99,8 +99,13 @@ export type AuthorBook = {
    * when present; Michele read that row as far too small to find.
    */
   buy?: { label: string; text: string; href: string }
-  /** A YouTube Short. Portrait, so the frame is 9:16 and capped narrow. */
-  video?: { id: string; title: string; label: string }
+  /**
+   * A YouTube embed. The frame is 16:9 whatever the clip is: a Short gets
+   * pillarboxed inside it, which is what the releasinggenerations.org
+   * reference does and what Michele asked for. No visible label, so there is
+   * no field for one; `title` is the accessible name on the iframe.
+   */
+  video?: { id: string; title: string }
   /** A bulleted block only one or two titles carry. */
   list?: { label: string; note?: string; items: string[] }
   /** A quiet panel of recognition or context. */
@@ -625,13 +630,13 @@ export const AUTHOR_BOOKS: AuthorBook[] = [
       },
     ],
     notes: ['Also available as an audiobook, produced in radio-drama style.'],
-    // Michele's own Short, on her own channel, embedded rather than re-hosted.
-    // It is a vertical 9:16 clip, so the frame is portrait and capped narrow;
-    // a 16:9 box would letterbox it inside two black bars.
+    // Michele's Short, embedded rather than re-hosted. It is a vertical clip in
+    // a 16:9 frame, so YouTube pillarboxes it. That is the point rather than a
+    // bug: the portrait frame it shipped in first read as unbalanced beside the
+    // cover. See VideoEmbed in the detail page for the sizing and the source.
     video: {
       id: 'IDfSPZ6D4wg',
       title: 'Dancing with Father, book short by Michele Okimura',
-      label: 'Watch the short',
     },
     endorsements: DANCING_ENDORSEMENTS,
     list: {

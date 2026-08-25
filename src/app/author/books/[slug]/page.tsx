@@ -180,42 +180,42 @@ function BuyLink({
 }
 
 /**
- * A YouTube Short. Portrait, so the frame is 9:16 and capped at 360px: a Short
- * in a 16:9 box is a thin strip between two black bars.
+ * The video embed.
  *
- * Embedded, never re-hosted. It is Michele's video on Michele's channel, and
- * downloading it to serve ourselves would breach YouTube's terms.
+ * LANDSCAPE, not portrait, and that is deliberate even though the clip is a
+ * YouTube Short. It shipped as a 9:16 portrait frame first and Michele read it
+ * as odd and unbalanced next to the book cover. The reference she pointed at is
+ * the Explicit Movement Testimonies block on releasinggenerations.org, whose
+ * embed measures 831 x 468 at a 1440 viewport: a plain 16:9 box, no label over
+ * it, left-aligned to the section's own text column rather than centred on the
+ * page. 52rem is 832px, which is that width to the pixel.
  *
- * `rel=0` keeps the end screen to her own channel. No autoplay, controls on,
- * and the iframe is lazy so it costs nothing until it scrolls into view.
+ * YouTube pillarboxes the vertical clip inside the landscape frame. That is
+ * expected and it is what the reference does too.
+ *
+ * No visible label. RG carries none, Michele preferred it that way, and a
+ * YouTube thumbnail with a play button over it does not need to be captioned
+ * "video". The iframe keeps its `title` so screen readers still get one.
+ *
+ * Embedded, never re-hosted: it is Michele's video on a channel that allows
+ * embedding, and downloading it to serve ourselves would breach YouTube's
+ * terms. `rel=0` keeps the end screen off other people's channels. No autoplay,
+ * controls on, and the iframe is lazy so it costs nothing until it scrolls in.
  */
-function ShortEmbed({
-  id,
-  title,
-  label,
-}: {
-  id: string
-  title: string
-  label: string
-}) {
+function VideoEmbed({ id, title }: { id: string; title: string }) {
   return (
-    <figure className="mt-10 flex flex-col items-center">
-      <figcaption className="font-display mb-4 text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-terracotta-ink)] uppercase sm:text-sm">
-        {label}
-      </figcaption>
-      <div className="w-full max-w-[360px]">
-        <div className="relative aspect-[9/16] w-full overflow-hidden rounded-2xl bg-neutral-950 ring-1 ring-[var(--color-navy-10)]">
-          <iframe
-            src={`https://www.youtube.com/embed/${id}?rel=0`}
-            title={title}
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-            className="absolute inset-0 h-full w-full border-0"
-          />
-        </div>
+    <div className="mx-auto mt-10 w-full max-w-[52rem]">
+      <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-neutral-950 ring-1 ring-[var(--color-navy-10)]">
+        <iframe
+          src={`https://www.youtube.com/embed/${id}?rel=0`}
+          title={title}
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+          className="absolute inset-0 h-full w-full border-0"
+        />
       </div>
-    </figure>
+    </div>
   )
 }
 
@@ -284,14 +284,11 @@ export default async function AuthorBookPage({
               ))}
             </div>
 
-            {/* Near the top by direction, so a visitor meets it before the
-                long copy rather than after it. */}
+            {/* Directly under the last paragraph of the description and above
+                everything else in this column, which is where Michele put it:
+                below the body copy, above the endorsements. */}
             {book.video ? (
-              <ShortEmbed
-                id={book.video.id}
-                title={book.video.title}
-                label={book.video.label}
-              />
+              <VideoEmbed id={book.video.id} title={book.video.title} />
             ) : null}
 
             {book.notes?.length ? (
