@@ -1,30 +1,82 @@
 import type { Metadata } from 'next'
 
-import { pageMetadata } from '@/lib/schema'
-
-import { Container } from '@/components/Container'
-import { FadeIn } from '@/components/FadeIn'
-import { PageIntro } from '@/components/PageIntro'
 import Image from 'next/image'
 
+import { pageMetadata } from '@/lib/schema'
+
 import { AboutMosaic } from '@/components/AboutMosaic'
-import { ContactBlock } from '@/components/ContactBlock'
+import { Container } from '@/components/Container'
+import { FadeIn } from '@/components/FadeIn'
 import { WebPageJsonLd } from '@/components/JsonLd'
+import { PageIntro } from '@/components/PageIntro'
 import { awards, credentials } from '@/lib/credentials'
-import { OWN_BRANDS } from '@/lib/organizations'
-import { GOLDEN_THREAD_QUOTE } from '@/lib/projects'
 
 export const metadata: Metadata = pageMetadata({
   title: 'About Michele',
   description:
-    'Michele Okimura is an author, speaker, executive director, and coach based on O\'ahu, Hawai\'i. Founder of Releasing Generations, Explicit Movement, Kingdom Families, and ReThink Creativity. 2023 Outstanding Advocate for Children and Youth of Hawai\'i.',
+    'Michele Okimura is an author and speaker in Honolulu, Hawaiʻi, who has spent the last four decades inspiring courage, vulnerability, healing, and creativity.',
   path: '/about',
 })
 
-// Voice ported from Michele's current micheleokimura.com /about page (warm,
-// vulnerable, first person, Brené Brown style); facts confirmed against the
-// citation-backed credentials dossier. Em dashes -> commas per house style.
-// Verbatim review by Michele pending.
+/**
+ * /about - a 1-to-1 mirror of Michele's live WordPress About page.
+ *
+ * Rebuilt 2026-08-25 on Brett's walkthrough. The whole point of this pass is
+ * fidelity to the WordPress source, so the rule for anyone editing this file
+ * is narrow: DO NOT rewrite, tighten, or "improve" the prose below. Michele,
+ * via Brett: "That's the exact copywriting that we want. That's the exact
+ * photos that we want."
+ *
+ * The crawl of https://micheleokimura.com/about/ is checked in at
+ * `design-references/wordpress-about-full/` (page HTML, Elementor CSS, and a
+ * per-tile manifest). `/about-me/` is a 404; `/about/` is the page.
+ *
+ * WordPress runs exactly three things, in this order:
+ *
+ *   1. an eyebrow "About Michele", an H2 "Welcome.", a one-line lead, an
+ *      Instagram icon, an H3 "Maybe dreams give purpose a voice.", and eight
+ *      body paragraphs
+ *   2. an H2 "My Story" over the 24-tile photo mosaic
+ *   3. nothing else
+ *
+ * The ONLY edits to that copy are the two the house rules require:
+ *   - em dashes removed (paragraphs 1 and 7)
+ *   - "Hawaii" -> "Hawaiʻi" (paragraph 2, twice)
+ *
+ * Everything else stands as Michele wrote it, INCLUDING wording that
+ * contradicts other parts of this repo. Flagged rather than fixed, because
+ * these are hers to rule on:
+ *   - "chairman of Releasing Generations". CLAUDE.md and the bios say founder
+ *     and Executive Director.
+ *   - "Michele Okimura Consulting", established 2017. CLAUDE.md says Michele
+ *     Okimura LLC.
+ *   - "For 15 years, I was an elementary school teacher". credentials.ts says
+ *     17 years and CLAUDE.md says roughly fourteen, and the 17 is visible
+ *     further down THIS page under "Roles and work".
+ *
+ * Sections deleted in this pass, per Brett, not to be restored without him:
+ *   - "The work Michele leads", the OWN_BRANDS logo grid. Releasing
+ *     Generations movement boxes do not belong on Michele's own About page.
+ *   - "Let's work together", the closing ContactBlock. The contact CTA lives
+ *     in the footer only now, and no email address is displayed anywhere.
+ *   - "Meet Michele", whose copy was written for the old build and has no
+ *     WordPress source. Its photograph is in git history.
+ *
+ * The pull line is "Maybe dreams give purpose a voice." This REVERSES the
+ * 2026-08-23 call in commit cacdff2, which cut that line in favour of "I
+ * believe dreams give purpose a voice." Brett's rule for this pass is that
+ * where WordPress has its own opening line, WordPress wins and the other is
+ * dropped so the page does not say the same thing twice. Michele should
+ * confirm which of the two she wants; only one of them belongs here.
+ *
+ * "Honors and recognition" and "Roles and work" have NO WordPress equivalent.
+ * They are this site's own sections and were kept by name on Brett's list.
+ *
+ * BANDS. Every section is full-bleed on one of --color-band-1/2/3 and carries
+ * its own padding, and neighbours never share a band. Top to bottom:
+ * banner (navy) / welcome band-1 / pull line band-3 / story band-2 /
+ * mosaic band-1 / honors band-2 / footer run-in band-4 (painted by SiteFooter).
+ */
 export default function AboutPage() {
   return (
     <>
@@ -34,207 +86,201 @@ export default function AboutPage() {
       <WebPageJsonLd
         path="/about"
         name="About Michele Okimura"
-        description="Author, speaker, coach, and Executive Director of Releasing Generations, based on O'ahu, Hawai'i."
+        description="Author and speaker in Honolulu, Hawaiʻi. Founder of Releasing Generations."
       />
 
-      {/* Banner runs with no subtitle. It used to carry "Maybe dreams give
-          purpose a voice.", which Michele cut on 2026-08-23 because the pull
-          quote further down says the same thing better: "I believe dreams give
-          purpose a voice." Do not reinstate one without retiring the other. */}
-      <PageIntro eyebrow="About" title="About Michele." />
+      {/* Brett's headline, which is longer than WordPress's "About Michele".
+          Left-justified, and BannerHero's Container runs w-full so this shares
+          its left edge with the wordmark in the header. No subtitle: the
+          WordPress lead line is not a subhead, it opens the Welcome section
+          below, and promoting it would reorder her copy. */}
+      <PageIntro eyebrow="About" title="About Michele Okimura" />
 
-      <Container className="mt-14 sm:mt-16">
-        <FadeIn>
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,20rem)_1fr] lg:items-start lg:gap-16">
-            <div className="relative aspect-[4/5] w-full max-w-xs overflow-hidden rounded-3xl bg-neutral-100 sm:max-w-sm lg:max-w-none">
-              <Image
-                src="/images/michele/about-hero.jpg"
-                alt="Michele Okimura on the beach in Hawai'i"
-                fill
-                priority
-                sizes="(min-width: 1024px) 20rem, 60vw"
-                className="object-cover object-[62%_28%]"
-              />
+      {/* WordPress: H2 "Welcome." and the one-line lead. Verbatim.
+          The portrait has no WordPress counterpart, since that page carries no
+          photograph outside the mosaic. It is an existing approved site asset,
+          held to 18rem so it sits beside the copy rather than dominating it. */}
+      <section className="bg-[var(--color-band-1)] py-12 sm:py-16 lg:py-20">
+        <Container>
+          <FadeIn>
+            <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_minmax(0,18rem)] lg:items-center lg:gap-16">
+              <div className="max-w-2xl">
+                <h2 className="font-display text-3xl font-medium tracking-tight text-neutral-950 sm:text-4xl">
+                  Welcome.
+                </h2>
+                <p className="mt-5 text-lg leading-8 text-neutral-700 sm:text-xl sm:leading-9">
+                  I&rsquo;m an author and speaker who has spent the last four
+                  decades inspiring courage, vulnerability, healing, and
+                  creativity.
+                </p>
+              </div>
+
+              <div className="relative order-first aspect-[4/5] w-full max-w-[15rem] overflow-hidden rounded-3xl bg-[var(--color-navy-10)] sm:max-w-[17rem] lg:order-last lg:max-w-none">
+                <Image
+                  src="/images/michele/about-hero.jpg"
+                  alt="Michele Okimura in Hawaiʻi"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 18rem, 17rem"
+                  className="object-cover object-[62%_28%]"
+                />
+              </div>
             </div>
+          </FadeIn>
+        </Container>
+      </section>
 
-            <div className="max-w-2xl space-y-6 text-lg leading-8 text-neutral-600">
-              <p>
-                I&rsquo;m an author, speaker, and coach who has spent the last four
-                decades inspiring courage, vulnerability, healing, and purpose.
-              </p>
-              <p>
-                My story has been an adventure in finding purpose, and it began with my
-                own healing journey. Transforming feelings of worthlessness into a deep
-                sense of value ignited a fire in me, a passion to help others discover
-                the same strength within themselves.
-              </p>
-              <p>
-                I am the founder and executive director of Releasing Generations, and I
-                write, speak, and teach across Hawai&lsquo;i and beyond. For more than
-                twenty years I served as a pastor, and before that I spent seventeen
-                years as an elementary school teacher. Across all of it the work is the
-                same: helping people find the courage to live out the purpose they were
-                made for.
-              </p>
-              <p>
-                My firm belief is that every person&rsquo;s story, even the broken ones,
-                can become a launchpad into a future full of freedom, wonder, and
-                limitless possibilities.
-              </p>
-            </div>
-          </div>
-        </FadeIn>
-      </Container>
-
-      {/* The golden thread. Michele's own framing of what connects the books,
-          the curricula, and the programs. Wording is single-sourced from
-          src/lib/projects.ts, which the Author page and every case study also
-          quote. Verbatim. */}
-      <Container className="mt-16 sm:mt-20">
-        <FadeIn>
-          <figure className="mx-auto max-w-4xl border-l-2 border-[var(--color-brand-terracotta)] pl-6 sm:pl-8">
-            <blockquote className="font-display text-2xl leading-10 text-neutral-900 italic sm:text-3xl sm:leading-tight">
-              &ldquo;{GOLDEN_THREAD_QUOTE}&rdquo;
-            </blockquote>
-            <figcaption className="mt-5 text-sm font-medium text-neutral-500 not-italic">
-              Michele Okimura
-            </figcaption>
-          </figure>
-        </FadeIn>
-      </Container>
-
-      {/* Meet Michele: a closer, warmer photo before the timeline pulls back
-          to tell the whole story chronologically. */}
-      <Container className="mt-16 sm:mt-20">
-        <FadeIn>
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,20rem)_1fr] lg:items-center lg:gap-16">
-            <div className="relative order-first aspect-[4/5] w-full max-w-xs overflow-hidden rounded-3xl bg-neutral-100 sm:max-w-sm lg:order-last lg:max-w-none">
-              <Image
-                src="/images/michele/about-meet-michele.jpg"
-                alt="Michele Okimura laughing at home"
-                fill
-                sizes="(min-width: 1024px) 20rem, 60vw"
-                className="object-cover"
-              />
-            </div>
-
-            <div className="max-w-2xl space-y-4">
-              <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
-                Meet Michele
-              </h2>
-              <p className="text-lg leading-8 text-neutral-600">
-                If you catch me on a good day, I am probably laughing about
-                something, coffee in hand, telling a story that gets a little
-                more dramatic every time I tell it. That is the same person who
-                shows up to every Talk Story Session and every stage.
-              </p>
-            </div>
-          </div>
-        </FadeIn>
-      </Container>
-
-      {/* Michele's line, standing on its own between Meet Michele and the
-          mosaic. Its py- carries the separation for both, which is why the
-          mosaic Container below has no top margin of its own.
+      {/* WordPress H3, verbatim, in its WordPress position between the lead
+          and the body prose. See the note at the top of this file about the
+          "I believe" variant this replaces.
           Teal is --color-teal-text, NOT --color-teal: the bright token measures
           2.31:1 on cream and misses even the 3:1 large-text floor, so it cannot
           carry a word at any size. See DESIGN-RULES.md. No quote marks, no
           italics, no background, per direction. */}
-      <Container className="py-20 sm:py-28">
-        <FadeIn>
-          <p className="font-display mx-auto max-w-4xl text-center text-[2rem] leading-[1.1] font-medium tracking-tight text-balance text-[var(--color-teal-text)] sm:text-[2.5rem] lg:text-5xl lg:leading-[1.08]">
-            I believe dreams give purpose a voice.
-          </p>
-        </FadeIn>
-      </Container>
+      <section className="bg-[var(--color-band-3)] py-16 sm:py-20 lg:py-24">
+        <Container>
+          <FadeIn>
+            <p className="font-display mx-auto max-w-4xl text-center text-[2rem] leading-[1.1] font-medium tracking-tight text-balance text-[var(--color-teal-text)] sm:text-[2.5rem] lg:text-5xl lg:leading-[1.08]">
+              Maybe dreams give purpose a voice.
+            </p>
+          </FadeIn>
+        </Container>
+      </section>
 
-      {/* "My Story": one unbroken square mosaic, captions revealed on hover.
-          Rebuilt on 2026-08-23 to match Michele's live WordPress About page,
-          which she asked for directly. This replaced AboutTimeline, the
-          seven-era layout with prose blocks and always-visible caption bands.
-          That component and its era prose are in git history if they are ever
-          wanted back. See design-references/wordpress-about/. */}
-      <Container>
-        <AboutMosaic />
-      </Container>
+      {/* The eight WordPress body paragraphs, in order, verbatim. Book titles
+          keep the italics WordPress sets on them. */}
+      <section className="bg-[var(--color-band-2)] py-12 sm:py-16 lg:py-20">
+        <Container>
+          <FadeIn>
+            <div className="max-w-2xl space-y-6 text-lg leading-8 text-neutral-700">
+              <p>
+                My story has been an adventure in finding purpose, and it began
+                with my own healing journey. Transforming feelings of
+                worthlessness into a deep sense of value ignited a fire in me, a
+                passion to help others discover the same strength within
+                themselves.
+              </p>
+              <p>
+                Here&rsquo;s the official part: I&rsquo;m an author, speaker, and
+                chairman of Releasing Generations, a non-profit that empowers
+                children, youth, and adults through workshops, retreats, and
+                creative sessions. I was awarded the &ldquo;Outstanding Advocate
+                for the Children and Youth in the State of Hawaiʻi&rdquo; award
+                in 2023 by Hawaiʻi&rsquo;s Governor Green and Mayor Blangiardi.
+                I&rsquo;ve written multiple books and curricula on creativity,
+                inner healing, and the empowerment of future generations.
+              </p>
+              <p>
+                For 15 years, I was an elementary school teacher, and for 23
+                years, I served as a pastor alongside my husband, which gave me
+                a profound compassion for people from all walks of life.
+              </p>
+              <p>
+                I&rsquo;ve poured my heart into my books to share the keys
+                I&rsquo;ve discovered along the way: from my healing journey in{' '}
+                <em className="font-semibold">Dancing with Father</em>, to
+                pursuing big dreams in{' '}
+                <em className="font-semibold">
+                  The Birth of Explicit Movement: Discover Keys to Fulfilling
+                  Your Purpose,
+                </em>{' '}
+                <em>a</em>nd empowering the next generation with the{' '}
+                <em className="font-semibold">Dream Big Journal</em> and the{' '}
+                <em className="font-semibold">Brave Series</em>
+                <em> curricula</em>.
+              </p>
+              <p>
+                Everything I do is focused on helping others flourish in life
+                and live out loud to their fullest potential.
+              </p>
+              <p>
+                Established in 2017, Michele Okimura Consulting has expanded my
+                capacity to live my purpose through the power of writing and by
+                equipping others through workshops, conferences, retreats, and
+                coaching.
+              </p>
+              <p>
+                <strong className="font-semibold text-neutral-900">
+                  My firm belief
+                </strong>{' '}
+                is that every person&rsquo;s story, even the broken ones, can
+                become a launchpad into a future full of freedom, wonder, and
+                limitless possibilities.
+              </p>
+              <p>
+                When I&rsquo;m not writing, you&rsquo;ll find me with my two
+                amazing &ldquo;twin-like&rdquo; kids, Aaron and Jessica, or
+                gardening with my husband, Rob, my best friend and the love of
+                my life.
+              </p>
+            </div>
+          </FadeIn>
+        </Container>
+      </section>
 
-      {/* The work Michele leads — her own brand family (own surface, not endorsers) */}
-      <Container className="mt-20 sm:mt-28">
-        <FadeIn className="mx-auto max-w-4xl">
-          <h2 className="text-center font-display text-sm font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
-            The work Michele leads
-          </h2>
-          <ul
-            role="list"
-            className="mt-8 grid grid-cols-2 items-center gap-6 sm:grid-cols-4"
-          >
-            {OWN_BRANDS.map((brand) => (
-              <li
-                key={brand.name}
-                className="flex h-24 items-center justify-center rounded-2xl border border-neutral-200 bg-white p-5"
+      {/* "My Story": one unbroken square mosaic, all 24 WordPress tiles, every
+          caption verbatim, revealed on hover. See AboutMosaic.tsx. */}
+      <section className="bg-[var(--color-band-1)] py-12 sm:py-16 lg:py-20">
+        <Container>
+          <AboutMosaic />
+        </Container>
+      </section>
+
+      {/* No WordPress equivalent. This site's own sections, kept by name. */}
+      <section className="bg-[var(--color-band-2)] py-12 sm:py-16 lg:py-20">
+        <Container>
+          <div className="mx-auto grid max-w-4xl grid-cols-1 gap-12 lg:grid-cols-2">
+            <FadeIn>
+              <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
+                Honors and recognition
+              </h2>
+              <ul
+                role="list"
+                className="mt-6 divide-y divide-[var(--color-navy)]/10 border-t border-[var(--color-navy)]/10"
               >
-                <span className="relative block h-full w-full">
-                  <Image
-                    src={brand.logo}
-                    alt={brand.name}
-                    fill
-                    sizes="180px"
-                    className="object-contain"
-                  />
-                </span>
-              </li>
-            ))}
-          </ul>
-        </FadeIn>
-      </Container>
+                {awards.map((award) => (
+                  <li key={award.title} className="py-5">
+                    <p className="font-display text-lg font-semibold tracking-tight text-neutral-950">
+                      {award.title}
+                      {award.year ? `, ${award.year}` : ''}
+                    </p>
+                    <p className="mt-1 text-sm text-neutral-600">
+                      {award.grantor}
+                    </p>
+                    {award.recipient && (
+                      <p className="mt-1 text-sm text-neutral-500">
+                        {award.recipient}
+                      </p>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </FadeIn>
 
-      {/* Honors & recognition + credentials, from the citation-backed dossier */}
-      <Container className="mt-20 sm:mt-28">
-        <div className="mx-auto grid max-w-4xl grid-cols-1 gap-12 lg:grid-cols-2">
-          <FadeIn>
-            <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
-              Honors and recognition
-            </h2>
-            <ul role="list" className="mt-6 divide-y divide-neutral-200 border-t border-neutral-200">
-              {awards.map((award) => (
-                <li key={award.title} className="py-5">
-                  <p className="font-display text-lg font-semibold tracking-tight text-neutral-950">
-                    {award.title}
-                    {award.year ? `, ${award.year}` : ''}
-                  </p>
-                  <p className="mt-1 text-sm text-neutral-600">{award.grantor}</p>
-                  {award.recipient && (
-                    <p className="mt-1 text-sm text-neutral-500">{award.recipient}</p>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </FadeIn>
-
-          <FadeIn>
-            <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
-              Roles and work
-            </h2>
-            <ul role="list" className="mt-6 space-y-3 border-t border-neutral-200 pt-6 text-base text-neutral-700">
-              {credentials.map((c) => (
-                <li key={c} className="flex gap-3">
-                  <span aria-hidden="true" className="text-[var(--color-brand-terracotta-ink)]">
-                    &middot;
-                  </span>
-                  <span>{c}</span>
-                </li>
-              ))}
-            </ul>
-          </FadeIn>
-        </div>
-      </Container>
-
-      <ContactBlock heading="Let&rsquo;s work together.">
-        <p>
-          Whether it is coaching through the Brave Purpose Author Method or a
-          speaking date, join the waitlist and Michele will reach out personally.
-        </p>
-      </ContactBlock>
+            <FadeIn>
+              <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
+                Roles and work
+              </h2>
+              <ul
+                role="list"
+                className="mt-6 space-y-3 border-t border-[var(--color-navy)]/10 pt-6 text-base text-neutral-700"
+              >
+                {credentials.map((c) => (
+                  <li key={c} className="flex gap-3">
+                    <span
+                      aria-hidden="true"
+                      className="text-[var(--color-brand-terracotta-ink)]"
+                    >
+                      &middot;
+                    </span>
+                    <span>{c}</span>
+                  </li>
+                ))}
+              </ul>
+            </FadeIn>
+          </div>
+        </Container>
+      </section>
     </>
   )
 }

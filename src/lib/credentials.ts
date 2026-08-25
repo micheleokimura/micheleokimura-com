@@ -23,9 +23,9 @@ export type Award = {
 
 export const awards: Award[] = [
   {
-    title: 'Outstanding Advocate for Children and Youth of Hawai‘i',
+    title: 'Outstanding Advocate for Children and Youth of Hawaiʻi',
     grantor:
-      'Hawai‘i Children and Youth Day, presented by Governor Josh Green and Mayor Rick Blangiardi',
+      'Hawaiʻi Children and Youth Day, presented by Governor Josh Green and Mayor Rick Blangiardi',
     year: 2023,
     // The recipient is the ORGANIZATION. Explicit Movement is a DBA of
     // Releasing Generations, so the two names are one legal entity and either
@@ -44,7 +44,7 @@ export const credentials: string[] = [
   'Founder and Director, Explicit Movement, Kingdom Families, and ReThink Creativity',
   'Author of Dancing with Father and The Brave Series curriculum',
   'Part-time pastor at Lifespring Church, Honolulu',
-  '17 years as an elementary public school teacher in Hawai‘i',
+  '17 years as an elementary public school teacher in Hawaiʻi',
 ]
 
 /** The single headline award for the compact homepage "recognized by" bar. */
