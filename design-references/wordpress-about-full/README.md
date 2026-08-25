@@ -189,3 +189,35 @@ This directory replaces the earlier `design-references/wordpress-about/`, whose
 crawl was partial and whose README described a state where 23 of the 24
 captions were deliberately blank. That state is over; every tile now carries
 its verbatim caption. The old directory is in git history.
+
+## Screenshots, 2026-08-25
+
+In `screenshots/`, captured with headless Chrome at 1400px wide.
+
+| File | What it is |
+| --- | --- |
+| `side-by-side-wordpress-vs-new-build.png` | The two pages next to each other, full length. This is the validation shot. |
+| `wordpress-about-full-page.png` | Live WordPress `/about/`, whole page |
+| `new-build-about-full-page.png` | Branch preview `/about`, whole page |
+| `new-build-hero.png` | The rebuilt hero, showing the headline left edge flush with the wordmark |
+
+What the side-by-side shows as INTENTIONALLY different:
+
+- The rebuild adds the teal banner carrying "About Michele Okimura" and
+  left-justifies it to the wordmark. WordPress centres its hero copy and its
+  headline is "About Michele". Both are Brett's instructions.
+- The rebuild shades each section on the band scale. WordPress runs two flat
+  grounds.
+- The rebuild adds one line under "My Story", "Hover over any photo to read the
+  story behind it.", because the hover is not discoverable on its own and on
+  this page the captions ARE the content.
+- WordPress carries an Instagram icon in the hero. The rebuild puts social
+  links in the footer.
+
+Everything else, the hero photograph, "Welcome.", the lead, "Maybe dreams give
+purpose a voice.", all eight body paragraphs, "My Story", and all 24 tiles in
+order, matches.
+
+`comparison.html` in this directory is the row-by-row version of the same
+check: it loads the left column from WordPress and the right from the branch
+preview, so a mismatch shows up as two different pictures in one row.
