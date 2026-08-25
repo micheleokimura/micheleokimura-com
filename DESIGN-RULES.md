@@ -163,6 +163,16 @@ they are off-palette and read as extra brand colors.
   after any visual change and check every hit against that list.
 - Alternative: small-caps text, letter-spaced (tracked), no background, no
   border, no rounded corners. Rendered in accent color when emphasis is needed.
+- **A BUTTON IS NOT AN EXCEPTION.** Tested 2026-08-24: the Speaker keynote
+  cards were built from a reference whose card CTA is a pill, and the argument
+  for keeping it was that the rule's stated reason ("pills look clickable")
+  does not apply to something that genuinely IS the click target. Michele held
+  the rule. It is permanent and it outranks any reference. Every button on the
+  site is `rounded-md`, card CTAs included.
+- The `rounded-full` that ARE allowed, and the only ones: a circular icon
+  holder (the keynote cards' icon), an avatar, a decorative bullet dot, and
+  the rounded ends on a hairline rule (the header's 2px nav underline). Each
+  is a shape, never a text label.
 
 The house pattern is:
 
@@ -189,12 +199,23 @@ it, because the header is navy text on cream and `main` already
 carries the padding that clears it. Below the banner, hard cut to cream and the
 content starts immediately.
 
-NO hero photography, and no per-page hero background. The identity is the
-banner, so it must be identical everywhere: a teal glow at the centre over a
-navy field deepening at the edges, defined once as `.surface-teal-banner` in
-`tailwind.css`. `PageIntro` used to render a photo mosaic (`HeroMosaic`) behind
-near-black text with a white text-shadow; that was dropped by direction and
-`HeroMosaic` is no longer rendered anywhere.
+NO hero photography inside the banner, and the default ground is the same
+everywhere: a teal glow at the centre over a navy field deepening at the edges,
+defined once as `.surface-teal-banner` in `tailwind.css`. `PageIntro` used to
+render a photo mosaic (`HeroMosaic`) behind near-black text with a white
+text-shadow; that was dropped by direction and `HeroMosaic` is no longer
+rendered anywhere.
+
+**Exception, added 2026-08-23 at Michele's direction: a page whose content
+carries a hero PHOTOGRAPH may take a banner ground sampled from that
+photograph.** `/speaker` is the first one: `.surface-violet-banner`, whose hue
+comes out of the stage shot further down the page. `BannerHero` takes a
+`surface` prop for this and nothing else. The geometry, the height, the type
+and the contrast budget do not change; only the hue does, so the banner still
+reads as the same component. See "Section bands and photo-derived washes"
+below before adding a third one. Two exist today (`/speaker` violet and
+`/coach` coral); a fourth needs a reason beyond taste, because the point of the
+banner is that it is recognisably the same object on every page.
 
 The glow is capped at 20% opacity, and that cap is a contrast budget rather
 than a taste call. At 20% the lit centre of the field measures 6.84:1 against
@@ -207,6 +228,70 @@ Banner content is always: tracked small-caps eyebrow (a LABEL, not a sentence),
 big H1, optional one-line subhead, all in cream. Keep the subhead to a line or
 two. Two pages had a five-line intro in the hero; the overflow moved into the
 page body rather than stretching the banner.
+
+## Section bands and photo-derived washes
+
+Michele, reading a page that ran as one flat colour: "I'm just staring into a
+void and I don't know when a thought's completed." Two rules came out of that.
+
+**Every distinct section is full-bleed and sits on its own ground.** The three
+grounds are `--color-band-1` `#FAFAF8`, `--color-band-2` `#F5F3EC`, and
+`--color-band-3` `#F2ECDF`, lightest first. Alternate them down the page and
+never run two of the same in a row, because a repeated band is exactly the seam
+that goes missing. The steps are deliberately small: this is meant to be FELT
+as a boundary rather than seen as a coloured panel. Navy body copy clears AA on
+all three.
+
+A CARD never takes a band. Tiles use `--color-cream` with a
+`ring-1 ring-[var(--color-navy-10)]`, which lifts off any of the three
+neutrals; a band on a band is a five-point difference nobody can see.
+
+**Section padding** is `py-14 sm:py-24 lg:py-28` (56 / 96 / 112px) as standard,
+carried by the section itself rather than by a margin stack on the first child.
+More on a deliberate pause like a pull quote. The shade change only registers
+if there is enough quiet either side of it.
+
+**Photo-derived washes.** When a section carries a hero photograph, its ground
+is sampled FROM that photograph rather than taken from the three neutrals. The
+band then belongs to its picture instead of looking like a tile the picture was
+pasted onto. This is opt-in, one wash per page, and the rest of the page still
+alternates band-1/2/3 around it.
+
+To add one: bin the photo's pixels in HSV, throw away everything below about
+12% value or 15% saturation (near-black and near-white carry no hue), and take
+the dominant cluster. Derive three values from it, and MEASURE all three:
+
+- `--color-<page>-deep`, the banner field. Dark enough that cream text clears
+  7:1, so the banner behaves exactly like the navy one.
+- `--color-<page>-glow`, the lit accent. Low opacity, banner centre only. Never
+  a ground, never text.
+- `--color-<page>-wash`, the light tint for the band under the banner. Within a
+  few points of band-1 so navy body copy still clears AA.
+
+The worked example, with its sampled numbers and its measured contrast, is in
+the PHOTO-DERIVED SECTION WASHES block in `src/styles/tailwind.css`. Read it
+before adding a page's palette rather than eyedropping a colour by hand.
+
+## No dark panels except the footer
+
+Michele, 2026-08-23: no dark blue text-box CTAs anywhere except the footer. The
+footer is the one place the brand fills the viewport (see below). A closing CTA
+on a content page is a plain band with a heading, a line of copy, and one
+button on the contact popup. No rounded navy slab, no `surface-teal` panel, no
+container at all.
+
+`ContactBlock`, `StepList`, and `OrgCarousel` still render navy panels and are
+used on `/projects`, `/resources`, `/case-studies`, `/works`, `/how-it-works`,
+`/about`, and `/author`. They are on the list to come out; `/speaker` and
+`/coach` are done.
+
+## No email addresses on client-facing pages
+
+Michele has asked for this more than once. `michele@micheleokimura.com` does
+not appear on any page a visitor can reach, because a plain address in the
+markup gets scraped. The contact popup is the only route in. `siteConfig.email`
+stays, because the API routes need somewhere to deliver to, but it must not be
+rendered.
 
 ## Header
 
@@ -259,9 +344,25 @@ Full-bleed `--color-navy`, cream text, per the Living in Duvall
 reference. This is the one place the brand fills the whole viewport width,
 which is what lets the rest of the site stay cream and quiet.
 
-Structure, top to bottom: a newsletter/wait-list block, then four columns, then
-the bottom bar with the copyright and the 988 crisis line. The 988 line ships on
-every page and does not get removed.
+Structure, top to bottom: four columns, then a bottom bar carrying the
+copyright and nothing else.
+
+Removed on 2026-08-23, all at Michele's instruction, none to be restored
+without her:
+
+- the "Stay in touch" newsletter / wait-list block that used to open the
+  footer, and the Contact button inside it,
+- the Spotify / Apple / RSS podcast platform row,
+- the "In a Moment with Brett K. Moore" co-host line under the podcast title,
+- her email address,
+- **the 988 Suicide and Crisis Lifeline block.** She asked for this twice. It
+  is called out here so that the next person to think "this site talks about
+  trauma, it should carry a crisis line" takes that back to Michele rather than
+  quietly re-adding it.
+
+Substack and YouTube joined the social row in the same pass. Both are `null` in
+`siteConfig.socials` until Michele supplies the handles, and the footer filters
+out any social without a URL rather than rendering a dead icon.
 
 The four columns, in order:
 
@@ -269,8 +370,8 @@ The four columns, in order:
 2. **Explore**: Home, Coach, Author, Speaker, About, How it works
 3. **Community**: Projects, Case studies, Authored works, Blog and resources,
    Contact
-4. **More from Michele**: the In a Moment podcast (plus Spotify / Apple / RSS),
-   the press kit, and her email
+4. **More from Michele**: the In a Moment podcast, and the press kit. Two
+   entries and nothing else.
 
 Two of those destinations are not what the label implies, and both are
 deliberate. There is no `/blog` route: `src/lib/blog.ts` renders the blog at

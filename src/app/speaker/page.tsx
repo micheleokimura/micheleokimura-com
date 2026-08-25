@@ -2,15 +2,89 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import {
+  AudioWaveform,
+  Compass,
+  Heart,
+  House,
+  Palette,
+  Sparkles,
+  Sunrise,
+} from 'lucide-react'
+
 import { Container } from '@/components/Container'
 import { FadeIn, FadeInStagger } from '@/components/FadeIn'
-import { Border } from '@/components/Border'
 import { BannerHero } from '@/components/BannerHero'
 import { SectionIntro } from '@/components/SectionIntro'
-import { JoinWaitListButton } from '@/components/wait-list/JoinWaitListButton'
+import { ContactTrigger } from '@/components/ContactTrigger'
 import { WebPageJsonLd } from '@/components/JsonLd'
-import { siteConfig } from '@/lib/site-config'
 import { pageMetadata } from '@/lib/schema'
+import {
+  SPEAKER_MESSAGES,
+  type MessageAccent,
+  type MessageIcon,
+  type MessageTexture,
+} from '@/lib/speaker-messages'
+
+/**
+ * Speaker page. Rebuilt 2026-08-23 against Michele and Brett's walkthrough.
+ *
+ * What changed in that pass, and why, so none of it gets quietly undone:
+ *
+ * BANNER. The ground is violet now, not the sitewide navy-and-teal. It is
+ * sampled from the stage photograph directly below it (see PHOTO-DERIVED
+ * SECTION WASHES in tailwind.css, which carries the sampled numbers and the
+ * measured contrast). This is the first application of a new sitewide
+ * convention: a section that carries a hero photograph takes its ground FROM
+ * that photograph. The banner also opts out of `text-wrap: balance`. Michele
+ * read the headline as centred; it measured flush with the wordmark at every
+ * width, and what actually read as centred was balance evening the two lines
+ * out and removing the ragged right edge. See the note on `balanceTitle` in
+ * BannerHero.
+ *
+ * LEAD. The paragraph comes before the photograph on narrow viewports. It
+ * used to be `order-first lg:order-last` on the picture, so a phone got the
+ * photo first and most readers never reached the copy.
+ *
+ * MESSAGES. What was a seven-deep vertical stack of full descriptions and
+ * endorsements is a 3-up grid of cards. Each card is an icon, a title, a
+ * teaser, and a link to /speaker/messages/<slug>, which is where the full
+ * description and that message's endorsements now live. Michele: shorter,
+ * easier to scan. The Gerald Teramae endorsement moved to the Dreaming Big
+ * With God page, and the "also available in a non-faith framing" line moved
+ * to the pages of the two messages it applies to.
+ *
+ * THE CARDS ARE THE PAGE'S COLOUR, which is the point of them. Brett, on the
+ * site reading flat: "it lacks colour and vibrancy." Each card takes a
+ * different Michele hue and a different hairline texture, following the
+ * "Most-Used Services" grid on livingin-platform.vercel.app. The colour, the
+ * texture and the icon are fields on the message in
+ * src/lib/speaker-messages.ts; the surfaces and every measured contrast
+ * figure are in the SPEAKER MESSAGE CARDS block in tailwind.css. Read that
+ * block before changing a colour: the gradient runs light at the top and dark
+ * at the bottom for a contrast reason, not a stylistic one.
+ *
+ * SECTION BANDS. Every section is full-bleed and sits on its own ground, same
+ * convention the home page established. Neighbours never share a band.
+ *
+ * QUOTE BANNER. Moved here from /coach on 2026-08-24, which dropped it in the
+ * same pass. It sits between the keynote grid and the stages list: a breath
+ * between the two densest blocks on the page, and "here is why I speak on
+ * these" landing right after what she speaks on. Its periwinkle is sampled
+ * from the sapphire flowers in the dress in the photograph it carries, which
+ * is the same photo-derived convention the banner at the top of this page
+ * follows.
+ *
+ * CLOSING CTA. The dark navy "Book Michele" panel is gone, along with the
+ * michele@micheleokimura.com link inside it. Michele: no dark blue text boxes
+ * anywhere except the footer, and no email address on any client-facing page.
+ * It is a plain band with one Contact button on the sitewide popup. Do not
+ * put an address back on this page.
+ *
+ * Copy of record: site/content/speaker/speaker-page-copy.md, locked with
+ * Michele 2026-08-22. The messages themselves live in
+ * src/lib/speaker-messages.ts and are shared with the message pages.
+ */
 
 export const metadata: Metadata = pageMetadata({
   title: 'Speaker',
@@ -21,121 +95,84 @@ export const metadata: Metadata = pageMetadata({
     'Some messages do more than inspire. They give people permission to be brave.',
 })
 
-/** Hero photo: Michele mid-message on stage, Day 1 26:31.5, open palm gesture. */
+/**
+ * Hero photo: Michele mid-message on stage, Day 2 pt 2 at 34:45, her own
+ * pick. The violet in this frame is where the banner and the wash under it
+ * get their colour, so swapping this photo means re-sampling those tokens.
+ */
 const HERO_PHOTO = '/images/michele/speaker-hero-day2.jpg'
 
-// Copy of record: site/content/speaker/speaker-page-copy.md (locked with Michele
-// 2026-08-22). Endorser wording is verbatim and must not be edited, including
-// any phrasing the house voice guide would otherwise avoid. Michele's own copy
-// carries no em dashes, so venue lines and attributions are structured fields
-// rather than dash-joined strings.
+/**
+ * Michele on the beach in the black dress, beside the tree. Shown
+ * circle-cropped in the quote banner.
+ *
+ * Swapped in 2026-08-24. The floral-dress photograph that was here (and the
+ * "my purpose is to help people live in the fullness" line that went with it)
+ * moved to /author. This is the same file /about uses for its own hero, which
+ * is deliberate reuse, not a stray reference.
+ *
+ * It is a PORTRAIT source, 800x1200, where the last one was landscape, so the
+ * circle needs a focal point: at 25% the face sits high in the crop instead of
+ * the frame filling up with sand.
+ */
+const MICHELE_PORTRAIT = '/images/michele/about-hero.jpg'
 
-type Endorsement = {
-  quote: string
-  name: string
-  role: string
+/**
+ * Grids escape Container's inner max-w-2xl cap on purpose. Container narrows
+ * its contents to 42rem below `lg`, which would leave the message tiles as
+ * narrow strips on a tablet. Same constant, same reason, as the home page.
+ */
+const WIDE = 'mx-auto max-w-7xl px-6 lg:px-8'
+
+/**
+ * Standard band padding: 56px on a phone, 96px on a desktop. Michele asked
+ * for 60 to 80 on desktop and 40 to 60 on mobile; the sm and lg steps match
+ * the home page's rhythm so the two pages scroll at the same pace.
+ */
+const BAND = 'w-full py-14 sm:py-24 lg:py-28'
+
+/**
+ * Seven messages into a three-column grid leaves one on its own in the last
+ * row. Centring it reads as deliberate; flush left reads as a missing tile.
+ * If Michele ever settles on six, this evaluates false and does nothing.
+ */
+const ORPHAN_IN_LAST_ROW = SPEAKER_MESSAGES.length % 3 === 1
+
+/**
+ * Message name to lucide component. Every name here is verified against the
+ * installed lucide-react: it exports `House` (`Home` is only an alias) and it
+ * has no `Waves`, so the voice card uses `AudioWaveform`.
+ *
+ * These are abstract rather than literal on purpose. The icon is a way to tell
+ * one card from another at a glance, not an illustration of the talk.
+ */
+// Typed off one of the icons rather than off lucide's own `LucideIcon`.
+// lucide-react 1.24 declares that type but does not export it, so importing
+// it fails the build; `typeof Compass` is the same shape and always correct.
+const ICONS: Record<MessageIcon, typeof Compass> = {
+  compass: Compass,
+  sparkles: Sparkles,
+  palette: Palette,
+  house: House,
+  heart: Heart,
+  sunrise: Sunrise,
+  waveform: AudioWaveform,
 }
 
-type Topic = {
-  number: string
-  title: string
-  /** One string for a single paragraph, an array when the topic runs longer. */
-  body: string | string[]
-  /** Shown when the message also travels without the faith framing. */
-  nonFaith?: boolean
-  /** Context the reader needs before the endorsements underneath a topic. */
-  endorsementsNote?: string
-  endorsements?: Endorsement[]
+const ACCENT_CLASS: Record<MessageAccent, string> = {
+  teal: 'msg-teal',
+  coral: 'msg-coral',
+  gold: 'msg-gold',
+  navy: 'msg-navy',
+  violet: 'msg-violet',
 }
 
-const TOPICS: Topic[] = [
-  {
-    number: '01',
-    title: 'Finding Your Brave Purpose',
-    body:
-      'The leap from a God-given dream to a courageous "yes" can feel impossible. In her signature keynote, Michele shares the raw, true story of founding Releasing Generations: the initial fears, the false starts, and the exact moment she stopped talking about her calling and started walking in it. Audiences leave with a teachable, practical framework to finally step into their own brave purpose. Delivered at churches, conferences, and leadership events for over a decade.',
-  },
-  {
-    number: '02',
-    title: 'Dreaming Big With God',
-    body:
-      'God\'s vision for your life is beautifully larger than the one you are comfortable praying for. Perfect for audiences standing at the threshold of a new season, Michele explores how to surrender your fears, your history, and your "what-ifs" to God. Whether you are carrying a quiet dream or feeling a persistent nudge, this message expands your faith to embrace what is truly possible.',
-    nonFaith: true,
-    endorsements: [
-      {
-        quote:
-          'Michele was able to rekindle and inspire the need and desire to reignite and inspire our Leadership Team that it is never too late to become a ‘dreamer’ and make a positive impact and difference in the world.',
-        name: 'Gerald Teramae',
-        role: 'Head of School, Island Pacific Academy',
-      },
-    ],
-  },
-  {
-    number: '03',
-    title: 'Activating Your Creativity',
-    body:
-      'You were purposefully created by the Creator to create. Moving far beyond traditional fine arts, Michele expands the definition of creativity to reach anyone who has ever felt unqualified. This message equips audiences to rise beyond their insecurities, giving them permission to bring their unique ideas, businesses, and extraordinary solutions into the light. She has led four Rethink Creativity conferences on this theme, activating people in every sphere of influence.',
-    nonFaith: true,
-  },
-  {
-    number: '04',
-    title: 'Building a Kingdom Culture at Home and in Ministry',
-    body:
-      'How do we shape environments that foster a resilient, deep-rooted, fully alive faith in our children and youth? Drawing on decades of experience, Michele offers a highly interactive experience for parents and leaders. Through engaging stories and interactive activities, she helps you build homes and healing, positive spaces for the younger saints where the next generation experiences God as undeniably real, personal, and worthy of their entire lives. Taught at conferences, in an eight-hour workshop format, and inside an e-course.',
-    endorsementsNote:
-      'The endorsements below are from Michele\'s Kingdom Kids Workshops, the flagship workshop within this topic. Same content, previously offered under that title.',
-    endorsements: [
-      {
-        quote:
-          'The Kingdom Kids Workshop has been the single most powerful equipping workshop for the parents and children’s ministry workers in our church. It gave them practical tools, and it imparted a living and powerful love and excitement for God.',
-        name: 'Cal Chinen',
-        role: 'Senior Pastor, Moanalua Gardens Missionary Church, Honolulu',
-      },
-      {
-        quote:
-          'Our experience with Kingdom Kids was amazing. Michele’s ministry sparked and stirred the faith of our entire church. Her creative, innovative, inspired approach enabled our children and youth to experience biblical truths and the Lord Himself in a very powerful way.',
-        name: 'Barry Deguchi',
-        role: 'Lead Pastor, Catalyst Christian Community, Long Beach, CA',
-      },
-      {
-        quote:
-          'Her creative and visually-exciting presentations have challenged us and our students to directly download from the Father Heart of God. We are now seeing children as young as five praying bold and encouraging words over other children and even their teachers. Our entire campus culture has changed. Our school will never be the same.',
-        name: 'Rebecca Furuhashi',
-        role: 'Principal, Christian Academy',
-      },
-    ],
-  },
-  {
-    number: '05',
-    title: 'Heart Wide Open: Building a Strong Connection with Your Child',
-    body:
-      'Your child\'s heart has a door, and you hold the key. In this transformative workshop, Michele equips parents to become the safe haven their children run toward. Through real-life storytelling, you will gain practical keys to validate feelings, speak unique love languages, turn everyday interactions into lasting deposits of trust, and more.',
-  },
-  {
-    number: '06',
-    title:
-      'Identity, Healing, and Walking in the Fullness of Who God Made You with Brave Purpose',
-    body:
-      'A message Michele is often invited to bring in women\'s ministry settings and churches. She walks women through the truth of their identity in Christ, and the healing God offers for the trauma, wounds, and hindrances that quietly hold them back from walking in confidence and joy. Rooted in her own journey and years of ministering to women in faith communities.',
-  },
-  {
-    number: '07',
-    title: 'How to Hear God\'s Voice',
-    body: [
-      'For children, youth, and adults ready to grow their two-way relationship with God. Beyond the ways most Christians know God speaks (through Scripture, sermons, music), Michele opens the door to the other ways God is already speaking: through a thought, a vision, a picture, a circumstance. This workshop teaches discernment, builds faith through testimony, and gives every participant practical activities to practice hearing God\'s voice in real time.',
-      'Michele also unpacks the invitation of 1 Corinthians 14:1 ("eagerly desire spiritual gifts, especially the gift of prophecy"), helping listeners grow the prophetic in their homes, their churches, and the encouragement they bring to others.',
-      'Delivered for children, teens, families, ministry teams, and pastors. Watching people realize "I can hear God\'s voice" is what keeps Michele coming back to this one.',
-    ],
-    endorsements: [
-      {
-        quote:
-          'She just did a session at Native Camp in Montana and it was excellent, the most impactful session of the whole camp. We had 19 FMI workers there. Every person had an experience of how to prophesy over each other. Simple, practical, and powerful. I saw it all personally. Now many children in our church prophesy and unashamedly pray for healing, all because of Michele.',
-        name: 'Pastor Kihāpiʻilani Pimental',
-        role: 'Worker Supervisor, Foursquare Missions International',
-      },
-    ],
-  },
-]
+const TEXTURE_CLASS: Record<MessageTexture, string> = {
+  lines: 'msg-tex-lines',
+  rings: 'msg-tex-rings',
+  grid: 'msg-tex-grid',
+  dots: 'msg-tex-dots',
+}
 
 type Engagement = {
   event: string
@@ -146,73 +183,34 @@ type Engagement = {
 
 const ENGAGEMENTS: Engagement[] = [
   { event: 'Arise Native American Leaders Camp', where: 'Montana, August 2026' },
-  { event: 'Hawaii Baptist Academy', where: 'Hawai\'i, January 2026' },
+  // "Hawaii Baptist Academy" is the school's own spelling of its own name and
+  // keeps its straight i. Every place name below takes the ʻokina.
+  { event: 'Hawaii Baptist Academy', where: 'Hawaiʻi, January 2026' },
   { event: 'Women of Influence National Conference', where: 'Florida, September 2025' },
   {
     event: 'National Conference on School Leadership (NASSP)',
     where: 'Washington, July 2025',
     format: 'Workshop',
   },
-  { event: 'Hawai\'i State Dream Expo', where: 'Hawai\'i, May 2025' },
+  { event: 'Hawaiʻi State Dream Expo', where: 'Hawaiʻi, May 2025' },
   {
-    event: 'Missionary Church Denomination, Hawai\'i Regional Conference',
+    event: 'Missionary Church Denomination, Hawaiʻi Regional Conference',
     where: 'March 2025',
   },
-  { event: 'Hanalani Schools', where: 'Hawai\'i, January 2025' },
-  { event: 'Kamehameha Schools', where: 'Hawai\'i, January 2025' },
+  { event: 'Hanalani Schools', where: 'Hawaiʻi, January 2025' },
+  { event: 'Kamehameha Schools', where: 'Hawaiʻi, January 2025' },
   {
     event: 'Catholic Schools Educators Annual Conference',
-    where: 'Hawai\'i, February 2024',
+    where: 'Hawaiʻi, February 2024',
     format: 'Keynote and workshop',
   },
   {
-    event: 'Foursquare Denomination, Hawai\'i District Leader\'s Conference',
+    event: 'Foursquare Denomination, Hawaiʻi District Leader’s Conference',
     where: 'October 2023',
   },
   { event: 'Missio Nexus Mission Leaders Conference', where: 'Florida, September 2023' },
   { event: 'Transform Our World Global Conference', where: 'October 2022' },
 ]
-
-function NonFaithNote() {
-  return (
-    <p className="mt-5 border-l-2 border-[var(--color-teal-30)] pl-4 text-sm text-neutral-600">
-      Also available in a non-faith framing for schools, workplaces, and public
-      events.
-    </p>
-  )
-}
-
-function Endorsements({
-  note,
-  items,
-}: {
-  note?: string
-  items: Endorsement[]
-}) {
-  return (
-    <div className="mt-8">
-      {note && <p className="text-sm italic text-neutral-500">{note}</p>}
-      <div className={note ? 'mt-6 space-y-8' : 'space-y-8'}>
-        {items.map((item) => (
-          <figure
-            key={item.name}
-            className="border-l-2 border-[var(--color-cta)] pl-6"
-          >
-            <blockquote className="text-base leading-7 text-neutral-700 italic">
-              &ldquo;{item.quote}&rdquo;
-            </blockquote>
-            <figcaption className="mt-3 text-sm text-neutral-500">
-              <span className="font-semibold text-neutral-950">
-                {item.name}
-              </span>
-              <span className="block">{item.role}</span>
-            </figcaption>
-          </figure>
-        ))}
-      </div>
-    </div>
-  )
-}
 
 export default function SpeakerPage() {
   return (
@@ -227,24 +225,35 @@ export default function SpeakerPage() {
         eyebrow="Speaking"
         title="Some messages do more than inspire."
         subtitle="They give people permission to be brave."
+        surface="violet"
+        balanceTitle={false}
       />
 
-      {/* The intro paragraph that used to sit inside the tall hero. It reads as
-          the lead now, on cream, straight under the banner, alongside a stage
-          photo. */}
-      <Container className="mt-12 sm:mt-16">
-        <FadeIn>
-          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1fr_minmax(0,28rem)] lg:gap-16">
-            <p className="max-w-3xl text-xl leading-9 text-neutral-600">
-              Michele Okimura speaks at churches, conferences, and schools, and
-              to small groups, leadership teams, and community organizations.
-              Whether you are gathering a crowd or an intimate team, she
-              brings messages that build brave purpose in homes, workplaces,
-              ministries, and teams, and help people find the courage to
-              dream big and make a difference.
-            </p>
+      {/* ------------------------------------------------ lead + hero photo */}
+      {/* The band that carries the photograph, so it takes the photograph's
+          colour: a wash of its violet at the top easing back to the site
+          ground before the next section. */}
+      <section className={`surface-violet-wash ${BAND}`}>
+        <Container>
+          <FadeIn>
+            {/* DOM order is paragraph then photo, and there is no `order`
+                utility on either. That is the fix: a phone reads the copy
+                first, and at lg the two-column track puts the photo on the
+                right without reordering anything. */}
+            <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1fr_minmax(0,28rem)] lg:gap-16">
+              {/* First sentence is Michele's approved rewrite, 2026-08-24,
+                  verbatim: conferences and workshops lead now, and the second
+                  list keeps its comma before "and to" so the two groups read
+                  as separate. The sentence that follows is unchanged. */}
+              <p className="max-w-3xl text-xl leading-9 text-neutral-600">
+                Michele Okimura speaks at conferences, workshops, churches, and
+                schools, and to small groups, leadership teams, and community
+                organizations. Whether you are gathering a crowd or an intimate
+                team, she brings messages that build brave purpose in homes,
+                workplaces, ministries, and teams, and help people find the
+                courage to dream big and make a difference.
+              </p>
 
-            <div className="order-first lg:order-last">
               <div className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl bg-neutral-100">
                 <Image
                   src={HERO_PHOTO}
@@ -256,75 +265,194 @@ export default function SpeakerPage() {
                 />
               </div>
             </div>
-          </div>
-        </FadeIn>
-      </Container>
-
-      <section aria-label="Topics">
-        <SectionIntro
-          eyebrow="Topics"
-          title="Topics I speak on."
-          className="mt-16 sm:mt-24"
-        >
-          <p>
-            Michele&rsquo;s signature messages are below. As a pastor, teacher,
-            and public speaker, she can also tailor a talk to your
-            group&rsquo;s specific theme, season, or need.
-          </p>
-        </SectionIntro>
-
-        <Container className="mt-16 sm:mt-20">
-          <FadeInStagger faster>
-            <ol role="list" className="space-y-16 sm:space-y-20">
-              {TOPICS.map((topic) => (
-                <FadeIn as="li" key={topic.number}>
-                  <Border className="pt-10">
-                    <div className="lg:grid lg:grid-cols-[6rem_1fr] lg:gap-10">
-                      <p
-                        aria-hidden="true"
-                        className="font-display text-4xl font-semibold tracking-tight text-[var(--color-brand-terracotta-ink)]"
-                      >
-                        {topic.number}
-                      </p>
-                      <div className="mt-4 lg:mt-0">
-                        <h3 className="font-display text-2xl font-semibold tracking-tight text-balance text-neutral-950 sm:text-3xl">
-                          {topic.title}
-                        </h3>
-                        {(Array.isArray(topic.body)
-                          ? topic.body
-                          : [topic.body]
-                        ).map((paragraph) => (
-                          <p
-                            key={paragraph}
-                            className="mt-5 max-w-3xl text-lg leading-8 text-neutral-600"
-                          >
-                            {paragraph}
-                          </p>
-                        ))}
-                        {topic.nonFaith && <NonFaithNote />}
-                        {topic.endorsements && (
-                          <div className="max-w-3xl">
-                            <Endorsements
-                              note={topic.endorsementsNote}
-                              items={topic.endorsements}
-                            />
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </Border>
-                </FadeIn>
-              ))}
-            </ol>
-          </FadeInStagger>
+          </FadeIn>
         </Container>
       </section>
 
-      <section aria-label="Where Michele has spoken">
+      {/* -------------------------------------------------------- messages */}
+      <section
+        aria-label="Messages Michele speaks on"
+        className={`bg-[var(--color-band-2)] ${BAND}`}
+      >
+        <SectionIntro eyebrow="Topics" title="Messages I’m passionate about.">
+          {/* First person, per Michele. This used to open "As a pastor,
+              teacher, and public speaker, she can also tailor...".
+              `text-pretty` plus the bound "or need" keeps the last word off a
+              line of its own, which she flagged. */}
+          <p className="text-pretty">
+            As a public speaker, I can also tailor a talk to your group&rsquo;s
+            specific theme or&nbsp;need.
+          </p>
+        </SectionIntro>
+
+        <div className={`${WIDE} mt-12 sm:mt-16`}>
+          <FadeInStagger faster>
+            <ul
+              role="list"
+              className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-7"
+            >
+              {SPEAKER_MESSAGES.map((message, index) => {
+                const isOrphan =
+                  ORPHAN_IN_LAST_ROW && index === SPEAKER_MESSAGES.length - 1
+                const Icon = ICONS[message.icon]
+
+                return (
+                  <FadeIn
+                    as="li"
+                    key={message.slug}
+                    className={isOrphan ? 'lg:col-start-2' : undefined}
+                  >
+                    {/* The whole card is the link, so the target is the card
+                        and not a two-word phrase at the bottom of it. The
+                        "Learn more" control below is decorative for that
+                        reason: it is inside the anchor, never a second one. */}
+                    <Link
+                      href={`/speaker/messages/${message.slug}`}
+                      className={`msg-card ${ACCENT_CLASS[message.accent]} ${
+                        TEXTURE_CLASS[message.texture]
+                      } group flex h-full flex-col items-center gap-5 rounded-3xl px-7 py-10 text-center text-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[var(--color-navy-20)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus-ring)] sm:px-8 sm:py-12`}
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-white/15 ring-1 ring-inset ring-white/25 transition duration-300 group-hover:bg-white/25"
+                      >
+                        <Icon className="h-7 w-7" strokeWidth={1.5} />
+                      </span>
+
+                      {/* The secondary line lives INSIDE the h3 rather than
+                          beside it, the same way the banner keeps its eyebrow
+                          inside the h1: it is part of the message's name, so
+                          it belongs to the heading. Smaller, regular weight
+                          and 85% white, which is the card's own supporting
+                          type. Measured at 6.11:1 on the worst accent and
+                          10.30:1 on this card's violet. */}
+                      {/* Typography stepped up 2026-08-24 on Michele's note
+                          that the cards read too small for an older reader.
+                          Title 24px on a phone, 30px from sm up, was 20px
+                          throughout. Line height is set explicitly at 1.18 so
+                          the ratio survives the size change rather than
+                          drifting with Tailwind's per-step defaults. */}
+                      <h3 className="font-display text-2xl leading-[1.18] font-semibold tracking-tight text-balance sm:text-[1.875rem]">
+                        {message.cardTitle ?? message.title}
+                        {message.subtitle && (
+                          <span className="mt-2 block text-base leading-[1.4] font-normal tracking-normal text-white/85 sm:text-lg">
+                            {message.subtitle}
+                          </span>
+                        )}
+                      </h3>
+
+                      {/* 16px on a phone, 18px from sm up, was 14px. Line
+                          height 1.5, which is the comfortable end of the
+                          1.4 to 1.5 band. */}
+                      <p className="text-base leading-[1.5] text-white sm:text-lg">
+                        {message.teaser}
+                      </p>
+
+                      {/* Pushed to the bottom so every card's control sits on
+                          the same baseline whatever the teaser's length, and
+                          on the darkest part of the gradient.
+
+                          `rounded-md`, NOT the reference's pill. Michele held
+                          the sitewide no-pills rule over the reference on
+                          2026-08-24: it is a permanent rule and it wins. md is
+                          also the radius every other button on the site uses,
+                          so this control now matches the header CTA and
+                          ContactTrigger rather than being its own shape. The
+                          circle above it stays round, which the rule allows
+                          for an icon holder. Do not put the pill back. */}
+                      <span className="mt-auto pt-3">
+                        <span className="font-display inline-flex items-center gap-1.5 rounded-md bg-white/15 px-6 py-2.5 text-[0.9375rem] font-semibold tracking-[0.12em] uppercase ring-1 ring-inset ring-white/30 transition duration-300 group-hover:bg-white/25">
+                          Learn more
+                          <span
+                            aria-hidden="true"
+                            className="transition-transform duration-200 group-hover:translate-x-0.5"
+                          >
+                            &rarr;
+                          </span>
+                        </span>
+                      </span>
+                    </Link>
+                  </FadeIn>
+                )
+              })}
+            </ul>
+          </FadeInStagger>
+        </div>
+      </section>
+
+      {/* --------------------------------------------------- quote banner */}
+      {/* Moved here from /coach on 2026-08-24, which dropped it in the same
+          pass. Placed between the keynote grid and the stages list on purpose:
+          it is a breath between the two densest blocks on the page, seven
+          saturated cards above and a twelve-row list below, and it lands
+          "here is why I speak on these" right after the reader has taken in
+          what she speaks on. The run that closes the page stays intact that
+          way too, stages into press kit into the ask, which is the order an
+          event organiser reads in.
+
+          Periwinkle. It was sampled from the sapphire flowers in the floral
+          dress that used to be the photograph here; that photo moved to
+          /author on 2026-08-24 and the wash stayed, at Michele's instruction.
+          It still belongs to the picture: this frame's dominant hue is the sky
+          and the ocean at 218 degrees, and the wash sits at 228, so the tie
+          survived the swap rather than being kept out of habit. The numbers
+          and the contrast budget are in the SPEAKER QUOTE BANNER block in
+          tailwind.css. */}
+      <section
+        aria-label="In Michele's words"
+        className={`surface-speaker-quote ${BAND}`}
+      >
+        <Container>
+          <FadeIn>
+            <figure className="flex flex-col items-center gap-10 text-center lg:flex-row lg:gap-16 lg:text-left">
+              {/* A fixed pixel box rather than a percentage, so the circle
+                  stays a circle at every width instead of squashing to an
+                  oval in the flex row. */}
+              <div className="relative h-[250px] w-[250px] flex-none overflow-hidden rounded-full bg-neutral-100 ring-1 ring-[var(--color-navy-10)] sm:h-[300px] sm:w-[300px] lg:h-[340px] lg:w-[340px]">
+                <Image
+                  src={MICHELE_PORTRAIT}
+                  alt="Michele Okimura on a beach in Hawaiʻi, leaning against a palm trunk with the ocean behind her"
+                  fill
+                  sizes="(min-width: 1024px) 340px, (min-width: 640px) 300px, 250px"
+                  className="object-cover object-[center_25%]"
+                />
+              </div>
+
+              <div>
+                {/* No quotation marks. At this size a pair of curly quotes
+                    just hangs two heavy marks in the corners, and the display
+                    setting already reads as a quote. Navy rather than
+                    teal-text, which measures 3.96:1 on this wash and fails. */}
+                <blockquote className="font-display mx-auto max-w-[22ch] text-[1.5rem] leading-[1.25] font-medium tracking-tight text-balance text-[var(--color-navy)] sm:max-w-[26ch] sm:text-[1.875rem] sm:leading-[1.22] lg:mx-0 lg:max-w-[30ch] lg:text-[2.25rem] lg:leading-[1.2]">
+                  Let&rsquo;s become a community of dreamers where we
+                  don&rsquo;t compete, but instead celebrate and support one
+                  another
+                </blockquote>
+                {/* No dash before the name: the house rule for this page is no
+                    em dash anywhere, so the attribution is the name alone.
+                    neutral-600 is the only secondary that clears AA on the
+                    periwinkle; coral-text, the usual house eyebrow colour,
+                    lands at 3.93:1 here. */}
+                <figcaption className="font-display mt-6 text-xs font-semibold tracking-[0.18em] text-neutral-600 uppercase sm:mt-8 sm:text-sm">
+                  Michele Okimura
+                </figcaption>
+              </div>
+            </figure>
+          </FadeIn>
+        </Container>
+      </section>
+
+      {/* ----------------------------------------------------- past events */}
+      <section
+        aria-label="Where Michele has spoken"
+        className={`bg-[var(--color-band-3)] ${BAND}`}
+      >
+        {/* Was "Recent stages.", which Michele found context-free. The eyebrow
+            came down from "Where I have spoken" to a single word so it does
+            not simply restate the heading underneath it. */}
         <SectionIntro
-          eyebrow="Where I have spoken"
-          title="Recent stages."
-          className="mt-24 sm:mt-32"
+          eyebrow="Stages"
+          title="Here are some past events I’ve spoken at."
           smaller
         />
 
@@ -355,18 +483,22 @@ export default function SpeakerPage() {
             </ul>
 
             <p className="mt-8 max-w-3xl text-base leading-7 text-neutral-500 italic">
-              Michele has also spoken at churches across Hawai&lsquo;i, the
-              mainland U.S., Canada, Japan, the Philippines, and Singapore in her
-              decades of ministry.
+              Michele has also spoken at churches across Hawaiʻi, the mainland
+              U.S., Canada, Japan, the Philippines, and Singapore in her decades
+              of ministry.
             </p>
           </FadeIn>
         </Container>
       </section>
 
-      <section aria-labelledby="press-kit-heading">
-        <Container className="mt-24 sm:mt-32">
+      {/* -------------------------------------------------------- press kit */}
+      <section
+        aria-labelledby="press-kit-heading"
+        className={`bg-[var(--color-band-1)] ${BAND}`}
+      >
+        <Container>
           <FadeIn>
-            <div className="rounded-3xl bg-neutral-50 p-8 ring-1 ring-inset ring-neutral-900/5 sm:p-10">
+            <div className="rounded-3xl bg-[var(--color-cream)] p-8 ring-1 ring-inset ring-[var(--color-navy-10)] sm:p-10">
               <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
                 <div className="max-w-2xl">
                   <h2
@@ -388,7 +520,7 @@ export default function SpeakerPage() {
                 <div className="shrink-0">
                   <div
                     aria-disabled="true"
-                    className="inline-flex flex-col items-start gap-1 rounded-md border border-dashed border-neutral-300 bg-white px-6 py-3"
+                    className="inline-flex flex-col items-start gap-1 rounded-md border border-dashed border-neutral-300 bg-[var(--color-band-1)] px-6 py-3"
                   >
                     <span className="text-sm font-semibold text-neutral-500">
                       Download the Press Kit (PDF)
@@ -404,52 +536,28 @@ export default function SpeakerPage() {
         </Container>
       </section>
 
-      <Container className="mt-24 sm:mt-32 lg:mt-40">
-        <FadeIn className="-mx-6 rounded-4xl bg-neutral-950 surface-teal px-6 py-20 sm:mx-0 sm:py-24 md:px-12">
-          <div className="mx-auto max-w-4xl">
-            <h2 className="font-display text-3xl font-medium tracking-tight text-balance text-white sm:text-4xl">
-              Book Michele.
-            </h2>
-            <p className="mt-6 max-w-2xl text-xl text-neutral-300">
-              Ready to bring Michele to your church, school, conference, or team?
-              Tell her about your event and she will reach out personally.
-            </p>
-            <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
-              <JoinWaitListButton source="speak-page">
-                Ask about a date
-              </JoinWaitListButton>
-              <Link
-                href={`mailto:${siteConfig.email}?subject=Speaking%20inquiry`}
-                className="text-base font-semibold text-white underline decoration-[var(--color-cta)] underline-offset-4 hover:decoration-2"
-              >
-                {siteConfig.email}
-              </Link>
+      {/* -------------------------------------------------------- book me */}
+      {/* Plain band, no panel, one button. See the CLOSING CTA note at the
+          top of this file before adding a container or an address here. */}
+      <section className={`bg-[var(--color-band-2)] ${BAND}`}>
+        <Container>
+          <FadeIn>
+            <div className="max-w-2xl">
+              <h2 className="font-display text-2xl font-semibold tracking-tight text-neutral-950 sm:text-3xl">
+                Book Michele.
+              </h2>
+              <p className="mt-4 text-lg leading-8 text-neutral-600">
+                Ready to bring Michele to your church, school, conference, or
+                team? Tell her about your event and she will reach out
+                personally.
+              </p>
+              <div className="mt-8">
+                <ContactTrigger interest="speaking">Contact</ContactTrigger>
+              </div>
             </div>
-
-            <Border className="mt-16 pt-10" invert>
-              <dl className="grid grid-cols-1 gap-x-10 gap-y-8 text-sm sm:grid-cols-2">
-                <div>
-                  <dt className="font-display font-semibold tracking-wider text-white/70 uppercase">
-                    Audiences
-                  </dt>
-                  <dd className="mt-3 text-white">
-                    Churches, conferences, schools, leadership teams, community
-                    organizations
-                  </dd>
-                </div>
-                <div>
-                  <dt className="font-display font-semibold tracking-wider text-white/70 uppercase">
-                    Based in
-                  </dt>
-                  <dd className="mt-3 text-white">
-                    {siteConfig.city}, {siteConfig.state}
-                  </dd>
-                </div>
-              </dl>
-            </Border>
-          </div>
-        </FadeIn>
-      </Container>
+          </FadeIn>
+        </Container>
+      </section>
     </>
   )
 }
