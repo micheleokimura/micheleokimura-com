@@ -12,6 +12,7 @@ import {
   SPEAKER_MESSAGES,
   getSpeakerMessage,
   speakerMessageFullTitle,
+  type MessageBlock,
 } from '@/lib/speaker-messages'
 
 /**
@@ -42,6 +43,85 @@ import {
  * the CTA.
  * ##################################################################
  */
+
+/**
+ * Renders a message's description blocks. Shared by the description itself and
+ * by each sub-topic underneath it, so both lay out identically.
+ *
+ * Index is a safe React key here: these arrays are static content in
+ * src/lib/speaker-messages.ts and are never reordered or filtered.
+ */
+function BodyBlocks({ blocks }: { blocks: MessageBlock[] }) {
+  return (
+    <>
+      {blocks.map((block, index) => {
+        if (block.kind === 'heading') {
+          return (
+            <h2
+              key={index}
+              className="font-display mt-10 text-xl font-semibold tracking-tight text-neutral-950 first:mt-0 sm:text-2xl"
+            >
+              {block.text}
+            </h2>
+          )
+        }
+
+        if (block.kind === 'list') {
+          return (
+            // A termed list gets more air between items than a plain one: its
+            // items are a bold label plus a sentence and usually wrap to two
+            // lines, so at the tighter spacing the rows start running together.
+            // A plain list of one-line items does not have that problem and
+            // stays as it was.
+            <ul
+              key={index}
+              role="list"
+              className={`mt-6 first:mt-0 ${
+                block.termed ? 'space-y-5' : 'space-y-3'
+              }`}
+            >
+              {block.items.map((item) => {
+                // A termed list is written "Term: what it means". Split on the
+                // FIRST colon only, so a colon later in the sentence stays in
+                // the sentence. An item with no colon renders whole.
+                const at = block.termed ? item.indexOf(': ') : -1
+                const term = at > -1 ? item.slice(0, at) : null
+                const rest = at > -1 ? item.slice(at + 2) : item
+
+                return (
+                  <li
+                    key={item}
+                    className="relative pl-6 text-lg leading-8 text-neutral-600"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="absolute top-[0.7em] left-0 h-1.5 w-1.5 rounded-full bg-[var(--color-brand-terracotta)]"
+                    />
+                    {term && (
+                      <span className="font-semibold text-neutral-950">
+                        {term}:{' '}
+                      </span>
+                    )}
+                    {rest}
+                  </li>
+                )
+              })}
+            </ul>
+          )
+        }
+
+        return (
+          <p
+            key={index}
+            className="mt-6 text-lg leading-8 text-neutral-600 first:mt-0"
+          >
+            {block.text}
+          </p>
+        )
+      })}
+    </>
+  )
+}
 
 export function generateStaticParams() {
   return SPEAKER_MESSAGES.map((message) => ({ slug: message.slug }))
@@ -104,70 +184,7 @@ export default async function SpeakerMessagePage({
         <Container>
           <FadeIn>
             <div className="max-w-3xl">
-              {/* The description is a block list, not a string of paragraphs:
-                  Michele's fuller descriptions carry a sub-heading and a
-                  bulleted list. See MessageBlock in
-                  src/lib/speaker-messages.ts. Index is a safe key here
-                  because the array is static content, never reordered. */}
-              {message.body.map((block, index) => {
-                if (block.kind === 'heading') {
-                  return (
-                    <h2
-                      key={index}
-                      className="font-display mt-10 text-xl font-semibold tracking-tight text-neutral-950 first:mt-0 sm:text-2xl"
-                    >
-                      {block.text}
-                    </h2>
-                  )
-                }
-
-                if (block.kind === 'list') {
-                  return (
-                    <ul
-                      key={index}
-                      role="list"
-                      className="mt-6 space-y-3 first:mt-0"
-                    >
-                      {block.items.map((item) => {
-                        // A termed list is written "Term: what it means". Split
-                        // on the FIRST colon only, so a colon later in the
-                        // sentence stays in the sentence. An item with no colon
-                        // renders whole.
-                        const at = block.termed ? item.indexOf(': ') : -1
-                        const term = at > -1 ? item.slice(0, at) : null
-                        const rest = at > -1 ? item.slice(at + 2) : item
-
-                        return (
-                          <li
-                            key={item}
-                            className="relative pl-6 text-lg leading-8 text-neutral-600"
-                          >
-                            <span
-                              aria-hidden="true"
-                              className="absolute top-[0.7em] left-0 h-1.5 w-1.5 rounded-full bg-[var(--color-brand-terracotta)]"
-                            />
-                            {term && (
-                              <span className="font-semibold text-neutral-950">
-                                {term}:{' '}
-                              </span>
-                            )}
-                            {rest}
-                          </li>
-                        )
-                      })}
-                    </ul>
-                  )
-                }
-
-                return (
-                  <p
-                    key={index}
-                    className="mt-6 text-lg leading-8 text-neutral-600 first:mt-0"
-                  >
-                    {block.text}
-                  </p>
-                )
-              })}
+              <BodyBlocks blocks={message.body} />
 
               {message.nonFaith && (
                 // This note came off the /speaker index on Michele's
@@ -183,6 +200,48 @@ export default async function SpeakerMessagePage({
           </FadeIn>
         </Container>
       </section>
+
+      {/* ------------------------------------------------------ sub-topics */}
+      {/* A further offering under the same keynote, on its own ground so a
+          reader sees at a glance that it is related but distinct. band-3 is
+          the warmest of the three neutrals and the description above resolves
+          to band-1, so the shade change carries the separation on its own; the
+          short rule above the heading is what says "a new offering starts
+          here" rather than "the same one continues".
+
+          The rule is coral-TEXT, not coral. Coral #F15C3D measures 2.87:1 on
+          band-3 and misses even the 3:1 a non-text element owes, so it would
+          be a marker nobody can see. coral-text holds 4.72:1 here. */}
+      {message.subtopics?.map((subtopic) => (
+        <section
+          key={subtopic.heading}
+          aria-label={subtopic.heading}
+          className="w-full bg-[var(--color-band-3)] py-14 sm:py-24 lg:py-28"
+        >
+          <Container>
+            <FadeIn>
+              <div className="max-w-3xl">
+                <span
+                  aria-hidden="true"
+                  className="block h-1 w-12 rounded-full bg-[var(--color-brand-terracotta-ink)]"
+                />
+                <h2 className="font-display mt-6 text-2xl font-semibold tracking-tight text-balance text-neutral-950 sm:text-3xl">
+                  {subtopic.heading}
+                </h2>
+                {subtopic.tagline && (
+                  <p className="mt-3 text-sm text-neutral-500">
+                    {subtopic.tagline}
+                  </p>
+                )}
+
+                <div className="mt-8">
+                  <BodyBlocks blocks={subtopic.body} />
+                </div>
+              </div>
+            </FadeIn>
+          </Container>
+        </section>
+      ))}
 
       {/* ---------------------------------------------------- endorsements */}
       {/* Renders only for the three messages that have one. The other four

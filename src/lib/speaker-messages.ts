@@ -82,6 +82,24 @@ export type MessageIcon =
   | 'sunrise'
   | 'waveform'
 
+/**
+ * A second offering that travels under the same keynote.
+ *
+ * Not just more body copy: it is a distinct workshop with its own audience,
+ * which is why it is a field of its own rather than more blocks appended to
+ * `body`. The message page renders it as a separate section on its own
+ * ground, so a reader sees at a glance that it is related but distinct.
+ *
+ * `tagline` is one short line under the heading saying who it is for. It is a
+ * sentence, so it is NOT set as a tracked small-caps eyebrow; the house rule
+ * reserves those for labels.
+ */
+export type MessageSubtopic = {
+  heading: string
+  tagline?: string
+  body: MessageBlock[]
+}
+
 export type SpeakerMessage = {
   slug: string
   number: string
@@ -105,6 +123,8 @@ export type SpeakerMessage = {
   texture: MessageTexture
   icon: MessageIcon
   body: MessageBlock[]
+  /** Further offerings under this same keynote. Rendered below `body`. */
+  subtopics?: MessageSubtopic[]
   /** Shown when the message also travels without the faith framing. */
   nonFaith?: boolean
   /** Context the reader needs before the endorsements underneath. */
@@ -197,6 +217,38 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
       {
         kind: 'paragraph',
         text: 'Whether you lead in business, education, ministry, or the arts, this message will awaken your imagination, break off creative blocks, and empower you to respond to the high calling of creating with God. She has led four Rethink Creativity conferences on this theme.',
+      },
+    ],
+    // Second offering under this keynote, added 2026-08-24. Michele's text is
+    // verbatim; the only change she asked for was the em dash after
+    // "God-sized dreams", now a comma. Nothing above this line was touched.
+    subtopics: [
+      {
+        heading: 'Ways to Nurture Creativity and Dreaming Big in Your Home',
+        tagline: 'A curated sub-topic for parents.',
+        body: [
+          {
+            kind: 'paragraph',
+            text: 'How do we inspire our children to harbor God-sized dreams, and give them the courage to pursue them? Every child carries a reservoir of divine creativity that includes and extends far beyond the traditional arts, waiting to be awakened in problem-solving, leadership, innovation, and design. In this empowering workshop, Michele equips parents with practical, spiritual keys to nurture their children’s unique gifts without imposing limitations on what is possible.',
+          },
+          {
+            kind: 'paragraph',
+            text: 'Parents will walk away equipped to partner with God’s unlimited imagination, learn how to unearth the hidden dreams inside their children’s hearts, and build a household culture where big dreams are celebrated and released. When we awaken creativity in the next generation, we empower them to generate innovative solutions that transform the world around them.',
+          },
+          {
+            kind: 'paragraph',
+            text: 'In this workshop, parents will discover how to:',
+          },
+          {
+            kind: 'list',
+            termed: true,
+            items: [
+              'Awaken Latent Creativity: Expand your child’s understanding of creative expression across all areas of life.',
+              'Nurture God-Sized Dreams: Unearth the unique passions inside your child’s heart and help them dream without limits.',
+              'Release Potential: Remove subtle boundaries and foster the confidence needed to make a lasting, real-world impact.',
+            ],
+          },
+        ],
       },
     ],
     nonFaith: true,
