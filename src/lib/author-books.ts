@@ -76,6 +76,31 @@ export type AuthorBook = {
   availableLabel?: string
   /** The case study for this title, over on /projects. */
   storyHref?: string
+  /**
+   * Headed blocks of bold-labelled points. Michele sent this shape for the two
+   * curricula on 2026-08-24, straight out of her brochure copy. `label` is
+   * stored WITHOUT its trailing colon; the colon is drawn at render time so it
+   * never ends up inside the bold run twice.
+   */
+  sections?: {
+    heading: string
+    items: { label?: string; text: string }[]
+    /** A closing paragraph under the list. */
+    outro?: string
+  }[]
+  /**
+   * A series wordmark, shown in place of a cover on the detail page. The Brave
+   * Series is a set of twenty-four volumes, so one volume's front cover was
+   * standing in for the whole thing at the top of its page.
+   */
+  logo?: { src: string; width: number; height: number; alt: string }
+  /**
+   * The prominent purchase call to action. Replaces the quiet `available` row
+   * when present; Michele read that row as far too small to find.
+   */
+  buy?: { label: string; text: string; href: string }
+  /** A YouTube Short. Portrait, so the frame is 9:16 and capped narrow. */
+  video?: { id: string; title: string; label: string }
   /** A bulleted block only one or two titles carry. */
   list?: { label: string; note?: string; items: string[] }
   /** A quiet panel of recognition or context. */
@@ -157,22 +182,57 @@ const RAISING_KINGDOM_KIDS_ENDORSEMENTS: Endorsement[] = [
   },
 ]
 
+/**
+ * The Brave Series endorsements, replaced wholesale 2026-08-24 with the seven
+ * from Michele's brochure. Two of the three that used to sit here are in this
+ * set, both in longer form, and the third came back with its surname corrected
+ * to Fischer.
+ *
+ * ORDER IS DELIBERATE and it is Michele's: the survivor and front-line voices
+ * open, because they carry the weight; the education and authority voices
+ * follow and make the case for a classroom; the parent and the teenager close,
+ * because they are who a reader pictures using it.
+ *
+ * VERBATIM. Two edits only, both hers: "life-saving & transformational" takes
+ * the ampersand out, and "porn, and sexual exploitation" gains an Oxford comma.
+ */
 const BRAVE_ENDORSEMENTS: Endorsement[] = [
   {
     quote:
-      '“The Brave Series is a groundbreaking, survivor-informed resource that empowers youth with confidence, resilience, and the tools to safeguard themselves from exploitation. Its engaging, age-appropriate approach builds self-worth and inspires leadership, making it an essential prevention tool for protecting and uplifting the next generation.”',
+      '\u201cThe Brave Series is a groundbreaking, survivor-informed resource that empowers youth with confidence, resilience, and the tools to safeguard themselves from exploitation. Its engaging, age-appropriate approach builds self-worth and inspires leadership, making it an essential prevention tool for protecting and uplifting the next generation.\u201d',
     source:
-      'Rachel Fisher, National and International Anti-Trafficking Consultant, Nurse, and Survivor',
+      'Rachel Fischer, National and International Anti-Trafficking Consultant, Nurse, and Survivor',
   },
   {
     quote:
-      '“When first introduced to the materials, I found them breathtaking and unlike anything I had seen. The Brave Series equips young people with the tools to navigate challenges, make informed decisions, and step confidently into their potential by addressing critical topics like self-worth, healthy relationships, and personal responsibility.”',
+      '\u201cHealing, life-saving and transformational! This book tackles a difficult topic in a relatable yet compassionate manner; the reader is guided through a path of inner healing, insight, and purpose while learning to protect themselves from the dangers of sex trafficking. This book is the answer to young girls finding strength to heal and move forward to become Brave, Beautiful, and on a path to meet their destiny!\u201d',
     source:
-      'Phyllis Unebasami, Retired Hawai‘i Deputy Superintendent of the Department of Education',
+      'Dr. Shantae Williams, PsyD, Front-Line Worker with Trafficked Youth',
   },
   {
     quote:
-      '“This book has helped me not only to have a brighter mindset but to love myself and be confident in who I am and what I stand for. This book is so simple yet so empowering in every word and detail!”',
+      '\u201cI know Brave & Beautiful, a prevention and restorative tool, is exactly what is needed as a resource to help teenage girls. This is a one-of-a-kind publication that will change the world. At the heart of Brave & Beautiful, we see the heart of justice being revealed. I believe you will never come across a resource like this!\u201d',
+    source: 'Young Adult Survivor',
+  },
+  {
+    quote:
+      '\u201cWhen first introduced to the materials, I found them breathtaking and unlike anything I had seen. Interactive and thought-provoking, The Brave Series fosters meaningful conversations and personal reflection, creating an environment where teens can share and connect. Its beautifully designed presentation captures the attention of even the most discerning teenagers, making it as visually engaging as it is impactful. The Brave Series equips young people with the tools to navigate challenges, make informed decisions, and step confidently into their potential by addressing critical topics like self-worth, healthy relationships, and personal responsibility.\u201d',
+    source:
+      'Phyllis Unebasami, Retired Hawai\u02bbi Deputy Superintendent, Department of Education',
+  },
+  {
+    quote:
+      '\u201cDay by day, I watched eyes, ears, and hearts open to the truth. Students shared how refreshing it was to talk about things they never get to talk about. Others found extreme healing from past abuse. No doubt this material will not only equip young people in their value and identity, but also save many from the lures of trafficking, porn, and sexual exploitation. I cannot recommend this material enough.\u201d',
+    source: 'Kelly Balarie, Educator, Comenius School of Creative Leadership',
+  },
+  {
+    quote:
+      '\u201cI love Brave & Beautiful! My 87-year-old mom is reading it and can hardly put it down! I\u2019m sharing this with my oldest daughter who is 20 and even my youngest daughter who is 12 years old! The quality is phenomenal! What an all-encompassing range! The impact will be felt!\u201d',
+    source: 'Angela Cannon, Parent',
+  },
+  {
+    quote:
+      '\u201cThis book has helped me not only to have a brighter mindset but to love myself and be confident in who I am and what I stand for. This book is so simple yet so empowering in every word and detail!\u201d',
     source: 'Malia Colburn, Teenage Girl',
   },
 ]
@@ -264,14 +324,63 @@ export const AUTHOR_BOOKS: AuthorBook[] = [
   {
     slug: 'dream-big-journal-curriculum',
     title: 'Dream Big Journals Curriculum',
-    meta: 'Published 2023-2025 · Sole author: Michele Okimura',
+    meta: 'Published 2023-2025 \u00b7 Sole author: Michele Okimura',
     cover: '/images/journals/dream-big-with-god-journal-youth-and-adults@2x.jpg',
     coverAlt: 'Dream Big Journal, Youth & Adults',
-    teaser:
-      'A multi-age curriculum designed to walk readers through the practice of dreaming big, in shorter, age-appropriate journals that meet each reader where they are.',
+    // Teaser follows the description, as every teaser on this shelf does: it is
+    // the opening sentence, lifted whole. It moved when the description was
+    // replaced on 2026-08-24. This one shows only in metadata, because the
+    // Dream Big parent renders as a family heading rather than a tile.
+    teaser: 'You never outgrow the God-given capacity to dream.',
+    // Michele's brochure copy, 2026-08-24, verbatim. Her cleanups, carried
+    // through: the en dashes in "Preschool\u2013Youth" and "Middle Age\u2013Seniors"
+    // are spelled out as " to ", and the em dashes in "invites you\u2014and those
+    // you love\u2014to expand it" are commas.
     description: [
-      'A multi-age curriculum designed to walk readers through the practice of dreaming big, in shorter, age-appropriate journals that meet each reader where they are. As children work through the pages, parents and teachers discover what’s alive in their kids’ hearts and gain the language to nurture those dreams before the world quiets them. Many of the adult callings we eventually walk in were first planted in us as children.',
-      'In a world that too often teaches us to shrink our vision, these journals do the opposite. Seniors in their twilight years have used them to reignite vision for their season of life with great joy and excitement. How wonderful it would be to raise a generation of dreamers of all ages who would impact the world we live in for good.',
+      'You never outgrow the God-given capacity to dream. Whether a young child is taking their first steps toward understanding their purpose or a senior is stepping into a vibrant legacy season, the Dream Big Journal Series meets every heart right where it is.',
+      'Designed as a tailored, age-appropriate curriculum, these journals walk readers through interactive activities that draw out the rich treasure hidden within. By helping you discover and uncover the unique seeds planted in your heart, this series empowers you to live out those dreams and release them to make an extraordinary difference in the world around you.',
+    ],
+    sections: [
+      {
+        heading: 'Why the Dream Big Series Changes Everything',
+        items: [
+          {
+            label: 'Uncover Your Inner Treasure',
+            text: 'Guided prompts and reflective exercises draw out the hidden gifts, ideas, and passions waiting to be released.',
+          },
+          {
+            label: 'For Young Hearts (Preschool to Youth)',
+            text: 'Many adult callings begin as seeds planted in childhood. These journals give parents and educators a front-row seat into what is alive inside a young heart, providing the language needed to nurture those dreams before the world tries to quiet them.',
+          },
+          {
+            label: 'For Next-Gen Leaders (Young Adults)',
+            text: 'Navigate critical life transitions, overcome self-doubt, and anchor personal ambitions in purposeful action.',
+          },
+          {
+            label: 'For Seasoned Visionaries (Middle Age to Seniors)',
+            text: 'It is never too late for a new beginning. Seniors in their twilight years use these journals to reignite passion, discover fresh purpose, and pass down a legacy of faith and joy.',
+          },
+        ],
+        outro:
+          'In a world that continually tempts us to shrink our vision, the Dream Big series invites you, and those you love, to expand it.',
+      },
+      {
+        heading: 'Tailored for Every Stage of Life',
+        items: [
+          {
+            label: 'Preschool & Elementary',
+            text: 'Interactive prompts to ignite wonder, curiosity, and divine identity.',
+          },
+          {
+            label: 'Youth & Young Adults',
+            text: 'Focused guidance to discover passion, overcome fear, and set purposeful goals.',
+          },
+          {
+            label: 'Middle Age & Seniors',
+            text: 'Deep reflection tools to recalibrate vision, embrace new chapters, and leave a lasting impact.',
+          },
+        ],
+      },
     ],
     notes: ['Piloted with fourth-grade students at Kamehameha Schools, Hawaiʻi.'],
     panel: {
@@ -286,25 +395,48 @@ export const AUTHOR_BOOKS: AuthorBook[] = [
   {
     slug: 'raising-kingdom-kids',
     title: 'Raising Kingdom Kids',
-    meta: 'A lesson book for equipping the next generation · More than 100 lessons',
+    meta: 'A lesson book for equipping the next generation \u00b7 More than 100 lessons',
     cover: '/images/books/kingdom-kids.webp',
     coverAlt: 'Raising Kingdom Kids',
     teaser:
-      'A compilation of over 100 proven, true lessons Michele developed across ten years of active children’s ministry and youth ministry work.',
+      'Tested in the trenches and proven in real ministry, the Kingdom Kids Curriculum is a dynamic compilation of over 100 field-tested lessons developed across ten years of active children\u2019s and youth ministry.',
+    // Michele's brochure copy, 2026-08-24, verbatim, with one edit of hers:
+    // Hawai\u02bbi takes the \u02bbokina. Her copy calls it "the Kingdom Kids
+    // Curriculum" where the title on the shelf is "Raising Kingdom Kids". That
+    // is her wording and it stays.
     description: [
-      'A compilation of over 100 proven, true lessons Michele developed across ten years of active children’s ministry and youth ministry work. Every lesson in the book was taught in a real room with real kids before it was written down. Nothing here is theory.',
-      'The book was built for children’s ministry leaders and parents, and the range turned out to be much wider than that. Many of the lessons carry straight across every age group, adults included, which is how churches have ended up teaching them from the main platform.',
+      'Tested in the trenches and proven in real ministry, the Kingdom Kids Curriculum is a dynamic compilation of over 100 field-tested lessons developed across ten years of active children\u2019s and youth ministry. Every single lesson was taught in a real room with real kids before being written down, ensuring that nothing here is abstract theory, but time-tested, practical truth that works.',
+      'Originally built for children\u2019s ministry leaders and parents, the impact of this curriculum has reached far beyond the Sunday school classroom. Trusted by churches across Hawai\u02bbi and throughout the U.S. mainland, its core truths carry seamlessly across every generation. In fact, pastors regularly adapt these foundational principles to teach from the main platform for full adult congregations.',
     ],
-    list: {
-      label: 'What the lessons cover',
-      items: [
-        'Identity in Christ',
-        'Hearing God’s voice',
-        'Raising children leaders',
-        'Giving children a voice',
-        'Healing hearts',
-      ],
-    },
+    // This replaces the bare five-item "What the lessons cover" list. Same five
+    // pillars, now with Michele's line on each.
+    sections: [
+      {
+        heading: 'Some Core Pillars Covered in the Curriculum',
+        items: [
+          {
+            label: 'Identity in Christ',
+            text: 'Rooting young hearts in who God says they are, breaking off lies of worthlessness and fear.',
+          },
+          {
+            label: 'Hearing God\u2019s Voice',
+            text: 'Demystifying the Spirit to help kids recognize, test, and respond to God\u2019s whisper in real time.',
+          },
+          {
+            label: 'Raising Child and Youth Leaders',
+            text: 'Equipping kids to step into active ministry, prayer, and service rather than remaining passive listeners.',
+          },
+          {
+            label: 'Giving Children and Youth a Voice',
+            text: 'Empowering the next generation to articulate their faith, share their testimony, and lead their peers.',
+          },
+          {
+            label: 'Healing Hearts',
+            text: 'Guiding children and youth through emotional restoration, forgiveness, and the comforting truth of God\u2019s love.',
+          },
+        ],
+      },
+    ],
     endorsements: RAISING_KINGDOM_KIDS_ENDORSEMENTS,
     endorsementsLabel: 'What churches say',
     available: [{ text: 'micheleokimura.com/store' }],
@@ -316,16 +448,64 @@ export const AUTHOR_BOOKS: AuthorBook[] = [
     meta: BOTH_VERSIONS,
     cover: '/images/brave-series/optimized/brave-and-beautiful-vol1.jpg',
     coverAlt: 'Brave & Beautiful, Volume 1',
+    // The series wordmark stands at the top of the detail page instead of the
+    // cover. One volume's front cover was speaking for all twenty-four, so the
+    // page opened with the words "Brave & Beautiful" over a heading that said
+    // Brave Series Curriculum. The tile on /author still uses the cover: a tile
+    // needs an image with colour in it, and a black wordmark on cream is not
+    // that. Black on transparent, so it needs a light ground.
+    logo: {
+      src: '/images/brave-series/logo-black.png',
+      width: 719,
+      height: 321,
+      alt: 'The Brave Series',
+    },
     teaser:
-      'A three-title youth curriculum that develops emotional health, builds self-worth and healthy relationships, and imparts wisdom for life and leadership.',
+      'The Brave Series is a comprehensive, three-title youth curriculum designed to build self-worth, foster healthy relationships, impart essential life and leadership wisdom, and proactively empower young people to protect themselves from exploitation.',
     pullQuote: 'Every page is a work of art. Just as every child is.',
+    // Michele's brochure copy, 2026-08-24, verbatim. Her cleanups, carried
+    // through: the em dashes in "Contributing Author\u2014producing" and in
+    // "adults of all ages\u2014including" are commas.
     description: [
-      'The Brave Series is a three-title youth curriculum that develops emotional health, builds self-worth and healthy relationships, imparts wisdom for life and leadership, and empowers readers to protect themselves from exploitation. A powerful preventative resource, available in both faith and non-faith versions. Michele led the series as Chief Editor, Creative Director, and Contributing Author. Twenty-four volumes in all: three titles, four-volume sets each, faith and non-faith versions.',
-      'While written for youth, the Brave Series has been adopted by church leaders for leadership development, and by women and men of all ages, from young adults to seniors, who have found their own healing, empowerment, and vision inside the material.',
+      'Equipping the next generation with emotional resilience and moral clarity is one of the most vital investments we can make. The Brave Series is a comprehensive, three-title youth curriculum designed to build self-worth, foster healthy relationships, impart essential life and leadership wisdom, and proactively empower young people to protect themselves from exploitation.',
+      'As a powerful preventative tool, this series serves as an invaluable resource whether you are an educator aiming to cultivate leadership skills, a mentor guiding at-risk youth, or a parent looking to invest deeply in your son or daughter. Michele led the series as Chief Editor, Creative Director, and Contributing Author, producing 24 volumes in total across faith-based and non-faith versions to serve every community.',
+    ],
+    sections: [
+      {
+        heading: 'Versatile for Every Environment',
+        items: [
+          {
+            label: 'For the Classroom & Small Groups',
+            text: 'The co-ed Brave Together version is specifically optimized for school settings, youth groups, and interactive cohort discussions.',
+          },
+          {
+            label: 'For Families & Mentors',
+            text: 'The complete series offers a shared language for parents, guardians, and mentors to navigate tough topics with teens and young adults safely and constructively.',
+          },
+        ],
+      },
+      {
+        heading: 'Impact Across Generations',
+        items: [
+          {
+            label: 'Youth & Teens',
+            text: 'Develops core emotional health, identity, and practical decision-making skills before crisis hits.',
+          },
+          {
+            label: 'Adults & Seniors',
+            text: 'While written for youth, adults of all ages, including church leaders, young adults, and seniors, have embraced these volumes to find their own healing, empowerment, and renewed vision.',
+          },
+        ],
+      },
     ],
     notes: [
       'Brave Together Faith version shipping in the next month; all other volumes available now.',
     ],
+    buy: {
+      label: 'Buy at',
+      text: 'thebraveseries.com',
+      href: 'https://thebraveseries.com',
+    },
     panel: {
       heading: 'Recognition',
       items: [
@@ -334,10 +514,6 @@ export const AUTHOR_BOOKS: AuthorBook[] = [
       ],
     },
     endorsements: BRAVE_ENDORSEMENTS,
-    available: [
-      { text: 'thebraveseries.com', href: 'https://thebraveseries.com' },
-    ],
-    availableLabel: 'Buy at',
     storyHref: '/projects/brave-series',
   },
   {
@@ -355,10 +531,13 @@ export const AUTHOR_BOOKS: AuthorBook[] = [
     // own terms. The paragraph above is the registry subtitle from
     // lib/site-config plus the series facts, and it is deliberately thin
     // rather than invented.
-    available: [
-      { text: 'thebraveseries.com', href: 'https://thebraveseries.com' },
-    ],
-    availableLabel: 'Buy at',
+    // Same prominent treatment as the parent series page. Michele's note was
+    // about this exact link being too small to find, and it is the same link.
+    buy: {
+      label: 'Buy at',
+      text: 'thebraveseries.com',
+      href: 'https://thebraveseries.com',
+    },
     storyHref: '/projects/brave-series',
   },
   {
@@ -373,10 +552,13 @@ export const AUTHOR_BOOKS: AuthorBook[] = [
       'Leadership curriculum for teen boys focused on courage, healthy masculinity, and purpose. One of the three titles in the Brave Series, in a four-volume set, available in both faith and non-faith versions.',
     ],
     // TODO(copy): see the note on brave-and-beautiful.
-    available: [
-      { text: 'thebraveseries.com', href: 'https://thebraveseries.com' },
-    ],
-    availableLabel: 'Buy at',
+    // Same prominent treatment as the parent series page. Michele's note was
+    // about this exact link being too small to find, and it is the same link.
+    buy: {
+      label: 'Buy at',
+      text: 'thebraveseries.com',
+      href: 'https://thebraveseries.com',
+    },
     storyHref: '/projects/brave-series',
   },
   {
@@ -394,10 +576,13 @@ export const AUTHOR_BOOKS: AuthorBook[] = [
       'The non-faith version was vetted and approved by the Hawaiʻi State Department of Education for use in secondary public schools in 2026. The faith version ships in the next month.',
     ],
     // TODO(copy): see the note on brave-and-beautiful.
-    available: [
-      { text: 'thebraveseries.com', href: 'https://thebraveseries.com' },
-    ],
-    availableLabel: 'Buy at',
+    // Same prominent treatment as the parent series page. Michele's note was
+    // about this exact link being too small to find, and it is the same link.
+    buy: {
+      label: 'Buy at',
+      text: 'thebraveseries.com',
+      href: 'https://thebraveseries.com',
+    },
     storyHref: '/projects/brave-series',
   },
   {
@@ -411,6 +596,14 @@ export const AUTHOR_BOOKS: AuthorBook[] = [
       'A book of poetry, reflection, and beautiful painted illustrations. Michele wrote it out of her own difficult journey through youth, as a way for anyone else walking a similar path to know they are seen, pursued, and loved by God as Father. Short enough to read in one sitting. The kind of book readers keep close and return to again and again. Come dance with the One who joys over you with singing.',
     ],
     notes: ['Also available as an audiobook, produced in radio-drama style.'],
+    // Michele's own Short, on her own channel, embedded rather than re-hosted.
+    // It is a vertical 9:16 clip, so the frame is portrait and capped narrow;
+    // a 16:9 box would letterbox it inside two black bars.
+    video: {
+      id: 'IDfSPZ6D4wg',
+      title: 'Dancing with Father, book short by Michele Okimura',
+      label: 'Watch the short',
+    },
     endorsements: DANCING_ENDORSEMENTS,
     list: {
       label: 'Reader impact',

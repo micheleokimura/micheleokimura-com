@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import Image from 'next/image'
 import Link from 'next/link'
 
 import { Container } from '@/components/Container'
@@ -96,6 +97,128 @@ function Panel({
   )
 }
 
+/**
+ * A headed block of bold-labelled points. Michele's brochure copy arrives in
+ * this shape for both curricula. The colon after each label is drawn here
+ * rather than stored in the data, so it can never end up inside the bold run
+ * twice or go missing on one item.
+ */
+function Section({
+  heading,
+  items,
+  outro,
+}: {
+  heading: string
+  items: { label?: string; text: string }[]
+  outro?: string
+}) {
+  return (
+    <section className="mt-12">
+      <h2 className="font-display text-xl leading-tight font-semibold tracking-tight text-neutral-950 sm:text-2xl">
+        {heading}
+      </h2>
+      <ul role="list" className="mt-6 space-y-6">
+        {items.map((item) => (
+          <li key={item.text} className="flex gap-4">
+            <span
+              aria-hidden="true"
+              className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-teal)]"
+            />
+            <p className="text-base leading-7 text-neutral-700">
+              {item.label ? (
+                <strong className="font-semibold text-neutral-950">
+                  {item.label}:
+                </strong>
+              ) : null}{' '}
+              {item.text}
+            </p>
+          </li>
+        ))}
+      </ul>
+      {outro ? (
+        <p className="mt-8 text-lg leading-8 text-neutral-700">{outro}</p>
+      ) : null}
+    </section>
+  )
+}
+
+/**
+ * The prominent purchase call to action. Michele read the old one-line
+ * "Buy at thebraveseries.com" as far too small to find, so this is its own
+ * centred panel: cream ground, tracked small-caps label, and the domain set at
+ * heading scale.
+ *
+ * Cream rather than a coral tint. DESIGN-RULES bans coral-tinted panels, and
+ * the warm accent the brief asks for is exactly what --color-band-3 is for.
+ * No pill, no rounded-full, no button chrome: the underline carries the
+ * affordance and thickens on hover.
+ */
+function BuyLink({
+  label,
+  text,
+  href,
+}: {
+  label: string
+  text: string
+  href: string
+}) {
+  return (
+    <div className="mt-12 rounded-2xl bg-[var(--color-band-3)] px-6 py-8 text-center ring-1 ring-[var(--color-navy-10)] sm:px-10 sm:py-10">
+      <p className="font-display text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-terracotta-ink)] uppercase sm:text-sm">
+        {label}
+      </p>
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="font-display mt-3 inline-block text-2xl leading-tight font-semibold tracking-tight text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-2 underline-offset-[6px] transition hover:decoration-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-brand-teal)] sm:text-3xl lg:text-4xl"
+      >
+        {text}
+      </a>
+    </div>
+  )
+}
+
+/**
+ * A YouTube Short. Portrait, so the frame is 9:16 and capped at 360px: a Short
+ * in a 16:9 box is a thin strip between two black bars.
+ *
+ * Embedded, never re-hosted. It is Michele's video on Michele's channel, and
+ * downloading it to serve ourselves would breach YouTube's terms.
+ *
+ * `rel=0` keeps the end screen to her own channel. No autoplay, controls on,
+ * and the iframe is lazy so it costs nothing until it scrolls into view.
+ */
+function ShortEmbed({
+  id,
+  title,
+  label,
+}: {
+  id: string
+  title: string
+  label: string
+}) {
+  return (
+    <figure className="mt-10 flex flex-col items-center">
+      <figcaption className="font-display mb-4 text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-terracotta-ink)] uppercase sm:text-sm">
+        {label}
+      </figcaption>
+      <div className="w-full max-w-[360px]">
+        <div className="relative aspect-[9/16] w-full overflow-hidden rounded-2xl bg-neutral-950 ring-1 ring-[var(--color-navy-10)]">
+          <iframe
+            src={`https://www.youtube.com/embed/${id}?rel=0`}
+            title={title}
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            className="absolute inset-0 h-full w-full border-0"
+          />
+        </div>
+      </div>
+    </figure>
+  )
+}
+
 export default async function AuthorBookPage({
   params,
 }: {
@@ -118,12 +241,28 @@ export default async function AuthorBookPage({
       <Container className="py-12 sm:py-16 lg:py-20">
         <FadeIn className="grid grid-cols-1 gap-10 lg:grid-cols-[18rem_1fr] lg:gap-16">
           <div className="mx-auto w-full max-w-[14rem] lg:mx-0 lg:max-w-none">
-            <Cover
-              src={book.cover}
-              alt={book.coverAlt}
-              sizes="(max-width: 1024px) 14rem, 18rem"
-              priority
-            />
+            {/* A series takes its wordmark; a single title takes its cover.
+                The logo is black on transparent, so it needs the light ground
+                this section already has. Explicit width and height, from the
+                file, so it reserves its own space and cannot shift the page. */}
+            {book.logo ? (
+              <Image
+                src={book.logo.src}
+                alt={book.logo.alt}
+                width={book.logo.width}
+                height={book.logo.height}
+                priority
+                sizes="(max-width: 1024px) 14rem, 18rem"
+                className="h-auto w-full max-w-[15rem] lg:max-w-[18rem]"
+              />
+            ) : (
+              <Cover
+                src={book.cover}
+                alt={book.coverAlt}
+                sizes="(max-width: 1024px) 14rem, 18rem"
+                priority
+              />
+            )}
           </div>
 
           <div>
@@ -144,6 +283,16 @@ export default async function AuthorBookPage({
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
+
+            {/* Near the top by direction, so a visitor meets it before the
+                long copy rather than after it. */}
+            {book.video ? (
+              <ShortEmbed
+                id={book.video.id}
+                title={book.video.title}
+                label={book.video.label}
+              />
+            ) : null}
 
             {book.notes?.length ? (
               <div className="mt-5 space-y-3">
@@ -192,6 +341,23 @@ export default async function AuthorBookPage({
               </div>
             ) : null}
 
+            {book.sections?.map((section) => (
+              <Section
+                key={section.heading}
+                heading={section.heading}
+                items={section.items}
+                outro={section.outro}
+              />
+            ))}
+
+            {book.buy ? (
+              <BuyLink
+                label={book.buy.label}
+                text={book.buy.text}
+                href={book.buy.href}
+              />
+            ) : null}
+
             {/* ENDORSEMENTS. Rendered only when real, signed-off quotes exist
                 for this title. The 21-Day Journal and the three Brave Series
                 titles have none yet, and this space is deliberately left for
@@ -205,7 +371,9 @@ export default async function AuthorBookPage({
               />
             ) : null}
 
-            {book.available?.length ? (
+            {/* Only when there is no prominent BuyLink above; two purchase
+                routes on one page is one too many. */}
+            {!book.buy && book.available?.length ? (
               <AvailableAt label={book.availableLabel} links={book.available} />
             ) : null}
 
