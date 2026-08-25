@@ -113,7 +113,13 @@ message page. Renamed by Michele 2026-08-24: it read "Heart Wide Open:
 Building a Strong Connection with Your Child" until then, led by the
 programme name. The promise leads now. The slug stays `heart-wide-open`.)
 
-Gain practical keys to build strong emotional connections within your family. Your child's heart has a door, and you hold the key. In this transformative workshop, Michele equips parents to become the safe haven their children run toward. Through real-life storytelling, you will gain practical keys to validate feelings, speak unique love languages, turn everyday interactions into lasting deposits of trust, and more.
+**Card teaser.** Gain practical keys to build strong emotional connections within your family. Your child's heart has a door, and you hold the key. Michele equips parents to become the safe haven their children run toward.
+
+**Full description.**
+
+Your child's heart has a door, and as a parent, you hold the key. We all long to shape, guide, and speak into the lives of our children, yet every parent encounters seasons of feeling disconnected or unsure how to reach them. In this transformative message, Michele empowers parents to build deep emotional connections and become a safe haven their children instinctively run toward.
+
+Through relatable stories and practical framework, you will learn how to unlock your child's heart, discovering how to validate complex feelings, speak their unique love language, diffuse conflict with grace, and turn everyday interactions into lasting deposits of trust that last a lifetime.
 
 ### 6. Identity, Healing, and Walking in the Fullness of Who God Made You with Brave Purpose
 

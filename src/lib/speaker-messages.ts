@@ -301,8 +301,22 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     accent: 'violet',
     texture: 'lines',
     icon: 'heart',
+    // Michele's full description, 2026-08-24, verbatim. Her source carries no
+    // em dash, so nothing was restructured. It supersedes the short paragraph
+    // that was here, including the "gain practical keys to build strong
+    // emotional connections within your family" sentence she had added to the
+    // front of it the day before: her longer text makes the same point in its
+    // own words. That sentence still opens the CARD teaser, which is
+    // deliberate and unchanged.
     body: [
-      { kind: 'paragraph', text: 'Gain practical keys to build strong emotional connections within your family. Your child’s heart has a door, and you hold the key. In this transformative workshop, Michele equips parents to become the safe haven their children run toward. Through real-life storytelling, you will gain practical keys to validate feelings, speak unique love languages, turn everyday interactions into lasting deposits of trust, and more.' },
+      {
+        kind: 'paragraph',
+        text: 'Your child’s heart has a door, and as a parent, you hold the key. We all long to shape, guide, and speak into the lives of our children, yet every parent encounters seasons of feeling disconnected or unsure how to reach them. In this transformative message, Michele empowers parents to build deep emotional connections and become a safe haven their children instinctively run toward.',
+      },
+      {
+        kind: 'paragraph',
+        text: 'Through relatable stories and practical framework, you will learn how to unlock your child’s heart, discovering how to validate complex feelings, speak their unique love language, diffuse conflict with grace, and turn everyday interactions into lasting deposits of trust that last a lifetime.',
+      },
     ],
   },
   {
