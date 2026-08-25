@@ -114,7 +114,7 @@ export function BannerHero({
           <div
             className={
               media
-                ? 'flex flex-col items-start gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-14'
+                ? 'flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between md:gap-10 lg:gap-14'
                 : undefined
             }
           >
@@ -155,7 +155,14 @@ export function BannerHero({
           {media ? (
             // Fixed width rather than a percentage, so the picture is the
             // same size on every message page whatever the headline does.
-            <div className="w-full max-w-[320px] shrink-0 self-center sm:max-w-[360px] lg:max-w-[380px]">
+            // Two column from md rather than lg. Stacked, this banner runs
+            // over 500px tall on a laptop-ish 856px viewport, which is the
+            // top-heaviness the layout change was meant to cure; it should not
+            // survive between 768 and 1024. The picture is held to 260px in
+            // that band so the headline keeps a readable measure beside it,
+            // and opens up to 380 at lg. Below md it stacks and aligns LEFT
+            // with the copy rather than centring under it.
+            <div className="w-full max-w-[280px] shrink-0 self-start md:max-w-[260px] md:self-center lg:max-w-[380px]">
               {media}
             </div>
           ) : null}
