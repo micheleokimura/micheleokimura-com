@@ -73,21 +73,17 @@ import {
  *    every title" link. /author carries the books, and the Author card in the
  *    three doors is now the only route to them from here.
  *
- * "What Leaders and Friends Are Saying" is LIVE, with Michele's curated list of
- * fifteen quotes signed off 2026-08-24. It was parked twice on the way here;
- * the list itself is now settled, so treat the arrays in home-variants.ts as
- * approved copy rather than a working set.
+ * "What leaders and friends are saying about me and my work" is LIVE, with
+ * Michele's curated list of fifteen quotes signed off 2026-08-24. It was parked
+ * twice on the way here; the list itself is now settled, so treat the arrays in
+ * home-variants.ts as approved copy rather than a working set.
  *
- * The heading went through "Things my friends say about me" and then "...and my
- * work" before this. It is NOT a friends-only list: Ted Esler, Wayne Cordeiro,
- * Gary Smalley and others are professional endorsers rather than personal
- * friends, and the earlier wording overclaimed the relationship. Do not put the
- * friendlier version back without checking who is actually in the arrays.
- *
- * It is also the one heading on this page in TITLE CASE and without a full
- * stop. Every other section heading here is sentence case with a period
- * ("Organizations I've worked with.", "A book in you."). That is deliberate and
- * Michele's wording; see the note in the section itself.
+ * The heading took four passes to land, and the reason for the last shape
+ * matters more than the wording: it is NOT a friends-only list. Ted Esler,
+ * Wayne Cordeiro, Gary and Norma Smalley, Phyllis Unebasami and Edwin Keh are
+ * professional endorsers rather than personal friends, and "Things my friends
+ * say about me", which this started as, overclaimed the relationship. Do not
+ * shorten it back to friends without checking who is actually in the arrays.
  */
 export const metadata: Metadata = pageMetadata({
   title: 'Coach, author, and speaker',
@@ -573,20 +569,25 @@ export default function HomePage() {
       >
         <Container>
           <FadeIn>
-            {/* TITLE CASE, AND NO FULL STOP, both deliberate and both
-                Michele's. Every other heading on this page is sentence case
-                with a period, so this one is the odd one out on purpose rather
-                than by oversight. "and" stays lowercase as a conjunction; "Are"
-                is capitalised because it is a verb. Do not "fix" either.
+            {/* SENTENCE CASE, and only "What" is capitalised. Michele settled
+                on this after a title-case version, so if you find "What Leaders
+                and Friends Are Saying" anywhere it is the superseded one.
 
-                The `friends-say-heading` id is kept even though the wording no
-                longer says "friends say": it is referenced by the section's
-                aria-labelledby, and renaming it buys nothing. */}
+                Sentence case now matches every other heading on this page. The
+                one thing it still does differently is carry no full stop, where
+                the others end in one ("Organizations I've worked with.", "A
+                book in you."). That is how Michele wrote it. Adding a period
+                would make the page fully consistent, but it is her copy, so it
+                is her call rather than a tidy-up.
+
+                The `friends-say-heading` id is kept even though the wording has
+                moved on: it is referenced by the section's aria-labelledby, and
+                renaming it buys nothing. */}
             <h2
               id="friends-say-heading"
               className="font-display text-center text-3xl font-medium tracking-tight text-balance text-[var(--color-brand-teal)] sm:text-4xl"
             >
-              What Leaders and Friends Are Saying
+              What leaders and friends are saying about me and my work
             </h2>
           </FadeIn>
         </Container>
