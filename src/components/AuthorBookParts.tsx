@@ -197,3 +197,60 @@ export function AvailableAt({
     </p>
   )
 }
+
+/**
+ * "Buy on Square": the storefront call to action carried by a book tile and,
+ * one size up, by the top of a book's own page.
+ *
+ * COLOUR. Coral fill, `rounded-md`, `--color-cta-ink` label. This is the same
+ * FILL_BASE that src/components/Button.tsx renders, deliberately, so the shop
+ * button reads as the same control as every other CTA on the site. The brief
+ * for this feature asked for a black rectangular button copied from the
+ * WordPress site; Michele chose the house coral on 2026-08-25 instead, because
+ * DESIGN-RULES bans dark CTAs outside the footer and a navy button here would
+ * have been the only primary CTA on the site in a different hue.
+ *
+ * NOT A PILL. `rounded-md`, and it has to stay that way. DESIGN-RULES settled
+ * on 2026-08-24 that being the genuine click target does not earn an element a
+ * `rounded-full`, and that ruling outranks any reference.
+ *
+ * ACCESSIBLE NAME. The Author page renders this button many times over with
+ * identical visible text, so pass `forTitle` and the link announces "Buy
+ * Dancing with Father on Square" rather than the fifth "Buy on Square" in a
+ * row. The visible label stays short.
+ */
+export function SquareButton({
+  href,
+  forTitle,
+  size = 'tile',
+  className = '',
+}: {
+  href: string
+  /** Book title, folded into the accessible name only. */
+  forTitle?: string
+  /** `tile` sits in a card footer; `page` matches Button's primary sizing. */
+  size?: 'tile' | 'page'
+  className?: string
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={forTitle ? `Buy ${forTitle} on Square` : undefined}
+      className={`group/buy inline-flex items-center justify-center gap-1.5 rounded-md bg-[var(--color-cta)] font-semibold text-[var(--color-cta-ink)] shadow-sm transition hover:bg-[var(--color-cta-hover)] focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 focus-visible:ring-offset-white focus-visible:outline-none ${
+        size === 'page'
+          ? 'px-6 py-3.5 text-base'
+          : 'px-3 py-2 text-xs sm:text-sm'
+      } ${className}`}
+    >
+      Buy on Square
+      <span
+        aria-hidden="true"
+        className="transition-transform duration-200 group-hover/buy:translate-x-0.5"
+      >
+        &rarr;
+      </span>
+    </a>
+  )
+}
