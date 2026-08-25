@@ -322,7 +322,7 @@ export default function AuthorPage() {
       <section className="surface-author-wash">
         <Container className={SECTION}>
           <FadeIn>
-            <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between sm:gap-10 lg:gap-16">
+            <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_minmax(0,38rem)] lg:items-center lg:gap-12">
               <div className="max-w-2xl">
                 <h1>
                   <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-terracotta-ink)] uppercase sm:text-sm">
@@ -340,17 +340,27 @@ export default function AuthorPage() {
                 </p>
               </div>
 
-              <div className="w-40 shrink-0 sm:w-44 lg:w-64">
-                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-[var(--color-band-1)] ring-1 ring-[var(--color-navy-10)]">
-                  <Image
-                    src="/images/michele/author-hero.jpg"
-                    alt="Michele Okimura with her coffee mug at home"
-                    fill
-                    priority
-                    sizes="(min-width: 1024px) 16rem, (min-width: 640px) 11rem, 10rem"
-                    className="object-cover"
-                  />
-                </div>
+              {/* Her own covers, fanned. Built by scripts/build-books-hero.swift
+                  from the same art the tiles below use, so it can be rebuilt
+                  whenever a cover changes or the two Brave Purpose editions
+                  finally have art. Transparent PNG on purpose: a baked-in
+                  background would put a rectangle edge across the wash.
+
+                  This slot used to hold a small portrait of Michele. It moved
+                  out on 2026-08-24, when she asked for "a photograph of books"
+                  because the page read bland, and it is not a loss: her
+                  portrait now closes the page, circle-cropped and much larger,
+                  on the quote banner. Two photographs of her on one page was
+                  the note I had already flagged. */}
+              <div className="relative aspect-[1920/1040] w-full">
+                <Image
+                  src="/images/author/books-hero.png"
+                  alt="A fan of Michele Okimura's books and journals: Dancing with Father, The Birth of Explicit Movement, the Brave Series, the Dream Big Journals, and Raising Kingdom Kids"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 38rem, 100vw"
+                  className="object-contain"
+                />
               </div>
             </div>
           </FadeIn>
@@ -467,6 +477,67 @@ export default function AuthorPage() {
         </div>
       </section>
 
+      {/* ------------------------------------------------- quote banner */}
+      {/* The banner that was on /speaker, and on /coach before that. It
+          replaces the photo-and-quote block that used to close this page:
+          same job, much stronger, and it carries Michele's purpose line
+          rather than a line about dreamers.
+
+          ORDER. It sits ABOVE "Also built by Michele" rather than dead last,
+          and that is a footer constraint, not a preference. SiteFooter carries
+          a top margin of its own, so the last section on a page has to be
+          band-1: any other ground leaves a strip of mismatched colour between
+          the section and the navy footer. A periwinkle band last would show a
+          near-white stripe above the footer and read as a bug. Landing it here
+          is also exactly what /speaker does with the same banner, where it is
+          a breath between the two densest blocks on the page.
+
+          Periwinkle is sampled from the sapphire flowers in the dress in this
+          very photograph. Numbers and the contrast budget are in the QUOTE
+          BANNER block in tailwind.css. Only navy and neutral-600 clear AA on
+          this wash. */}
+      <section
+        aria-label="In Michele's words"
+        className="surface-speaker-quote w-full py-14 sm:py-24 lg:py-28"
+      >
+        <Container>
+          <FadeIn>
+            <figure className="flex flex-col items-center gap-10 text-center lg:flex-row lg:gap-16 lg:text-left">
+              {/* A fixed pixel box rather than a percentage, so the circle
+                  stays a circle at every width instead of squashing to an
+                  oval in the flex row. */}
+              <div className="relative h-[250px] w-[250px] flex-none overflow-hidden rounded-full bg-neutral-100 ring-1 ring-[var(--color-navy-10)] sm:h-[300px] sm:w-[300px] lg:h-[340px] lg:w-[340px]">
+                <Image
+                  src="/images/michele/coach-hero.jpg"
+                  alt="Michele Okimura at home in Honolulu"
+                  fill
+                  sizes="(min-width: 1024px) 340px, (min-width: 640px) 300px, 250px"
+                  className="object-cover object-[center_20%]"
+                />
+              </div>
+
+              <div>
+                {/* No quotation marks. At this size a pair of curly quotes
+                    just hangs two heavy marks in the corners, and the display
+                    setting already reads as a quote. Navy rather than
+                    teal-text, which measures 3.96:1 on this wash and fails. */}
+                <blockquote className="font-display mx-auto max-w-[22ch] text-[1.5rem] leading-[1.25] font-medium tracking-tight text-balance text-[var(--color-navy)] sm:max-w-[26ch] sm:text-[1.875rem] sm:leading-[1.22] lg:mx-0 lg:max-w-[30ch] lg:text-[2.25rem] lg:leading-[1.2]">
+                  My purpose is to help people live in the fullness of who they
+                  were created to be with brave purpose.
+                </blockquote>
+                {/* No dash before the name: no em dash anywhere on this site,
+                    so the attribution is the name alone. neutral-600 is the
+                    only secondary that clears AA on the periwinkle;
+                    coral-text, the usual house eyebrow colour, is 3.93:1. */}
+                <figcaption className="font-display mt-6 text-xs font-semibold tracking-[0.18em] text-neutral-600 uppercase sm:mt-8 sm:text-sm">
+                  Michele Okimura
+                </figcaption>
+              </div>
+            </figure>
+          </FadeIn>
+        </Container>
+      </section>
+
       {/* ------------------------------------------------- other projects */}
       {/* Kingdom Kids and ReThink Creativity are programs rather than titles,
           so they have no tile on the shelf. They belong to the same body of
@@ -475,9 +546,13 @@ export default function AuthorPage() {
           The navy "Every story in one place" card that used to close this row
           is gone: Michele's rule is that dark blue belongs to the footer and
           nowhere else. The route into /projects is a plain link now. */}
+      {/* Band-1, and it has to be: this is the last section, and SiteFooter
+          carries a top margin, so any other ground would show as a strip of
+          mismatched colour above the navy footer. The cards take cream for the
+          same reason the shelf tiles do, so they still lift off the ground. */}
       <section
         aria-labelledby="other-projects"
-        className={`bg-[var(--color-band-2)] ${SECTION}`}
+        className={`bg-[var(--color-band-1)] ${SECTION}`}
       >
         <div className={WIDE}>
           <FadeIn>
@@ -497,7 +572,7 @@ export default function AuthorPage() {
                 <FadeIn as="li" key={project.href} scaleIn className="flex">
                   <Link
                     href={project.href}
-                    className="group flex h-full w-full flex-col rounded-2xl bg-[var(--color-band-1)] p-6 shadow-sm ring-1 ring-[var(--color-navy-10)] transition duration-300 hover:-translate-y-0.5 hover:shadow-md hover:ring-[var(--color-teal-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)] lg:p-8"
+                    className="group flex h-full w-full flex-col rounded-2xl bg-[var(--color-band-3)] p-6 shadow-sm ring-1 ring-[var(--color-navy-10)] transition duration-300 hover:-translate-y-0.5 hover:shadow-md hover:ring-[var(--color-teal-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)] lg:p-8"
                   >
                     <span className="font-display text-xs font-semibold tracking-[0.18em] text-[var(--color-brand-terracotta-ink)] uppercase">
                       {project.kicker}
@@ -535,48 +610,6 @@ export default function AuthorPage() {
         </div>
       </section>
 
-      {/* ------------------------------------------------- photo and quote */}
-      {/* The page ends on Michele's own line, at a readable size next to a
-          medium portrait. Band-1, because SiteFooter carries a top margin and
-          this is the last section: any other band would show as a strip of
-          mismatched colour above the navy footer.
-
-          No CTA block under it. Michele cut "Stay close to the next release"
-          and asked for the page to run straight into the footer, which carries
-          the contact route. Do not add one back. */}
-      <section
-        aria-label="In Michele's words"
-        className={`bg-[var(--color-band-1)] ${SECTION}`}
-      >
-        <Container>
-          <FadeIn>
-            <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:gap-12 lg:gap-16">
-              <div className="w-56 shrink-0 sm:w-64 lg:w-[22rem]">
-                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl bg-[var(--color-band-3)] ring-1 ring-[var(--color-navy-10)]">
-                  <Image
-                    src="/images/michele/backup-stone-wall-ocean.jpg"
-                    alt="Michele Okimura on the beach at home in Hawaiʻi"
-                    fill
-                    sizes="(min-width: 1024px) 22rem, (min-width: 640px) 16rem, 14rem"
-                    className="object-cover"
-                  />
-                </div>
-              </div>
-
-              <figure>
-                <blockquote className="font-display text-2xl leading-tight font-medium text-balance text-[var(--color-brand-teal)] sm:text-3xl lg:text-4xl lg:leading-[1.15]">
-                  &ldquo;Let&rsquo;s become a community of dreamers where we
-                  don&rsquo;t compete but instead celebrate and support one
-                  another.&rdquo;
-                </blockquote>
-                <figcaption className="font-display mt-6 text-sm font-semibold tracking-[0.18em] text-neutral-500 uppercase">
-                  Michele Okimura
-                </figcaption>
-              </figure>
-            </div>
-          </FadeIn>
-        </Container>
-      </section>
     </>
   )
 }

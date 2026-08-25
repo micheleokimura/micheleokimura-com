@@ -325,6 +325,39 @@ html {
     );
 }
 
+/* ---------------------------------------------------------------------
+   QUOTE BANNER  (/speaker and /author)
+   ---------------------------------------------------------------------
+   The periwinkle strip behind Michele's portrait and her purpose line. It
+   started on /coach, moved to /speaker on 2026-08-24, and landed on /author
+   the same day. The class name still says speaker because /speaker is where
+   it is defined on that branch and the two must stay byte-identical; when
+   both land, this is one declaration, not two.
+
+   The colour is sampled from the photograph it carries. Michele asked for
+   "periwinkle, a lighter sapphire, matching the sapphire flowers in the
+   dress, and don't make it too dark". The flowers in
+   public/images/michele/coach-hero.jpg average #28326A across 954 pixels once
+   the pale fabric and the shadow are thrown out: hue 230, s 0.62, v 0.42. A
+   true sapphire. This wash is that hue held exactly and lifted to s 0.13,
+   v 0.96, which keeps the flower's colour and none of its weight.
+
+   Flat, no gradient. It is one full-bleed strip and a gradient would fight
+   the circular portrait sitting on it.
+
+   Measured on this wash:
+     --color-navy         10.60:1   the quote
+     text-neutral-600      5.55:1   the attribution
+     text-neutral-500      4.23:1   FAILS, do not use
+     --color-coral-text    3.93:1   FAILS
+     --color-teal-text     3.96:1   FAILS
+   Only navy and neutral-600 clear AA here, which is why the attribution is a
+   neutral rather than the coral the house eyebrow usually takes. Re-measure
+   before recolouring anything on this strip. */
+.surface-speaker-quote {
+  background-color: #d5daf5;
+}
+
 /* The Author hero ground. Warm blush pulled from Michele's own hero photo, so
    the section reads as an extension of the picture sitting in it rather than
    as a tinted box behind it.
