@@ -232,8 +232,8 @@ export const PULL_QUOTE = {
 } as const
 
 /**
- * "Things my friends say about me and my work" — the two scrolling rows that replaced the
- * Recognition section.
+ * "What Leaders and Friends Are Saying" — the two scrolling rows that
+ * replaced the Recognition section.
  *
  * LIVE, AND THE LIST IS SIGNED OFF. Michele curated it on 2026-08-24: fifteen
  * quotes, eight in the top row and seven in the bottom. What she changed in
