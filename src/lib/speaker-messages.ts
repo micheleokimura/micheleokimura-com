@@ -382,16 +382,36 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     accent: 'teal',
     texture: 'rings',
     icon: 'sunrise',
+    // Michele's full description, 2026-08-24, verbatim. The only change she
+    // asked for was the em dash in "who God created you to be, free from
+    // pride", now a comma.
+    //
+    // It replaces the whole paragraph that was here, and that DELIBERATELY
+    // drops "She walks women through the truth of their identity in Christ,
+    // the healing God offers, and the joy-filled freedom Christ gives", the
+    // sentence she had added the day before. Her call: the new text covers
+    // the same ground at length, so keeping the older line would say it
+    // twice. The sentence is not lost from the site, it still closes the CARD
+    // teaser on /speaker, which is unchanged.
     body: [
-      // Michele's approved sentence, 2026-08-24, closes this. She asked for
-      // it to be ADDED at the end, but it is a rewrite of the sentence that
-      // already sat there, so appending it would have opened two consecutive
-      // sentences with "She walks women through the truth of their identity
-      // in Christ". The superseded sentence came out instead, which also
-      // drops "for the trauma, wounds, and hindrances that quietly hold them
-      // back from walking in confidence and joy". Flagged to her; restore it
-      // as its own sentence if she wants it back.
-      { kind: 'paragraph', text: 'A message Michele is often invited to bring in women’s ministry settings and churches, rooted in her own journey and years of ministering to women in faith communities. She walks women through the truth of their identity in Christ, the healing God offers, and the joy-filled freedom Christ gives.' },
+      {
+        kind: 'paragraph',
+        text: 'For too many women, hidden struggles with self-worth, unresolved pain, and quiet insecurity hold back the brilliant calling God has placed on their lives. Rooted in her own journey of transformation and years of ministering to faith communities, Michele brings a powerful, liberating message designed to break off limitation and elevate women into their true identity in Christ.',
+      },
+      {
+        kind: 'paragraph',
+        text: 'In this uplifting and deeply restorative message, Michele walks women through the healing truth of who they are, guiding them to see and embrace their worth through God’s eyes. Audiences are empowered to step out of passivity, celebrate their divine value in a healthy, holy way, and step boldly into their purpose with unshakeable confidence, freedom, and joy.',
+      },
+      { kind: 'heading', text: 'Key Takeaways for Women' },
+      {
+        kind: 'list',
+        termed: true,
+        items: [
+          'Rooted Identity: Dismantle the lies of worthlessness and insecurity by anchoring your heart in God’s divine estimation of you.',
+          'Holy Self-Value: Learn to honor and celebrate who God created you to be, free from pride, comparison, or shame.',
+          'Unstoppable Freedom: Overcome spiritual and emotional blocks to walk out your unique calling with passion and courage.',
+        ],
+      },
     ],
   },
   {

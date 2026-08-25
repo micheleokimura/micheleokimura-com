@@ -123,7 +123,19 @@ Through relatable stories and practical framework, you will learn how to unlock 
 
 ### 6. Identity, Healing, and Walking in the Fullness of Who God Made You with Brave Purpose
 
-A message Michele is often invited to bring in women's ministry settings and churches, rooted in her own journey and years of ministering to women in faith communities. She walks women through the truth of their identity in Christ, the healing God offers, and the joy-filled freedom Christ gives.
+**Card teaser.** A message Michele is often invited to bring in women's ministry settings and churches. She walks women through the truth of their identity in Christ, the healing God offers, and the joy-filled freedom Christ gives.
+
+**Full description.**
+
+For too many women, hidden struggles with self-worth, unresolved pain, and quiet insecurity hold back the brilliant calling God has placed on their lives. Rooted in her own journey of transformation and years of ministering to faith communities, Michele brings a powerful, liberating message designed to break off limitation and elevate women into their true identity in Christ.
+
+In this uplifting and deeply restorative message, Michele walks women through the healing truth of who they are, guiding them to see and embrace their worth through God's eyes. Audiences are empowered to step out of passivity, celebrate their divine value in a healthy, holy way, and step boldly into their purpose with unshakeable confidence, freedom, and joy.
+
+#### Key Takeaways for Women
+
+- Rooted Identity: Dismantle the lies of worthlessness and insecurity by anchoring your heart in God's divine estimation of you.
+- Holy Self-Value: Learn to honor and celebrate who God created you to be, free from pride, comparison, or shame.
+- Unstoppable Freedom: Overcome spiritual and emotional blocks to walk out your unique calling with passion and courage.
 
 ### 7. How to Hear God's Voice
 

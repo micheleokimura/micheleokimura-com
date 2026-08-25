@@ -28,12 +28,12 @@ import {
  * routes.
  *
  * ####################### PLACEHOLDER ##############################
- * Five of the seven now carry Michele's full description (brave purpose,
- * dreaming big, creativity, kingdom culture, heart wide open, all
- * 2026-08-24). The other two still run on the short paragraph the card teaser
- * was cut from and are waiting on her longer text:
+ * Six of the seven now carry Michele's full description (brave purpose,
+ * dreaming big, creativity, kingdom culture, heart wide open, identity, all
+ * 2026-08-24). ONE still runs on the short paragraph the card teaser was cut
+ * from and is waiting on her longer text:
  *
- *   identity-healing-and-brave-purpose, how-to-hear-gods-voice
+ *   how-to-hear-gods-voice
  *
  * Four of the seven carry no endorsement at all, and five more endorsers are
  * named for kingdom-culture whose quotes have not been captured; see the TODO
