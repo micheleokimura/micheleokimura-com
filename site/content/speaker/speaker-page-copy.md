@@ -109,7 +109,10 @@ empty testimonial.*
 ### 5. Build a Strong Connection with Your Child
 
 *Heart Wide Open* (secondary line under the title, on the card and on the
-message page. Renamed by Michele 2026-08-24: it read "Heart Wide Open:
+message page. One photograph, chosen 2026-08-24: a hand holding a smaller
+hand, close up in low evening light, by Busra Akkaya on Pexels. It replaced a
+father-and-son beach shot and a mother-and-daughter hug; a pair of hands reads
+for a son or a daughter equally. Renamed by Michele 2026-08-24: it read "Heart Wide Open:
 Building a Strong Connection with Your Child" until then, led by the
 programme name. The promise leads now. The slug stays `heart-wide-open`.)
 
@@ -127,7 +130,7 @@ Through relatable stories and practical framework, you will learn how to unlock 
 
 **Full description.**
 
-For too many women, hidden struggles with self-worth, unresolved pain, and quiet insecurity hold back the brilliant calling God has placed on their lives. Rooted in her own journey of transformation and years of ministering to faith communities, Michele brings a powerful, liberating message designed to break off limitation and elevate women into their true identity in Christ.
+You are made to be set free to reach your fullest potential. For too many women, hidden struggles with self-worth, unresolved pain, and quiet insecurity hold back the brilliant calling God has placed on their lives. Rooted in her own journey of transformation and years of ministering to faith communities, Michele brings a powerful, liberating message designed to break off limitation and elevate women into their true identity in Christ.
 
 In this uplifting and deeply restorative message, Michele walks women through the healing truth of who they are, guiding them to see and embrace their worth through God's eyes. Audiences are empowered to step out of passivity, celebrate their divine value in a healthy, holy way, and step boldly into their purpose with unshakeable confidence, freedom, and joy.
 

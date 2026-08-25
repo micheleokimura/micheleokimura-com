@@ -128,6 +128,15 @@ export type MessageHero = {
   alt: string
   wash: string
   focal?: string
+  /**
+   * Photographer credit, where the source asks for one or deserves one.
+   *
+   * NOT rendered anywhere yet: the site has no photo-credit surface, and alt
+   * text is the wrong place for it because alt describes the picture for
+   * someone who cannot see it. Recorded here so the attribution is tracked in
+   * one place and displaying it later is a one-line change.
+   */
+  credit?: string
 }
 
 /**
@@ -433,21 +442,28 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
   },
   {
     slug: 'heart-wide-open',
-    // ################### WAITING ON A PHOTOGRAPH ###################
-    // Both pictures came off this message on 2026-08-24: the father and son
-    // on the beach, and the girl hugging her mother. Michele is choosing a
-    // single new image for it.
+    // Michele's final pick, 2026-08-24, replacing both the father-and-son
+    // beach shot and the girl hugging her mother. One picture now, and a
+    // universal one: a hand and a smaller hand, so it reads for a son or a
+    // daughter equally.
     //
-    // There is deliberately no placeholder. With no `hero` the banner simply
-    // runs single column, exactly as it did before any of these photographs
-    // existed, and the description falls back to the violet wash. A grey box
-    // saying "image coming" would look like a bug to anyone who lands here.
+    // The wash is warm even though the frame is not. Sampled, the dominant
+    // hue is the cool dark ground at 180 to 210 degrees, 60% of the colour,
+    // against 26% for the skin. The warm hue is the one taken because it is
+    // the one that CHARACTERISES the photograph: the hands in low sun are the
+    // subject and the dark is only what they are lit against. That is the
+    // judgement the convention on MessageHero asks for.
     //
-    // When the new photograph arrives: drop it in public/images/keynotes/,
-    // add a `hero` block here, and sample its wash the way MessageHero above
-    // describes. The sunset amber this page used to carry is gone with the
-    // picture it came from, so do not reinstate it without re-sampling.
-    // ###############################################################
+    // It is a tall 2:3 portrait in a 4:3 slot, so the focal point matters
+    // more than usual: 70% puts the clasped hands in the middle of the crop
+    // instead of the sleeve.
+    hero: {
+      src: '/images/keynotes/connect-with-child-hero.jpg',
+      alt: 'An adult hand holding a small child’s hand, close up in warm low evening light',
+      wash: '#F6E3D6',
+      focal: 'center 70%',
+      credit: 'Busra Akkaya on Pexels',
+    },
     number: '05',
     // Flipped 2026-08-24 at Michele's instruction. It was
     // "Heart Wide Open: Building a Strong Connection with Your Child", one
@@ -520,10 +536,11 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     body: [
       {
         kind: 'paragraph',
-        // Opening line added 2026-08-24, verbatim. It answers the hero
-        // photograph directly above it, where she is lifting a crown onto her
-        // own head.
-        text: 'You were crowned with purpose. For too many women, hidden struggles with self-worth, unresolved pain, and quiet insecurity hold back the brilliant calling God has placed on their lives. Rooted in her own journey of transformation and years of ministering to faith communities, Michele brings a powerful, liberating message designed to break off limitation and elevate women into their true identity in Christ.',
+        // Opening line, Michele's second version, 2026-08-24, verbatim. The
+        // first was "You were crowned with purpose", written against a crown
+        // photograph that has since been dropped. This one answers the
+        // butterflies that replaced it, which are a jar being opened.
+        text: 'You are made to be set free to reach your fullest potential. For too many women, hidden struggles with self-worth, unresolved pain, and quiet insecurity hold back the brilliant calling God has placed on their lives. Rooted in her own journey of transformation and years of ministering to faith communities, Michele brings a powerful, liberating message designed to break off limitation and elevate women into their true identity in Christ.',
       },
       {
         kind: 'paragraph',
