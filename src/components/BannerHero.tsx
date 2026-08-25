@@ -43,6 +43,7 @@ export function BannerHero({
   centered = false,
   surface = 'teal',
   balanceTitle = true,
+  media,
   children,
 }: {
   eyebrow?: string
