@@ -212,6 +212,25 @@ export default async function SpeakerMessagePage({
         subtitle={message.subtitle}
         surface="violet"
         balanceTitle={false}
+        media={
+          message.hero ? (
+            // 4:3 rather than the 16:9 this photograph used to run at. At
+            // 380px wide a widescreen plate is only 214px tall and reads as a
+            // strip beside a 48px headline; 4:3 holds its own next to the
+            // type. Deep violet underneath covers the moment before it paints.
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-[var(--color-speaker-deep)] shadow-lg shadow-black/25 ring-1 ring-white/15">
+              <Image
+                src={message.hero.src}
+                alt={message.hero.alt}
+                fill
+                priority
+                sizes="(min-width: 1024px) 380px, (min-width: 640px) 360px, 320px"
+                className="object-cover"
+                style={{ objectPosition: message.hero.focal ?? 'center' }}
+              />
+            </div>
+          ) : undefined
+        }
       />
 
       {/* The description sits on the message's OWN ground: a pale tint
@@ -227,26 +246,10 @@ export default async function SpeakerMessagePage({
           message.hero ? { backgroundColor: message.hero.wash } : undefined
         }
       >
-        {/* The hero runs at CONTAINER width, wider than the measure the copy
-            takes, with the wash showing around it. Generous air above and
-            below; nothing here is allowed to feel cramped. */}
-        {message.hero && (
-          <div className={`${WIDE} mb-14 sm:mb-20`}>
-            <FadeIn>
-              <div className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl bg-neutral-100 shadow-sm ring-1 ring-[var(--color-navy-10)]">
-                <Image
-                  src={message.hero.src}
-                  alt={message.hero.alt}
-                  fill
-                  priority
-                  sizes="(min-width: 1280px) 76rem, 100vw"
-                  className="object-cover"
-                  style={{ objectPosition: message.hero.focal ?? 'center' }}
-                />
-              </div>
-            </FadeIn>
-          </div>
-        )}
+        {/* The photograph used to run here, full width, in its own band. It
+            moved up into the banner on 2026-08-24: it was pushing the body
+            copy most of a screen down while the banner above it sat half
+            empty. The body starts immediately now. */}
 
         <Container>
           <FadeIn>
@@ -318,11 +321,11 @@ export default async function SpeakerMessagePage({
                   aria-hidden="true"
                   className="block h-1 w-12 rounded-full bg-[var(--color-brand-terracotta-ink)]"
                 />
-                <h2 className="font-display mt-6 text-2xl font-semibold tracking-tight text-balance text-neutral-950 sm:text-3xl">
+                <h2 className="font-display mt-6 text-3xl leading-[1.18] font-semibold tracking-tight text-balance text-neutral-950 sm:text-4xl">
                   {subtopic.heading}
                 </h2>
                 {subtopic.tagline && (
-                  <p className="mt-3 text-sm text-neutral-500">
+                  <p className="mt-4 text-base text-neutral-500">
                     {subtopic.tagline}
                   </p>
                 )}
@@ -349,12 +352,12 @@ export default async function SpeakerMessagePage({
           <Container>
             <FadeIn>
               <div className="max-w-3xl">
-                <h2 className="font-display text-2xl font-semibold tracking-tight text-neutral-950">
+                <h2 className="font-display text-3xl leading-[1.18] font-semibold tracking-tight text-neutral-950">
                   What people say about this message
                 </h2>
 
                 {message.endorsementsNote && (
-                  <p className="mt-4 text-sm text-neutral-500 italic">
+                  <p className="mt-4 text-base text-neutral-500 italic">
                     {message.endorsementsNote}
                   </p>
                 )}
@@ -365,14 +368,14 @@ export default async function SpeakerMessagePage({
                       key={item.name}
                       className="border-l-2 border-[var(--color-cta)] pl-6"
                     >
-                      <blockquote className="text-base leading-7 text-neutral-700 italic">
+                      <blockquote className="text-lg leading-[1.6] text-neutral-700 italic">
                         &ldquo;{item.quote}&rdquo;
                       </blockquote>
                       {/* `role` is optional: one endorsement came in from an
                           unnamed workshop attendee with no title attached, and
                           an empty line under the name would read as a missing
                           field rather than as a deliberate omission. */}
-                      <figcaption className="mt-3 text-sm text-neutral-500">
+                      <figcaption className="mt-4 text-base text-neutral-500">
                         <span className="font-semibold text-neutral-950">
                           {item.name}
                         </span>
@@ -396,10 +399,10 @@ export default async function SpeakerMessagePage({
         <Container>
           <FadeIn>
             <div className="max-w-2xl">
-              <h2 className="font-display text-2xl font-semibold tracking-tight text-neutral-950 sm:text-3xl">
+              <h2 className="font-display text-3xl leading-[1.18] font-semibold tracking-tight text-neutral-950 sm:text-4xl">
                 Interested in this message for your event?
               </h2>
-              <p className="mt-4 text-lg leading-8 text-neutral-600">
+              <p className="mt-5 text-lg leading-[1.6] text-neutral-600 sm:text-xl">
                 Tell me about your group and the date you have in mind.
               </p>
               <div className="mt-8">

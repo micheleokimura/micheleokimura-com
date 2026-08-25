@@ -310,7 +310,7 @@ export default function SpeakerPage() {
                       href={`/speaker/messages/${message.slug}`}
                       className={`msg-card ${ACCENT_CLASS[message.accent]} ${
                         TEXTURE_CLASS[message.texture]
-                      } group flex h-full flex-col items-center gap-4 rounded-3xl px-6 py-9 text-center text-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[var(--color-navy-20)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus-ring)] sm:px-7 sm:py-10`}
+                      } group flex h-full flex-col items-center gap-5 rounded-3xl px-7 py-10 text-center text-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[var(--color-navy-20)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus-ring)] sm:px-8 sm:py-12`}
                     >
                       <span
                         aria-hidden="true"
@@ -326,16 +326,25 @@ export default function SpeakerPage() {
                           and 85% white, which is the card's own supporting
                           type. Measured at 6.11:1 on the worst accent and
                           10.30:1 on this card's violet. */}
-                      <h3 className="font-display text-xl font-semibold tracking-tight text-balance">
+                      {/* Typography stepped up 2026-08-24 on Michele's note
+                          that the cards read too small for an older reader.
+                          Title 24px on a phone, 30px from sm up, was 20px
+                          throughout. Line height is set explicitly at 1.18 so
+                          the ratio survives the size change rather than
+                          drifting with Tailwind's per-step defaults. */}
+                      <h3 className="font-display text-2xl leading-[1.18] font-semibold tracking-tight text-balance sm:text-[1.875rem]">
                         {message.cardTitle ?? message.title}
                         {message.subtitle && (
-                          <span className="mt-1.5 block text-sm font-normal tracking-normal text-white/85">
+                          <span className="mt-2 block text-base leading-[1.4] font-normal tracking-normal text-white/85 sm:text-lg">
                             {message.subtitle}
                           </span>
                         )}
                       </h3>
 
-                      <p className="text-sm leading-6 text-white">
+                      {/* 16px on a phone, 18px from sm up, was 14px. Line
+                          height 1.5, which is the comfortable end of the
+                          1.4 to 1.5 band. */}
+                      <p className="text-base leading-[1.5] text-white sm:text-lg">
                         {message.teaser}
                       </p>
 
@@ -352,7 +361,7 @@ export default function SpeakerPage() {
                           circle above it stays round, which the rule allows
                           for an icon holder. Do not put the pill back. */}
                       <span className="mt-auto pt-3">
-                        <span className="font-display inline-flex items-center gap-1.5 rounded-md bg-white/15 px-5 py-2 text-xs font-semibold tracking-[0.14em] uppercase ring-1 ring-inset ring-white/30 transition duration-300 group-hover:bg-white/25">
+                        <span className="font-display inline-flex items-center gap-1.5 rounded-md bg-white/15 px-6 py-2.5 text-[0.9375rem] font-semibold tracking-[0.12em] uppercase ring-1 ring-inset ring-white/30 transition duration-300 group-hover:bg-white/25">
                           Learn more
                           <span
                             aria-hidden="true"

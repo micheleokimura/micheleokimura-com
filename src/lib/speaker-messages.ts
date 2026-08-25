@@ -433,20 +433,21 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
   },
   {
     slug: 'heart-wide-open',
-    hero: {
-      src: '/images/keynotes/connect-with-child-hero.jpg',
-      alt: 'A father holding his young son close on a beach at sunset, both smiling with their eyes closed',
-      // Sunset gold behind the palms, 30 deg, 29% of the frame.
-      wash: '#F6E5D1',
-      focal: 'center 35%',
-    },
-    inlineImage: {
-      src: '/images/keynotes/connect-with-child-secondary.jpg',
-      alt: 'A girl hugging her mother tightly, eyes closed and smiling, in warm afternoon light',
-      // After the first paragraph, which ends on becoming the safe haven a
-      // child runs toward. The picture is that sentence.
-      afterBlock: 1,
-    },
+    // ################### WAITING ON A PHOTOGRAPH ###################
+    // Both pictures came off this message on 2026-08-24: the father and son
+    // on the beach, and the girl hugging her mother. Michele is choosing a
+    // single new image for it.
+    //
+    // There is deliberately no placeholder. With no `hero` the banner simply
+    // runs single column, exactly as it did before any of these photographs
+    // existed, and the description falls back to the violet wash. A grey box
+    // saying "image coming" would look like a bug to anyone who lands here.
+    //
+    // When the new photograph arrives: drop it in public/images/keynotes/,
+    // add a `hero` block here, and sample its wash the way MessageHero above
+    // describes. The sunset amber this page used to carry is gone with the
+    // picture it came from, so do not reinstate it without re-sampling.
+    // ###############################################################
     number: '05',
     // Flipped 2026-08-24 at Michele's instruction. It was
     // "Heart Wide Open: Building a Strong Connection with Your Child", one
@@ -481,18 +482,20 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
   },
   {
     slug: 'identity-healing-and-brave-purpose',
+    // Crown photograph dropped 2026-08-24 at Michele's instruction. The
+    // butterflies are the whole visual for this message now, so they moved up
+    // into the banner and are NOT also repeated inline: the same picture twice
+    // on one page reads as a mistake rather than as emphasis.
+    //
+    // The wash moved with the photograph. It was the crown's sunlit
+    // golden-green; it is the butterflies' blue now, sampled the same way
+    // (peak hue 202 degrees, 45% of the frame's colour). Navy on it is
+    // 11.75:1 and neutral-600 is 6.16:1.
     hero: {
-      src: '/images/keynotes/identity-healing-hero.jpg',
-      alt: 'A woman lifting a jewelled gold crown onto her own head, looking up and smiling in warm garden light',
-      // Sunlit golden-green of the garden behind her.
-      wash: '#F2F4CA',
-      focal: 'center 40%',
-    },
-    inlineImage: {
       src: '/images/keynotes/identity-healing-secondary.jpg',
       alt: 'Green butterflies rising out of an open glass jar into a moonlit blue meadow',
-      // After the second paragraph, which is the one about freedom and joy.
-      afterBlock: 2,
+      wash: '#D4E9F6',
+      focal: 'center 45%',
     },
     number: '06',
     title:

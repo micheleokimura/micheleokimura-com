@@ -66,6 +66,18 @@ export function BannerHero({
    * `text-wrap: pretty`, which fills each line and leaves the rag.
    */
   balanceTitle?: boolean
+  /**
+   * Optional picture, shown to the RIGHT of the copy from lg up and stacked
+   * underneath it below that.
+   *
+   * Added 2026-08-24 for the message pages. They used to run a full-width
+   * hero photograph in its own band under the banner, which pushed the body
+   * copy most of a screen down and left the banner itself half empty. The
+   * photograph moved up into the banner instead: the copy gets the left
+   * column, the picture gets a fixed ~380px on the right, and the body starts
+   * straight after. Pages without a picture are unchanged, single column.
+   */
+  media?: React.ReactNode
   /** Optional CTA row. Coaching uses it; Author and Speak do not. */
   children?: React.ReactNode
 }) {
@@ -81,7 +93,9 @@ export function BannerHero({
         surface === 'violet'
           ? 'surface-violet-banner'
           : 'surface-teal-banner'
-      } relative isolate flex min-h-[280px] w-full items-center overflow-hidden py-12 sm:min-h-[300px] sm:py-14 lg:min-h-[320px]`}
+      } relative isolate flex min-h-[280px] w-full items-center overflow-hidden py-12 sm:min-h-[300px] sm:py-14 lg:min-h-[320px] ${
+        media ? 'lg:py-16' : ''
+      }`}
     >
       {/* `w-full` is load-bearing and this is the bug Michele was pointing at.
           The section is `display: flex` so that `items-center` can hold the
@@ -96,6 +110,14 @@ export function BannerHero({
           banner now shares its left edge with the header on every page. */}
       <Container className="w-full">
         <FadeIn className={centered ? 'text-center' : undefined}>
+          <div
+            className={
+              media
+                ? 'flex flex-col items-start gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-14'
+                : undefined
+            }
+          >
+          <div className={media ? 'min-w-0 flex-1' : undefined}>
           <h1>
             {eyebrow ? (
               <>
@@ -127,6 +149,16 @@ export function BannerHero({
           ) : null}
 
           {children ? <div className="mt-6 sm:mt-7">{children}</div> : null}
+          </div>
+
+          {media ? (
+            // Fixed width rather than a percentage, so the picture is the
+            // same size on every message page whatever the headline does.
+            <div className="w-full max-w-[320px] shrink-0 self-center sm:max-w-[360px] lg:max-w-[380px]">
+              {media}
+            </div>
+          ) : null}
+          </div>
         </FadeIn>
       </Container>
     </section>
