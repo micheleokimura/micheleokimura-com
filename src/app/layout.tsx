@@ -8,7 +8,7 @@ import { SiteFooter } from '@/components/SiteFooter'
 import { SiteGraphJsonLd } from '@/components/JsonLd'
 import { SmoothScroll } from '@/components/SmoothScroll'
 import { WaitListProvider } from '@/components/wait-list/WaitListProvider'
-import { siteConfig } from '@/lib/site-config'
+import { siteConfig, imageOrigin } from '@/lib/site-config'
 
 const monaSans = localFont({
   src: '../fonts/Mona-Sans.var.woff2',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
      */
     images: [
       {
-        url: siteConfig.ogImage,
+        url: `${imageOrigin}${siteConfig.ogImage}`,
         width: 1200,
         height: 630,
         alt: `${siteConfig.brand}, speaker, author, and writing coach`,
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: `${siteConfig.brand} · Speaker, author, and coach`,
     description: siteConfig.description,
-    images: [siteConfig.ogImage],
+    images: [`${imageOrigin}${siteConfig.ogImage}`],
   },
   alternates: {
     canonical: '/',

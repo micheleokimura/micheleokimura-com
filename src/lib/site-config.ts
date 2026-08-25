@@ -15,11 +15,32 @@ export type AuthoredWork = {
   coverImage?: string
 }
 
+const SITE_URL = 'https://micheleokimura.com'
+
+/**
+ * Origin that social card images and schema images are served from.
+ *
+ * og:image has to be an absolute URL, and the scraper fetches it directly, so
+ * it has to name a host that actually holds the file. micheleokimura.com is
+ * still the old WordPress site on WP Engine, so anything under it comes back
+ * 404 and the card renders blank, which is the exact failure this is meant to
+ * fix. VERCEL_URL is the deployment's own hostname and always serves the build
+ * the tag was generated in.
+ *
+ * Only images go through this. Canonicals, og:url and the schema @ids stay on
+ * siteConfig.url, because those are identity and have to keep pointing at the
+ * real domain. When DNS moves to Vercel, this can collapse back to
+ * siteConfig.url.
+ */
+export const imageOrigin = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : SITE_URL
+
 export const siteConfig = {
   brand: 'Michele Okimura',
   shortBrand: 'Michele Okimura',
   domain: 'micheleokimura.com',
-  url: 'https://micheleokimura.com',
+  url: SITE_URL,
   email: 'michele@micheleokimura.com',
   /**
    * Sitewide Open Graph / Twitter card image AND the `image` on Michele's

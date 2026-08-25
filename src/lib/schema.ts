@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import { siteConfig, authoredWorks, type AuthoredWork } from '@/lib/site-config'
+import { siteConfig, imageOrigin, authoredWorks, type AuthoredWork } from '@/lib/site-config'
 
 /**
  * ONE entity graph for the whole site.
@@ -74,7 +74,7 @@ export function personSchema(): Json {
     mainEntityOfPage: `${siteConfig.url}/about`,
     email: siteConfig.email,
     description: siteConfig.description,
-    image: `${siteConfig.url}${siteConfig.headshot}`,
+    image: `${imageOrigin}${siteConfig.headshot}`,
     gender: 'Female',
     nationality: 'American',
     birthPlace: { '@type': 'Place', name: 'Honolulu, Hawaii, USA' },
@@ -329,7 +329,7 @@ export function articleSchema({
     isPartOf: { '@id': WEBSITE_ID },
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
     inLanguage: 'en-US',
-    image: `${siteConfig.url}${image ?? siteConfig.ogImage}`,
+    image: `${imageOrigin}${image ?? siteConfig.ogImage}`,
   }
   if (tags?.length) data.keywords = tags.join(', ')
   return data
@@ -413,7 +413,7 @@ export function pageMetadata({
   ogDescription?: string
 }): Metadata {
   const url = `${siteConfig.url}${path === '/' ? '' : path}`
-  const ogImage = `${siteConfig.url}${image ?? siteConfig.ogImage}`
+  const ogImage = `${imageOrigin}${image ?? siteConfig.ogImage}`
   const fullTitle = `${title} · ${siteConfig.brand}`
   const social = ogDescription ?? description
 
