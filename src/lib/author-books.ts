@@ -654,16 +654,19 @@ export const AUTHOR_BOOKS: AuthorBook[] = [
     cover: '/images/books/birth-of-explicit-movement-cover@2x.jpg',
     coverAlt: 'The Birth of Explicit Movement',
     teaser:
-      'Part inspiring memoir and part transformative leadership tool, Birth of Explicit Movement tells Michele\u2019s full founding story, packed with profound and practical keys to following God and fulfilling your divine purpose.',
-    // Michele's copy, 2026-08-24, verbatim.
+      'What in the world could God have in store for you? God\u2019s dreams for your life are far more profound than anything you could ever imagine, and fulfilling your purpose to the fullest is a journey He is faithful to complete.',
+    // Michele's copy, revised 2026-08-24. This REPLACED a first version she
+    // sent the same day; the opening question and the reworded points are the
+    // edit. Her cleanups carried through: the em dashes in "founding
+    // story\u2014offering" and "levels of ministry\u2014senior" are commas.
     //
     // NAMING. Her prose says "Birth of Explicit Movement" with no leading
     // "The", while the official title above keeps it. That is deliberate and it
     // is hers. Do not "fix" the body copy to match the title, and do not strip
     // the "The" from the title to match the body.
     description: [
-      'Part inspiring memoir and part transformative leadership tool, Birth of Explicit Movement tells Michele\u2019s full founding story, packed with profound and practical keys to following God and fulfilling your divine purpose.',
-      'Each chapter opens with an extraordinary, supernatural God story that draws you in and sets the stage for high-impact teachable moments. Written as both a personal testimony and a practical reflection guide, every chapter closes with structured reflection sections designed to help readers hear God\u2019s voice, apply wisdom, and take bold steps of obedience.',
+      'What in the world could God have in store for you? God\u2019s dreams for your life are far more profound than anything you could ever imagine, and fulfilling your purpose to the fullest is a journey He is faithful to complete. Part inspiring memoir and part transformative leadership tool, Birth of Explicit Movement tells Michele\u2019s full founding story, offering a front-row seat to how God calls unlikely people to step beyond self-doubt, insecurity, and limitations to experience the extraordinary power of obedience.',
+      'Each chapter opens with an awe-inspiring, supernatural God story that sets the stage for high-impact teachable moments. Written as both a personal testimony and a reflection guide, every section closes with interactive prompts designed to help readers hear God\u2019s voice, embrace the wisdom of His design, and take bold, fruitful steps into their unique calling.',
     ],
     sections: [
       {
@@ -673,20 +676,20 @@ export const AUTHOR_BOOKS: AuthorBook[] = [
           'Why Birth of Explicit Movement: Discover Keys to Fulfilling Your Purpose Resonates So Deeply',
         items: [
           {
+            label: 'Miraculous Stories of Impact',
+            text: 'Features real, faith-building accounts of God\u2019s supernatural guidance that inspire you to move from self-doubt into bold action.',
+          },
+          {
             label: 'Profound & Practical Keys',
-            text: 'Unpacks actionable truths for discerning God\u2019s calling and walking it out in everyday life.',
+            text: 'Unpacks timeless, actionable truths for discerning God\u2019s voice and fulfilling His specific purpose for your life.',
           },
           {
             label: 'Tested Leadership Resource',
-            text: 'Proven across all levels of ministry, as a senior pastor even used this book to mentor and align his core leadership teams.',
-          },
-          {
-            label: 'Supernatural Testimony',
-            text: 'Features real, awe-inspiring stories of God\u2019s guidance that build faith and impart courage.',
+            text: 'Proven across all levels of ministry, senior pastors have used this book to mentor, align, and inspire their core leadership teams.',
           },
           {
             label: 'Interactive Reflection Sections',
-            text: 'Turns Michele\u2019s personal account into an interactive blueprint for your own spiritual journey.',
+            text: 'Turns Michele\u2019s personal account into an interactive blueprint for your own spiritual journey and generational impact.',
           },
           {
             label: 'The Keynote Foundation',
