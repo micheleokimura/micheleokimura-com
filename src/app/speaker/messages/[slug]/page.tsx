@@ -27,11 +27,20 @@ import {
  * routes.
  *
  * ####################### PLACEHOLDER ##############################
- * These pages are deliberately thin. Four of the seven messages carry no
- * endorsement yet (see the comment where the endorsements would render) and
- * none of them carries a photograph, a video clip, a run sheet, or a
- * technical rider. Michele has that material; it has not been collected.
- * The layout leaves room for all of it between the description and the CTA.
+ * Four of the seven now carry Michele's full description (brave purpose,
+ * dreaming big, creativity, kingdom culture, all 2026-08-24). The other
+ * three still run on the short paragraph the card teaser was cut from and
+ * are waiting on her longer text:
+ *
+ *   heart-wide-open, identity-healing-and-brave-purpose,
+ *   how-to-hear-gods-voice
+ *
+ * Four of the seven carry no endorsement at all, and five more endorsers are
+ * named for kingdom-culture whose quotes have not been captured; see the TODO
+ * in src/lib/speaker-messages.ts. No page carries a photograph, a video clip,
+ * a run sheet, or a technical rider. Michele has that material; it has not
+ * been collected. The layout leaves room for it between the description and
+ * the CTA.
  * ##################################################################
  */
 
@@ -96,14 +105,70 @@ export default async function SpeakerMessagePage({
         <Container>
           <FadeIn>
             <div className="max-w-3xl">
-              {message.body.map((paragraph) => (
-                <p
-                  key={paragraph}
-                  className="mt-6 text-lg leading-8 text-neutral-600 first:mt-0"
-                >
-                  {paragraph}
-                </p>
-              ))}
+              {/* The description is a block list, not a string of paragraphs:
+                  Michele's fuller descriptions carry a sub-heading and a
+                  bulleted list. See MessageBlock in
+                  src/lib/speaker-messages.ts. Index is a safe key here
+                  because the array is static content, never reordered. */}
+              {message.body.map((block, index) => {
+                if (block.kind === 'heading') {
+                  return (
+                    <h2
+                      key={index}
+                      className="font-display mt-10 text-xl font-semibold tracking-tight text-neutral-950 first:mt-0 sm:text-2xl"
+                    >
+                      {block.text}
+                    </h2>
+                  )
+                }
+
+                if (block.kind === 'list') {
+                  return (
+                    <ul
+                      key={index}
+                      role="list"
+                      className="mt-6 space-y-3 first:mt-0"
+                    >
+                      {block.items.map((item) => {
+                        // A termed list is written "Term: what it means". Split
+                        // on the FIRST colon only, so a colon later in the
+                        // sentence stays in the sentence. An item with no colon
+                        // renders whole.
+                        const at = block.termed ? item.indexOf(': ') : -1
+                        const term = at > -1 ? item.slice(0, at) : null
+                        const rest = at > -1 ? item.slice(at + 2) : item
+
+                        return (
+                          <li
+                            key={item}
+                            className="relative pl-6 text-lg leading-8 text-neutral-600"
+                          >
+                            <span
+                              aria-hidden="true"
+                              className="absolute top-[0.7em] left-0 h-1.5 w-1.5 rounded-full bg-[var(--color-brand-terracotta)]"
+                            />
+                            {term && (
+                              <span className="font-semibold text-neutral-950">
+                                {term}:{' '}
+                              </span>
+                            )}
+                            {rest}
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  )
+                }
+
+                return (
+                  <p
+                    key={index}
+                    className="mt-6 text-lg leading-8 text-neutral-600 first:mt-0"
+                  >
+                    {block.text}
+                  </p>
+                )
+              })}
 
               {message.nonFaith && (
                 // This note came off the /speaker index on Michele's
@@ -152,11 +217,15 @@ export default async function SpeakerMessagePage({
                       <blockquote className="text-base leading-7 text-neutral-700 italic">
                         &ldquo;{item.quote}&rdquo;
                       </blockquote>
+                      {/* `role` is optional: one endorsement came in from an
+                          unnamed workshop attendee with no title attached, and
+                          an empty line under the name would read as a missing
+                          field rather than as a deliberate omission. */}
                       <figcaption className="mt-3 text-sm text-neutral-500">
                         <span className="font-semibold text-neutral-950">
                           {item.name}
                         </span>
-                        <span className="block">{item.role}</span>
+                        {item.role && <span className="block">{item.role}</span>}
                       </figcaption>
                     </figure>
                   ))}

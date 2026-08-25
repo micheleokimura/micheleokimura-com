@@ -1,6 +1,12 @@
 # Speaker Page - Final Copy
 
-**Locked with Michele 2026-08-22. Six copy edits approved 2026-08-24.** This file is the authoritative source for `/speak`. The rendered page at `src/app/speak/page.tsx` is generated from this copy. Edit here first, then update the page.
+**Locked with Michele 2026-08-22. Six copy edits approved 2026-08-24. Full
+subpage descriptions for four messages approved 2026-08-24.**
+
+Each message now has TWO texts. The CARD TEASER is the short line on the
+grid at /speaker. The FULL DESCRIPTION is the longer text on that message's
+own page at /speaker/messages/<slug>. Where only one is given below, the
+card and the page still share it. This file is the authoritative source for `/speak`. The rendered page at `src/app/speak/page.tsx` is generated from this copy. Edit here first, then update the page.
 
 House style note: no em dashes anywhere. Venue lines use a middle dot, and endorsement attributions carry no leading dash. Endorser wording is verbatim and is never edited.
 
@@ -21,11 +27,15 @@ Michele's signature messages are below. As a pastor, teacher, and public speaker
 
 ### 1. Finding Your Brave Purpose
 
-The leap from a God-given dream to a courageous "yes" can feel impossible. In her signature keynote, Michele shares the raw, true story of founding Releasing Generations: the initial fears, the false starts, and the exact moment she stopped talking about her calling and started walking in it. Audiences leave with a teachable, practical framework to finally step into their own brave purpose. Delivered at churches, conferences, and leadership events for over a decade.
+**Card teaser.** The leap from a God-given dream to a courageous "yes" can feel impossible. Audiences leave with a teachable, practical framework to finally step into their own brave purpose.
+
+**Full description.** The distance between a God-given dream and a courageous "yes" often feels like an insurmountable chasm. In her signature keynote, Michele pulls back the curtain on the raw, unfiltered story of founding Releasing Generations, confronting the paralyzing fears, overcoming the false starts, and capturing the exact moment she stopped dreaming about her calling and started walking in it. For over a decade at conferences, churches, and leadership events, this transformative message has awakened audiences to the "more" God has waiting for them. You won't just walk away inspired; you will leave equipped with a clear, practical framework to step into your own brave purpose and live it out loud.
 
 ### 2. Dreaming Big With God
 
-God's vision for your life is beautifully larger than the one you are comfortable praying for. Perfect for audiences standing at the threshold of a new season, Michele explores how to surrender your fears, your history, and your "what-ifs" to God. Whether you are carrying a quiet dream or feeling a persistent nudge, this message expands your faith to embrace what is truly possible.
+**Card teaser.** God's vision for your life is beautifully larger than the one you are comfortable praying for. This message expands your faith to embrace what is truly possible.
+
+**Full description.** Deep within you lies a treasure chest of dormant dreams, waiting to be discovered, uncovered, and reclaimed for a world in desperate need of what you carry. In this high-impact keynote, Michele invites audiences on a sacred treasure hunt to unearth the God-sized vision within them and step into a reality bigger than their history, their fears, or their "what-ifs." Perfect for anyone standing at the threshold of a new season, whether you are holding a quiet whisper or a persistent nudge, this message expands your faith, breaks off limitation, and equips you to embrace the extraordinary possibilities God has waiting on the other side of your trust.
 
 *Also available in a non-faith framing for schools, workplaces, and public events.*
 
@@ -35,17 +45,43 @@ God's vision for your life is beautifully larger than the one you are comfortabl
 
 ### 3. Activating Your Creativity
 
-You are purposely created by the creator to create. Michele expands the definition of creativity, connecting to every sphere of influence in a person's life. Everyone is a creative genius. Learn why.
+**Card teaser.** You are purposely created by the creator to create. Michele expands the definition of creativity, connecting to every sphere of influence in a person's life. Everyone is a creative genius. Learn why.
 
-She has led four Rethink Creativity conferences on this theme.
+**Full description.**
+
+You are purposefully crafted by the Ultimate Creator to create. In this dynamic, eye-opening message, Michele shatters the myth that creativity belongs only to artists, revealing how every individual possesses a reservoir of creative genius waiting to be unlocked in their unique sphere of influence. When you align your mind with God's unlimited imagination, the impossible becomes achievable: breakthrough solutions emerge, system-level transformation takes root, and miracles happen.
+
+Imagine the ripple effect of stepping into your divine capacity:
+
+- What if a new family tradition impacts generations to come?
+- What if a single song ignites a person's lifelong purpose?
+- What if an innovative system revolutionizes your entire organization?
+- What if your boldest idea solves a deeply rooted community problem?
+- What if your movement or art imparts supernatural hope to the broken?
+- What if your creative solution unlocks relief for those in desperate need?
+
+Whether you lead in business, education, ministry, or the arts, this message will awaken your imagination, break off creative blocks, and empower you to respond to the high calling of creating with God. She has led four Rethink Creativity conferences on this theme.
 
 *Also available in a non-faith framing for schools, workplaces, and public events.*
 
 ### 4. Building a Kingdom Culture at Home and in Ministry
 
-How do we shape a culture that fosters a resilient, deep-rooted, fully alive faith in our children and youth? Michele offers a highly interactive experience for parents and leaders, imparting keys to transformation.
+**Card teaser.** How do we shape a culture that fosters a resilient, deep-rooted, fully alive faith in our children and youth? Michele offers a highly interactive experience for parents and leaders, imparting keys to transformation.
 
-Taught at conferences, in an eight-hour workshop format, and inside an e-course.
+**Full description.**
+
+How do we build an environment where the next generation doesn't just inherit our faith, but encounters a living God for themselves? In this highly interactive experience, Michele equips parents, ministry teams, and church leaders with practical, supernatural keys to cultivate a resilient, deep-rooted, and fully alive Kingdom culture in their homes and communities.
+
+Rather than training youth to simply be the "church of tomorrow," this message empowers young people to hear the voice of the Holy Spirit, walk in intimacy with Him, and minister in power alongside adults today.
+
+#### Core Activation Topics
+
+- Discerning God's Voice: Cultivating real-time intimacy and conversation with the Spirit
+- Heart Wholeness & Identity: Rooting young lives in their true standing in Christ
+- Relational Evangelism: Sharing faith naturally through love and supernatural encounters
+- Generational Leadership: Unlocking spiritual authority and leadership in youth
+
+Available as an immersive keynote, a comprehensive 8-hour hands-on workshop, or a self-paced digital course.
 
 *The endorsements below are from Michele's Kingdom Kids Workshops, the flagship workshop within this topic. Same content, previously offered under that title.*
 
@@ -60,6 +96,15 @@ Taught at conferences, in an eight-hour workshop format, and inside an e-course.
 > "Her creative and visually-exciting presentations have challenged us and our students to directly download from the Father Heart of God. We are now seeing children as young as five praying bold and encouraging words over other children and even their teachers. Our entire campus culture has changed. Our school will never be the same."
 >
 > Rebecca Furuhashi, Principal, Christian Academy
+
+> "Michele's words touched our hearts, stirred our emotions, and challenged us to take action! I gained ways to encourage our children to be bold, to minister to others, to pray and to demonstrate love. I received tools we can pass on to our own children to show God's love!"
+>
+> Workshop attendee
+
+*Five more endorsers are named for this message and their quotes have not been
+captured yet: Allen Cardines, Russell Higa, Charis Chinen, Megan Junge, Damon
+Gohata. Nothing is stubbed in for them, because a name without its words is an
+empty testimonial.*
 
 ### 5. Build a Strong Connection with Your Child
 

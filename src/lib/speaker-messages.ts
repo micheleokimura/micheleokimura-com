@@ -32,8 +32,26 @@
 export type Endorsement = {
   quote: string
   name: string
-  role: string
+  /** Omitted for an unnamed attendee, where there is no title to print. */
+  role?: string
 }
+
+/**
+ * One block of a message page's description.
+ *
+ * This was a plain `string[]` of paragraphs until 2026-08-24, when Michele
+ * delivered full descriptions for four of the messages and two of them carry
+ * a sub-heading and a bulleted list. A block list keeps that structure in the
+ * data instead of smuggling markup into a string.
+ *
+ * `termed` on a list means each item is written "Term: what it means"; the
+ * renderer splits on the FIRST colon and sets the term in semibold, so a
+ * scannable list stays scannable. An item with no colon renders whole.
+ */
+export type MessageBlock =
+  | { kind: 'paragraph'; text: string }
+  | { kind: 'heading'; text: string }
+  | { kind: 'list'; items: string[]; termed?: boolean }
 
 /**
  * Card colour on the /speaker grid. Each one is a Michele palette hue taken
@@ -86,7 +104,7 @@ export type SpeakerMessage = {
   accent: MessageAccent
   texture: MessageTexture
   icon: MessageIcon
-  body: string[]
+  body: MessageBlock[]
   /** Shown when the message also travels without the faith framing. */
   nonFaith?: boolean
   /** Context the reader needs before the endorsements underneath. */
@@ -104,8 +122,16 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     accent: 'teal',
     texture: 'lines',
     icon: 'compass',
+    // Michele's full description, 2026-08-24, verbatim bar the em dashes she
+    // asked to have taken out (after "Releasing Generations" and after "her
+    // calling", both now commas). It supersedes the short paragraph that was
+    // here and carries every fact that one did, the decade of delivery
+    // included, so nothing is held back.
     body: [
-      'The leap from a God-given dream to a courageous "yes" can feel impossible. In her signature keynote, Michele shares the raw, true story of founding Releasing Generations: the initial fears, the false starts, and the exact moment she stopped talking about her calling and started walking in it. Audiences leave with a teachable, practical framework to finally step into their own brave purpose. Delivered at churches, conferences, and leadership events for over a decade.',
+      {
+        kind: 'paragraph',
+        text: 'The distance between a God-given dream and a courageous "yes" often feels like an insurmountable chasm. In her signature keynote, Michele pulls back the curtain on the raw, unfiltered story of founding Releasing Generations, confronting the paralyzing fears, overcoming the false starts, and capturing the exact moment she stopped dreaming about her calling and started walking in it. For over a decade at conferences, churches, and leadership events, this transformative message has awakened audiences to the "more" God has waiting for them. You won’t just walk away inspired; you will leave equipped with a clear, practical framework to step into your own brave purpose and live it out loud.',
+      },
     ],
   },
   {
@@ -117,8 +143,13 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     accent: 'coral',
     texture: 'rings',
     icon: 'sparkles',
+    // Michele's full description, 2026-08-24, verbatim bar the em dashes she
+    // asked to have taken out (after "season" and after "nudge", both commas).
     body: [
-      'God’s vision for your life is beautifully larger than the one you are comfortable praying for. Perfect for audiences standing at the threshold of a new season, Michele explores how to surrender your fears, your history, and your "what-ifs" to God. Whether you are carrying a quiet dream or feeling a persistent nudge, this message expands your faith to embrace what is truly possible.',
+      {
+        kind: 'paragraph',
+        text: 'Deep within you lies a treasure chest of dormant dreams, waiting to be discovered, uncovered, and reclaimed for a world in desperate need of what you carry. In this high-impact keynote, Michele invites audiences on a sacred treasure hunt to unearth the God-sized vision within them and step into a reality bigger than their history, their fears, or their "what-ifs." Perfect for anyone standing at the threshold of a new season, whether you are holding a quiet whisper or a persistent nudge, this message expands your faith, breaks off limitation, and equips you to embrace the extraordinary possibilities God has waiting on the other side of your trust.',
+      },
     ],
     nonFaith: true,
     endorsements: [
@@ -139,13 +170,34 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     accent: 'navy',
     texture: 'grid',
     icon: 'palette',
+    // Michele's full description, 2026-08-24, verbatim bar the em dash after
+    // "artists", now a comma. Her closing paragraph absorbs the Rethink
+    // Creativity count that used to sit here as a separate line, so that line
+    // is gone rather than printed twice.
     body: [
-      // Michele's approved rewrite, 2026-08-24, verbatim. It replaced a
-      // longer paragraph. The Rethink Creativity count below is the one fact
-      // that paragraph carried which hers does not, so it is kept as its own
-      // line rather than dropped silently.
-      'You are purposely created by the creator to create. Michele expands the definition of creativity, connecting to every sphere of influence in a person’s life. Everyone is a creative genius. Learn why.',
-      'She has led four Rethink Creativity conferences on this theme.',
+      {
+        kind: 'paragraph',
+        text: 'You are purposefully crafted by the Ultimate Creator to create. In this dynamic, eye-opening message, Michele shatters the myth that creativity belongs only to artists, revealing how every individual possesses a reservoir of creative genius waiting to be unlocked in their unique sphere of influence. When you align your mind with God’s unlimited imagination, the impossible becomes achievable: breakthrough solutions emerge, system-level transformation takes root, and miracles happen.',
+      },
+      {
+        kind: 'paragraph',
+        text: 'Imagine the ripple effect of stepping into your divine capacity:',
+      },
+      {
+        kind: 'list',
+        items: [
+          'What if a new family tradition impacts generations to come?',
+          'What if a single song ignites a person’s lifelong purpose?',
+          'What if an innovative system revolutionizes your entire organization?',
+          'What if your boldest idea solves a deeply rooted community problem?',
+          'What if your movement or art imparts supernatural hope to the broken?',
+          'What if your creative solution unlocks relief for those in desperate need?',
+        ],
+      },
+      {
+        kind: 'paragraph',
+        text: 'Whether you lead in business, education, ministry, or the arts, this message will awaken your imagination, break off creative blocks, and empower you to respond to the high calling of creating with God. She has led four Rethink Creativity conferences on this theme.',
+      },
     ],
     nonFaith: true,
   },
@@ -159,12 +211,34 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     accent: 'gold',
     texture: 'dots',
     icon: 'house',
+    // Michele's full description, 2026-08-24, verbatim. Her closing line
+    // states the delivery formats, so the separate "taught at conferences, in
+    // an eight-hour workshop format, and inside an e-course" line that used to
+    // sit here is gone rather than saying the same thing twice.
     body: [
-      // Michele's approved rewrite, 2026-08-24, verbatim. The delivery
-      // formats below are what the replaced paragraph carried that hers does
-      // not, and an event organiser needs them, so they stay.
-      'How do we shape a culture that fosters a resilient, deep-rooted, fully alive faith in our children and youth? Michele offers a highly interactive experience for parents and leaders, imparting keys to transformation.',
-      'Taught at conferences, in an eight-hour workshop format, and inside an e-course.',
+      {
+        kind: 'paragraph',
+        text: 'How do we build an environment where the next generation doesn’t just inherit our faith, but encounters a living God for themselves? In this highly interactive experience, Michele equips parents, ministry teams, and church leaders with practical, supernatural keys to cultivate a resilient, deep-rooted, and fully alive Kingdom culture in their homes and communities.',
+      },
+      {
+        kind: 'paragraph',
+        text: 'Rather than training youth to simply be the "church of tomorrow," this message empowers young people to hear the voice of the Holy Spirit, walk in intimacy with Him, and minister in power alongside adults today.',
+      },
+      { kind: 'heading', text: 'Core Activation Topics' },
+      {
+        kind: 'list',
+        termed: true,
+        items: [
+          'Discerning God’s Voice: Cultivating real-time intimacy and conversation with the Spirit',
+          'Heart Wholeness & Identity: Rooting young lives in their true standing in Christ',
+          'Relational Evangelism: Sharing faith naturally through love and supernatural encounters',
+          'Generational Leadership: Unlocking spiritual authority and leadership in youth',
+        ],
+      },
+      {
+        kind: 'paragraph',
+        text: 'Available as an immersive keynote, a comprehensive 8-hour hands-on workshop, or a self-paced digital course.',
+      },
     ],
     endorsementsNote:
       'The endorsements below are from Michele’s Kingdom Kids Workshops, the flagship workshop within this topic. Same content, previously offered under that title.',
@@ -187,6 +261,28 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
         name: 'Rebecca Furuhashi',
         role: 'Principal, Christian Academy',
       },
+      // Added 2026-08-24. Michele sent two attendee quotes and called them A
+      // and B; A is already on the home page, so this is B and it lives here
+      // so the same words are never on two pages. No name and no title: it
+      // came in unattributed, and inventing either would be inventing a
+      // testimonial. Leave `role` off unless she supplies one.
+      {
+        quote:
+          'Michele’s words touched our hearts, stirred our emotions, and challenged us to take action! I gained ways to encourage our children to be bold, to minister to others, to pray and to demonstrate love. I received tools we can pass on to our own children to show God’s love!',
+        name: 'Workshop attendee',
+      },
+      // ################### TODO: five more endorsers ###################
+      // Michele named these five for this message and their quotes have NOT
+      // been captured yet, so none of them is stubbed in below. Adding a name
+      // without its words would put an empty testimonial on the page.
+      //
+      //   Allen Cardines, Russell Higa, Charis Chinen, Megan Junge,
+      //   Damon Gohata
+      //
+      // When the text arrives, append each as a normal entry above this
+      // comment and the section grows on its own. Endorser wording is
+      // verbatim and is never edited.
+      // #################################################################
     ],
   },
   {
@@ -206,7 +302,7 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     texture: 'lines',
     icon: 'heart',
     body: [
-      'Gain practical keys to build strong emotional connections within your family. Your child’s heart has a door, and you hold the key. In this transformative workshop, Michele equips parents to become the safe haven their children run toward. Through real-life storytelling, you will gain practical keys to validate feelings, speak unique love languages, turn everyday interactions into lasting deposits of trust, and more.',
+      { kind: 'paragraph', text: 'Gain practical keys to build strong emotional connections within your family. Your child’s heart has a door, and you hold the key. In this transformative workshop, Michele equips parents to become the safe haven their children run toward. Through real-life storytelling, you will gain practical keys to validate feelings, speak unique love languages, turn everyday interactions into lasting deposits of trust, and more.' },
     ],
   },
   {
@@ -229,7 +325,7 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
       // drops "for the trauma, wounds, and hindrances that quietly hold them
       // back from walking in confidence and joy". Flagged to her; restore it
       // as its own sentence if she wants it back.
-      'A message Michele is often invited to bring in women’s ministry settings and churches, rooted in her own journey and years of ministering to women in faith communities. She walks women through the truth of their identity in Christ, the healing God offers, and the joy-filled freedom Christ gives.',
+      { kind: 'paragraph', text: 'A message Michele is often invited to bring in women’s ministry settings and churches, rooted in her own journey and years of ministering to women in faith communities. She walks women through the truth of their identity in Christ, the healing God offers, and the joy-filled freedom Christ gives.' },
     ],
   },
   {
@@ -246,10 +342,10 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
       // ways most Christians know God speaks" line below is what the replaced
       // paragraph carried that hers does not, and it is the substance of the
       // workshop, so it stays as its own paragraph.
-      'For youth and adults of all ages who are ready to grow in their two-way relationship with God, this workshop builds faith through testimony, teaches discernment, and gives each participant practical activities to hear God’s voice in real time. Be prepared to encounter God in this time.',
-      'Beyond the ways most Christians know God speaks (through Scripture, sermons, music), Michele opens the door to the other ways God is already speaking: through a thought, a vision, a picture, a circumstance.',
-      'Michele also unpacks the invitation of 1 Corinthians 14:1 ("eagerly desire spiritual gifts, especially the gift of prophecy"), helping listeners grow the prophetic in their homes, their churches, and the encouragement they bring to others.',
-      'Delivered for children, teens, families, ministry teams, and pastors. Watching people realize "I can hear God’s voice" is what keeps Michele coming back to this one.',
+      { kind: 'paragraph', text: 'For youth and adults of all ages who are ready to grow in their two-way relationship with God, this workshop builds faith through testimony, teaches discernment, and gives each participant practical activities to hear God’s voice in real time. Be prepared to encounter God in this time.' },
+      { kind: 'paragraph', text: 'Beyond the ways most Christians know God speaks (through Scripture, sermons, music), Michele opens the door to the other ways God is already speaking: through a thought, a vision, a picture, a circumstance.' },
+      { kind: 'paragraph', text: 'Michele also unpacks the invitation of 1 Corinthians 14:1 ("eagerly desire spiritual gifts, especially the gift of prophecy"), helping listeners grow the prophetic in their homes, their churches, and the encouragement they bring to others.' },
+      { kind: 'paragraph', text: 'Delivered for children, teens, families, ministry teams, and pastors. Watching people realize "I can hear God’s voice" is what keeps Michele coming back to this one.' },
     ],
     endorsements: [
       {
