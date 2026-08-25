@@ -10,9 +10,14 @@ type Props = {
   children: React.ReactNode
   /** Tags the CTA so this page's bottom signups are attributed to it. */
   source?: string
+  /**
+   * Replaces the default wait-list button. Pages that should open the sitewide
+   * contact popup instead pass a `<ContactTrigger>` here.
+   */
+  cta?: React.ReactNode
 }
 
-export function ContactBlock({ heading, children, source = 'contact-block' }: Props) {
+export function ContactBlock({ heading, children, source = 'contact-block', cta }: Props) {
   return (
     <Container className="mt-24 sm:mt-32 lg:mt-40">
       <FadeIn className="-mx-6 rounded-4xl bg-neutral-950 surface-teal px-6 py-20 sm:mx-0 sm:py-32 md:px-12">
@@ -24,7 +29,7 @@ export function ContactBlock({ heading, children, source = 'contact-block' }: Pr
               </h2>
               <div className="mt-6 text-xl text-neutral-300">{children}</div>
               <div className="mt-10">
-                <JoinWaitListButton source={source} tone="dark" />
+                {cta ?? <JoinWaitListButton source={source} tone="dark" />}
               </div>
             </div>
 

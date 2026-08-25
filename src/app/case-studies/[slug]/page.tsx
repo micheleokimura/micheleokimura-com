@@ -5,6 +5,7 @@ import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
 import { PageIntro } from '@/components/PageIntro'
 import { ContactBlock } from '@/components/ContactBlock'
+import { ContactTrigger } from '@/components/ContactTrigger'
 import { getCaseStudyBySlug, getPublishableSlugs } from '@/lib/case-studies'
 import { pageMetadata } from '@/lib/schema'
 
@@ -48,10 +49,18 @@ export default async function CaseStudyPage({
         </FadeIn>
       </Container>
 
-      <ContactBlock heading="Work with Michele.">
+      <ContactBlock
+        heading="Work with Michele."
+        cta={
+          <ContactTrigger tone="dark" interest="speaking">
+            Contact Michele
+          </ContactTrigger>
+        }
+      >
         <p>
-          If you lead a school, church, or organization and want this kind of work,
-          reach out and Michele will follow up personally.
+          If you lead a school, church, or organization and want to bring this kind
+          of work to your community, please reach out. Michele will follow up with
+          you personally.
         </p>
       </ContactBlock>
     </>
