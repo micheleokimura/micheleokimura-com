@@ -98,7 +98,7 @@ const OTHER_PROJECTS = projectStudies.filter((project) =>
  *   body p-2.5 xs:p-4                         same
  *   serif title, leading-tight, ~18px         font-display at the same size
  *   group-hover:text-primary on the title     title goes teal on hover
- *   muted 14px/20px teaser, line-clamp-2      same colour and size, clamp-4
+ *   muted 14px/20px teaser, line-clamp-2      same colour and size, clamp-5
  *   mt-auto footer row, pt-1.5 xs:pt-4        same
  *
  * Two deliberate departures, both forced by what the card is carrying.
@@ -108,11 +108,13 @@ const OTHER_PROJECTS = projectStudies.filter((project) =>
  * Your Purpose" does not, and a truncated book title is a worse card than a
  * two-line one.
  *
- * The teaser clamps at FOUR lines, not two. Every teaser on this shelf is
+ * The teaser clamps at FIVE lines, not two. Every teaser on this shelf is
  * approved copy lifted whole from the book's own description, and clamping at
- * two would put an ellipsis through the middle of six of them. Four clears all
- * the current copy while keeping the clamp there as a guard, so a longer teaser
- * added later still cannot blow the card out.
+ * two would put an ellipsis through the middle of most of them. It was four
+ * until 2026-08-24, when three descriptions were replaced and two of the new
+ * opening sentences ran past four lines in a 24rem column. Five clears all the
+ * current copy while keeping the clamp there as a guard, so a longer teaser
+ * added later still cannot blow the card out. Re-measure before lowering it.
  *
  * The reference's second footer element, a coloured "Open" status pill, is NOT
  * borrowed. DESIGN-RULES bans pills outright because they read as clickable, so
@@ -176,7 +178,7 @@ function BookTile({
             <Forthcoming label={book.forthcoming} />
           </span>
         ) : null}
-        <p className="mt-1.5 line-clamp-4 text-xs leading-5 text-neutral-600 sm:text-sm sm:leading-5">
+        <p className="mt-1.5 line-clamp-5 text-xs leading-5 text-neutral-600 sm:text-sm sm:leading-5">
           {book.teaser}
         </p>
         {showLearnMore ? <LearnMore /> : null}
