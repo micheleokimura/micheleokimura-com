@@ -130,7 +130,7 @@ const MICHELE_PORTRAIT = '/images/michele/about-hero.jpg'
  * its contents to 42rem below `lg`, which would leave the message tiles as
  * narrow strips on a tablet. Same constant, same reason, as the home page.
  */
-const WIDE = 'mx-auto max-w-7xl px-6 lg:px-8'
+const WIDE = 'mx-auto max-w-7xl gutter-x'
 
 /**
  * Standard band padding: 56px on a phone, 96px on a desktop. Michele asked

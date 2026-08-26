@@ -93,7 +93,7 @@ export const metadata: Metadata = pageMetadata({
  * columns about 210px wide at a tablet width. Using the full max-w-7xl gutter
  * instead gives roughly 226px columns at 768px, which the cards can carry.
  */
-const WIDE = 'mx-auto max-w-7xl px-6 lg:px-8'
+const WIDE = 'mx-auto max-w-7xl gutter-x'
 
 /**
  * Role-card icons. Names verified against the installed lucide-react, which is
@@ -246,9 +246,44 @@ export default function HomePage() {
           If this file is ever replaced again, re-measure. A brighter clip needs
           more scrim. Do not re-introduce blur to hide the stage: that is the
           exact thing Michele rejected. */}
+      {/* FULL-VIEWPORT ON A PHONE, added 2026-08-26 after Brett reviewed the
+          live site on an iPhone 15 Pro. His note was that the hero "should
+          feel like the site" and take the entire viewport, with no dead white
+          space at the top fighting it for attention. Three things make that
+          happen, and they are spread across three files:
+
+            1. layout.tsx ships viewport-fit=cover, so iOS stops letterboxing
+               the page inside the safe area and the video can reach the top
+               of the glass.
+            2. SiteHeader goes transparent below sm on this route, so the band
+               that used to sit above the video is gone rather than merely
+               recoloured.
+            3. The margin below cancels `main`'s header pad exactly, using the
+               same --header-offset variable `main` pads with, so the section
+               starts at y=0. If the header height ever changes, that one
+               variable moves and these two stay in agreement.
+
+          `min-h-[100svh]`, not `100dvh` and not `100vh`. svh is the viewport
+          with the browser chrome SHOWN, which is the state the page loads in,
+          so the hero fills the screen exactly at first paint. dvh would be
+          correct at every scroll position and wrong in a more annoying way:
+          it re-lays-out the hero while you scroll, which on a section this
+          size reads as the whole page jumping. 100vh is the largest of the
+          three and would push the CTA under the URL bar on load. `min-h`
+          rather than `h`, so the copy can still grow the section at a large
+          accessibility text size instead of overflowing it.
+
+          THE CROP IS THE TRADE, and it is worth knowing about. The clip is
+          16:9 and `object-cover` on a 393x852 screen scales it to fit the
+          HEIGHT, so the full frame height survives and roughly the middle
+          26% of its width is what you see. Michele stands upper-middle in
+          every stage frame, so she stays in shot; the wide audience cutaways
+          are what get cropped hardest. At the old 32rem this was already
+          showing about 43% of the frame width, so the change is a matter of
+          degree rather than a new condition. Flagged to Brett as his call. */}
       <section
         aria-label="Michele Okimura"
-        className="relative isolate min-h-[32rem] w-full overflow-hidden bg-[var(--color-navy)] sm:min-h-0 sm:aspect-[16/9] sm:max-h-[calc(100svh-4.75rem)]"
+        className="relative isolate mt-[calc(var(--header-offset)*-1)] min-h-[100svh] w-full overflow-hidden bg-[var(--color-navy)] sm:mt-0 sm:min-h-0 sm:aspect-[16/9] sm:max-h-[calc(100svh-4.75rem)]"
       >
         <video
           src="/videos/michele-hero.mp4"
@@ -302,7 +337,13 @@ export default function HomePage() {
             Re-run the measurement if the video is ever replaced; a brighter
             clip needs more scrim. The script is in the commit for this change. */}
         <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,rgba(31,39,68,0.78)_0%,rgba(31,39,68,0.70)_40%,rgba(31,39,68,0.52)_70%,rgba(31,39,68,0)_100%)] pt-40 sm:pt-48 lg:pt-56">
-        <Container className="pb-9 sm:pb-10 lg:pb-14">
+        {/* pb clears the home indicator. With viewport-fit=cover the section
+            now runs to the physical bottom of the screen, and the old 36px
+            put the CTA squarely under the 34px indicator on an iPhone. The
+            inset is 0 everywhere else, so this is the old padding on every
+            other device. From sm the hero is no longer full-bleed and the
+            inset is irrelevant, but harmless. */}
+        <Container className="pb-[calc(2.25rem+env(safe-area-inset-bottom,0px))] sm:pb-10 lg:pb-14">
           <FadeIn className="max-w-2xl">
             <h1 className="font-display text-[2rem] leading-[1.05] font-medium tracking-tight text-balance text-[var(--color-cream)] sm:text-[2.5rem] lg:text-6xl">
               {HERO.h1}

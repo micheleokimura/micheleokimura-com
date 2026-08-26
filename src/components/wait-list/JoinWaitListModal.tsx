@@ -162,18 +162,24 @@ export function JoinWaitListModal({
 
   return createPortal(
     <motion.div
-      className="fixed inset-0 z-[120] flex items-end justify-center bg-neutral-950/60 p-4 backdrop-blur-sm sm:items-center"
+      className="fixed inset-0 z-[120] flex items-end justify-center bg-neutral-950/60 p-4 pb-[calc(1rem+env(safe-area-inset-bottom,0px))] backdrop-blur-sm sm:items-center"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.18 }}
       onClick={onClose}
     >
+      {/* max-h + overflow-y-auto. This sheet had NEITHER, so on a phone the
+          four-field form simply ran off the bottom of the screen with no way
+          to scroll it: the page behind is what moved. `data-lenis-prevent`
+          keeps the smooth-scroll wrapper's hands off the sheet's own scroll,
+          the same way ContactPopup does it. */}
       <motion.div
         ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className="relative w-full max-w-[500px] rounded-2xl bg-white p-6 shadow-2xl ring-1 ring-neutral-900/10 sm:p-8"
+        data-lenis-prevent
+        className="relative max-h-[calc(100dvh-2rem-env(safe-area-inset-bottom,0px))] w-full max-w-[500px] overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl ring-1 ring-neutral-900/10 sm:max-h-[calc(100dvh-4rem)] sm:p-8"
         initial={{ opacity: 0, y: 16, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.2 }}
@@ -183,7 +189,7 @@ export function JoinWaitListModal({
               type="button"
               onClick={onClose}
               aria-label="Close"
-              className="absolute right-4 top-4 rounded-full p-2 text-neutral-500 transition hover:bg-neutral-100 hover:text-neutral-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2"
+              className="absolute right-2.5 top-2.5 inline-flex h-11 w-11 items-center justify-center rounded-full text-neutral-500 transition hover:bg-neutral-100 hover:text-neutral-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2"
             >
               <XIcon className="h-5 w-5" />
             </button>

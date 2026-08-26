@@ -26,9 +26,16 @@ import { cn } from '@/lib/cn'
 export function Logo({
   className,
   invert = false,
+  priority,
 }: {
   className?: string
   invert?: boolean
+  /**
+   * Overrides the default below. The one caller that needs it is the mobile
+   * home header, where the WHITE mark is the header logo and is above the
+   * fold, which is the exact case the default gets wrong.
+   */
+  priority?: boolean
 }) {
   return (
     <Image
@@ -45,10 +52,12 @@ export function Logo({
       height={421}
       sizes="90px"
       // The black mark is the header's and is above the fold on every route,
-      // so it is fetched eagerly. The white one is the footer's, which is by
-      // definition below the fold: preloading it would only compete with the
-      // real LCP image and earn a Next warning for its trouble.
-      priority={!invert}
+      // so it is fetched eagerly. The white one is USUALLY the footer's, which
+      // is by definition below the fold: preloading it would only compete with
+      // the real LCP image and earn a Next warning for its trouble. Usually,
+      // because since 2026-08-26 the white mark is also the mobile home
+      // header, and that one passes `priority` explicitly.
+      priority={priority ?? !invert}
       className={cn('block h-[42px] w-auto sm:h-[52px]', className)}
     />
   )

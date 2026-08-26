@@ -261,13 +261,55 @@
   --color-neutral-100: #eae3d3;
   --color-neutral-50: #f0e9da;
 
-  /* CTA fills. Rest is coral, hover lightens one step, and both carry
-     coral-ink (see the derived-text note above: cream on coral is 2.81:1 and
-     cannot be the label). Ink on coral is 4.75:1 and on the hover 5.92:1, so
-     the label GAINS contrast on hover rather than losing it. */
-  --color-cta: var(--color-coral);
-  --color-cta-hover: var(--color-coral-hover);
-  --color-cta-ink: var(--color-coral-ink);
+  /* ---------------------------------------------------------------------
+     CTA FILLS
+     ---------------------------------------------------------------------
+     THE LABEL IS WHITE NOW, and the fill moved to pay for it. Changed
+     2026-08-26 on Brett's iPhone review: the orange button's dark text and
+     dark arrow "should be white so it reads faster", sitewide.
+
+     Pure white #FFFFFF on brand coral #F15C3D is 3.31:1, which fails AA for
+     normal text, and the buttons run at 14 to 16px so the large-text floor
+     does not apply. Coral therefore had to come down. #C84C33 is that same
+     hue and saturation (HSV h 10.3, s 0.747) with the value walked from 0.945
+     to 0.785, which is the first step where white clears AA with a margin
+     rather than by a hair. Measured:
+
+       white on --color-cta       #C84C33   4.63:1   (was 3.31:1 on #F15C3D)
+       white on --color-cta-hover #A93E2B   6.16:1   (was 2.66:1 on #F47C60)
+
+     The hover DARKENS. It used to lighten to #F47C60, which was right when
+     the label was near-black and is exactly backwards now: white on that
+     hover is 2.66:1. The old principle survives the inversion, though, which
+     is the point of picking this value: the label still GAINS contrast on
+     hover rather than losing it.
+
+     The button as a SHAPE gained too. Coral on band-1 was 3.17:1, which is
+     the "coral-on-light button boundary" the coach-hero note calls out as a
+     site-wide condition; #C84C33 on band-1 is 4.43:1 and clears the 3:1 that
+     WCAG 1.4.11 asks of a control's edge on every ground on the site.
+
+     --color-coral IS UNCHANGED and is still the locked brand hex. This is a
+     CTA-fill decision, not a palette change: coral still appears at full
+     strength as decoration, as rings, and inside the card glows. Only the
+     surface that has to carry a white word came down.
+
+     --color-coral-ink #1B2239 has not gone anywhere either. It is no longer
+     a button label, but it is still the dark ink the focus outline needs;
+     see --color-focus-outline below. */
+  --color-cta: #c84c33;
+  --color-cta-hover: #a93e2b;
+  --color-cta-ink: #ffffff;
+
+  /* The keyboard focus outline, and the reason --color-coral-ink outlived its
+     job as a button label. The global :focus-visible rule at the bottom of
+     this file used to draw itself in --color-cta-ink, which was fine while
+     that token was a near-black. It is white now, and a white outline on the
+     off-white page ground is an invisible focus indicator: WCAG 2.4.11 and
+     2.4.7 both fail outright. The outline colour is therefore its own token,
+     pointing at the ink that used to carry it. Dark surfaces override it to
+     cream in the rule itself, exactly as before. */
+  --color-focus-outline: var(--color-coral-ink);
 
   /* ---------------------------------------------------------------------
      COACH PAGE PALETTE HOOK  (/coach)
@@ -336,6 +378,54 @@
 
 html {
   text-wrap: pretty;
+}
+
+/* ---------------------------------------------------------------------
+   SAFE AREAS  (added 2026-08-26, Brett's iPhone 15 Pro review)
+   ---------------------------------------------------------------------
+   layout.tsx now ships `viewport-fit=cover`, because the home hero has to
+   run edge to edge behind the Dynamic Island on a phone. That switch is
+   sitewide and it has a sitewide consequence: iOS stops insetting the page
+   for the notch and the home indicator, and every `env(safe-area-inset-*)`
+   goes from 0 to a real number. Anything that sat at the very top or the
+   very bottom of the viewport has to pay for that itself now.
+
+   --header-offset is the pad that keeps page content out from under the
+   absolutely-positioned header. It is `main`'s old pt-20 / sm:pt-24 plus
+   whatever iOS reports for the notch, in one place, because exactly two
+   things need to agree on it: `main` pads DOWN by it, and the home hero
+   pulls UP by it to reach the top of the screen. If the header's height
+   changes, this is the number to re-measure, and it is now the only one.
+
+   On every non-notched device, and on iOS in a context where the inset is
+   zero, env() resolves to 0px and this is byte-for-byte the old padding.
+   Desktop cannot move. */
+:root {
+  --header-offset: calc(5rem + env(safe-area-inset-top, 0px));
+}
+@media (min-width: 40rem) {
+  :root {
+    --header-offset: calc(6rem + env(safe-area-inset-top, 0px));
+  }
+}
+
+/* The page gutter, notch-aware. This is `px-6 lg:px-8` with a floor rather
+   than a fixed value, so it only ever grows, and only in landscape on a
+   notched phone, which is the one orientation where the cutout eats into
+   the side of the page. max() means the computed value is identical to the
+   old one at every width on every device that reports no inset.
+
+   It replaces the literal `mx-auto max-w-7xl px-6 lg:px-8` that Container
+   and the four `WIDE` constants were each spelling out by hand. */
+.gutter-x {
+  padding-inline: max(1.5rem, env(safe-area-inset-left, 0px))
+    max(1.5rem, env(safe-area-inset-right, 0px));
+}
+@media (min-width: 64rem) {
+  .gutter-x {
+    padding-inline: max(2rem, env(safe-area-inset-left, 0px))
+      max(2rem, env(safe-area-inset-right, 0px));
+  }
 }
 
 /* Depth on the big dark panels: a deeper navy at the top easing into the
@@ -765,7 +855,7 @@ h4 {
   outline: none;
 }
 :focus-visible {
-  outline: 2px solid var(--color-cta-ink);
+  outline: 2px solid var(--color-focus-outline);
   outline-offset: 2px;
   border-radius: 2px;
 }

@@ -71,7 +71,7 @@ export const metadata: Metadata = pageMetadata({
 /** The home page's full-width wrapper. Container caps its children at max-w-2xl
  *  below lg, which turns a three-column grid into three narrow strips on a
  *  tablet. Grids use this; running text uses Container. */
-const WIDE = 'mx-auto max-w-7xl px-6 lg:px-8'
+const WIDE = 'mx-auto max-w-7xl gutter-x'
 
 /** Section rhythm, from Brett's note: 60-80px desktop, 40-60px mobile. */
 const SECTION = 'py-12 sm:py-16 lg:py-20'

@@ -35,15 +35,22 @@ type ButtonProps = {
  * `primary` now renders as the same thing, one size up. That makes the CTA
  * treatment uniform sitewide instead of the home page having its own.
  *
- * The colour stays coral because coral is the CTA fill in the locked palette
- * and is what the hero's "Get in touch" button already uses. Michele's
- * objection was to the marker SHAPE, not the hue; swapping this one button to
- * navy or teal would leave it the only primary CTA on the site in a different
- * colour. Easy to change if she disagrees: it is the `--color-cta` token below.
+ * The colour stays in the coral family because coral is the CTA fill in the
+ * locked palette and is what the hero's "Get in touch" button already uses.
+ * Michele's objection was to the marker SHAPE, not the hue; swapping this one
+ * button to navy or teal would leave it the only primary CTA on the site in a
+ * different colour. Easy to change if she disagrees: it is the `--color-cta`
+ * token.
  *
- * Contrast: the label is --color-cta-ink #1B2239 on coral #F15C3D, 4.75:1, and
- * 5.92:1 on the lighter hover. Plain navy would be 4.43:1 and miss AA, which is
- * why the ink token exists. Do not swap the label to navy or to cream.
+ * Contrast, updated 2026-08-26 when the label went white sitewide: it is
+ * --color-cta-ink #FFFFFF on --color-cta #C84C33, 4.63:1, rising to 6.16:1 on
+ * the DARKER hover. The arrow below inherits `color`, so it went white with the
+ * label and needs nothing of its own.
+ *
+ * The fill is no longer raw coral, and that is not a stylistic drift: white on
+ * #F15C3D is 3.31:1 and fails AA outright. Do not point --color-cta back at
+ * --color-coral without taking the label back to --color-coral-ink with it.
+ * See the CTA block in tailwind.css.
  */
 
 /** The two filled sizes. `primary` is the page-level CTA; `solid` is form-sized. */

@@ -43,6 +43,35 @@ stand-in. Do not invent a sixth.
 | CTA hover fill | `#F47C60` | `--color-coral-hover` |
 | Text ON a coral fill | `#1B2239` | `--color-coral-ink` |
 
+### The CTA fill is its own colour now (2026-08-26)
+
+Brett's iPhone review: the orange button's dark text and dark arrow "should be
+white so it reads faster", sitewide. White on brand coral `#F15C3D` is 3.31:1
+and fails AA, and the buttons run at 14 to 16px so the large-text floor does not
+apply. The fill therefore came down one notch to pay for the label.
+
+| Role | Hex | Token |
+| ---- | --- | ----- |
+| CTA fill | `#C84C33` | `--color-cta` |
+| CTA hover fill | `#A93E2B` | `--color-cta-hover` |
+| CTA label and arrow | `#FFFFFF` | `--color-cta-ink` |
+| Keyboard focus outline | `#1B2239` | `--color-focus-outline` |
+
+`#C84C33` is coral's own hue and saturation (HSV h 10.3, s 0.747) with the value
+walked from 0.945 to 0.785. Measured: white on the fill is **4.63:1**, on the
+hover **6.16:1**. The hover DARKENS now, which is the inversion of the old
+behaviour and preserves the old principle: the label gains contrast on hover.
+
+`--color-coral` `#F15C3D` is UNCHANGED and is still the locked brand hex. This
+is a CTA-fill decision, not a palette change; coral still appears at full
+strength as decoration, rings and card glows. `--color-coral-ink` `#1B2239` is
+no longer a button label but is still the dark ink the focus outline needs,
+which is why `--color-focus-outline` points at it.
+
+One useful side effect: the button as a SHAPE went from 3.17:1 on band-1 to
+4.43:1, so the "coral-on-light button boundary" caveat elsewhere in this file
+no longer applies to CTAs.
+
 Two more tokens exist for controls, because WCAG holds those to 3:1 while
 decoration is exempt:
 
@@ -70,11 +99,12 @@ text, 3:1 for large text and for UI components.
   Reach for `--color-teal-text`.
 - **Coral `#F15C3D` never carries text on cream** either, at 2.81:1. Use
   `--color-coral-text` `#B8431F` at 4.62:1.
-- **Text on a coral button is `--color-coral-ink`, never cream.** Coral is a
-  light color, so cream on it is 2.81:1 and fails exactly as hard as coral on
-  cream. Plain navy gets 4.43:1 and still misses, which is why the ink is
-  `#1B2239` for 4.75:1. On the hover fill it rises to 5.92:1, so the label
-  gains contrast on hover.
+- **Text on a CTA button is white on `--color-cta` `#C84C33`,** at 4.63:1. See
+  the CTA-fill section above for why the fill moved. Superseded rule, kept
+  because the reasoning still binds anything that puts a label on RAW coral:
+  cream on `#F15C3D` is 2.81:1 and plain navy is 4.43:1, so raw coral can only
+  carry `--color-coral-ink` `#1B2239` at 4.75:1, and it cannot carry white at
+  all (3.31:1).
 - **Gold is DECORATIVE ONLY and never spells a word.** Gold on cream is
   1.68:1. Divider lines, ornament, tiny bullets, subtle highlights. That is
   the whole list. The rule is absolute even where gold would technically pass

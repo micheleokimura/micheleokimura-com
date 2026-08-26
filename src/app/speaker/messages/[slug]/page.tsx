@@ -155,7 +155,7 @@ function BodyBlocks({
  * Escapes Container's inner max-w-2xl cap so the hero can run the full width
  * of the page gutter. Same constant, same reason, as /speaker.
  */
-const WIDE = 'mx-auto max-w-7xl px-6 lg:px-8'
+const WIDE = 'mx-auto max-w-7xl gutter-x'
 
 export function generateStaticParams() {
   return SPEAKER_MESSAGES.map((message) => ({ slug: message.slug }))

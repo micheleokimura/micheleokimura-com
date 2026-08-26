@@ -15,7 +15,10 @@ export function Container<T extends React.ElementType = 'div'>({
   const Component = as ?? 'div'
 
   return (
-    <Component className={cn('mx-auto max-w-7xl px-6 lg:px-8', className)}>
+    // `gutter-x` is the old `px-6 lg:px-8` with max() floors so the gutter
+    // grows to clear the notch when a phone is held in landscape, and is
+    // identical to the old value everywhere else. Declared in tailwind.css.
+    <Component className={cn('mx-auto max-w-7xl gutter-x', className)}>
       <div className="mx-auto max-w-2xl lg:max-w-none">{children}</div>
     </Component>
   )

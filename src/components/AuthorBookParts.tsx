@@ -202,7 +202,8 @@ export function AvailableAt({
  * "Buy on Square": the storefront call to action carried by a book tile and,
  * one size up, by the top of a book's own page.
  *
- * COLOUR. Coral fill, `rounded-md`, `--color-cta-ink` label. This is the same
+ * COLOUR. --color-cta fill, `rounded-md`, `--color-cta-ink` label, which is
+ * white on a darkened coral as of 2026-08-26. This is the same
  * FILL_BASE that src/components/Button.tsx renders, deliberately, so the shop
  * button reads as the same control as every other CTA on the site. The brief
  * for this feature asked for a black rectangular button copied from the

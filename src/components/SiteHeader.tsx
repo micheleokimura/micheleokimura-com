@@ -37,6 +37,21 @@ function XIcon(props: React.SVGProps<SVGSVGElement>) {
   )
 }
 
+/**
+ * MOBILE OVERLAY MODE, added 2026-08-26 after Brett's iPhone 15 Pro review.
+ *
+ * On the home page BELOW sm, the header stops being a bar and becomes furniture
+ * floating on the hero video: no ground, no hairline, white wordmark, and a
+ * hamburger on a dark chip. Everything from sm up, and every other route at
+ * every width, is the bar this file has always drawn. The breakpoint is `sm`
+ * rather than `md` because that is where the home hero already switches between
+ * its stacked-copy layout and true 16:9; splitting them would put a transparent
+ * header over a 16:9 hero that was never designed to carry one.
+ *
+ * It goes back to being a solid bar the moment the menu opens. The panel below
+ * is an opaque sheet, and hanging it off a transparent bar leaves a stripe of
+ * video showing between the two.
+ */
 export function SiteHeader() {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
@@ -57,6 +72,9 @@ export function SiteHeader() {
     return () => window.removeEventListener('keydown', onKey)
   }, [open])
 
+  // See the note above the component. `open` is in the condition on purpose.
+  const floating = pathname === '/' && !open
+
   return (
     // Height, set 2026-08-23 on Michele's note that the bar was "too tall, too
     // much negative space above and below the nav". It was pt-6 / sm:pt-10 with
@@ -73,7 +91,53 @@ export function SiteHeader() {
     //
     // `absolute`, not `fixed`: this scrolls away, and `main` in layout.tsx pads
     // down to clear it, so an opaque background here never covers content.
-    <header className="absolute top-0 right-0 left-0 z-40 border-b border-[var(--color-navy)]/8 bg-[var(--color-band-1)] py-3 sm:py-4">
+    //
+    // pt-[env(safe-area-inset-top)] pushes the row clear of the Dynamic Island.
+    // It is on the header rather than on the row so that the header's own
+    // ground, when it has one, still paints all the way up behind the status
+    // bar; a bar that stopped below the island would read as a floating card.
+    <header
+      className={cn(
+        'absolute top-0 right-0 left-0 z-40 border-b py-3 pt-[calc(0.75rem+env(safe-area-inset-top,0px))] sm:py-4 sm:pt-[calc(1rem+env(safe-area-inset-top,0px))]',
+        // Base-then-`sm:` rather than `max-sm:`, so the cascade order is the
+        // one Tailwind guarantees: the responsive variant always wins over the
+        // bare utility, whatever order the strings arrive in.
+        floating
+          ? 'border-transparent bg-transparent sm:border-[var(--color-navy)]/8 sm:bg-[var(--color-band-1)]'
+          : 'border-[var(--color-navy)]/8 bg-[var(--color-band-1)]',
+      )}
+    >
+      {/* The legibility scrim behind the white wordmark, mobile home only.
+          40% black at the very top of the glass, gone by the bottom of it, so
+          the mark reads over any frame of the video without the top of the
+          screen turning into a bar again.
+
+          HEIGHT IS 8rem PLUS THE NOTCH INSET, not a flat 8rem. That is the
+          whole reason it is a calc: the safe-area pad pushes the wordmark down
+          to roughly 71-113px on an iPhone 15 Pro, so a fixed 128px scrim has
+          already faded to about 4% by the BOTTOM of the signature, which is
+          where it is needed most. Adding the inset moves the whole ramp down
+          with the mark, and on a device that reports no inset this is exactly
+          the 128px it was drawn as.
+
+          The wordmark is a logotype, which WCAG exempts from 1.4.3 and 1.4.11,
+          so the alpha is a legibility judgement rather than a measured floor.
+          It is worth knowing what the judgement is up against: the clip's two
+          audience shots run to a relative luminance of 0.95, and white on 40%
+          black over one of those is 2.5:1. Legible, and the honest reason it
+          is allowed to be thin is that those frames are two seconds of a
+          sixteen-second loop whose mean luminance is 0.089. Pushing the scrim
+          past this starts rebuilding the bar Brett asked to have removed.
+
+          `pointer-events-none` matters: this box is taller than the header, so
+          without it the scrim would swallow taps on the top of the hero. */}
+      {floating ? (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[calc(8rem+env(safe-area-inset-top,0px))] bg-[linear-gradient(to_bottom,rgba(0,0,0,0.40)_0%,rgba(0,0,0,0.22)_50%,rgba(0,0,0,0)_100%)] sm:hidden"
+        />
+      ) : null}
+
       <Container>
         {/* The nav takes `ml-auto` rather than the row taking `justify-between`.
             Michele read the old spacing as centered and disliked it; pushing
@@ -83,9 +147,26 @@ export function SiteHeader() {
           <Link
             href="/"
             aria-label={`${siteConfig.brand} home`}
-            className="shrink-0 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-neutral-950"
+            className={cn(
+              'shrink-0 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4',
+              floating
+                ? 'focus-visible:outline-white sm:focus-visible:outline-neutral-950'
+                : 'focus-visible:outline-neutral-950',
+            )}
           >
-            <Logo />
+            {/* Two marks rather than one filtered one. The white file is real
+                artwork Michele supplied and the footer has been using it on
+                navy since 2026-08-24, so the header takes the same asset
+                rather than inventing a CSS-inverted copy of the black one.
+                Both are served through next/image at sizes="90px", so the
+                second one costs single-digit kilobytes on the one breakpoint
+                where it is visible. It is `priority` because on mobile home it
+                IS the header logo, above the fold, and the black one is hidden
+                there. */}
+            {floating ? (
+              <Logo invert priority className="sm:hidden" />
+            ) : null}
+            <Logo className={floating ? 'hidden sm:block' : undefined} />
           </Link>
 
           {/* Five labels plus the wordmark and the CTA are a tight fit in the
@@ -146,7 +227,17 @@ export function SiteHeader() {
             })}
           </nav>
 
-          <div className="flex shrink-0 items-center gap-3">
+          {/* `ml-auto` below md, and only below md. Brett, reviewing on an
+              iPhone 15 Pro: the menu button belongs top-right, which is where
+              every phone user reaches for it. It was sitting immediately to
+              the right of the wordmark, because nothing in the row claimed the
+              free space once the nav collapsed.
+              From md up the nav itself carries `ml-auto` and is what pushes
+              this group right, so this margin has to switch OFF there: two
+              `auto` margins in one flex row SPLIT the free space between them,
+              which would open a gap between the nav and the Contact button and
+              change the desktop bar. Hence md:ml-0. */}
+          <div className="ml-auto flex shrink-0 items-center gap-3 md:ml-0">
             {/* The ONE contact CTA in the header. There used to be a second
                 button beside it (the wait-list button, whose label had already
                 been unified to "Contact"), so the header shipped two identical
@@ -165,16 +256,16 @@ export function SiteHeader() {
                 Measured: navy label on the band-1 bar is 14.0:1. The boundary
                 is --color-field-border, the token that exists because WCAG
                 holds a control's edge to 3:1 and a hairline of navy at low
-                alpha does not get there. On hover the fill is coral and the
-                label switches to --color-cta-ink for 4.75:1; plain navy on
-                coral is 4.43:1 and misses, which is the trap DESIGN-RULES
-                calls out. The mobile panel keeps the filled treatment: it is a
+                alpha does not get there. On hover the fill is --color-cta and
+                the label switches to --color-cta-ink, which is white as of
+                2026-08-26, for 4.63:1. The mobile panel keeps the filled
+                treatment: it is a
                 full-width block standing alone in a sheet, and an outline at
                 that size reads as disabled. */}
             <button
               type="button"
               onClick={() => setContactOpen(true)}
-              className="hidden items-center justify-center rounded-md px-4 py-2 text-sm font-semibold whitespace-nowrap text-[var(--color-navy)] ring-1 ring-[var(--color-field-border)] transition hover:bg-[var(--color-cta)] hover:text-[var(--color-cta-ink)] hover:ring-[var(--color-cta)] focus-visible:ring-2 focus-visible:ring-[var(--color-cta-ink)] focus-visible:ring-offset-2 focus-visible:outline-none sm:inline-flex lg:px-5 lg:py-2.5"
+              className="hidden items-center justify-center rounded-md px-4 py-2 text-sm font-semibold whitespace-nowrap text-[var(--color-navy)] ring-1 ring-[var(--color-field-border)] transition hover:bg-[var(--color-cta)] hover:text-[var(--color-cta-ink)] hover:ring-[var(--color-cta)] focus-visible:ring-2 focus-visible:ring-[var(--color-focus-outline)] focus-visible:ring-offset-2 focus-visible:outline-none sm:inline-flex lg:px-5 lg:py-2.5"
             >
               Contact
             </button>
@@ -185,12 +276,38 @@ export function SiteHeader() {
                 read as a menu. The word carries it. Cutting the nav from eight
                 links to five also let the full nav come down from lg to md, so
                 the half-screen case now shows real links rather than this. */}
+            {/* TAP TARGET. min-h-11 / min-w-11 is 44x44 CSS px, the iOS HIG
+                floor. px-3 py-2 around a 24px line box was landing this at
+                40px tall, which is a miss on the one control that every phone
+                user has to hit.
+
+                ON THE FLOATING HOME HEADER it takes a dark chip, because a
+                navy label with a navy hairline is unreadable over video. The
+                chip is black at 55%, and 55 is a measured number rather than
+                a taste one: white text needs the composite behind it at or
+                below a relative luminance of 0.183 to clear AA, and the worst
+                frame in this clip is effectively white (0.95), so the alpha
+                has to be at least 0.535 to hold in the WORST case. At 0.55 the
+                label is 4.76:1 over a pure-white frame and better over every
+                other one. 40%, which was the first sketch, lands at 2.85:1
+                over those same frames.
+
+                `rounded-md`, not a pill. Brett described this as a pill and
+                the intent is the same thing: a small chip that separates the
+                control from the picture. The sitewide no-pills rule and the
+                `rounded-md` every other control on this site uses both win on
+                the actual radius. */}
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
               aria-expanded={open}
               aria-controls="mobile-nav-panel"
-              className="inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-neutral-900 ring-1 ring-[var(--color-teal-20)] transition hover:bg-[var(--color-teal-05)] hover:ring-[var(--color-teal-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)] md:hidden"
+              className={cn(
+                'inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-md px-3 py-2 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 md:hidden',
+                floating
+                  ? 'bg-black/55 text-white ring-1 ring-white/25 backdrop-blur-[2px] hover:bg-black/70 focus-visible:outline-white sm:bg-transparent sm:text-neutral-900 sm:ring-[var(--color-teal-20)] sm:backdrop-blur-none sm:hover:bg-[var(--color-teal-05)] sm:hover:ring-[var(--color-teal-30)] sm:focus-visible:outline-[var(--color-brand-teal)]'
+                  : 'text-neutral-900 ring-1 ring-[var(--color-teal-20)] hover:bg-[var(--color-teal-05)] hover:ring-[var(--color-teal-30)] focus-visible:outline-[var(--color-brand-teal)]',
+              )}
             >
               {open ? (
                 <XIcon className="h-4 w-4" />
@@ -257,7 +374,7 @@ export function SiteHeader() {
                   setOpen(false)
                   setContactOpen(true)
                 }}
-                className="inline-flex w-full items-center justify-center rounded-md bg-[var(--color-cta)] px-6 py-3 text-sm font-semibold text-[var(--color-cta-ink)] shadow-sm transition hover:bg-[var(--color-cta-hover)] focus-visible:ring-2 focus-visible:ring-[var(--color-cta-ink)] focus-visible:ring-offset-2 focus-visible:outline-none"
+                className="inline-flex w-full items-center justify-center rounded-md bg-[var(--color-cta)] px-6 py-3 text-sm font-semibold text-[var(--color-cta-ink)] shadow-sm transition hover:bg-[var(--color-cta-hover)] focus-visible:ring-2 focus-visible:ring-[var(--color-focus-outline)] focus-visible:ring-offset-2 focus-visible:outline-none"
               >
                 Contact
               </button>

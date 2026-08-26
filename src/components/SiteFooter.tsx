@@ -31,8 +31,19 @@ import { footerColumns, siteConfig } from '@/lib/site-config'
 const headingClass =
   'font-display text-xs font-semibold tracking-[0.22em] uppercase text-[var(--color-teal-on-dark)]'
 
+/**
+ * `inline-block py-1.5 -my-1.5` is a TAP TARGET, not spacing. The padding grows
+ * the hit area from the 24px line box to 36px; the equal negative margin takes
+ * the growth back out of the layout, so the rendered footer is pixel-identical
+ * at every width. 36 rather than the 44 iOS asks for because the rows are
+ * 24px on a 12px `space-y-3` rhythm, which puts the pitch at 36: anything
+ * taller would make neighbouring links overlap each other's targets, and a
+ * link you hit by accident is worse than one you have to aim at. Going to a
+ * true 44 means respacing the column, which is a desktop change and is
+ * Brett's call rather than a QA fix.
+ */
 const linkClass =
-  'text-[var(--color-cream)]/75 transition hover:text-[var(--color-cream)] hover:underline underline-offset-4 decoration-[var(--color-teal-on-dark)]'
+  'inline-block py-1.5 -my-1.5 text-[var(--color-cream)]/75 transition hover:text-[var(--color-cream)] hover:underline underline-offset-4 decoration-[var(--color-teal-on-dark)]'
 
 /**
  * Socials. Substack and YouTube were added on Michele's 2026-08-23 review.
@@ -139,7 +150,12 @@ export function SiteFooter() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={item.label}
-                    className="text-[var(--color-cream)]/60 transition hover:text-[var(--color-cream)]"
+                    // Same trick as linkClass above: a 36x36 hit area on a
+                    // 20x20 layout box, so five social icons that were 20px
+                    // targets become tappable without the row moving a pixel.
+                    // -m-2 against h-9/w-9 leaves the hit areas exactly
+                    // adjacent on the 16px gap rather than overlapping.
+                    className="-m-2 flex h-9 w-9 items-center justify-center text-[var(--color-cream)]/60 transition hover:text-[var(--color-cream)]"
                   >
                     <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path d={item.path} />
@@ -202,7 +218,14 @@ export function SiteFooter() {
           </div>
 
           {/* ------------------------------------------------ bottom bar */}
-          <div className="border-t border-[var(--color-cream)]/15 pt-8 pb-12">
+          {/* The bottom pad carries the home indicator. layout.tsx ships
+              viewport-fit=cover as of 2026-08-26, so this line is now the last
+              thing before the physical bottom edge of an iPhone screen and the
+              indicator sits on top of whatever is there. The navy itself is
+              fine underneath it, which is the point of painting to the edge;
+              the copyright line is not. env() is 0 on everything without an
+              indicator, so this is the old pb-12 everywhere else. */}
+          <div className="border-t border-[var(--color-cream)]/15 pt-8 pb-[calc(3rem+env(safe-area-inset-bottom,0px))]">
             <p className="text-sm text-[var(--color-cream)]/60">
               &copy; {siteConfig.brand} {new Date().getFullYear()}. All rights
               reserved.

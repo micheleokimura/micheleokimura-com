@@ -267,12 +267,20 @@ export function ContactPopup({
 
   if (!mounted || !open) return null
 
+  // 16px ON MOBILE, 15px from sm up. iOS Safari zooms the whole page in when
+  // you focus an input whose computed font-size is under 16px, and there is no
+  // way back out of that zoom except pinching. The field was a flat 15px, so
+  // every text box in this form did it. The sm step keeps the desktop
+  // rendering byte-for-byte what it was.
   const fieldClass =
-    'w-full rounded-lg border border-[var(--color-field-border)] bg-white px-3 py-2.5 text-[15px] text-neutral-950 transition placeholder:text-neutral-400 focus:border-neutral-950 focus:ring-4 focus:ring-neutral-950/5 focus:outline-none disabled:opacity-60'
+    'w-full rounded-lg border border-[var(--color-field-border)] bg-white px-3 py-2.5 text-base text-neutral-950 transition placeholder:text-neutral-400 focus:border-neutral-950 focus:ring-4 focus:ring-neutral-950/5 focus:outline-none disabled:opacity-60 sm:text-[15px]'
 
   return createPortal(
+    /* pb clears the home indicator. This is a BOTTOM SHEET below sm, so with
+       viewport-fit=cover its bottom edge is now the physical bottom of the
+       screen and the submit button was landing under the indicator. */
     <motion.div
-      className="fixed inset-0 z-[130] flex items-end justify-center bg-neutral-950/50 p-2 backdrop-blur-md sm:items-center sm:p-4"
+      className="fixed inset-0 z-[130] flex items-end justify-center bg-neutral-950/50 p-2 pb-[calc(0.5rem+env(safe-area-inset-bottom,0px))] backdrop-blur-md sm:items-center sm:p-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.18 }}
@@ -285,7 +293,7 @@ export function ContactPopup({
         aria-labelledby={titleId}
         aria-describedby={status === 'done' ? undefined : descId}
         data-lenis-prevent
-        className="relative max-h-[calc(100dvh-1rem)] w-full max-w-[440px] overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl ring-1 ring-neutral-900/10 sm:max-h-[calc(100dvh-2rem)] sm:p-7"
+        className="relative max-h-[calc(100dvh-1rem-env(safe-area-inset-bottom,0px))] w-full max-w-[440px] overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl ring-1 ring-neutral-900/10 sm:max-h-[calc(100dvh-2rem)] sm:p-7"
         initial={{ opacity: 0, y: 16, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.2 }}
@@ -295,7 +303,7 @@ export function ContactPopup({
           type="button"
           onClick={onClose}
           aria-label="Close"
-          className="absolute top-3 right-3 rounded-md p-2 text-neutral-500 transition hover:bg-neutral-100 hover:text-neutral-950 focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 focus-visible:outline-none"
+          className="absolute top-1.5 right-1.5 inline-flex h-11 w-11 items-center justify-center rounded-md text-neutral-500 transition hover:bg-neutral-100 hover:text-neutral-950 focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 focus-visible:outline-none"
         >
           <XIcon className="h-5 w-5" />
         </button>
@@ -342,7 +350,14 @@ export function ContactPopup({
                   {INTERESTS.map((option) => {
                     const id = `${titleId}-interest-${option.value}`
                     return (
-                      <div key={option.value} className="flex items-center gap-3">
+                      // min-h-11 on the row and a stretched label give the
+                      // whole line a 44px tap target. It was a 16px box beside
+                      // a 24px line, so the only reliable way to tick one of
+                      // these on a phone was to hit the box itself.
+                      <div
+                        key={option.value}
+                        className="flex min-h-11 items-stretch gap-3"
+                      >
                         <input
                           id={id}
                           type="checkbox"
@@ -351,11 +366,11 @@ export function ContactPopup({
                           checked={interests.includes(option.value)}
                           onChange={() => toggleInterest(option.value)}
                           disabled={status === 'submitting'}
-                          className="h-4 w-4 flex-none accent-[var(--color-cta)] focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 focus-visible:outline-none"
+                          className="h-5 w-5 flex-none self-center accent-[var(--color-cta)] focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 focus-visible:outline-none"
                         />
                         <label
                           htmlFor={id}
-                          className="cursor-pointer text-[15px] leading-6 font-medium text-neutral-700 select-none"
+                          className="flex flex-auto cursor-pointer items-center text-[15px] leading-6 font-medium text-neutral-700 select-none"
                         >
                           {option.label}
                         </label>
