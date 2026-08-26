@@ -25,9 +25,11 @@ Nancy Vuu is a couture designer and the Visionary Director of The House of Nancy
 
 **Major Milestones:** Nancy brought Michele in as a keynote speaker and vendor for the inaugural Dream Expo for the State of Hawaiʻi. Likewise, Michele partnered in the national-press grand opening of Nancy's California atelier to highlight their joint philanthropic initiative against human trafficking.
 
-## The Outcome & Foreword
+## The Outcome
 
 Their philanthropic collaboration and deep friendship continue to thrive today. Nancy also wrote the foreword for Michele's books, *Brave Purpose* and *Brave Purpose with God*. Here are a few powerful excerpts from Nancy's foreword:
+
+### Nancy's Foreword
 
 > "To walk alongside Michele Okimura is to witness a rare and beautiful phenomenon: someone who consistently sees the 'gold' in every person she encounters... Our journey together has been a tapestry of shared vision and divine collaboration... helping others move from 'Dream Big' to 'Dream Again,' and ultimately to 'Dreams Realized.'"
 
