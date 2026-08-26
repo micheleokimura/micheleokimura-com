@@ -33,86 +33,108 @@ import { FadeIn } from '@/components/FadeIn'
  *      hover is unreachable on a touch screen. From `sm` up it is the
  *      WordPress full-tile behaviour.
  *
- * CAPTIONS ARE INTENTIONALLY BLANK, by direction on 2026-08-23. Only the
- * Renaissance tile carries copy. Every other tile waits on Michele to send
- * caption text. A tile with an empty caption renders no overlay at all, so
- * hovering it does nothing.
+ * CAPTIONS, 2026-08-26. Michele asked for the hover verbiage to be live: "when
+ * the cursor hovers over each photo, there should be words that appear in a
+ * transparent way but pop." Her own WordPress copy is now wired in for all 24
+ * tiles, from `design-references/wordpress-about/mosaic-tiles.json`. This
+ * replaces the interim state where every caption but Renaissance was blank.
  *
- * The verbatim WordPress caption for all 24 tiles was extracted on the same
- * day and is preserved in `design-references/wordpress-about/mosaic-tiles.json`
- * if her copy is ever wanted back. Note that copy carries known defects: a
- * "1955" date on the sisters tile, "than than", "our!", and "non- profit".
+ * Her wording is verbatim except for these, all of which are typography rather
+ * than authorship:
+ *
+ *   - doubled spaces mid-sentence collapsed (tiles 3, 7, 12, 14, 15, 21, 22,
+ *     24), since captions render with `whitespace-pre-line`
+ *   - tile 8 "older than than Aaron" -> "older than Aaron"
+ *   - tile 13 "repeated our! high school" -> "repeated our high school"
+ *   - tile 17 "2018: Published  2018: Published The Birth of..." de-duplicated
+ *   - tile 22 a literal tab collapsed to a space
+ *   - tile 23 "non- profit" -> "non-profit"
+ *   - "Hawaii" set as "Hawaiʻi" per DESIGN-RULES.md
+ *
+ * Two things are NOT verbatim and are flagged for Michele:
+ *
+ *   - Tile 2 still says "1955", which cannot be right when tile 1 says she was
+ *     born in 1962. Left as she wrote it; she rules on the year.
+ *   - Tile 22 now names Releasing Generations as the award recipient. The
+ *     WordPress caption reads as though the award were Michele's personally,
+ *     and it is the organisation's. See the recipient note in
+ *     src/lib/credentials.ts, which says not to put her name alone back.
+ *
+ * FOUR PHOTOS ARE STILL MISSING. They were on the WordPress install and are
+ * not in this repo, not in Brett's master folder, not in Michele's Drive or
+ * Dropbox, and not in Canva. micheleokimura.com now serves this Next.js app,
+ * so /wp-content/uploads/ 403s, and the Wayback Machine holds no snapshot of
+ * any of the four. Their tiles render the caption over a tinted panel with a
+ * "Photo to come" label, so the story still reads and the gap is obvious.
+ * Filenames are in the reference README under "Photos that exist on WordPress
+ * but not in this repo".
  */
 
 type Tile = {
-  /** Omitted where the photo has not been migrated into the repo yet. */
+  /** Omitted where the photo is missing. See the four flagged below. */
   src?: string
   alt: string
-  /** Blank until Michele sends per-tile copy. Blank means no hover overlay. */
   caption: string
 }
 
 const IMG_ROOT = '/images/about-timeline'
 
-/**
- * All 24 tiles in WordPress document order.
- *
- * Twenty are wired to photos already in the repo, migrated in commit df736e0.
- * Four have no asset here and render a placeholder square. Those four are
- * licensed originals on the WordPress install and are being migrated properly
- * in a separate task, so they are deliberately NOT pulled from the live URL.
- * Their filenames and URLs are in the reference JSON.
- */
+/** All 24 tiles in WordPress document order. */
 const TILES: Tile[] = [
   {
     src: `${IMG_ROOT}/about-1962-parents-grandma-01.jpg`,
     alt: 'Michele as a baby with her parents and grandmother in Honolulu, 1962.',
-    caption: '',
+    caption: '1962: Born in Honolulu, Hawaiʻi.\n(My parents, grandma, and I)',
   },
   {
     src: `${IMG_ROOT}/about-1964-sisters-02.jpg`,
     alt: 'Michele with her two younger sisters.',
-    caption: '',
+    /* "1955" is Michele's own wording and contradicts the 1962 birth year on
+       the tile above. Left for her to rule on. */
+    caption: '1955: Oldest of two beautiful younger sisters.',
   },
   {
     src: `${IMG_ROOT}/about-1979-miss-teen-usa-03.jpg`,
     alt: 'Michele as a Miss Teen USA finalist, 1979.',
-    caption: '',
+    caption:
+      '1979: Miss Teen USA Finalist I didn’t win. But loved the experience!',
   },
   {
     src: `${IMG_ROOT}/about-1979-high-school-graduation-04.jpg`,
     alt: 'Michele at her high school graduation, 1979.',
-    caption: '',
+    caption: '1979: Graduated from high school',
   },
   {
     src: `${IMG_ROOT}/about-1984-college-graduation-05.jpg`,
     alt: 'Michele at her college graduation, 1984.',
-    caption: '',
+    caption:
+      '1984: Graduated from college with a bachelor’s degree in Elementary Education.',
   },
   {
     src: `${IMG_ROOT}/about-1984-wedding-rob-06.jpg`,
     alt: 'Michele and Rob on their wedding day, 1984.',
-    caption: '',
+    caption:
+      '1984: Married Rob after dating for three years. The love of my life and best friend.',
   },
   {
     src: `${IMG_ROOT}/about-1991-son-aaron-07.jpg`,
     alt: 'Michele with her newborn son Aaron, 1991.',
-    caption: '',
+    caption: '1991: Overflowing joy! Adopted our son Aaron.',
   },
   {
     src: `${IMG_ROOT}/about-1993-daughter-jessica-08.jpg`,
     alt: 'Michele with her newborn daughter Jessica, 1993.',
-    caption: '',
+    caption:
+      '1993: More rivers of joy! Adopted our daughter Jessica…who happened to be 9 days older than Aaron! My twin-like sweeties.',
   },
   {
     src: `${IMG_ROOT}/about-1997-lifespring-church-founded-09.jpg`,
     alt: 'Lifespring Church, founded by Michele and Rob in Honolulu, 1997.',
-    caption: '',
+    caption:
+      '1997: Rob and I founded Lifespring Church. I was unconventionally qualified to be a pastor by comedian Jim Carrey, but that is another story for another time.',
   },
   {
-    /* TODO: Renaissance conference flyer, 2011. Needs Michele to upload.
-       On WordPress as Renaissance-2010-and-2011-scaled.jpeg. This is the one
-       tile whose caption copy is confirmed. */
+    /* MISSING PHOTO. WordPress: Renaissance-2010-and-2011-scaled.jpeg */
     alt: 'Renaissance conference flyer, 2011.',
     caption:
       'Renaissance Conferences in 2010 and 2011: my first two arts conferences to release people into greater creativity!',
@@ -120,122 +142,135 @@ const TILES: Tile[] = [
   {
     src: `${IMG_ROOT}/about-2011-dancing-with-father-published-10.jpg`,
     alt: 'Dancing with Father, published 2011.',
-    caption: '',
+    caption: '2011: Published Dancing with Father. Let’s heal hearts.',
   },
   {
-    /* TODO: 2014 island-wide youth and parent conference, the prayer circle
-       photo. Needs Michele to upload. On WordPress as 11-2014-EX-conference-.jpeg */
+    /* MISSING PHOTO. WordPress: 11-2014-EX-conference-.jpeg */
     alt: 'The first island-wide youth and parent conference, 2014.',
-    caption: '',
+    caption:
+      '2014: Our first island-wide youth and parent conference. Little did I know then that it would grow into a movement.',
   },
   {
     src: `${IMG_ROOT}/about-2015-explicit-nonprofit-12.jpg`,
     alt: 'Explicit Conferences become a nonprofit organization, 2015.',
-    caption: '',
+    caption:
+      '2015: Unexpected curve ball! Explicit Conferences grew into a non-profit organization. And we held our first middle school, young adult, and parent conferences AND repeated our high school conference. How ever did we do 4 in one year?!!',
   },
   {
     src: `${IMG_ROOT}/about-2016-philippines-conference-13.jpg`,
     alt: 'Conference in the Philippines, 2016.',
-    caption: '',
+    caption:
+      '2016: Another shocker… going global! Philippines Conferences in Manila and Baguio.',
   },
   {
     src: `${IMG_ROOT}/about-2016-singapore-conference-14.jpg`,
     alt: 'Youth and parent conference in Singapore, 2016.',
-    caption: '',
+    caption:
+      '2016: Asia here we come! Youth and Parent Conference in Singapore!',
   },
   {
     src: `${IMG_ROOT}/about-2018-pacrim-university-15.jpg`,
     alt: 'Michele teaching her first university course, 2018.',
-    caption: '',
+    caption: '2018: Teaching my first University course.',
   },
   {
     src: `${IMG_ROOT}/about-2018-explicit-movement-books-16.jpg`,
     alt: 'The Birth of Explicit Movement and its 21-Day Journal, 2018.',
-    caption: '',
+    caption:
+      '2018: Published The Birth of Explicit Movement: Discover Keys to Fulfilling Your Purpose and the Explicit Movement 21-Day Journal.',
   },
   {
     src: `${IMG_ROOT}/about-2018-california-conference-17.jpg`,
     alt: 'The first California youth and parent conference, 2018.',
-    caption: '',
+    caption:
+      '2018: Hello SoCal! The first California Youth and Parent Conference.',
   },
   {
-    /* TODO: Kingdom Kids workshops, 2019. Needs Michele to upload.
-       On WordPress as Kingdom-Kids-Workshops.jpeg */
+    /* MISSING PHOTO. WordPress: Kingdom-Kids-Workshops.jpeg */
     alt: 'Kingdom Kids equipping workshops, 2019.',
-    caption: '',
+    caption:
+      '2019: Began launching equipping events for parents, teachers, and leaders in raising healthy and flourishing children and youth!',
   },
   {
-    /* TODO: ReThink Creativity online conferences, 2020 and 2021. Needs Michele
-       to upload. On WordPress as ReThink-Creativity-2020-and-2021-scaled.jpeg */
+    /* MISSING PHOTO. WordPress: ReThink-Creativity-2020-and-2021-scaled.jpeg */
     alt: 'ReThink Creativity online conferences, 2020 and 2021.',
-    caption: '',
+    caption:
+      'MY GREAT JOY! Online Creativity Conferences in 2020 and 2021, hosting global speakers!',
   },
   {
     src: `${IMG_ROOT}/about-2022-brave-and-beautiful-published-18.jpg`,
     alt: 'The Brave & Beautiful curriculum, published 2022.',
-    caption: '',
+    caption:
+      '2022: Published the Brave & Beautiful Curriculum. Empowering teen girls and women with confidence, purpose, and tools to protect themselves from exploitation.',
   },
   {
     src: `${IMG_ROOT}/about-2023-hawaii-outstanding-advocate-19.jpg`,
     alt: 'Michele receiving the Outstanding Advocate award, 2023.',
-    caption: '',
+    /* Recipient is the organisation. See the header note and credentials.ts. */
+    caption:
+      '2023: SURPRISE! Releasing Generations was awarded the State of Hawaiʻi’s 2023 ‘Outstanding Advocate for the Children and Youth in The State of Hawaiʻi Award’ by Mayor Blangiardi and Governor Green. Humbled greatly. I didn’t even know we were nominated!',
   },
   {
     src: `${IMG_ROOT}/about-2023-rg-10th-anniversary-20.jpg`,
     alt: 'Releasing Generations tenth anniversary, 2023.',
-    caption: '',
+    caption:
+      '2023: Happy 10th Birthday to our non-profit organization Releasing Generations. Overwhelmed with gratitude for the journey.',
   },
   {
     src: `${IMG_ROOT}/about-2023-2025-dream-big-journals-21.jpg`,
     alt: 'The Dream Big Journals curriculum, 2023 to 2025.',
-    caption: '',
+    caption:
+      '2023-2025: Published the Dream Big Journals curriculum. Versions created for Preschoolers through adults.',
   },
 ]
 
 function MosaicTile({ tile }: { tile: Tile }) {
-  const hasCaption = tile.caption.trim().length > 0
+  /* A tile with no photograph shows its caption outright, so there is nothing
+     to reveal and nothing to focus. Only photographed tiles are tab stops. */
+  if (!tile.src) {
+    return (
+      <li>
+        <div className="flex aspect-square w-full flex-col justify-end gap-3 bg-[var(--color-navy-10)] p-4 sm:items-center sm:justify-center sm:p-5 sm:text-center">
+          <span className="font-display text-[0.6875rem] font-semibold tracking-[0.22em] text-neutral-500 uppercase">
+            Photo to come
+          </span>
+          <p className="text-sm leading-snug whitespace-pre-line text-neutral-700 sm:text-base sm:leading-normal">
+            {tile.caption}
+          </p>
+        </div>
+      </li>
+    )
+  }
 
   return (
     <li>
-      {/* Only a tile that actually has a caption is focusable. Putting 24 empty
-          tab stops in the middle of the page would be worse than useless. */}
       <figure
-        tabIndex={hasCaption ? 0 : undefined}
+        tabIndex={0}
         className="group relative block aspect-square w-full overflow-hidden bg-[var(--color-navy-10)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus-ring)]"
       >
-        {tile.src ? (
-          <Image
-            src={tile.src}
-            alt={tile.alt}
-            fill
-            sizes="(min-width: 1024px) 24rem, (min-width: 640px) 45vw, 90vw"
-            className="object-cover"
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center p-4">
-            <span className="font-display text-xs font-semibold tracking-[0.22em] text-neutral-500 uppercase">
-              Photo to come
-            </span>
-          </div>
-        )}
+        <Image
+          src={tile.src}
+          alt={tile.alt}
+          fill
+          sizes="(min-width: 1024px) 24rem, (min-width: 640px) 45vw, 90vw"
+          className="object-cover"
+        />
 
-        {hasCaption && (
-          /* Below sm: a bottom gradient band, always visible, because an
-             opacity-only hover cannot be reached on a touch screen.
-             From sm up: the WordPress full-tile scrim on hover or focus. */
-          <figcaption
-            className={[
-              'pointer-events-none absolute inset-0 flex flex-col justify-end whitespace-pre-line p-4 text-sm leading-snug text-[var(--color-cream)]',
-              'bg-gradient-to-t from-[var(--color-navy)] via-[var(--color-navy)]/65 to-transparent',
-              'sm:items-center sm:justify-center sm:bg-none sm:p-5 sm:text-center sm:text-base sm:leading-normal',
-              'sm:bg-[var(--color-navy)]/75 sm:opacity-0 sm:transition-opacity sm:duration-[400ms] sm:ease-in-out',
-              'sm:group-hover:opacity-100 sm:group-focus-visible:opacity-100',
-              'sm:motion-reduce:transition-none',
-            ].join(' ')}
-          >
-            {tile.caption}
-          </figcaption>
-        )}
+        {/* Below sm: a bottom gradient band, always visible, because an
+            opacity-only hover cannot be reached on a touch screen.
+            From sm up: the WordPress full-tile scrim on hover or focus. */}
+        <figcaption
+          className={[
+            'pointer-events-none absolute inset-0 flex flex-col justify-end whitespace-pre-line p-4 text-sm leading-snug text-[var(--color-cream)]',
+            'bg-gradient-to-t from-[var(--color-navy)] via-[var(--color-navy)]/70 to-transparent',
+            'sm:items-center sm:justify-center sm:bg-none sm:p-5 sm:text-base sm:leading-normal sm:text-center',
+            'sm:bg-[var(--color-navy)]/75 sm:opacity-0 sm:transition-opacity sm:duration-[400ms] sm:ease-in-out',
+            'sm:group-hover:opacity-100 sm:group-focus-visible:opacity-100',
+            'sm:motion-reduce:transition-none',
+          ].join(' ')}
+        >
+          {tile.caption}
+        </figcaption>
       </figure>
     </li>
   )

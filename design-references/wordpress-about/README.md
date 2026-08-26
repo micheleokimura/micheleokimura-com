@@ -98,7 +98,22 @@ Four of the 24 tiles have no equivalent in `public/images/about-timeline/`:
 | 19 | `Kingdom-Kids-Workshops.jpeg` | 2019, equipping events for parents, teachers, and leaders |
 | 20 | `ReThink-Creativity-2020-and-2021-scaled.jpeg` | Online Creativity Conferences 2020 and 2021 |
 
-Their URLs are in `mosaic-tiles.json` if they are ever pulled across.
+Their URLs are in `mosaic-tiles.json`, but those URLs are dead. Hunted again on
+2026-08-26 when Michele asked for the mosaic to be finished, with no result:
+
+| Where | Outcome |
+| --- | --- |
+| `public/images/about-timeline/` | Not there. The migration in `df736e0` carried 20 of 24. |
+| Brett's master folder, mirrored at `assets-raw/current-site-archive-2026-06-26/images/about/original/` | Not there. Source numbering skips 11, and the other three were never in it. |
+| The live site | `micheleokimura.com` now serves this Next.js app, so `/wp-content/uploads/2025/09/` returns a Vercel 403. The WordPress install is no longer reachable at that host. |
+| Wayback Machine | No snapshot of any of the four files. |
+| Michele's Google Drive, both accounts, and Dropbox | Spotlight and `find` by filename and by keyword return nothing. Nearby folders exist (`Kingdom Kids Workshop 2024`, `old-info@rethinkcreativity.org`) but hold later years and video, not these images. |
+| Canva | Searched 2026-05-22, see the note further down. Nothing identifiable. |
+
+So these four have to come from Michele or from whoever holds the WordPress
+backup. Until then `AboutMosaic.tsx` renders their tile as a tinted panel
+carrying the caption plus a "Photo to come" label, which keeps the story
+readable and keeps the gap visible.
 
 ## Michele's own screenshots, 2026-08-23
 
@@ -125,13 +140,24 @@ is the wrong reading of this reference.
 
 Corner radius is 0 on every tile.
 
-## Why the rebuilt captions are blank
+## Captions: blank on 2026-08-23, wired in on 2026-08-26
 
-By direction, 2026-08-23. `AboutMosaic.tsx` ships with `caption: ''` on every
-tile except Renaissance, whose copy was confirmed separately. Blank means the
-tile renders no hover overlay at all.
+The first rebuild shipped `caption: ''` on every tile except Renaissance, by
+direction, while Michele considered sending fresh per-tile copy.
 
-The verbatim copy for all 24 tiles is in `mosaic-tiles.json` above and is not
-lost. Do not silently wire it back in. Michele is sending per-tile caption text,
-and her copy will supersede what is in that file, which still carries the
-defects listed earlier on this page.
+She then asked for the hover verbiage to be live: "when the cursor hovers over
+each photo, there should be words that appear in a transparent way but pop."
+So `AboutMosaic.tsx` now carries her WordPress copy for all 24 tiles, taken
+from `mosaic-tiles.json`, with the mechanical defects listed above corrected
+and "Hawaii" set as "Hawaiʻi". The component header lists every edit.
+
+Two items are still open for Michele:
+
+1. Tile 2 reads "1955", which cannot square with the 1962 birth year on tile 1.
+   Shipped as she wrote it.
+2. Tile 22 has been reworded to name Releasing Generations as the recipient of
+   the 2023 Outstanding Advocate award. Her WordPress caption reads as though
+   the award were hers personally. `src/lib/credentials.ts` records that the
+   recipient is the organisation and says not to put her name alone back.
+
+If she sends new copy it supersedes all of this.

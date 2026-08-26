@@ -107,7 +107,13 @@ export default function AboutPage() {
           to tell the whole story chronologically. */}
       <Container className="mt-16 sm:mt-20">
         <FadeIn>
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,20rem)_1fr] lg:items-center lg:gap-16">
+          {/* The narrow 20rem track is on the RIGHT here, because the photo
+              carries lg:order-last and so lands in the second column. It used
+              to be [minmax(0,20rem)_1fr], which put the photo in the 1fr track
+              and rendered it 832px wide at 1440, more than twice the hero
+              above it. Michele flagged that on 2026-08-26: "way too big".
+              Both portraits are now the same 320x400. */}
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_minmax(0,20rem)] lg:items-center lg:gap-16">
             <div className="relative order-first aspect-[4/5] w-full max-w-xs overflow-hidden rounded-3xl bg-neutral-100 sm:max-w-sm lg:order-last lg:max-w-none">
               <Image
                 src="/images/michele/about-meet-michele.jpg"
