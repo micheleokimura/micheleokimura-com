@@ -13,7 +13,7 @@ completion-date: 2025-03
 
 ## The Organization
 
-Missionary Church Hawaiʻi is the island expression of the Missionary Church denomination, comprising a dedicated network of congregations across the state. Moanalua Gardens Missionary Church in Honolulu sits near the center of this network, where Pastor Cal Chinen serves as the Hawaii District Leader.
+Missionary Church Hawaiʻi is the island expression of the Missionary Church denomination, comprising a dedicated network of congregations across the state. Moanalua Gardens Missionary Church in Honolulu sits near the center of this network, where Pastor Cal Chinen serves as the Hawaiʻi District Leader.
 
 ## The Engagement
 
@@ -32,7 +32,9 @@ These pastors also belong to the [Transform Our World](/case-studies/transform-o
 The deep impact of Michele's curriculum on their congregations is best described by the pastors themselves following her workshop:
 
 > "The Kingdom Kids Workshop has been the single most powerful equipping workshop for the parents and children's ministry workers in our church. It gave them practical tools, and it imparted a living and powerful love and excitement for God."
+>
 > Pastor Cal Chinen, Moanalua Gardens Missionary Church, Honolulu
 
 > "The Kingdom Kids Workshop had a very personal and powerful impact on me. I experienced the power of God's love being poured out upon not only myself, but on other Senior Pastors, ministry leaders and parents. We were being restored, renewed, refreshed, rejuvenated, and revived by the power of the Holy Spirit. I would recommend every pastor, ministry leader, and parent to attend Kingdom Kids Workshops by Michele Okimura! This workshop will change the future of Hawaii by helping us to collectively work together to look at our children, speak to our children, and love our children from the heart of God."
-> Allen Cardines, Senior Pastor, Nanaikapono Protestant Church, Nanakuli, Hawaii
+>
+> Allen Cardines, Senior Pastor, Nanaikapono Protestant Church, Nanakuli, Hawaiʻi

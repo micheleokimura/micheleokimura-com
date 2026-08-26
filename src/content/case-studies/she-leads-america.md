@@ -17,7 +17,7 @@ She Leads America is a rapidly expanding, global network founded and led by Liz 
 
 ## The Engagement
 
-**A Divine Connection:** In May, Michele had an inspiring and wonderful meeting with founder Liz Doyle, which laid the groundwork for an exciting new partnership.
+**A Divine Connection:** In May 2026, Michele had an inspiring and wonderful meeting with founder Liz Doyle, which laid the groundwork for an exciting new partnership.
 
 **State Leadership:** Michele officially accepted the invitation to become the Hawaiʻi State Representative for She Leads America, stepping into the role of lead director for "She Leads Hawaiʻi."
 

@@ -40,7 +40,9 @@ Michele's teaching continues to bring profound, practical transformation to Four
 Vice President Ted Vail, Senior Vice President of Mission, has been a steady supporter, along with Pastor Kihāpiʻilani Pimental. Both shared the following regarding the deep impact of her work:
 
 > "Michele Okimura's *Brave Purpose with God* is a refreshing and hope-filled guide for anyone longing to understand the dreams God places in their heart. I was especially drawn to the treasure-hunt imagery that runs throughout the book, an imaginative yet grounded reminder that God's dreams for us are clues meant to be followed. Okimura masterfully connects the prophetic and the artistic with the dusty, everyday path we actually walk. This is not a book about avoiding difficulty; it's about finding God's presence and purpose in the midst of it. Readers will come away not just encouraged but awakened as travelers ready to follow God's clues toward the treasure He has prepared."
+>
 > Ted Vail D.I.S., Senior Vice President of Mission, The Foursquare Church
 
 > "She just did a session at Native Camp in Montana, and it was excellent, one of the most impactful sessions of the whole camp. We had 19 FMI workers there. Every person had an experience of how to prophesy over each other. Simple, practical, and powerful. I saw it all personally. Now many children in our church prophesy and unashamedly pray for healing, all because of Michele."
+>
 > Pastor Kihāpiʻilani Pimental, Worker Supervisor, Foursquare Missions International

@@ -36,4 +36,5 @@ Michele has partnered with Christian Academy for many years through a variety of
 The transformative nature of this relationship was beautifully summarized by former Principal Rebecca Furuhashi, who shared the following endorsement after Michele conducted a full-staff teacher training workshop:
 
 > "Her creative and visually-exciting presentations have challenged us and our students to directly download from the Father Heart of God. We are now seeing children as young as five praying bold and encouraging words over other children and even their teachers. Our entire campus culture has changed. Our school will never be the same."
+>
 > Rebecca Furuhashi, Former Principal, Christian Academy

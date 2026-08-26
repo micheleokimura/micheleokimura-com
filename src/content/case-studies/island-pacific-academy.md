@@ -32,4 +32,5 @@ Michele and Gerald Teramae share a close friendship spanning over fifteen years,
 Following the impactful leadership retreat, Gerald Teramae provided a formal endorsement of Michele's presentation. He reflected on the profound effect the session had on his team's mindset and culture:
 
 > "Michele was able to rekindle and inspire the need and desire to reignite and inspire our Leadership Team that it is never too late to become a 'dreamer' and make a positive impact and difference in the world."
+>
 > Gerald Teramae, Head of School, Island Pacific Academy
