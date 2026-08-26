@@ -225,15 +225,29 @@ export default function HomePage() {
           left between the header pad and the bottom inset hits the brief across
           the range instead, and it can never push the CTA off the bottom:
 
-            393x852 phone     block 29.5% to 71.7%
-            1440x900 desktop  block   27% to   80%
+            393x852 phone     block 32.2% to 73.4%
+             834x1194 iPad    block 34.6% to 69.4%
+            1440x900 desktop  block 29.5% to 75.9%
+            1512x860 laptop   block 28.5% to 77.1%
 
-          The pt/pb are what make that safe. pt is the header's own height, so
-          the copy can never slide under the wordmark or the nav; pb clears the
-          home indicator. Centring happens in what is left. */}
+          THE PADDING IS SYMMETRIC, and that is the whole reason the tops land
+          near 30 rather than near 25. pt is the header's own height, so the
+          copy can never slide under the wordmark or the nav. pb was 2.25rem
+          plus the bottom inset, which is all the home indicator needs, and the
+          asymmetry quietly biased the centre 30px DOWN on a desktop: measured
+          before this, the block ran 32.8% to 79.2% at 1440x900. Matching pb to
+          pt costs nothing and buys back that bias. The smallest --header-offset
+          is 5rem, comfortably past the 34px indicator, so the clearance the old
+          value existed for is still there.
+
+          The bottoms still run past 70, to between 69 and 77. That is the copy,
+          not the layout: at 1440 the block is 418px against the 360px that a
+          literal 30-to-70 allows, and the only ways to close it are a smaller
+          hero type scale or less copy. Both are Michele's call, not a QA fix,
+          so the block is centred and honest rather than squeezed. */}
       <section
         aria-label="Michele Okimura"
-        className="relative isolate mt-[calc(var(--header-offset)*-1)] flex min-h-[100svh] w-full flex-col justify-center overflow-hidden bg-[var(--color-navy)] pt-[var(--header-offset)] pb-[calc(2.25rem+env(safe-area-inset-bottom,0px))]"
+        className="relative isolate mt-[calc(var(--header-offset)*-1)] flex min-h-[100svh] w-full flex-col justify-center overflow-hidden bg-[var(--color-navy)] pt-[var(--header-offset)] pb-[var(--header-offset)]"
       >
         {/* DO NOT restyle this element without reading the whole comment. The
             file itself is owned by a separate task and must not be touched
@@ -308,21 +322,22 @@ export default function HomePage() {
             asked for actually legible rather than merely arranged.
 
             The fade point is measured against the copy column, not chosen. That
-            column is capped at min(34rem, 42vw), so on a 1440 screen its right
-            edge lands at about 46% across. Composited over the wash, worst
+            column is capped at min(34rem, 46vw), so its right edge lands at
+            about 46% across on a 1440 screen and 50% on a 1024 one, and the
+            stops are set against the wider of the two. Composited over the wash, worst
             frame in the clip:
 
               left edge of the copy     effective 0.798
               30% across                effective 0.775
-              46% across, column end    effective 0.685   (floor 0.62)
-              60% across, no text       effective 0.532
+              50% across, column end    effective 0.685   (floor 0.62)
+              62% across, no text       effective 0.545
               85% across                the wash alone, 0.28
 
             If the copy column is ever widened, move the 0.52 stop with it or
             the last line of every paragraph loses its ground. */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 hidden bg-[linear-gradient(to_right,rgba(31,39,68,0.72)_0%,rgba(31,39,68,0.68)_35%,rgba(31,39,68,0.52)_50%,rgba(31,39,68,0.18)_70%,rgba(31,39,68,0)_85%)] sm:block"
+          className="absolute inset-0 hidden bg-[linear-gradient(to_right,rgba(31,39,68,0.72)_0%,rgba(31,39,68,0.68)_38%,rgba(31,39,68,0.52)_54%,rgba(31,39,68,0.18)_72%,rgba(31,39,68,0)_85%)] sm:block"
         />
 
         {/* `relative` is load-bearing, not decoration. Everything above is
@@ -336,17 +351,26 @@ export default function HomePage() {
             instead of the cap below. */}
         <div className="relative mx-auto w-full max-w-7xl gutter-x">
           {/* THE LEFT THIRD, expressed as a cap rather than a fraction.
-              `min(34rem, 42vw)` is two limits at once: 42vw keeps the column to
+              `min(34rem, 46vw)` is two limits at once: 46vw keeps the column to
               roughly the left third of a wide screen, so the composition Brett
               asked for holds from a laptop to an ultrawide, and 34rem stops the
               measure running past a readable line length on the very widest
               ones. Below sm there is no cap at all, because a third of a 393px
               phone is not a column, it is a gutter.
 
-                 768px tablet   322px, 42%
+                 768px tablet   353px, 46%
+                1024px          471px, 46%
+                1184px and up   544px, capped by the 34rem
                 1440px desktop  544px, 38%
-                1920px          544px, 28% */}
-          <FadeIn className="sm:max-w-[min(34rem,42vw)]">
+                1920px          544px, 28%
+
+              46 rather than 42, and the number came from a measurement rather
+              than taste. At 42vw a 1024x768 iPad in landscape gave the column
+              430px while the type was already at its `lg` sizes, so a 56px H1
+              wrapped to three lines and the block ran to 85% of the screen.
+              46vw only does anything below 1184px, where the 34rem cap has not
+              engaged yet, so every desktop width is untouched by this. */}
+          <FadeIn className="sm:max-w-[min(34rem,46vw)]">
             <h1 className="font-display text-[2rem] leading-[1.05] font-medium tracking-tight text-balance text-[var(--color-cream)] sm:text-[2.5rem] lg:text-6xl">
               {HERO.h1}
             </h1>
