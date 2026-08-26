@@ -13,15 +13,26 @@ completion-date: 2025-03
 
 ## The Organization
 
-Missionary Church Hawaiʻi is the island expression of the Missionary Church denomination, a network of congregations across Hawaiʻi led by a close group of lead pastors who know each other well. Moanalua Gardens Missionary Church in Honolulu sits near the center of that network, where Pastor Cal Chinen serves as District Leader.
+Missionary Church Hawaiʻi is the island expression of the Missionary Church denomination, comprising a dedicated network of congregations across the state. Moanalua Gardens Missionary Church in Honolulu sits near the center of this network, where Pastor Cal Chinen serves as the Hawaii District Leader.
 
 ## The Engagement
 
-Michele's relationship with Cal Chinen is a long friendship before it is anything else. She has spoken at his church functions many times over the years, and when the denomination gathered for its Hawaiʻi regional conference in March 2025, Cal invited her to keynote. Her messages in those rooms draw on two bodies of work: the Brave Series, and "Dreaming Big for Your Lives," the Brave Purpose message about stepping into what God has already put in front of you. Beyond Moanalua Gardens, Michele holds strong working relationships with about five other lead pastors across Missionary Church Hawaiʻi.
+**Deep Roots:** Michele's relationship with Pastor Cal Chinen is fundamentally built on a long-standing personal friendship. Over the years, she has been a frequent speaker at his church functions.
+
+**Keynote Leadership:** When the denomination gathered for its Hawaiʻi regional conference in March 2025, Pastor Cal invited Michele to deliver the keynote addresses at both the Kauaʻi and Oʻahu events.
+
+**Core Message:** Her messages during these gatherings drew on the Brave Series and the "Dream Big Journals," communicating her Brave Purpose message about stepping confidently into what God has already placed in front of you.
+
+**Broad Network:** Beyond Moanalua Gardens, Michele maintains strong working relationships with approximately five other lead pastors across Missionary Church Hawaiʻi.
 
 ## The Outcome
 
-Those pastors all belong to the [Transform Our World](/case-studies/transform-our-world-hawaii) Hawaiʻi chapter, which meets weekly, so the relationships stay current rather than going quiet between engagements. Every one of them is a strong supporter of Releasing Generations. Cal Chinen on the workshop material Michele brought to his congregation:
+These pastors also belong to the [Transform Our World](/case-studies/transform-our-world-hawaii) Hawaiʻi chapter, gathering weekly to ensure their relationships remain active and current between engagements. Every one of these leaders is a strong supporter of Releasing Generations.
+
+The deep impact of Michele's curriculum on their congregations is best described by the pastors themselves following her workshop:
 
 > "The Kingdom Kids Workshop has been the single most powerful equipping workshop for the parents and children's ministry workers in our church. It gave them practical tools, and it imparted a living and powerful love and excitement for God."
-> Cal Chinen, Moanalua Gardens Missionary Church, Honolulu
+> Pastor Cal Chinen, Moanalua Gardens Missionary Church, Honolulu
+
+> "The Kingdom Kids Workshop had a very personal and powerful impact on me. I experienced the power of God's love being poured out upon not only myself, but on other Senior Pastors, ministry leaders and parents. We were being restored, renewed, refreshed, rejuvenated, and revived by the power of the Holy Spirit. I would recommend every pastor, ministry leader, and parent to attend Kingdom Kids Workshops by Michele Okimura! This workshop will change the future of Hawaii by helping us to collectively work together to look at our children, speak to our children, and love our children from the heart of God."
+> Allen Cardines, Senior Pastor, Nanaikapono Protestant Church, Nanakuli, Hawaii

@@ -426,13 +426,22 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
           'Michele’s words touched our hearts, stirred our emotions, and challenged us to take action! I gained ways to encourage our children to be bold, to minister to others, to pray and to demonstrate love. I received tools we can pass on to our own children to show God’s love!',
         name: 'Workshop attendee',
       },
-      // ################### TODO: five more endorsers ###################
-      // Michele named these five for this message and their quotes have NOT
+      // Added 2026-08-25 with Michele's revised Missionary Church Hawaiʻi case
+      // study, which supplied this endorsement verbatim. "Hawaii" and
+      // "Nanaikapono" are spelled without ʻokina because that is how the
+      // endorser wrote them; endorser wording is never edited.
+      {
+        quote:
+          'The Kingdom Kids Workshop had a very personal and powerful impact on me. I experienced the power of God’s love being poured out upon not only myself, but on other Senior Pastors, ministry leaders and parents. We were being restored, renewed, refreshed, rejuvenated, and revived by the power of the Holy Spirit. I would recommend every pastor, ministry leader, and parent to attend Kingdom Kids Workshops by Michele Okimura! This workshop will change the future of Hawaii by helping us to collectively work together to look at our children, speak to our children, and love our children from the heart of God.',
+        name: 'Allen Cardines',
+        role: 'Senior Pastor, Nanaikapono Protestant Church, Nanakuli, Hawaii',
+      },
+      // ################### TODO: four more endorsers ###################
+      // Michele named these four for this message and their quotes have NOT
       // been captured yet, so none of them is stubbed in below. Adding a name
       // without its words would put an empty testimonial on the page.
       //
-      //   Allen Cardines, Russell Higa, Charis Chinen, Megan Junge,
-      //   Damon Gohata
+      //   Russell Higa, Charis Chinen, Megan Junge, Damon Gohata
       //
       // When the text arrives, append each as a normal entry above this
       // comment and the section grows on its own. Endorser wording is

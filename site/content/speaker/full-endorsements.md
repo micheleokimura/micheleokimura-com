@@ -16,7 +16,7 @@
 
 ## Kingdom Kids Workshop endorsements (8 total)
 
-*Source: Michele's Kingdom Kids Workshop endorsements docx. This file captures what is verbatim in the Speaker page copy signed off 2026-08-21. The full docx contents were not accessible during this task; the five endorsements marked TODO below need to be pulled directly from the docx and pasted in verbatim before the Press Kit PDF is assembled.*
+*Source: Michele's Kingdom Kids Workshop endorsements docx. This file captures what is verbatim in the Speaker page copy signed off 2026-08-21, plus the Allen Cardines endorsement Michele supplied on 2026-08-25. The full docx contents were not accessible during the original task; the four endorsements still marked TODO below need to be pulled directly from the docx and pasted in verbatim before the Press Kit PDF is assembled.*
 
 ### 2. Cal Chinen — Moanalua Gardens Missionary Church, Honolulu
 
@@ -30,9 +30,12 @@
 
 **Attribution:** Barry Deguchi, Lead Pastor, Catalyst Christian Community, Long Beach, CA
 
-### 4. Allen Cardines — [affiliation TODO]
+### 4. Allen Cardines - Nanaikapono Protestant Church, Nanakuli, Hawaii
 
-> [TODO: pull verbatim from Kingdom Kids Workshop endorsements docx. Not accessible during 2026-08-21 task; docx was not present in the uploads folder or the repo. Michele or a follow-up task needs to add the verbatim quote and full attribution here.]
+> "The Kingdom Kids Workshop had a very personal and powerful impact on me. I experienced the power of God's love being poured out upon not only myself, but on other Senior Pastors, ministry leaders and parents. We were being restored, renewed, refreshed, rejuvenated, and revived by the power of the Holy Spirit. I would recommend every pastor, ministry leader, and parent to attend Kingdom Kids Workshops by Michele Okimura! This workshop will change the future of Hawaii by helping us to collectively work together to look at our children, speak to our children, and love our children from the heart of God."
+
+**Attribution:** Allen Cardines, Senior Pastor, Nanaikapono Protestant Church, Nanakuli, Hawaii
+**Source:** Michele's revised Missionary Church Hawaiʻi case-study copy, 2026-08-25. "Hawaii" and "Nanaikapono" are verbatim without ʻokina.
 
 ### 5. Rebecca Furuhashi — Christian Academy
 
@@ -42,19 +45,19 @@
 
 ### 6. Russell Higa — [affiliation TODO]
 
-> [TODO: pull verbatim from Kingdom Kids Workshop endorsements docx. Same note as Allen Cardines above.]
+> [TODO: pull verbatim from Kingdom Kids Workshop endorsements docx. Not accessible during the 2026-08-21 task; needs to be pulled from the docx.]
 
 ### 7. Charis Chinen — [affiliation TODO]
 
-> [TODO: pull verbatim from Kingdom Kids Workshop endorsements docx. Same note as Allen Cardines above.]
+> [TODO: pull verbatim from Kingdom Kids Workshop endorsements docx. Not accessible during the 2026-08-21 task; needs to be pulled from the docx.]
 
 ### 8. Megan Junge — [affiliation TODO]
 
-> [TODO: pull verbatim from Kingdom Kids Workshop endorsements docx. Same note as Allen Cardines above.]
+> [TODO: pull verbatim from Kingdom Kids Workshop endorsements docx. Not accessible during the 2026-08-21 task; needs to be pulled from the docx.]
 
 ### 9. Damon Gohata — [affiliation TODO]
 
-> [TODO: pull verbatim from Kingdom Kids Workshop endorsements docx. Same note as Allen Cardines above.]
+> [TODO: pull verbatim from Kingdom Kids Workshop endorsements docx. Not accessible during the 2026-08-21 task; needs to be pulled from the docx.]
 
 ---
 
@@ -81,5 +84,5 @@
 
 - All endorser wording is verbatim. Do not edit words like "empowered," "impactful," "amazing," etc.; they are direct quotes.
 - Attribution lines follow the format: `Name, Title, Organization, City` (city omitted when the endorser is affiliated with a Hawai'i organization the audience recognizes).
-- The four verbatim quotes above (Teramae, Cal Chinen, Barry Deguchi, Furuhashi) were signed off by Michele on 2026-08-21 as part of the Speaker page final copy.
-- The five TODO Kingdom Kids endorsements and the attendee comments block must be pulled from the source docx before the Press Kit PDF ships.
+- The four verbatim quotes above (Teramae, Cal Chinen, Barry Deguchi, Furuhashi) were signed off by Michele on 2026-08-21 as part of the Speaker page final copy. Allen Cardines was added on 2026-08-25 from Michele's revised Missionary Church Hawaiʻi case-study copy.
+- The four TODO Kingdom Kids endorsements and the attendee comments block must be pulled from the source docx before the Press Kit PDF ships.

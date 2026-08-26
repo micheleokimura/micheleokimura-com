@@ -13,11 +13,13 @@ import {
   type Endorsement,
 } from '@/components/CaseStudyLayout'
 
-// Origin story is Michele's own account, condensed for the web. The three
-// endorsements are verbatim from the Kingdom Kids Workshop endorsements docx and
-// were signed off by Michele on 2026-08-21; they also appear on /speaker under
-// "Building a Kingdom Culture at Home and in Ministry", which is this workshop
-// under its current title. Source: content/speaker/full-endorsements.md.
+// Origin story is Michele's own account, condensed for the web. The four
+// endorsements are verbatim from the Kingdom Kids Workshop endorsements docx;
+// the first three were signed off by Michele on 2026-08-21 and the Allen
+// Cardines one arrived 2026-08-25 with her revised Missionary Church Hawaiʻi
+// case study. They also appear on /speaker under "Building a Kingdom Culture at
+// Home and in Ministry", which is this workshop under its current title.
+// Source: content/speaker/full-endorsements.md.
 import { pageMetadata } from '@/lib/schema'
 
 export const metadata: Metadata = pageMetadata({
@@ -45,6 +47,12 @@ const ENDORSEMENTS: Endorsement[] = [
     quote:
       'Her creative and visually-exciting presentations have challenged us and our students to directly download from the Father Heart of God. We are now seeing children as young as five praying bold and encouraging words over other children and even their teachers. Our entire campus culture has changed. Our school will never be the same.',
     source: 'Rebecca Furuhashi, Principal, Christian Academy',
+  },
+  {
+    quote:
+      'The Kingdom Kids Workshop had a very personal and powerful impact on me. I experienced the power of God’s love being poured out upon not only myself, but on other Senior Pastors, ministry leaders and parents. We were being restored, renewed, refreshed, rejuvenated, and revived by the power of the Holy Spirit. I would recommend every pastor, ministry leader, and parent to attend Kingdom Kids Workshops by Michele Okimura! This workshop will change the future of Hawaii by helping us to collectively work together to look at our children, speak to our children, and love our children from the heart of God.',
+    source:
+      'Allen Cardines, Senior Pastor, Nanaikapono Protestant Church, Nanakuli, Hawaii',
   },
 ]
 
