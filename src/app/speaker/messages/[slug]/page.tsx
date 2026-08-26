@@ -397,6 +397,32 @@ export default async function SpeakerMessagePage({
           and none is to be added. */}
       <section className="w-full bg-[var(--color-band-1)] py-14 sm:py-24 lg:py-28">
         <Container>
+          {/* Recording of the message, when there is one. It sits above the
+              CTA on purpose: a reader watches Michele deliver it and then has
+              the enquiry button directly underneath. Same treatment as the
+              embed on an author book page, and the same reasoning behind it
+              (see VideoEmbed in src/app/author/books/[slug]/page.tsx): no
+              visible label, `rel=0` to keep the end screen off other people's
+              channels, no autoplay, and lazy so it costs nothing until it
+              scrolls into view. The iframe keeps its `title` for screen
+              readers. */}
+          {message.youtube && (
+            <FadeIn>
+              <div className="mb-14 w-full max-w-[52rem] sm:mb-20">
+                <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-neutral-950 ring-1 ring-[var(--color-navy-10)]">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${message.youtube.id}?rel=0`}
+                    title={message.youtube.title}
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    className="absolute inset-0 h-full w-full border-0"
+                  />
+                </div>
+              </div>
+            </FadeIn>
+          )}
+
           <FadeIn>
             <div className="max-w-2xl">
               <h2 className="font-display text-3xl leading-[1.18] font-semibold tracking-tight text-neutral-950 sm:text-4xl">

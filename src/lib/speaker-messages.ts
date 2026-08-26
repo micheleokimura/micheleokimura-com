@@ -196,6 +196,21 @@ export type SpeakerMessage = {
     poster: string
     description: string
   }
+  /**
+   * A recording of the message itself, on YouTube, shown above the closing
+   * CTA on the message page.
+   *
+   * Separate from `video` above, which is a silent ambient clip that runs at
+   * the top of the page. This one is Michele on a platform, with sound, and a
+   * reader watches it right before deciding whether to enquire.
+   *
+   * Embedded rather than re-hosted: it is Michele's own channel, and pulling
+   * the file down to serve ourselves would breach YouTube's terms.
+   */
+  youtube?: {
+    id: string
+    title: string
+  }
   /** Shown when the message also travels without the faith framing. */
   nonFaith?: boolean
   /** Context the reader needs before the endorsements underneath. */
@@ -395,6 +410,11 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
         text: 'Available as an immersive keynote, a comprehensive 8-hour hands-on workshop, or a self-paced digital course.',
       },
     ],
+    // Added 2026-08-25.
+    youtube: {
+      id: 'y4rmy3MbaoI',
+      title: 'Michele Okimura — Kingdom Culture',
+    },
     endorsementsNote:
       'The endorsements below are from Michele’s Kingdom Kids Workshops, the flagship workshop within this topic. Same content, previously offered under that title.',
     endorsements: [
