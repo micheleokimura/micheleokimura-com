@@ -18,7 +18,6 @@ import { BannerHero } from '@/components/BannerHero'
 import { SectionIntro } from '@/components/SectionIntro'
 import { ContactTrigger } from '@/components/ContactTrigger'
 import { WebPageJsonLd } from '@/components/JsonLd'
-import { projectStudies } from '@/lib/projects'
 import { pageMetadata } from '@/lib/schema'
 import {
   SPEAKER_MESSAGES,
@@ -82,12 +81,13 @@ import {
  * It is a plain band with one Contact button on the sitewide popup. Do not
  * put an address back on this page.
  *
- * WORKSHOPS. Added 2026-08-25, moved off the bottom of /author: ReThink
- * Creativity. Michele asked for it at the bottom of this page, so it sits
- * below the Book Michele band rather than above it. The Kingdom Kids Workshop
- * came across in the same move and was pulled the same day as a duplicate of
- * /speaker/messages/building-a-kingdom-culture; the WORKSHOPS comment in the
- * markup has the reasoning.
+ * WORKSHOPS. There is no workshops row on this page any more. It landed here
+ * on 2026-08-25 carrying one card, ReThink Creativity, after coming off the
+ * bottom of /author, and it left again the same day: Michele's read is that
+ * the conference belongs under the keynote it grows out of, so the card now
+ * closes /speaker/messages/activating-your-creativity and points at
+ * /speaker/creativity/rethink-creativity-conference. See the comment at the
+ * foot of the markup before rebuilding a row here.
  *
  * Copy of record: site/content/speaker/speaker-page-copy.md, locked with
  * Michele 2026-08-22. The messages themselves live in
@@ -181,31 +181,6 @@ const TEXTURE_CLASS: Record<MessageTexture, string> = {
   grid: 'msg-tex-grid',
   dots: 'msg-tex-dots',
 }
-
-/**
- * The programs that close this page. ReThink Creativity, and for a few hours
- * on 2026-08-25 the Kingdom Kids Workshop as well; see the WORKSHOPS comment
- * down in the markup for why that one came straight back out.
- *
- * Card copy is read from the project registry rather than written out here, so
- * this section and the /projects index never drift apart. The filter is by
- * slug and the order follows the registry.
- */
-const WORKSHOPS = projectStudies.filter((project) =>
-  ['rethink-creativity'].includes(project.slug),
-)
-
-/**
- * The card grid goes two-up only when there is something to pair. A lone card
- * in a `sm:grid-cols-2` reads as a tile that failed to load, which is exactly
- * what this section would have looked like after the Kingdom Kids Workshop was
- * pulled. One card gets a single column capped at the width of the copy above
- * it instead. Add a second program and the two-up comes back on its own.
- */
-const WORKSHOP_GRID =
-  WORKSHOPS.length > 1
-    ? 'grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8'
-    : 'grid max-w-2xl grid-cols-1 gap-6'
 
 type Engagement = {
   event: string
@@ -592,98 +567,28 @@ export default function SpeakerPage() {
         </Container>
       </section>
 
-      {/* ------------------------------------------------------- workshops */}
-      {/* Moved here from the bottom of /author on 2026-08-25, at Michele's
-          direction: ReThink Creativity is a conference she leads, which is
-          speaking work rather than an authored title, so it had no business
-          closing the Author page.
+      {/* THE WORKSHOPS ROW THAT CLOSED THIS PAGE IS GONE, 2026-08-25.
 
-          THE KINGDOM KIDS WORKSHOP IS NOT HERE, AND DELIBERATELY SO. It came
-          across in the same move and Michele pulled it the same day. It is not
-          a judgement about the workshop; the material is already on this site,
-          under the name she teaches it by, at
-          /speaker/messages/building-a-kingdom-culture. A card here would be a
-          second door onto the same content one scroll below the message grid
-          that already carries it. Do not add it back.
+          It arrived here that morning off the bottom of /author carrying one
+          card, ReThink Creativity, and left the same day at Michele's
+          direction. The conference is the thing "Activating Your Creativity"
+          grows into, so the card belongs at the foot of that keynote rather
+          than at the foot of the whole speaking section: it now closes
+          /speaker/messages/activating-your-creativity, retitled "Unleashing
+          Your Creative Identity: The Rethink Creativity Conference", with the
+          blurb dropped and the link pointing at the new detail page at
+          /speaker/creativity/rethink-creativity-conference. It is rendered
+          from the `relatedProgram` field on the message in
+          src/lib/speaker-messages.ts.
 
-          What that removal did NOT touch, on purpose: /projects/kingdom-kids
-          is still live, still in the /projects index and the sitemap, and
-          still linked from /projects/raising-kingdom-kids, which calls it the
-          companion workshop to the lesson book. Deleting the case study is a
-          much bigger decision than dropping a card and nobody has asked for
-          it.
+          The "Every story in one place" link into /projects went with it, the
+          same way it did when this row left /author. /projects is in the site
+          footer, so nothing here is a dead end.
 
-          Copy is UNCHANGED from what /author was showing, which means it is
-          still read from the project registry in src/lib/projects.ts and this
-          section and the /projects index cannot drift apart. Michele is
-          sending revised copy; when it lands, edit the registry entry rather
-          than hard-coding strings here.
-
-          It sits BELOW "Book Michele" because Michele asked for the bottom of
-          the page. Band-3, because its neighbour above is band-2 and no two
-          sections on this page share a ground. Ending on band-3 is fine:
-          SiteFooter paints its own run-in with band-4, so no page has to end
-          on a particular band.
-
-          The card is the /author markup rebuilt on this page's conventions:
-          BAND rather than SECTION for the section padding, SectionIntro for
-          the heading so it matches Stages and Topics, and no new component.
-          The grid is WORKSHOP_GRID rather than a literal, so one card does not
-          render as half a row. */}
-      <section
-        aria-label="Workshops and conferences Michele leads"
-        className={`bg-[var(--color-band-3)] ${BAND}`}
-      >
-        <SectionIntro
-          eyebrow="Workshops"
-          title="Workshops and conferences I lead."
-          smaller
-        />
-
-        <div className={`${WIDE} mt-10 sm:mt-12`}>
-          <FadeInStagger faster>
-            <ul role="list" className={WORKSHOP_GRID}>
-              {WORKSHOPS.map((project) => (
-                <FadeIn as="li" key={project.href} scaleIn className="flex">
-                  <Link
-                    href={project.href}
-                    className="group flex h-full w-full flex-col rounded-2xl bg-[var(--color-cream)] p-6 shadow-sm ring-1 ring-[var(--color-navy-10)] transition duration-300 hover:-translate-y-0.5 hover:shadow-md hover:ring-[var(--color-teal-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)] lg:p-8"
-                  >
-                    <span className="font-display text-xs font-semibold tracking-[0.18em] text-[var(--color-brand-terracotta-ink)] uppercase">
-                      {project.kicker}
-                    </span>
-                    <h3 className="font-display mt-3 text-xl font-semibold tracking-tight text-neutral-950">
-                      {project.title}
-                    </h3>
-                    <p className="mt-4 flex-auto text-base leading-7 text-neutral-700">
-                      {project.blurb}
-                    </p>
-                    <span className="font-display mt-6 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition group-hover:decoration-2">
-                      Read the story
-                      <span
-                        aria-hidden="true"
-                        className="transition-transform duration-200 group-hover:translate-x-0.5"
-                      >
-                        &rarr;
-                      </span>
-                    </span>
-                  </Link>
-                </FadeIn>
-              ))}
-            </ul>
-          </FadeInStagger>
-
-          <FadeIn className="mt-10">
-            <Link
-              href="/projects"
-              className="font-display inline-flex items-center gap-1.5 text-base font-semibold text-neutral-950 underline decoration-[var(--color-brand-terracotta)] decoration-2 underline-offset-4 transition hover:text-[var(--color-brand-terracotta-ink)]"
-            >
-              Every story in one place
-              <span aria-hidden="true">&rarr;</span>
-            </Link>
-          </FadeIn>
-        </div>
-      </section>
+          /projects/rethink-creativity is UNTOUCHED and still live, still in
+          the /projects index and the sitemap. Do not rebuild a card for it on
+          this page: the keynote page is the one door onto the conference now.
+      */}
     </>
   )
 }

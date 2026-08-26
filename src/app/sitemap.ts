@@ -69,6 +69,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: PRIORITY.caseStudy,
   }))
 
+  // The ReThink Creativity conference write-up, added 2026-08-25. It hangs
+  // off /speaker/messages/activating-your-creativity rather than off
+  // /projects, so it is not in `projectRoutes` and has to be listed on its
+  // own. Case-study priority: it is a real landing page an event organizer
+  // can be sent straight to, same as a message page.
+  const speakerProgramEntries: MetadataRoute.Sitemap = [
+    {
+      url: `${siteConfig.url}/speaker/creativity/rethink-creativity-conference`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: PRIORITY.caseStudy,
+    },
+  ]
+
   // One page per title on the Author shelf. Added 2026-08-23 with the tile
   // rebuild: /author is a grid now and each tile has a real URL behind it, so
   // those URLs have to be crawlable in their own right.
@@ -113,6 +127,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     ...baseEntries,
     ...messageEntries,
+    ...speakerProgramEntries,
     ...authorBookEntries,
     ...projectEntries,
     ...worksEntries,

@@ -446,6 +446,64 @@ export default async function SpeakerMessagePage({
           </FadeIn>
         </Container>
       </section>
+
+      {/* ------------------------------------------------- related program */}
+      {/* A programme this keynote grows into. Only "Activating Your
+          Creativity" carries one so far: the ReThink Creativity conference
+          card, which spent 2026-08-25 travelling from the bottom of /author
+          to the bottom of /speaker before Michele put it here, under the
+          message it belongs to.
+
+          It sits BELOW the enquiry CTA on purpose, the same place it sat on
+          /speaker. The reader's next step from this page is still "contact
+          me about this message"; the conference is the door for someone who
+          wants to keep reading instead.
+
+          band-3 against the CTA's band-1, so the two do not share a ground.
+          Ending the page on band-3 is fine: SiteFooter paints its own run-in.
+
+          NO BLURB. The card is a kicker, a title, and a link, and it is built
+          to lay out correctly that way rather than to look like a card whose
+          description failed to load. Michele asked for the description gone.
+          The link label is set in caps because she wrote it that way; the
+          text content stays sentence case so a screen reader does not spell
+          it out. */}
+      {message.relatedProgram && (
+        <section
+          aria-label="Related conference"
+          className="w-full bg-[var(--color-band-3)] py-14 sm:py-24 lg:py-28"
+        >
+          <Container>
+            <FadeIn>
+              <Link
+                href={message.relatedProgram.href}
+                className="group flex max-w-2xl flex-col rounded-2xl bg-[var(--color-cream)] p-6 shadow-sm ring-1 ring-[var(--color-navy-10)] transition duration-300 hover:-translate-y-0.5 hover:shadow-md hover:ring-[var(--color-teal-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)] lg:p-8"
+              >
+                <span className="font-display text-xs font-semibold tracking-[0.18em] text-[var(--color-brand-terracotta-ink)] uppercase">
+                  {message.relatedProgram.kicker}
+                </span>
+                <h2 className="font-display mt-3 text-xl font-semibold tracking-tight text-balance text-neutral-950 sm:text-2xl">
+                  {message.relatedProgram.title}
+                </h2>
+                {message.relatedProgram.blurb && (
+                  <p className="mt-4 text-base leading-7 text-neutral-700">
+                    {message.relatedProgram.blurb}
+                  </p>
+                )}
+                <span className="font-display mt-6 inline-flex items-center gap-1.5 self-start text-sm font-semibold tracking-[0.14em] text-[var(--color-brand-teal)] uppercase underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition group-hover:decoration-2">
+                  Learn more
+                  <span
+                    aria-hidden="true"
+                    className="transition-transform duration-200 group-hover:translate-x-0.5"
+                  >
+                    &rarr;
+                  </span>
+                </span>
+              </Link>
+            </FadeIn>
+          </Container>
+        </section>
+      )}
     </>
   )
 }

@@ -211,6 +211,26 @@ export type SpeakerMessage = {
     id: string
     title: string
   }
+  /**
+   * A programme this keynote grows into, shown as a single card at the very
+   * bottom of the message page.
+   *
+   * Added 2026-08-25 for "Activating Your Creativity", whose conference card
+   * came off /speaker at Michele's direction. Deliberately NOT read from the
+   * project registry the way the /speaker row used to be: Michele retitled
+   * this one and asked for the blurb dropped, so the card carries its own
+   * words and there is nothing left to keep in step with /projects.
+   *
+   * `blurb` is optional and currently unused. The card lays out correctly
+   * without it; a future programme that needs a line of description can set
+   * it rather than forcing one back onto this one.
+   */
+  relatedProgram?: {
+    kicker: string
+    title: string
+    href: string
+    blurb?: string
+  }
   /** Shown when the message also travels without the faith framing. */
   nonFaith?: boolean
   /** Context the reader needs before the endorsements underneath. */
@@ -362,6 +382,16 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
         ],
       },
     ],
+    // The conference this keynote grows into. Moved here 2026-08-25 from the
+    // bottom of /speaker, which had it for a few hours after it came off
+    // /author. Michele's retitle, and her instruction was to drop the blurb
+    // that came with the old card, so there is no description here on purpose.
+    relatedProgram: {
+      kicker: 'Conference · 2010 to present',
+      title:
+        'Unleashing Your Creative Identity: The Rethink Creativity Conference',
+      href: '/speaker/creativity/rethink-creativity-conference',
+    },
     nonFaith: true,
   },
   {
