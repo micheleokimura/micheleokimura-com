@@ -265,7 +265,7 @@ function MosaicTile({ tile }: { tile: Tile }) {
             'bg-gradient-to-t from-[var(--color-navy)] via-[var(--color-navy)]/70 to-transparent',
             'sm:items-center sm:justify-center sm:bg-none sm:p-5 sm:text-base sm:leading-normal sm:text-center',
             'sm:bg-[var(--color-navy)]/75 sm:opacity-0 sm:transition-opacity sm:duration-[400ms] sm:ease-in-out',
-            'sm:group-hover:opacity-100 sm:group-focus-visible:opacity-100',
+            'sm:group-hover:opacity-100 sm:group-focus:opacity-100 sm:group-focus-visible:opacity-100',
             'sm:motion-reduce:transition-none',
           ].join(' ')}
         >
