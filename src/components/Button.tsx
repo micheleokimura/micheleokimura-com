@@ -83,7 +83,14 @@ export function Button({
     : cn(
         // Text link with a dashed underline that firms up on hover. This is
         // what `secondary` always was minus the marker sliding in behind it.
-        'group inline-flex items-center justify-center gap-1.5 text-base font-medium underline decoration-dashed underline-offset-4 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4',
+        //
+        // `py-2.5 -my-2.5` is a tap target, not spacing. These render as a
+        // 24px line box and they are standalone page CTAs sitting next to a
+        // filled button, so WCAG 2.5.8's inline-text exemption does not cover
+        // them. The padding takes the hit area to 44px and the equal negative
+        // margin takes the growth back out of the layout, so nothing moves at
+        // any breakpoint.
+        'group -my-2.5 inline-flex items-center justify-center gap-1.5 py-2.5 text-base font-medium underline decoration-dashed underline-offset-4 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4',
         isDark
           ? 'text-white decoration-neutral-500 hover:decoration-white focus-visible:outline-white'
           : 'text-neutral-950 decoration-neutral-400 hover:decoration-neutral-950 focus-visible:outline-neutral-950',

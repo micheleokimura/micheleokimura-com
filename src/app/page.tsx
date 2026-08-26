@@ -385,7 +385,12 @@ export default function HomePage() {
                 down to just the honour to save a line. If it is ever too long
                 for the layout, take it out of the hero altogether rather than
                 shortening it back into a personal claim. See HERO.award. */}
-            <p className="mt-4 flex items-start gap-3 text-xs leading-5 text-[var(--color-cream)]/75 sm:mt-5 sm:text-[0.8125rem]">
+            {/* 13px, and the same 13px at every width. It used to be `text-xs`
+                below sm and 13px from sm up, which rendered this credit SMALLER
+                on the phone than on the desktop it was designed for. Nothing
+                about a 393px screen argues for less type than a 1440px one.
+                Brett's mobile pass, 2026-08-26. */}
+            <p className="mt-4 flex items-start gap-3 text-[0.8125rem] leading-5 text-[var(--color-cream)]/75 sm:mt-5">
               <span
                 aria-hidden="true"
                 className="mt-2 h-px w-6 shrink-0 bg-[var(--color-teal-on-dark)] sm:w-8"

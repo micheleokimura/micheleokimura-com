@@ -124,7 +124,11 @@ export default function WorksPage() {
                           </p>
                         )}
                         {work.year && (
-                          <p className="mt-3 text-xs text-neutral-500">
+                          {/* 13px below sm rather than 12: a publisher-and-year
+                              credit is small type by design, but 12px on a
+                              phone is under every legibility floor going. The
+                              desktop size is unchanged. */}
+                          <p className="mt-3 text-[0.8125rem] text-neutral-500 sm:text-xs">
                             {work.publisher
                               ? `${work.publisher}, ${work.year}`
                               : String(work.year)}

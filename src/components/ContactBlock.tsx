@@ -49,7 +49,9 @@ export function ContactBlock({ heading, children, source = 'contact-block', cta 
                 <dd className="mt-3">
                   <a
                     href={`mailto:${siteConfig.email}`}
-                    className="text-white hover:text-[var(--color-brand-terracotta-on-dark)]"
+                    // -my-2.5/py-2.5: a 44px hit area on a 14px line, with
+                    // the growth cancelled so the block does not move.
+                    className="-my-2.5 inline-block py-2.5 text-white hover:text-[var(--color-brand-terracotta-on-dark)]"
                   >
                     {siteConfig.email}
                   </a>

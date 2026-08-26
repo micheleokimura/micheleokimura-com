@@ -216,7 +216,11 @@ function BookTile({
             <Forthcoming label={book.forthcoming} />
           </span>
         ) : null}
-        <p className="mt-1.5 line-clamp-5 text-xs leading-5 text-neutral-600 sm:text-sm sm:leading-5">
+        {/* 14px at every width. This ran at 12px below sm and 14px from sm
+            up, so the teaser was smallest on the screen held closest to the
+            face. The shelf is one column below sm, so the extra line height
+            just makes the card taller; nothing reflows. */}
+        <p className="mt-1.5 line-clamp-5 text-sm leading-5 text-neutral-600">
           {book.teaser}
         </p>
         {hasFooter ? (
@@ -322,7 +326,7 @@ function FamilyHeading({
       <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-3">
         <Link
           href={href}
-          className="font-display inline-flex items-center gap-2 text-base font-semibold text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-2 underline-offset-[6px] transition hover:text-[var(--color-brand-terracotta-ink)] sm:text-lg"
+          className="font-display -my-2.5 inline-flex items-center gap-2 py-2.5 text-base font-semibold text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-2 underline-offset-[6px] transition hover:text-[var(--color-brand-terracotta-ink)] sm:text-lg"
         >
           Learn more
           <span aria-hidden="true">&rarr;</span>
@@ -568,7 +572,7 @@ export default function AuthorPage() {
                 href={SQUARE_STORE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-display inline-flex items-center gap-2 text-base font-semibold text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-2 underline-offset-[6px] transition hover:text-[var(--color-brand-terracotta-ink)] sm:text-lg"
+                className="font-display -my-2.5 inline-flex items-center gap-2 py-2.5 text-base font-semibold text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-2 underline-offset-[6px] transition hover:text-[var(--color-brand-terracotta-ink)] sm:text-lg"
               >
                 Shop all books on Square
                 <span aria-hidden="true">&rarr;</span>

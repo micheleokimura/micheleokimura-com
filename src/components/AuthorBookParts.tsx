@@ -242,7 +242,12 @@ export function SquareButton({
       className={`group/buy inline-flex items-center justify-center gap-1.5 rounded-md bg-[var(--color-cta)] font-semibold text-[var(--color-cta-ink)] shadow-sm transition hover:bg-[var(--color-cta-hover)] focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 focus-visible:ring-offset-white focus-visible:outline-none ${
         size === 'page'
           ? 'px-6 py-3.5 text-base'
-          : 'px-3 py-2 text-xs sm:text-sm'
+          : // `tile` was a 12px label in a 32px-tall control below sm, which is
+            // both under the 16px reading floor and well under the 44pt tap
+            // target. 14px at every width, and min-h-11 forces the 44 on the
+            // phone. `sm:min-h-0` hands the height back to the padding from sm
+            // up, so the desktop card footer is the 40px control it always was.
+            'min-h-11 px-3 py-2 text-sm sm:min-h-0'
       } ${className}`}
     >
       Buy on Square
