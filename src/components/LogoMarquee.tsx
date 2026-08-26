@@ -64,7 +64,10 @@ function LogoTile({ item }: { item: ClientLogo }) {
       <span className="relative flex h-24 w-full items-center justify-center">
         <LogoArt item={item} />
       </span>
-      <span className="text-center text-sm text-neutral-600 transition group-hover:text-neutral-900">
+      {/* text-sm -> text-base, per Michele 2026-08-25. At 2x tile width the
+          caption was legible only if you went looking for it; one step up
+          reads at a glance without competing with the logo above it. */}
+      <span className="text-center text-base text-neutral-600 transition group-hover:text-neutral-900">
         {item.name}
       </span>
     </>
