@@ -115,17 +115,32 @@ export function LogoMarquee() {
 
       <FadeIn>
         <div className="marquee-band mt-12 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
-          {/* 192s, and the number is arithmetic rather than taste. Michele
-              asked for the scroll to be ~50% slower. The tiles also doubled in
-              width in the same pass, which on its own would have DOUBLED the
-              pixel speed at an unchanged duration. So the old 48s has to be
-              multiplied twice: x2 to absorb the wider track, then x2 again for
-              the requested slowdown. The track travels 50% of its own width per
-              cycle, so this is ~26 px/s against the old ~51 px/s. Re-derive
-              this if the tile width changes again. */}
+          {/* 144s: halfway back from Brett's slowdown, per Michele 2026-08-25.
+              She wants it faster than the current crawl and slower than it was
+              before he asked.
+
+              The history, so the midpoint is arithmetic rather than taste:
+                36s  original build
+                48s  first slowdown (c970bdb)
+                192s Brett's slowdown (8c11587), which in the SAME commit also
+                     doubled the tile width, w-36/sm:w-40 -> w-72/sm:w-80
+
+              That last commit is why the raw numbers do not compare. Doubling
+              the tile width doubles the track length, so holding pixel speed
+              constant already required going 48s -> 96s. Only the second
+              doubling, 96s -> 192s, was the slowdown Brett asked for. So the
+              pre-slowdown speed expressed in today's geometry is 96s, and the
+              midpoint is (96 + 192) / 2 = 144s.
+
+              The track travels 50% of its own width per cycle, which puts this
+              at ~35 px/s, between the old ~51 and the current ~26. Taking the
+              naive midpoint of the raw numbers, (48 + 192) / 2 = 120s, would
+              land at ~42 px/s and undo about three quarters of the slowdown.
+              Re-derive this if the tile width changes again. */}
+
           <div
             className="marquee-track marquee-rtl"
-            style={{ animationDuration: '192s' }}
+            style={{ animationDuration: '144s' }}
           >
             {items.map((item, i) => (
               <LogoTile key={`${item.slug}-${i}`} item={item} />
