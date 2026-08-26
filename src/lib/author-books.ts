@@ -405,13 +405,19 @@ export const AUTHOR_BOOKS: AuthorBook[] = [
     coverAlt: 'Raising Kingdom Kids',
     teaser:
       'Tested in the trenches and proven in real ministry, the Kingdom Kids Curriculum is a dynamic compilation of over 100 field-tested lessons developed across ten years of active children\u2019s and youth ministry.',
-    // Michele's brochure copy, 2026-08-24, verbatim, with one edit of hers:
-    // Hawai\u02bbi takes the \u02bbokina. Her copy calls it "the Kingdom Kids
-    // Curriculum" where the title on the shelf is "Raising Kingdom Kids". That
-    // is her wording and it stays.
+    // Michele's brochure copy, verbatim, with two edits of hers: Hawai\u02bbi takes
+    // the \u02bbokina, and her source read "U.s mainland". Her copy calls it "the
+    // Kingdom Kids Curriculum" where the title on the shelf is "Raising Kingdom
+    // Kids". That is her wording and it stays, as do "dynamic" and
+    // "seamlessly".
+    //
+    // Revised 2026-08-25: the second paragraph now stops after "carry
+    // seamlessly across every generation". The sentence that used to follow it,
+    // about pastors adapting the principles for full adult congregations, was
+    // cut by Michele.
     description: [
       'Tested in the trenches and proven in real ministry, the Kingdom Kids Curriculum is a dynamic compilation of over 100 field-tested lessons developed across ten years of active children\u2019s and youth ministry. Every single lesson was taught in a real room with real kids before being written down, ensuring that nothing here is abstract theory, but time-tested, practical truth that works.',
-      'Originally built for children\u2019s ministry leaders and parents, the impact of this curriculum has reached far beyond the Sunday school classroom. Trusted by churches across Hawai\u02bbi and throughout the U.S. mainland, its core truths carry seamlessly across every generation. In fact, pastors regularly adapt these foundational principles to teach from the main platform for full adult congregations.',
+      'Originally built for children\u2019s ministry leaders and parents, the impact of this curriculum has reached far beyond the Sunday school classroom. Trusted by churches across Hawai\u02bbi and on the U.S. mainland. Its core truths carry seamlessly across every generation.',
     ],
     // This replaces the bare five-item "What the lessons cover" list. Same five
     // pillars, now with Michele's line on each.
