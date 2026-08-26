@@ -40,7 +40,7 @@ stand-in. Do not invent a sixth.
 | Teal AS TEXT on cream | `#0F766E` | `--color-teal-text` |
 | Teal accent AS TEXT on navy | `#9FE8DF` | `--color-teal-on-dark` |
 | Coral AS TEXT on cream | `#B8431F` | `--color-coral-text` |
-| CTA hover fill | `#F47C60` | `--color-coral-hover` |
+| Coral, lightened | `#F47C60` | `--color-coral-hover` |
 | Text ON a coral fill | `#1B2239` | `--color-coral-ink` |
 
 ### The CTA fill is its own colour now (2026-08-26)
