@@ -248,15 +248,18 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     accent: 'teal',
     texture: 'lines',
     icon: 'compass',
-    // Michele's full description, 2026-08-24, verbatim bar the em dashes she
-    // asked to have taken out (after "Releasing Generations" and after "her
-    // calling", both now commas). It supersedes the short paragraph that was
-    // here and carries every fact that one did, the decade of delivery
-    // included, so nothing is held back.
+    // Michele's own rewrite, 2026-08-26, dropped in verbatim. It replaces the
+    // single paragraph she sent on 2026-08-24 and keeps every fact that one
+    // carried, the decade of delivery included, while adding the wrestling
+    // with God she calls "Banter to Obedience". Two paragraphs by her choice.
     body: [
       {
         kind: 'paragraph',
-        text: 'The distance between a God-given dream and a courageous "yes" often feels like an insurmountable chasm. In her signature keynote, Michele pulls back the curtain on the raw, unfiltered story of founding Releasing Generations, confronting the paralyzing fears, overcoming the false starts, and capturing the exact moment she stopped dreaming about her calling and started walking in it. For over a decade at conferences, churches, and leadership events, this transformative message has awakened audiences to the "more" God has waiting for them. You won’t just walk away inspired; you will leave equipped with a clear, practical framework to step into your own brave purpose and live it out loud.',
+        text: 'The distance between a God-given dream and a courageous "yes" can often feel impossibly wide. In her signature keynote, Michele shares the honest, unfiltered story of founding Releasing Generations. She opens up about her own paralyzing fears, the false starts, and the deep insecurities she faced when God first called her. Because we cannot see the future, we often wrestle with God before stepping into what He has for us. Michele often refers to this message as "Banter to Obedience." But more importantly, she shares the beauty of finally embracing that call, stepping out in faith, and discovering exactly what she was born to do.',
+      },
+      {
+        kind: 'paragraph',
+        text: 'For over a decade at conferences, churches, and leadership events, this message has awakened audiences to the "more" God has waiting for them. It is a faith-building journey that reveals the absolute goodness of God and His deep desire to help you fulfill your own beautiful, unique calling. You will leave encouraged, equipped, and armed with a practical framework to step into your brave purpose and live it out loud.',
       },
     ],
     // Shutterstock 1059019742, licensed. Sun breaking through a forest with
