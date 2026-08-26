@@ -148,15 +148,11 @@ export const CLIENT_LOGOS: ClientLogo[] = [
     logo: null,
     href: '/case-studies/kamehameha-schools',
   },
-  // Advance Good carries no case-study copy anywhere in the repo yet, so it
-  // takes the contact popup until Michele sends wording. She Leads America got
-  // its page on 2026-08-25 and links to it like any other tile.
   {
     slug: 'advance-good',
     name: 'Advance Good',
     logo: `${DIR}/advance-good.png`,
-    href: null,
-    contact: true,
+    href: '/case-studies/advance-good',
   },
   {
     slug: 'she-leads-america',
