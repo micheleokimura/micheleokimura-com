@@ -145,11 +145,15 @@ export default function AboutPage() {
               <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
                 Meet Michele
               </h2>
+              {/* Michele's own wording, sent 2026-08-26, replacing the ported
+                  WordPress-era copy. One paragraph by direction. */}
               <p className="text-lg leading-8 text-neutral-600">
-                If you catch me on a good day, I am probably laughing about
-                something, coffee in hand, telling a story that gets a little
-                more dramatic every time I tell it. That is the same person who
-                shows up to every Talk Story Session and every stage.
+                Most days, you&rsquo;ll find me with coffee in hand, laughing
+                over a story that gets a little more dramatic every time I tell
+                it. I care about real connection. When I step on stage or lead a
+                Talk Story Session, my goal is always the same: to bring that
+                same warmth, real-life energy, and heart to the room, meeting
+                people right where they are.
               </p>
             </div>
           </div>
