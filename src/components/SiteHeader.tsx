@@ -38,19 +38,27 @@ function XIcon(props: React.SVGProps<SVGSVGElement>) {
 }
 
 /**
- * MOBILE OVERLAY MODE, added 2026-08-26 after Brett's iPhone 15 Pro review.
+ * OVERLAY MODE ON THE HOME PAGE, AT EVERY WIDTH.
  *
- * On the home page BELOW sm, the header stops being a bar and becomes furniture
- * floating on the hero video: no ground, no hairline, white wordmark, and a
- * hamburger on a dark chip. Everything from sm up, and every other route at
- * every width, is the bar this file has always drawn. The breakpoint is `sm`
- * rather than `md` because that is where the home hero already switches between
- * its stacked-copy layout and true 16:9; splitting them would put a transparent
- * header over a 16:9 hero that was never designed to carry one.
+ * Added for mobile on 2026-08-26 after Brett's iPhone review, and widened to
+ * every breakpoint later the same day after he reviewed desktop: "the hero
+ * treatment we defined for mobile now applies to EVERY breakpoint." So on `/`
+ * the header stops being a bar and becomes furniture floating on the video: no
+ * ground, no hairline, white wordmark, white nav, and a top-of-screen scrim
+ * doing the legibility work. Every other route is the bar this file has always
+ * drawn, unchanged.
+ *
+ * There is no `sm:` or `md:` reversion left in here. That is the point of the
+ * change: one treatment, every screen. The only thing that still switches on
+ * width is WHICH control you get, the full nav from md up or the hamburger
+ * below it, and that breakpoint is inherited rather than new.
  *
  * It goes back to being a solid bar the moment the menu opens. The panel below
  * is an opaque sheet, and hanging it off a transparent bar leaves a stripe of
  * video showing between the two.
+ *
+ * WHITE TEXT ON MOVING PICTURE IS THE HARD PART, and the scrim numbers below
+ * are where the honesty lives. Read the note on the scrim element.
  */
 export function SiteHeader() {
   const pathname = usePathname()
@@ -99,46 +107,67 @@ export function SiteHeader() {
     <header
       className={cn(
         'absolute top-0 right-0 left-0 z-40 border-b py-3 pt-[calc(0.75rem+env(safe-area-inset-top,0px))] sm:py-4 sm:pt-[calc(1rem+env(safe-area-inset-top,0px))]',
-        // Base-then-`sm:` rather than `max-sm:`, so the cascade order is the
-        // one Tailwind guarantees: the responsive variant always wins over the
-        // bare utility, whatever order the strings arrive in.
         floating
-          ? 'border-transparent bg-transparent sm:border-[var(--color-navy)]/8 sm:bg-[var(--color-band-1)]'
+          ? 'border-transparent bg-transparent'
           : 'border-[var(--color-navy)]/8 bg-[var(--color-band-1)]',
       )}
     >
-      {/* The legibility scrim behind the white wordmark, mobile home only.
-          40% black at the very top of the glass, gone by the bottom of it, so
-          the mark reads over any frame of the video without the top of the
-          screen turning into a bar again.
+      {/* THE TOP SCRIM, and it is now carrying words rather than a logotype,
+          which is why it got heavier when the nav moved onto it.
 
-          HEIGHT IS 8rem PLUS THE NOTCH INSET, not a flat 8rem. That is the
-          whole reason it is a calc: the safe-area pad pushes the wordmark down
-          to roughly 71-113px on an iPhone 15 Pro, so a fixed 128px scrim has
-          already faded to about 4% by the BOTTOM of the signature, which is
-          where it is needed most. Adding the inset moves the whole ramp down
-          with the mark, and on a device that reports no inset this is exactly
-          the 128px it was drawn as.
+          A logotype is exempt from WCAG 1.4.3 and 1.4.11, so the first version
+          of this was a legibility judgement at 40%. The nav is not exempt: it
+          is 13 to 14px text, so it owes a measured 4.5:1 against the WORST
+          frame in the clip, and the worst frame is a near-white audience shot
+          at a relative luminance of 0.95.
 
-          The wordmark is a logotype, which WCAG exempts from 1.4.3 and 1.4.11,
-          so the alpha is a legibility judgement rather than a measured floor.
-          It is worth knowing what the judgement is up against: the clip's two
-          audience shots run to a relative luminance of 0.95, and white on 40%
-          black over one of those is 2.5:1. Legible, and the honest reason it
-          is allowed to be thin is that those frames are two seconds of a
-          sixteen-second loop whose mean luminance is 0.089. Pushing the scrim
-          past this starts rebuilding the bar Brett asked to have removed.
+          The arithmetic, composited in order (video, then the hero's flat 28%
+          navy wash, then this):
+            worst frame + wash          effective luminance 0.58
+            white needs                 luminance <= 0.1833  (4.5:1)
+            so this scrim needs         alpha >= 0.38 where the nav sits
+            it delivers                 0.50 at y=34, 0.45 at y=68
+            white on that               6.4:1 at the top of the row, 5.0:1 at
+                                        the bottom of it
+          Every label in the row clears AA against the brightest frame in the
+          clip, which is the only frame worth designing for.
+
+          HEIGHT IS 11rem PLUS THE NOTCH INSET, not a flat 11rem. The safe-area
+          pad pushes the whole row down on a notched phone, so a fixed height
+          would have the ramp fading out exactly where the row lands. Adding the
+          inset moves the ramp down with it, and on anything reporting no inset
+          this is the 176px it was drawn as.
+
+          Six stops rather than two, because a two-stop linear ramp has a hard
+          visual midpoint and reads as the bottom edge of a bar. These
+          approximate an ease-out, so what you see is a vignette.
+
+          If the video is ever regraded lighter, re-measure. If it is graded
+          DARKER, this can come down, and it should: 0.52 at the very top is the
+          most this can carry before it starts rebuilding the bar Brett asked to
+          have removed.
 
           `pointer-events-none` matters: this box is taller than the header, so
-          without it the scrim would swallow taps on the top of the hero. */}
+          without it the scrim would swallow clicks on the top of the hero. */}
       {floating ? (
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[calc(8rem+env(safe-area-inset-top,0px))] bg-[linear-gradient(to_bottom,rgba(0,0,0,0.40)_0%,rgba(0,0,0,0.22)_50%,rgba(0,0,0,0)_100%)] sm:hidden"
+          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[calc(11rem+env(safe-area-inset-top,0px))] bg-[linear-gradient(to_bottom,rgba(0,0,0,0.52)_0%,rgba(0,0,0,0.50)_20%,rgba(0,0,0,0.44)_40%,rgba(0,0,0,0.28)_62%,rgba(0,0,0,0.12)_82%,rgba(0,0,0,0)_100%)]"
         />
       ) : null}
 
-      <Container>
+      {/* NOT <Container>, and the difference is load-bearing below lg.
+          Container caps its contents at max-w-2xl (672px) until lg, which on a
+          1000px tablet inset the whole header row by 164px on each side: the
+          wordmark floated in from the left edge and the nav stopped well short
+          of the right one. Brett's brief asks for the nav hard against the top
+          right at every width, so the row takes the uncapped max-w-7xl gutter
+          instead. At lg and up Container is already `lg:max-w-none`, so the
+          desktop bar is byte-for-byte what it was; what changes is 720-1023px,
+          where the row now spans the page the way it always looked like it
+          should. The hero copy below uses this same wrapper, so the wordmark
+          and the H1 share one left edge. */}
+      <div className="mx-auto max-w-7xl gutter-x">
         {/* The nav takes `ml-auto` rather than the row taking `justify-between`.
             Michele read the old spacing as centered and disliked it; pushing
             the five labels to the right sits them against the Contact button
@@ -150,23 +179,21 @@ export function SiteHeader() {
             className={cn(
               'shrink-0 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4',
               floating
-                ? 'focus-visible:outline-white sm:focus-visible:outline-neutral-950'
+                ? 'focus-visible:outline-white'
                 : 'focus-visible:outline-neutral-950',
             )}
           >
-            {/* Two marks rather than one filtered one. The white file is real
-                artwork Michele supplied and the footer has been using it on
-                navy since 2026-08-24, so the header takes the same asset
-                rather than inventing a CSS-inverted copy of the black one.
-                Both are served through next/image at sizes="90px", so the
-                second one costs single-digit kilobytes on the one breakpoint
-                where it is visible. It is `priority` because on mobile home it
-                IS the header logo, above the fold, and the black one is hidden
-                there. */}
-            {floating ? (
-              <Logo invert priority className="sm:hidden" />
-            ) : null}
-            <Logo className={floating ? 'hidden sm:block' : undefined} />
+            {/* One mark, not two. The white file is real artwork Michele
+                supplied and the footer has been using it on navy since
+                2026-08-24, so the overlay header takes the same asset rather
+                than inventing a CSS-inverted copy of the black one.
+
+                This used to render BOTH and hide one per breakpoint, because
+                the overlay only existed below sm. It applies at every width
+                now, so the breakpoint swap is gone and with it the second
+                download. `priority`, because on this route it IS the header
+                logo and it is above the fold. */}
+            {floating ? <Logo invert priority /> : <Logo />}
           </Link>
 
           {/* Five labels plus the wordmark and the CTA are a tight fit in the
@@ -195,9 +222,23 @@ export function SiteHeader() {
                     // change means the current page is not signalled by color
                     // alone (WCAG 1.4.1). Navy on the off-white ground is
                     // 13.7:1.
-                    active
-                      ? 'font-semibold text-[var(--color-navy)]'
-                      : 'font-medium text-neutral-700 hover:text-[var(--color-navy)]',
+                    //
+                    // OVER THE VIDEO the same rule holds and the colours flip:
+                    // white for both states, and the CURRENT page is carried by
+                    // weight plus the rule below it rather than by a second
+                    // colour. Every label is solid white rather than white/85,
+                    // because at the scrim this header runs, 85% white drops to
+                    // 3.71:1 against the brightest frame while solid white
+                    // holds 6.4:1. There is no room for a transparent ink here.
+                    // Inactive labels are separated from the active one by
+                    // weight, exactly as on the light bar.
+                    floating
+                      ? active
+                        ? 'font-semibold text-white'
+                        : 'font-medium text-white hover:text-white'
+                      : active
+                        ? 'font-semibold text-[var(--color-navy)]'
+                        : 'font-medium text-neutral-700 hover:text-[var(--color-navy)]',
                   )}
                   aria-current={active ? 'page' : undefined}
                   // Drop focus after a MOUSE click so the keyboard focus ring
@@ -217,9 +258,13 @@ export function SiteHeader() {
                     aria-hidden="true"
                     className={cn(
                       'absolute inset-x-2 bottom-1 h-0.5 origin-left rounded-full transition-transform duration-[240ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] lg:inset-x-3',
-                      active
-                        ? 'scale-x-100 bg-[var(--color-navy)]'
-                        : 'scale-x-0 bg-[var(--color-navy)]/40 group-hover:scale-x-100',
+                      floating
+                        ? active
+                          ? 'scale-x-100 bg-white'
+                          : 'scale-x-0 bg-white/60 group-hover:scale-x-100'
+                        : active
+                          ? 'scale-x-100 bg-[var(--color-navy)]'
+                          : 'scale-x-0 bg-[var(--color-navy)]/40 group-hover:scale-x-100',
                     )}
                   />
                 </Link>
@@ -262,10 +307,23 @@ export function SiteHeader() {
                 treatment: it is a
                 full-width block standing alone in a sheet, and an outline at
                 that size reads as disabled. */}
+            {/* OVER THE VIDEO the outline goes white. The boundary rule is
+                the same one that put --color-field-border on the light bar:
+                WCAG 1.4.11 holds a control's edge to 3:1, and white at 55%
+                over the scrimmed frame clears that at every point in the clip
+                while a hairline at 20% would not. The label is solid white for
+                the same reason the nav labels are. Hover still lands on
+                --color-cta, whose white label is 4.63:1, so the control behaves
+                identically on both grounds and only the resting colours move. */}
             <button
               type="button"
               onClick={() => setContactOpen(true)}
-              className="hidden items-center justify-center rounded-md px-4 py-2 text-sm font-semibold whitespace-nowrap text-[var(--color-navy)] ring-1 ring-[var(--color-field-border)] transition hover:bg-[var(--color-cta)] hover:text-[var(--color-cta-ink)] hover:ring-[var(--color-cta)] focus-visible:ring-2 focus-visible:ring-[var(--color-focus-outline)] focus-visible:ring-offset-2 focus-visible:outline-none sm:inline-flex lg:px-5 lg:py-2.5"
+              className={cn(
+                'hidden items-center justify-center rounded-md px-4 py-2 text-sm font-semibold whitespace-nowrap transition focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none sm:inline-flex lg:px-5 lg:py-2.5',
+                floating
+                  ? 'text-white ring-1 ring-white/55 hover:bg-[var(--color-cta)] hover:ring-[var(--color-cta)] focus-visible:ring-white focus-visible:ring-offset-transparent'
+                  : 'text-[var(--color-navy)] ring-1 ring-[var(--color-field-border)] hover:bg-[var(--color-cta)] hover:text-[var(--color-cta-ink)] hover:ring-[var(--color-cta)] focus-visible:ring-[var(--color-focus-outline)] focus-visible:ring-offset-2',
+              )}
             >
               Contact
             </button>
@@ -305,7 +363,7 @@ export function SiteHeader() {
               className={cn(
                 'inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-md px-3 py-2 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 md:hidden',
                 floating
-                  ? 'bg-black/55 text-white ring-1 ring-white/25 backdrop-blur-[2px] hover:bg-black/70 focus-visible:outline-white sm:bg-transparent sm:text-neutral-900 sm:ring-[var(--color-teal-20)] sm:backdrop-blur-none sm:hover:bg-[var(--color-teal-05)] sm:hover:ring-[var(--color-teal-30)] sm:focus-visible:outline-[var(--color-brand-teal)]'
+                  ? 'bg-black/55 text-white ring-1 ring-white/25 backdrop-blur-[2px] hover:bg-black/70 focus-visible:outline-white'
                   : 'text-neutral-900 ring-1 ring-[var(--color-teal-20)] hover:bg-[var(--color-teal-05)] hover:ring-[var(--color-teal-30)] focus-visible:outline-[var(--color-brand-teal)]',
               )}
             >
@@ -318,7 +376,7 @@ export function SiteHeader() {
             </button>
           </div>
         </div>
-      </Container>
+      </div>
 
       <div
         id="mobile-nav-panel"

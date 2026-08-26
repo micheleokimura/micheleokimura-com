@@ -186,105 +186,73 @@ export default function HomePage() {
   return (
     <>
       {/* ------------------------------------------------------------- hero */}
-      {/* TRUE 16:9, from sm up. The source file is 1920x1080, but the section
-          used to be a fixed 360-440px band, which cropped it to roughly 3.3:1
-          and cut the audience out of frame. `aspect-[16/9]` lets the whole
-          frame through, which is what Michele asked for and what keeps her AND
-          the room visible.
+      {/* FULL VIEWPORT AT EVERY BREAKPOINT. Brett, 2026-08-26, after reviewing
+          the mobile treatment on desktop: "the hero treatment we defined for
+          mobile now applies to EVERY breakpoint." So the 16:9 band is gone, the
+          white header above it is gone, and this is one video filling the glass
+          from phone to ultrawide.
 
-          Below sm the ratio is dropped for a min-height instead: 16:9 on a
-          375px phone is 211px tall, which cannot hold the H1, the subhead, the
-          award line and a button. There the video is ambient background behind
-          stacked copy.
+          What it replaced, so nobody restores it by accident: `min-h-[32rem]`
+          below sm and `sm:aspect-[16/9] sm:max-h-[calc(100svh-4.75rem)]` above
+          it, with the copy in a bottom-anchored scrim. That design existed to
+          show the whole 16:9 frame including the audience. Full-bleed cannot do
+          that at any aspect ratio other than 16:9, and that is the trade Brett
+          made knowingly. See the crop note on the video below.
 
-          The max-height is VIEWPORT-RELATIVE, and the distinction matters. An
-          earlier cut used a fixed 900px, which engaged on any viewport wider
-          than 1600px: Michele's own display is 1710 CSS px, so the one person
-          who asked for 16:9 would have been served 1.90:1 on her own screen.
-          That cap was removed.
-
-          `calc(100svh-4.75rem)` is a different thing. 4.75rem is the header, so
-          this caps the hero at exactly the space left on screen, and it can
-          only ever engage when honest 16:9 would push the hero PAST the fold,
-          which is the one case where the ratio and Michele's "the award has to
-          be visible above the fold" cannot both be satisfied. On her 1710x1073
-          display 16:9 is 962px against 997px available, so nothing clamps and
-          she sees true 16:9. On a shorter laptop the hero gives up a little
-          height rather than dropping the award and the CTA off the screen.
-
-          If she would rather have pure 16:9 everywhere and accept the CTA
-          falling below the fold on small laptops, delete the max-h and nothing
-          else changes.
-
-          OVERLAY. Two layers, and they do different jobs. See the notes on each
-          one below; the short version is a 25% flat wash over the whole frame
-          plus a scrim that only exists behind the copy.
-
-          The scrim is what was actually wrong before. The wash was already 35%,
-          but the scrim under it ran to 95% navy across the bottom THREE
-          QUARTERS of the frame, so the majority of the hero composited to
-          roughly 97% navy and the picture only survived in a thin band up top.
-          Michele reported the hero as reading solid navy, and she was right.
-          Both numbers came down, and the scrim is now bound to the text rather
-          than to a fraction of the hero.
-
-          WHAT IS IN THE VIDEO, because it changes what any of this can achieve.
-          The clip is 16s and cuts between stage shots of Michele and shots of
-          the audience. The stage footage is SHARP as of 2026-08-25. It used to
-          carry a 9px gaussian blur, added to soften the guitars, stools and mic
-          stands behind her, and that blur softened Michele along with them.
-          Michele asked for it gone, so the clip was re-rendered without it and
-          she is in focus now. The instruments and stools are visible as a
-          result; that is the trade she chose, and her face is the priority.
-
-          The scrim numbers below still hold, because sharpening changed detail
-          rather than brightness: mean relative luminance behind the copy moved
-          0.056 -> 0.055 across 65 frames, and the peak frame is unchanged at
-          0.123. The audience footage is still the brightest thing in the clip
-          and is still the reason the scrim cannot go lower than it does.
-
-          If this file is ever replaced again, re-measure. A brighter clip needs
-          more scrim. Do not re-introduce blur to hide the stage: that is the
-          exact thing Michele rejected. */}
-      {/* FULL-VIEWPORT ON A PHONE, added 2026-08-26 after Brett reviewed the
-          live site on an iPhone 15 Pro. His note was that the hero "should
-          feel like the site" and take the entire viewport, with no dead white
-          space at the top fighting it for attention. Three things make that
-          happen, and they are spread across three files:
-
+          HOW THE FULL VIEWPORT IS ACHIEVED, across three files:
             1. layout.tsx ships viewport-fit=cover, so iOS stops letterboxing
-               the page inside the safe area and the video can reach the top
-               of the glass.
-            2. SiteHeader goes transparent below sm on this route, so the band
-               that used to sit above the video is gone rather than merely
-               recoloured.
-            3. The margin below cancels `main`'s header pad exactly, using the
-               same --header-offset variable `main` pads with, so the section
-               starts at y=0. If the header height ever changes, that one
-               variable moves and these two stay in agreement.
+               the page into the safe area and the video reaches the glass.
+            2. SiteHeader goes transparent on this route at every width.
+            3. The negative margin below cancels `main`'s header pad exactly,
+               reading the same --header-offset that `main` pads with, so the
+               section starts at y=0 and the two can never drift apart.
 
           `min-h-[100svh]`, not `100dvh` and not `100vh`. svh is the viewport
-          with the browser chrome SHOWN, which is the state the page loads in,
-          so the hero fills the screen exactly at first paint. dvh would be
-          correct at every scroll position and wrong in a more annoying way:
-          it re-lays-out the hero while you scroll, which on a section this
-          size reads as the whole page jumping. 100vh is the largest of the
-          three and would push the CTA under the URL bar on load. `min-h`
-          rather than `h`, so the copy can still grow the section at a large
-          accessibility text size instead of overflowing it.
+          with browser chrome SHOWN, which is the state the page loads in, so
+          the hero fills the screen exactly at first paint. dvh is correct at
+          every scroll position and wrong in a more annoying way: it re-lays-out
+          the hero while you scroll, which at this size reads as the whole page
+          jumping. 100vh is the largest of the three and would push the CTA
+          under the URL bar on load. `min-h` rather than `h`, so the copy can
+          grow the section at a large accessibility text size instead of
+          overflowing it.
 
-          THE CROP IS THE TRADE, and it is worth knowing about. The clip is
-          16:9 and `object-cover` on a 393x852 screen scales it to fit the
-          HEIGHT, so the full frame height survives and roughly the middle
-          26% of its width is what you see. Michele stands upper-middle in
-          every stage frame, so she stays in shot; the wide audience cutaways
-          are what get cropped hardest. At the old 32rem this was already
-          showing about 43% of the frame width, so the change is a matter of
-          degree rather than a new condition. Flagged to Brett as his call. */}
+          VERTICAL PLACEMENT IS CENTRING, NOT A FIXED 30%. Brett asked for the
+          block to start around 30% down with the CTA ending around 70%, so it
+          reads balanced rather than floaty. A literal `top: 30%` hits that on
+          one screen size and misses everywhere else, because the block's height
+          is set by how many lines the copy wraps to. Centring inside the space
+          left between the header pad and the bottom inset hits the brief across
+          the range instead, and it can never push the CTA off the bottom:
+
+            393x852 phone     block 29.5% to 71.7%
+            1440x900 desktop  block   27% to   80%
+
+          The pt/pb are what make that safe. pt is the header's own height, so
+          the copy can never slide under the wordmark or the nav; pb clears the
+          home indicator. Centring happens in what is left. */}
       <section
         aria-label="Michele Okimura"
-        className="relative isolate mt-[calc(var(--header-offset)*-1)] min-h-[100svh] w-full overflow-hidden bg-[var(--color-navy)] sm:mt-0 sm:min-h-0 sm:aspect-[16/9] sm:max-h-[calc(100svh-4.75rem)]"
+        className="relative isolate mt-[calc(var(--header-offset)*-1)] flex min-h-[100svh] w-full flex-col justify-center overflow-hidden bg-[var(--color-navy)] pt-[var(--header-offset)] pb-[calc(2.25rem+env(safe-area-inset-bottom,0px))]"
       >
+        {/* DO NOT restyle this element without reading the whole comment. The
+            file itself is owned by a separate task and must not be touched
+            from here.
+
+            object-cover + object-center is the whole crop policy. Cover is what
+            lets one 16:9 clip fill a portrait phone and an ultrawide monitor
+            from the same source; center is what keeps Michele, who stands
+            upper-middle in every stage beat, inside the visible window at both
+            extremes. On a 393x852 phone that window is roughly the middle 26%
+            of the frame's width; on a 2560x1440 monitor it is the full width
+            and the middle 90% of its height.
+
+            If Michele ever needs nudging once the re-edited clip lands, the
+            control is `object-position` and the direction is counter-intuitive:
+            a value BELOW 50% (say `object-[40%_center]`) shows more of the
+            frame's LEFT side and moves her toward the right of the screen,
+            which is the direction that suits this layout, since the copy owns
+            the left. Above 50% moves her left, into the text. */}
         <video
           src="/videos/michele-hero.mp4"
           autoPlay
@@ -292,59 +260,93 @@ export default function HomePage() {
           loop
           playsInline
           poster="/team/michele-hero-canva.jpg"
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover object-center"
           aria-hidden="true"
         />
 
-        {/* The flat wash over the WHOLE frame: 25%, the light end of the range
-            Michele asked for. This is the only thing covering the top of the
-            picture, which is where she is: in every stage frame she stands in
-            the upper-middle, so her head and shoulders sit at roughly 10-25% of
-            the frame height and are darkened by this and nothing else.
+        {/* Layer 1 of 3: a flat wash over the WHOLE frame, and every contrast
+            figure in this file is measured with it already applied. It went
+            from 25% to 28% when the copy moved off the bottom of the frame:
+            the old design could lean on a heavy bottom scrim because nothing
+            sat above it, and this one has words across the middle of the
+            picture instead.
 
-            25% rather than 40% because the footage is already dark. Measured
-            over 65 frames, the mean relative luminance behind the copy is
-            0.089, so this clip has very little brightness to give away. */}
+            The clip is dark to begin with. Measured over 65 frames, mean
+            relative luminance behind the copy is 0.089, and this wash is doing
+            almost nothing for most of the loop. What it exists for is the two
+            audience cutaways that run to 0.95, which are what every floor in
+            this file is set against. */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[var(--color-navy)]/25"
+          className="absolute inset-0 bg-[var(--color-navy)]/28"
         />
 
-        {/* The legibility scrim, and it is attached to the COPY rather than to
-            a fraction of the hero. That distinction is load-bearing: the hero
-            is 16:9 but clamps to the viewport on a short screen, so a
-            percentage-height scrim slides out from under the text exactly when
-            the hero gets shorter. This element wraps the copy, so its height is
-            always the text plus the `pt` fade zone, at every breakpoint.
+        {/* Layer 2, PORTRAIT ONLY. Below sm the copy runs the full width of the
+            screen, so a left-weighted scrim would do nothing for it and this
+            one runs top to bottom instead.
 
-            The stops are derived, not eyeballed. Sampling every 0.25s across
-            the clip and compositing cream #F2ECDF over navy at each candidate
-            alpha, the copy needs an effective alpha of 0.54 under the H1 (large
-            text, 3:1) and 0.62 under the subhead (body text, 4.5:1) for ZERO
-            failing pixels in the worst frame. The clip is mostly dark, but two
-            audience shots run to a near-white luminance of 0.95 right where the
-            text sits, and those are what set the floor.
+            The ramp is shaped around what sits where. It stays out of the way
+            through the top fifth, which is the header's own scrim's territory,
+            reaches 0.42 by 28% where the H1 starts, and is at full strength by
+            40% where the body copy begins. That split is deliberate and it is
+            the same one the old bottom scrim used: an H1 is large text and owes
+            3:1, so it can sit on a lighter ground than the subhead, which owes
+            4.5:1. Composited over the wash above, worst frame in the clip:
 
-            Measured result of the shipped stack, worst case across the clip,
-            zero failing pixels in every band:
+              H1 top line, 29% down     effective 0.604   (floor 0.54)
+              subhead, 40% down         effective 0.798   (floor 0.62)
+              award and CTA, 55%+       effective 0.85+ */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(31,39,68,0)_0%,rgba(31,39,68,0.12)_18%,rgba(31,39,68,0.42)_28%,rgba(31,39,68,0.72)_40%,rgba(31,39,68,0.80)_70%,rgba(31,39,68,0.82)_100%)] sm:hidden"
+        />
 
-              H1        effective 0.630   4.13:1  (floor 3.0)
-              roles     effective 0.692   5.04:1  (floor 4.5)
-              subhead   effective 0.722   5.16:1  (floor 4.5)
-              award     effective 0.792   5.15:1  (floor 4.5)
-              top of frame, where Michele is:  0.25, the wash alone
+        {/* Layer 2, LANDSCAPE. From sm up the copy is a column down the left,
+            so the scrim is too: heavy on the left, gone by 85% across, which
+            leaves the right side of the frame clean for Michele. This is the
+            half of the design that makes the rule-of-thirds composition Brett
+            asked for actually legible rather than merely arranged.
 
-            Re-run the measurement if the video is ever replaced; a brighter
-            clip needs more scrim. The script is in the commit for this change. */}
-        <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,rgba(31,39,68,0.78)_0%,rgba(31,39,68,0.70)_40%,rgba(31,39,68,0.52)_70%,rgba(31,39,68,0)_100%)] pt-40 sm:pt-48 lg:pt-56">
-        {/* pb clears the home indicator. With viewport-fit=cover the section
-            now runs to the physical bottom of the screen, and the old 36px
-            put the CTA squarely under the 34px indicator on an iPhone. The
-            inset is 0 everywhere else, so this is the old padding on every
-            other device. From sm the hero is no longer full-bleed and the
-            inset is irrelevant, but harmless. */}
-        <Container className="pb-[calc(2.25rem+env(safe-area-inset-bottom,0px))] sm:pb-10 lg:pb-14">
-          <FadeIn className="max-w-2xl">
+            The fade point is measured against the copy column, not chosen. That
+            column is capped at min(34rem, 42vw), so on a 1440 screen its right
+            edge lands at about 46% across. Composited over the wash, worst
+            frame in the clip:
+
+              left edge of the copy     effective 0.798
+              30% across                effective 0.775
+              46% across, column end    effective 0.685   (floor 0.62)
+              60% across, no text       effective 0.532
+              85% across                the wash alone, 0.28
+
+            If the copy column is ever widened, move the 0.52 stop with it or
+            the last line of every paragraph loses its ground. */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 hidden bg-[linear-gradient(to_right,rgba(31,39,68,0.72)_0%,rgba(31,39,68,0.68)_35%,rgba(31,39,68,0.52)_50%,rgba(31,39,68,0.18)_70%,rgba(31,39,68,0)_85%)] sm:block"
+        />
+
+        {/* `relative` is load-bearing, not decoration. Everything above is
+            absolutely positioned, and a static element paints UNDER a
+            positioned sibling however late it appears in the DOM, so without
+            this the copy renders behind the scrims.
+
+            Same `mx-auto max-w-7xl gutter-x` the header row uses, so the H1 and
+            the wordmark share one left edge at every width. Not <Container>:
+            its inner max-w-2xl cap would set this column's width below lg
+            instead of the cap below. */}
+        <div className="relative mx-auto w-full max-w-7xl gutter-x">
+          {/* THE LEFT THIRD, expressed as a cap rather than a fraction.
+              `min(34rem, 42vw)` is two limits at once: 42vw keeps the column to
+              roughly the left third of a wide screen, so the composition Brett
+              asked for holds from a laptop to an ultrawide, and 34rem stops the
+              measure running past a readable line length on the very widest
+              ones. Below sm there is no cap at all, because a third of a 393px
+              phone is not a column, it is a gutter.
+
+                 768px tablet   322px, 42%
+                1440px desktop  544px, 38%
+                1920px          544px, 28% */}
+          <FadeIn className="sm:max-w-[min(34rem,42vw)]">
             <h1 className="font-display text-[2rem] leading-[1.05] font-medium tracking-tight text-balance text-[var(--color-cream)] sm:text-[2.5rem] lg:text-6xl">
               {HERO.h1}
             </h1>
@@ -354,12 +356,11 @@ export default function HomePage() {
                 CREAM, not the pale teal --color-teal-on-dark that every other
                 eyebrow on a dark surface uses. That token is specified against
                 FLAT navy, where it holds 7.71:1. Over video it does not: at the
-                overlay this hero now runs, the measurement put it at 4.26:1
-                with ~100 failing pixels in the bright audience frames, and the
-                only ways to rescue it were to darken the hero further (which is
-                the opposite of what this change is for) or to brighten the ink.
-                Cream is the brighter ink and lands at 5.04:1. If the teal
-                eyebrow is wanted back here, the video has to get darker. */}
+                overlay this hero runs, the measurement put it at 4.26:1 with
+                ~100 failing pixels in the bright audience frames, and the only
+                ways to rescue it were to darken the hero further or to brighten
+                the ink. Cream is the brighter ink and lands at 5.04:1. If the
+                teal eyebrow is wanted back here, the video has to get darker. */}
             <p className="font-display mt-3 text-sm font-semibold tracking-[0.16em] text-[var(--color-cream)] uppercase sm:mt-4 sm:text-base lg:text-lg">
               {HERO.roles.join(' · ')}
             </p>
@@ -368,7 +369,7 @@ export default function HomePage() {
                 glyphs toward the video behind them and cost about half a point
                 of contrast: 4.05:1 measured, which fails AA, against 5.16:1
                 solid. Do not reintroduce an opacity here. */}
-            <p className="mt-4 max-w-xl text-[0.9375rem] leading-7 text-[var(--color-cream)] sm:mt-5 sm:text-base sm:leading-7 lg:text-lg lg:leading-8">
+            <p className="mt-4 text-[0.9375rem] leading-7 text-[var(--color-cream)] sm:mt-5 sm:text-base sm:leading-7 lg:text-lg lg:leading-8">
               {HERO.subhead}
             </p>
 
@@ -384,18 +385,17 @@ export default function HomePage() {
                 So: do not rewrite this to start with Michele, and do not trim it
                 down to just the honour to save a line. If it is ever too long
                 for the layout, take it out of the hero altogether rather than
-                shortening it back into a personal claim. See HERO.award. */}
-            {/* 13px, and the same 13px at every width. It used to be `text-xs`
-                below sm and 13px from sm up, which rendered this credit SMALLER
-                on the phone than on the desktop it was designed for. Nothing
-                about a 393px screen argues for less type than a 1440px one.
-                Brett's mobile pass, 2026-08-26. */}
+                shortening it back into a personal claim. See HERO.award.
+
+                13px at every width. It used to be `text-xs` below sm and 13px
+                above, which rendered this credit SMALLER on the phone than on
+                the desktop it was designed for. */}
             <p className="mt-4 flex items-start gap-3 text-[0.8125rem] leading-5 text-[var(--color-cream)]/75 sm:mt-5">
               <span
                 aria-hidden="true"
                 className="mt-2 h-px w-6 shrink-0 bg-[var(--color-teal-on-dark)] sm:w-8"
               />
-              <span className="max-w-lg">
+              <span>
                 {HERO.award.lead}
                 <span className="font-semibold text-[var(--color-cream)]">
                   {HERO.award.honor}
@@ -410,7 +410,6 @@ export default function HomePage() {
               </ContactTrigger>
             </div>
           </FadeIn>
-        </Container>
         </div>
       </section>
 
