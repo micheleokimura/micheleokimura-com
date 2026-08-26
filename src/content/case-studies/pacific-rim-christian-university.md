@@ -13,12 +13,20 @@ completion-date: pending
 
 ## The Organization
 
-Pacific Rim Christian University is a Christian university in Honolulu, training students for ministry and vocation across the islands and the wider Pacific. Craig Panquow serves as its President.
+Pacific Rim Christian University is a Christian university located in Honolulu, dedicated to training students for ministry and vocation across the islands and the wider Pacific. The institution is currently led by President Craig Pankow.
 
 ## The Engagement
 
-Michele's collaboration with Pacific Rim runs deeper than a speaking relationship. She has taught two full university courses on Explicit Movement, putting the material her nonprofit teaches in the field into the hands of university students in a formal academic setting. She has also spoken in chapel on multiple occasions, and brought her message on dreaming big for their lives with brave purpose to the student body.
+Michele's collaboration with Pacific Rim goes much deeper than a standard speaking relationship:
+
+**University Courses:** Over the course of two semesters, she taught two full university courses on Explicit Movement. This placed the field material utilized by her nonprofit directly into the hands of university students within a formal academic setting.
+
+**Chapel Speaking:** She has been a featured speaker at the university's chapels, bringing her core message of dreaming big and living with brave purpose to the broader student body.
+
+**Dream Big Workshop:** Michele and [Nancy Vuu](/case-studies/nancy-vuu) collaborated with the university and President Craig Pankow to host a special Dream Big Workshop, where both Michele and Nancy served as keynote speakers.
 
 ## The Outcome
 
-The university purchased the Brave Series for its library, which puts the curriculum in front of students who never sat in one of Michele's courses. Pacific Rim remains an ongoing supporter of Releasing Generations and of the Dream Big Journal initiative, and the working collaboration with President Craig Panquow continues.
+**Library Resources:** The university purchased the Brave Series for its library, ensuring the curriculum remains accessible to students who may never have sat in one of Michele's courses.
+
+**Ongoing Partnership:** Pacific Rim remains an ongoing, dedicated supporter of Releasing Generations, while Michele continues to actively champion the mission and vision of the university.
