@@ -18,6 +18,7 @@ import { BannerHero } from '@/components/BannerHero'
 import { SectionIntro } from '@/components/SectionIntro'
 import { ContactTrigger } from '@/components/ContactTrigger'
 import { WebPageJsonLd } from '@/components/JsonLd'
+import { projectStudies } from '@/lib/projects'
 import { pageMetadata } from '@/lib/schema'
 import {
   SPEAKER_MESSAGES,
@@ -80,6 +81,10 @@ import {
  * anywhere except the footer, and no email address on any client-facing page.
  * It is a plain band with one Contact button on the sitewide popup. Do not
  * put an address back on this page.
+ *
+ * WORKSHOPS. Added 2026-08-25, moved off the bottom of /author: the Kingdom
+ * Kids Workshop and ReThink Creativity. Michele asked for them at the bottom
+ * of this page, so they sit below the Book Michele band rather than above it.
  *
  * Copy of record: site/content/speaker/speaker-page-copy.md, locked with
  * Michele 2026-08-22. The messages themselves live in
@@ -173,6 +178,19 @@ const TEXTURE_CLASS: Record<MessageTexture, string> = {
   grid: 'msg-tex-grid',
   dots: 'msg-tex-dots',
 }
+
+/**
+ * The two programs that close this page: the Kingdom Kids Workshop and
+ * ReThink Creativity. Both were on /author until 2026-08-25; see the WORKSHOPS
+ * comment down in the markup for why they moved.
+ *
+ * Card copy is read from the project registry rather than written out here, so
+ * this section and the /projects index never drift apart. The filter is by
+ * slug and the order follows the registry.
+ */
+const WORKSHOPS = projectStudies.filter((project) =>
+  ['kingdom-kids', 'rethink-creativity'].includes(project.slug),
+)
 
 type Engagement = {
   event: string
@@ -557,6 +575,86 @@ export default function SpeakerPage() {
             </div>
           </FadeIn>
         </Container>
+      </section>
+
+      {/* ------------------------------------------------------- workshops */}
+      {/* Moved here from the bottom of /author on 2026-08-25, at Michele's
+          direction. The Kingdom Kids Workshop is parent and ministry-leader
+          training she delivers in a room, and ReThink Creativity is a
+          conference she leads. Both are speaking work, and neither is an
+          authored title, so neither had any business closing the Author page.
+
+          Copy is UNCHANGED from what /author was showing, which means it is
+          still read from the project registry in src/lib/projects.ts and this
+          section and the /projects index cannot drift apart. Michele is
+          sending revised copy for both; when it lands, edit the registry
+          entries rather than hard-coding strings here.
+
+          It sits BELOW "Book Michele" because Michele asked for the bottom of
+          the page. Band-3, because its neighbour above is band-2 and no two
+          sections on this page share a ground. Ending on band-3 is fine:
+          SiteFooter paints its own run-in with band-4, so no page has to end
+          on a particular band.
+
+          The card is the /author markup rebuilt on this page's conventions:
+          BAND rather than SECTION for the section padding, SectionIntro for
+          the heading so it matches Stages and Topics, and no new component. */}
+      <section
+        aria-label="Workshops and conferences Michele leads"
+        className={`bg-[var(--color-band-3)] ${BAND}`}
+      >
+        <SectionIntro
+          eyebrow="Workshops"
+          title="Workshops and conferences I lead."
+          smaller
+        />
+
+        <div className={`${WIDE} mt-10 sm:mt-12`}>
+          <FadeInStagger faster>
+            <ul
+              role="list"
+              className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8"
+            >
+              {WORKSHOPS.map((project) => (
+                <FadeIn as="li" key={project.href} scaleIn className="flex">
+                  <Link
+                    href={project.href}
+                    className="group flex h-full w-full flex-col rounded-2xl bg-[var(--color-cream)] p-6 shadow-sm ring-1 ring-[var(--color-navy-10)] transition duration-300 hover:-translate-y-0.5 hover:shadow-md hover:ring-[var(--color-teal-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)] lg:p-8"
+                  >
+                    <span className="font-display text-xs font-semibold tracking-[0.18em] text-[var(--color-brand-terracotta-ink)] uppercase">
+                      {project.kicker}
+                    </span>
+                    <h3 className="font-display mt-3 text-xl font-semibold tracking-tight text-neutral-950">
+                      {project.title}
+                    </h3>
+                    <p className="mt-4 flex-auto text-base leading-7 text-neutral-700">
+                      {project.blurb}
+                    </p>
+                    <span className="font-display mt-6 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition group-hover:decoration-2">
+                      Read the story
+                      <span
+                        aria-hidden="true"
+                        className="transition-transform duration-200 group-hover:translate-x-0.5"
+                      >
+                        &rarr;
+                      </span>
+                    </span>
+                  </Link>
+                </FadeIn>
+              ))}
+            </ul>
+          </FadeInStagger>
+
+          <FadeIn className="mt-10">
+            <Link
+              href="/projects"
+              className="font-display inline-flex items-center gap-1.5 text-base font-semibold text-neutral-950 underline decoration-[var(--color-brand-terracotta)] decoration-2 underline-offset-4 transition hover:text-[var(--color-brand-terracotta-ink)]"
+            >
+              Every story in one place
+              <span aria-hidden="true">&rarr;</span>
+            </Link>
+          </FadeIn>
+        </div>
       </section>
     </>
   )

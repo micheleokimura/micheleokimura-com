@@ -13,7 +13,6 @@ import {
   type AuthorBook,
 } from '@/lib/author-books'
 import { SQUARE_STORE_URL, getSquareLink } from '@/data/square-store-links'
-import { projectStudies } from '@/lib/projects'
 import { pageMetadata } from '@/lib/schema'
 
 /**
@@ -51,9 +50,12 @@ import { pageMetadata } from '@/lib/schema'
  * that is still the site identity.
  *
  * BANDS. Sections alternate --color-band-1 / band-2 the way the home page
- * does, so each one reads as a finished thought. The LAST section has to be
- * band-1: SiteFooter carries a top margin, and any other band would leave a
- * strip of mismatched colour above the navy footer.
+ * does, so each one reads as a finished thought. There is no constraint on
+ * which band goes last: SiteFooter paints its own run-in with band-4.
+ *
+ * 2026-08-25. The closing "Also built by Michele" row moved to /speaker. Its
+ * two cards, the Kingdom Kids Workshop and ReThink Creativity, are speaking
+ * work rather than authored titles. The page now ends on the quote banner.
  */
 export const metadata: Metadata = pageMetadata({
   title: 'Author',
@@ -72,14 +74,6 @@ const WIDE = 'mx-auto max-w-7xl px-6 lg:px-8'
 const SECTION = 'py-12 sm:py-16 lg:py-20'
 
 const TILE_SIZES = '(max-width: 640px) 6rem, (max-width: 1024px) 30vw, 24rem'
-
-/**
- * Programs that have a case study but no title on the shelf. Card copy is read
- * from the project registry so these and the /projects index never drift apart.
- */
-const OTHER_PROJECTS = projectStudies.filter((project) =>
-  ['kingdom-kids', 'rethink-creativity'].includes(project.slug),
-)
 
 /* ---------------------------------------------------------------- pieces */
 
@@ -587,14 +581,10 @@ export default function AuthorPage() {
           same job, much stronger, and it carries Michele's purpose line
           rather than a line about dreamers.
 
-          ORDER. It sits ABOVE "Also built by Michele" rather than dead last,
-          and that is a footer constraint, not a preference. SiteFooter carries
-          a top margin of its own, so the last section on a page has to be
-          band-1: any other ground leaves a strip of mismatched colour between
-          the section and the navy footer. A periwinkle band last would show a
-          near-white stripe above the footer and read as a bug. Landing it here
-          is also exactly what /speaker does with the same banner, where it is
-          a breath between the two densest blocks on the page.
+          It closes the page as of 2026-08-25, when "Also built by Michele"
+          moved to /speaker. That is safe: SiteFooter paints its own run-in
+          with band-4, so a page can end on any ground it likes, periwinkle
+          included. See the note at the top of SiteFooter.
 
           Periwinkle is sampled from the sapphire flowers in the dress in this
           very photograph. Numbers and the contrast budget are in the QUOTE
@@ -642,78 +632,20 @@ export default function AuthorPage() {
         </Container>
       </section>
 
-      {/* ------------------------------------------------- other projects */}
-      {/* Kingdom Kids and ReThink Creativity are programs rather than titles,
-          so they have no tile on the shelf. They belong to the same body of
-          work, so they get cards here and a route into the full index.
+      {/* The "Also built by Michele" row that used to close this page is GONE,
+          moved wholesale to /speaker on 2026-08-25. It carried two cards, the
+          Kingdom Kids Workshop and ReThink Creativity, and Michele's read was
+          that both are speaking work rather than authored titles: one is
+          parent and ministry-leader training she delivers in a room, the other
+          is a conference she leads. Neither has a title on the shelf above, so
+          neither belongs on the Author page at all. They now close /speaker,
+          along with the "Every story in one place" route into /projects that
+          sat under them here. /projects is also still in the footer, so this
+          page losing the link is not a dead end.
 
-          The navy "Every story in one place" card that used to close this row
-          is gone: Michele's rule is that dark blue belongs to the footer and
-          nowhere else. The route into /projects is a plain link now. */}
-      {/* Band-1, and it has to be: this is the last section, and SiteFooter
-          carries a top margin, so any other ground would show as a strip of
-          mismatched colour above the navy footer. The cards take cream for the
-          same reason the shelf tiles do, so they still lift off the ground. */}
-      <section
-        aria-labelledby="other-projects"
-        className={`bg-[var(--color-band-1)] ${SECTION}`}
-      >
-        <div className={WIDE}>
-          <FadeIn>
-            <h2
-              id="other-projects"
-              className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase"
-            >
-              Also built by Michele
-            </h2>
-          </FadeIn>
-          <FadeInStagger faster className="mt-8">
-            <ul
-              role="list"
-              className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
-            >
-              {OTHER_PROJECTS.map((project) => (
-                <FadeIn as="li" key={project.href} scaleIn className="flex">
-                  <Link
-                    href={project.href}
-                    className="group flex h-full w-full flex-col rounded-2xl bg-[var(--color-band-3)] p-6 shadow-sm ring-1 ring-[var(--color-navy-10)] transition duration-300 hover:-translate-y-0.5 hover:shadow-md hover:ring-[var(--color-teal-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)] lg:p-8"
-                  >
-                    <span className="font-display text-xs font-semibold tracking-[0.18em] text-[var(--color-brand-terracotta-ink)] uppercase">
-                      {project.kicker}
-                    </span>
-                    <h3 className="font-display mt-3 text-xl font-semibold tracking-tight text-neutral-950">
-                      {project.title}
-                    </h3>
-                    <p className="mt-4 flex-auto text-base leading-7 text-neutral-700">
-                      {project.blurb}
-                    </p>
-                    <span className="font-display mt-6 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition group-hover:decoration-2">
-                      Read the story
-                      <span
-                        aria-hidden="true"
-                        className="transition-transform duration-200 group-hover:translate-x-0.5"
-                      >
-                        &rarr;
-                      </span>
-                    </span>
-                  </Link>
-                </FadeIn>
-              ))}
-            </ul>
-          </FadeInStagger>
-
-          <FadeIn className="mt-10">
-            <Link
-              href="/projects"
-              className="font-display inline-flex items-center gap-1.5 text-base font-semibold text-neutral-950 underline decoration-[var(--color-brand-terracotta)] decoration-2 underline-offset-4 transition hover:text-[var(--color-brand-terracotta-ink)]"
-            >
-              Every story in one place
-              <span aria-hidden="true">&rarr;</span>
-            </Link>
-          </FadeIn>
-        </div>
-      </section>
-
+          Do not rebuild this row from the project registry. If a future
+          program genuinely is an authored work, it gets a tile on the shelf
+          instead. */}
     </>
   )
 }
