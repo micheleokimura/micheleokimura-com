@@ -212,6 +212,30 @@ export type SpeakerMessage = {
     title: string
   }
   /**
+   * A produced promo film for the message, shown DIRECTLY UNDER the
+   * description and above everything else on the page.
+   *
+   * Third and last of the three video slots, and the three are genuinely
+   * different things. `video` is a silent ambient clip that runs above the
+   * copy. `youtube` is a recording of Michele delivering the message, and it
+   * sits at the foot of the page because a reader watches it while deciding
+   * whether to enquire. This one is a piece Michele's team cut on purpose to
+   * sell the message, so it wants the reader to have her framing FIRST and
+   * then be shown it: her instruction on 2026-08-26 was description, then
+   * video, in that order.
+   *
+   * `intro` is the line printed above the frame and is required, not
+   * optional. A produced film dropped into a page with nothing to introduce
+   * it reads as an advert that wandered in.
+   *
+   * Embedded rather than re-hosted, for the same reason as `youtube`.
+   */
+  promoVideo?: {
+    id: string
+    title: string
+    intro: string
+  }
+  /**
    * A programme this keynote grows into, shown as a single card at the very
    * bottom of the message page.
    *
@@ -357,6 +381,21 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
         text: 'Whether you lead in business, education, ministry, or the arts, this message will awaken your imagination, break off creative blocks, and empower you to respond to the high calling of creating with God. She has led four Rethink Creativity conferences on this theme.',
       },
     ],
+    // The promo film Michele's team cut for this message. It opened the
+    // ReThink Creativity conference page from the day that page was built
+    // until 2026-08-26, when Michele moved it here: the conference page is
+    // the history, and the film is selling the keynote. It is gone from
+    // there, not duplicated, and the conference is still one click away on
+    // the card at the bottom of this page.
+    //
+    // Her intro line is verbatim and belongs to the video, so it lives with
+    // it here rather than as a trailing paragraph in `body`.
+    promoVideo: {
+      id: 'z7XSFwSDPj4',
+      title: 'ReThink Creativity Conference - Michele Okimura',
+      intro:
+        'Watch this short video Michele and her team produced to capture the heart of this keynote.',
+    },
     // Second offering under this keynote, added 2026-08-24. Michele's text is
     // verbatim; the only change she asked for was the em dash after
     // "God-sized dreams", now a comma. Nothing above this line was touched.

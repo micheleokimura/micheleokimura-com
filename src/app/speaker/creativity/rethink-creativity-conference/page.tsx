@@ -14,16 +14,24 @@ import { pageMetadata } from '@/lib/schema'
  *
  * WHY IT LIVES UNDER /speaker RATHER THAN /projects. The conference is the
  * thing "Activating Your Creativity" grows into, so Michele asked for the
- * card at the foot of that keynote page and for the card to land here. The
- * only link into this page is that card, at the bottom of
+ * card on that keynote page and for the card to land here. The only link
+ * into this page is that card, which now sits between the parents'
+ * sub-topic and the enquiry CTA on
  * /speaker/messages/activating-your-creativity.
+ *
+ * THE PROMO FILM IS NO LONGER HERE. This page opened with the ReThink
+ * Creativity video until 2026-08-26, when Michele moved it to the keynote
+ * page, under her description of the message. It is not duplicated: this
+ * page is the history, and the film is selling the keynote. The body copy
+ * below never referred to it, so the page reads from "The Origin" down
+ * exactly as it did.
  *
  * /projects/rethink-creativity IS STILL LIVE AND IS A DIFFERENT PAGE. That
  * one is the case study: her origin account in her own quoted words, the
  * Zechariah panel, the stat grid, the speaker roster. This one is the account
- * she wrote for the keynote page, and it opens with the recording. Both are
- * hers, both are current, and neither is a draft of the other. If they are
- * ever to be merged, that is a content decision for Michele, not a tidy-up.
+ * she wrote for the keynote page. Both are hers, both are current, and
+ * neither is a draft of the other. If they are ever to be merged, that is a
+ * content decision for Michele, not a tidy-up.
  *
  * COPY IS VERBATIM. Michele supplied the four sections below as written and
  * they are set here word for word, including "dynamic" and "wildly creative".
@@ -94,29 +102,6 @@ export default function ReThinkCreativityConferencePage() {
         <Container>
           <FadeIn>
             <div className="max-w-3xl">
-              {/* The recording opens the page, above a word of the body copy.
-                  Michele asked for it there: the conference is easier to
-                  believe once you have seen it.
-
-                  Same treatment as the embed at the foot of a message page
-                  and the one on an author book page. 16:9 whatever the source
-                  is, `rel=0` so the end screen stays off other people's
-                  channels, no autoplay, and lazy so it costs nothing until it
-                  scrolls into view. Neutral-950 underneath covers the moment
-                  before the poster paints. Embedded rather than re-hosted:
-                  pulling the file down to serve ourselves would breach
-                  YouTube's terms. */}
-              <div className="relative mb-10 aspect-video w-full overflow-hidden rounded-2xl bg-neutral-950 ring-1 ring-[var(--color-navy-10)] sm:mb-12">
-                <iframe
-                  src="https://www.youtube.com/embed/z7XSFwSDPj4?rel=0"
-                  title="ReThink Creativity Conference - Michele Okimura"
-                  loading="lazy"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  className="absolute inset-0 h-full w-full border-0"
-                />
-              </div>
-
               <h2 className="font-display text-xl font-semibold tracking-tight text-neutral-950 sm:text-2xl">
                 The Origin
               </h2>

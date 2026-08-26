@@ -292,6 +292,40 @@ export default async function SpeakerMessagePage({
                   workplaces, and public events.
                 </p>
               )}
+
+              {message.promoVideo && (
+                // BELOW the description, never above it. Michele's reason,
+                // 2026-08-26: a reader needs her framing of the message
+                // before the film, and then the film confirms it. Above the
+                // copy it would be doing the arguing on its own.
+                //
+                // The non-faith note above stays hugging the copy it belongs
+                // to, so this sits under both. A small bordered aside printed
+                // AFTER a video reads as a caption on the video, which is not
+                // what that note says.
+                //
+                // Same embed treatment as the recording at the foot of this
+                // page and the one on an author book page: 16:9 whatever the
+                // source is, `rel=0` so the end screen stays off other
+                // people's channels, no autoplay, and lazy so it costs
+                // nothing until it scrolls into view. Neutral-950 underneath
+                // covers the moment before the poster paints.
+                <div className="mt-12 sm:mt-16">
+                  <p className="text-lg leading-8 text-neutral-600">
+                    {message.promoVideo.intro}
+                  </p>
+                  <div className="relative mt-6 aspect-video w-full overflow-hidden rounded-2xl bg-neutral-950 ring-1 ring-[var(--color-navy-10)]">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${message.promoVideo.id}?rel=0`}
+                      title={message.promoVideo.title}
+                      loading="lazy"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      className="absolute inset-0 h-full w-full border-0"
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           </FadeIn>
         </Container>
