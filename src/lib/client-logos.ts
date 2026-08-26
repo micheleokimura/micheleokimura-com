@@ -134,20 +134,19 @@ export const CLIENT_LOGOS: ClientLogo[] = [
     href: '/case-studies/pacific-rim-christian-university',
   },
   // Text-only by design. Kamehameha Schools' mark is trademarked and is not
-  // reproduced here; the name is set in small caps instead.
+  // reproduced here; the name is set in small caps instead. `logo` stays null
+  // permanently. That is a trademark constraint, not a missing-asset gap, so do
+  // not "fix" it by sourcing art.
   //
-  // This one takes `contact` as a standing constraint rather than as a gap
-  // waiting to be filled. lib/organizations.ts and the aggregate file at
-  // src/content/case-studies/_aggregate-nda-engagements.md both record that
-  // Kamehameha engagement detail surfaces only as unnamed aggregate framing.
-  // The name is approved for this band; the story is not approved for a page.
-  // Do not create /case-studies/kamehameha-schools without Michele clearing it.
+  // The story constraint, though, is lifted. Michele cleared and sent the copy
+  // on 2026-08-25, so the tile links to a real page like any other. The page
+  // itself carries no logo either; the case-study template renders the org name
+  // as text through PageIntro and has no logo prop at all.
   {
     slug: 'kamehameha-schools',
     name: 'Kamehameha Schools',
     logo: null,
-    href: null,
-    contact: true,
+    href: '/case-studies/kamehameha-schools',
   },
   // Advance Good carries no case-study copy anywhere in the repo yet, so it
   // takes the contact popup until Michele sends wording. She Leads America got

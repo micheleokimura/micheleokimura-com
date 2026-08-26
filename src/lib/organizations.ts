@@ -13,8 +13,10 @@
 // - kamehameha-schools: no logo mark is ever used, per their trademark. It does
 //   not appear in this hero/carousel registry at all. It does appear on the home
 //   LogoMarquee as a TEXT-ONLY tile (see lib/client-logos), confirmed by Michele
-//   2026-08-23. Engagement detail still surfaces as unnamed aggregate framing
-//   (see lib/case-studies getNdaAggregate / About).
+//   2026-08-23. The engagement now has a named case study at
+//   /case-studies/kamehameha-schools, cleared by Michele 2026-08-25, so the
+//   detail no longer routes through the aggregate framing. The logo exclusion
+//   is unchanged and permanent: the page is text-only too.
 // - sacred-hearts-academy: on hold (ready-to-publish:false). Not in grid/marquee.
 // - Metro Christian, Lifespring 808, New Hope Community, Windward Missionary,
 //   Calvary Assembly of God: relationship-only. No logo, no tile.
