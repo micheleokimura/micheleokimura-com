@@ -401,7 +401,7 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     // "God-sized dreams", now a comma. Nothing above this line was touched.
     subtopics: [
       {
-        heading: 'Ways to Nurture Creativity and Dreaming Big in Your Home',
+        heading: 'Ways to Nurture Creativity and Dream Big in Your Home',
         tagline: 'A curated sub-topic for parents.',
         body: [
           {
