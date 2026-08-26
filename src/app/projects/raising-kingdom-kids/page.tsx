@@ -16,6 +16,8 @@ import {
 } from '@/components/CaseStudyLayout'
 import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
+import { SquareButton } from '@/components/AuthorBookParts'
+import { getPurchaseLink } from '@/data/square-store-links'
 
 // The lesson book, told as its own case study. Distinct from
 // /projects/kingdom-kids, which tells the story of the WORKSHOP the book grew
@@ -58,6 +60,11 @@ const ENDORSEMENTS: Endorsement[] = [
 ]
 
 export default function RaisingKingdomKidsPage() {
+  /* The Square collection holding all three products: hard copy, digital file,
+     and the workshop workbook. Michele's copy calls the lesson book "the
+     Kingdom Kids Curriculum", which is the wording the button takes. */
+  const purchaseHref = getPurchaseLink('raising-kingdom-kids')
+
   return (
     <CaseStudyLayout
       workSlug="raising-kingdom-kids"
@@ -71,6 +78,16 @@ export default function RaisingKingdomKidsPage() {
           children&rsquo;s ministry leaders, and anyone building a culture where
           young people are trusted with something real.
         </p>
+      }
+      heroCta={
+        purchaseHref ? (
+          <SquareButton
+            href={purchaseHref}
+            forTitle="Raising Kingdom Kids"
+            size="page"
+            label="Shop the Kingdom Kids Curriculum"
+          />
+        ) : null
       }
       contactHeading="Bring Raising Kingdom Kids to your church."
       contactBody={

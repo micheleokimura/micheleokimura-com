@@ -25,6 +25,7 @@ export function CaseStudyLayout({
   eyebrow,
   title,
   lede,
+  heroCta,
   children,
   contactHeading = 'Bring this to your people.',
   contactBody,
@@ -34,6 +35,19 @@ export function CaseStudyLayout({
   eyebrow: string
   title: string
   lede: React.ReactNode
+  /**
+   * A single purchase CTA, sat between the banner and the body.
+   *
+   * Added 2026-08-26 on Michele's direction that a reader who lands on a
+   * curriculum page and already knows they want it should not have to read to
+   * the bottom to find the shop. It lives on the shared layout rather than
+   * being pasted into each page so all four curriculum pages put the button in
+   * the same place at the same size, which is the whole point of the ask.
+   *
+   * Only the pages selling a stocked product pass one. A page with nothing to
+   * point at passes nothing and the slot collapses; there is no placeholder.
+   */
+  heroCta?: React.ReactNode
   children: React.ReactNode
   contactHeading?: string
   contactBody?: React.ReactNode
@@ -55,6 +69,14 @@ export function CaseStudyLayout({
       <PageIntro eyebrow={eyebrow} title={title}>
         {lede}
       </PageIntro>
+
+      {heroCta ? (
+        <Container className="mt-10 sm:mt-12">
+          <FadeIn className="flex justify-center sm:justify-start">
+            {heroCta}
+          </FadeIn>
+        </Container>
+      ) : null}
 
       {children}
 

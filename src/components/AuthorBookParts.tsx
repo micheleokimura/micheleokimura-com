@@ -237,6 +237,7 @@ export function SquareButton({
   href,
   forTitle,
   size = 'tile',
+  label,
   className = '',
 }: {
   href: string
@@ -244,6 +245,22 @@ export function SquareButton({
   forTitle?: string
   /** `tile` sits in a card footer; `page` matches Button's primary sizing. */
   size?: 'tile' | 'page'
+  /**
+   * Overrides the host-derived label.
+   *
+   * Added 2026-08-26 on Michele's direction that the shelf read one word on
+   * every tile. `storeButtonLabel` names the shop it points at, which is right
+   * on a detail page carrying one title and wrong on a grid where eight tiles
+   * in a row then read "Buy on Square", "Buy on Square", "Shop at
+   * explicitmovement.org". The Author shelf passes "Purchase"; the curriculum
+   * landing pages pass "Shop the <thing>". Left unset, the button still names
+   * its own host, which is what /author/books/<slug> still does.
+   *
+   * The accessible name follows the override and still carries the title, so a
+   * screen reader hears "Purchase Dancing with Father" rather than the fifth
+   * bare "Purchase" of the row.
+   */
+  label?: string
   className?: string
 }) {
   return (
@@ -251,7 +268,13 @@ export function SquareButton({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={forTitle ? storeButtonAriaLabel(href, forTitle) : undefined}
+      aria-label={
+        forTitle
+          ? label
+            ? `${label} ${forTitle}`
+            : storeButtonAriaLabel(href, forTitle)
+          : undefined
+      }
       className={`group/buy inline-flex items-center justify-center gap-1.5 rounded-md bg-[var(--color-cta)] font-semibold text-[var(--color-cta-ink)] shadow-sm transition hover:bg-[var(--color-cta-hover)] focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 focus-visible:ring-offset-white focus-visible:outline-none ${
         size === 'page'
           ? 'px-6 py-3.5 text-base'
@@ -263,7 +286,7 @@ export function SquareButton({
             'min-h-11 px-3 py-2 text-sm sm:min-h-0'
       } ${className}`}
     >
-      {storeButtonLabel(href)}
+      {label ?? storeButtonLabel(href)}
       <span
         aria-hidden="true"
         className="transition-transform duration-200 group-hover/buy:translate-x-0.5"

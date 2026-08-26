@@ -19,6 +19,8 @@ import {
 } from '@/components/CaseStudyLayout'
 import { BraveSeriesCovers } from '@/components/BraveSeriesCovers'
 import { Container } from '@/components/Container'
+import { SquareButton } from '@/components/AuthorBookParts'
+import { BRAVE_SERIES_STORE_URL } from '@/data/square-store-links'
 
 // Origin story is Michele's own account, condensed for the web. Endorsements are
 // verbatim and are the same set carried on /author; edit both together.
@@ -98,6 +100,10 @@ const ENDORSEMENTS: Endorsement[] = [
   },
 ]
 
+// The one purchase route for all twenty-four volumes, at the top of the page as
+// of 2026-08-26. The quiet BuyLinks row further down names the same storefront
+// and stays where it is: that row is a fact about where the series sells, sat
+// inside the reach section, and this is the call to action.
 export default function BraveSeriesPage() {
   return (
     <CaseStudyLayout
@@ -111,6 +117,13 @@ export default function BraveSeriesPage() {
           from exploitation. It started with a vision in a shower and ended up in
           front of the Hawaiʻi Department of Education.
         </p>
+      }
+      heroCta={
+        <SquareButton
+          href={BRAVE_SERIES_STORE_URL}
+          size="page"
+          label="Shop the Brave Series"
+        />
       }
       contactHeading="Bring the Brave Series to your school or organization."
       contactSource="project-brave-series"

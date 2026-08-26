@@ -97,6 +97,14 @@ const ENDORSEMENTS: Endorsement[] = [
   },
 ]
 
+/**
+ * One label for both buttons on this page, so the CTA at the top and the one
+ * under the eight covers cannot drift apart. It read "Buy on Square" under the
+ * covers until 2026-08-26, when Michele asked for the shop button to name the
+ * product rather than the host it happens to sit on.
+ */
+const SHOP_LABEL = 'Shop Dream Big Journals'
+
 export default function DreamBigJournalsPage() {
   // One Square collection for the whole curriculum. Every age bracket is a
   // dropdown variant of one product over there, so there is a single honest
@@ -117,6 +125,16 @@ export default function DreamBigJournalsPage() {
           permission to want something, and someone nearby who takes it
           seriously.
         </p>
+      }
+      heroCta={
+        squareHref ? (
+          <SquareButton
+            href={squareHref}
+            forTitle="the Dream Big Journals"
+            size="page"
+            label={SHOP_LABEL}
+          />
+        ) : null
       }
       contactHeading="Bring the Dream Big Journals to your classroom."
       contactSource="project-dream-big-journals"
@@ -201,6 +219,7 @@ export default function DreamBigJournalsPage() {
               href={squareHref}
               forTitle="the Dream Big Journals"
               size="page"
+              label={SHOP_LABEL}
             />
           </div>
         ) : null}

@@ -133,3 +133,43 @@ function hostOf(href: string): string {
 export function getSquareLink(slug: string): string | null {
   return squareLinks[slug] ?? null
 }
+
+/* ------------------------------------------------------- purchase buttons */
+
+/** The Brave Series front door. Michele's specified form, with the `www.`. */
+export const BRAVE_SERIES_STORE_URL = 'https://www.thebraveseries.com'
+
+/** The Explicit Movement shop, carrying both Explicit Movement titles. */
+export const EXPLICIT_MOVEMENT_STORE_URL = 'https://www.explicitmovement.org/shop'
+
+/**
+ * Destinations the Author shelf's "Purchase" button uses, layered OVER
+ * `squareLinks`.
+ *
+ * WHY THIS IS A SECOND MAP RATHER THAN FOUR MORE ROWS IN `squareLinks`.
+ * Michele asked on 2026-08-26 for every tile on /author to carry a Purchase
+ * button, the four Brave Series tiles included. `squareLinks` is also read by
+ * /author/books/<slug>, and those four records already carry a `buy` panel
+ * pointing at thebraveseries.com (see AUTHOR_BOOKS in src/lib/author-books.ts).
+ * Adding the Brave Series to `squareLinks` would print that same destination
+ * twice on one detail page, which is the exact thing the note at the head of
+ * this file exists to prevent. So the shelf reads THIS map and the detail pages
+ * keep reading `squareLinks` unchanged.
+ *
+ * Anything not listed here falls through to `squareLinks`, so a title that
+ * moves storefronts still only needs editing in one place.
+ */
+const purchaseOverrides: Record<string, string> = {
+  'brave-series': BRAVE_SERIES_STORE_URL,
+  'brave-and-beautiful': BRAVE_SERIES_STORE_URL,
+  'brave-and-bold': BRAVE_SERIES_STORE_URL,
+  'brave-together': BRAVE_SERIES_STORE_URL,
+}
+
+/**
+ * The storefront a Purchase button points at, or null when nothing live exists
+ * to point at. `null` still means the button is omitted rather than disabled.
+ */
+export function getPurchaseLink(slug: string): string | null {
+  return purchaseOverrides[slug] ?? squareLinks[slug] ?? null
+}

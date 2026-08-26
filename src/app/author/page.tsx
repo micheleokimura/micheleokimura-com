@@ -12,7 +12,7 @@ import {
   getAuthorBook,
   type AuthorBook,
 } from '@/lib/author-books'
-import { SQUARE_STORE_URL, getSquareLink } from '@/data/square-store-links'
+import { SQUARE_STORE_URL, getPurchaseLink } from '@/data/square-store-links'
 import { pageMetadata } from '@/lib/schema'
 
 /**
@@ -130,16 +130,44 @@ const TILE_CLASS =
 const BODY_CLASS = 'flex min-w-0 flex-1 flex-col p-2.5 sm:p-4'
 
 /**
+ * The outline half of a button PAIR: "Learn more" beside "Purchase".
+ *
+ * 2026-08-26, Michele's direction: every tile on this page carries the same two
+ * controls, and the two read as siblings rather than as a primary with a
+ * footnote. So "Learn more" stopped being a bare underlined text link and became
+ * an outline button with EXACTLY the geometry SquareButton renders at the same
+ * size. The ring is `ring-1 ring-inset` rather than a border on purpose: a
+ * border would add 2px to the height and stand the pair a hair out of line.
+ *
+ * Same padding, same `text-sm`, same `rounded-md`, same `min-h-11` tap floor on
+ * a phone as the filled button beside it. If SquareButton's sizing moves, move
+ * these with it.
+ */
+const OUTLINE_TILE_BUTTON =
+  'font-display inline-flex min-h-11 items-center justify-center gap-1.5 rounded-md px-3 py-2 text-sm font-semibold text-[var(--color-brand-teal)] shadow-sm ring-1 ring-inset ring-[var(--color-teal-30)] transition group-hover:ring-[var(--color-brand-teal)] sm:min-h-0'
+
+/** The same pair, one size up, for a curriculum family heading. Matches
+ *  SquareButton's `page` sizing the way the tile version matches `tile`. */
+const OUTLINE_PAGE_BUTTON =
+  'font-display group/learn inline-flex items-center justify-center gap-1.5 rounded-md px-6 py-3.5 text-base font-semibold text-[var(--color-brand-teal)] shadow-sm ring-1 ring-inset ring-[var(--color-teal-30)] transition hover:bg-[var(--color-teal-05)] hover:ring-[var(--color-brand-teal)] focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:outline-none'
+
+/**
  * The "Learn more" half of the tile footer.
  *
+ * Still a <span> rather than an <a>, even now that it looks like a button. The
+ * whole tile is already covered by a transparent overlay link to
+ * /author/books/<slug> (see BookTile), and an anchor inside that overlay's card
+ * would be the nested-anchor problem that overlay exists to solve. The click
+ * lands on the overlay and goes exactly where the label says.
+ *
  * The `mt-auto` that used to pin this to the bottom of the body now lives on
- * TILE_FOOTER, which wraps this and the Square button together so the pair
+ * TILE_FOOTER, which wraps this and the Purchase button together so the pair
  * lines up across a row of cards whatever the teaser length. Reference
  * spacing: `pt-1.5 xs:pt-4`.
  */
 function LearnMore() {
   return (
-    <span className="font-display inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition group-hover:decoration-2">
+    <span className={OUTLINE_TILE_BUTTON}>
       Learn more
       <span
         aria-hidden="true"
@@ -151,7 +179,7 @@ function LearnMore() {
   )
 }
 
-/** Holds "Learn more" and the Square button on one baseline at the card foot. */
+/** Holds "Learn more" and "Purchase" on one baseline at the card foot. */
 const TILE_FOOTER =
   'mt-auto flex flex-wrap items-center gap-x-3 gap-y-2 pt-1.5 sm:pt-4'
 
@@ -180,18 +208,16 @@ function BookTile({
   book,
   headingClass = 'text-lg',
   as: Heading = 'h3',
-  showLearnMore = true,
 }: {
   book: AuthorBook
   headingClass?: string
   as?: 'h3' | 'h4'
-  /** Off inside a curriculum family, which carries one link on its heading. */
-  showLearnMore?: boolean
 }) {
-  const squareHref = getSquareLink(book.slug)
-  /* The three Brave Series child tiles carry neither, and an empty footer
-     would still spend its `pt-4` on nothing. */
-  const hasFooter = showLearnMore || Boolean(squareHref)
+  /* Not `getSquareLink`. The shelf's Purchase button reads the purchase map,
+     which layers the Brave Series' own storefront over the Square listings
+     without changing what /author/books/<slug> renders. See the note on
+     `getPurchaseLink` in src/data/square-store-links.ts. */
+  const purchaseHref = getPurchaseLink(book.slug)
 
   return (
     <div className={`${TILE_CLASS} relative`}>
@@ -223,27 +249,28 @@ function BookTile({
         <p className="mt-1.5 line-clamp-5 text-sm leading-5 text-neutral-600">
           {book.teaser}
         </p>
-        {hasFooter ? (
-          <div className={TILE_FOOTER}>
-            {showLearnMore ? <LearnMore /> : null}
-            {/* No button and no substitute label when there is no listing.
-                The brief asked for a "Coming soon" here, and the two titles it
-                would land on are the two Brave Purpose editions, which already
-                carry "Forthcoming Spring 2027" three lines up in Michele's own
-                wording. A generic second label under it says the same thing
-                twice, less precisely. The other unlinked titles must not get
-                one at all: the Brave Series sells through thebraveseries.com,
-                so "coming soon" on it would be false. See
-                src/data/square-store-links.ts. */}
-            {squareHref ? (
-              <SquareButton
-                href={squareHref}
-                forTitle={book.title}
-                className="relative z-10"
-              />
-            ) : null}
-          </div>
-        ) : null}
+        {/* Every tile carries the same pair, Michele's direction of
+            2026-08-26: "Learn more" to the title's own page, "Purchase" to the
+            shop that stocks it. The footer is unconditional now because
+            "Learn more" always renders; only the Purchase half can drop out.
+
+            No button and no substitute label when there is no listing. The
+            brief asked for a "Coming soon" here, and the only two titles it
+            would land on are the two Brave Purpose editions, which already
+            carry "Forthcoming Spring 2027" three lines up in Michele's own
+            wording. A generic second label under it says the same thing twice,
+            less precisely. See src/data/square-store-links.ts. */}
+        <div className={TILE_FOOTER}>
+          <LearnMore />
+          {purchaseHref ? (
+            <SquareButton
+              href={purchaseHref}
+              forTitle={book.title}
+              label="Purchase"
+              className="relative z-10"
+            />
+          ) : null}
+        </div>
       </div>
     </div>
   )
@@ -287,14 +314,14 @@ function FamilyHeading({
   title,
   subtitle,
   href,
-  squareHref,
+  purchaseHref,
   forTitle,
 }: {
   title: string
   subtitle?: string
   href: string
-  /** Square link for the whole curriculum, when there is one. */
-  squareHref?: string | null
+  /** Storefront for the whole curriculum, when there is one. */
+  purchaseHref?: string | null
   forTitle?: string
 }) {
   return (
@@ -313,25 +340,32 @@ function FamilyHeading({
           {subtitle}
         </p>
       ) : null}
-      {/* Deliberately larger than the per-tile link: this one is carrying a
-          whole curriculum rather than a single title.
+      {/* The same "Learn more" / "Purchase" pair the tiles carry, one size up:
+          this one is carrying a whole curriculum rather than a single title.
 
-          The Square button sits HERE rather than on the eight edition tiles
+          The Purchase button sits HERE rather than on the eight edition tiles
           below it. Every bracket of the Dream Big curriculum is one product on
           Square with the age group as a dropdown, so a button per tile would
           be the same URL eight times over. That is the exact repetition
           Michele's 2026-08-24 note asked to remove, and it applies to a buy
           link as much as to a "Learn more". */}
-      <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-3">
-        <Link
-          href={href}
-          className="font-display -my-2.5 inline-flex items-center gap-2 py-2.5 text-base font-semibold text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-2 underline-offset-[6px] transition hover:text-[var(--color-brand-terracotta-ink)] sm:text-lg"
-        >
+      <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-3">
+        <Link href={href} className={OUTLINE_PAGE_BUTTON}>
           Learn more
-          <span aria-hidden="true">&rarr;</span>
+          <span
+            aria-hidden="true"
+            className="transition-transform duration-200 group-hover/learn:translate-x-0.5"
+          >
+            &rarr;
+          </span>
         </Link>
-        {squareHref ? (
-          <SquareButton href={squareHref} forTitle={forTitle ?? title} />
+        {purchaseHref ? (
+          <SquareButton
+            href={purchaseHref}
+            forTitle={forTitle ?? title}
+            size="page"
+            label="Purchase"
+          />
         ) : null}
       </div>
     </FadeIn>
@@ -489,7 +523,7 @@ export default function AuthorPage() {
                     title={parent.title}
                     subtitle={block.subtitle}
                     href={`/author/books/${parent.slug}`}
-                    squareHref={getSquareLink(parent.slug)}
+                    purchaseHref={getPurchaseLink(parent.slug)}
                     forTitle={parent.title}
                   />
 
@@ -507,11 +541,16 @@ export default function AuthorPage() {
                               scaleIn
                               className="flex"
                             >
+                              {/* These three used to carry no footer at all,
+                                  on the reasoning that the family heading
+                                  above already links to the one page they all
+                                  point at. Michele overrode that on
+                                  2026-08-26: every tile on this page gets the
+                                  same pair. */}
                               <BookTile
                                 book={child}
                                 as="h4"
                                 headingClass="text-base"
-                                showLearnMore={false}
                               />
                             </FadeIn>
                           )
