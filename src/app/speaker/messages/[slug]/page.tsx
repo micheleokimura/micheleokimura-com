@@ -339,6 +339,85 @@ export default async function SpeakerMessagePage({
         </section>
       ))}
 
+      {/* ------------------------------------------------- related program */}
+      {/* A programme this keynote grows into. Only "Activating Your
+          Creativity" carries one so far: the ReThink Creativity conference
+          card, which spent 2026-08-25 travelling from the bottom of /author
+          to the bottom of /speaker before Michele put it here, under the
+          message it belongs to.
+
+          It sat BELOW the enquiry CTA until 2026-08-26 and now sits directly
+          under the parents' sub-topic, above the CTA. Michele's reason: a
+          reader who has just finished the whole message is the reader most
+          likely to want the conference, and at the foot of the page it was
+          arriving after the one button that ends the visit.
+
+          band-2, between the sub-topic's band-3 above and the CTA's band-1
+          below, so the page steps through three grounds rather than repeating
+          one. If a message ever carries endorsements AND a related programme,
+          this section and the endorsements underneath would share band-2;
+          move one of them at that point.
+
+          NO BLURB and no eyebrow. The card is a title and a link, and it is
+          built to lay out correctly that way rather than to look like a card
+          whose description failed to load. Michele asked for the description
+          gone in August, and for the "Conference · 2010 to present" kicker
+          gone on 2026-08-26. The link label is set in caps because she wrote
+          it that way; the text content stays sentence case so a screen reader
+          does not spell it out.
+
+          COLOUR. Lavender, not the cream this card used to wear, because
+          cream on a neutral band was doing nothing to mark it as the one
+          thing on the page that goes somewhere else. Violet is not a
+          borrowed colour here: it is the Speaker section's own, the banner at
+          the top of this page and the whole of /speaker are built on
+          --color-speaker-deep #241B4F, and violet-100 is that hue at the pale
+          end. Measured on violet-100 #EDE9FE:
+
+            violet-950 #2E1065  the title       12.8:1
+            violet-900 #4C1D95  the blurb        9.2:1
+            violet-700 #6D28D9  "Learn more"     6.0:1
+            violet-500 #8B5CF6  ring, underline  3.6:1  (3:1 is the floor
+                                                 for a non-text boundary)
+
+          The ring is doing real work rather than decorating: violet-100 and
+          band-2 are within a hundredth of each other in luminance, so the
+          card is separated from its ground by hue and by that ring, and a
+          paler ring would leave it floating. */}
+      {message.relatedProgram && (
+        <section
+          aria-label="Related conference"
+          className="w-full bg-[var(--color-band-2)] py-14 sm:py-24 lg:py-28"
+        >
+          <Container>
+            <FadeIn>
+              <Link
+                href={message.relatedProgram.href}
+                className="group flex max-w-2xl flex-col rounded-2xl bg-violet-100 p-6 shadow-sm ring-2 ring-violet-500 transition duration-300 hover:-translate-y-0.5 hover:shadow-md hover:ring-violet-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700 lg:p-8"
+              >
+                <h2 className="font-display text-xl font-semibold tracking-tight text-balance text-violet-950 sm:text-2xl">
+                  {message.relatedProgram.title}
+                </h2>
+                {message.relatedProgram.blurb && (
+                  <p className="mt-4 text-base leading-7 text-violet-900">
+                    {message.relatedProgram.blurb}
+                  </p>
+                )}
+                <span className="font-display mt-6 inline-flex items-center gap-1.5 self-start text-sm font-semibold tracking-[0.14em] text-violet-700 uppercase underline decoration-violet-500 decoration-1 underline-offset-4 transition group-hover:decoration-2">
+                  Learn more
+                  <span
+                    aria-hidden="true"
+                    className="transition-transform duration-200 group-hover:translate-x-0.5"
+                  >
+                    &rarr;
+                  </span>
+                </span>
+              </Link>
+            </FadeIn>
+          </Container>
+        </section>
+      )}
+
       {/* ---------------------------------------------------- endorsements */}
       {/* Renders only for the three messages that have one. The other four
           get nothing at all rather than an empty heading; when Michele
@@ -449,64 +528,6 @@ export default async function SpeakerMessagePage({
           </FadeIn>
         </Container>
       </section>
-
-      {/* ------------------------------------------------- related program */}
-      {/* A programme this keynote grows into. Only "Activating Your
-          Creativity" carries one so far: the ReThink Creativity conference
-          card, which spent 2026-08-25 travelling from the bottom of /author
-          to the bottom of /speaker before Michele put it here, under the
-          message it belongs to.
-
-          It sits BELOW the enquiry CTA on purpose, the same place it sat on
-          /speaker. The reader's next step from this page is still "contact
-          me about this message"; the conference is the door for someone who
-          wants to keep reading instead.
-
-          band-3 against the CTA's band-1, so the two do not share a ground.
-          Ending the page on band-3 is fine: SiteFooter paints its own run-in.
-
-          NO BLURB. The card is a kicker, a title, and a link, and it is built
-          to lay out correctly that way rather than to look like a card whose
-          description failed to load. Michele asked for the description gone.
-          The link label is set in caps because she wrote it that way; the
-          text content stays sentence case so a screen reader does not spell
-          it out. */}
-      {message.relatedProgram && (
-        <section
-          aria-label="Related conference"
-          className="w-full bg-[var(--color-band-3)] py-14 sm:py-24 lg:py-28"
-        >
-          <Container>
-            <FadeIn>
-              <Link
-                href={message.relatedProgram.href}
-                className="group flex max-w-2xl flex-col rounded-2xl bg-[var(--color-cream)] p-6 shadow-sm ring-1 ring-[var(--color-navy-10)] transition duration-300 hover:-translate-y-0.5 hover:shadow-md hover:ring-[var(--color-teal-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)] lg:p-8"
-              >
-                <span className="font-display text-xs font-semibold tracking-[0.18em] text-[var(--color-brand-terracotta-ink)] uppercase">
-                  {message.relatedProgram.kicker}
-                </span>
-                <h2 className="font-display mt-3 text-xl font-semibold tracking-tight text-balance text-neutral-950 sm:text-2xl">
-                  {message.relatedProgram.title}
-                </h2>
-                {message.relatedProgram.blurb && (
-                  <p className="mt-4 text-base leading-7 text-neutral-700">
-                    {message.relatedProgram.blurb}
-                  </p>
-                )}
-                <span className="font-display mt-6 inline-flex items-center gap-1.5 self-start text-sm font-semibold tracking-[0.14em] text-[var(--color-brand-teal)] uppercase underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition group-hover:decoration-2">
-                  Learn more
-                  <span
-                    aria-hidden="true"
-                    className="transition-transform duration-200 group-hover:translate-x-0.5"
-                  >
-                    &rarr;
-                  </span>
-                </span>
-              </Link>
-            </FadeIn>
-          </Container>
-        </section>
-      )}
     </>
   )
 }

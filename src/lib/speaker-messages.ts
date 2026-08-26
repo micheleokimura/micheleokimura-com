@@ -224,9 +224,13 @@ export type SpeakerMessage = {
    * `blurb` is optional and currently unused. The card lays out correctly
    * without it; a future programme that needs a line of description can set
    * it rather than forcing one back onto this one.
+   *
+   * There is no `kicker` any more. The card carried "Conference · 2010 to
+   * present" over the title until 2026-08-26, when Michele asked for the
+   * eyebrow dropped outright. The date range lives on the conference page
+   * itself, which is one click away.
    */
   relatedProgram?: {
-    kicker: string
     title: string
     href: string
     blurb?: string
@@ -389,10 +393,13 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     // bottom of /speaker, which had it for a few hours after it came off
     // /author. Michele's retitle, and her instruction was to drop the blurb
     // that came with the old card, so there is no description here on purpose.
+    //
+    // Retitled again 2026-08-26: the two clauses swapped, so the conference
+    // NAME leads and the promise follows it. The old order buried the thing a
+    // reader is looking for behind a phrase they cannot search for.
     relatedProgram: {
-      kicker: 'Conference · 2010 to present',
       title:
-        'Unleashing Your Creative Identity: The Rethink Creativity Conference',
+        'The Rethink Creativity Conference: Unleashing Your Creative Identity',
       href: '/speaker/creativity/rethink-creativity-conference',
     },
     nonFaith: true,
