@@ -140,7 +140,7 @@ export const CLIENT_LOGOS: ClientLogo[] = [
     slug: 'she-leads-america',
     name: 'She Leads America',
     logo: `${DIR}/she-leads-america.png`,
-    href: null,
+    href: '/case-studies/she-leads-america',
     matte: true,
   },
 ]
