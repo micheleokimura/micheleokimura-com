@@ -64,7 +64,7 @@ export const metadata: Metadata = pageMetadata({
  * pages follow.
  */
 const STRANDS = [
-  'Historic Space Collaboration: In 2021, the conference partnered with Danny Kim from Valley Christian Schools to connect with the International Space Station (ISS). Attendees submitted prayers that were uploaded to the ISS, literally releasing prayer over the earth as the station orbited!',
+  'MAKING HISTORY! Historic Space Collaboration: In 2021, the conference partnered with Danny Kim from Valley Christian Schools to connect with the International Space Station (ISS). Attendees submitted prayers that were uploaded to the ISS, literally releasing prayer over the earth as the station orbited!',
   'Global Medical & Therapeutic Insight: Surgeons discussed the role of creativity in the medical field, while a team of professional therapists led a workshop on creativity in counseling.',
   'Business & Government Leadership: The event featured a State Representative speaking on creative problem-solving in government, alongside business innovators like Edwin Keh, Vice President and COO of Walmart Global Procurement.',
 ]
@@ -158,7 +158,8 @@ export default function ReThinkCreativityConferencePage() {
                 Unexpectedly, the COVID outbreak led Michele to transition the
                 2020 and 2021 conferences online, which rapidly expanded their
                 reach to a global audience. Each dynamic event featured
-                powerful plenary speakers alongside 20 distinct workshops:
+                powerful plenary speakers alongside 20 distinct workshops. Here
+                are just some of the features and topics covered:
               </p>
 
               {/* Termed list: a bold label and a sentence, so it gets the
