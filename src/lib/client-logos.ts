@@ -5,8 +5,14 @@
 // `slug` is the join key. It matches the case-study markdown filename under
 // src/content/case-studies/ and the /case-studies/<slug> URL, the same
 // convention lib/organizations.ts uses. Do not rename a slug without renaming
-// the matching markdown file, or the tile links to a 404. Where no case study
-// exists yet, `href` is null and the tile renders as plain, non-clickable art.
+// the matching markdown file, or the tile links to a 404.
+//
+// === TILES WITH NO CASE STUDY YET ===
+// Where no case study exists, `href` is null. Such a tile used to render as
+// plain, non-clickable art, which Michele read as a broken link: no pointer
+// cursor, no response to a click. Those tiles now set `contact: true` and open
+// the sitewide contact popup instead, so every tile in the band answers a
+// click. Swap `contact` for a real `href` the moment the case study lands.
 //
 // === LOGO ART ===
 // Files live under /public/images/client-logos/optimized, capped at 400px on
@@ -22,8 +28,13 @@ export type ClientLogo = {
   name: string
   /** Logo file under /public/images/client-logos/optimized, or null for a text tile. */
   logo: string | null
-  /** Case study URL, or null when no case study exists yet (tile is not a link). */
+  /** Case study URL, or null when no case study exists yet. */
   href: string | null
+  /**
+   * No case study yet: the tile opens the sitewide contact popup rather than
+   * sitting inert. Only read when `href` is null; an `href` always wins.
+   */
+  contact?: boolean
   /** Source art is white or cream on transparent; invert it to read on cream. */
   invert?: boolean
   /** Source art carries an opaque white background; blend it into the cream. */
@@ -124,17 +135,29 @@ export const CLIENT_LOGOS: ClientLogo[] = [
   },
   // Text-only by design. Kamehameha Schools' mark is trademarked and is not
   // reproduced here; the name is set in small caps instead.
+  //
+  // This one takes `contact` as a standing constraint rather than as a gap
+  // waiting to be filled. lib/organizations.ts and the aggregate file at
+  // src/content/case-studies/_aggregate-nda-engagements.md both record that
+  // Kamehameha engagement detail surfaces only as unnamed aggregate framing.
+  // The name is approved for this band; the story is not approved for a page.
+  // Do not create /case-studies/kamehameha-schools without Michele clearing it.
   {
     slug: 'kamehameha-schools',
     name: 'Kamehameha Schools',
     logo: null,
     href: null,
+    contact: true,
   },
+  // Advance Good carries no case-study copy anywhere in the repo yet, so it
+  // takes the contact popup until Michele sends wording. She Leads America got
+  // its page on 2026-08-25 and links to it like any other tile.
   {
     slug: 'advance-good',
     name: 'Advance Good',
     logo: `${DIR}/advance-good.png`,
     href: null,
+    contact: true,
   },
   {
     slug: 'she-leads-america',

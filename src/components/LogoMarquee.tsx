@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { Container } from '@/components/Container'
+import { ContactSurface } from '@/components/ContactSurface'
 import { FadeIn } from '@/components/FadeIn'
 import { CLIENT_LOGOS, type ClientLogo } from '@/lib/client-logos'
 
@@ -10,15 +11,15 @@ import { CLIENT_LOGOS, type ClientLogo } from '@/lib/client-logos'
  * Reuses the .marquee-track / .marquee-band CSS from tailwind.css (defined
  * for OrgCarousel) but overrides the animation duration inline.
  *
- * Reworked 2026-08-23 on Michele's review: logos at 2x, full colour at rest
- * (they were grayscale and dimmed), and the drift slowed to half its former
- * pixel speed. See the notes at the tile and at the duration.
+ * Reworked 2026-08-23 on Michele's review: logos at 2x and full colour at rest
+ * (they were grayscale and dimmed). The drift was halved in the same pass and
+ * then taken back up on 2026-08-25. See the notes at the tile and the duration.
  *
- * Three tile shapes come out of the registry:
- *  - a logo that links to a case study,
- *  - a logo with no case study yet, rendered as plain non-clickable art,
- *  - a text tile, used for Kamehameha Schools, whose mark is trademarked and
- *    is not reproduced here.
+ * Every tile is clickable as of 2026-08-25. The art is either a logo image or,
+ * for Kamehameha Schools, a text wordmark, since their mark is trademarked and
+ * is not reproduced here. The click goes one of two places: to the case study
+ * when the registry has an `href`, or to the sitewide contact popup when it
+ * does not. Nothing renders as inert art any more. See client-logos.ts.
  */
 function LogoArt({ item }: { item: ClientLogo }) {
   if (!item.logo) {
@@ -73,25 +74,44 @@ function LogoTile({ item }: { item: ClientLogo }) {
     </>
   )
 
-  const className =
-    'group flex w-72 shrink-0 flex-col items-center gap-3 px-6 sm:w-80'
+  const base = 'group flex w-72 shrink-0 flex-col items-center gap-3 px-6 sm:w-80'
+  // A <Link> gets a pointer from the user agent; a <button> does not, because
+  // Tailwind's preflight resets it to cursor:default. Michele reported exactly
+  // that symptom on the three contact tiles, so state it rather than inherit it.
+  const className = `${base} cursor-pointer`
 
-  if (!item.href) {
+  if (item.href) {
     return (
-      <div className={className} aria-label={item.name}>
+      <Link
+        href={item.href}
+        aria-label={`Read the ${item.name} story`}
+        className={className}
+      >
         {inner}
-      </div>
+      </Link>
     )
   }
 
+  // No case study yet. Rather than a dead tile, open the contact popup so the
+  // click still goes somewhere and the interest lands in Michele's inbox.
+  if (item.contact) {
+    return (
+      <ContactSurface
+        interest="speaking"
+        ariaLabel={`Ask Michele about her work with ${item.name}`}
+        className={className}
+      >
+        {inner}
+      </ContactSurface>
+    )
+  }
+
+  // Neither an href nor `contact`. No entry is in this state today; the branch
+  // exists so a future tile can opt out of being clickable at all.
   return (
-    <Link
-      href={item.href}
-      aria-label={`Read the ${item.name} story`}
-      className={className}
-    >
+    <div className={base} aria-label={item.name}>
       {inner}
-    </Link>
+    </div>
   )
 }
 
@@ -111,7 +131,7 @@ export function LogoMarquee() {
             Organizations I&rsquo;ve worked with.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-center text-base text-neutral-600">
-            Hover to pause, click any logo for the story.
+            Hover to pause, click any logo to learn more.
           </p>
         </FadeIn>
       </Container>
@@ -140,7 +160,6 @@ export function LogoMarquee() {
               naive midpoint of the raw numbers, (48 + 192) / 2 = 120s, would
               land at ~42 px/s and undo about three quarters of the slowdown.
               Re-derive this if the tile width changes again. */}
-
           <div
             className="marquee-track marquee-rtl"
             style={{ animationDuration: '144s' }}
