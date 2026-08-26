@@ -83,7 +83,6 @@ export default function RaisingKingdomKidsPage() {
         purchaseHref ? (
           <SquareButton
             href={purchaseHref}
-            forTitle="Raising Kingdom Kids"
             size="page"
             label="Shop the Kingdom Kids Curriculum"
           />

@@ -130,7 +130,6 @@ export default function DreamBigJournalsPage() {
         squareHref ? (
           <SquareButton
             href={squareHref}
-            forTitle="the Dream Big Journals"
             size="page"
             label={SHOP_LABEL}
           />
@@ -217,7 +216,6 @@ export default function DreamBigJournalsPage() {
           <div className="mt-10 flex justify-center">
             <SquareButton
               href={squareHref}
-              forTitle="the Dream Big Journals"
               size="page"
               label={SHOP_LABEL}
             />
