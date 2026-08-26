@@ -1,5 +1,9 @@
 import Image from 'next/image'
 
+import {
+  storeButtonAriaLabel,
+  storeButtonLabel,
+} from '@/data/square-store-links'
 import type { AvailableLink, Endorsement } from '@/lib/author-books'
 
 /**
@@ -199,8 +203,16 @@ export function AvailableAt({
 }
 
 /**
- * "Buy on Square": the storefront call to action carried by a book tile and,
- * one size up, by the top of a book's own page.
+ * The storefront call to action carried by a book tile and, one size up, by
+ * the top of a book's own page.
+ *
+ * LABEL. Read off the href rather than passed in, so a title that moves
+ * storefronts renames its own button everywhere it appears. Square titles say
+ * "Buy on Square"; the two Explicit Movement titles moved to Michele's own
+ * shop on 2026-08-26 and say "Shop at explicitmovement.org". The rule lives in
+ * `storeButtonLabel` in src/data/square-store-links.ts, next to the URLs it
+ * reads. The component keeps its name, which is now a misnomer; see the header
+ * of that file.
  *
  * COLOUR. --color-cta fill, `rounded-md`, `--color-cta-ink` label, which is
  * white on a darkened coral as of 2026-08-26. This is the same
@@ -217,8 +229,9 @@ export function AvailableAt({
  *
  * ACCESSIBLE NAME. The Author page renders this button many times over with
  * identical visible text, so pass `forTitle` and the link announces "Buy
- * Dancing with Father on Square" rather than the fifth "Buy on Square" in a
- * row. The visible label stays short.
+ * Dancing with Father on Square", or "Shop for The Birth of Explicit Movement
+ * at explicitmovement.org", rather than the fifth identical label in a row.
+ * The visible label stays short.
  */
 export function SquareButton({
   href,
@@ -238,7 +251,7 @@ export function SquareButton({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={forTitle ? `Buy ${forTitle} on Square` : undefined}
+      aria-label={forTitle ? storeButtonAriaLabel(href, forTitle) : undefined}
       className={`group/buy inline-flex items-center justify-center gap-1.5 rounded-md bg-[var(--color-cta)] font-semibold text-[var(--color-cta-ink)] shadow-sm transition hover:bg-[var(--color-cta-hover)] focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 focus-visible:ring-offset-white focus-visible:outline-none ${
         size === 'page'
           ? 'px-6 py-3.5 text-base'
@@ -250,7 +263,7 @@ export function SquareButton({
             'min-h-11 px-3 py-2 text-sm sm:min-h-0'
       } ${className}`}
     >
-      Buy on Square
+      {storeButtonLabel(href)}
       <span
         aria-hidden="true"
         className="transition-transform duration-200 group-hover/buy:translate-x-0.5"

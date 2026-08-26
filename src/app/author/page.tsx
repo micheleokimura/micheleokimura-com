@@ -157,7 +157,7 @@ const TILE_FOOTER =
 
 /**
  * A title on the shelf: cover, title, forthcoming tag, teaser, and a footer
- * carrying "Learn more" and, where the title is stocked, "Buy on Square".
+ * carrying "Learn more" and, where the title is stocked, its shop button.
  *
  * WHY THIS IS A DIV WRAPPING AN OVERLAY LINK RATHER THAN A LINK WRAPPING
  * EVERYTHING. The tile used to be one <Link> around the whole card. The Square
@@ -232,9 +232,8 @@ function BookTile({
                 carry "Forthcoming Spring 2027" three lines up in Michele's own
                 wording. A generic second label under it says the same thing
                 twice, less precisely. The other unlinked titles must not get
-                one at all: the Brave Series sells through thebraveseries.com
-                and The Birth of Explicit Movement has been out since 2018, so
-                "coming soon" on either would be false. See
+                one at all: the Brave Series sells through thebraveseries.com,
+                so "coming soon" on it would be false. See
                 src/data/square-store-links.ts. */}
             {squareHref ? (
               <SquareButton

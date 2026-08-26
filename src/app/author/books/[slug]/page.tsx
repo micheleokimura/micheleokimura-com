@@ -275,17 +275,16 @@ export default async function AuthorBookPage({
                 It is up here rather than beside the BuyLink panel further down
                 because those are two different destinations doing two
                 different jobs: BuyLink is the branded storefront a title was
-                already sold through, this is Michele's own Square store. No
-                title carries both today (see the Brave Series note in
-                src/data/square-store-links.ts), so the two never stack.
+                already sold through, this is the shop Michele sells it from
+                herself. No title carries both today (see the Brave Series note
+                in src/data/square-store-links.ts), so the two never stack.
 
                 Nothing renders in place of the button when there is no
                 listing. The brief asked for a "Coming soon" stand-in, but the
-                forthcoming titles already print "Forthcoming Spring 2027" at
-                the head of the column beside this one, and the titles that are
-                simply not stocked on Square are on sale elsewhere: calling The
-                Birth of Explicit Movement "coming soon" in 2026 would be
-                flatly untrue. */}
+                titles that would land on are the two Brave Purpose editions,
+                which already print "Forthcoming Spring 2027" at the head of
+                the column beside this one, and the Brave Series, which sells
+                through thebraveseries.com and is not coming soon at all. */}
             {squareHref ? (
               <div className="mt-6">
                 <SquareButton

@@ -1,5 +1,14 @@
 /**
- * Square storefront links, one entry per title on the Author shelf.
+ * Storefront links, one entry per title on the Author shelf.
+ *
+ * === "SQUARE" IS NOW A MISNOMER IN THESE NAMES ===
+ * This file, `squareLinks`, `getSquareLink` and `SquareButton` were all written
+ * when every destination here was a Square store. On 2026-08-26 Michele moved
+ * the two Explicit Movement titles onto her own shop at explicitmovement.org,
+ * so the map now holds a storefront URL of any host and the button labels
+ * itself from that host (see `storeButtonLabel` below and the button in
+ * src/components/AuthorBookParts.tsx). The names were left alone to keep that
+ * change small. Read every "Square" in here as "storefront".
  *
  * WHERE THESE CAME FROM. Crawled 2026-08-25 from the two Square sitemaps, then
  * every URL below was checked for a 200 before it was written down:
@@ -77,11 +86,47 @@ export const squareLinks: Record<string, string | null> = {
   'brave-and-bold': null,
   'brave-together': null,
 
-  // The trade book is not stocked on either Square store. The companion
-  // journal is, over on the Brave Series storefront.
-  'birth-of-explicit-movement': null,
-  'explicit-movement-21-day-journal':
-    'https://braveseries.square.site/product/explicit-21-day-interactive-journal/1',
+  // Both Explicit Movement titles sell through the Explicit Movement shop, on
+  // Michele's direction of 2026-08-26. The trade book was never stocked on
+  // either Square store, and the journal used to point at its Brave Series
+  // Square listing; she wants one front door for both.
+  'birth-of-explicit-movement': 'https://www.explicitmovement.org/shop',
+  'explicit-movement-21-day-journal': 'https://www.explicitmovement.org/shop',
+}
+
+/**
+ * The visible label for a storefront button, taken from the URL it points at.
+ *
+ * Derived rather than stored per title so that every surface carrying the
+ * button (the Author shelf tiles, /author/books/<slug>, the Dream Big project
+ * page) names the right shop without each call site having to remember to pass
+ * a label. Square keeps its brand name, because naming that host instead would
+ * print a bare subdomain where a shop name belongs. Every other host is named
+ * outright, which is how the Explicit Movement titles read "Shop at
+ * explicitmovement.org".
+ */
+export function storeButtonLabel(href: string): string {
+  const host = hostOf(href)
+  if (!host) return 'Visit the shop'
+  if (host.endsWith('square.site')) return 'Buy on Square'
+  return `Shop at ${host}`
+}
+
+/** The accessible name, which also carries the title. See SquareButton. */
+export function storeButtonAriaLabel(href: string, title: string): string {
+  const host = hostOf(href)
+  if (!host) return `Shop for ${title}`
+  if (host.endsWith('square.site')) return `Buy ${title} on Square`
+  return `Shop for ${title} at ${host}`
+}
+
+/** Hostname without the `www.`, or '' if the URL will not parse. */
+function hostOf(href: string): string {
+  try {
+    return new URL(href).hostname.replace(/^www\./, '')
+  } catch {
+    return ''
+  }
 }
 
 /** Convenience reader, so callers do not index a possibly-missing key. */
