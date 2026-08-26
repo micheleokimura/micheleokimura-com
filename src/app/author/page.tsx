@@ -53,9 +53,12 @@ import { pageMetadata } from '@/lib/schema'
  * does, so each one reads as a finished thought. There is no constraint on
  * which band goes last: SiteFooter paints its own run-in with band-4.
  *
- * 2026-08-25. The closing "Also built by Michele" row moved to /speaker. Its
- * two cards, the Kingdom Kids Workshop and ReThink Creativity, are speaking
- * work rather than authored titles. The page now ends on the quote banner.
+ * 2026-08-25. The closing "Also built by Michele" row is gone. Its two cards,
+ * the Kingdom Kids Workshop and ReThink Creativity, are speaking work rather
+ * than authored titles. ReThink Creativity now closes /speaker; the Kingdom
+ * Kids Workshop was dropped outright as a duplicate of the message page at
+ * /speaker/messages/building-a-kingdom-culture. The page now ends on the quote
+ * banner.
  */
 export const metadata: Metadata = pageMetadata({
   title: 'Author',
@@ -633,15 +636,24 @@ export default function AuthorPage() {
       </section>
 
       {/* The "Also built by Michele" row that used to close this page is GONE,
-          moved wholesale to /speaker on 2026-08-25. It carried two cards, the
-          Kingdom Kids Workshop and ReThink Creativity, and Michele's read was
-          that both are speaking work rather than authored titles: one is
-          parent and ministry-leader training she delivers in a room, the other
-          is a conference she leads. Neither has a title on the shelf above, so
-          neither belongs on the Author page at all. They now close /speaker,
-          along with the "Every story in one place" route into /projects that
-          sat under them here. /projects is also still in the footer, so this
-          page losing the link is not a dead end.
+          2026-08-25. It carried two cards, the Kingdom Kids Workshop and
+          ReThink Creativity, and Michele's read was that both are speaking
+          work rather than authored titles: one is parent and ministry-leader
+          training she delivers in a room, the other is a conference she leads.
+          Neither has a title on the shelf above, so neither belonged on the
+          Author page at all.
+
+          They did not both survive the move. ReThink Creativity now closes
+          /speaker, along with the "Every story in one place" route into
+          /projects that sat under it here. The Kingdom Kids Workshop was
+          dropped outright rather than relocated: the material is already on
+          /speaker/messages/building-a-kingdom-culture, which is the name
+          Michele teaches it under, so a card for it anywhere would be a second
+          door onto one thing. /projects/kingdom-kids is untouched and still
+          live; only the cards are gone.
+
+          /projects is still in the footer, so this page losing that link is
+          not a dead end.
 
           Do not rebuild this row from the project registry. If a future
           program genuinely is an authored work, it gets a tile on the shelf

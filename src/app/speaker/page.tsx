@@ -82,9 +82,12 @@ import {
  * It is a plain band with one Contact button on the sitewide popup. Do not
  * put an address back on this page.
  *
- * WORKSHOPS. Added 2026-08-25, moved off the bottom of /author: the Kingdom
- * Kids Workshop and ReThink Creativity. Michele asked for them at the bottom
- * of this page, so they sit below the Book Michele band rather than above it.
+ * WORKSHOPS. Added 2026-08-25, moved off the bottom of /author: ReThink
+ * Creativity. Michele asked for it at the bottom of this page, so it sits
+ * below the Book Michele band rather than above it. The Kingdom Kids Workshop
+ * came across in the same move and was pulled the same day as a duplicate of
+ * /speaker/messages/building-a-kingdom-culture; the WORKSHOPS comment in the
+ * markup has the reasoning.
  *
  * Copy of record: site/content/speaker/speaker-page-copy.md, locked with
  * Michele 2026-08-22. The messages themselves live in
@@ -180,17 +183,29 @@ const TEXTURE_CLASS: Record<MessageTexture, string> = {
 }
 
 /**
- * The two programs that close this page: the Kingdom Kids Workshop and
- * ReThink Creativity. Both were on /author until 2026-08-25; see the WORKSHOPS
- * comment down in the markup for why they moved.
+ * The programs that close this page. ReThink Creativity, and for a few hours
+ * on 2026-08-25 the Kingdom Kids Workshop as well; see the WORKSHOPS comment
+ * down in the markup for why that one came straight back out.
  *
  * Card copy is read from the project registry rather than written out here, so
  * this section and the /projects index never drift apart. The filter is by
  * slug and the order follows the registry.
  */
 const WORKSHOPS = projectStudies.filter((project) =>
-  ['kingdom-kids', 'rethink-creativity'].includes(project.slug),
+  ['rethink-creativity'].includes(project.slug),
 )
+
+/**
+ * The card grid goes two-up only when there is something to pair. A lone card
+ * in a `sm:grid-cols-2` reads as a tile that failed to load, which is exactly
+ * what this section would have looked like after the Kingdom Kids Workshop was
+ * pulled. One card gets a single column capped at the width of the copy above
+ * it instead. Add a second program and the two-up comes back on its own.
+ */
+const WORKSHOP_GRID =
+  WORKSHOPS.length > 1
+    ? 'grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8'
+    : 'grid max-w-2xl grid-cols-1 gap-6'
 
 type Engagement = {
   event: string
@@ -579,16 +594,30 @@ export default function SpeakerPage() {
 
       {/* ------------------------------------------------------- workshops */}
       {/* Moved here from the bottom of /author on 2026-08-25, at Michele's
-          direction. The Kingdom Kids Workshop is parent and ministry-leader
-          training she delivers in a room, and ReThink Creativity is a
-          conference she leads. Both are speaking work, and neither is an
-          authored title, so neither had any business closing the Author page.
+          direction: ReThink Creativity is a conference she leads, which is
+          speaking work rather than an authored title, so it had no business
+          closing the Author page.
+
+          THE KINGDOM KIDS WORKSHOP IS NOT HERE, AND DELIBERATELY SO. It came
+          across in the same move and Michele pulled it the same day. It is not
+          a judgement about the workshop; the material is already on this site,
+          under the name she teaches it by, at
+          /speaker/messages/building-a-kingdom-culture. A card here would be a
+          second door onto the same content one scroll below the message grid
+          that already carries it. Do not add it back.
+
+          What that removal did NOT touch, on purpose: /projects/kingdom-kids
+          is still live, still in the /projects index and the sitemap, and
+          still linked from /projects/raising-kingdom-kids, which calls it the
+          companion workshop to the lesson book. Deleting the case study is a
+          much bigger decision than dropping a card and nobody has asked for
+          it.
 
           Copy is UNCHANGED from what /author was showing, which means it is
           still read from the project registry in src/lib/projects.ts and this
           section and the /projects index cannot drift apart. Michele is
-          sending revised copy for both; when it lands, edit the registry
-          entries rather than hard-coding strings here.
+          sending revised copy; when it lands, edit the registry entry rather
+          than hard-coding strings here.
 
           It sits BELOW "Book Michele" because Michele asked for the bottom of
           the page. Band-3, because its neighbour above is band-2 and no two
@@ -598,7 +627,9 @@ export default function SpeakerPage() {
 
           The card is the /author markup rebuilt on this page's conventions:
           BAND rather than SECTION for the section padding, SectionIntro for
-          the heading so it matches Stages and Topics, and no new component. */}
+          the heading so it matches Stages and Topics, and no new component.
+          The grid is WORKSHOP_GRID rather than a literal, so one card does not
+          render as half a row. */}
       <section
         aria-label="Workshops and conferences Michele leads"
         className={`bg-[var(--color-band-3)] ${BAND}`}
@@ -611,10 +642,7 @@ export default function SpeakerPage() {
 
         <div className={`${WIDE} mt-10 sm:mt-12`}>
           <FadeInStagger faster>
-            <ul
-              role="list"
-              className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8"
-            >
+            <ul role="list" className={WORKSHOP_GRID}>
               {WORKSHOPS.map((project) => (
                 <FadeIn as="li" key={project.href} scaleIn className="flex">
                   <Link
