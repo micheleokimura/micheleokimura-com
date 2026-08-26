@@ -414,7 +414,7 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
         quote:
           'Her creative and visually-exciting presentations have challenged us and our students to directly download from the Father Heart of God. We are now seeing children as young as five praying bold and encouraging words over other children and even their teachers. Our entire campus culture has changed. Our school will never be the same.',
         name: 'Rebecca Furuhashi',
-        role: 'Principal, Christian Academy',
+        role: 'Former Principal, Christian Academy',
       },
       // Added 2026-08-24. Michele sent two attendee quotes and called them A
       // and B; A is already on the home page, so this is B and it lives here

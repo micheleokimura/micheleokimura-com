@@ -46,7 +46,7 @@ const ENDORSEMENTS: Endorsement[] = [
   {
     quote:
       'Her creative and visually-exciting presentations have challenged us and our students to directly download from the Father Heart of God. We are now seeing children as young as five praying bold and encouraging words over other children and even their teachers. Our entire campus culture has changed. Our school will never be the same.',
-    source: 'Rebecca Furuhashi, Principal, Christian Academy',
+    source: 'Rebecca Furuhashi, Former Principal, Christian Academy',
   },
   {
     quote:

@@ -410,7 +410,7 @@ export const FRIENDS_SAY_BOTTOM: Testimonial[] = [
     quote:
       'Her creative and visually-exciting presentations have challenged us and our students to directly download from the Father Heart of God. We are now seeing children as young as five praying bold and encouraging words over other children and even their teachers. Our entire campus culture has changed. Our school will never be the same.',
     name: 'Rebecca Furuhashi',
-    title: 'Principal, Christian Academy',
+    title: 'Former Principal, Christian Academy',
   },
   {
     quote:
