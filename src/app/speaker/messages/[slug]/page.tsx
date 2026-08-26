@@ -437,7 +437,10 @@ export default async function SpeakerMessagePage({
               <p className="mt-8 text-sm">
                 <Link
                   href="/speaker"
-                  className="font-semibold text-neutral-700 underline decoration-[var(--color-navy-20)] underline-offset-4 transition hover:text-neutral-950 hover:decoration-[var(--color-navy)]"
+                  // -my-3.5/py-3.5 is a 44pt tap target on a 14px line, with
+                  // the growth cancelled so the paragraph does not move. This
+                  // is the only way back to the keynote list from here.
+                  className="-my-3.5 inline-block py-3.5 font-semibold text-neutral-700 underline decoration-[var(--color-navy-20)] underline-offset-4 transition hover:text-neutral-950 hover:decoration-[var(--color-navy)]"
                 >
                   All of my messages
                 </Link>

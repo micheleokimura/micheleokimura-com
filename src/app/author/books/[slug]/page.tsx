@@ -487,7 +487,7 @@ export default async function AuthorBookPage({
               {book.storyHref ? (
                 <Link
                   href={book.storyHref}
-                  className="font-display inline-flex items-center gap-1.5 text-base font-semibold text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition hover:decoration-2"
+                  className="font-display -my-2.5 inline-flex items-center gap-1.5 py-2.5 text-base font-semibold text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition hover:decoration-2"
                 >
                   Read the story behind it
                   <span aria-hidden="true">&rarr;</span>
@@ -495,7 +495,7 @@ export default async function AuthorBookPage({
               ) : null}
               <Link
                 href="/author"
-                className="font-display inline-flex items-center gap-1.5 text-base font-semibold text-neutral-700 underline decoration-[var(--color-navy)]/25 decoration-1 underline-offset-4 transition hover:text-neutral-950 hover:decoration-2"
+                className="font-display -my-2.5 inline-flex items-center gap-1.5 py-2.5 text-base font-semibold text-neutral-700 underline decoration-[var(--color-navy)]/25 decoration-1 underline-offset-4 transition hover:text-neutral-950 hover:decoration-2"
               >
                 <span aria-hidden="true">&larr;</span>
                 All books and curricula
