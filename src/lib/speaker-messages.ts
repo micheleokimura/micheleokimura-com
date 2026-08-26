@@ -628,7 +628,7 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     endorsements: [
       {
         quote:
-          'She just did a session at Native Camp in Montana and it was excellent, the most impactful session of the whole camp. We had 19 FMI workers there. Every person had an experience of how to prophesy over each other. Simple, practical, and powerful. I saw it all personally. Now many children in our church prophesy and unashamedly pray for healing, all because of Michele.',
+          'She just did a session at Native Camp in Montana, and it was excellent, one of the most impactful sessions of the whole camp. We had 19 FMI workers there. Every person had an experience of how to prophesy over each other. Simple, practical, and powerful. I saw it all personally. Now many children in our church prophesy and unashamedly pray for healing, all because of Michele.',
         name: 'Pastor Kihāpiʻilani Pimental',
         role: 'Worker Supervisor, Foursquare Missions International',
       },
