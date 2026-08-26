@@ -73,7 +73,7 @@ each one.
 
 | Tile | Caption says | Issue |
 | --- | --- | --- |
-| 2 | "1955: Oldest of two beautiful younger sisters." | Michele was born in 1962, so 1955 cannot be right. Left verbatim. |
+| 2 | "1955: Oldest of two beautiful younger sisters." | Michele was born in 1962, so 1955 cannot be right. She confirmed 1969 on 2026-08-26, and the rebuild now says 1969. |
 | 8 | "older than than Aaron" | Doubled word. Left verbatim. |
 | 13 | "repeated our! high school conference" | Stray exclamation mark. Left verbatim. |
 | 17 | "2018: Published  2018: Published The Birth of..." | Paste artifact, the opening clause is duplicated. This one IS corrected in the rebuild, since it is mechanical rather than authored. |
@@ -165,13 +165,19 @@ So `AboutMosaic.tsx` now carries her WordPress copy for all 24 tiles, taken
 from `mosaic-tiles.json`, with the mechanical defects listed above corrected
 and "Hawaii" set as "Hawaiʻi". The component header lists every edit.
 
-Two items are still open for Michele:
+Two items were open for Michele and she closed both on 2026-08-26:
 
-1. Tile 2 reads "1955", which cannot square with the 1962 birth year on tile 1.
-   Shipped as she wrote it.
-2. Tile 22 has been reworded to name Releasing Generations as the recipient of
-   the 2023 Outstanding Advocate award. Her WordPress caption reads as though
-   the award were hers personally. `src/lib/credentials.ts` records that the
-   recipient is the organisation and says not to put her name alone back.
+1. Tile 2 read "1955", which could not square with the 1962 birth year on tile
+   1. She confirmed the year is **1969**.
+2. Tile 22 is now her own rewrite, and it supersedes both her WordPress
+   caption and the interim fix that named Releasing Generations outright:
+
+   > 2023: SURPRISE!! Our nonprofit was honored with the Hawaiʻi State's 2023
+   > Outstanding Advocate for Children and Youth Award by the Governor and the
+   > City Mayor. So humbled. I didn't even know we were nominated!
+
+   "Our nonprofit" keeps the award with the organisation, which is what
+   `src/lib/credentials.ts` asks for. Shipped verbatim except for curly
+   apostrophes and the ʻokina, which she wrote as plain "Hawaii".
 
 If she sends new copy it supersedes all of this.

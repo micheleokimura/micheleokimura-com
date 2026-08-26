@@ -59,13 +59,14 @@ import { FadeIn } from '@/components/FadeIn'
  *   - tile 23 "non- profit" -> "non-profit"
  *   - "Hawaii" set as "Hawaiʻi" per DESIGN-RULES.md
  *
- * Two things are NOT verbatim and are still open for Michele:
+ * Two tiles Michele then rewrote herself on 2026-08-26, closing the last two
+ * open questions:
  *
- *   - Tile 2 says "1955", which cannot be right when tile 1 says she was born
- *     in 1962. Left as she wrote it; she rules on the year.
- *   - Tile 22 names Releasing Generations as the award recipient. Her caption
- *     reads as though the 2023 award were hers personally, and it is the
- *     organisation's. See the recipient note in src/lib/credentials.ts, which
+ *   - Tile 2 said "1955", which could not square with the 1962 birth year on
+ *     tile 1. She confirmed the year is 1969.
+ *   - Tile 22 is her own new wording. It opens "Our nonprofit was honored
+ *     with", which keeps the 2023 award with the organisation rather than with
+ *     her personally. See the recipient note in src/lib/credentials.ts, which
  *     says not to put her name alone back.
  *
  * All 24 photographs are present as of 2026-08-26. The last four arrived from
@@ -102,9 +103,9 @@ const TILES: Tile[] = [
   {
     src: `${IMG_ROOT}/about-1964-sisters-02.jpg`,
     alt: 'Michele with her two younger sisters.',
-    /* "1955" is Michele's own wording and contradicts the 1962 birth year on
-       the tile above. Left for her to rule on. */
-    caption: '1955: Oldest of two beautiful younger sisters.',
+    /* Was "1955", which contradicted the 1962 birth year on the tile above.
+       Michele confirmed 1969 on 2026-08-26. */
+    caption: '1969: Oldest of two beautiful younger sisters.',
   },
   {
     src: `${IMG_ROOT}/about-1979-miss-teen-usa-03.jpg`,
@@ -223,9 +224,12 @@ const TILES: Tile[] = [
   {
     src: `${IMG_ROOT}/about-2023-hawaii-outstanding-advocate-19.jpg`,
     alt: 'Michele receiving the Outstanding Advocate award, 2023.',
-    /* Recipient is the organisation. See the header note and credentials.ts. */
+    /* Michele's rewrite, 2026-08-26, replacing both her WordPress wording and
+       the interim fix that named Releasing Generations outright. "Our
+       nonprofit" keeps the recipient correct, which is what credentials.ts
+       asks for. Verbatim except for curly apostrophes and the ʻokina. */
     caption:
-      '2023: SURPRISE! Releasing Generations was awarded the State of Hawaiʻi’s 2023 ‘Outstanding Advocate for the Children and Youth in The State of Hawaiʻi Award’ by Mayor Blangiardi and Governor Green. Humbled greatly. I didn’t even know we were nominated!',
+      '2023: SURPRISE!! Our nonprofit was honored with the Hawaiʻi State’s 2023 Outstanding Advocate for Children and Youth Award by the Governor and the City Mayor. So humbled. I didn’t even know we were nominated!',
   },
   {
     src: `${IMG_ROOT}/about-2023-rg-10th-anniversary-20.jpg`,
