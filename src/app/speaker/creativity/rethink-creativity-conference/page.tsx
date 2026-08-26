@@ -255,7 +255,7 @@ export default function ReThinkCreativityConferencePage() {
               <p className="mt-8 text-sm">
                 <Link
                   href="/speaker/messages/activating-your-creativity"
-                  className="font-semibold text-neutral-700 underline decoration-[var(--color-navy-20)] underline-offset-4 transition hover:text-neutral-950 hover:decoration-[var(--color-navy)]"
+                  className="-my-3.5 inline-block py-3.5 font-semibold text-neutral-700 underline decoration-[var(--color-navy-20)] underline-offset-4 transition hover:text-neutral-950 hover:decoration-[var(--color-navy)]"
                 >
                   Back to Activating Your Creativity
                 </Link>

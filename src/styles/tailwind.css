@@ -992,6 +992,14 @@ html.lenis body {
   color: var(--color-neutral-800);
   font-size: 1.0625rem;
   line-height: 1.75;
+  /* THE ONLY HORIZONTAL OVERFLOW ON THE SITE, found on a phone during Brett's
+     2026-08-26 mobile pass and fixed here. Michele's posts cite sources as
+     bare URLs, and a URL is one unbreakable word: three of them on
+     /resources/2026-michele-okimura-hawaii-governor-award pushed the page to
+     466px inside a 393px viewport, so the whole article scrolled sideways.
+     `break-word` only breaks a word that has nowhere else to go, so ordinary
+     prose still wraps at spaces exactly as before. */
+  overflow-wrap: break-word;
 }
 .prose-blog p {
   margin-top: 1.25em;
@@ -1017,6 +1025,10 @@ html.lenis body {
   line-height: 1.3;
 }
 .prose-blog a {
+  /* `anywhere`, not `break-word`. A bare URL offers no break opportunity, and
+     break-word declines to split a token that is alone in its inline box,
+     which is exactly the case here. See the note on .prose-blog above. */
+  overflow-wrap: anywhere;
   color: var(--color-brand-teal);
   text-decoration-line: underline;
   text-decoration-color: var(--color-cta);
