@@ -123,11 +123,18 @@ export default function WorksPage() {
                             {work.subtitle}
                           </p>
                         )}
+                        {/* 13px below sm rather than 12: a publisher-and-year
+                            credit is small type by design, but 12px on a phone
+                            is under every legibility floor going. The desktop
+                            size is unchanged.
+
+                            THIS COMMENT LIVES ABOVE THE GUARD, not inside it.
+                            Everything between `&&` and the element is a JS
+                            expression position, where `{` opens an object
+                            literal rather than a JSX comment. Putting it there
+                            is a syntax error, and it is one that only shows up
+                            as a failed build. */}
                         {work.year && (
-                          {/* 13px below sm rather than 12: a publisher-and-year
-                              credit is small type by design, but 12px on a
-                              phone is under every legibility floor going. The
-                              desktop size is unchanged. */}
                           <p className="mt-3 text-[0.8125rem] text-neutral-500 sm:text-xs">
                             {work.publisher
                               ? `${work.publisher}, ${work.year}`
