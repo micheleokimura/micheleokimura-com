@@ -50,7 +50,7 @@ export default function AboutPage() {
           quote further down is teal at a similar size, so this one is navy and
           bold to keep the two from competing. */}
       <Container className="pt-14 pb-16 sm:pt-16 sm:pb-20">
-        <FadeIn className="mx-auto max-w-4xl text-center text-[var(--color-navy)]">
+        <FadeIn className="mx-auto max-w-5xl text-center text-[var(--color-navy)]">
           <p className="font-display text-3xl leading-[1.1] font-extrabold tracking-tight text-balance md:text-4xl lg:text-5xl">
             Your story. Your power. Your creative genius.
           </p>
