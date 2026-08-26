@@ -208,16 +208,24 @@ function BookTile({
   book,
   headingClass = 'text-lg',
   as: Heading = 'h3',
+  showPurchase = true,
 }: {
   book: AuthorBook
   headingClass?: string
   as?: 'h3' | 'h4'
+  /**
+   * Draw the tile's own Purchase button. False for a tile inside a family
+   * whose FamilyHeading already carries one, which is Michele's direction of
+   * 2026-08-26: the three Brave Series tiles were each repeating the same
+   * thebraveseries.com button that sits at the head of the section.
+   */
+  showPurchase?: boolean
 }) {
   /* Not `getSquareLink`. The shelf's Purchase button reads the purchase map,
      which layers the Brave Series' own storefront over the Square listings
      without changing what /author/books/<slug> renders. See the note on
      `getPurchaseLink` in src/data/square-store-links.ts. */
-  const purchaseHref = getPurchaseLink(book.slug)
+  const purchaseHref = showPurchase ? getPurchaseLink(book.slug) : null
 
   return (
     <div className={`${TILE_CLASS} relative`}>
@@ -249,10 +257,12 @@ function BookTile({
         <p className="mt-1.5 line-clamp-5 text-sm leading-5 text-neutral-600">
           {book.teaser}
         </p>
-        {/* Every tile carries the same pair, Michele's direction of
-            2026-08-26: "Learn more" to the title's own page, "Purchase" to the
-            shop that stocks it. The footer is unconditional now because
-            "Learn more" always renders; only the Purchase half can drop out.
+        {/* "Learn more" to the title's own page, and, where the tile stands on
+            its own, "Purchase" to the shop that stocks it. The footer is
+            unconditional because "Learn more" always renders; only the
+            Purchase half can drop out. A tile inside a family is passed
+            showPurchase={false} and carries "Learn more" alone, because the
+            family heading above it holds the one buy button for the set.
 
             No button and no substitute label when there is no listing. The
             brief asked for a "Coming soon" here, and the only two titles it
@@ -541,16 +551,20 @@ export default function AuthorPage() {
                               scaleIn
                               className="flex"
                             >
-                              {/* These three used to carry no footer at all,
-                                  on the reasoning that the family heading
-                                  above already links to the one page they all
-                                  point at. Michele overrode that on
-                                  2026-08-26: every tile on this page gets the
-                                  same pair. */}
+                              {/* "Learn more" only. These three tiles carried
+                                  a Purchase button for part of 2026-08-26,
+                                  and Michele took it back off the same day:
+                                  all three point at the same
+                                  thebraveseries.com storefront as the
+                                  Purchase button in the family heading a few
+                                  lines above them, so the section was showing
+                                  one destination four times. The heading's
+                                  button is the one that stays. */}
                               <BookTile
                                 book={child}
                                 as="h4"
                                 headingClass="text-base"
+                                showPurchase={false}
                               />
                             </FadeIn>
                           )

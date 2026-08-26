@@ -22,7 +22,7 @@ import {
   DREAM_BIG_EDITIONS,
   getAuthorBook,
 } from '@/lib/author-books'
-import { getSquareLink } from '@/data/square-store-links'
+import { BRAVE_SERIES_STORE_URL, getSquareLink } from '@/data/square-store-links'
 import { pageMetadata } from '@/lib/schema'
 
 /**
@@ -232,7 +232,24 @@ export default async function AuthorBookPage({
   const book = getAuthorBook(slug)
   if (!book) notFound()
 
-  const squareHref = getSquareLink(slug)
+  /**
+   * The storefront for the button that sits under the cover or wordmark at the
+   * top of the page.
+   *
+   * The Brave Series curriculum is the one title that is not read out of
+   * `squareLinks` here. Its entry there is null, because the series sells
+   * through thebraveseries.com rather than either Square store, so this page
+   * used to open with a wordmark and no way to buy: the only purchase route was
+   * the BuyLink panel most of a screen further down. Michele's direction on
+   * 2026-08-26 was to put the button directly under the logo at the top, and
+   * that this is where people buy the series.
+   *
+   * The three child titles are deliberately not included. They sell through the
+   * same storefront, and Michele's call the same day was that the series page
+   * is the one that carries the button.
+   */
+  const topPurchaseHref =
+    slug === 'brave-series' ? BRAVE_SERIES_STORE_URL : getSquareLink(slug)
 
   return (
     <>
@@ -283,14 +300,22 @@ export default async function AuthorBookPage({
                 listing. The brief asked for a "Coming soon" stand-in, but the
                 titles that would land on are the two Brave Purpose editions,
                 which already print "Forthcoming Spring 2027" at the head of
-                the column beside this one, and the Brave Series, which sells
-                through thebraveseries.com and is not coming soon at all. */}
-            {squareHref ? (
+                the column beside this one.
+
+                The Brave Series is the exception described on
+                `topPurchaseHref` above: it renders here, under the wordmark.
+                Its BuyLink panel further down names the same storefront and
+                was left in place, because Michele asked for that panel herself
+                when the one-line version read as too small to find. If she
+                wants a single purchase route on this page, the panel is the
+                half to drop, not this button. */}
+            {topPurchaseHref ? (
               <div className="mt-6">
                 <SquareButton
-                  href={squareHref}
+                  href={topPurchaseHref}
                   forTitle={book.title}
                   size="page"
+                  label={slug === 'brave-series' ? 'Purchase' : undefined}
                   className="w-full"
                 />
               </div>

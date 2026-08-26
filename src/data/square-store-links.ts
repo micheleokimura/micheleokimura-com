@@ -58,6 +58,13 @@
  * `buy` panel those records already carry in src/lib/author-books.ts. Adding a
  * Square button beside it would put two competing purchase destinations on one
  * page. Leave these null unless she changes that.
+ *
+ * The Brave Series curriculum page does now carry a button under its wordmark,
+ * on Michele's direction of 2026-08-26, and it names thebraveseries.com rather
+ * than Square. That button is hard-coded in
+ * src/app/author/books/[slug]/page.tsx off the slug, precisely so these rows
+ * can stay null and no OTHER title starts pointing at a Square listing that
+ * does not sell the thing on the page.
  */
 
 /** The storefront root. The Author page's "Shop all books" link. */
@@ -147,17 +154,24 @@ export const EXPLICIT_MOVEMENT_STORE_URL = 'https://www.explicitmovement.org/sho
  * `squareLinks`.
  *
  * WHY THIS IS A SECOND MAP RATHER THAN FOUR MORE ROWS IN `squareLinks`.
- * Michele asked on 2026-08-26 for every tile on /author to carry a Purchase
- * button, the four Brave Series tiles included. `squareLinks` is also read by
- * /author/books/<slug>, and those four records already carry a `buy` panel
- * pointing at thebraveseries.com (see AUTHOR_BOOKS in src/lib/author-books.ts).
- * Adding the Brave Series to `squareLinks` would print that same destination
- * twice on one detail page, which is the exact thing the note at the head of
- * this file exists to prevent. So the shelf reads THIS map and the detail pages
- * keep reading `squareLinks` unchanged.
+ * Michele asked on 2026-08-26 for the Brave Series to carry a Purchase button
+ * on /author. `squareLinks` is read by /author/books/<slug> as well, and all
+ * four Brave records already carry a `buy` panel pointing at thebraveseries.com
+ * (see AUTHOR_BOOKS in src/lib/author-books.ts). Putting the series into
+ * `squareLinks` would hand that same destination to all four detail pages on
+ * top of the panel they already have. So the shelf reads THIS map, and the
+ * detail pages keep reading `squareLinks` unchanged.
  *
  * Anything not listed here falls through to `squareLinks`, so a title that
  * moves storefronts still only needs editing in one place.
+ *
+ * The three child titles are still listed even though nothing reads them
+ * today. Michele's follow-up later on 2026-08-26 took the Purchase button off
+ * the three Brave Series tiles on /author (all three named the same storefront
+ * as the button in the section heading, so the section printed one destination
+ * four times), and the tiles now pass showPurchase={false}. The rows stay
+ * because they are the correct answer if a per-title button ever comes back,
+ * and because a wrong answer left here would be silent.
  */
 const purchaseOverrides: Record<string, string> = {
   'brave-series': BRAVE_SERIES_STORE_URL,
