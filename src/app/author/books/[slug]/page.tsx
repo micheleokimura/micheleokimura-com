@@ -7,6 +7,7 @@ import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
 import { BannerHero } from '@/components/BannerHero'
 import { BraveSeriesCovers } from '@/components/BraveSeriesCovers'
+import { CoverGrid } from '@/components/CaseStudyLayout'
 import {
   AvailableAt,
   Cover,
@@ -18,6 +19,7 @@ import { WebPageJsonLd } from '@/components/JsonLd'
 import {
   AUTHOR_BOOKS,
   AUTHOR_EDITION_LABELS,
+  DREAM_BIG_EDITIONS,
   getAuthorBook,
 } from '@/lib/author-books'
 import { getSquareLink } from '@/data/square-store-links'
@@ -430,6 +432,42 @@ export default async function AuthorBookPage({
                 tiles, because twelve covers under a tile row read as a second,
                 competing shelf. Source is lib/brave-series-covers, relabelled
                 for the Author wording through `editionLabels`. */}
+            {/* The eight Dream Big covers: four journals, then the four
+                companion teacher guides, youngest bracket first. Michele asked
+                on 2026-08-25 for the same eight she sees in the Dream Big
+                section of /author to appear on the curriculum's own page, which
+                until now showed a single cover in the column beside this one.
+                Same source array the shelf reads (DREAM_BIG_EDITIONS), and the
+                same CoverGrid the /projects/dream-big-journals page uses, so
+                the three places cannot drift apart when a cover is reshot. */}
+            {book.slug === 'dream-big-journal-curriculum' ? (
+              <div className="mt-14">
+                <h2 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
+                  Every edition
+                </h2>
+                <p className="mt-3 max-w-2xl text-base leading-7 text-neutral-600">
+                  Four age brackets, each with a companion teacher guide. Every
+                  one ships in a faith and a non-faith version.
+                </p>
+                <CoverGrid
+                  label="The four journal editions"
+                  items={DREAM_BIG_EDITIONS.map((edition) => ({
+                    src: edition.journal,
+                    alt: `Dream Big Journal, ${edition.label}`,
+                    caption: edition.label,
+                  }))}
+                />
+                <CoverGrid
+                  label="Companion teacher guides"
+                  items={DREAM_BIG_EDITIONS.map((edition) => ({
+                    src: edition.guide,
+                    alt: `Dream Big Teacher Guide, ${edition.label}`,
+                    caption: edition.label,
+                  }))}
+                />
+              </div>
+            ) : null}
+
             {book.slug === 'brave-series' ? (
               <div className="mt-14">
                 <h2 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">

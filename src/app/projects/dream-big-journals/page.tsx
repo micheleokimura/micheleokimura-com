@@ -3,7 +3,6 @@ import type { Metadata } from 'next'
 import { pageMetadata } from '@/lib/schema'
 
 import {
-  BuyLinks,
   CaseStudyLayout,
   CaseStudySection,
   CoverGrid,
@@ -16,7 +15,9 @@ import {
   VoiceNote,
   type Endorsement,
 } from '@/components/CaseStudyLayout'
+import { SquareButton } from '@/components/AuthorBookParts'
 import { Container } from '@/components/Container'
+import { getSquareLink } from '@/data/square-store-links'
 
 // Vision statement is Michele's own words. The four classroom quotes are
 // verbatim and are the same set carried on /author; edit both together.
@@ -97,6 +98,12 @@ const ENDORSEMENTS: Endorsement[] = [
 ]
 
 export default function DreamBigJournalsPage() {
+  // One Square collection for the whole curriculum. Every age bracket is a
+  // dropdown variant of one product over there, so there is a single honest
+  // destination for all eight covers above the button. See the long note in
+  // src/data/square-store-links.ts.
+  const squareHref = getSquareLink('dream-big-journal-curriculum')
+
   return (
     <CaseStudyLayout
       workSlug="dream-big-journal-curriculum"
@@ -184,12 +191,27 @@ export default function DreamBigJournalsPage() {
             caption: edition.label,
           }))}
         />
+
+        {/* Directly under the eight covers, which is where a reader who has
+            just looked at them is. Nothing renders when there is no live
+            listing rather than a button that 404s. */}
+        {squareHref ? (
+          <div className="mt-10 flex justify-center">
+            <SquareButton
+              href={squareHref}
+              forTitle="the Dream Big Journals"
+              size="page"
+            />
+          </div>
+        ) : null}
       </Container>
 
       <CaseStudySection heading="In classrooms" id="reach">
         <FactList label="Where it has been used" items={REACH} />
         <Endorsements items={ENDORSEMENTS} label="Voices from the classroom" />
-        <BuyLinks links={[{ text: 'micheleokimura.com/store' }]} />
+        {/* The old "Where to get it: micheleokimura.com/store" line was plain
+            text pointing at a route this site does not have. The Square button
+            under the covers is the one purchase route on this page now. */}
       </CaseStudySection>
 
       <PullQuote>
