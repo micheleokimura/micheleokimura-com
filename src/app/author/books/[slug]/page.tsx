@@ -251,6 +251,23 @@ export default async function AuthorBookPage({
   const topPurchaseHref =
     slug === 'brave-series' ? BRAVE_SERIES_STORE_URL : getSquareLink(slug)
 
+  /**
+   * Draw the big BuyLink panel near the foot of the page.
+   *
+   * Off for the Brave Series curriculum, because the button under the wordmark
+   * added above already points at thebraveseries.com and the panel pointed at
+   * the same place. Michele's confirmation on 2026-08-26: the top button is
+   * the only shop link that page carries.
+   *
+   * The three child titles keep their panel. None of them has a button at the
+   * top, so the panel is still their only purchase route.
+   *
+   * Left as a rule about the PAGE rather than deleting `buy` from the record
+   * in src/lib/author-books.ts, because that record is also where the
+   * storefront and its wording are written down for the series.
+   */
+  const showBuyPanel = Boolean(book.buy) && slug !== 'brave-series'
+
   return (
     <>
       <WebPageJsonLd
@@ -303,12 +320,11 @@ export default async function AuthorBookPage({
                 the column beside this one.
 
                 The Brave Series is the exception described on
-                `topPurchaseHref` above: it renders here, under the wordmark.
-                Its BuyLink panel further down names the same storefront and
-                was left in place, because Michele asked for that panel herself
-                when the one-line version read as too small to find. If she
-                wants a single purchase route on this page, the panel is the
-                half to drop, not this button. */}
+                `topPurchaseHref` above: it renders here, under the wordmark,
+                and it is the only shop link on that page. Its BuyLink panel
+                named the same storefront most of a screen further down, and
+                Michele confirmed on 2026-08-26 that this button replaces it.
+                See `showBuyPanel` below. */}
             {topPurchaseHref ? (
               <div className="mt-6">
                 <SquareButton
@@ -404,7 +420,7 @@ export default async function AuthorBookPage({
               />
             ))}
 
-            {book.buy ? (
+            {showBuyPanel && book.buy ? (
               <BuyLink
                 label={book.buy.label}
                 text={book.buy.text}
@@ -427,7 +443,7 @@ export default async function AuthorBookPage({
 
             {/* Only when there is no prominent BuyLink above; two purchase
                 routes on one page is one too many. */}
-            {!book.buy && book.available?.length ? (
+            {!showBuyPanel && book.available?.length ? (
               <AvailableAt label={book.availableLabel} links={book.available} />
             ) : null}
 

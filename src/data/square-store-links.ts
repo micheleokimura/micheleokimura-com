@@ -61,7 +61,8 @@
  *
  * The Brave Series curriculum page does now carry a button under its wordmark,
  * on Michele's direction of 2026-08-26, and it names thebraveseries.com rather
- * than Square. That button is hard-coded in
+ * than Square. It REPLACED the BuyLink panel that page used to carry, so the
+ * page is still down to one shop link. That button is hard-coded in
  * src/app/author/books/[slug]/page.tsx off the slug, precisely so these rows
  * can stay null and no OTHER title starts pointing at a Square listing that
  * does not sell the thing on the page.
@@ -158,9 +159,9 @@ export const EXPLICIT_MOVEMENT_STORE_URL = 'https://www.explicitmovement.org/sho
  * on /author. `squareLinks` is read by /author/books/<slug> as well, and all
  * four Brave records already carry a `buy` panel pointing at thebraveseries.com
  * (see AUTHOR_BOOKS in src/lib/author-books.ts). Putting the series into
- * `squareLinks` would hand that same destination to all four detail pages on
- * top of the panel they already have. So the shelf reads THIS map, and the
- * detail pages keep reading `squareLinks` unchanged.
+ * `squareLinks` would hand that same destination to the three child detail
+ * pages on top of the panel they still render. So the shelf reads THIS map,
+ * and the detail pages keep reading `squareLinks` unchanged.
  *
  * Anything not listed here falls through to `squareLinks`, so a title that
  * moves storefronts still only needs editing in one place.
