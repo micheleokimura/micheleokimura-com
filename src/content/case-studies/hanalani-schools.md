@@ -5,7 +5,7 @@ engagement-type: school-partner
 ready-to-publish: true
 nda-flagged: false
 endorsements-pending: false
-hero-headline: Piloting in Bible study, with school-wide plans ahead
+hero-headline: Piloting the Brave Series with secondary students
 completion-date: 2026-02
 ---
 
@@ -13,14 +13,22 @@ completion-date: 2026-02
 
 ## The Organization
 
-Hanalani Schools is a private Christian school on Oʻahu serving students from the early grades through high school. Bible instruction runs as a graded subject across the school, which makes curriculum choices there academic decisions as much as ministry ones.
+Hanalani Schools is a private Christian school on Oʻahu, serving students from the early grades through high school. Because Bible instruction is a graded subject across the school, curriculum choices here carry significant weight as both academic and ministry decisions.
 
 ## The Engagement
 
-Hanalani has hosted multiple trainings with Releasing Generations over a long working relationship, much of it built alongside former Headmaster Mark Morimoto, who is now retiring. The school has invited Michele in to lead parenting workshops on connecting with your children, nurturing creativity, and dreaming big at home. She also spoke at Hanalani's Christian Emphasis Week, where she led two youth assemblies.
+Michele and Releasing Generations have built a long and active working relationship with Hanalani.
 
-In January 2025 Michele spoke on campus again, and the work moved from the assembly hall into the classroom. Hanalani has piloted Brave & Beautiful and Brave & Bold with sixth-grade Bible study groups, one for girls and one for boys, running with a small group of students.
+**Parent Workshops:** The school has frequently invited Michele to lead workshops for parents, focusing on connecting with their children, nurturing creativity, and fostering a "dream big" environment at home.
+
+**Student Assemblies:** She was a featured speaker at Hanalani's Christian Emphasis Week, where she led two impactful youth assemblies.
+
+**Staff Training:** In 2025, Releasing Generations conducted dedicated equipping workshops for the school's staff.
+
+**Curriculum Piloting:** Hanalani is currently piloting both the Brave & Beautiful and Brave & Bold curricula with their secondary students this year. This initiative champions the core mission and vision of the Brave Series while directly empowering their youth.
 
 ## The Outcome
 
-The pilot is active and the school is excited about a future school-wide implementation of Brave Together. Getting the material into a graded course rather than a one-off assembly is the version of adoption that lasts past the season a speaker visits.
+**Active Pilot:** The Brave Series pilot program is currently underway and actively running at the school.
+
+**Ongoing Commitment:** Michele remains deeply committed to serving Hanalani Schools and supporting them with any future needs they may have.
