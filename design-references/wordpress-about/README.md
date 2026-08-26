@@ -110,10 +110,24 @@ Their URLs are in `mosaic-tiles.json`, but those URLs are dead. Hunted again on
 | Michele's Google Drive, both accounts, and Dropbox | Spotlight and `find` by filename and by keyword return nothing. Nearby folders exist (`Kingdom Kids Workshop 2024`, `old-info@rethinkcreativity.org`) but hold later years and video, not these images. |
 | Canva | Searched 2026-05-22, see the note further down. Nothing identifiable. |
 
-So these four have to come from Michele or from whoever holds the WordPress
-backup. Until then `AboutMosaic.tsx` renders their tile as a tinted panel
-carrying the caption plus a "Photo to come" label, which keeps the story
-readable and keeps the gap visible.
+**Resolved the same day.** Michele sent all four herself, so the mosaic is
+complete and nothing is outstanding. They live in `public/images/about/`
+rather than `public/images/about-timeline/`, because they came from her rather
+than from the timeline migration:
+
+| Tile | File in the repo | Source pixels |
+| --- | --- | --- |
+| 10, left of the Dancing with Father book | `renaissance-2010-2011.jpeg` | 2988 square |
+| 12, right of the Dancing with Father book | `explicit-movement-2014.jpeg` | 451 square |
+| 19, far left of the second-to-last row | `kingdom-kids-workshops.jpeg` | 714 square |
+| 20, middle of the second-to-last row | `rethink-creativity-2020-2021.jpeg` | 2998 square |
+
+All four are perfect squares, so they need no cropping to sit in a 1:1 tile.
+Two are smaller than a desktop tile wants: a tile renders 392 CSS px, so a
+retina screen asks for about 784, and `explicit-movement-2014.jpeg` at 451 and
+`kingdom-kids-workshops.jpeg` at 714 will soften slightly there. Worth
+replacing if larger originals ever turn up. The other two are oversized and
+downscale cleanly.
 
 ## Michele's own screenshots, 2026-08-23
 

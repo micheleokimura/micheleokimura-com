@@ -43,7 +43,24 @@ export default function AboutPage() {
           purpose a voice." Do not reinstate one without retiring the other. */}
       <PageIntro eyebrow="About" title="About Michele." />
 
-      <Container className="mt-14 sm:mt-16">
+      {/* Michele's positioning tagline, added 2026-08-26 as the page opener.
+          It sits under the site banner and above every piece of content,
+          because it is the frame the rest of the page hangs off. Two separate
+          visual lines with a gap, never run together as a sentence. The pull
+          quote further down is teal at a similar size, so this one is navy and
+          bold to keep the two from competing. */}
+      <Container className="pt-14 pb-16 sm:pt-16 sm:pb-20">
+        <FadeIn className="mx-auto max-w-4xl text-center text-[var(--color-navy)]">
+          <p className="font-display text-3xl leading-[1.1] font-extrabold tracking-tight text-balance md:text-4xl lg:text-5xl">
+            Your story. Your power. Your creative genius.
+          </p>
+          <p className="font-display mt-4 text-3xl leading-[1.1] font-bold tracking-tight text-balance sm:mt-5 md:text-4xl lg:text-5xl">
+            My great adventure is helping you find yours.
+          </p>
+        </FadeIn>
+      </Container>
+
+      <Container>
         <FadeIn>
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,20rem)_1fr] lg:items-start lg:gap-16">
             <div className="relative aspect-[4/5] w-full max-w-xs overflow-hidden rounded-3xl bg-neutral-100 sm:max-w-sm lg:max-w-none">

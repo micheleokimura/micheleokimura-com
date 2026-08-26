@@ -18,32 +18,40 @@ import { FadeIn } from '@/components/FadeIn'
  *   - a full-tile scrim on hover, rgba(0,0,0,0.6), white centred text,
  *     opacity 0 -> 1 over 0.4s ease-in-out
  *
- * Three deliberate departures:
+ * Four deliberate departures:
  *
  *   1. Two columns at `sm`. WordPress jumps 1 -> 3, which turns an iPad into
  *      three narrow strips inside this site's container.
- *   2. The scrim is navy rather than black, at 75%, with cream text on it.
- *      Navy is the house palette. 75% is the lightest alpha that still holds
- *      cream at 5.3:1 over a white photo, which is the worst case, and it
- *      leaves the photograph legible underneath the way the reference does.
- *      Michele's screenshot of the Renaissance tile is the check here: the
- *      poster type reads straight through the scrim. An opaque panel is wrong.
- *   3. Below `sm` the caption sits in an always-visible gradient band at the
+ *   2. The scrim is navy rather than black, at 70%. Navy is the house palette,
+ *      and 70% leaves the photograph legible underneath the way the reference
+ *      does. Michele's screenshot of the Renaissance tile is the check here:
+ *      the poster type reads straight through the scrim. An opaque panel is
+ *      wrong.
+ *   3. Caption type is much larger than a caption would normally run: 18px on
+ *      a phone, 20px at `sm`, 24px on a desktop tile, semibold, white, tight
+ *      leading. Michele asked for this directly on 2026-08-26, because her
+ *      audience skews older: "even if the words fill the little box, that
+ *      would be fine with me because it disappears when the cursor goes off of
+ *      the photo." Her longest caption at 252 characters still clears the tile
+ *      at every breakpoint, so nothing clips and nothing needs an ellipsis.
+ *      If a future caption runs longer than that, check it before shipping.
+ *   4. Below `sm` the caption sits in an always-visible gradient band at the
  *      bottom of the tile instead of a hover scrim, because an opacity-only
  *      hover is unreachable on a touch screen. From `sm` up it is the
- *      WordPress full-tile behaviour.
+ *      WordPress full-tile behaviour, revealed on hover, on tap, or on
+ *      keyboard focus.
  *
- * CAPTIONS, 2026-08-26. Michele asked for the hover verbiage to be live: "when
- * the cursor hovers over each photo, there should be words that appear in a
- * transparent way but pop." Her own WordPress copy is now wired in for all 24
- * tiles, from `design-references/wordpress-about/mosaic-tiles.json`. This
- * replaces the interim state where every caption but Renaissance was blank.
+ * CAPTIONS. Michele's own copy, confirmed twice: once from the WordPress crawl
+ * in `design-references/wordpress-about/mosaic-tiles.json`, then again on
+ * 2026-08-26 from the Word document she sent
+ * ("Template for About Michele 2.docx"), whose 21-photo grid plus three loose
+ * captions at the end match this list tile for tile.
  *
- * Her wording is verbatim except for these, all of which are typography rather
- * than authorship:
+ * Her wording is verbatim except for these, all typography rather than
+ * authorship:
  *
- *   - doubled spaces mid-sentence collapsed (tiles 3, 7, 12, 14, 15, 21, 22,
- *     24), since captions render with `whitespace-pre-line`
+ *   - doubled spaces mid-sentence collapsed, since captions render with
+ *     `whitespace-pre-line`
  *   - tile 8 "older than than Aaron" -> "older than Aaron"
  *   - tile 13 "repeated our! high school" -> "repeated our high school"
  *   - tile 17 "2018: Published  2018: Published The Birth of..." de-duplicated
@@ -51,35 +59,40 @@ import { FadeIn } from '@/components/FadeIn'
  *   - tile 23 "non- profit" -> "non-profit"
  *   - "Hawaii" set as "Hawaiʻi" per DESIGN-RULES.md
  *
- * Two things are NOT verbatim and are flagged for Michele:
+ * Two things are NOT verbatim and are still open for Michele:
  *
- *   - Tile 2 still says "1955", which cannot be right when tile 1 says she was
- *     born in 1962. Left as she wrote it; she rules on the year.
- *   - Tile 22 now names Releasing Generations as the award recipient. The
- *     WordPress caption reads as though the award were Michele's personally,
- *     and it is the organisation's. See the recipient note in
- *     src/lib/credentials.ts, which says not to put her name alone back.
+ *   - Tile 2 says "1955", which cannot be right when tile 1 says she was born
+ *     in 1962. Left as she wrote it; she rules on the year.
+ *   - Tile 22 names Releasing Generations as the award recipient. Her caption
+ *     reads as though the 2023 award were hers personally, and it is the
+ *     organisation's. See the recipient note in src/lib/credentials.ts, which
+ *     says not to put her name alone back.
  *
- * FOUR PHOTOS ARE STILL MISSING. They were on the WordPress install and are
- * not in this repo, not in Brett's master folder, not in Michele's Drive or
- * Dropbox, and not in Canva. micheleokimura.com now serves this Next.js app,
- * so /wp-content/uploads/ 403s, and the Wayback Machine holds no snapshot of
- * any of the four. Their tiles render the caption over a tinted panel with a
- * "Photo to come" label, so the story still reads and the gap is obvious.
- * Filenames are in the reference README under "Photos that exist on WordPress
- * but not in this repo".
+ * All 24 photographs are present as of 2026-08-26. The last four arrived from
+ * Michele directly, after the WordPress originals turned out to be
+ * unrecoverable, and live in `/images/about` rather than
+ * `/images/about-timeline` because they came from her rather than from the
+ * timeline migration.
  */
 
 type Tile = {
-  /** Omitted where the photo is missing. See the four flagged below. */
-  src?: string
+  src: string
   alt: string
   caption: string
 }
 
 const IMG_ROOT = '/images/about-timeline'
+/** The four Michele sent on 2026-08-26 to close the gaps. */
+const FROM_MICHELE = '/images/about'
 
-/** All 24 tiles in WordPress document order. */
+/**
+ * All 24 tiles in WordPress document order, which is also the order Michele
+ * confirmed on 2026-08-26. At three columns that puts Renaissance immediately
+ * left of the Dancing with Father book and the 2014 conference immediately
+ * right of it, and it puts Kingdom Kids far left and ReThink Creativity in the
+ * middle of the second-to-last row. Reordering this array moves those tiles,
+ * so check the rows before changing it.
+ */
 const TILES: Tile[] = [
   {
     src: `${IMG_ROOT}/about-1962-parents-grandma-01.jpg`,
@@ -134,8 +147,9 @@ const TILES: Tile[] = [
       '1997: Rob and I founded Lifespring Church. I was unconventionally qualified to be a pastor by comedian Jim Carrey, but that is another story for another time.',
   },
   {
-    /* MISSING PHOTO. WordPress: Renaissance-2010-and-2011-scaled.jpeg */
-    alt: 'Renaissance conference flyer, 2011.',
+    /* Left of the Dancing with Father book, per Michele. */
+    src: `${FROM_MICHELE}/renaissance-2010-2011.jpeg`,
+    alt: 'Poster for Renaissance: a Journey to Creativity, July 2011.',
     caption:
       'Renaissance Conferences in 2010 and 2011: my first two arts conferences to release people into greater creativity!',
   },
@@ -145,8 +159,9 @@ const TILES: Tile[] = [
     caption: '2011: Published Dancing with Father. Let’s heal hearts.',
   },
   {
-    /* MISSING PHOTO. WordPress: 11-2014-EX-conference-.jpeg */
-    alt: 'The first island-wide youth and parent conference, 2014.',
+    /* Right of the Dancing with Father book, per Michele. */
+    src: `${FROM_MICHELE}/explicit-movement-2014.jpeg`,
+    alt: 'Young people standing arm in arm at the 2014 Explicit conference.',
     caption:
       '2014: Our first island-wide youth and parent conference. Little did I know then that it would grow into a movement.',
   },
@@ -186,14 +201,16 @@ const TILES: Tile[] = [
       '2018: Hello SoCal! The first California Youth and Parent Conference.',
   },
   {
-    /* MISSING PHOTO. WordPress: Kingdom-Kids-Workshops.jpeg */
-    alt: 'Kingdom Kids equipping workshops, 2019.',
+    /* Far left of the second-to-last row, per Michele. */
+    src: `${FROM_MICHELE}/kingdom-kids-workshops.jpeg`,
+    alt: 'Flyer for the Kingdom Kids Workshops led by Michele Okimura.',
     caption:
       '2019: Began launching equipping events for parents, teachers, and leaders in raising healthy and flourishing children and youth!',
   },
   {
-    /* MISSING PHOTO. WordPress: ReThink-Creativity-2020-and-2021-scaled.jpeg */
-    alt: 'ReThink Creativity online conferences, 2020 and 2021.',
+    /* Middle of the second-to-last row, per Michele. */
+    src: `${FROM_MICHELE}/rethink-creativity-2020-2021.jpeg`,
+    alt: 'The ReThink Creativity logo.',
     caption:
       'MY GREAT JOY! Online Creativity Conferences in 2020 and 2021, hosting global speakers!',
   },
@@ -225,23 +242,6 @@ const TILES: Tile[] = [
 ]
 
 function MosaicTile({ tile }: { tile: Tile }) {
-  /* A tile with no photograph shows its caption outright, so there is nothing
-     to reveal and nothing to focus. Only photographed tiles are tab stops. */
-  if (!tile.src) {
-    return (
-      <li>
-        <div className="flex aspect-square w-full flex-col justify-end gap-3 bg-[var(--color-navy-10)] p-4 sm:items-center sm:justify-center sm:p-5 sm:text-center">
-          <span className="font-display text-[0.6875rem] font-semibold tracking-[0.22em] text-neutral-500 uppercase">
-            Photo to come
-          </span>
-          <p className="text-sm leading-snug whitespace-pre-line text-neutral-700 sm:text-base sm:leading-normal">
-            {tile.caption}
-          </p>
-        </div>
-      </li>
-    )
-  }
-
   return (
     <li>
       <figure
@@ -258,13 +258,16 @@ function MosaicTile({ tile }: { tile: Tile }) {
 
         {/* Below sm: a bottom gradient band, always visible, because an
             opacity-only hover cannot be reached on a touch screen.
-            From sm up: the WordPress full-tile scrim on hover or focus. */}
+            From sm up: the WordPress full-tile scrim, on hover, on tap, or on
+            keyboard focus. */}
         <figcaption
           className={[
-            'pointer-events-none absolute inset-0 flex flex-col justify-end whitespace-pre-line p-4 text-sm leading-snug text-[var(--color-cream)]',
-            'bg-gradient-to-t from-[var(--color-navy)] via-[var(--color-navy)]/70 to-transparent',
-            'sm:items-center sm:justify-center sm:bg-none sm:p-5 sm:text-base sm:leading-normal sm:text-center',
-            'sm:bg-[var(--color-navy)]/75 sm:opacity-0 sm:transition-opacity sm:duration-[400ms] sm:ease-in-out',
+            'pointer-events-none absolute inset-0 flex flex-col justify-end p-4 whitespace-pre-line',
+            'text-lg leading-tight font-semibold text-[var(--color-white)]',
+            'bg-gradient-to-t from-[var(--color-navy)] via-[var(--color-navy)]/80 to-transparent',
+            'sm:items-center sm:justify-center sm:p-5 sm:text-center sm:text-xl lg:text-2xl',
+            'sm:bg-none sm:bg-[var(--color-navy)]/70',
+            'sm:opacity-0 sm:transition-opacity sm:duration-[400ms] sm:ease-in-out',
             'sm:group-hover:opacity-100 sm:group-focus:opacity-100 sm:group-focus-visible:opacity-100',
             'sm:motion-reduce:transition-none',
           ].join(' ')}
@@ -296,8 +299,8 @@ export function AboutMosaic() {
           role="list"
           className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {TILES.map((tile, i) => (
-            <MosaicTile key={tile.src ?? `placeholder-${i}`} tile={tile} />
+          {TILES.map((tile) => (
+            <MosaicTile key={tile.src} tile={tile} />
           ))}
         </ul>
       </FadeIn>
