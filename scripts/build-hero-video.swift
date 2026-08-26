@@ -120,8 +120,11 @@ func writeClipFrames(_ frames: [(rel: Double, image: CIImage)], rate: Double, cu
     }
 }
 
+// Half-second dissolve. Six beats need six of these, so they stay short.
+let transitionDur = 0.5
+
 func writeTransition(from: CIImage, to: CIImage, cursorStart: Double) {
-    let halfDur = 0.75
+    let halfDur = transitionDur / 2.0
     let fps = 30.0
     let stepCount = Int(halfDur * fps)
     for k in 0..<stepCount {
@@ -136,43 +139,56 @@ func writeTransition(from: CIImage, to: CIImage, cursorStart: Double) {
     }
 }
 
-// --- Decode all clips first (cheap: CIImage wraps existing pixel buffers) ---
-print("Decoding clip 1 (stage, 26:30.0-26:33.5)...")
-let clip1 = decodeAndProcess(url: exUrl, inSec: 1590.0, outSec: 1593.5, isStage: true)
-print("Decoding clip 2 (crowd, 3:57.0-4:00.0)...")
-let clip2 = decodeAndProcess(url: storyUrl, inSec: 237.0, outSec: 240.0, isStage: false)
-print("Decoding clip 3 (stage, 26:34.0-26:37.5)...")
-let clip3 = decodeAndProcess(url: exUrl, inSec: 1594.0, outSec: 1597.5, isStage: true)
-
-guard let clip1First = clip1.first?.image, let clip1Last = clip1.last?.image,
-      let clip2First = clip2.first?.image, let clip2Last = clip2.last?.image,
-      let clip3First = clip3.first?.image else {
-    fatalError("empty clip frames")
+// --- The beat list ---
+//
+// Michele on the Day 1 stage is angled camera-right, so every audience cutaway
+// is a shot where the room is looking camera-left. The old build's single
+// cutaway (Our Story 237.0-240.0) held three shots inside three seconds, the
+// last of which was a girl taking notes in a classroom. That whole range is out.
+//
+// isStage marks the Day 1 stage footage; it no longer changes the treatment.
+struct Beat {
+    let name: String
+    let url: URL
+    let inSec: Double
+    let outSec: Double
+    let rate: Double
+    let isStage: Bool
+    var screenDur: Double { (outSec - inSec) / rate }
 }
 
-// --- Sequence: clip1(5.0s) -> transition(1.5s) -> clip2(3.0s) -> transition(1.5s) -> clip3(5.0s) = 16.0s ---
+let beats: [Beat] = [
+    Beat(name: "michele 1",  url: exUrl,    inSec: 1590.00, outSec: 1591.40, rate: 0.7, isStage: true),
+    Beat(name: "audience 1", url: storyUrl, inSec:  153.80, outSec:  155.50, rate: 1.0, isStage: false),
+    Beat(name: "michele 2",  url: exUrl,    inSec: 1594.40, outSec: 1595.80, rate: 0.7, isStage: true),
+    Beat(name: "audience 2", url: storyUrl, inSec:  298.05, outSec:  298.95, rate: 0.6, isStage: false),
+    Beat(name: "michele 3",  url: exUrl,    inSec: 1613.80, outSec: 1615.20, rate: 0.7, isStage: true),
+    Beat(name: "audience 3", url: storyUrl, inSec:  299.55, outSec:  301.35, rate: 1.0, isStage: false),
+]
+
+print("Decoding \(beats.count) beats...")
+let decoded: [[(rel: Double, image: CIImage)]] = beats.map {
+    print("  \($0.name) \($0.url.lastPathComponent) [\($0.inSec)-\($0.outSec)]")
+    return decodeAndProcess(url: $0.url, inSec: $0.inSec, outSec: $0.outSec, isStage: $0.isStage)
+}
+for (i, d) in decoded.enumerated() where d.isEmpty {
+    fatalError("beat \(beats[i].name) decoded no frames")
+}
+
+// Clip, then dissolve into the next beat. The final dissolve lands back on the
+// first frame of beat 1 so the loop seam is not a hard cut.
 var cursor = 0.0
-print("Writing clip 1...")
-writeClipFrames(clip1, rate: 0.7, cursorStart: cursor)
-cursor += 3.5 / 0.7
+for (i, beat) in beats.enumerated() {
+    print("Writing \(beat.name) at \(String(format: "%.2f", cursor))s...")
+    writeClipFrames(decoded[i], rate: beat.rate, cursorStart: cursor)
+    cursor += beat.screenDur
 
-print("Writing transition 1...")
-writeTransition(from: clip1Last, to: clip2First, cursorStart: cursor)
-cursor += 1.5
+    let next = decoded[(i + 1) % beats.count]
+    writeTransition(from: decoded[i].last!.image, to: next.first!.image, cursorStart: cursor)
+    cursor += transitionDur
+}
 
-print("Writing clip 2...")
-writeClipFrames(clip2, rate: 1.0, cursorStart: cursor)
-cursor += 3.0
-
-print("Writing transition 2...")
-writeTransition(from: clip2Last, to: clip3First, cursorStart: cursor)
-cursor += 1.5
-
-print("Writing clip 3...")
-writeClipFrames(clip3, rate: 0.7, cursorStart: cursor)
-cursor += 3.5 / 0.7
-
-print("Total timeline: \(cursor)s")
+print("Total timeline: \(String(format: "%.2f", cursor))s")
 
 input.markAsFinished()
 let sem = DispatchSemaphore(value: 0)
