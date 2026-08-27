@@ -49,14 +49,17 @@ export default function AboutPage() {
           visual lines with a gap, never run together as a sentence. The pull
           quote further down is teal at a similar size, so this one is navy and
           bold to keep the two from competing. Line one is the punch and
-          runs bigger and extrabold. Line two answers softer at about 75
-          percent of its size, still bold and still centered. */}
+          runs bigger and extrabold. Line two answers softer at roughly 75
+          percent of its size, still bold and still centered. Check the
+          ratio against the --text-* values in src/styles/tailwind.css, not
+          against stock Tailwind: this theme redefines the whole scale, so
+          text-3xl is 1.75rem here and text-5xl is 2.75rem. */}
       <Container className="pt-14 pb-16 sm:pt-16 sm:pb-20">
         <FadeIn className="mx-auto max-w-5xl text-center text-[var(--color-navy)]">
           <p className="font-display text-3xl leading-[1.1] font-extrabold tracking-tight text-balance md:text-4xl lg:text-5xl">
             Your story. Your power. Your creative genius.
           </p>
-          <p className="font-display mt-4 text-2xl leading-[1.1] font-bold tracking-tight text-balance sm:mt-5 md:text-[1.75rem] lg:text-4xl">
+          <p className="font-display mt-4 text-xl leading-[1.1] font-bold tracking-tight text-balance sm:mt-5 md:text-2xl lg:text-4xl">
             My great adventure is helping you find yours.
           </p>
         </FadeIn>
