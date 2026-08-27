@@ -128,12 +128,13 @@ export default function AboutPage() {
 
       {/* Meet Michele: a closer, warmer photo before the timeline pulls back
           to tell the whole story chronologically. */}
-      {/* No bottom pad here. Side by side the photo is the last thing in the
-          container and the signature's spill lands in whatever follows, which
-          is the teal line and its py-28. That is 112px against an 80px spill,
-          so it still clears on its own. If the signature drops much further,
-          this is the first thing that will need a pad again. */}
-      <Container className="mt-16 sm:mt-20">
+      {/* lg:pb- is the signature's clearance side by side, where the photo is
+          the last thing in the container and the spill lands in whatever
+          follows. That is the teal line and its py-28, and for the first time
+          the spill is larger than it: 124px against 112px, so without this
+          pad the signature would cross into "I believe dreams give purpose a
+          voice." The 3rem buys 36px of margin on top of that. */}
+      <Container className="mt-16 sm:mt-20 lg:pb-12">
         <FadeIn>
           {/* The narrow 20rem track is on the RIGHT here, because the photo
               carries lg:order-last and so lands in the second column. It used
@@ -160,7 +161,7 @@ export default function AboutPage() {
               crosses the corner and hangs 125px, and the photo still sits
               directly above the eyebrow, so that needs 10rem. Re-measure both
               whenever the signature moves. */}
-          <div className="grid grid-cols-1 gap-x-10 gap-y-28 sm:gap-y-32 lg:grid-cols-[minmax(0,42rem)_minmax(0,20rem)] lg:items-center lg:gap-x-12">
+          <div className="grid grid-cols-1 gap-x-10 gap-y-40 sm:gap-y-48 lg:grid-cols-[minmax(0,42rem)_minmax(0,20rem)] lg:items-center lg:gap-x-12">
             {/* Two boxes, because the signature has to escape the one the
                 photo is clipped by. This outer box owns the size and is the
                 positioning context; the inner one owns the rounded corners
@@ -219,10 +220,10 @@ export default function AboutPage() {
                   differ. Michele asked on 2026-08-26 to nudge the whole block
                   up and right so it sits centred on the corner, then for
                   roughly double that, then back down a little with more right
-                  again, so that more of "Michele" lands in the white beside
-                  the print. Vertical is free and phones take all of it.
-                  Horizontal is not: the full move is -28%, which puts the
-                  tail 90px past the frame, and a 375px screen has about 31px
+                  again, and again, so that more of "Michele" lands in the
+                  white beside the print. Vertical is free and phones take all
+                  of it. Horizontal is not: the full move is -34%, which puts
+                  the tail 109px past the frame, and a 375px screen has 31px
                   of room beside the photo. Phones are pinned at -8%, which is
                   already their ceiling; everything from sm up, where the
                   photo has room beside it, takes the whole move. Do not unify
@@ -453,7 +454,7 @@ export default function AboutPage() {
                   </filter>
                 </defs>
               </svg>
-              <span className="sig-crayon pointer-events-none absolute right-[-8%] bottom-[11%] origin-bottom-right rotate-[-35deg] sm:right-[-28%] whitespace-nowrap text-right font-signature text-[5.75rem] leading-[0.95] sm:text-[6.9rem] lg:text-[5.75rem]">
+              <span className="sig-crayon pointer-events-none absolute right-[-8%] bottom-0 origin-bottom-right rotate-[-35deg] sm:right-[-34%] whitespace-nowrap text-right font-signature text-[5.75rem] leading-[0.95] sm:text-[6.9rem] lg:text-[5.75rem]">
                 <span className="sig-crayon-soft block pr-[0.6em]">Love,</span>
                 <span className="sig-crayon-hard block">Michele</span>
               </span>
