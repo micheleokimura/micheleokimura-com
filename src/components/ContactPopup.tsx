@@ -64,7 +64,6 @@ function mailtoFallback(fields: {
   firstName: string
   lastName: string
   email: string
-  phone: string
 }): string {
   const name = [fields.firstName.trim(), fields.lastName.trim()]
     .filter(Boolean)
@@ -76,7 +75,6 @@ function mailtoFallback(fields: {
   const body = [
     `Name: ${name || '(not provided)'}`,
     `Email: ${fields.email.trim() || '(not provided)'}`,
-    `Phone: ${fields.phone.trim() || '(not provided)'}`,
     `Interested in: ${labels || '(not provided)'}`,
     '',
     'Message:',
@@ -97,10 +95,12 @@ function mailtoFallback(fields: {
  * inbox and a single sheet.
  *
  * Fields, in order: what are you interested in (multi-select, at least one),
- * an optional place to tell the story, then first name, last name, email, and
- * phone. The story and the phone are optional; everything else is required.
- * The phone used to block a send when left blank, and Michele asked for that
- * to stop: email is the only contact detail she needs to reply.
+ * an optional place to tell the story, then first name, last name, and email.
+ * The story is the only optional one.
+ *
+ * There is no phone field. It was required, then briefly optional, and Michele
+ * asked for it gone: email is the only contact detail she replies on, and the
+ * field was costing her submissions.
  *
  * Accessibility is handled by hand, matching `JoinWaitListModal`: role="dialog"
  * + aria-modal, focus moved in on open and restored to the trigger on close, a
@@ -135,7 +135,6 @@ export function ContactPopup({
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
-  const [phone, setPhone] = useState('')
 
   useEffect(() => setMounted(true), [])
 
@@ -149,7 +148,6 @@ export function ContactPopup({
     setFirstName('')
     setLastName('')
     setEmail('')
-    setPhone('')
   }, [open, preSelectedInterest])
 
   // Close the popup a few seconds after a successful send. Held in a ref so a
@@ -240,7 +238,6 @@ export function ContactPopup({
     const fn = firstName.trim()
     const ln = lastName.trim()
     const em = email.trim()
-    const ph = phone.trim()
 
     if (!interests.length) {
       setError('Pick at least one thing you are interested in.')
@@ -269,7 +266,6 @@ export function ContactPopup({
           first_name: fn,
           last_name: ln,
           email: em,
-          phone: ph,
           pageUrl: typeof window === 'undefined' ? '' : window.location.href,
         }),
       })
@@ -480,27 +476,6 @@ export function ContactPopup({
                 />
               </div>
 
-              <div className="mt-2">
-                <label htmlFor={`${titleId}-phone`} className="sr-only">
-                  Phone number (optional)
-                </label>
-                <input
-                  id={`${titleId}-phone`}
-                  type="tel"
-                  name="phone"
-                  autoComplete="tel"
-                  inputMode="tel"
-                  placeholder="Phone number (optional)"
-                  value={phone}
-                  onChange={(e) => {
-                    setPhone(e.target.value)
-                    if (error) setError(null)
-                  }}
-                  disabled={status === 'submitting'}
-                  className={fieldClass}
-                />
-              </div>
-
               {/* Honeypot, hidden from real people. */}
               <div aria-hidden="true" className="hidden">
                 <label>
@@ -533,7 +508,6 @@ export function ContactPopup({
                         firstName,
                         lastName,
                         email,
-                        phone,
                       })}
                       className="font-medium text-neutral-950 underline underline-offset-4"
                     >

@@ -15,8 +15,12 @@ export const dynamic = 'force-dynamic'
  * lands in Michele's inbox.
  *
  * Accepts the popup's own shape (interests, story, first_name, last_name,
- * email, phone) and also a plain { name, email, phone, organization, message }
- * body, so curl checks and any future form can post here without translating.
+ * email) and also a plain { name, email, organization, message } body, so curl
+ * checks and any future form can post here without translating.
+ *
+ * A `phone` key is accepted and silently dropped. The popup no longer collects
+ * one, but a browser holding the old bundle in cache still sends it, and those
+ * submissions must go through rather than 422.
  */
 
 type Payload = {
@@ -26,7 +30,6 @@ type Payload = {
   lastName?: string
   last_name?: string
   email?: string
-  phone?: string
   organization?: string
   message?: string
   story?: string
@@ -62,7 +65,6 @@ export async function POST(req: Request): Promise<NextResponse> {
   const lastName = clean(body.lastName ?? body.last_name, 80)
   const name = clean(body.name, 120) || [firstName, lastName].filter(Boolean).join(' ')
   const email = clean(body.email, 200)
-  const phone = clean(body.phone, 60)
   const organization = clean(body.organization, 200)
   const message = clean(body.message, 4000) || clean(body.story, 4000)
   const pageUrl = clean(body.pageUrl, 500)
@@ -104,7 +106,6 @@ export async function POST(req: Request): Promise<NextResponse> {
     '',
     `Name: ${name || '(not provided)'}`,
     `Email: ${email}`,
-    `Phone: ${phone || '(not provided)'}`,
     `Organization: ${organization || '(not provided)'}`,
     `Interested in: ${interests.length ? interests.join(', ') : '(not provided)'}`,
     `Page: ${pageUrl || '(not provided)'}`,
