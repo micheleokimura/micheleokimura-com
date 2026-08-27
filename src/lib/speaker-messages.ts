@@ -677,11 +677,27 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
   {
     slug: 'how-to-hear-gods-voice',
     hero: {
-      src: '/images/keynotes/hear-gods-voice-hero.jpg',
-      alt: 'A man in a park cupping a hand behind his ear to listen, smiling and looking upward',
-      // Sunlit green of the park canopy, 60-90 deg, half the frame.
-      wash: '#EBF5D3',
-      focal: 'center 35%',
+      // Replaced 2026-08-26 at Michele's request: she wanted a warmer, more
+      // relatable frame than the man cupping his ear, which read as a literal
+      // illustration of the title. New filename rather than an overwrite so no
+      // CDN copy of the old frame can survive at the same URL. Source asset is
+      // Shutterstock 125311163, supplied by Michele, downsampled from 5760 to
+      // the 2400 the other heroes run at.
+      src: '/images/keynotes/hear-gods-voice-hero-looking-up.jpg',
+      alt: 'A woman leaning on a park railing, smiling as she looks up, sunlit green trees blurred behind her',
+      // Green of the blurred canopy, 80.5 deg, sampled the usual way: 60% of
+      // the weight against 29% for the skin tones at 23 deg, which the house
+      // method discounts on any photograph of a person. This lands close to
+      // the 77.6 deg the previous frame gave, because both photographs are
+      // sunlit park greenery, so the ground under the description barely
+      // moves even though the picture above it changed completely.
+      // Navy 12.90:1, neutral-600 6.87:1.
+      wash: '#E9F5D3',
+      // The plate is 4:3 and this photograph is 3:2, so the crop trims width
+      // only and the vertical half of a focal would do nothing. Biased right
+      // because she stands in the right third: centred, the crop clips her
+      // shoulder and bag, and at 380px her face is what carries the warmth.
+      focal: 'right center',
     },
     number: '07',
     title: 'How to Hear God’s Voice',
