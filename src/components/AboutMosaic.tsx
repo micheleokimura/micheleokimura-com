@@ -139,7 +139,7 @@ const TILES: Tile[] = [
     src: `${IMG_ROOT}/about-1993-daughter-jessica-08.jpg`,
     alt: 'Michele with her newborn daughter Jessica, 1993.',
     caption:
-      '1993: More rivers of joy! Adopted our daughter Jessica…who happened to be 9 days older than Aaron! My twin-like sweeties.',
+      '1992: More rivers of joy! Adopted our daughter Jessica…who happened to be 9 days older than Aaron! My twin-like sweeties.',
   },
   {
     src: `${IMG_ROOT}/about-1997-lifespring-church-founded-09.jpg`,
