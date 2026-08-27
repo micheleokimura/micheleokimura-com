@@ -130,8 +130,9 @@ export default function AboutPage() {
           to tell the whole story chronologically. */}
       {/* lg:pb- is the signature's clearance side by side, where the photo is
           the last thing in the container and the spill lands in whatever
-          follows. That is the teal line and its py-28, 112px against a 116px
-          spill, so without this the signature would cross into it. */}
+          follows. That is the teal line and its py-28, 112px against a 96px
+          spill. It clears without help now that the signature has moved up,
+          but only just, so the pad stays as the margin. */}
       <Container className="mt-16 sm:mt-20 lg:pb-8">
         <FadeIn>
           {/* The narrow 20rem track is on the RIGHT here, because the photo
@@ -214,8 +215,15 @@ export default function AboutPage() {
                   order.
 
                   The right inset is capped by the narrowest phone rather than
-                  by taste: -6% puts the tail about 20px past the frame, which
-                  still lands inside the page gutter on a 320px screen.
+                  by taste, and that is the one place the two breakpoints
+                  differ. Michele asked on 2026-08-26 to nudge the whole block
+                  up and right so it sits centred on the corner. Up is free.
+                  Right is not: the full nudge is -12%, which puts the tail
+                  38px past the frame and 7px past the edge of a 375px screen,
+                  so phones take -8% and about a third of the sideways move.
+                  Everything from sm up, where the photo has room beside it,
+                  takes the whole nudge. Do not unify these without redoing
+                  that arithmetic.
 
                   How the ink looks is `.sig-crayon` in tailwind.css. */}
               {/* The crayon, twice. Same four stages both times: warp the
@@ -442,7 +450,7 @@ export default function AboutPage() {
                   </filter>
                 </defs>
               </svg>
-              <span className="sig-crayon pointer-events-none absolute right-[-6%] bottom-[2%] origin-bottom-right rotate-[-35deg] whitespace-nowrap text-right font-signature text-[5.75rem] leading-[0.95] sm:text-[6.9rem] lg:text-[5.75rem]">
+              <span className="sig-crayon pointer-events-none absolute right-[-8%] bottom-[7%] origin-bottom-right rotate-[-35deg] sm:right-[-12%] whitespace-nowrap text-right font-signature text-[5.75rem] leading-[0.95] sm:text-[6.9rem] lg:text-[5.75rem]">
                 <span className="sig-crayon-soft block pr-[0.6em]">Love,</span>
                 <span className="sig-crayon-hard block">Michele</span>
               </span>
