@@ -136,7 +136,6 @@ export default function DreamBigJournalsPage() {
         ) : null
       }
       contactHeading="Bring the Dream Big Journals to your classroom."
-      contactSource="project-dream-big-journals"
       contactBody={
         <p>
           Schools, churches, and families are running these across every age

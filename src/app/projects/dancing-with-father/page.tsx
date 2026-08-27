@@ -86,7 +86,6 @@ export default function DancingWithFatherProject() {
         </p>
       }
       contactHeading="Come dance with the One who joys over you."
-      contactSource="project-dancing-with-father"
       contactBody={
         <p>
           Leave your name and email to hear when Michele releases something new,

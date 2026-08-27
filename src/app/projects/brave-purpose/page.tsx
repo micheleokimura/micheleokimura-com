@@ -79,7 +79,6 @@ export default function BravePurposeProject() {
         </p>
       }
       contactHeading="The current is moving."
-      contactSource="project-brave-purpose"
       contactBody={
         <p>
           Leave your name and email and Michele will let you know when{' '}

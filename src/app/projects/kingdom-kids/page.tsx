@@ -85,7 +85,6 @@ export default function KingdomKidsPage() {
         </p>
       }
       contactHeading="Bring the Kingdom Kids Workshop to your church."
-      contactSource="project-kingdom-kids"
       contactBody={
         <p>
           Michele teaches this as a conference session, a full eight-hour

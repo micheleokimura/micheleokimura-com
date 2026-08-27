@@ -65,7 +65,6 @@ export default function BraveAndBoldPage() {
         </p>
       }
       contactHeading="Bring Brave & Bold to your boys."
-      contactSource="project-brave-and-bold"
       contactBody={
         <p>
           Churches, schools, and youth organizations are running this with teen

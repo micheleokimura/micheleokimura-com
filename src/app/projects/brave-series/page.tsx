@@ -126,7 +126,6 @@ export default function BraveSeriesPage() {
         />
       }
       contactHeading="Bring the Brave Series to your school or organization."
-      contactSource="project-brave-series"
       contactBody={
         <p>
           Schools, churches, safe houses, and youth organizations are running

@@ -96,7 +96,6 @@ export default function RaisingKingdomKidsPage() {
           conference session, a full eight-hour training, and an e-course.
         </p>
       }
-      contactSource="project-raising-kingdom-kids"
     >
       <Container className="mt-14 sm:mt-20">
         <FadeIn className="mx-auto max-w-[18rem] sm:max-w-xs">

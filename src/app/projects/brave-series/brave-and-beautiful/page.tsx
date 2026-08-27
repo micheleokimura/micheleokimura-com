@@ -65,7 +65,6 @@ export default function BraveAndBeautifulPage() {
         </p>
       }
       contactHeading="Bring Brave & Beautiful to your girls."
-      contactSource="project-brave-and-beautiful"
       contactBody={
         <p>
           Schools, churches, and safe houses run this curriculum with teen

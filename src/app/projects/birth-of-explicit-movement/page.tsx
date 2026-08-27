@@ -77,7 +77,6 @@ export default function BirthOfExplicitMovementProject() {
         </p>
       }
       contactHeading="Step out with increased abandon."
-      contactSource="project-birth-of-explicit-movement"
       contactBody={
         <p>
           Leave your name and email to hear when Michele releases something new,

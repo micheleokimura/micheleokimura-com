@@ -68,7 +68,6 @@ export default function ReThinkCreativityPage() {
         </p>
       }
       contactHeading="Bring ReThink Creativity to your people."
-      contactSource="project-rethink-creativity"
       contactBody={
         <p>
           Michele teaches this as a keynote, a workshop, and a full conference

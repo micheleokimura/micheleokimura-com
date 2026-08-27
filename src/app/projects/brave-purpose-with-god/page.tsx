@@ -86,7 +86,6 @@ export default function BravePurposeWithGodProject() {
         </p>
       }
       contactHeading="The current is moving."
-      contactSource="project-brave-purpose-with-god"
       contactBody={
         <p>
           Leave your name and email and Michele will let you know when{' '}

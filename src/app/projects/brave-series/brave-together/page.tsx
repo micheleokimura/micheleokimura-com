@@ -86,7 +86,6 @@ export default function BraveTogetherPage() {
         </p>
       }
       contactHeading="Bring Brave Together to your school."
-      contactSource="project-brave-together"
       contactBody={
         <p>
           The Hawaiʻi Brave Together three-article booklet was reviewed and
