@@ -25,7 +25,7 @@
 | Calls happen when a call is the fastest way to unblock the work | Briefing, LOCKED (sessions-not-weeks framing) |
 | Three postures: blank page, partial draft, finished manuscript. Same Method, same fee | Briefing, LOCKED |
 | Deliverable: 50,000 to 55,000 words, 12 chapters in 3 Acts, three AI cover concepts, the identity of an author | Briefing, LOCKED |
-| Talk Story Sessions (TST) and Unique Author Voice (UAV) | Briefing, LOCKED terminology sweep 2026-08-04 |
+| Talk Story Session (TSS) and Unique Author Voice (UAV) | Briefing, LOCKED terminology sweep 2026-08-04; abbreviation changed from TST to TSS by Michele 2026-08-27 |
 | Act names and the twelve chapter beats | `content/copywriting/brave-purpose-author-method.md` (Michele's own copy) |
 | Self-publishing path via books.by | Briefing, LOCKED |
 | 2023 Outstanding Advocate for Children and Youth | `src/lib/site-config.ts`, CLAUDE.md |

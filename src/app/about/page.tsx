@@ -478,14 +478,21 @@ export default function AboutPage() {
                 Meet Michele
               </h2>
               {/* Michele's own wording, sent 2026-08-26, replacing the ported
-                  WordPress-era copy. One paragraph by direction. */}
+                  WordPress-era copy. One paragraph by direction.
+
+                  "(TSS)" added 2026-08-27 under the sitewide acronym rule: the
+                  first body-copy appearance of Talk Story Session on a page is
+                  spelled out with the acronym in parentheses, and any later
+                  appearance on the SAME page is the bare acronym. This is the
+                  only appearance on /about, so it is the spelled-out one. The
+                  rule is written out in full at the top of src/app/coach/page.tsx. */}
               <p className="text-lg leading-8 text-neutral-600">
                 Most days, you&rsquo;ll find me with coffee in hand, laughing
                 over a story that gets a little more dramatic every time I tell
                 it. I care about real connection. When I step on stage or lead a
-                Talk Story Session, my goal is always the same: to bring that
-                same warmth, real-life energy, and heart to the room, meeting
-                people right where they are.
+                Talk Story Session (TSS), my goal is always the same: to bring
+                that same warmth, real-life energy, and heart to the room,
+                meeting people right where they are.
               </p>
             </div>
           </div>

@@ -25,7 +25,7 @@ import { pageMetadata } from '@/lib/schema'
  *  - the "You speak. I listen. Together with Claude..." lead block. His note:
  *    it reads as AI copy, and naming the tool in the offer is wrong. Claude is
  *    a tool Michele works with, it is not part of what a writer buys. The same
- *    reasoning is why the TST card below no longer names it either.
+ *    reasoning is why the TSS card below no longer names it either.
  *  - "Fiction, memoir, nonfiction, poetry: the method meets you where your
  *    book lives." The FAQ already says this in Michele's words.
  *  - the "Learn more" jump link in the hero.
@@ -48,7 +48,7 @@ import { pageMetadata } from '@/lib/schema'
  * her own story rather than describing what a reader buys.
  *
  * Converted in two rounds that same day, all of it Michele's own wording:
- * the "heart of it" lead, both pillar cards (TST and UAV), both "Where authors
+ * the "heart of it" lead, both pillar cards (TSS and UAV), both "Where authors
  * get stuck" cards, all three FAQ answers with the heading above them, and the
  * "Not just books" aside. The FAQ QUESTIONS are the reader's own and stay in
  * second person; do not touch them.
@@ -71,8 +71,28 @@ import { pageMetadata } from '@/lib/schema'
  * deliverables panel and the FAQ. No navy panel appears anywhere below the
  * header: dark navy is the footer's, and the footer's only.
  *
- * The one saturated moment left is the TST/UAV pair, and that is deliberate:
+ * The one saturated moment left is the TSS/UAV pair, and that is deliberate:
  * see the .coach-card block in tailwind.css.
+ *
+ * ACRONYMS, set by Michele 2026-08-27 and sitewide.
+ *
+ * Talk Story Session is TSS and Unique Author Voice is UAV. In BODY COPY, the
+ * first appearance on a given page spells the term out with the acronym in
+ * parentheses ("a Talk Story Session (TSS)"), and every later appearance on
+ * that same page is the bare acronym. The count runs per page, not per site,
+ * and it runs over body copy only: headings, box titles and the pillar badges
+ * below are outside it, so a card titled "Talk Story Sessions" does not spend
+ * the page's one spell-out.
+ *
+ * The three body-copy sites today are the UAV pillar body and the "Do I need to
+ * have written anything yet" FAQ answer on this page, and the "Meet Michele"
+ * paragraph on /about. Each is a page's first appearance, so all three are
+ * spelled out; nothing on the site has earned a bare acronym yet. If a second
+ * mention is ever added to a page, that one is the bare acronym.
+ *
+ * NOTE: the older briefing at site/content/coaching/coaching-page-copy.md
+ * locked the abbreviation as "TST" on 2026-08-04. Michele overrode it to "TSS"
+ * on 2026-08-27; that file has been updated to match. TSS is the live one.
  *
  * The five --color-coach-* tokens still drive the accents (numerals,
  * checkmarks, panel fills). Nothing here hardcodes a hex; the two washes are
@@ -108,7 +128,7 @@ type Pillar = {
  */
 const PILLARS: Pillar[] = [
   {
-    abbr: 'TST',
+    abbr: 'TSS',
     title: 'Talk Story Sessions',
     body:
       'You and Michele will sit down, and you’ll tell her about your book the way you would tell a friend over coffee. She will ask questions, you talk, and she will record the whole conversation. What you said comes back to you as manuscript pages in your own words, ready to read and react to.',
@@ -128,8 +148,14 @@ const PILLARS: Pillar[] = [
     title: 'Unique Author Voice',
     // Colon after "voice", never a dash. Michele asked for the colon by name on
     // 2026-08-27, and the sitewide no-em-dash rule bans the alternative anyway.
+    // The colon now follows the "(UAV)" gloss; it still separates the term from
+    // what the term IS, which is the whole reason she asked for it.
+    //
+    // This is the FIRST body-copy appearance of the term on /coach, so it is
+    // spelled out with the acronym in parentheses. See the ACRONYMS note at the
+    // top of this file.
     body:
-      'Before you draft a single chapter, Michele will build your unique author voice: a 46-dimensional read of how you use grammar, logic, and rhetoric, rooted in the classical trivium. Every page you and she write gets measured against that profile. Your book sounds like you on your best day.',
+      'Before you draft a single chapter, Michele will build your Unique Author Voice (UAV): a 46-dimensional read of how you use grammar, logic, and rhetoric, rooted in the classical trivium. Every page you and she write gets measured against that profile. Your book sounds like you on your best day.',
     icon: FingerprintPattern,
     style: {
       // Coral, with the palette's gold banked into the far corner as pure
@@ -176,7 +202,7 @@ const FAQS: { question: string; answer: string }[] = [
   {
     question: 'Do I need to have written anything yet?',
     answer:
-      'No. Plenty of writers start with nothing on the page. If you can talk about your book, you can start. That is the whole point of a Talk Story Session.',
+      'No. Plenty of writers start with nothing on the page. If you can talk about your book, you can start. That is the whole point of a Talk Story Session (TSS).',
   },
   {
     question: 'How much time will this take?',
@@ -187,7 +213,7 @@ const FAQS: { question: string; answer: string }[] = [
 
 /**
  * The tick in "In six months, you get". A small round well rather than a bare
- * glyph, so the checklist picks up the icon treatment from the TST and UAV
+ * glyph, so the checklist picks up the icon treatment from the TSS and UAV
  * cards above it at a quieter scale. The teal disc is 3.77:1 against the panel
  * behind it, which clears the 3:1 a non-text graphic owes under WCAG 1.4.11.
  */
@@ -246,7 +272,7 @@ export default function CoachingPage() {
             {/* Michele's line, reworded by her 2026-08-27 into third person to
                 match the rest of the page. Approved verbatim, including the
                 singular "conversation" here against the plural used in the
-                metadata and the TST card. Do not edit it. */}
+                metadata and the TSS card. Do not edit it. */}
             <p className="font-display mt-4 max-w-2xl text-lg leading-7 font-medium text-neutral-700 sm:text-xl sm:leading-8">
               Talk with Michele. Together, you&rsquo;ll turn your conversation
               into a manuscript.
@@ -288,7 +314,7 @@ export default function CoachingPage() {
             </p>
           </FadeIn>
 
-          {/* TST and UAV as saturated gradient tiles, built to the
+          {/* TSS and UAV as saturated gradient tiles, built to the
               "Most-Used Services" pattern Brett sent from
               livingin-platform.vercel.app/services: texture over a gradient, a
               round icon well at the top, then label and copy. Colours, tint
@@ -315,10 +341,31 @@ export default function CoachingPage() {
                           className="h-8 w-8 text-[var(--color-cream)] sm:h-9 sm:w-9"
                         />
                       </span>
-                      <p className="font-display mt-6 text-sm font-semibold tracking-[0.22em] text-[var(--color-cream)]/75 uppercase">
+                      {/* The acronym, at display scale in white. It used to be
+                          a 14px cream eyebrow at 75% opacity; Michele asked on
+                          2026-08-27 for TSS and UAV to read as the NAME of each
+                          part of the method, so it now outsizes the spelled-out
+                          title below it. White is --color-white, the token the
+                          .coach-card contrast notes are measured against, and
+                          at full opacity: 7.18:1 on the teal card and 6.20:1 on
+                          the coral at each card's lightest point, both clear of
+                          the 4.5:1 AA floor for normal text, let alone the 3:1
+                          this size and weight actually owe. Do not put it back
+                          on an opacity modifier; the old /75 was what made it
+                          recede. */}
+                      <p
+                        aria-hidden="true"
+                        className="font-display mt-6 text-4xl leading-none font-extrabold tracking-[0.06em] text-[var(--color-white)] uppercase sm:text-5xl"
+                      >
                         {item.abbr}
                       </p>
-                      <h3 className="font-display mt-2 text-2xl font-semibold tracking-tight text-[var(--color-cream)] sm:text-[1.75rem]">
+                      {/* The h3 carries both for assistive tech, since the
+                          acronym above is decorative once it is spoken here:
+                          "TSS. Talk Story Sessions." Sighted readers see only
+                          the title, because the abbreviation is already the
+                          line above it. */}
+                      <h3 className="font-display mt-3 text-2xl font-semibold tracking-tight text-[var(--color-cream)] sm:text-[1.75rem]">
+                        <span className="sr-only">{item.abbr}. </span>
                         {item.title}
                       </h3>
                       <p className="mt-5 max-w-md text-base leading-7 text-[var(--color-cream)]/85">
