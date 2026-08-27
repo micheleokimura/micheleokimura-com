@@ -311,8 +311,8 @@ export const FRIENDS_SAY_TOP: Testimonial[] = [
   },
   {
     /**
-     * REPLACES the Native Camp quote this slot used to hold ("She just did a
-     * session at Native Camp in Montana..."). Michele swapped it on 2026-08-24
+     * REPLACES the Native Camp quote this slot used to hold ("I cannot
+     * recommend Michele to you more highly..."). Michele swapped it on 2026-08-24
      * for this one, which is about the book rather than a session, so the card
      * now carries a `work`. The old wording is not retired from the repo: it is
      * still the version running on /speaker under topic 7, where it is the

@@ -43,6 +43,6 @@ Vice President Ted Vail, Senior Vice President of Mission, has been a steady sup
 >
 > Ted Vail D.I.S., Senior Vice President of Mission, The Foursquare Church
 
-> "She just did a session at Native Camp in Montana, and it was excellent, one of the most impactful sessions of the whole camp. We had 19 FMI workers there. Every person had an experience of how to prophesy over each other. Simple, practical, and powerful. I saw it all personally. Now many children in our church prophesy and unashamedly pray for healing, all because of Michele."
+> “I cannot recommend Michele to you more highly. She just did a session at the Native American camp in Montana, and it was excellent, one of the most impactful sessions of the whole camp. We had 19 FMI workers there, and every person had an experience of how to prophesy over each other. Simple, practical, and powerful. I saw it all. The family ministry director in my home church was discipled by her. Now, many children in our church prophesy and unashamedly pray for healing, all because of Michele.”
 >
 > Pastor Kihāpiʻilani Pimental, Worker Supervisor, Foursquare Missions International
