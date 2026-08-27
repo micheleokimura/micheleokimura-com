@@ -81,7 +81,7 @@ import { siteConfig } from '@/lib/site-config'
  */
 export const metadata: Metadata = {
   ...pageMetadata({
-    title: 'Speaker, Author, and Coach',
+    title: 'Speaker, Author, and Writing Coach',
     description:
       'Michele Okimura is a speaker, author, and coach in Honolulu, Hawaiʻi. Two published trade books, two more in 2027, keynotes and workshops, and the Brave Purpose Author Method.',
     path: '/',
@@ -94,7 +94,7 @@ export const metadata: Metadata = {
    * route whose <title> never picks the brand up. pageMetadata already puts the
    * full string in og:title; this puts it in the tab and the search result too.
    */
-  title: { absolute: `Speaker, Author, and Coach · ${siteConfig.brand}` },
+  title: { absolute: `Speaker, Author, and Writing Coach · ${siteConfig.brand}` },
 }
 
 /**
