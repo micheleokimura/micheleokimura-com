@@ -132,7 +132,7 @@ export default function AboutPage() {
           the last thing in the container and the spill lands in whatever
           follows. That is the teal line and its py-28, 112px against a 104px
           spill, which is true but not a margin. The extra 2rem is. */}
-      <Container className="mt-16 sm:mt-20 lg:pb-8">
+      <Container className="mt-16 sm:mt-20">
         <FadeIn>
           {/* The narrow 20rem track is on the RIGHT here, because the photo
               carries lg:order-last and so lands in the second column. It used
@@ -159,7 +159,7 @@ export default function AboutPage() {
               crosses the corner and hangs 125px, and the photo still sits
               directly above the eyebrow, so that needs 10rem. Re-measure both
               whenever the signature moves. */}
-          <div className="grid grid-cols-1 gap-x-10 gap-y-16 sm:gap-y-40 lg:grid-cols-[minmax(0,42rem)_minmax(0,20rem)] lg:items-center lg:gap-x-12">
+          <div className="grid grid-cols-1 gap-x-10 gap-y-16 sm:gap-y-28 lg:grid-cols-[minmax(0,42rem)_minmax(0,20rem)] lg:items-center lg:gap-x-12">
             {/* Two boxes, because the signature has to escape the one the
                 photo is clipped by. This outer box owns the size and is the
                 positioning context; the inner one owns the rounded corners
@@ -177,39 +177,45 @@ export default function AboutPage() {
                 />
               </div>
               {/* Her signature, set rather than scanned. See the @font-face
-                  note in tailwind.css for why Mrs Saint Delafield, and why it
-                  is not her own hand: nothing of hers was ever archived. She
-                  did send a photograph of how she signs, on 2026-08-26, and
-                  it is what drove the font choice: loose and dramatic, more
-                  loop than letter, nothing like typographic cursive.
+                  note in tailwind.css for why Alex Brush and what it beat.
+                  She sent a photograph of how she actually signs on
+                  2026-08-26: loose, dramatic, more loop than letter. The
+                  brief since then has been to get thinner and looser, and
+                  this pass carries no stroke at all.
 
                   Live text, not an image, so it stays sharp at any DPR.
 
                   TWO COMPOSITIONS, and the breakpoint is not cosmetic.
 
-                  From sm up, the photo's bottom-right corner cuts through the
-                  middle of "Michele": "Mich" on the print, "ele" off it, with
-                  "Love," above and wholly inside. That is what Michele asked
-                  for, and it costs 129px of signature hanging off the right
-                  of the frame, because half a 300px word has to go somewhere.
+                  From sm up, the photo's bottom-right corner cuts the middle
+                  of "Michele": "Mich" on the print, "ele" off it, "Love,"
+                  above and wholly inside. That is Michele's spec, and it
+                  costs 143px of signature hanging off the right of the frame,
+                  because half a 300px word has to go somewhere.
 
                   Below sm there is nowhere for it to go. The photo is nearly
-                  the full width of a phone, so those 129px land past the edge
+                  the full width of a phone, so those 143px land past the edge
                   of the screen and open a horizontal scrollbar. No angle or
                   size fixes it: bisecting the word at the corner always costs
                   half its length in horizontal room, and a phone has about
-                  24px of it. So phones get a smaller signature tucked into
-                  the corner instead, same font and same slant, 18px of spill.
-                  If the two ever need to be reconciled, the lever is the
-                  photo's width on phones, not the signature.
+                  24px of it. Phones get a smaller signature tucked into the
+                  corner instead, same font and slant, 21px of spill. If the
+                  two ever need reconciling, the lever is the photo's width on
+                  phones, not the signature.
 
-                  The rotation is +22deg, and it is deliberately the opposite
-                  sign from the -25deg that ran here until now. The corner can
-                  only bisect the word if the word DESCENDS to the right: with
-                  an upward slant, whatever sits at the corner has everything
-                  before it hanging below the frame, which is exactly what the
-                  previous three passes kept running into. Flipping the sign
-                  is what made her description reachable at all.
+                  The rotation is +35deg. Positive is load-bearing: the corner
+                  can only bisect the word if the word DESCENDS to the right,
+                  since with an upward slant whatever sits at the corner has
+                  everything before it hanging below the frame. 35 rather than
+                  22 because Michele asked for the tail further off the
+                  corner.
+
+                  Two levers position this, and they are independent, which is
+                  the useful part. The right and bottom insets slide the whole
+                  block along its own axis and so decide WHERE the corner cuts
+                  the name; the padding on "Love," slides only the first line,
+                  and is what pulls it back onto the print without disturbing
+                  that cut. Tune them in that order.
 
                   How the ink looks is `.sig-crayon` in tailwind.css. */}
               {/* The crayon, twice. Same four stages both times: warp the
@@ -244,7 +250,7 @@ export default function AboutPage() {
                     <feDisplacementMap
                       in="SourceGraphic"
                       in2="warp"
-                      scale={4}
+                      scale={3}
                       xChannelSelector="R"
                       yChannelSelector="G"
                       result="rough"
@@ -265,7 +271,7 @@ export default function AboutPage() {
                       in="gritCoarseAlpha"
                       result="gritCoarseMask"
                     >
-                      <feFuncA type="linear" slope={24} intercept={-15.36} />
+                      <feFuncA type="linear" slope={24} intercept={-17.76} />
                     </feComponentTransfer>
                     <feTurbulence
                       type="fractalNoise"
@@ -283,7 +289,7 @@ export default function AboutPage() {
                       in="gritFineAlpha"
                       result="gritFineMask"
                     >
-                      <feFuncA type="linear" slope={24} intercept={-17.28} />
+                      <feFuncA type="linear" slope={24} intercept={-19.68} />
                     </feComponentTransfer>
                     <feComposite
                       in="gritCoarseMask"
@@ -348,7 +354,7 @@ export default function AboutPage() {
                     <feDisplacementMap
                       in="SourceGraphic"
                       in2="warp"
-                      scale={4}
+                      scale={3}
                       xChannelSelector="R"
                       yChannelSelector="G"
                       result="rough"
@@ -369,7 +375,7 @@ export default function AboutPage() {
                       in="gritCoarseAlpha"
                       result="gritCoarseMask"
                     >
-                      <feFuncA type="linear" slope={24} intercept={-18.24} />
+                      <feFuncA type="linear" slope={24} intercept={-19.2} />
                     </feComponentTransfer>
                     <feTurbulence
                       type="fractalNoise"
@@ -387,7 +393,7 @@ export default function AboutPage() {
                       in="gritFineAlpha"
                       result="gritFineMask"
                     >
-                      <feFuncA type="linear" slope={24} intercept={-20.16} />
+                      <feFuncA type="linear" slope={24} intercept={-21.12} />
                     </feComponentTransfer>
                     <feComposite
                       in="gritCoarseMask"
@@ -436,8 +442,8 @@ export default function AboutPage() {
                   </filter>
                 </defs>
               </svg>
-              <span className="sig-crayon pointer-events-none absolute right-[10%] bottom-[-8%] origin-bottom-right rotate-[22deg] whitespace-nowrap text-right font-signature text-[4.375rem] leading-[0.95] sm:right-[-14%] sm:bottom-[-26%] sm:text-[8.85rem] lg:text-[7.375rem]">
-                <span className="sig-crayon-soft block pr-[0.6em]">Love,</span>
+              <span className="sig-crayon pointer-events-none absolute right-[16%] bottom-[-8%] origin-bottom-right rotate-[35deg] whitespace-nowrap text-right font-signature text-[4.125rem] leading-[0.95] sm:right-[-8%] sm:bottom-[-16%] sm:text-[8.1rem] lg:text-[6.75rem]">
+                <span className="sig-crayon-soft block pr-[1.1em]">Love,</span>
                 <span className="sig-crayon-hard block">Michele</span>
               </span>
             </div>

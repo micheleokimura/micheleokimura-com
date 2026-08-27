@@ -1,40 +1,37 @@
 @import 'tailwindcss';
 @import './base.css';
 
-/* Mrs Saint Delafield, self-hosted. Michele had no signature file on the old
+/* Alex Brush, self-hosted. Michele had no signature file on the old
    WordPress site and the Internet Archive never crawled anything of hers but
    the home page HTML. Settled; do not search again.
 
-   Seventh font, and the reason the search ran this long is that the brief
-   kept sharpening. Homemade Apple and Caveat: too thin. Kalam Bold: thick,
-   but printed rather than written. Yellowtail: a monoline, read as slender.
-   Meddon: flourished, read as pointy, which is fair for a calligraphic face.
-   Pacifico: liquid and thick, but a logo script rather than a signature.
+   Eighth font. The list of what it beat, so nobody walks the road again:
+   Homemade Apple and Caveat (too thin for the era when there was no stroke),
+   Kalam Bold (printed, not written), Yellowtail (monoline, read as slender),
+   Meddon (flourished but calligraphic, read as pointy), Pacifico (liquid but
+   a logo script, read as clunky), Mrs Saint Delafield (loose, but still
+   heavier than she wants).
 
-   Then Michele sent a photograph of how she actually signs: loose, dramatic,
-   more loop than letter. That reframed it. The target is signature ENERGY,
-   not typographic cursive, which rules out the neat faces however handsome.
+   The thing that kept this search going is that two of Michele's asks pull
+   against each other. She wants dramatic, loose, thin letterforms, and she
+   wants the fill eaten by crayon grit. Thin strokes plus aggressive grit
+   equals confetti. Earlier passes answered that by thickening the stroke,
+   which is exactly what she then objected to. This pass answers it the other
+   way: no stroke at all, and the grit backed off to suit. Alex Brush is the
+   thinnest face that still holds its shape under grit at these settings.
+   Allura is thinner and prettier and its hairlines drop out; if it is ever
+   tried again, the grit has to come down with it, not the stroke go up.
 
-   Bilbo Swash Caps was the first candidate and is out: despite the name its
-   lowercase is nearly plain, and it is far too fine to survive the grit.
-   Monsieur La Doulaise has the wildest swashes of anything on Google Fonts
-   and was the one to beat, but its strokes are hairlines, the grit destroys
-   them, and thickening the stroke enough to save them fills in the very
-   loops that made it dramatic. Mrs Saint Delafield is the compromise that
-   works: genuinely loose and irregular, real signature energy, and heavy
-   enough at 0.06em of stroke to keep its shape once the crayon eats it.
+   Sizes never port between faces. This one draws "Michele" 300px at 108px.
 
-   Sizes never port between these faces. This one draws "Michele" 300px at
-   132px; Pacifico needed 88px for the same width.
-
-   Latin subset only, from Google's v14 build. Self-hosted to match Mona Sans
+   Latin subset only, from Google's v23 build. Self-hosted to match Mona Sans
    and to keep the page off fonts.gstatic.com. */
 @font-face {
-  font-family: 'Mrs Saint Delafield';
+  font-family: 'Alex Brush';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('/fonts/MrsSaintDelafield-Regular-latin.woff2') format('woff2');
+  src: url('/fonts/AlexBrush-Regular-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
     U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
     U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
@@ -79,7 +76,7 @@
 
   /* Handwriting. One job on this site: the "Love, Michele" signature on the
      About portrait. Do not reach for it for headings or pull quotes. */
-  --font-signature: 'Mrs Saint Delafield', ui-rounded, cursive;
+  --font-signature: 'Alex Brush', ui-rounded, cursive;
 
   /* ---------------------------------------------------------------------
      MICHELE OKIMURA BRAND PALETTE
@@ -471,56 +468,53 @@ html {
   }
 }
 
-/* The crayon in "Love, Michele" on the About portrait. The colour and the
-   stroke live on the block; the wax itself is an SVG filter, and there are
-   TWO of them, applied per line. Both are defined next to the signature in
-   the About page, because nothing else references them.
+/* The crayon in "Love, Michele" on the About portrait. The colour lives on
+   the block; the wax is an SVG filter, and there are TWO of them, applied
+   per line. Both are defined next to the signature in the About page,
+   because nothing else references them.
 
-   The stroke widens the letterforms before the filter eats them. It is in em
-   so it tracks the font-size across breakpoints rather than going light on
-   the larger step. `paint-order` puts it under the fill so it grows each
-   glyph outward; a browser without `paint-order` centres it instead, which
-   reads slightly thinner and nothing worse.
+   THERE IS NO STROKE ANY MORE, and that is deliberate. Every earlier pass
+   widened the letterforms with `-webkit-text-stroke` so they could survive
+   the grit, and on 2026-08-26 Michele named the result: clunky, and she
+   asked for half the weight. So the balance is struck from the other side
+   now, with a thinner face and gentler grit. If a future pass reaches for
+   the stroke again to rescue a fine script, it is re-making the mistake:
+   bring the grit down instead.
 
    Each filter runs four stages: warp the outline with a displacement map,
    punch grit holes THROUGH the fill so the colour skips the way a crayon
    skips paper tooth, then press darker wax into patches of what survives.
 
-   The grit took three passes to get right and the lessons are all in the
-   numbers, so do not round them off:
+   The numbers all have reasons, so do not round them off:
 
-   The transfer must be a step, not a ramp. slope 24 with the intercept at
-   -24x the threshold makes the mask either fully on or fully off, so the
-   result is holes. An earlier slope of 2.5 gave a soft gradient, which
-   Michele called "solid red with edge wobble".
+   The grit transfer must be a step, not a ramp. slope 24 with the intercept
+   at -24x the threshold makes the mask either fully on or fully off, so the
+   result is holes. A slope of 2.5 gave a soft gradient, which Michele called
+   "solid red with edge wobble".
 
    The frequency must be LOW. At 0.5 and up the holes come out smaller than
-   the strokes are wide and it reads as sandpaper stipple. 0.06 is what gives
-   voids you can see.
+   the strokes are wide and it reads as sandpaper stipple. 0.06 gives voids
+   you can see.
 
    Two frequencies, unioned: 0.06 for the skipped patches, 0.30 for the tooth
-   between them. Either one alone reads mechanical.
+   between them. Either alone reads mechanical.
 
-   The threshold is bounded by legibility, and the bound is tighter than it
-   looks. A void has to be narrower than the stroke it lands on, or the
-   letter breaks in two. At 0.58 with Pacifico the voids won that fight and
-   "Michele" read as "Mishule" on the live page, which is worse than no
-   texture at all. 0.64 is the most aggressive setting where the name still
-   reads. If the font or the size changes, re-check this by reading the word
-   at 1x, not by looking at a magnified crop, because a crop hides exactly
-   this failure.
+   The threshold is bounded by legibility, and the bound moves with the
+   font's weight. A void has to be narrower than the stroke it lands on or
+   the letter breaks in two. On a heavy face 0.64 held; on Alex Brush, which
+   has no stroke propping it up, it does not, and 0.74 is where the name
+   survives. Whenever the face changes, re-read the word at 1x before
+   shipping: a magnified crop hides exactly this failure, and "Michele" once
+   went out reading "Mishule" because of it.
 
-   The two filters differ only in threshold, because the lines need different
-   amounts. "Michele" is long and mostly over the pale floral dress. "Love,"
-   is short, sits over the busiest part of the photo, and needs -soft: at the
-   same settings it eroded past reading first.
+   The two filters differ only in threshold. "Michele" is long and mostly
+   over the pale floral dress. "Love," is short, sits over the busiest part
+   of the photo, and erodes past reading first, so it takes -soft.
 
-   No text-shadow. At this size the letters carry themselves, and a halo
-   under a holed fill reads as a sticker laid on the photo. */
+   No text-shadow: a halo under a holed fill reads as a sticker laid on the
+   photo rather than as crayon on the print. */
 .sig-crayon {
   color: #b7291d;
-  -webkit-text-stroke: 0.06em #b7291d;
-  paint-order: stroke fill;
 }
 
 .sig-crayon-hard {
