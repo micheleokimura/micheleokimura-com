@@ -627,7 +627,7 @@ export default function HomePage() {
               id="friends-say-heading"
               className="font-display text-center text-3xl font-medium tracking-tight text-balance text-[var(--color-brand-teal)] sm:text-4xl"
             >
-              What leaders and friends are saying about me and my work
+              What leaders and friends are saying
             </h2>
           </FadeIn>
         </Container>
