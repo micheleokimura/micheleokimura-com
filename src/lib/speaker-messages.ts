@@ -446,11 +446,19 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
   {
     slug: 'building-a-kingdom-culture',
     hero: {
-      src: '/images/keynotes/kingdom-culture-hero.jpg',
-      alt: 'A family in a bright living room, two parents leaning together while their daughter talks and their son listens',
-      // Warm cream of the room, held near grey so it does not read peach.
-      wash: '#F7EFE9',
-      focal: 'center 45%',
+      // Replaced 2026-08-26 at Michele's request: the indoor living-room
+      // photograph read as subdued, and she wanted a happier picture on this
+      // message. New filename rather than an overwrite so no CDN copy of the
+      // old frame can survive at the same URL.
+      src: '/images/keynotes/kingdom-culture-hero-park.jpg',
+      alt: 'A family of four laughing together under a broad tree in a sunlit park, both parents turned toward their teenage son and young daughter',
+      // Green of the deeper foliage, 88 deg, sampled the usual way. The
+      // canopy's own peak sits at 74 deg, which is where How to Hear God's
+      // Voice already is, so this takes the cooler green a shade further in
+      // rather than repeating that wash. Navy 12.8:1, neutral-600 6.8:1.
+      wash: '#E6F5D5',
+      // No focal: the photograph is 1.83:1 inside a 4:3 plate, so the crop
+      // trims width and the family already sits centred across it.
     },
     number: '04',
     title: 'Building a Kingdom Culture at Home and in Ministry',
