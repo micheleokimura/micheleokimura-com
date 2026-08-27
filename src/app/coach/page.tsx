@@ -40,6 +40,26 @@ import { pageMetadata } from '@/lib/schema'
  *    briefly; Michele moved it to the Speaker page. Its teal wash went with
  *    it, so there is no `.surface-coach-quote` in tailwind.css any more.
  *
+ * VOICE, set by Michele 2026-08-27 and sitewide.
+ *
+ * Copy that describes a SERVICE, meaning something the reader will experience,
+ * speaks about Michele in the THIRD PERSON. First person belongs to the
+ * personal-narrative pages, /about and the home page, where Michele is telling
+ * her own story rather than describing what a reader buys.
+ *
+ * Converted in that pass: both pillar cards (TST and UAV) and all three FAQ
+ * answers, plus the FAQ heading above them. The FAQ QUESTIONS are the reader's
+ * own and stay in second person; do not touch them.
+ *
+ * STILL FIRST PERSON, and flagged to Michele on 2026-08-27 rather than changed
+ * unasked: the two "Where authors get stuck" cards ("I bring the roadmap", "I
+ * help you find it"), the second deliverable ("Then I show you how to use your
+ * voice"), the "Not just books" aside ("Most of my coaching is with authors"),
+ * the "The heart of it" lead ("Together, we do a series of interviews"), and
+ * the hero subtitle, which is separately marked approved-verbatim. If she says
+ * yes to those, this whole page is third person and the note above is the rule
+ * to apply.
+ *
  * COLOR. The page runs on the site band scale (band-1/2/3, see tailwind.css)
  * with one surface of its own, `.surface-coach-hero`, a coral wash. Brett
  * asked for the hero to stop being the sitewide navy banner. The bands then
@@ -88,7 +108,7 @@ const PILLARS: Pillar[] = [
     abbr: 'TST',
     title: 'Talk Story Sessions',
     body:
-      'We sit down and you tell me about your book the way you would tell a friend over coffee. I ask questions, you talk, and I record the whole conversation. What you said comes back to you as manuscript pages in your own words, ready to read and react to.',
+      'You and Michele will sit down, and you’ll tell her about your book the way you would tell a friend over coffee. She will ask questions, you talk, and she will record the whole conversation. What you said comes back to you as manuscript pages in your own words, ready to read and react to.',
     icon: MessagesSquare,
     style: {
       // Teal. Rings, because a Talk Story Session is a conversation widening
@@ -103,8 +123,10 @@ const PILLARS: Pillar[] = [
   {
     abbr: 'UAV',
     title: 'Unique Author Voice',
+    // Colon after "voice", never a dash. Michele asked for the colon by name on
+    // 2026-08-27, and the sitewide no-em-dash rule bans the alternative anyway.
     body:
-      'Before we draft a single chapter I build your Unique Author Voice: a 46-dimension read of how you use grammar, logic and rhetoric, rooted in the classical Trivium. Every page we write gets measured against that profile. Your book sounds like you on your best day.',
+      'Before you draft a single chapter, Michele will build your unique author voice: a 46-dimensional read of how you use grammar, logic, and rhetoric, rooted in the classical trivium. Every page you and she write gets measured against that profile. Your book sounds like you on your best day.',
     icon: FingerprintPattern,
     style: {
       // Coral, with the palette's gold banked into the far corner as pure
@@ -146,7 +168,7 @@ const FAQS: { question: string; answer: string }[] = [
   {
     question: 'What kind of books do you work on?',
     answer:
-      'Fiction, memoir, nonfiction, poetry, and books that turn out to be a little of each. I have written across that whole range myself, so the method shapes itself around the book you are actually writing.',
+      'Fiction, memoir, nonfiction, poetry, and books that turn out to be a little of each. Michele has written across that whole range herself, so the method shapes itself around the book you are actually writing.',
   },
   {
     question: 'Do I need to have written anything yet?',
@@ -156,7 +178,7 @@ const FAQS: { question: string; answer: string }[] = [
   {
     question: 'How much time will this take?',
     answer:
-      'A conversation with me, plus a block of your own time to read the pages that come back and tell me what is right and what is off. Some weeks are heavier than others.',
+      'A conversation with Michele, plus a block of your own time to read the pages that come back and tell her what is right and what is off. Some weeks are heavier than others.',
   },
 ]
 
@@ -385,7 +407,14 @@ export default function CoachingPage() {
 
       {/* ------------------------------------------------------------ 5. FAQ */}
       {/* band-2, so the FAQ separates from the teal banner above it and the
-          band-3 aside below it. Three questions, answers verbatim. */}
+          band-3 aside below it. Three questions, answers verbatim.
+
+          THE ANSWERS ARE THIRD PERSON, 2026-08-27. The questions are the
+          reader's and stay exactly as they are; the answers describe a service
+          and so speak about Michele by name. The heading over them moved with
+          them, from "What writers ask me first" to "...ask Michele first",
+          because a first-person heading sitting on top of third-person answers
+          reads as a mistake. See the VOICE note at the top of this file. */}
       <section
         aria-labelledby="faq-heading"
         className="bg-[var(--color-band-2)] py-16 sm:py-20 lg:py-24"
@@ -398,7 +427,7 @@ export default function CoachingPage() {
               </span>
               <span className="sr-only"> - </span>
               <span className="font-display block text-3xl font-medium tracking-tight text-balance text-neutral-950 sm:text-4xl lg:text-5xl">
-                What writers ask me first.
+                What writers ask Michele first.
               </span>
             </h2>
           </FadeIn>

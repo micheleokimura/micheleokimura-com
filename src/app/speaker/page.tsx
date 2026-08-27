@@ -282,14 +282,21 @@ export default function SpeakerPage() {
         aria-label="Messages Michele speaks on"
         className={`bg-[var(--color-band-2)] ${BAND}`}
       >
-        <SectionIntro eyebrow="Topics" title="Messages I’m passionate about.">
-          {/* First person, per Michele. This used to open "As a pastor,
-              teacher, and public speaker, she can also tailor...".
+        <SectionIntro
+          eyebrow="Topics"
+          title="Messages Michele is passionate about."
+        >
+          {/* THIRD PERSON, per Michele, 2026-08-27. This block ran in first
+              person from 2026-08-24 until then. The sitewide rule she settled
+              on: copy that describes a SERVICE the reader will experience
+              speaks about Michele in the third person, and first person is
+              kept for the personal-narrative pages, /about and the home page.
+              This is a service catalogue, so it is "Michele", not "I".
               `text-pretty` plus the bound "or need" keeps the last word off a
               line of its own, which she flagged. */}
           <p className="text-pretty">
-            As a public speaker, I can also tailor a talk to your group&rsquo;s
-            specific theme or&nbsp;need.
+            As a public speaker, Michele can also tailor a talk to your
+            group&rsquo;s specific theme or&nbsp;need.
           </p>
         </SectionIntro>
 
