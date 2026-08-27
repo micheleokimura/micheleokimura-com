@@ -98,8 +98,9 @@ function mailtoFallback(fields: {
  *
  * Fields, in order: what are you interested in (multi-select, at least one),
  * an optional place to tell the story, then first name, last name, email, and
- * phone. Everything but the story is required. The phone is checked for
- * content only, so international and informal formats both pass.
+ * phone. The story and the phone are optional; everything else is required.
+ * The phone used to block a send when left blank, and Michele asked for that
+ * to stop: email is the only contact detail she needs to reply.
  *
  * Accessibility is handled by hand, matching `JoinWaitListModal`: role="dialog"
  * + aria-modal, focus moved in on open and restored to the trigger on close, a
@@ -251,10 +252,6 @@ export function ContactPopup({
     }
     if (!EMAIL_RE.test(em)) {
       setError('Enter a valid email address.')
-      return
-    }
-    if (!ph) {
-      setError('Enter a phone number Michele can reach you on.')
       return
     }
 
@@ -485,7 +482,7 @@ export function ContactPopup({
 
               <div className="mt-2">
                 <label htmlFor={`${titleId}-phone`} className="sr-only">
-                  Phone number
+                  Phone number (optional)
                 </label>
                 <input
                   id={`${titleId}-phone`}
@@ -493,8 +490,7 @@ export function ContactPopup({
                   name="phone"
                   autoComplete="tel"
                   inputMode="tel"
-                  placeholder="Phone number"
-                  required
+                  placeholder="Phone number (optional)"
                   value={phone}
                   onChange={(e) => {
                     setPhone(e.target.value)
