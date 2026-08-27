@@ -163,7 +163,7 @@ const STALLS: Stall[] = [
 
 const DELIVERABLES: string[] = [
   'A finished manuscript in your own voice.',
-  'Your book, written. Then I show you how to use your voice for the rest of what you write: social posts, talks, the next book.',
+  'Your book, written. Then Michele shows you how to use your voice for the rest of what you write: social posts, talks, the next book.',
   'A written walkthrough of your publishing options.',
 ]
 
@@ -171,7 +171,7 @@ const FAQS: { question: string; answer: string }[] = [
   {
     question: 'What kind of books do you work on?',
     answer:
-      'Fiction, memoir, nonfiction, poetry, and books that turn out to be a little of each. Michele has written across that whole range herself, so the method shapes itself around the book you are actually writing.',
+      'Nonfiction, memoir, spiritual formation, poetry, and curriculum. Michele has written across that range herself, so the method shapes itself around the book you are actually writing.',
   },
   {
     question: 'Do I need to have written anything yet?',
@@ -488,13 +488,14 @@ export default function CoachingPage() {
                   paragraph above it answers, so a header between the two would
                   split one thought in half. Same type, same measure.
 
-                  HEADS UP, FLAGGED TO MICHELE THE DAY IT WENT IN. This says
-                  fiction is not her specialty. The first FAQ answer, one
-                  section up the page, opens "Fiction, memoir, nonfiction,
-                  poetry" and says the method shapes itself around whatever you
-                  are writing. A reader who reads both gets two different
-                  answers about novels. Her call which one is right; do not
-                  quietly reword either one to resolve it. */}
+                  This used to contradict the first FAQ answer, which opened
+                  "Fiction, memoir, nonfiction, poetry" and told a novelist the
+                  method would shape itself around whatever they were writing.
+                  Michele resolved it 2026-08-27 in favor of this paragraph:
+                  the FAQ answer now lists nonfiction, memoir, spiritual
+                  formation, poetry, and curriculum, and drops fiction. Poetry
+                  stays in both because she has written a poetry book. Keep the
+                  two lists agreeing if either one is edited. */}
               <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-700">
                 Michele works best with authors of nonfiction, especially books
                 rooted in your lived story: memoir, testimony, spiritual
