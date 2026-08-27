@@ -496,12 +496,19 @@ html {
    Two frequencies, unioned: 0.06 for the skipped patches, 0.30 for the tooth
    between them. Either one alone reads mechanical.
 
-   And the two filters differ only in threshold, because the lines need
-   different amounts. "Michele" is long, sits mostly over the pale floral
-   dress, and can afford the aggressive version. "Love," is the short line
-   over the busiest part of the photo, and at the same settings it eroded
-   past reading; -soft raises both thresholds so it keeps its skips without
-   losing the word.
+   The threshold is bounded by legibility, and the bound is tighter than it
+   looks. A void has to be narrower than the stroke it lands on, or the
+   letter breaks in two. At 0.58 with Pacifico the voids won that fight and
+   "Michele" read as "Mishule" on the live page, which is worse than no
+   texture at all. 0.64 is the most aggressive setting where the name still
+   reads. If the font or the size changes, re-check this by reading the word
+   at 1x, not by looking at a magnified crop, because a crop hides exactly
+   this failure.
+
+   The two filters differ only in threshold, because the lines need different
+   amounts. "Michele" is long and mostly over the pale floral dress. "Love,"
+   is short, sits over the busiest part of the photo, and needs -soft: at the
+   same settings it eroded past reading first.
 
    No text-shadow. At this size the letters carry themselves, and a halo
    under a holed fill reads as a sticker laid on the photo. */

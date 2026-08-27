@@ -286,7 +286,7 @@ export default function AboutPage() {
                       in="gritCoarseAlpha"
                       result="gritCoarseMask"
                     >
-                      <feFuncA type="linear" slope={24} intercept={-13.92} />
+                      <feFuncA type="linear" slope={24} intercept={-15.36} />
                     </feComponentTransfer>
                     <feTurbulence
                       type="fractalNoise"
@@ -304,7 +304,7 @@ export default function AboutPage() {
                       in="gritFineAlpha"
                       result="gritFineMask"
                     >
-                      <feFuncA type="linear" slope={24} intercept={-15.84} />
+                      <feFuncA type="linear" slope={24} intercept={-17.28} />
                     </feComponentTransfer>
                     <feComposite
                       in="gritCoarseMask"
@@ -390,7 +390,7 @@ export default function AboutPage() {
                       in="gritCoarseAlpha"
                       result="gritCoarseMask"
                     >
-                      <feFuncA type="linear" slope={24} intercept={-16.8} />
+                      <feFuncA type="linear" slope={24} intercept={-17.28} />
                     </feComponentTransfer>
                     <feTurbulence
                       type="fractalNoise"
@@ -408,7 +408,7 @@ export default function AboutPage() {
                       in="gritFineAlpha"
                       result="gritFineMask"
                     >
-                      <feFuncA type="linear" slope={24} intercept={-18.72} />
+                      <feFuncA type="linear" slope={24} intercept={-19.2} />
                     </feComponentTransfer>
                     <feComposite
                       in="gritCoarseMask"
