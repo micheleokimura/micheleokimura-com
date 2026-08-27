@@ -18,6 +18,7 @@ import {
   type Door,
   type Testimonial,
 } from '@/lib/home-variants'
+import { siteConfig } from '@/lib/site-config'
 
 /**
  * Home page. Rebuilt 2026-08-23 against Michele's walkthrough of the live site.
@@ -78,14 +79,23 @@ import {
  * the list itself is now settled, so treat the arrays in home-variants.ts as
  * approved copy rather than a working set.
  */
-export const metadata: Metadata = pageMetadata({
-  title: 'Speaker, Author, and Coach',
-  description:
-    'Michele Okimura is an author, speaker, and coach in Honolulu, Hawaiʻi. Two published trade books, two more in 2027, keynotes and workshops, and the Brave Purpose Author Method.',
-  path: '/',
-  ogDescription:
-    'Author, speaker, and coach in Honolulu. Founder and Executive Director of Releasing Generations.',
-})
+export const metadata: Metadata = {
+  ...pageMetadata({
+    title: 'Speaker, Author, and Coach',
+    description:
+      'Michele Okimura is a speaker, author, and coach in Honolulu, Hawaiʻi. Two published trade books, two more in 2027, keynotes and workshops, and the Brave Purpose Author Method.',
+    path: '/',
+    ogDescription:
+      'Speaker, author, and coach in Honolulu. Founder and Executive Director of Releasing Generations.',
+  }),
+  /**
+   * The root layout's `%s · Michele Okimura` template only reaches child
+   * segments, and app/page.tsx IS the root segment, so the home page is the one
+   * route whose <title> never picks the brand up. pageMetadata already puts the
+   * full string in og:title; this puts it in the tab and the search result too.
+   */
+  title: { absolute: `Speaker, Author, and Coach · ${siteConfig.brand}` },
+}
 
 /**
  * The doors section escapes Container's inner max-w-2xl cap on purpose.
