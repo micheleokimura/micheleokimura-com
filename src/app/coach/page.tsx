@@ -482,6 +482,27 @@ export default function CoachingPage() {
                 whether it&rsquo;s a season of life, a calling, or a spiritual
                 practice, reach out. If it fits, Michele will let you know.
               </p>
+              {/* The fit clarifier, added 2026-08-27 at Michele's direction, as
+                  a second paragraph in this aside rather than a section of its
+                  own: it is answering the same "is this for me" question the
+                  paragraph above it answers, so a header between the two would
+                  split one thought in half. Same type, same measure.
+
+                  HEADS UP, FLAGGED TO MICHELE THE DAY IT WENT IN. This says
+                  fiction is not her specialty. The first FAQ answer, one
+                  section up the page, opens "Fiction, memoir, nonfiction,
+                  poetry" and says the method shapes itself around whatever you
+                  are writing. A reader who reads both gets two different
+                  answers about novels. Her call which one is right; do not
+                  quietly reword either one to resolve it. */}
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-700">
+                Michele works best with authors of nonfiction, especially books
+                rooted in your lived story: memoir, testimony, spiritual
+                formation, and curriculum. Novels and fiction aren&rsquo;t her
+                specialty. If that&rsquo;s what you&rsquo;re writing,
+                she&rsquo;ll gladly point you toward someone who is. But if your
+                book is true, she&rsquo;s in her element.
+              </p>
               <div className="mt-8">
                 <ContactTrigger interest="other">Get in touch</ContactTrigger>
               </div>
