@@ -675,7 +675,7 @@ export default function AuthorPage() {
                     setting already reads as a quote. Navy rather than
                     teal-text, which measures 3.96:1 on this wash and fails. */}
                 <blockquote className="font-display mx-auto max-w-[22ch] text-[1.5rem] leading-[1.25] font-medium tracking-tight text-balance text-[var(--color-navy)] sm:max-w-[26ch] sm:text-[1.875rem] sm:leading-[1.22] lg:mx-0 lg:max-w-[30ch] lg:text-[2.25rem] lg:leading-[1.2]">
-                  My purpose is to help people live in the fullness of who they
+                  My heart is to help people live in the fullness of who they
                   were created to be with brave purpose.
                 </blockquote>
                 {/* No dash before the name: no em dash anywhere on this site,
