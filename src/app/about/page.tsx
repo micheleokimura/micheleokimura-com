@@ -149,85 +149,159 @@ export default function AboutPage() {
               edge, which is the price of moving it left. If it is ever put
               back on that edge, put the 1fr back too and widen the paragraph
               instead, because the slack always reappears otherwise. */}
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,42rem)_minmax(0,20rem)] lg:items-center lg:gap-12">
-            <div className="relative order-first aspect-[4/5] w-full max-w-xs overflow-hidden rounded-3xl bg-neutral-100 sm:max-w-sm lg:order-last lg:max-w-none">
-              <Image
-                src="/images/michele/about-meet-michele.jpg"
-                alt="Michele Okimura laughing at home"
-                fill
-                sizes="(min-width: 1024px) 20rem, 60vw"
-                className="object-cover"
-              />
+          {/* The row gap is 5rem rather than the 2.5rem it used to be, and
+              only below lg. Stacked, the photo sits directly above the
+              eyebrow, and the signature now hangs about 53px past the bottom
+              of the frame, which landed on top of "MEET MICHELE" at the old
+              gap. Above lg the two are side by side, the row gap stops
+              applying, and the spill falls into the section's own bottom
+              margin, which is 4rem and clears it. */}
+          <div className="grid grid-cols-1 gap-x-10 gap-y-20 lg:grid-cols-[minmax(0,42rem)_minmax(0,20rem)] lg:items-center lg:gap-x-12">
+            {/* Two boxes, because the signature has to escape the one the
+                photo is clipped by. This outer box owns the size and is the
+                positioning context; the inner one owns the rounded corners
+                and the `overflow-hidden` that makes them. The signature is a
+                child of the outer box, so it can cross the print edge. Put
+                them back together and the tail gets cut off again. */}
+            <div className="relative order-first aspect-[4/5] w-full max-w-xs sm:max-w-sm lg:order-last lg:max-w-none">
+              <div className="absolute inset-0 overflow-hidden rounded-3xl bg-neutral-100">
+                <Image
+                  src="/images/michele/about-meet-michele.jpg"
+                  alt="Michele Okimura laughing at home"
+                  fill
+                  sizes="(min-width: 1024px) 20rem, 60vw"
+                  className="object-cover"
+                />
+              </div>
               {/* Her signature, set rather than scanned. See the @font-face
-                  note in tailwind.css for why Kalam and why it is not her own
-                  hand: there is no signature file on the old WordPress site
-                  or in the Internet Archive's one capture of it.
+                  note in tailwind.css for why Yellowtail, and why it is not
+                  her own hand: the Internet Archive has never crawled
+                  anything of hers but the home page HTML, and her own site
+                  archive has no signature asset either. Both searched twice.
 
                   Live text, not an image, so it stays sharp at any DPR and
                   scales with the photo. The photo is 320px wide at base,
                   384px at sm, and back to 320px at lg, which is why the size
                   steps up and then back down: the ratio to the frame is what
-                  is being held constant, 0.144. That puts the block at about
-                  56% of the frame's width, which is the scale Michele asked
-                  for when she said it should not look tucked in.
+                  is held constant, 0.216. Every inset below is a percentage
+                  for the same reason.
 
                   The angle is -25deg, from a sketch Michele sent on
-                  2026-08-26 after seeing the first pass at -7deg. Negative is
-                  the direction she drew: counter-clockwise, so "Love," sits
-                  low on the left and "Michele" climbs to the right, reading
-                  up toward the corner. It is meant to be an obvious slant.
+                  2026-08-26. Counter-clockwise, so "Love," sits low on the
+                  left and "Michele" climbs to the right.
 
-                  Rotating about the bottom-right corner swings the block's
-                  lower-left down toward the frame edge, and `overflow-hidden`
-                  on the parent cuts whatever crosses it. The bottom inset is
-                  the clearance for that, and it is not a free number: it went
-                  6% to 13% when the angle went to -25deg, and 13% to 15% when
-                  the crayon pass moved to Kalam, which sets wider than Caveat
-                  and so swings the block's lower-left further down. Check it
-                  by rendering the frame with `overflow: visible` and an
-                  outline on it, which is the only way to see what is actually
-                  being cut: the element box hangs below the frame at this
-                  angle whether or not any ink is down there.
+                  Two things make it run off the print rather than sit inside
+                  it, which is what she asked for on 2026-08-26.
 
-                  Everything about how the ink itself looks (the colour, the
-                  stroke that thickens it, the filter that roughens the edges,
-                  the halo that keeps it readable) is in `.sig-crayon` in
-                  tailwind.css, with the reasoning. */}
-              {/* The turbulence the crayon edge is displaced by. It sits here
-                  rather than in a shared defs file because this signature is
-                  the only thing on the site that references it. */}
-              <svg aria-hidden="true" focusable="false" className="absolute h-0 w-0">
+                  The first is the negative right inset plus the small bottom
+                  one: the block is anchored past the frame's right edge and
+                  low enough that "Love," stays inside while "Michele" crosses
+                  the bottom and trails off the corner. 8% is measured, not
+                  guessed. It puts 53px of the signature below the frame; 2%
+                  put 77px there, which was more than the layout below has
+                  room for.
+
+                  The second is the padding on "Love,". Both lines are right
+                  aligned, and at -25deg the second line falls down and to the
+                  LEFT of the first, so flush right would tuck "Michele"
+                  inside the corner instead of past it. Insetting "Love," by
+                  0.9em pushes the long line out to be the rightmost thing in
+                  the block, which is what reaches the corner and escapes.
+
+                  How the ink itself looks is `.sig-crayon` in tailwind.css. */}
+              {/* The crayon, in four stages: warp the outline, punch grit
+                  holes through the fill, then press darker wax into patches
+                  of what survives. Reasoning is on `.sig-crayon`. It sits
+                  here rather than in a shared defs file because this
+                  signature is the only thing that references it. */}
+              <svg
+                aria-hidden="true"
+                focusable="false"
+                className="absolute h-0 w-0"
+              >
                 <defs>
                   <filter
                     id="crayon-signature"
-                    x="-25%"
-                    y="-25%"
-                    width="150%"
-                    height="150%"
+                    x="-45%"
+                    y="-45%"
+                    width="190%"
+                    height="190%"
+                    colorInterpolationFilters="sRGB"
                   >
                     <feTurbulence
                       type="fractalNoise"
-                      baseFrequency="0.07"
+                      baseFrequency="0.045"
                       numOctaves={4}
                       seed={3}
-                      result="noise"
+                      result="warp"
                     />
                     <feDisplacementMap
                       in="SourceGraphic"
-                      in2="noise"
-                      scale={3}
+                      in2="warp"
+                      scale={4}
                       xChannelSelector="R"
                       yChannelSelector="G"
+                      result="rough"
                     />
+                    <feTurbulence
+                      type="fractalNoise"
+                      baseFrequency="0.7"
+                      numOctaves={4}
+                      seed={17}
+                      result="grit"
+                    />
+                    <feColorMatrix
+                      in="grit"
+                      type="luminanceToAlpha"
+                      result="gritAlpha"
+                    />
+                    <feComponentTransfer in="gritAlpha" result="gritMask">
+                      <feFuncA type="linear" slope={2.5} intercept={-1.5} />
+                    </feComponentTransfer>
+                    <feComposite
+                      in="rough"
+                      in2="gritMask"
+                      operator="out"
+                      result="waxy"
+                    />
+                    <feFlood floodColor="#8B1E14" result="pressed" />
+                    <feTurbulence
+                      type="fractalNoise"
+                      baseFrequency="0.09"
+                      numOctaves={3}
+                      seed={29}
+                      result="patch"
+                    />
+                    <feColorMatrix
+                      in="patch"
+                      type="luminanceToAlpha"
+                      result="patchAlpha"
+                    />
+                    <feComponentTransfer in="patchAlpha" result="patchMask">
+                      <feFuncA type="linear" slope={1.8} intercept={-0.75} />
+                    </feComponentTransfer>
+                    <feComposite
+                      in="pressed"
+                      in2="patchMask"
+                      operator="in"
+                      result="patches"
+                    />
+                    <feComposite
+                      in="patches"
+                      in2="waxy"
+                      operator="in"
+                      result="pressedOnWax"
+                    />
+                    <feMerge>
+                      <feMergeNode in="waxy" />
+                      <feMergeNode in="pressedOnWax" />
+                    </feMerge>
                   </filter>
                 </defs>
               </svg>
-              <span
-                className="sig-crayon pointer-events-none absolute right-[6%] bottom-[15%] origin-bottom-right rotate-[-25deg] text-right font-signature text-[2.875rem] leading-[1.05] font-bold sm:text-[3.45rem] lg:text-[2.875rem]"
-              >
-                Love,
-                <br />
-                Michele
+              <span className="sig-crayon pointer-events-none absolute right-[-4%] bottom-[8%] origin-bottom-right rotate-[-25deg] whitespace-nowrap text-right font-signature text-[4.3rem] leading-[0.9] sm:text-[5.15rem] lg:text-[4.3rem]">
+                <span className="block pr-[0.9em]">Love,</span>
+                <span className="block">Michele</span>
               </span>
             </div>
 
