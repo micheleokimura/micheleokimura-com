@@ -47,18 +47,21 @@ import { pageMetadata } from '@/lib/schema'
  * personal-narrative pages, /about and the home page, where Michele is telling
  * her own story rather than describing what a reader buys.
  *
- * Converted in that pass: both pillar cards (TST and UAV) and all three FAQ
- * answers, plus the FAQ heading above them. The FAQ QUESTIONS are the reader's
- * own and stay in second person; do not touch them.
+ * Converted in two rounds that same day, all of it Michele's own wording:
+ * the "heart of it" lead, both pillar cards (TST and UAV), both "Where authors
+ * get stuck" cards, all three FAQ answers with the heading above them, and the
+ * "Not just books" aside. The FAQ QUESTIONS are the reader's own and stay in
+ * second person; do not touch them.
  *
- * STILL FIRST PERSON, and flagged to Michele on 2026-08-27 rather than changed
- * unasked: the two "Where authors get stuck" cards ("I bring the roadmap", "I
- * help you find it"), the second deliverable ("Then I show you how to use your
- * voice"), the "Not just books" aside ("Most of my coaching is with authors"),
- * the "The heart of it" lead ("Together, we do a series of interviews"), and
- * the hero subtitle, which is separately marked approved-verbatim. If she says
- * yes to those, this whole page is third person and the note above is the rule
- * to apply.
+ * TWO LINES ARE STILL FIRST PERSON, both left that way on purpose.
+ *
+ * The hero subtitle is marked approved-verbatim by Michele and is exempt until
+ * she says otherwise. The second deliverable ("Then I show you how to use your
+ * voice") was flagged to her twice on 2026-08-27 and not included in either
+ * round of changes she sent back, so it is deliberately untouched rather than
+ * missed. It is the one line on the page that still needs a decision; if she
+ * says yes, it becomes "Then Michele shows you how to use your voice" and this
+ * page is third person throughout.
  *
  * COLOR. The page runs on the site band scale (band-1/2/3, see tailwind.css)
  * with one surface of its own, `.surface-coach-hero`, a coral wash. Brett
@@ -148,13 +151,13 @@ const STALLS: Stall[] = [
     number: '01',
     title: 'The missing roadmap.',
     body:
-      'Most writers have no clear path from the idea in their head to a finished manuscript. Every week turns into a decision about what to write, and the decision usually wins. I bring the roadmap, so your time goes into the writing.',
+      'Most writers have no clear path from the idea in their head to a finished manuscript. Every week turns into a decision about what to write, and the decision usually wins. Michele brings the roadmap, so your time goes into the writing.',
   },
   {
     number: '02',
     title: 'The borrowed voice.',
     body:
-      'It is easy to write the way the books on your shelf sound. Your own voice is already there and it is the best thing you have. I help you find it and write the whole book out of it.',
+      'It is easy to write the way the books on your shelf sound. Your own voice is already there and it is the best thing you have. Michele helps you find it and write the whole book out of it.',
   },
 ]
 
@@ -277,8 +280,8 @@ export default function CoachingPage() {
                 ("Two things carry the whole method...") was cut for reading as
                 marketing gloss rather than as Michele. */}
             <p className="mt-6 text-xl leading-9 text-neutral-600">
-              Together, we do a series of interviews that we record and then
-              turn into a book over the course of six months.
+              Together with Michele, you&rsquo;ll engage in a series of recorded
+              interviews that become your book over the course of six months.
             </p>
           </FadeIn>
 
@@ -427,7 +430,7 @@ export default function CoachingPage() {
               </span>
               <span className="sr-only"> - </span>
               <span className="font-display block text-3xl font-medium tracking-tight text-balance text-neutral-950 sm:text-4xl lg:text-5xl">
-                What writers ask Michele first.
+                What writers ask Michele.
               </span>
             </h2>
           </FadeIn>
@@ -472,12 +475,12 @@ export default function CoachingPage() {
                 Not just books.
               </h2>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-700">
-                Most of my coaching is with authors, but not all of it. One
-                pastor asked me to coach him on hearing God&rsquo;s voice, and
-                that&rsquo;s become part of what I do. If you&rsquo;re working
-                on something that isn&rsquo;t a book, whether a season of life,
-                a calling, or a spiritual practice, reach out. If it&rsquo;s a
-                fit, we&rsquo;ll talk.
+                Most of Michele&rsquo;s coaching is with authors, but not all
+                of it. One pastor asked her to coach him on hearing
+                God&rsquo;s voice, and that has become part of her practice. If
+                you&rsquo;re working on something that isn&rsquo;t a book,
+                whether it&rsquo;s a season of life, a calling, or a spiritual
+                practice, reach out. If it fits, Michele will let you know.
               </p>
               <div className="mt-8">
                 <ContactTrigger interest="other">Get in touch</ContactTrigger>
