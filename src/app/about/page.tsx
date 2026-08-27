@@ -128,12 +128,11 @@ export default function AboutPage() {
 
       {/* Meet Michele: a closer, warmer photo before the timeline pulls back
           to tell the whole story chronologically. */}
-      {/* No bottom padding here any more. Side by side, the photo is the last
-          thing in the container and the signature's spill lands in whatever
-          follows, which is the teal line and its py-28. That was 112px against
-          a 109px spill and needed help; the spill is 45px now and clears on
-          its own. Re-check this if the signature grows again. */}
-      <Container className="mt-16 sm:mt-20">
+      {/* lg:pb- is the signature's clearance side by side, where the photo is
+          the last thing in the container and the spill lands in whatever
+          follows. That is the teal line and its py-28, 112px against a 104px
+          spill, which is true but not a margin. The extra 2rem is. */}
+      <Container className="mt-16 sm:mt-20 lg:pb-8">
         <FadeIn>
           {/* The narrow 20rem track is on the RIGHT here, because the photo
               carries lg:order-last and so lands in the second column. It used
@@ -154,13 +153,13 @@ export default function AboutPage() {
               edge, which is the price of moving it left. If it is ever put
               back on that edge, put the 1fr back too and widen the paragraph
               instead, because the slack always reappears otherwise. */}
-          {/* The row gap is 5rem, and it is clearance for the signature. Stacked,
-              the photo sits directly above the eyebrow, and the signature
-              hangs about 45px past the bottom of the frame at base and 54px
-              at sm. Every time the signature has been resized or moved this
-              number has had to move with it, so re-measure rather than
-              assuming it still fits. */}
-          <div className="grid grid-cols-1 gap-x-10 gap-y-20 lg:grid-cols-[minmax(0,42rem)_minmax(0,20rem)] lg:items-center lg:gap-x-12">
+          {/* Two row gaps, because there are two signatures. Below sm the
+              signature is the small contained one and hangs 32px past the
+              frame, so 4rem is plenty. From sm up it is the big one that
+              crosses the corner and hangs 125px, and the photo still sits
+              directly above the eyebrow, so that needs 10rem. Re-measure both
+              whenever the signature moves. */}
+          <div className="grid grid-cols-1 gap-x-10 gap-y-16 sm:gap-y-40 lg:grid-cols-[minmax(0,42rem)_minmax(0,20rem)] lg:items-center lg:gap-x-12">
             {/* Two boxes, because the signature has to escape the one the
                 photo is clipped by. This outer box owns the size and is the
                 positioning context; the inner one owns the rounded corners
@@ -178,61 +177,41 @@ export default function AboutPage() {
                 />
               </div>
               {/* Her signature, set rather than scanned. See the @font-face
-                  note in tailwind.css for why Yellowtail, and why it is not
-                  her own hand: the Internet Archive has never crawled
-                  anything of hers but the home page HTML, and her own site
-                  archive has no signature asset either. Both searched twice.
+                  note in tailwind.css for why Mrs Saint Delafield, and why it
+                  is not her own hand: nothing of hers was ever archived. She
+                  did send a photograph of how she signs, on 2026-08-26, and
+                  it is what drove the font choice: loose and dramatic, more
+                  loop than letter, nothing like typographic cursive.
 
-                  Live text, not an image, so it stays sharp at any DPR and
-                  scales with the photo. The photo is 320px wide at base,
-                  384px at sm, and back to 320px at lg, which is why the size
-                  steps up and then back down: the ratio to the frame is what
-                  is held constant. Every inset below is a percentage for the
-                  same reason.
+                  Live text, not an image, so it stays sharp at any DPR.
 
-                  Do not compare this font-size to the ones in git history.
-                  Every face has drawn "Michele" at a different width for the
-                  same px, so the number has swung between 46 and 82 while the
-                  word itself only ever grew. Pacifico draws it 285px at 82px.
-                  Measure the word, not the font-size.
+                  TWO COMPOSITIONS, and the breakpoint is not cosmetic.
 
-                  The angle is -25deg, from a sketch Michele sent on
-                  2026-08-26. Counter-clockwise, so "Love," sits low on the
-                  left and "Michele" climbs to the right.
+                  From sm up, the photo's bottom-right corner cuts through the
+                  middle of "Michele": "Mich" on the print, "ele" off it, with
+                  "Love," above and wholly inside. That is what Michele asked
+                  for, and it costs 129px of signature hanging off the right
+                  of the frame, because half a 300px word has to go somewhere.
 
-                  Two things make it run off the print rather than sit inside
-                  it. Michele asked for the spill on 2026-08-26 and then asked
-                  for MORE of it: "Love," on the photo, "Michele" mostly off.
+                  Below sm there is nowhere for it to go. The photo is nearly
+                  the full width of a phone, so those 129px land past the edge
+                  of the screen and open a horizontal scrollbar. No angle or
+                  size fixes it: bisecting the word at the corner always costs
+                  half its length in horizontal room, and a phone has about
+                  24px of it. So phones get a smaller signature tucked into
+                  the corner instead, same font and same slant, 18px of spill.
+                  If the two ever need to be reconciled, the lever is the
+                  photo's width on phones, not the signature.
 
-                  The first is the negative right inset plus the bottom one.
-                  Both are measured: bottom 19% keeps "Love," and most of
-                  "Michele" on the print and lets the tail cross the
-                  bottom-right corner, leaving 45px below the frame. The row
-                  gap on the grid is the clearance for those 45px.
+                  The rotation is +22deg, and it is deliberately the opposite
+                  sign from the -25deg that ran here until now. The corner can
+                  only bisect the word if the word DESCENDS to the right: with
+                  an upward slant, whatever sits at the corner has everything
+                  before it hanging below the frame, which is exactly what the
+                  previous three passes kept running into. Flipping the sign
+                  is what made her description reachable at all.
 
-                  The right inset is capped by the narrowest phone, not by
-                  taste. -6% puts the tail 19px past the frame, which lands
-                  inside the 24px page gutter on a 320px screen. -9% looked
-                  better and put it 1px past the viewport, which is a
-                  horizontal scrollbar. Do not open it up without redoing that
-                  arithmetic.
-
-                  Michele asked for the "ch" to sit ON the corner with the
-                  rest of the word above it. That is not reachable at -25deg:
-                  the line rises to the right, so whatever sits at the corner
-                  has everything before it hanging below. This is as close as
-                  the angle allows. Flipping the rotation positive would give
-                  her the exact composition, at the cost of the upward slant
-                  she asked for in the sketch.
-
-                  The second is the padding on "Love,". Both lines are right
-                  aligned, and at -25deg the second line falls down and to the
-                  LEFT of the first, so flush right would tuck "Michele"
-                  inside the corner instead of past it. Insetting "Love," by
-                  0.6em pushes the long line out to be the rightmost thing in
-                  the block, which is what reaches the corner and escapes.
-
-                  How the ink itself looks is `.sig-crayon` in tailwind.css. */}
+                  How the ink looks is `.sig-crayon` in tailwind.css. */}
               {/* The crayon, twice. Same four stages both times: warp the
                   outline, punch grit holes through the fill at two
                   frequencies, press darker wax into what survives. The two
@@ -390,7 +369,7 @@ export default function AboutPage() {
                       in="gritCoarseAlpha"
                       result="gritCoarseMask"
                     >
-                      <feFuncA type="linear" slope={24} intercept={-17.28} />
+                      <feFuncA type="linear" slope={24} intercept={-18.24} />
                     </feComponentTransfer>
                     <feTurbulence
                       type="fractalNoise"
@@ -408,7 +387,7 @@ export default function AboutPage() {
                       in="gritFineAlpha"
                       result="gritFineMask"
                     >
-                      <feFuncA type="linear" slope={24} intercept={-19.2} />
+                      <feFuncA type="linear" slope={24} intercept={-20.16} />
                     </feComponentTransfer>
                     <feComposite
                       in="gritCoarseMask"
@@ -457,8 +436,8 @@ export default function AboutPage() {
                   </filter>
                 </defs>
               </svg>
-              <span className="sig-crayon pointer-events-none absolute right-[-6%] bottom-[19%] origin-bottom-right rotate-[-25deg] whitespace-nowrap text-right font-signature text-[5.125rem] leading-[0.95] sm:text-[6.15rem] lg:text-[5.125rem]">
-                <span className="sig-crayon-soft block pr-[0.5em]">Love,</span>
+              <span className="sig-crayon pointer-events-none absolute right-[10%] bottom-[-8%] origin-bottom-right rotate-[22deg] whitespace-nowrap text-right font-signature text-[4.375rem] leading-[0.95] sm:right-[-14%] sm:bottom-[-26%] sm:text-[8.85rem] lg:text-[7.375rem]">
+                <span className="sig-crayon-soft block pr-[0.6em]">Love,</span>
                 <span className="sig-crayon-hard block">Michele</span>
               </span>
             </div>
