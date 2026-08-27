@@ -5,7 +5,7 @@ import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
 import { Border } from '@/components/Border'
 import { PageIntro } from '@/components/PageIntro'
-import { JoinWaitListButton } from '@/components/wait-list/JoinWaitListButton'
+import { ContactTrigger } from '@/components/ContactTrigger'
 import { EmilyPortrait as MichelePortrait } from '@/components/EmilyAvatar'
 import { siteConfig } from '@/lib/site-config'
 import { pageMetadata } from '@/lib/schema'
@@ -40,7 +40,7 @@ export default function ContactPage() {
                 thirty seconds, and she follows up personally by email.
               </p>
               <div className="mt-8">
-                <JoinWaitListButton source="contact-page" />
+                <ContactTrigger>Contact</ContactTrigger>
               </div>
             </div>
           </FadeIn>

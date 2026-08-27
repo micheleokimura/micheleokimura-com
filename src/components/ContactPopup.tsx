@@ -102,7 +102,12 @@ function mailtoFallback(fields: {
  * asked for it gone: email is the only contact detail she replies on, and the
  * field was costing her submissions.
  *
- * Accessibility is handled by hand, matching `JoinWaitListModal`: role="dialog"
+ * This is now the ONLY contact form on the site. A second one used to live in
+ * `components/wait-list/` behind the dark end-of-page panels and the /contact
+ * page, asking for a church website domain and posting to /api/wait-list; it
+ * had been failing for every visitor. It is deleted, and those CTAs open this.
+ *
+ * Accessibility is handled by hand: role="dialog"
  * + aria-modal, focus moved in on open and restored to the trigger on close, a
  * Tab focus trap, Escape and backdrop click to close, real checkboxes inside a
  * fieldset, and a polite live region for errors.

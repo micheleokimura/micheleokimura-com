@@ -2,22 +2,29 @@ import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
 import { Border } from '@/components/Border'
 import { EmilyAvatar } from '@/components/EmilyAvatar'
-import { JoinWaitListButton } from '@/components/wait-list/JoinWaitListButton'
+import { ContactTrigger } from '@/components/ContactTrigger'
 import { siteConfig } from '@/lib/site-config'
 
 type Props = {
   heading: string
   children: React.ReactNode
-  /** Tags the CTA so this page's bottom signups are attributed to it. */
-  source?: string
   /**
-   * Replaces the default wait-list button. Pages that should open the sitewide
-   * contact popup instead pass a `<ContactTrigger>` here.
+   * Replaces the default CTA. Pages that want an interest pre-ticked pass their
+   * own `<ContactTrigger interest="...">` here.
    */
   cta?: React.ReactNode
 }
 
-export function ContactBlock({ heading, children, source = 'contact-block', cta }: Props) {
+/**
+ * The dark panel that closes most pages, with one CTA in it.
+ *
+ * The CTA used to be a `JoinWaitListButton`, which opened a second, older
+ * contact form asking for a church website domain. That form posted to
+ * /api/wait-list and had been failing for every visitor. It is gone: the
+ * default is now the same contact popup the header and every other page CTA
+ * opens, so the site has one contact form.
+ */
+export function ContactBlock({ heading, children, cta }: Props) {
   return (
     <Container className="mt-24 sm:mt-32 lg:mt-40">
       <FadeIn className="-mx-6 rounded-4xl bg-neutral-950 surface-teal px-6 py-20 sm:mx-0 sm:py-32 md:px-12">
@@ -29,7 +36,7 @@ export function ContactBlock({ heading, children, source = 'contact-block', cta 
               </h2>
               <div className="mt-6 text-xl text-neutral-300">{children}</div>
               <div className="mt-10">
-                {cta ?? <JoinWaitListButton source={source} tone="dark" />}
+                {cta ?? <ContactTrigger tone="dark">Contact</ContactTrigger>}
               </div>
             </div>
 

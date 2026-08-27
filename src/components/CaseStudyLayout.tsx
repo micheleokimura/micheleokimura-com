@@ -29,7 +29,6 @@ export function CaseStudyLayout({
   children,
   contactHeading = 'Bring this to your people.',
   contactBody,
-  contactSource,
   workSlug,
 }: {
   eyebrow: string
@@ -51,7 +50,6 @@ export function CaseStudyLayout({
   children: React.ReactNode
   contactHeading?: string
   contactBody?: React.ReactNode
-  contactSource?: string
   /**
    * Slug of the matching entry in `authoredWorks`. Emits the Book or
    * CreativeWorkSeries node for the title this case study is about, under the
@@ -94,7 +92,7 @@ export function CaseStudyLayout({
         </FadeIn>
       </Container>
 
-      <ContactBlock heading={contactHeading} source={contactSource}>
+      <ContactBlock heading={contactHeading}>
         {contactBody ?? (
           <p>
             Tell Michele about your school, church, or organization and what you

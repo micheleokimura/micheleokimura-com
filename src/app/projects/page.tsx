@@ -165,7 +165,6 @@ export default function ProjectsPage() {
 
       <ContactBlock
         heading="Want something like this built with your people?"
-        source="projects-index"
       >
         <p>
           Michele coaches writers through the Brave Purpose Author Method and

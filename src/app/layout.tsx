@@ -7,7 +7,6 @@ import { SiteHeader } from '@/components/SiteHeader'
 import { SiteFooter } from '@/components/SiteFooter'
 import { SiteGraphJsonLd } from '@/components/JsonLd'
 import { SmoothScroll } from '@/components/SmoothScroll'
-import { WaitListProvider } from '@/components/wait-list/WaitListProvider'
 import { siteConfig, imageOrigin } from '@/lib/site-config'
 
 const monaSans = localFont({
@@ -100,26 +99,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <SiteGraphJsonLd />
-        <WaitListProvider>
-          <SmoothScroll>
-            <SiteHeader />
-            {/* The header is absolutely positioned, so this pad is what keeps
-                page content out from under it. It tracks the header's height:
-                py-3 + a ~42px row lands the bar at roughly 66px, py-4 at 74px.
-                Cut from pt-28/sm:pt-32 on 2026-08-23 when the header padding
-                came down. Re-measure both together.
+        <SmoothScroll>
+          <SiteHeader />
+          {/* The header is absolutely positioned, so this pad is what keeps
+              page content out from under it. It tracks the header's height:
+              py-3 + a ~42px row lands the bar at roughly 66px, py-4 at 74px.
+              Cut from pt-28/sm:pt-32 on 2026-08-23 when the header padding
+              came down. Re-measure both together.
 
-                The literal pt-20 / sm:pt-24 moved into --header-offset in
-                tailwind.css on 2026-08-26, unchanged apart from the notch inset
-                added to it. It is a variable now because the home hero has to
-                pull itself back up by exactly this amount to reach the top of
-                the screen, and the two numbers cannot be allowed to drift. */}
-            <main id="main" className="flex-auto pt-[var(--header-offset)]">
-              {children}
-            </main>
-            <SiteFooter />
-          </SmoothScroll>
-        </WaitListProvider>
+              The literal pt-20 / sm:pt-24 moved into --header-offset in
+              tailwind.css on 2026-08-26, unchanged apart from the notch inset
+              added to it. It is a variable now because the home hero has to
+              pull itself back up by exactly this amount to reach the top of
+              the screen, and the two numbers cannot be allowed to drift. */}
+          <main id="main" className="flex-auto pt-[var(--header-offset)]">
+            {children}
+          </main>
+          <SiteFooter />
+        </SmoothScroll>
       </body>
     </html>
   )
