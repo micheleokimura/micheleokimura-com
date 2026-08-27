@@ -129,8 +129,21 @@ export default function AboutPage() {
               to be [minmax(0,20rem)_1fr], which put the photo in the 1fr track
               and rendered it 832px wide at 1440, more than twice the hero
               above it. Michele flagged that on 2026-08-26: "way too big".
-              Both portraits are now the same 320x400. */}
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_minmax(0,20rem)] lg:items-center lg:gap-16">
+              Both portraits are now the same 320x400.
+
+              The first track is 42rem rather than 1fr, and that is the whole
+              of the second fix from the same day: "too much gap" between the
+              copy and the photo. A 1fr track measured 832px at 1440 while the
+              paragraph inside it is capped at max-w-2xl, so 160px of the
+              track sat empty to the right of the text and the 4rem gap piled
+              on top of it, putting 224px between the last word and the photo.
+              Pinning the track to 42rem (max-w-2xl exactly) leaves no slack
+              inside it, so the gap utility is now the only thing separating
+              them: 48px. The photo no longer reaches the container's right
+              edge, which is the price of moving it left. If it is ever put
+              back on that edge, put the 1fr back too and widen the paragraph
+              instead, because the slack always reappears otherwise. */}
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,42rem)_minmax(0,20rem)] lg:items-center lg:gap-12">
             <div className="relative order-first aspect-[4/5] w-full max-w-xs overflow-hidden rounded-3xl bg-neutral-100 sm:max-w-sm lg:order-last lg:max-w-none">
               <Image
                 src="/images/michele/about-meet-michele.jpg"
@@ -139,6 +152,27 @@ export default function AboutPage() {
                 sizes="(min-width: 1024px) 20rem, 60vw"
                 className="object-cover"
               />
+              {/* Her signature, set rather than scanned. See the @font-face
+                  note in tailwind.css for why Caveat and why it is not her
+                  own hand: there is no signature file on the old WordPress
+                  site or in the Internet Archive's one capture of it.
+
+                  Live text, not an image, so it stays sharp at any DPR and
+                  scales with the photo. The photo is 320px wide at base,
+                  384px at sm, and back to 320px at lg, which is why the size
+                  steps up and then back down: the ratio to the frame is what
+                  is being held constant, roughly 0.11.
+
+                  The white halo in the text-shadow is load-bearing. The
+                  bottom-right corner of this photo is her pale floral dress,
+                  and red on that print is close to invisible without it. */}
+              <span
+                className="pointer-events-none absolute right-[6%] bottom-[6%] origin-bottom-right rotate-[-7deg] text-right font-signature text-[2.25rem] leading-[1.05] font-bold text-[#B02A22] [text-shadow:0_0_6px_rgba(255,255,255,0.85),0_1px_2px_rgba(0,0,0,0.25)] sm:text-[2.625rem] lg:text-[2.25rem]"
+              >
+                Love,
+                <br />
+                Michele
+              </span>
             </div>
 
             <div className="max-w-2xl space-y-4">
