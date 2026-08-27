@@ -467,7 +467,7 @@ export default function SpeakerPage() {
             not simply restate the heading underneath it. */}
         <SectionIntro
           eyebrow="Stages"
-          title="Here are some past events Michele has spoken at."
+          title="Where Michele has spoken."
           smaller
         />
 
