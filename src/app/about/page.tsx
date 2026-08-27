@@ -91,8 +91,16 @@ export default function AboutPage() {
                 the same strength within themselves.
               </p>
               <p>
-                I am the founder and executive director of Releasing Generations, and I
-                write, speak, and teach across Hawai&lsquo;i and beyond. For more than
+                I am the founder and executive director of{' '}
+                <a
+                  href="https://releasinggenerations.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-neutral-950 underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition hover:decoration-2"
+                >
+                  Releasing Generations
+                </a>
+                , and I write, speak, and teach across Hawai&lsquo;i and beyond. For more than
                 twenty years I served as a pastor, and before that I spent seventeen
                 years as an elementary school teacher. Across all of it the work is the
                 same: helping people find the courage to live out the purpose they were
