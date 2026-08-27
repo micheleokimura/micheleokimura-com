@@ -171,7 +171,7 @@ const FAQS: { question: string; answer: string }[] = [
   {
     question: 'What kind of books do you work on?',
     answer:
-      'Nonfiction, memoir, spiritual formation, poetry, and curriculum. Michele has written across that range herself, so the method shapes itself around the book you are actually writing.',
+      'Nonfiction, memoir, spiritual formation, poetry, and curriculum. Michele has written across that range herself and works well with authors writing creative nonfiction rooted in their lived story.',
   },
   {
     question: 'Do I need to have written anything yet?',
