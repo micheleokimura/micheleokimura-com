@@ -161,13 +161,25 @@ export default function AboutPage() {
                   scales with the photo. The photo is 320px wide at base,
                   384px at sm, and back to 320px at lg, which is why the size
                   steps up and then back down: the ratio to the frame is what
-                  is being held constant, roughly 0.11.
+                  is being held constant, 0.15.
+
+                  The angle is -25deg, from a sketch Michele sent on
+                  2026-08-26 after seeing the first pass at -7deg. Negative is
+                  the direction she drew: counter-clockwise, so "Love," sits
+                  low on the left and "Michele" climbs to the right, reading
+                  up toward the corner. It is meant to be an obvious slant.
+
+                  Rotating about the bottom-right corner swings the block's
+                  lower-left down toward the frame edge, and `overflow-hidden`
+                  on the parent would cut it. The 9% bottom inset is the
+                  clearance for that, measured at this angle and this size. It
+                  has to be rechecked if either one moves.
 
                   The white halo in the text-shadow is load-bearing. The
                   bottom-right corner of this photo is her pale floral dress,
                   and red on that print is close to invisible without it. */}
               <span
-                className="pointer-events-none absolute right-[6%] bottom-[6%] origin-bottom-right rotate-[-7deg] text-right font-signature text-[2.25rem] leading-[1.05] font-bold text-[#B02A22] [text-shadow:0_0_6px_rgba(255,255,255,0.85),0_1px_2px_rgba(0,0,0,0.25)] sm:text-[2.625rem] lg:text-[2.25rem]"
+                className="pointer-events-none absolute right-[6%] bottom-[9%] origin-bottom-right rotate-[-25deg] text-right font-signature text-[3rem] leading-[1.05] font-bold text-[#B02A22] [text-shadow:0_0_6px_rgba(255,255,255,0.85),0_1px_2px_rgba(0,0,0,0.25)] sm:text-[3.6rem] lg:text-[3rem]"
               >
                 Love,
                 <br />
