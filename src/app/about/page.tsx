@@ -159,15 +159,17 @@ export default function AboutPage() {
                 className="object-cover"
               />
               {/* Her signature, set rather than scanned. See the @font-face
-                  note in tailwind.css for why Caveat and why it is not her
-                  own hand: there is no signature file on the old WordPress
-                  site or in the Internet Archive's one capture of it.
+                  note in tailwind.css for why Kalam and why it is not her own
+                  hand: there is no signature file on the old WordPress site
+                  or in the Internet Archive's one capture of it.
 
                   Live text, not an image, so it stays sharp at any DPR and
                   scales with the photo. The photo is 320px wide at base,
                   384px at sm, and back to 320px at lg, which is why the size
                   steps up and then back down: the ratio to the frame is what
-                  is being held constant, 0.15.
+                  is being held constant, 0.144. That puts the block at about
+                  56% of the frame's width, which is the scale Michele asked
+                  for when she said it should not look tucked in.
 
                   The angle is -25deg, from a sketch Michele sent on
                   2026-08-26 after seeing the first pass at -7deg. Negative is
@@ -177,17 +179,51 @@ export default function AboutPage() {
 
                   Rotating about the bottom-right corner swings the block's
                   lower-left down toward the frame edge, and `overflow-hidden`
-                  on the parent cuts whatever crosses it. At 9% the bottom of
-                  the M in "Michele" sat on that line. 13% is what clears it,
-                  checked at this angle and this size by rendering the frame
-                  with overflow visible and an outline on it. Recheck the same
-                  way if the angle or the size moves.
+                  on the parent cuts whatever crosses it. The bottom inset is
+                  the clearance for that, and it is not a free number: it went
+                  6% to 13% when the angle went to -25deg, and 13% to 15% when
+                  the crayon pass moved to Kalam, which sets wider than Caveat
+                  and so swings the block's lower-left further down. Check it
+                  by rendering the frame with `overflow: visible` and an
+                  outline on it, which is the only way to see what is actually
+                  being cut: the element box hangs below the frame at this
+                  angle whether or not any ink is down there.
 
-                  The white halo in the text-shadow is load-bearing. The
-                  bottom-right corner of this photo is her pale floral dress,
-                  and red on that print is close to invisible without it. */}
+                  Everything about how the ink itself looks (the colour, the
+                  stroke that thickens it, the filter that roughens the edges,
+                  the halo that keeps it readable) is in `.sig-crayon` in
+                  tailwind.css, with the reasoning. */}
+              {/* The turbulence the crayon edge is displaced by. It sits here
+                  rather than in a shared defs file because this signature is
+                  the only thing on the site that references it. */}
+              <svg aria-hidden="true" focusable="false" className="absolute h-0 w-0">
+                <defs>
+                  <filter
+                    id="crayon-signature"
+                    x="-25%"
+                    y="-25%"
+                    width="150%"
+                    height="150%"
+                  >
+                    <feTurbulence
+                      type="fractalNoise"
+                      baseFrequency="0.07"
+                      numOctaves={4}
+                      seed={3}
+                      result="noise"
+                    />
+                    <feDisplacementMap
+                      in="SourceGraphic"
+                      in2="noise"
+                      scale={3}
+                      xChannelSelector="R"
+                      yChannelSelector="G"
+                    />
+                  </filter>
+                </defs>
+              </svg>
               <span
-                className="pointer-events-none absolute right-[6%] bottom-[13%] origin-bottom-right rotate-[-25deg] text-right font-signature text-[3rem] leading-[1.05] font-bold text-[#B02A22] [text-shadow:0_0_6px_rgba(255,255,255,0.85),0_1px_2px_rgba(0,0,0,0.25)] sm:text-[3.6rem] lg:text-[3rem]"
+                className="sig-crayon pointer-events-none absolute right-[6%] bottom-[15%] origin-bottom-right rotate-[-25deg] text-right font-signature text-[2.875rem] leading-[1.05] font-bold sm:text-[3.45rem] lg:text-[2.875rem]"
               >
                 Love,
                 <br />

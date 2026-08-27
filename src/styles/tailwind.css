@@ -1,20 +1,27 @@
 @import 'tailwindcss';
 @import './base.css';
 
-/* Caveat, self-hosted. Michele had no signature file on the old WordPress
-   site and the Internet Archive holds only one capture of the home page, so
-   her "Love, Michele" mark on the About portrait is set rather than scanned.
-   Caveat over Homemade Apple because the portrait it sits on is a pale
-   floral dress: Homemade Apple's hairline strokes vanish against it at the
-   320px the photo actually renders, and Caveat's felt-pen weight holds.
-   Latin subset only, straight from Google's v23 build. Self-hosted to match
-   Mona Sans and to keep the page off fonts.gstatic.com. */
+/* Kalam Bold, self-hosted. Michele had no signature file on the old
+   WordPress site and the Internet Archive holds only one capture of the home
+   page, so her "Love, Michele" mark on the About portrait is set rather than
+   scanned.
+
+   Third font tried for it, and the two it beat are worth recording so nobody
+   retries them. Homemade Apple: hairline strokes, invisible against the pale
+   floral dress it sits on at the 320px the photo renders. Caveat: held up,
+   but felt-pen thin, and on 2026-08-26 Michele asked for a thick red crayon.
+   Permanent Marker is the obvious crayon candidate and is disqualified for a
+   different reason: it has no lowercase, so it sets as LOVE, MICHELE, which
+   reads as a shout rather than a signature.
+
+   Latin subset only, from Google's v18 build. Self-hosted to match Mona Sans
+   and to keep the page off fonts.gstatic.com. */
 @font-face {
-  font-family: 'Caveat';
+  font-family: 'Kalam';
   font-style: normal;
-  font-weight: 400 700;
+  font-weight: 700;
   font-display: swap;
-  src: url('/fonts/Caveat-Variable-latin.woff2') format('woff2');
+  src: url('/fonts/Kalam-700-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
     U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
     U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
@@ -59,7 +66,7 @@
 
   /* Handwriting. One job on this site: the "Love, Michele" signature on the
      About portrait. Do not reach for it for headings or pull quotes. */
-  --font-signature: Caveat, ui-rounded, cursive;
+  --font-signature: Kalam, ui-rounded, cursive;
 
   /* ---------------------------------------------------------------------
      MICHELE OKIMURA BRAND PALETTE
@@ -449,6 +456,37 @@ html {
     padding-inline: max(2rem, env(safe-area-inset-left, 0px))
       max(2rem, env(safe-area-inset-right, 0px));
   }
+}
+
+/* The crayon in "Love, Michele" on the About portrait, added 2026-08-26 when
+   Michele asked for a thick red crayon rather than a pen. Kalam Bold on its
+   own is a marker: the strokes are even and the edges are clean. Two
+   properties close the gap to wax.
+
+   The stroke fattens the letterforms past what the bold weight alone gives,
+   which is the "thick" half of the note. `paint-order` puts the stroke under
+   the fill so it widens each glyph outward instead of eating into it. A
+   browser without `paint-order` centers the stroke instead, which reads a
+   little thinner and nothing else, so there is no fallback to write.
+
+   The filter is the "waxy" half. feTurbulence drives feDisplacementMap, so
+   every edge wobbles a few pixels and no two letters break the same way.
+   Scale is 3, chosen against the actual photo: at 5 the letterforms start to
+   deform and it reads as a rendering fault, and under 2 it is invisible at
+   this size. The filter lives in the About page next to the signature, since
+   it is the only thing that uses it.
+
+   The white halo in the text-shadow is load-bearing and predates the crayon.
+   The corner this sits in is her pale floral dress, and red on that print is
+   close to unreadable without it. */
+.sig-crayon {
+  color: #b7291d;
+  -webkit-text-stroke: 1.2px #b7291d;
+  paint-order: stroke fill;
+  filter: url(#crayon-signature);
+  text-shadow:
+    0 0 6px rgba(255, 255, 255, 0.85),
+    0 1px 2px rgba(0, 0, 0, 0.25);
 }
 
 /* Depth on the big dark panels: a deeper navy at the top easing into the
