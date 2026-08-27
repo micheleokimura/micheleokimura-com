@@ -243,10 +243,13 @@ export default function CoachingPage() {
               </span>
             </h1>
 
-            {/* Michele's line. Approved verbatim. Do not edit it. */}
+            {/* Michele's line, reworded by her 2026-08-27 into third person to
+                match the rest of the page. Approved verbatim, including the
+                singular "conversation" here against the plural used in the
+                metadata and the TST card. Do not edit it. */}
             <p className="font-display mt-4 max-w-2xl text-lg leading-7 font-medium text-neutral-700 sm:text-xl sm:leading-8">
-              Let&rsquo;s talk. Then we&rsquo;ll turn your conversations into a
-              manuscript.
+              Talk with Michele. Together, you&rsquo;ll turn your conversation
+              into a manuscript.
             </p>
 
             <div className="mt-7 sm:mt-8">
