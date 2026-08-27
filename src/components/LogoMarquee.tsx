@@ -130,7 +130,7 @@ export function LogoMarquee() {
           <h2 className="text-center font-display text-3xl font-medium tracking-tight text-[var(--color-brand-teal)] sm:text-4xl">
             Organizations I&rsquo;ve worked with.
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-center text-base text-neutral-600">
+          <p className="mx-auto mt-4 max-w-xl text-center text-lg text-neutral-600">
             Hover to pause, click any logo to learn more.
           </p>
         </FadeIn>
