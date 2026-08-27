@@ -128,7 +128,12 @@ export default function AboutPage() {
 
       {/* Meet Michele: a closer, warmer photo before the timeline pulls back
           to tell the whole story chronologically. */}
-      <Container className="mt-16 sm:mt-20">
+      {/* lg:pb- is the signature's clearance in the side-by-side layout, where
+          the photo is the last thing in the container and the spill lands in
+          whatever follows. What follows is the teal line, whose py-28 gives
+          112px against a 109px spill: true, but 3px is not a margin. The
+          extra 2rem is. */}
+      <Container className="mt-16 sm:mt-20 lg:pb-8">
         <FadeIn>
           {/* The narrow 20rem track is on the RIGHT here, because the photo
               carries lg:order-last and so lands in the second column. It used
@@ -149,14 +154,14 @@ export default function AboutPage() {
               edge, which is the price of moving it left. If it is ever put
               back on that edge, put the 1fr back too and widen the paragraph
               instead, because the slack always reappears otherwise. */}
-          {/* The row gap is 5rem rather than the 2.5rem it used to be, and
-              only below lg. Stacked, the photo sits directly above the
-              eyebrow, and the signature now hangs about 53px past the bottom
-              of the frame, which landed on top of "MEET MICHELE" at the old
-              gap. Above lg the two are side by side, the row gap stops
-              applying, and the spill falls into the section's own bottom
-              margin, which is 4rem and clears it. */}
-          <div className="grid grid-cols-1 gap-x-10 gap-y-20 lg:grid-cols-[minmax(0,42rem)_minmax(0,20rem)] lg:items-center lg:gap-x-12">
+          {/* The row gap is 9rem, 11rem once the photo grows at sm, and it is
+              all clearance for the signature. Stacked, the photo sits
+              directly above the eyebrow, and the signature hangs about 109px
+              past the bottom of the frame at base and 131px at sm. Every time
+              Michele has asked for the signature to be bigger, this number
+              and the lg:pb- on the Container have had to move with it, so
+              re-measure both rather than assuming they still fit. */}
+          <div className="grid grid-cols-1 gap-x-10 gap-y-36 sm:gap-y-44 lg:grid-cols-[minmax(0,42rem)_minmax(0,20rem)] lg:items-center lg:gap-x-12">
             {/* Two boxes, because the signature has to escape the one the
                 photo is clipped by. This outer box owns the size and is the
                 positioning context; the inner one owns the rounded corners
@@ -183,36 +188,42 @@ export default function AboutPage() {
                   scales with the photo. The photo is 320px wide at base,
                   384px at sm, and back to 320px at lg, which is why the size
                   steps up and then back down: the ratio to the frame is what
-                  is held constant, 0.216. Every inset below is a percentage
-                  for the same reason.
+                  is held constant. Every inset below is a percentage for the
+                  same reason.
+
+                  Do not compare this font-size to the ones in git history.
+                  Meddon sets much larger per px than the faces before it, so
+                  62px here draws "Michele" 305px wide, against 236px for the
+                  Yellowtail version at 69px. The word is what got bigger.
 
                   The angle is -25deg, from a sketch Michele sent on
                   2026-08-26. Counter-clockwise, so "Love," sits low on the
                   left and "Michele" climbs to the right.
 
                   Two things make it run off the print rather than sit inside
-                  it, which is what she asked for on 2026-08-26.
+                  it. Michele asked for the spill on 2026-08-26 and then asked
+                  for MORE of it: "Love," on the photo, "Michele" mostly off.
 
                   The first is the negative right inset plus the small bottom
-                  one: the block is anchored past the frame's right edge and
-                  low enough that "Love," stays inside while "Michele" crosses
-                  the bottom and trails off the corner. 8% is measured, not
-                  guessed. It puts 53px of the signature below the frame; 2%
-                  put 77px there, which was more than the layout below has
-                  room for.
+                  one. Both are measured, not guessed: bottom 6% puts "Love,"
+                  wholly on the print and drops 109px of "Michele" below it,
+                  which is most of the word. The clearance for those 109px is
+                  the row gap on the grid and the lg:pb- on the Container, and
+                  those two numbers only work for THIS size.
 
                   The second is the padding on "Love,". Both lines are right
                   aligned, and at -25deg the second line falls down and to the
                   LEFT of the first, so flush right would tuck "Michele"
                   inside the corner instead of past it. Insetting "Love," by
-                  0.9em pushes the long line out to be the rightmost thing in
+                  0.6em pushes the long line out to be the rightmost thing in
                   the block, which is what reaches the corner and escapes.
 
                   How the ink itself looks is `.sig-crayon` in tailwind.css. */}
-              {/* The crayon, in four stages: warp the outline, punch grit
-                  holes through the fill, then press darker wax into patches
-                  of what survives. Reasoning is on `.sig-crayon`. It sits
-                  here rather than in a shared defs file because this
+              {/* The crayon: warp the outline, punch grit holes through the
+                  fill at two frequencies, then press darker wax into patches
+                  of what survives. The thresholds and frequencies all have
+                  reasons, and they are on `.sig-crayon` in tailwind.css. It
+                  sits here rather than in a shared defs file because this
                   signature is the only thing that references it. */}
               <svg
                 aria-hidden="true"
@@ -245,19 +256,46 @@ export default function AboutPage() {
                     />
                     <feTurbulence
                       type="fractalNoise"
-                      baseFrequency="0.7"
-                      numOctaves={4}
+                      baseFrequency="0.06"
+                      numOctaves={3}
                       seed={17}
-                      result="grit"
+                      result="gritCoarse"
                     />
                     <feColorMatrix
-                      in="grit"
+                      in="gritCoarse"
                       type="luminanceToAlpha"
-                      result="gritAlpha"
+                      result="gritCoarseAlpha"
                     />
-                    <feComponentTransfer in="gritAlpha" result="gritMask">
-                      <feFuncA type="linear" slope={2.5} intercept={-1.5} />
+                    <feComponentTransfer
+                      in="gritCoarseAlpha"
+                      result="gritCoarseMask"
+                    >
+                      <feFuncA type="linear" slope={24} intercept={-13.92} />
                     </feComponentTransfer>
+                    <feTurbulence
+                      type="fractalNoise"
+                      baseFrequency="0.30"
+                      numOctaves={2}
+                      seed={41}
+                      result="gritFine"
+                    />
+                    <feColorMatrix
+                      in="gritFine"
+                      type="luminanceToAlpha"
+                      result="gritFineAlpha"
+                    />
+                    <feComponentTransfer
+                      in="gritFineAlpha"
+                      result="gritFineMask"
+                    >
+                      <feFuncA type="linear" slope={24} intercept={-15.84} />
+                    </feComponentTransfer>
+                    <feComposite
+                      in="gritCoarseMask"
+                      in2="gritFineMask"
+                      operator="over"
+                      result="gritMask"
+                    />
                     <feComposite
                       in="rough"
                       in2="gritMask"
@@ -299,8 +337,8 @@ export default function AboutPage() {
                   </filter>
                 </defs>
               </svg>
-              <span className="sig-crayon pointer-events-none absolute right-[-4%] bottom-[8%] origin-bottom-right rotate-[-25deg] whitespace-nowrap text-right font-signature text-[4.3rem] leading-[0.9] sm:text-[5.15rem] lg:text-[4.3rem]">
-                <span className="block pr-[0.9em]">Love,</span>
+              <span className="sig-crayon pointer-events-none absolute right-[-5%] bottom-[6%] origin-bottom-right rotate-[-25deg] whitespace-nowrap text-right font-signature text-[3.875rem] leading-[0.95] sm:text-[4.65rem] lg:text-[3.875rem]">
+                <span className="block pr-[0.6em]">Love,</span>
                 <span className="block">Michele</span>
               </span>
             </div>
