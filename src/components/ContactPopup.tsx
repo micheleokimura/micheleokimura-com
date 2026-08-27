@@ -7,18 +7,16 @@ import { motion } from 'framer-motion'
 import { siteConfig } from '@/lib/site-config'
 
 /**
- * Google Apps Script Web App endpoint.
+ * Where the form posts. A route in this same app, so no CORS and no third
+ * party to keep alive. It emails Michele through Resend.
  *
- * Michele deploys the script in `content/setup/contact-popup-google-apps-script.js`
- * as a Web App and pastes the resulting `/exec` URL here (or sets
- * NEXT_PUBLIC_CONTACT_SCRIPT_URL in Vercel, which wins over this constant).
- * Full walkthrough: `content/setup/contact-popup-setup.md`.
+ * This used to be a Google Apps Script Web App URL read from
+ * NEXT_PUBLIC_CONTACT_SCRIPT_URL, with a placeholder fallback. When that env
+ * var went missing the form short-circuited to the error state before it ever
+ * made a request, which is how "Something went wrong" showed up on every
+ * submission.
  */
-const SCRIPT_URL_PLACEHOLDER = 'YOUR_APPS_SCRIPT_URL_HERE'
-const SCRIPT_URL =
-  process.env.NEXT_PUBLIC_CONTACT_SCRIPT_URL || SCRIPT_URL_PLACEHOLDER
-/** False until Michele pastes the deployed URL in. Drives the mailto fallback. */
-const CONFIGURED = Boolean(SCRIPT_URL) && SCRIPT_URL !== SCRIPT_URL_PLACEHOLDER
+const ENDPOINT = '/api/contact-message'
 
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/
 
@@ -69,10 +67,9 @@ function XIcon(props: React.SVGProps<SVGSVGElement>) {
  * Tab focus trap, Escape and backdrop click to close, real checkboxes inside a
  * fieldset, and a polite live region for errors.
  *
- * Submission posts JSON to a Google Apps Script Web App. The Content-Type is
- * text/plain on purpose: it is CORS-safelisted, so the browser skips the
- * preflight OPTIONS request that Apps Script cannot answer. The script reads
- * the raw body and parses it as JSON.
+ * Submission posts JSON to `/api/contact-message`, a route in this same app
+ * that emails Michele through Resend. Same origin, so there is no preflight to
+ * work around and nothing outside Vercel to keep running.
  */
 export function ContactPopup({
   open,
@@ -224,21 +221,11 @@ export function ContactPopup({
 
     setError(null)
 
-    // Nothing to post to until the Apps Script URL is pasted in. Show the
-    // fallback rather than firing a request that will never land.
-    if (!CONFIGURED) {
-      setStatus('error')
-      return
-    }
-
     setStatus('submitting')
     try {
-      const res = await fetch(SCRIPT_URL, {
+      const res = await fetch(ENDPOINT, {
         method: 'POST',
-        // text/plain is CORS-safelisted, so no preflight. The Apps Script
-        // parses the raw body as JSON.
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        redirect: 'follow',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           source: 'contact',
           interests,
@@ -248,14 +235,6 @@ export function ContactPopup({
           email: em,
           phone: ph,
           pageUrl: typeof window === 'undefined' ? '' : window.location.href,
-          // Legacy aliases. The Apps Script in content/setup/ reads the
-          // snake_case keys above, but whatever version Michele has deployed
-          // right now still reads these. Keeping both means the sheet keeps
-          // filling in even before she redeploys the script.
-          firstName: fn,
-          lastName: ln,
-          message: story.trim(),
-          category: interests.join(', '),
         }),
       })
       if (!res.ok) throw new Error('request failed')
