@@ -94,6 +94,12 @@ export default function AboutPage() {
                 made for.
               </p>
               <p>
+                Beyond the work, my heart is at home. I&rsquo;ve been happily married to
+                Rob for 42 years, and we&rsquo;re grateful to have raised two adult
+                children, Aaron and Jessica. Our son-in-law Kevin and our beautiful
+                grandbaby, Mia, complete our little world.
+              </p>
+              <p>
                 My firm belief is that every person&rsquo;s story, even the broken ones,
                 can become a launchpad into a future full of freedom, wonder, and
                 limitless possibilities.
