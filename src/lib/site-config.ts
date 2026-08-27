@@ -291,8 +291,9 @@ export const authoredWorks: AuthoredWork[] = [
  * /coaching and /speak routes on 2026-08-23, with permanent redirects from both
  * old paths in next.config.ts.
  *
- * Order is Coach, Author, Speaker: the coaching offer is the commercial ask, so
- * it leads.
+ * Order is Speaker, Author, Coach. The OG card in scripts/og-card.html and the
+ * sitewide meta title in layout.tsx follow the same order, so the nav, the
+ * social card and the link-preview title all read alike.
  *
  * Everything else lives in the footer. See `footerColumns` below.
  */

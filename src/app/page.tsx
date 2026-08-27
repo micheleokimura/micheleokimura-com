@@ -79,7 +79,7 @@ import {
  * approved copy rather than a working set.
  */
 export const metadata: Metadata = pageMetadata({
-  title: 'Coach, author, and speaker',
+  title: 'Speaker, Author, and Coach',
   description:
     'Michele Okimura is an author, speaker, and coach in Honolulu, Hawaiʻi. Two published trade books, two more in 2027, keynotes and workshops, and the Brave Purpose Author Method.',
   path: '/',
