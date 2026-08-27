@@ -49,6 +49,45 @@ function XIcon(props: React.SVGProps<SVGSVGElement>) {
 }
 
 /**
+ * A ready-to-send email holding everything the person just typed.
+ *
+ * The send can fail for reasons the reader cannot do anything about: the mail
+ * key missing from the deployment, Resend down, a phone that dropped off wifi
+ * mid-submit. Before this, that meant a bare "something went wrong" and a
+ * plain address, so the story someone had just written out was theirs to type
+ * again somewhere else. Most people simply leave. This hands their own words
+ * back to them in a message that is already addressed and already filled in.
+ */
+function mailtoFallback(fields: {
+  interests: ContactInterest[]
+  story: string
+  firstName: string
+  lastName: string
+  email: string
+  phone: string
+}): string {
+  const name = [fields.firstName.trim(), fields.lastName.trim()]
+    .filter(Boolean)
+    .join(' ')
+  const labels = fields.interests
+    .map((value) => INTERESTS.find((option) => option.value === value)?.label ?? value)
+    .join(', ')
+  const subject = name ? `Website inquiry from ${name}` : 'Website inquiry'
+  const body = [
+    `Name: ${name || '(not provided)'}`,
+    `Email: ${fields.email.trim() || '(not provided)'}`,
+    `Phone: ${fields.phone.trim() || '(not provided)'}`,
+    `Interested in: ${labels || '(not provided)'}`,
+    '',
+    'Message:',
+    fields.story.trim() || '(none provided)',
+  ].join('\n')
+  return `mailto:${siteConfig.email}?subject=${encodeURIComponent(
+    subject,
+  )}&body=${encodeURIComponent(body)}`
+}
+
+/**
  * Sitewide contact popup.
  *
  * One form for every inquiry on the site. The header's "Contact" button opens
@@ -490,14 +529,21 @@ export function ContactPopup({
                 ) : null}
                 {status === 'error' ? (
                   <p className="mt-2 text-sm text-neutral-700">
-                    Something went wrong. Please email{' '}
+                    That did not send. Nothing you typed is lost:{' '}
                     <a
-                      href={`mailto:${siteConfig.email}`}
+                      href={mailtoFallback({
+                        interests,
+                        story,
+                        firstName,
+                        lastName,
+                        email,
+                        phone,
+                      })}
                       className="font-medium text-neutral-950 underline underline-offset-4"
                     >
-                      {siteConfig.email}
+                      open it in your email app
                     </a>{' '}
-                    directly.
+                    and it will arrive as a message to {siteConfig.email}.
                   </p>
                 ) : null}
               </div>
