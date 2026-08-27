@@ -128,12 +128,12 @@ export default function AboutPage() {
 
       {/* Meet Michele: a closer, warmer photo before the timeline pulls back
           to tell the whole story chronologically. */}
-      {/* lg:pb- is the signature's clearance side by side, where the photo is
-          the last thing in the container and the spill lands in whatever
-          follows. That is the teal line and its py-28, 112px against a 96px
-          spill. It clears without help now that the signature has moved up,
-          but only just, so the pad stays as the margin. */}
-      <Container className="mt-16 sm:mt-20 lg:pb-8">
+      {/* No bottom pad here. Side by side the photo is the last thing in the
+          container and the signature's spill lands in whatever follows, which
+          is the teal line and its py-28. That is 112px against a 56px spill
+          now that the signature sits high on the corner, so it clears on its
+          own. Put the pad back if the signature ever moves down again. */}
+      <Container className="mt-16 sm:mt-20">
         <FadeIn>
           {/* The narrow 20rem track is on the RIGHT here, because the photo
               carries lg:order-last and so lands in the second column. It used
@@ -160,7 +160,7 @@ export default function AboutPage() {
               crosses the corner and hangs 125px, and the photo still sits
               directly above the eyebrow, so that needs 10rem. Re-measure both
               whenever the signature moves. */}
-          <div className="grid grid-cols-1 gap-x-10 gap-y-36 sm:gap-y-44 lg:grid-cols-[minmax(0,42rem)_minmax(0,20rem)] lg:items-center lg:gap-x-12">
+          <div className="grid grid-cols-1 gap-x-10 gap-y-24 sm:gap-y-28 lg:grid-cols-[minmax(0,42rem)_minmax(0,20rem)] lg:items-center lg:gap-x-12">
             {/* Two boxes, because the signature has to escape the one the
                 photo is clipped by. This outer box owns the size and is the
                 positioning context; the inner one owns the rounded corners
@@ -217,13 +217,14 @@ export default function AboutPage() {
                   The right inset is capped by the narrowest phone rather than
                   by taste, and that is the one place the two breakpoints
                   differ. Michele asked on 2026-08-26 to nudge the whole block
-                  up and right so it sits centred on the corner. Up is free.
-                  Right is not: the full nudge is -12%, which puts the tail
-                  38px past the frame and 7px past the edge of a 375px screen,
-                  so phones take -8% and about a third of the sideways move.
-                  Everything from sm up, where the photo has room beside it,
-                  takes the whole nudge. Do not unify these without redoing
-                  that arithmetic.
+                  up and right so it sits centred on the corner, then asked
+                  for roughly double that. Up is free, and phones take all of
+                  it. Right is not: the full nudge is -24%, which puts the
+                  tail 77px past the frame, and a 375px screen has about 31px
+                  of room beside the photo. Phones are pinned at -8%, which is
+                  already their ceiling; everything from sm up, where the
+                  photo has room beside it, takes the whole move. Do not
+                  unify these without redoing that arithmetic.
 
                   How the ink looks is `.sig-crayon` in tailwind.css. */}
               {/* The crayon, twice. Same four stages both times: warp the
@@ -450,7 +451,7 @@ export default function AboutPage() {
                   </filter>
                 </defs>
               </svg>
-              <span className="sig-crayon pointer-events-none absolute right-[-8%] bottom-[7%] origin-bottom-right rotate-[-35deg] sm:right-[-12%] whitespace-nowrap text-right font-signature text-[5.75rem] leading-[0.95] sm:text-[6.9rem] lg:text-[5.75rem]">
+              <span className="sig-crayon pointer-events-none absolute right-[-8%] bottom-[17%] origin-bottom-right rotate-[-35deg] sm:right-[-24%] whitespace-nowrap text-right font-signature text-[5.75rem] leading-[0.95] sm:text-[6.9rem] lg:text-[5.75rem]">
                 <span className="sig-crayon-soft block pr-[0.6em]">Love,</span>
                 <span className="sig-crayon-hard block">Michele</span>
               </span>
