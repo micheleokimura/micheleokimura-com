@@ -128,12 +128,12 @@ export default function AboutPage() {
 
       {/* Meet Michele: a closer, warmer photo before the timeline pulls back
           to tell the whole story chronologically. */}
-      {/* lg:pb- is the signature's clearance in the side-by-side layout, where
-          the photo is the last thing in the container and the spill lands in
-          whatever follows. What follows is the teal line, whose py-28 gives
-          112px against a 109px spill: true, but 3px is not a margin. The
-          extra 2rem is. */}
-      <Container className="mt-16 sm:mt-20 lg:pb-8">
+      {/* No bottom padding here any more. Side by side, the photo is the last
+          thing in the container and the signature's spill lands in whatever
+          follows, which is the teal line and its py-28. That was 112px against
+          a 109px spill and needed help; the spill is 45px now and clears on
+          its own. Re-check this if the signature grows again. */}
+      <Container className="mt-16 sm:mt-20">
         <FadeIn>
           {/* The narrow 20rem track is on the RIGHT here, because the photo
               carries lg:order-last and so lands in the second column. It used
@@ -154,14 +154,13 @@ export default function AboutPage() {
               edge, which is the price of moving it left. If it is ever put
               back on that edge, put the 1fr back too and widen the paragraph
               instead, because the slack always reappears otherwise. */}
-          {/* The row gap is 9rem, 11rem once the photo grows at sm, and it is
-              all clearance for the signature. Stacked, the photo sits
-              directly above the eyebrow, and the signature hangs about 109px
-              past the bottom of the frame at base and 131px at sm. Every time
-              Michele has asked for the signature to be bigger, this number
-              and the lg:pb- on the Container have had to move with it, so
-              re-measure both rather than assuming they still fit. */}
-          <div className="grid grid-cols-1 gap-x-10 gap-y-36 sm:gap-y-44 lg:grid-cols-[minmax(0,42rem)_minmax(0,20rem)] lg:items-center lg:gap-x-12">
+          {/* The row gap is 5rem, and it is clearance for the signature. Stacked,
+              the photo sits directly above the eyebrow, and the signature
+              hangs about 45px past the bottom of the frame at base and 54px
+              at sm. Every time the signature has been resized or moved this
+              number has had to move with it, so re-measure rather than
+              assuming it still fits. */}
+          <div className="grid grid-cols-1 gap-x-10 gap-y-20 lg:grid-cols-[minmax(0,42rem)_minmax(0,20rem)] lg:items-center lg:gap-x-12">
             {/* Two boxes, because the signature has to escape the one the
                 photo is clipped by. This outer box owns the size and is the
                 positioning context; the inner one owns the rounded corners
@@ -192,9 +191,10 @@ export default function AboutPage() {
                   same reason.
 
                   Do not compare this font-size to the ones in git history.
-                  Meddon sets much larger per px than the faces before it, so
-                  62px here draws "Michele" 305px wide, against 236px for the
-                  Yellowtail version at 69px. The word is what got bigger.
+                  Every face has drawn "Michele" at a different width for the
+                  same px, so the number has swung between 46 and 82 while the
+                  word itself only ever grew. Pacifico draws it 285px at 82px.
+                  Measure the word, not the font-size.
 
                   The angle is -25deg, from a sketch Michele sent on
                   2026-08-26. Counter-clockwise, so "Love," sits low on the
@@ -204,12 +204,26 @@ export default function AboutPage() {
                   it. Michele asked for the spill on 2026-08-26 and then asked
                   for MORE of it: "Love," on the photo, "Michele" mostly off.
 
-                  The first is the negative right inset plus the small bottom
-                  one. Both are measured, not guessed: bottom 6% puts "Love,"
-                  wholly on the print and drops 109px of "Michele" below it,
-                  which is most of the word. The clearance for those 109px is
-                  the row gap on the grid and the lg:pb- on the Container, and
-                  those two numbers only work for THIS size.
+                  The first is the negative right inset plus the bottom one.
+                  Both are measured: bottom 19% keeps "Love," and most of
+                  "Michele" on the print and lets the tail cross the
+                  bottom-right corner, leaving 45px below the frame. The row
+                  gap on the grid is the clearance for those 45px.
+
+                  The right inset is capped by the narrowest phone, not by
+                  taste. -6% puts the tail 19px past the frame, which lands
+                  inside the 24px page gutter on a 320px screen. -9% looked
+                  better and put it 1px past the viewport, which is a
+                  horizontal scrollbar. Do not open it up without redoing that
+                  arithmetic.
+
+                  Michele asked for the "ch" to sit ON the corner with the
+                  rest of the word above it. That is not reachable at -25deg:
+                  the line rises to the right, so whatever sits at the corner
+                  has everything before it hanging below. This is as close as
+                  the angle allows. Flipping the rotation positive would give
+                  her the exact composition, at the cost of the upward slant
+                  she asked for in the sketch.
 
                   The second is the padding on "Love,". Both lines are right
                   aligned, and at -25deg the second line falls down and to the
@@ -219,12 +233,14 @@ export default function AboutPage() {
                   the block, which is what reaches the corner and escapes.
 
                   How the ink itself looks is `.sig-crayon` in tailwind.css. */}
-              {/* The crayon: warp the outline, punch grit holes through the
-                  fill at two frequencies, then press darker wax into patches
-                  of what survives. The thresholds and frequencies all have
-                  reasons, and they are on `.sig-crayon` in tailwind.css. It
-                  sits here rather than in a shared defs file because this
-                  signature is the only thing that references it. */}
+              {/* The crayon, twice. Same four stages both times: warp the
+                  outline, punch grit holes through the fill at two
+                  frequencies, press darker wax into what survives. The two
+                  differ only in the grit thresholds. "Michele" takes the
+                  aggressive one; "Love," is short and sits over the busiest
+                  part of the photo, and at those settings it eroded past
+                  reading, so it takes -soft. Every number has a reason and
+                  they are on `.sig-crayon` in tailwind.css. */}
               <svg
                 aria-hidden="true"
                 focusable="false"
@@ -335,11 +351,115 @@ export default function AboutPage() {
                       <feMergeNode in="pressedOnWax" />
                     </feMerge>
                   </filter>
+                  <filter
+                    id="crayon-signature-soft"
+                    x="-45%"
+                    y="-45%"
+                    width="190%"
+                    height="190%"
+                    colorInterpolationFilters="sRGB"
+                  >
+                    <feTurbulence
+                      type="fractalNoise"
+                      baseFrequency="0.045"
+                      numOctaves={4}
+                      seed={3}
+                      result="warp"
+                    />
+                    <feDisplacementMap
+                      in="SourceGraphic"
+                      in2="warp"
+                      scale={4}
+                      xChannelSelector="R"
+                      yChannelSelector="G"
+                      result="rough"
+                    />
+                    <feTurbulence
+                      type="fractalNoise"
+                      baseFrequency="0.06"
+                      numOctaves={3}
+                      seed={17}
+                      result="gritCoarse"
+                    />
+                    <feColorMatrix
+                      in="gritCoarse"
+                      type="luminanceToAlpha"
+                      result="gritCoarseAlpha"
+                    />
+                    <feComponentTransfer
+                      in="gritCoarseAlpha"
+                      result="gritCoarseMask"
+                    >
+                      <feFuncA type="linear" slope={24} intercept={-16.8} />
+                    </feComponentTransfer>
+                    <feTurbulence
+                      type="fractalNoise"
+                      baseFrequency="0.30"
+                      numOctaves={2}
+                      seed={41}
+                      result="gritFine"
+                    />
+                    <feColorMatrix
+                      in="gritFine"
+                      type="luminanceToAlpha"
+                      result="gritFineAlpha"
+                    />
+                    <feComponentTransfer
+                      in="gritFineAlpha"
+                      result="gritFineMask"
+                    >
+                      <feFuncA type="linear" slope={24} intercept={-18.72} />
+                    </feComponentTransfer>
+                    <feComposite
+                      in="gritCoarseMask"
+                      in2="gritFineMask"
+                      operator="over"
+                      result="gritMask"
+                    />
+                    <feComposite
+                      in="rough"
+                      in2="gritMask"
+                      operator="out"
+                      result="waxy"
+                    />
+                    <feFlood floodColor="#8B1E14" result="pressed" />
+                    <feTurbulence
+                      type="fractalNoise"
+                      baseFrequency="0.09"
+                      numOctaves={3}
+                      seed={29}
+                      result="patch"
+                    />
+                    <feColorMatrix
+                      in="patch"
+                      type="luminanceToAlpha"
+                      result="patchAlpha"
+                    />
+                    <feComponentTransfer in="patchAlpha" result="patchMask">
+                      <feFuncA type="linear" slope={1.8} intercept={-0.75} />
+                    </feComponentTransfer>
+                    <feComposite
+                      in="pressed"
+                      in2="patchMask"
+                      operator="in"
+                      result="patches"
+                    />
+                    <feComposite
+                      in="patches"
+                      in2="waxy"
+                      operator="in"
+                      result="pressedOnWax"
+                    />
+                    <feMerge>
+                      <feMergeNode in="waxy" />
+                      <feMergeNode in="pressedOnWax" />
+                    </feMerge>
+                  </filter>
                 </defs>
               </svg>
-              <span className="sig-crayon pointer-events-none absolute right-[-5%] bottom-[6%] origin-bottom-right rotate-[-25deg] whitespace-nowrap text-right font-signature text-[3.875rem] leading-[0.95] sm:text-[4.65rem] lg:text-[3.875rem]">
-                <span className="block pr-[0.6em]">Love,</span>
-                <span className="block">Michele</span>
+              <span className="sig-crayon pointer-events-none absolute right-[-6%] bottom-[19%] origin-bottom-right rotate-[-25deg] whitespace-nowrap text-right font-signature text-[5.125rem] leading-[0.95] sm:text-[6.15rem] lg:text-[5.125rem]">
+                <span className="sig-crayon-soft block pr-[0.5em]">Love,</span>
+                <span className="sig-crayon-hard block">Michele</span>
               </span>
             </div>
 
