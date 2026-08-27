@@ -21,7 +21,7 @@ Nancy Vuu is a couture designer and the Visionary Director of The House of Nancy
 
 **Ongoing Collaborations:** They frequently partner on Nancy's Crowning Initiative, perfectly blending Nancy's crowning work with Michele's message about identity and worth.
 
-**Shared Platforms:** They co-lead dream retreats and have spoken together on "Dreaming Big For Your Life" at various events, including an East Coast church dream summit and as co-keynotes at the 2024 Hawaiʻi Catholic Schools educators' gathering.
+**Shared Platforms:** They have partnered together on "Dreaming Big For Your Life" at various events, including an East Coast church dream summit and as co-keynotes at the 2024 Hawaiʻi Catholic Schools educators' gathering.
 
 **Major Milestones:** Nancy brought Michele in as a keynote speaker and vendor for the inaugural Dream Expo for the State of Hawaiʻi. Likewise, Michele partnered in the national-press grand opening of Nancy's California atelier to highlight their joint philanthropic initiative against human trafficking.
 
