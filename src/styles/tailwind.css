@@ -1,37 +1,28 @@
 @import 'tailwindcss';
 @import './base.css';
 
-/* Alex Brush, self-hosted. Michele had no signature file on the old
+/* Mrs Saint Delafield, self-hosted. Michele had no signature file on the old
    WordPress site and the Internet Archive never crawled anything of hers but
    the home page HTML. Settled; do not search again.
 
-   Eighth font. The list of what it beat, so nobody walks the road again:
-   Homemade Apple and Caveat (too thin for the era when there was no stroke),
-   Kalam Bold (printed, not written), Yellowtail (monoline, read as slender),
-   Meddon (flourished but calligraphic, read as pointy), Pacifico (liquid but
-   a logo script, read as clunky), Mrs Saint Delafield (loose, but still
-   heavier than she wants).
+   This is the face she chose, in her words "perfect", so treat it as fixed
+   and change the numbers around it instead. Recorded here because the search
+   took eight fonts and it would be easy to restart it by accident: Homemade
+   Apple and Caveat (too thin), Kalam Bold (printed, not written), Yellowtail
+   (monoline, read as slender), Meddon (calligraphic, read as pointy),
+   Pacifico (liquid but a logo script, read as clunky), Alex Brush (thinner
+   still, and shipped for one deploy before she asked to come back here).
 
-   The thing that kept this search going is that two of Michele's asks pull
-   against each other. She wants dramatic, loose, thin letterforms, and she
-   wants the fill eaten by crayon grit. Thin strokes plus aggressive grit
-   equals confetti. Earlier passes answered that by thickening the stroke,
-   which is exactly what she then objected to. This pass answers it the other
-   way: no stroke at all, and the grit backed off to suit. Alex Brush is the
-   thinnest face that still holds its shape under grit at these settings.
-   Allura is thinner and prettier and its hairlines drop out; if it is ever
-   tried again, the grit has to come down with it, not the stroke go up.
+   Sizes never port between faces. This one draws "Michele" 210px at 92px.
 
-   Sizes never port between faces. This one draws "Michele" 300px at 108px.
-
-   Latin subset only, from Google's v23 build. Self-hosted to match Mona Sans
+   Latin subset only, from Google's v14 build. Self-hosted to match Mona Sans
    and to keep the page off fonts.gstatic.com. */
 @font-face {
-  font-family: 'Alex Brush';
+  font-family: 'Mrs Saint Delafield';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('/fonts/AlexBrush-Regular-latin.woff2') format('woff2');
+  src: url('/fonts/MrsSaintDelafield-Regular-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
     U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
     U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
@@ -76,7 +67,7 @@
 
   /* Handwriting. One job on this site: the "Love, Michele" signature on the
      About portrait. Do not reach for it for headings or pull quotes. */
-  --font-signature: 'Alex Brush', ui-rounded, cursive;
+  --font-signature: 'Mrs Saint Delafield', ui-rounded, cursive;
 
   /* ---------------------------------------------------------------------
      MICHELE OKIMURA BRAND PALETTE
@@ -468,24 +459,28 @@ html {
   }
 }
 
-/* The crayon in "Love, Michele" on the About portrait. The colour lives on
-   the block; the wax is an SVG filter, and there are TWO of them, applied
-   per line. Both are defined next to the signature in the About page,
-   because nothing else references them.
+/* The crayon in "Love, Michele" on the About portrait. The colour and the
+   stroke live on the block; the wax is an SVG filter, and there are TWO of
+   them, applied per line. Both are defined next to the signature in the
+   About page, because nothing else references them.
 
-   THERE IS NO STROKE ANY MORE, and that is deliberate. Every earlier pass
-   widened the letterforms with `-webkit-text-stroke` so they could survive
-   the grit, and on 2026-08-26 Michele named the result: clunky, and she
-   asked for half the weight. So the balance is struck from the other side
-   now, with a thinner face and gentler grit. If a future pass reaches for
-   the stroke again to rescue a fine script, it is re-making the mistake:
-   bring the grit down instead.
+   The stroke is back, at 0.045em. It went 0.06 -> 0 -> 0.045 across three
+   passes and the middle one is the instructive failure: with no stroke at
+   all a fine script has nothing propping it up, so the grit has to come down
+   so far that the skips stop reading as crayon. 0.045 is Michele's "just a
+   touch thinner" from 0.06, and it is about the floor for this face at this
+   grit. If it needs to go lower, lower the grit thresholds in step.
+
+   It is in em so it tracks the font-size across breakpoints instead of going
+   light on the larger step. `paint-order` puts it under the fill so it grows
+   each glyph outward; a browser without `paint-order` centres it, which
+   reads slightly thinner and nothing worse.
 
    Each filter runs four stages: warp the outline with a displacement map,
    punch grit holes THROUGH the fill so the colour skips the way a crayon
    skips paper tooth, then press darker wax into patches of what survives.
 
-   The numbers all have reasons, so do not round them off:
+   The numbers all have reasons:
 
    The grit transfer must be a step, not a ramp. slope 24 with the intercept
    at -24x the threshold makes the mask either fully on or fully off, so the
@@ -500,12 +495,10 @@ html {
    between them. Either alone reads mechanical.
 
    The threshold is bounded by legibility, and the bound moves with the
-   font's weight. A void has to be narrower than the stroke it lands on or
-   the letter breaks in two. On a heavy face 0.64 held; on Alex Brush, which
-   has no stroke propping it up, it does not, and 0.74 is where the name
-   survives. Whenever the face changes, re-read the word at 1x before
-   shipping: a magnified crop hides exactly this failure, and "Michele" once
-   went out reading "Mishule" because of it.
+   weight. A void has to be narrower than the stroke it lands on or the
+   letter breaks in two. Whenever the face or the stroke changes, re-read the
+   word at 1x before shipping: a magnified crop hides exactly this failure,
+   and "Michele" once went out reading "Mishule" because of it.
 
    The two filters differ only in threshold. "Michele" is long and mostly
    over the pale floral dress. "Love," is short, sits over the busiest part
@@ -515,6 +508,8 @@ html {
    photo rather than as crayon on the print. */
 .sig-crayon {
   color: #b7291d;
+  -webkit-text-stroke: 0.045em #b7291d;
+  paint-order: stroke fill;
 }
 
 .sig-crayon-hard {

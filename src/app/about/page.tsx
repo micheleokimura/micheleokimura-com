@@ -130,9 +130,9 @@ export default function AboutPage() {
           to tell the whole story chronologically. */}
       {/* lg:pb- is the signature's clearance side by side, where the photo is
           the last thing in the container and the spill lands in whatever
-          follows. That is the teal line and its py-28, 112px against a 104px
-          spill, which is true but not a margin. The extra 2rem is. */}
-      <Container className="mt-16 sm:mt-20">
+          follows. That is the teal line and its py-28, 112px against a 116px
+          spill, so without this the signature would cross into it. */}
+      <Container className="mt-16 sm:mt-20 lg:pb-8">
         <FadeIn>
           {/* The narrow 20rem track is on the RIGHT here, because the photo
               carries lg:order-last and so lands in the second column. It used
@@ -159,7 +159,7 @@ export default function AboutPage() {
               crosses the corner and hangs 125px, and the photo still sits
               directly above the eyebrow, so that needs 10rem. Re-measure both
               whenever the signature moves. */}
-          <div className="grid grid-cols-1 gap-x-10 gap-y-16 sm:gap-y-28 lg:grid-cols-[minmax(0,42rem)_minmax(0,20rem)] lg:items-center lg:gap-x-12">
+          <div className="grid grid-cols-1 gap-x-10 gap-y-36 sm:gap-y-44 lg:grid-cols-[minmax(0,42rem)_minmax(0,20rem)] lg:items-center lg:gap-x-12">
             {/* Two boxes, because the signature has to escape the one the
                 photo is clipped by. This outer box owns the size and is the
                 positioning context; the inner one owns the rounded corners
@@ -177,45 +177,45 @@ export default function AboutPage() {
                 />
               </div>
               {/* Her signature, set rather than scanned. See the @font-face
-                  note in tailwind.css for why Alex Brush and what it beat.
-                  She sent a photograph of how she actually signs on
-                  2026-08-26: loose, dramatic, more loop than letter. The
-                  brief since then has been to get thinner and looser, and
-                  this pass carries no stroke at all.
+                  note in tailwind.css for why Mrs Saint Delafield and what it
+                  beat. She settled on it on 2026-08-26 ("perfect"), so the
+                  face is fixed now; tune the numbers around it.
 
                   Live text, not an image, so it stays sharp at any DPR.
 
-                  TWO COMPOSITIONS, and the breakpoint is not cosmetic.
+                  THE ROTATION IS NEGATIVE, and it has been both signs, so the
+                  reasoning for each is worth keeping.
 
-                  From sm up, the photo's bottom-right corner cuts the middle
-                  of "Michele": "Mich" on the print, "ele" off it, "Love,"
-                  above and wholly inside. That is Michele's spec, and it
-                  costs 143px of signature hanging off the right of the frame,
-                  because half a 300px word has to go somewhere.
+                  Negative climbs to the right, which is what her original
+                  sketch shows and what she confirmed: the signature starts
+                  low on the left and sweeps up across the bottom-right
+                  corner. Positive descends, which is the only way to get the
+                  corner to cut the middle of "Michele" with "Mich" left on
+                  the print, and that composition was live for two deploys
+                  before she asked for the sketch angle back. The two cannot
+                  both be had: with an upward slant, whatever sits at the
+                  corner has everything before it hanging below the frame. So
+                  the start of "Michele" hangs below the photo by design here,
+                  and that is the cost of the sketch.
 
-                  Below sm there is nowhere for it to go. The photo is nearly
-                  the full width of a phone, so those 143px land past the edge
-                  of the screen and open a horizontal scrollbar. No angle or
-                  size fixes it: bisecting the word at the corner always costs
-                  half its length in horizontal room, and a phone has about
-                  24px of it. Phones get a smaller signature tucked into the
-                  corner instead, same font and slant, 21px of spill. If the
-                  two ever need reconciling, the lever is the photo's width on
-                  phones, not the signature.
+                  Flipping the sign also removed a responsive problem that had
+                  forced two separate compositions. Descending, the tail ran
+                  sideways and needed 143px of room the phone did not have.
+                  Climbing, the same tail runs mostly DOWNWARD, so it spills
+                  into the row gap instead of off the screen, and one set of
+                  insets now serves every width. If the sign is ever flipped
+                  back, the phone breakpoint has to come back with it.
 
-                  The rotation is +35deg. Positive is load-bearing: the corner
-                  can only bisect the word if the word DESCENDS to the right,
-                  since with an upward slant whatever sits at the corner has
-                  everything before it hanging below the frame. 35 rather than
-                  22 because Michele asked for the tail further off the
-                  corner.
+                  Two levers position this, and they are independent. The
+                  right and bottom insets slide the whole block along its own
+                  axis and decide where it crosses the corner; the padding on
+                  "Love," slides only the first line, and is what keeps it on
+                  the print without disturbing that crossing. Tune in that
+                  order.
 
-                  Two levers position this, and they are independent, which is
-                  the useful part. The right and bottom insets slide the whole
-                  block along its own axis and so decide WHERE the corner cuts
-                  the name; the padding on "Love," slides only the first line,
-                  and is what pulls it back onto the print without disturbing
-                  that cut. Tune them in that order.
+                  The right inset is capped by the narrowest phone rather than
+                  by taste: -6% puts the tail about 20px past the frame, which
+                  still lands inside the page gutter on a 320px screen.
 
                   How the ink looks is `.sig-crayon` in tailwind.css. */}
               {/* The crayon, twice. Same four stages both times: warp the
@@ -271,7 +271,7 @@ export default function AboutPage() {
                       in="gritCoarseAlpha"
                       result="gritCoarseMask"
                     >
-                      <feFuncA type="linear" slope={24} intercept={-17.76} />
+                      <feFuncA type="linear" slope={24} intercept={-16.8} />
                     </feComponentTransfer>
                     <feTurbulence
                       type="fractalNoise"
@@ -289,7 +289,7 @@ export default function AboutPage() {
                       in="gritFineAlpha"
                       result="gritFineMask"
                     >
-                      <feFuncA type="linear" slope={24} intercept={-19.68} />
+                      <feFuncA type="linear" slope={24} intercept={-18.72} />
                     </feComponentTransfer>
                     <feComposite
                       in="gritCoarseMask"
@@ -442,8 +442,8 @@ export default function AboutPage() {
                   </filter>
                 </defs>
               </svg>
-              <span className="sig-crayon pointer-events-none absolute right-[16%] bottom-[-8%] origin-bottom-right rotate-[35deg] whitespace-nowrap text-right font-signature text-[4.125rem] leading-[0.95] sm:right-[-8%] sm:bottom-[-16%] sm:text-[8.1rem] lg:text-[6.75rem]">
-                <span className="sig-crayon-soft block pr-[1.1em]">Love,</span>
+              <span className="sig-crayon pointer-events-none absolute right-[-6%] bottom-[2%] origin-bottom-right rotate-[-35deg] whitespace-nowrap text-right font-signature text-[5.75rem] leading-[0.95] sm:text-[6.9rem] lg:text-[5.75rem]">
+                <span className="sig-crayon-soft block pr-[0.6em]">Love,</span>
                 <span className="sig-crayon-hard block">Michele</span>
               </span>
             </div>
