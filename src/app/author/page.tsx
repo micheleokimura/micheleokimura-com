@@ -96,7 +96,7 @@ const TILE_SIZES = '(max-width: 640px) 6rem, (max-width: 1024px) 30vw, 24rem'
  *   body p-2.5 xs:p-4                         same
  *   serif title, leading-tight, ~18px         font-display at the same size
  *   group-hover:text-primary on the title     title goes teal on hover
- *   muted 14px/20px teaser, line-clamp-2      same colour and size, clamp-5
+ *   muted 14px/20px teaser, line-clamp-2      same colour, 20px/36px, clamp-5
  *   mt-auto footer row, pt-1.5 xs:pt-4        same
  *
  * Two deliberate departures, both forced by what the card is carrying.
@@ -250,11 +250,13 @@ function BookTile({
             <Forthcoming label={book.forthcoming} />
           </span>
         ) : null}
-        {/* 14px at every width. This ran at 12px below sm and 14px from sm
-            up, so the teaser was smallest on the screen held closest to the
-            face. The shelf is one column below sm, so the extra line height
-            just makes the card taller; nothing reflows. */}
-        <p className="mt-1.5 line-clamp-5 text-sm leading-5 text-neutral-600">
+        {/* The sitewide reading size, 20px/2.25rem, the same `text-xl
+            leading-9` the About page body prose runs at. Michele's direction of
+            2026-08-27: the teaser was the smallest copy on the page at 14px and
+            she could not read it. It ran at 12px below sm before that, so this
+            is the second bump. The shelf is one column below sm, so the taller
+            type just makes each card taller; nothing reflows. */}
+        <p className="mt-1.5 line-clamp-5 text-xl leading-9 text-neutral-600">
           {book.teaser}
         </p>
         {/* "Learn more" to the title's own page, and, where the tile stands on
