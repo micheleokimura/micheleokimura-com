@@ -27,18 +27,20 @@ import { FadeIn } from '@/components/FadeIn'
  *      does. Michele's screenshot of the Renaissance tile is the check here:
  *      the poster type reads straight through the scrim. An opaque panel is
  *      wrong.
- *   3. Caption type is much larger than a caption would normally run: 20px on
- *      a phone, 24px at `sm`, 28px on a desktop tile, semibold, white, tight
- *      leading. Michele asked for this directly on 2026-08-26, because her
+ *   3. Caption type is much larger than a caption would normally run, and it
+ *      is sized off the tile rather than off the viewport: 6.6% of tile width,
+ *      floored at 18px and capped at 28px, semibold, white, tight leading.
+ *      Michele asked for the oversized caption on 2026-08-26, because her
  *      audience skews older: "even if the words fill the little box, that
  *      would be fine with me because it disappears when the cursor goes off of
- *      the photo." Then a step larger again on 2026-08-27, alongside the body
- *      copy on /about, for the same reason. Her longest caption at 252
- *      characters still clears the tile at every breakpoint, so nothing clips
- *      and nothing needs an ellipsis, but there is much less slack now than
- *      there was at the 2026-08-26 sizes: the 2015 Explicit tile is the one to
- *      measure. Check it, and any caption longer than 252 characters, before
- *      shipping another bump.
+ *      the photo." She asked for another step up on 2026-08-27.
+ *
+ *      The tile-relative sizing arrived with that second request, because a
+ *      fixed ladder could not hold both ends of the caption list. Filling the
+ *      box is what she wants; overflowing it silently is not, and that is what
+ *      a fixed size did to the two longest captions on a medium screen. The
+ *      arithmetic is on the figcaption. Re-measure it before changing either
+ *      the coefficient or any caption longer than 236 characters.
  *   4. Below `sm` the caption sits in an always-visible gradient band at the
  *      bottom of the tile instead of a hover scrim, because an opacity-only
  *      hover is unreachable on a touch screen. From `sm` up it is the
@@ -252,8 +254,11 @@ const TILES: Tile[] = [
 function MosaicTile({ tile }: { tile: Tile }) {
   return (
     <li>
+      {/* containerType, so the caption can size itself off THIS tile rather
+          than off the viewport. See the note on the figcaption. */}
       <figure
         tabIndex={0}
+        style={{ containerType: 'inline-size' }}
         className="group relative block aspect-square w-full overflow-hidden bg-[var(--color-navy-10)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus-ring)]"
       >
         <Image
@@ -268,12 +273,33 @@ function MosaicTile({ tile }: { tile: Tile }) {
             opacity-only hover cannot be reached on a touch screen.
             From sm up: the WordPress full-tile scrim, on hover, on tap, or on
             keyboard focus. */}
+        {/* 6.6% of the tile's own width, floored at 18px and capped at 28px.
+            This replaced a fixed text-lg/sm:text-xl/lg:text-2xl ladder on
+            2026-08-27 and it is a bug fix, not a style preference: at a fixed
+            size the longest captions overflowed a square tile and the tail was
+            simply cut off. The 2015 Explicit caption, the longest at 236
+            characters, was losing 116px of itself at a 1024 viewport BEFORE
+            the 2026-08-27 bump, and 215px after it. Measured on the live page
+            at 640/768/820/1024/1180/1280/1440/1600.
+
+            The coefficient is measured, not chosen. The largest font the
+            limiting caption can take lands at 6.99, 7.06, 7.00 and 7.27
+            percent of tile width across those breakpoints, which is flat
+            enough to treat as one number; 6.6 is that number with roughly
+            five percent of headroom, and it leaves 16-36px of slack per tile.
+            Raising it past 7 starts clipping the two long captions again.
+
+            The cap is Michele's requested step up: 1.75rem is 28px, one above
+            the 24px the desktop tile used to run. The floor keeps a narrow
+            phone readable. If a caption is ever written longer than 236
+            characters, re-measure before trusting this. */}
         <figcaption
+          style={{ fontSize: 'clamp(1.125rem, 6.6cqw, 1.75rem)' }}
           className={[
             'pointer-events-none absolute inset-0 flex flex-col justify-end p-4 whitespace-pre-line',
-            'text-xl leading-tight font-semibold text-[var(--color-white)]',
+            'leading-tight font-semibold text-[var(--color-white)]',
             'bg-gradient-to-t from-[var(--color-navy)] via-[var(--color-navy)]/80 to-transparent',
-            'sm:items-center sm:justify-center sm:p-5 sm:text-center sm:text-2xl lg:text-3xl',
+            'sm:items-center sm:justify-center sm:p-5 sm:text-center',
             'sm:bg-none sm:bg-[var(--color-navy)]/70',
             'sm:opacity-0 sm:transition-opacity sm:duration-[400ms] sm:ease-in-out',
             'sm:group-hover:opacity-100 sm:group-focus:opacity-100 sm:group-focus-visible:opacity-100',
