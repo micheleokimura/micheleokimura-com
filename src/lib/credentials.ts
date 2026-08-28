@@ -38,13 +38,54 @@ export const awards: Award[] = [
   },
 ]
 
-/** Short factual credentials for the About page (no pricing). Cited in the dossier. */
-export const credentials: string[] = [
-  'Founder and Executive Director, Releasing Generations',
-  'Founder and Director, Explicit Movement, Kingdom Families, and ReThink Creativity',
-  'Author of Dancing with Father and The Brave Series curriculum',
-  'Part-time pastor at Lifespring Church, Honolulu',
-  '17 years as an elementary public school teacher in Hawai‘i',
+export type Credential = {
+  /** The bullet itself. */
+  label: string
+  /**
+   * Sub-bullets, rendered one indent step in at the same reading size as the
+   * parent. Used where one role opens onto a list: the three facets under
+   * Releasing Generations, and the authored titles.
+   */
+  items?: string[]
+}
+
+/**
+ * Short factual credentials for the About page (no pricing). Cited in the
+ * dossier. Rewritten 2026-08-28 to Michele's structure: the three Releasing
+ * Generations facets and the authored titles each nest under their parent
+ * rather than being flattened into a single line.
+ *
+ * Book and curriculum titles here are the exact strings the Author page shows,
+ * read off src/lib/author-books.ts, so a title never reads two ways on the
+ * site. The two Brave Purpose books are the exception in wording only: they
+ * carry "(forthcoming)" here where /author says "Forthcoming Spring 2027".
+ */
+export const credentials: Credential[] = [
+  {
+    label:
+      'Founder and Executive Director of Releasing Generations, which includes three facets:',
+    items: ['Explicit Movement', 'Kingdom Families', 'ReThink Creativity'],
+  },
+  {
+    label: 'Author of:',
+    items: [
+      'Dancing with Father',
+      'The Birth of Explicit Movement: Discover Keys to Fulfilling Your Purpose',
+      'The Raising Kingdom Kids curriculum',
+      'The Dream Big Journals Curriculum',
+      'Brave Purpose (forthcoming)',
+      'Brave Purpose with God (forthcoming)',
+    ],
+  },
+  {
+    label:
+      'Chief Editor and Chief Creative Director of the Brave Series Curriculum and The Explicit Movement 21-Day Interactive Journal',
+  },
+  { label: 'Part-time pastor at Lifespring Church, Honolulu' },
+  {
+    label:
+      '14 years as an elementary public school teacher in Hawaiʻi and California',
+  },
 ]
 
 /** The single headline award for the compact homepage "recognized by" bar. */

@@ -593,11 +593,34 @@ export default function AboutPage() {
             </h2>
             <ul role="list" className="mt-6 space-y-3 border-t border-neutral-200 pt-6 text-xl leading-9 text-neutral-700">
               {credentials.map((c) => (
-                <li key={c} className="flex gap-3">
+                <li key={c.label} className="flex gap-3">
                   <span aria-hidden="true" className="text-[var(--color-brand-terracotta-ink)]">
                     &middot;
                   </span>
-                  <span>{c}</span>
+                  {/* div, not span: a <ul> inside phrasing content is invalid
+                      HTML, and only some of these bullets carry a nested list. */}
+                  <div>
+                    {c.label}
+                    {/* Sub-bullets inherit the parent list's text-xl/leading-9,
+                        so a nested title reads at the same 20px as the role it
+                        sits under. ml-6 is the one indent step; the marker
+                        column above is the same width. */}
+                    {c.items ? (
+                      <ul role="list" className="mt-3 ml-6 space-y-3">
+                        {c.items.map((item) => (
+                          <li key={item} className="flex gap-3">
+                            <span
+                              aria-hidden="true"
+                              className="text-[var(--color-brand-terracotta-ink)]"
+                            >
+                              &middot;
+                            </span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </div>
                 </li>
               ))}
             </ul>
