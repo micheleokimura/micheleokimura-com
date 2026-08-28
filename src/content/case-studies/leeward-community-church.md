@@ -16,7 +16,7 @@ Leeward Community Church meets in Pearl City on the leeward side of O'ahu and se
 
 ## Speaking at Leeward
 
-Michele and her team were invited to speak at the adult Sunday school services for six weeks in a row during the summer of 2024 and 2025. She also led a keynote equipping the children's ministry leaders in 2025. Michele has a very close working relationship with Pastor Joe Ong and his team.
+Michele and her team were invited to speak at the adult Sunday school services for six weeks in a row during the summer of 2024 and 2025. She also led a keynote equipping the children's ministry leaders in 2025. Michele has a very close working relationship with Pastor Joseph Ong and his team.
 
 ## Hosting the November conference
 
