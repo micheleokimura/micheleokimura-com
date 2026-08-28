@@ -45,7 +45,10 @@ export default async function CaseStudyPage({
 
       <Container className="mt-10 sm:mt-12">
         <FadeIn className="mx-auto max-w-2xl">
-          <div className="prose-blog" dangerouslySetInnerHTML={{ __html: study.contentHtml }} />
+          <div
+            className="prose-blog prose-case-study"
+            dangerouslySetInnerHTML={{ __html: study.contentHtml }}
+          />
         </FadeIn>
       </Container>
 

@@ -1079,7 +1079,8 @@ html.lenis body {
   }
 }
 
-/* Article body styling for /resources/[slug] pages */
+/* Article body styling for the markdown-driven pages: /resources/[slug] and
+   /case-studies/[slug]. */
 .prose-blog {
   color: var(--color-neutral-800);
   font-size: 1.0625rem;
@@ -1092,6 +1093,19 @@ html.lenis body {
      `break-word` only breaks a word that has nowhere else to go, so ordinary
      prose still wraps at spaces exactly as before. */
   overflow-wrap: break-word;
+}
+/* Case studies read at the sitewide body size instead of the article size.
+   Michele flagged on 2026-08-27 that /case-studies/<slug> still looked small
+   next to /about after the ee687b9 sweep, and it did: those pages are markdown
+   piped through .prose-blog, so the text-lg -> text-xl class swap never reached
+   them. 1.25rem is text-xl and 1.8 is leading-9 against it, which is exactly
+   what /about and /coach set. Kept unitless so the smaller inline runs (code)
+   still scale their own leading. Two classes, so this beats the base rule.
+   Scoped to case studies on purpose: blog posts at /resources/<slug> keep the
+   17px article size. Headings are in rem and do not move. */
+.prose-blog.prose-case-study {
+  font-size: 1.25rem;
+  line-height: 1.8;
 }
 .prose-blog p {
   margin-top: 1.25em;
