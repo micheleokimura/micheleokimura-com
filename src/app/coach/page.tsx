@@ -368,7 +368,7 @@ export default function CoachingPage() {
                         <span className="sr-only">{item.abbr}. </span>
                         {item.title}
                       </h3>
-                      <p className="mt-5 max-w-md text-base leading-7 text-[var(--color-cream)]/85">
+                      <p className="mt-5 max-w-md text-xl leading-9 text-[var(--color-cream)]/85">
                         {item.body}
                       </p>
                     </div>
@@ -492,7 +492,7 @@ export default function CoachingPage() {
                   <dt className="font-display text-lg font-semibold text-neutral-950">
                     {faq.question}
                   </dt>
-                  <dd className="mt-3 text-base leading-7 text-neutral-700">
+                  <dd className="mt-3 text-xl leading-9 text-neutral-700">
                     {faq.answer}
                   </dd>
                 </div>

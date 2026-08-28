@@ -80,7 +80,7 @@ function Panel({
         {heading}
       </h2>
       {body ? (
-        <p className="mt-4 text-base leading-7 text-neutral-700">{body}</p>
+        <p className="mt-4 text-xl leading-9 text-neutral-700">{body}</p>
       ) : null}
       {items ? (
         <ul role="list" className="mt-5 space-y-4">
@@ -90,7 +90,7 @@ function Panel({
                 aria-hidden="true"
                 className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-teal)]"
               />
-              <span className="text-base leading-7 text-neutral-800">
+              <span className="text-xl leading-9 text-neutral-800">
                 {item}
               </span>
             </li>
@@ -128,7 +128,7 @@ function Section({
               aria-hidden="true"
               className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-teal)]"
             />
-            <p className="text-base leading-7 text-neutral-700">
+            <p className="text-xl leading-9 text-neutral-700">
               {item.label ? (
                 <strong className="font-semibold text-neutral-950">
                   {item.label}:
@@ -369,7 +369,7 @@ export default async function AuthorBookPage({
                 {book.notes.map((note) => (
                   <p
                     key={note}
-                    className="text-base leading-7 text-neutral-600 italic"
+                    className="text-xl leading-9 text-neutral-600 italic"
                   >
                     {note}
                   </p>
@@ -402,7 +402,7 @@ export default async function AuthorBookPage({
                         aria-hidden="true"
                         className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-brand-teal)]"
                       />
-                      <span className="text-base leading-7 text-neutral-700">
+                      <span className="text-xl leading-9 text-neutral-700">
                         {item}
                       </span>
                     </li>
@@ -485,7 +485,7 @@ export default async function AuthorBookPage({
                 <h2 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
                   Every edition
                 </h2>
-                <p className="mt-3 max-w-2xl text-base leading-7 text-neutral-600">
+                <p className="mt-3 max-w-2xl text-xl leading-9 text-neutral-600">
                   Four age brackets, each with a companion teacher guide. Every
                   one ships in a faith and a non-faith version.
                 </p>
@@ -513,7 +513,7 @@ export default async function AuthorBookPage({
                 <h2 className="font-display text-xs font-semibold tracking-widest text-neutral-500 uppercase">
                   The twelve volumes
                 </h2>
-                <p className="mt-3 max-w-2xl text-base leading-7 text-neutral-600">
+                <p className="mt-3 max-w-2xl text-xl leading-9 text-neutral-600">
                   Four volumes in each title, shown here in a mix of the Faith
                   and Non-Faith versions. Every volume ships in both.
                 </p>

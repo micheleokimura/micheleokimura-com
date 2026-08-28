@@ -151,7 +151,7 @@ export function Endorsements({
             key={`${item.source}-${i}`}
             className="border-l-2 border-[var(--color-brand-terracotta)] pl-5"
           >
-            <blockquote className="text-base leading-7 text-neutral-700 italic">
+            <blockquote className="text-xl leading-9 text-neutral-700 italic">
               {item.quote}
             </blockquote>
             <figcaption className="mt-2 text-sm font-medium text-neutral-500 not-italic">
