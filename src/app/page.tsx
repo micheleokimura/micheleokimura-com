@@ -121,9 +121,12 @@ const DOOR_ICONS: Record<Door['icon'], typeof Mic> = {
 /**
  * One card in the two scrolling endorsement rows.
  *
- * BODY TYPE IS 17px, up from the 15px this ran at before it was parked.
+ * BODY TYPE IS 20px (text-xl leading-9), the sitewide reading size, up from the
+ * 17px it carried on restore and the 15px it ran at before it was parked.
  * Michele's note: older readers matter. The card widened with it so the measure
- * stays readable rather than the copy just reflowing into a taller column.
+ * stays readable rather than the copy just reflowing into a taller column. The
+ * cards get taller at this size and that is accepted; the attribution block
+ * stays at 15px so the hierarchy inside the card still holds.
  *
  * The horizontal space between cards is `mx` on the card, NOT `gap` on the
  * track. The marquee keyframes wrap by translating exactly -50% of the track,
@@ -134,7 +137,7 @@ const DOOR_ICONS: Record<Door['icon'], typeof Mic> = {
 function TestimonialCard({ item }: { item: Testimonial }) {
   return (
     <figure className="mx-3 flex w-[21rem] shrink-0 flex-col rounded-2xl bg-[var(--color-cream)] p-7 ring-1 ring-[var(--color-navy-10)] sm:w-[27rem] sm:p-8">
-      <blockquote className="flex-auto text-[1.0625rem] leading-7 text-neutral-800">
+      <blockquote className="flex-auto text-xl leading-9 text-neutral-800">
         &ldquo;{item.quote}&rdquo;
       </blockquote>
       <figcaption className="mt-6 border-t border-[var(--color-navy-10)] pt-5 text-[0.9375rem]">
