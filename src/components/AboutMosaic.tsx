@@ -323,7 +323,11 @@ export function AboutMosaic() {
         >
           My Story
         </h2>
-        <p className="mt-3 text-lg text-neutral-600 italic">
+        {/* Desktop only: the tiles below print their captions inline on small
+            screens, so the hover hint would point at text already on the page.
+            Michele asked for this to start at md. Note the tiles flip to
+            hover-reveal at sm, so 640-767px carries no hint. */}
+        <p className="mt-3 hidden text-lg text-neutral-600 italic md:block">
           Hover over each photo to peek at the story behind it.
         </p>
       </FadeIn>
