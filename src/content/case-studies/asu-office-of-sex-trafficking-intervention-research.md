@@ -10,9 +10,6 @@ completion-date: 2026-05
 
 # Arizona State University Office of Sex Trafficking Intervention Research
 
-> "Hi Michele, They look great to me now. It is ok for some sections to have more than 2 if you think they are important concepts. I think they are."
-> Dr. Dominique Roe-Sepowitz, MSW, PhD, ASU School of Social Work, April 10, 2026
-
 ## The partner
 
 Michele partnered directly with Dr. Dominique Roe-Sepowitz at ASU School of Social Work. Dr. Roe-Sepowitz is helping Michele and her team assess and analyze data so that, in the future, the Brave Series can stand as a research-based curriculum.
