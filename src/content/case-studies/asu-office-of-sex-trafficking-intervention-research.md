@@ -25,7 +25,7 @@ Her partnership with Michele's work sits inside that mandate. The Brave Together
 
 Through the spring and summer of 2026, Michele, her team, and Dr. Roe-Sepowitz built and refined the Brave Together pre- and post-curriculum evaluation surveys across all four volumes of the Brave Together curriculum.
 
-Michele's team working alongside Dr. Roe-Sepowitz included retired Deputy Superintendent Phyllis Unebasami and Lisa Nagamine.
+Michele's team working alongside Dr. Roe-Sepowitz included retired Deputy Superintendent Phyllis Unebasami and Lisa Nagamine, who helps oversee middle school principals across the state of Hawaiʻi.
 
 ## The outcome
 

@@ -16,7 +16,7 @@ The meeting included counselors from the Maui Complex, along with a few other ne
 
 ## The work Michele did at the meeting
 
-On May 8, 2025, Michele delivered the presentation to the Department of Education counselors at the meeting, alongside Phyllis Unebasami, recently retired Deputy Superintendent, and Lisa Nagamine of the Office of the Superintendent. Both joined as co-presenters.
+On May 8, 2025, Michele delivered the presentation to the Department of Education counselors at the meeting, alongside Phyllis Unebasami, recently retired Deputy Superintendent, and Lisa Nagamine, who helps oversee middle school principals across the state of Hawaiʻi. Both joined as co-presenters.
 
 ## The outcome
 
