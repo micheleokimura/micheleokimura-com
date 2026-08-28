@@ -27,14 +27,18 @@ import { FadeIn } from '@/components/FadeIn'
  *      does. Michele's screenshot of the Renaissance tile is the check here:
  *      the poster type reads straight through the scrim. An opaque panel is
  *      wrong.
- *   3. Caption type is much larger than a caption would normally run: 18px on
- *      a phone, 20px at `sm`, 24px on a desktop tile, semibold, white, tight
+ *   3. Caption type is much larger than a caption would normally run: 20px on
+ *      a phone, 24px at `sm`, 28px on a desktop tile, semibold, white, tight
  *      leading. Michele asked for this directly on 2026-08-26, because her
  *      audience skews older: "even if the words fill the little box, that
  *      would be fine with me because it disappears when the cursor goes off of
- *      the photo." Her longest caption at 252 characters still clears the tile
- *      at every breakpoint, so nothing clips and nothing needs an ellipsis.
- *      If a future caption runs longer than that, check it before shipping.
+ *      the photo." Then a step larger again on 2026-08-27, alongside the body
+ *      copy on /about, for the same reason. Her longest caption at 252
+ *      characters still clears the tile at every breakpoint, so nothing clips
+ *      and nothing needs an ellipsis, but there is much less slack now than
+ *      there was at the 2026-08-26 sizes: the 2015 Explicit tile is the one to
+ *      measure. Check it, and any caption longer than 252 characters, before
+ *      shipping another bump.
  *   4. Below `sm` the caption sits in an always-visible gradient band at the
  *      bottom of the tile instead of a hover scrim, because an opacity-only
  *      hover is unreachable on a touch screen. From `sm` up it is the
@@ -267,9 +271,9 @@ function MosaicTile({ tile }: { tile: Tile }) {
         <figcaption
           className={[
             'pointer-events-none absolute inset-0 flex flex-col justify-end p-4 whitespace-pre-line',
-            'text-lg leading-tight font-semibold text-[var(--color-white)]',
+            'text-xl leading-tight font-semibold text-[var(--color-white)]',
             'bg-gradient-to-t from-[var(--color-navy)] via-[var(--color-navy)]/80 to-transparent',
-            'sm:items-center sm:justify-center sm:p-5 sm:text-center sm:text-xl lg:text-2xl',
+            'sm:items-center sm:justify-center sm:p-5 sm:text-center sm:text-2xl lg:text-3xl',
             'sm:bg-none sm:bg-[var(--color-navy)]/70',
             'sm:opacity-0 sm:transition-opacity sm:duration-[400ms] sm:ease-in-out',
             'sm:group-hover:opacity-100 sm:group-focus:opacity-100 sm:group-focus-visible:opacity-100',

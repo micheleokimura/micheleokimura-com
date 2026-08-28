@@ -79,7 +79,15 @@ export default function AboutPage() {
               />
             </div>
 
-            <div className="max-w-2xl space-y-6 text-lg leading-8 text-neutral-600">
+            {/* Body prose runs one step above the sitewide 18px here, and only
+                here. Michele asked on 2026-08-27 for a readability test scoped
+                to /about, because her audience skews older: text-lg -> text-xl,
+                20px. leading moves with it, 8 -> 9, so the ratio holds at 1.8
+                instead of tightening to 1.6. Do NOT change the scale in
+                src/styles/tailwind.css to do this; the whole point is that the
+                rest of the site stays at 18px for the comparison. Reverting is
+                this one class string and the Meet Michele one below. */}
+            <div className="max-w-2xl space-y-6 text-xl leading-9 text-neutral-600">
               <p>
                 I&rsquo;m an author, speaker, and coach who has spent the last four
                 decades inspiring courage, vulnerability, healing, and purpose.
@@ -486,7 +494,9 @@ export default function AboutPage() {
                   appearance on the SAME page is the bare acronym. This is the
                   only appearance on /about, so it is the spelled-out one. The
                   rule is written out in full at the top of src/app/coach/page.tsx. */}
-              <p className="text-lg leading-8 text-neutral-600">
+              {/* Matches the bio block above: text-xl leading-9 for the
+                  2026-08-27 readability test. See the note up there. */}
+              <p className="text-xl leading-9 text-neutral-600">
                 Most days, you&rsquo;ll find me with coffee in hand, laughing
                 over a story that gets a little more dramatic every time I tell
                 it. I care about real connection. When I step on stage or lead a
