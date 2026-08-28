@@ -18,6 +18,9 @@
 //   detail no longer routes through the aggregate framing. The logo exclusion
 //   is unchanged and permanent: the page is text-only too.
 // - sacred-hearts-academy: on hold (ready-to-publish:false). Not in grid/marquee.
+// - brave-bold-conference-nov-2025: retired 2026-08-28. The November 2025
+//   conference is now told inside the Leeward Community Church case study, so
+//   the standalone entry and its tile are gone. The old URL 301s to Leeward.
 // - Metro Christian, Lifespring 808, New Hope Community, Windward Missionary,
 //   Calvary Assembly of God: relationship-only. No logo, no tile.
 
@@ -55,13 +58,6 @@ export const LOGO_ORGS: LogoOrg[] = [
     logo: '/org-logos/asu-office-of-sex-trafficking-intervention-research.svg',
     logoDark: '/org-logos/asu-office-of-sex-trafficking-intervention-research-white.svg',
     href: '/case-studies/asu-office-of-sex-trafficking-intervention-research',
-  },
-  {
-    slug: 'brave-bold-conference-nov-2025',
-    name: 'Brave & Bold Conference',
-    logo: '/org-logos/brave-bold-conference-nov-2025-wordmark.svg',
-    logoDark: '/org-logos/brave-bold-conference-nov-2025-white.svg',
-    href: '/case-studies/brave-bold-conference-nov-2025',
   },
   {
     slug: 'leeward-community-church',

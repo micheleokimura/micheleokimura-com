@@ -27,6 +27,13 @@ const nextConfig: NextConfig = {
       { source: "/portfolio", destination: "/speaker", permanent: true },
       { source: "/speaking", destination: "/speaker", permanent: true },
       { source: "/subscription", destination: "/coach", permanent: true },
+      // The standalone Brave & Bold conference case study was folded into the
+      // Leeward Community Church story on 2026-08-28. Keep the old URL alive.
+      {
+        source: "/case-studies/brave-bold-conference-nov-2025",
+        destination: "/case-studies/leeward-community-church",
+        permanent: true,
+      },
     ];
   },
 };

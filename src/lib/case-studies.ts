@@ -32,7 +32,6 @@ const ORDER = [
   'hawaii-baptist-academy',
   'hawaii-doe-counselor-plc-maui',
   'asu-office-of-sex-trafficking-intervention-research',
-  'brave-bold-conference-nov-2025',
   'leeward-community-church',
 ]
 
