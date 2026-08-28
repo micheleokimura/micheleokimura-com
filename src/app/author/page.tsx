@@ -96,7 +96,7 @@ const TILE_SIZES = '(max-width: 640px) 6rem, (max-width: 1024px) 30vw, 24rem'
  *   body p-2.5 xs:p-4                         same
  *   serif title, leading-tight, ~18px         font-display at the same size
  *   group-hover:text-primary on the title     title goes teal on hover
- *   muted 14px/20px teaser, line-clamp-2      same colour, 20px/36px, clamp-5
+ *   muted 14px/20px teaser, line-clamp-2      same colour, 20px/36px, clamp-6
  *   mt-auto footer row, pt-1.5 xs:pt-4        same
  *
  * Two deliberate departures, both forced by what the card is carrying.
@@ -106,13 +106,16 @@ const TILE_SIZES = '(max-width: 640px) 6rem, (max-width: 1024px) 30vw, 24rem'
  * Your Purpose" does not, and a truncated book title is a worse card than a
  * two-line one.
  *
- * The teaser clamps at FIVE lines, not two. Every teaser on this shelf is
+ * The teaser clamps at SIX lines, not two. Every teaser on this shelf is
  * approved copy lifted whole from the book's own description, and clamping at
  * two would put an ellipsis through the middle of most of them. It was four
- * until 2026-08-24, when three descriptions were replaced and two of the new
- * opening sentences ran past four lines in a 24rem column. Five clears all the
- * current copy while keeping the clamp there as a guard, so a longer teaser
- * added later still cannot blow the card out. Re-measure before lowering it.
+ * until 2026-08-24, then five, each number measured against the type size of
+ * the day. It is six as of 2026-08-27, when the teaser went from 14px to the
+ * 20px reading size and three descriptions (Kingdom Kids, Dancing with Father,
+ * The Birth of Explicit Movement) came out one line over the old five. Six
+ * clears all the current copy while keeping the clamp there as a guard, so a
+ * longer teaser added later still cannot blow the card out. Measured in a
+ * 346px column at 1280px wide; re-measure before changing the type size.
  *
  * The reference's second footer element, a coloured "Open" status pill, is NOT
  * borrowed. DESIGN-RULES bans pills outright because they read as clickable, so
@@ -256,7 +259,7 @@ function BookTile({
             she could not read it. It ran at 12px below sm before that, so this
             is the second bump. The shelf is one column below sm, so the taller
             type just makes each card taller; nothing reflows. */}
-        <p className="mt-1.5 line-clamp-5 text-xl leading-9 text-neutral-600">
+        <p className="mt-1.5 line-clamp-6 text-xl leading-9 text-neutral-600">
           {book.teaser}
         </p>
         {/* "Learn more" to the title's own page, and, where the tile stands on
