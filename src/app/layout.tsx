@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import localFont from 'next/font/local'
+import Script from 'next/script'
 
 import '@/styles/tailwind.css'
 
@@ -7,7 +8,27 @@ import { SiteHeader } from '@/components/SiteHeader'
 import { SiteFooter } from '@/components/SiteFooter'
 import { SiteGraphJsonLd } from '@/components/JsonLd'
 import { SmoothScroll } from '@/components/SmoothScroll'
+import { ClarityAnalytics } from '@/components/ClarityAnalytics'
 import { siteConfig, imageOrigin } from '@/lib/site-config'
+
+/**
+ * Analytics configuration. Every one of these is optional: with the var unset
+ * the matching tag is never rendered, so the site works exactly as it did
+ * before, just untracked. Nothing here holds a hardcoded property ID.
+ *
+ * NEXT_PUBLIC_* is inlined at BUILD time, so adding one of these in Vercel
+ * takes effect on the next deploy, not immediately. The full walkthrough for
+ * creating each property lives at docs/analytics-setup.md.
+ */
+const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
+const gscVerification = process.env.NEXT_PUBLIC_GSC_VERIFICATION
+
+/**
+ * Vercel's own Web Analytics and Speed Insights beacons are served by the
+ * platform from the deployment itself, so they only exist on a real Vercel
+ * deploy. Off in dev, where those two paths would just 404 into the console.
+ */
+const isProduction = process.env.NODE_ENV === 'production'
 
 const monaSans = localFont({
   src: '../fonts/Mona-Sans.var.woff2',
@@ -78,6 +99,16 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
+  /**
+   * Google Search Console's meta-tag verification. Next renders this as
+   * <meta name="google-site-verification" content="..."> in the head. Left
+   * undefined the key is dropped entirely and no tag is emitted, which is what
+   * we want until Michele has pulled a token from Search Console.
+   *
+   * Verification has to stay in place permanently. Google re-checks it, and
+   * removing the token later un-verifies the property.
+   */
+  verification: gscVerification ? { google: gscVerification } : undefined,
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
@@ -117,6 +148,33 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </main>
           <SiteFooter />
         </SmoothScroll>
+
+        {/* Analytics. All of it mounts last, after the page content, and all
+            of it is afterInteractive, so none of it is on the render path. */}
+
+        {isProduction ? (
+          <>
+            <Script src="/_vercel/insights/script.js" strategy="afterInteractive" />
+            <Script src="/_vercel/speed-insights/script.js" strategy="afterInteractive" />
+          </>
+        ) : null}
+
+        {gaMeasurementId ? (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${gaMeasurementId}');`}
+            </Script>
+          </>
+        ) : null}
+
+        <ClarityAnalytics />
       </body>
     </html>
   )
