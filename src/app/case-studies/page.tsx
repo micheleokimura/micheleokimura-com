@@ -74,21 +74,6 @@ export default function CaseStudiesPage() {
                 </Link>
               </FadeIn>
             ))}
-
-            {/* Pending: Calvary Chapel (location confirming). Slot reserved, non-clickable. */}
-            <FadeIn as="li" scaleIn>
-              <div className="flex h-full flex-col rounded-3xl border border-dashed border-neutral-300 bg-neutral-50/60 p-8">
-                <span className="text-xs font-semibold tracking-widest text-neutral-400 uppercase">
-                  Coming soon
-                </span>
-                <h2 className="mt-3 font-display text-xl font-semibold tracking-tight text-neutral-500">
-                  Calvary Chapel
-                </h2>
-                <p className="mt-4 flex-1 text-base leading-7 text-neutral-500">
-                  Workshop partnership. Story publishes once the location is confirmed.
-                </p>
-              </div>
-            </FadeIn>
           </ul>
         </FadeInStagger>
       </Container>

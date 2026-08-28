@@ -28,14 +28,12 @@ export type LogoOrg = {
   logo: string | null
   /** White-on-transparent variant for dark backgrounds, or null. */
   logoDark: string | null
-  /** Case study URL, or null when partner/reference-only or pending. */
+  /** Case study URL, or null when partner/reference-only. */
   href: string | null
-  /** Awaiting confirmation (e.g. Calvary Chapel location); renders, non-clickable. */
-  pending?: boolean
 }
 
 // Featured partner orgs with published case studies (clickable), then breadth
-// partners (non-clickable), then the pending Calvary Chapel slot.
+// partners (non-clickable).
 export const LOGO_ORGS: LogoOrg[] = [
   {
     slug: 'hawaii-baptist-academy',
