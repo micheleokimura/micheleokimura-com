@@ -578,9 +578,9 @@ export default function AboutPage() {
                     {award.title}
                     {award.year ? `, ${award.year}` : ''}
                   </p>
-                  <p className="mt-1 text-sm text-neutral-600">{award.grantor}</p>
+                  <p className="mt-1 text-xl leading-9 text-neutral-600">{award.grantor}</p>
                   {award.recipient && (
-                    <p className="mt-1 text-sm text-neutral-500">{award.recipient}</p>
+                    <p className="mt-1 text-xl leading-9 text-neutral-500">{award.recipient}</p>
                   )}
                 </li>
               ))}
@@ -591,7 +591,7 @@ export default function AboutPage() {
             <h2 className="font-display text-sm font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
               Roles and work
             </h2>
-            <ul role="list" className="mt-6 space-y-3 border-t border-neutral-200 pt-6 text-base text-neutral-700">
+            <ul role="list" className="mt-6 space-y-3 border-t border-neutral-200 pt-6 text-xl leading-9 text-neutral-700">
               {credentials.map((c) => (
                 <li key={c} className="flex gap-3">
                   <span aria-hidden="true" className="text-[var(--color-brand-terracotta-ink)]">
