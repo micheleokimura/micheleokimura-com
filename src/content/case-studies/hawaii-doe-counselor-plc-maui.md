@@ -1,6 +1,6 @@
 ---
 org-slug: hawaii-doe-maui-complex
-org-name: Hawaiʻi State Department of Education (Included the Maui Complex)
+org-name: Hawaiʻi State Department of Education, Outer Island Complex Meeting
 engagement-type: state-doe-presenter
 ready-to-publish: true
 nda-flagged: false
@@ -8,7 +8,7 @@ hero-headline: State counselors met the Brave Series and the Dream Big Journal
 completion-date: 2025-05
 ---
 
-# Hawaiʻi State Department of Education (Included the Maui Complex)
+# Hawaiʻi State Department of Education, Outer Island Complex Meeting
 
 ## The meeting
 

@@ -47,7 +47,7 @@ export const LOGO_ORGS: LogoOrg[] = [
   },
   {
     slug: 'hawaii-doe-counselor-plc-maui',
-    name: 'Hawaiʻi DOE, Maui Complex',
+    name: 'Hawaiʻi DOE, Outer Island Complexes',
     logo: '/org-logos/hawaii-doe-counselor-plc-maui.png',
     logoDark: '/org-logos/hawaii-doe-counselor-plc-maui-white.png',
     href: '/case-studies/hawaii-doe-counselor-plc-maui',
