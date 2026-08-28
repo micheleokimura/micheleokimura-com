@@ -66,6 +66,17 @@ export const LOGO_ORGS: LogoOrg[] = [
     logoDark: '/org-logos/leeward-community-church-white.svg',
     href: '/case-studies/leeward-community-church',
   },
+  // No logo art has been supplied yet. `logo`/`logoDark` stay null so the tile
+  // is skipped by carouselItems() rather than rendering a dangling image path.
+  // Drop first-assembly-of-god.png and -white.png into /public/org-logos and
+  // point these two fields at them to light the tile up.
+  {
+    slug: 'first-assembly-of-god',
+    name: 'First Assembly of God',
+    logo: null,
+    logoDark: null,
+    href: '/case-studies/first-assembly-of-god',
+  },
   {
     slug: 'lifespring-hawaii',
     name: 'Lifespring Hawaii',

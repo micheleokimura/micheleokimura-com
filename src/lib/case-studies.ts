@@ -33,6 +33,7 @@ const ORDER = [
   'hawaii-doe-counselor-plc-maui',
   'asu-office-of-sex-trafficking-intervention-research',
   'leeward-community-church',
+  'first-assembly-of-god',
 ]
 
 function metaFrom(slug: string, data: Record<string, unknown>): CaseStudyMeta {
