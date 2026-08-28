@@ -421,10 +421,13 @@ export default function HomePage() {
                 for the layout, take it out of the hero altogether rather than
                 shortening it back into a personal claim. See HERO.award.
 
-                13px at every width. It used to be `text-xs` below sm and 13px
+                14px at every width. It used to be `text-xs` below sm and 13px
                 above, which rendered this credit SMALLER on the phone than on
-                the desktop it was designed for. */}
-            <p className="mt-4 flex items-start gap-3 text-[0.8125rem] leading-5 text-[var(--color-cream)]/75 sm:mt-5">
+                the desktop it was designed for; the flat 13px that replaced
+                that went up one step of the scale to `text-sm` for reading
+                size. Stay a clear step under the subhead above: this line is
+                a credit, not a second subhead. */}
+            <p className="mt-4 flex items-start gap-3 text-sm leading-6 text-[var(--color-cream)]/75 sm:mt-5">
               <span
                 aria-hidden="true"
                 className="mt-2 h-px w-6 shrink-0 bg-[var(--color-teal-on-dark)] sm:w-8"
