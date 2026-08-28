@@ -16,7 +16,13 @@ Michele partnered directly with Dr. Dominique Roe-Sepowitz at ASU School of Soci
 
 Dr. Roe-Sepowitz served as lead researcher on a comprehensive Hawaiʻi State study of sex trafficking across the islands from 2018 to 2024, in partnership with the State Government. It has been a great honor and privilege for Michele to partner with Dominique, who from the very beginning shared how deeply she believes in the Brave Series, so much so that she volunteered her expertise and time to this work.
 
-Her partnership with Michele's work sits inside that mandate. The Brave Together curriculum, in its four-volume Faith and Classic editions, is now being deployed in school and community settings across Hawaiʻi. Outcome measurement matters. The instrument that captures whether the curriculum is changing what it claims to change has to be designed by people who understand prevention-education evaluation at a research level.
+## A full-circle story
+
+When Dr. Roe-Sepowitz's Hawaiʻi research findings were first published in 2018, Michele was so moved by what Dominique and her team had uncovered that she felt called to respond. In 2019, Michele hosted the Listen Conference, a citywide gathering focused on anti-sex trafficking awareness and prevention. A month after that conference, she began writing what would become the very first volume of the Brave Series curriculum: Brave and Beautiful, for teen girls.
+
+Years later, the research and the curriculum have come back to meet each other. Michele had the chance to thank Dominique in person for the impact her work had on the trajectory of Releasing Generations, and to share that the Brave Series was, in a real sense, born out of Dominique's own research. Dominique was deeply moved to hear it. She had once shared that she does the work, but rarely gets to learn whether it lands.
+
+For Michele, this has been a beautiful full-circle moment, a dream come true, and an honor to now work alongside Dominique on the very curriculum her research helped inspire.
 
 ## The work the partnership produced
 
