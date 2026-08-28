@@ -117,7 +117,7 @@ function BodyBlocks({
                 return (
                   <li
                     key={item}
-                    className="relative pl-6 text-lg leading-8 text-neutral-600"
+                    className="relative pl-6 text-xl leading-9 text-neutral-600"
                   >
                     <span
                       aria-hidden="true"
@@ -140,7 +140,7 @@ function BodyBlocks({
 
         return (
           <Fragment key={index}>
-            <p className="mt-6 text-lg leading-8 text-neutral-600 first:mt-0">
+            <p className="mt-6 text-xl leading-9 text-neutral-600 first:mt-0">
               {block.text}
             </p>
             {plate(index)}
@@ -311,7 +311,7 @@ export default async function SpeakerMessagePage({
                 // nothing until it scrolls into view. Neutral-950 underneath
                 // covers the moment before the poster paints.
                 <div className="mt-12 sm:mt-16">
-                  <p className="text-lg leading-8 text-neutral-600">
+                  <p className="text-xl leading-9 text-neutral-600">
                     {message.promoVideo.intro}
                   </p>
                   <div className="relative mt-6 aspect-video w-full overflow-hidden rounded-2xl bg-neutral-950 ring-1 ring-[var(--color-navy-10)]">

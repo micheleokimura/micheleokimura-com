@@ -447,7 +447,7 @@ export default function CoachingPage() {
                 {DELIVERABLES.map((item) => (
                   <li key={item} className="flex items-start gap-x-4 sm:gap-x-5">
                     <CheckMark />
-                    <span className="text-lg leading-8 text-neutral-800">
+                    <span className="text-xl leading-9 text-neutral-800">
                       {item}
                     </span>
                   </li>
@@ -524,7 +524,7 @@ export default function CoachingPage() {
               >
                 Not just books.
               </h2>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-700">
+              <p className="mt-6 max-w-2xl text-xl leading-9 text-neutral-700">
                 Most of Michele&rsquo;s coaching is with authors, but not all
                 of it. One pastor asked her to coach him on hearing
                 God&rsquo;s voice, and that has become part of her practice. If
@@ -546,7 +546,7 @@ export default function CoachingPage() {
                   formation, poetry, and curriculum, and drops fiction. Poetry
                   stays in both because she has written a poetry book. Keep the
                   two lists agreeing if either one is edited. */}
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-700">
+              <p className="mt-6 max-w-2xl text-xl leading-9 text-neutral-700">
                 Michele works best with authors of nonfiction, especially books
                 rooted in your lived story: memoir, testimony, spiritual
                 formation, and curriculum. Novels and fiction aren&rsquo;t her

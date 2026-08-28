@@ -138,7 +138,7 @@ export default function ReThinkCreativityPage() {
                 warriors. He calls forth the craftsmen.
               </p>
               <figure className="mt-8 border-l-2 border-[var(--color-brand-terracotta)] pl-6">
-                <blockquote className="text-lg leading-8 text-neutral-300 italic">
+                <blockquote className="text-xl leading-9 text-neutral-300 italic">
                   &ldquo;God uses our craftsmanship to dismantle the works of the
                   enemy. There&rsquo;s a powerful thing we need to tap into with
                   the Lord regarding that.&rdquo;

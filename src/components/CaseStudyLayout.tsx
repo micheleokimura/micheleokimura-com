@@ -188,7 +188,7 @@ export function Prose({
 }) {
   return (
     <FadeIn
-      className={`mt-8 max-w-3xl space-y-5 text-lg leading-8 text-neutral-700 ${className}`}
+      className={`mt-8 max-w-3xl space-y-5 text-xl leading-9 text-neutral-700 ${className}`}
     >
       {children}
     </FadeIn>

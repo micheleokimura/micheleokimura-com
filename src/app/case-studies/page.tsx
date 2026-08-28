@@ -40,7 +40,7 @@ export default function CaseStudiesPage() {
           interior page became a fixed-height banner; the words are unchanged. */}
       <Container className="mt-14 sm:mt-16">
         <FadeIn>
-          <p className="max-w-2xl text-lg leading-8 text-neutral-600">
+          <p className="max-w-2xl text-xl leading-9 text-neutral-600">
             Each story is told by the work and the outcome. Not every engagement
             is named here. Some of the strongest work has happened inside
             institutions that prefer to stay private, and those are honored

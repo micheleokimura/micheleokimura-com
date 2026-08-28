@@ -103,7 +103,7 @@ export default function ProjectsPage() {
           interior page became a fixed-height banner; the words are unchanged. */}
       <Container className="mt-14 sm:mt-16">
         <FadeIn>
-          <p className="max-w-2xl text-lg leading-8 text-neutral-600">
+          <p className="max-w-2xl text-xl leading-9 text-neutral-600">
             Each curriculum, conference, journal series, and book below is a
             record of taking an idea from nothing to something people can hold.
             These are the stories behind them: where each one came from, how it

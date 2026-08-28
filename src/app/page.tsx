@@ -403,7 +403,7 @@ export default function HomePage() {
                 glyphs toward the video behind them and cost about half a point
                 of contrast: 4.05:1 measured, which fails AA, against 5.16:1
                 solid. Do not reintroduce an opacity here. */}
-            <p className="mt-4 text-[0.9375rem] leading-7 text-[var(--color-cream)] sm:mt-5 sm:text-base sm:leading-7 lg:text-lg lg:leading-8">
+            <p className="mt-4 text-[0.9375rem] leading-7 text-[var(--color-cream)] sm:mt-5 sm:text-base sm:leading-7 lg:text-xl lg:leading-9">
               {HERO.subhead}
             </p>
 
@@ -688,7 +688,7 @@ export default function HomePage() {
             </h2>
             {/* Held at max-w-3xl so widening the wrapper for the heading does
                 not stretch the body copy's measure with it. */}
-            <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-neutral-700 sm:text-xl">
+            <p className="mx-auto mt-6 max-w-3xl text-xl leading-9 text-neutral-700 sm:text-xl">
               Twenty-six weeks, one writer, one method. What comes out the other
               side is a publication-ready book that still sounds like you.
             </p>

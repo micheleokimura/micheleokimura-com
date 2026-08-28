@@ -561,7 +561,7 @@ export default function SpeakerPage() {
               <h2 className="font-display text-2xl font-semibold tracking-tight text-neutral-950 sm:text-3xl">
                 Book Michele.
               </h2>
-              <p className="mt-4 text-lg leading-8 text-neutral-600">
+              <p className="mt-4 text-xl leading-9 text-neutral-600">
                 Ready to bring Michele to your church, school, conference, or
                 team? Tell her about your event and she will reach out
                 personally.

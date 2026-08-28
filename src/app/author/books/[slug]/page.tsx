@@ -140,7 +140,7 @@ function Section({
         ))}
       </ul>
       {outro ? (
-        <p className="mt-8 text-lg leading-8 text-neutral-700">{outro}</p>
+        <p className="mt-8 text-xl leading-9 text-neutral-700">{outro}</p>
       ) : null}
     </section>
   )
@@ -351,7 +351,7 @@ export default async function AuthorBookPage({
               </p>
             ) : null}
 
-            <div className="space-y-5 text-lg leading-8 text-neutral-700">
+            <div className="space-y-5 text-xl leading-9 text-neutral-700">
               {book.description.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}

@@ -105,7 +105,7 @@ export default function ReThinkCreativityConferencePage() {
               <h2 className="font-display text-xl font-semibold tracking-tight text-neutral-950 sm:text-2xl">
                 The Origin
               </h2>
-              <p className="mt-6 text-lg leading-8 text-neutral-600">
+              <p className="mt-6 text-xl leading-9 text-neutral-600">
                 Michele&rsquo;s journey with this message began with the 2010
                 and 2011 Renaissance Conferences, which celebrated and equipped
                 people to grow their creativity. A decade later, this vision
@@ -122,7 +122,7 @@ export default function ReThinkCreativityConferencePage() {
               <h2 className="font-display mt-10 text-xl font-semibold tracking-tight text-neutral-950 sm:text-2xl">
                 The Vision
               </h2>
-              <p className="mt-6 text-lg leading-8 text-neutral-600">
+              <p className="mt-6 text-xl leading-9 text-neutral-600">
                 Michele founded the conference to combat the widespread false
                 belief that many people simply are not creative. She champions
                 the truth that creativity includes discovering the vital
@@ -139,7 +139,7 @@ export default function ReThinkCreativityConferencePage() {
               <h2 className="font-display mt-10 text-xl font-semibold tracking-tight text-neutral-950 sm:text-2xl">
                 The Engagement
               </h2>
-              <p className="mt-6 text-lg leading-8 text-neutral-600">
+              <p className="mt-6 text-xl leading-9 text-neutral-600">
                 Unexpectedly, the COVID outbreak led Michele to transition the
                 2020 and 2021 conferences online, which rapidly expanded their
                 reach to a global audience. Each dynamic event featured
@@ -161,7 +161,7 @@ export default function ReThinkCreativityConferencePage() {
                   return (
                     <li
                       key={term}
-                      className="relative pl-6 text-lg leading-8 text-neutral-600"
+                      className="relative pl-6 text-xl leading-9 text-neutral-600"
                     >
                       <span
                         aria-hidden="true"
@@ -175,7 +175,7 @@ export default function ReThinkCreativityConferencePage() {
                   )
                 })}
 
-                <li className="relative pl-6 text-lg leading-8 text-neutral-600">
+                <li className="relative pl-6 text-xl leading-9 text-neutral-600">
                   <span
                     aria-hidden="true"
                     className="absolute top-[0.7em] left-0 h-1.5 w-1.5 rounded-full bg-[var(--color-brand-terracotta)]"
@@ -189,7 +189,7 @@ export default function ReThinkCreativityConferencePage() {
                   creativity in a plenary session.
                 </li>
 
-                <li className="relative pl-6 text-lg leading-8 text-neutral-600">
+                <li className="relative pl-6 text-xl leading-9 text-neutral-600">
                   <span
                     aria-hidden="true"
                     className="absolute top-[0.7em] left-0 h-1.5 w-1.5 rounded-full bg-[var(--color-brand-terracotta)]"
@@ -205,7 +205,7 @@ export default function ReThinkCreativityConferencePage() {
               <h2 className="font-display mt-10 text-xl font-semibold tracking-tight text-neutral-950 sm:text-2xl">
                 The Outcome
               </h2>
-              <p className="mt-6 text-lg leading-8 text-neutral-600">
+              <p className="mt-6 text-xl leading-9 text-neutral-600">
                 Michele carries a deep conviction that creativity brings
                 healing, beauty, wholeness, and joy to life, enabling
                 God&rsquo;s people to fulfill their callings with excellence.
