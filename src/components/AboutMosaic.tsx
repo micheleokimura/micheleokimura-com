@@ -319,10 +319,13 @@ export function AboutMosaic() {
       <FadeIn>
         <h2
           id="my-story"
-          className="font-display text-3xl font-medium tracking-tight text-neutral-950 sm:text-4xl"
+          className="font-display text-4xl font-medium tracking-tight text-neutral-950 sm:text-5xl"
         >
           My Story
         </h2>
+        <p className="mt-3 text-lg text-neutral-600 italic">
+          Hover over each photo to peek at the story behind it.
+        </p>
       </FadeIn>
 
       {/* One unbroken grid. 20px gutters and square tiles, per WordPress.
