@@ -482,13 +482,13 @@ export default function SpeakerPage() {
                   key={`${item.event}-${item.where}`}
                   className="flex flex-col gap-1 py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8"
                 >
-                  <span className="font-display text-base font-semibold text-neutral-950">
+                  <span className="font-display text-xl leading-9 font-semibold text-neutral-950">
                     {item.event}
                   </span>
-                  <span className="shrink-0 text-sm text-neutral-500 sm:text-right">
+                  <span className="shrink-0 text-xl leading-9 text-neutral-500 sm:text-right">
                     {item.where}
                     {item.format && (
-                      <span className="mt-1 block text-xs tracking-wider text-neutral-400 uppercase">
+                      <span className="mt-1 block text-sm tracking-wider text-neutral-400 uppercase">
                         {item.format}
                       </span>
                     )}
@@ -497,7 +497,7 @@ export default function SpeakerPage() {
               ))}
             </ul>
 
-            <p className="mt-8 max-w-3xl text-base leading-7 text-neutral-500 italic">
+            <p className="mt-8 max-w-3xl text-xl leading-9 text-neutral-500 italic">
               Michele has also spoken at churches across Hawaiʻi, the mainland
               U.S., Canada, Japan, the Philippines, and Singapore in her decades
               of ministry.

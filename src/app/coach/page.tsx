@@ -503,10 +503,19 @@ export default function CoachingPage() {
       </section>
 
       {/* -------------------------------------------------- 6. NOT JUST BOOKS */}
-      {/* Kept from the previous coaching pass, wording untouched. The soft
-          panel is reused from section 4 so this reads as a warm aside rather
-          than a second offer, and interest="other" (not "coaching") keeps these
-          inquiries out of the book wait-list.
+      {/* Kept from the previous coaching pass, wording untouched. The panel
+          carries `.surface-coach-hero`, the same coral-over-blush wash as the
+          hero at the top of the page: Michele asked on 2026-08-27 for this box
+          to be the hero pink rather than the tinted cream it used to share
+          with section 4. It reads as a warm aside rather than a second offer,
+          and interest="other" (not "coaching") keeps these inquiries out of
+          the book wait-list.
+
+          The wash carries body copy at 11.2:1 and the coral button at the same
+          2.54:1 it already has in the hero, so nothing here is a new contrast
+          condition. See the .surface-coach-hero block in tailwind.css. It sits
+          on band-3 (#efefea, cool grey), so the warm panel still separates
+          from its ground.
 
           band-3 is the last content ground on the page. SiteFooter paints its
           own band-4 run-in below this, so the close of the page descends
@@ -517,7 +526,7 @@ export default function CoachingPage() {
       >
         <Container>
           <FadeIn>
-            <div className="rounded-4xl bg-[var(--color-coach-surface-soft)] p-8 ring-1 ring-[var(--color-navy-10)] sm:p-12">
+            <div className="surface-coach-hero rounded-4xl p-8 ring-1 ring-[var(--color-navy-10)] sm:p-12">
               <h2
                 id="not-just-books-heading"
                 className="font-display text-2xl font-semibold tracking-tight text-neutral-950 sm:text-3xl"
