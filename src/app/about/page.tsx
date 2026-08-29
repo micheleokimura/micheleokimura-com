@@ -44,7 +44,7 @@ export default function AboutPage() {
 
           Calls BannerHero directly rather than through the PageIntro alias,
           the same way /speaker does, because it needs a surface other than the
-          sitewide default. `slate` is the warm earthy slate-blue this page
+          sitewide default. `slate` is the muted periwinkle this page
           runs, and the closing panel at the foot of the page runs the SAME
           flat value. Change one and change the other, or the page stops
           framing itself. See the --color-about-slate block in tailwind.css. */}
@@ -541,7 +541,7 @@ export default function AboutPage() {
         <AboutMosaic />
       </Container>
 
-      {/* The work Michele leads — her own brand family (own surface, not endorsers) */}
+      {/* The work Michele leads: her own brand family (own surface, not endorsers) */}
       <Container className="mt-20 sm:mt-28">
         <FadeIn className="mx-auto max-w-4xl">
           <h2 className="text-center font-display text-sm font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">

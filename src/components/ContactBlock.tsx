@@ -16,7 +16,7 @@ type Props = {
   cta?: React.ReactNode
   /**
    * The panel's ground. 'teal' is the sitewide navy surface and the default.
-   * 'slate' is the About page's warm earthy slate-blue, the same flat value
+   * 'slate' is the About page's muted periwinkle #4F5C99, the same flat value
    * its banner runs, so the top and the bottom of that page frame it in one
    * colour. It replaced a sage green on 2026-08-29. Slate is far lighter than
    * navy, so the two secondary inks step up one stop to hold AA on it. The

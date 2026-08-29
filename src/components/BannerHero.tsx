@@ -60,16 +60,22 @@ const EYEBROW_CLASS = {
  * `surface="slate"` is /about, added 2026-08-29. Michele read the navy banner
  * as cold, and much darker than the sage panel closing the same page, so the
  * two bands that frame /about had nothing to do with each other. Both are now
- * one flat warm earthy slate-blue, `.surface-about-slate-banner` up top and
+ * one flat value, `.surface-about-slate-banner` up top and
  * `.surface-about-slate` at the foot. It is scoped to that one page: every
  * other interior hero still defaults to `teal`.
+ *
+ * That value was re-cut later the same day. It began as a warm earthy
+ * slate-blue #4E5872, which Michele read as still mostly grey, and it is now
+ * #4F5C99, a muted cornflower periwinkle in the direction of a blue
+ * hydrangea. The token kept its `slate` name; see the block in tailwind.css
+ * for why, and for the full re-measured contrast table.
  *
  * The two violets take the pale lavender eyebrow and the plum does NOT: on
  * the plum that lavender measures 4.48:1 at the lightest pixel of the
  * gradient and misses AA, so `plum` takes a warm blush at 5.37:1. `slate`
- * takes a pale warm sand at 5.43:1 for the same reason in reverse: the pale
- * teal would pass at 5.09:1 but pulls the band back cool, which is what the
- * recolour was for. See EYEBROW_CLASS above and the measured tables in
+ * takes a pale warm sand at 4.84:1 for the same reason in reverse: the pale
+ * teal would scrape a pass at 4.54:1 but pulls the band back cool, which is
+ * what the recolour was for. See EYEBROW_CLASS above and the measured tables in
  * tailwind.css.
  *
  * The eyebrow is plain tracked small caps. No pill, no badge, no border, no
@@ -99,7 +105,7 @@ export function BannerHero({
   /**
    * Banner ground. `violet` is the photo-derived field the message pages
    * carry; `plum` is the warm, untextured purple /speaker itself runs;
-   * `slate` is the warm earthy slate-blue /about runs top and bottom. See
+   * `slate` is the muted periwinkle /about runs top and bottom. See
    * above.
    */
   surface?: 'teal' | 'violet' | 'plum' | 'slate'
