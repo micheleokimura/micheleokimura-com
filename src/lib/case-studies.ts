@@ -34,6 +34,7 @@ const ORDER = [
   'asu-office-of-sex-trafficking-intervention-research',
   'leeward-community-church',
   'first-assembly-of-god',
+  'first-presbyterian-church-honolulu',
 ]
 
 function metaFrom(slug: string, data: Record<string, unknown>): CaseStudyMeta {

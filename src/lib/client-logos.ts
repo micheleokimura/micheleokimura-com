@@ -173,11 +173,9 @@ export const CLIENT_LOGOS: ClientLogo[] = [
     logo: `${DIR}/first-assembly-of-god.png`,
     href: '/case-studies/first-assembly-of-god',
   },
-  // NO CASE STUDY YET. This is the first tile to use the `contact` route the
-  // header describes; every other org in the list has a page. Do not point
-  // `href` at /case-studies/first-presbyterian-church-honolulu to make it
-  // clickable: that markdown file does not exist and the tile would 404.
-  // Swap `contact` for the real href the moment Michele clears the story.
+  // Shipped 2026-08-28 as a `contact` tile with no case study, then switched to
+  // a real href hours later when Michele cleared the story. Every org in the
+  // list now has a page again, so nothing exercises the `contact` route today.
   //
   // The mark is green stained glass on an opaque white background, so it takes
   // `matte` for the same reason She Leads America does.
@@ -185,8 +183,7 @@ export const CLIENT_LOGOS: ClientLogo[] = [
     slug: 'first-presbyterian-church-honolulu',
     name: 'First Presbyterian Church of Honolulu',
     logo: `${DIR}/first-presbyterian-church-honolulu.png`,
-    href: null,
-    contact: true,
+    href: '/case-studies/first-presbyterian-church-honolulu',
     matte: true,
   },
 ]
