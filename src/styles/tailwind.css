@@ -747,7 +747,15 @@ html {
 /* The light half of the same idea: the band that actually carries the Speaker
    hero photograph. A wash of the photo's violet at the top easing into the
    site ground, so the picture sits in colour that came out of it and the band
-   still resolves to --color-band-1 before the next section starts. */
+   still resolves to --color-band-1 before the next section starts.
+
+   /speaker ITSELF NO LONGER USES THIS, as of 2026-08-29. Once the site
+   flattened to the single white #FCFAF6 the lavender read as a clash rather
+   than as a tint of the photograph, and that page went to a neutral
+   band-1/panel alternation instead. The sole remaining caller is
+   /speaker/messages/[slug], on message pages that carry no hero image of
+   their own. Retire the class and --color-speaker-wash with it when that page
+   is next revisited; nothing else depends on either. */
 .surface-violet-wash {
   background-image: linear-gradient(
     to bottom,

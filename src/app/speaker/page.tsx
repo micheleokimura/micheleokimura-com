@@ -238,10 +238,29 @@ export default function SpeakerPage() {
       />
 
       {/* ------------------------------------------------ lead + hero photo */}
-      {/* The band that carries the photograph, so it takes the photograph's
-          colour: a wash of its violet at the top easing back to the site
-          ground before the next section. */}
-      <section className={`surface-violet-wash ${BAND}`}>
+      {/* THE VIOLET WASH IS GONE FROM THIS BAND, 2026-08-29.
+
+          It was `.surface-violet-wash`, a gradient from --color-speaker-wash
+          #EFEBF7 easing down to the site ground: a pale lavender sampled from
+          the stage photograph so the picture sat in colour that came out of
+          it. That reasoning held while the ground was cream. It stopped
+          holding the moment the site flattened to the single white #FCFAF6:
+          against a near-white ground the lavender no longer reads as a tint
+          of the photo, it reads as a different, cooler page, and Michele
+          called it a clash on 2026-08-29.
+
+          What replaces it is Option A, a neutral rhythm. Sections alternate
+          #FCFAF6 (--color-band-1) and #F1EEE7 (--color-panel, the card ground
+          piloted on /coach), so separation comes from lightness rather than
+          from hue and nothing on the page has to agree with the banner. The
+          full sequence is documented at the press kit band below, which is
+          the one section the alternation deliberately skips.
+
+          `.surface-violet-wash` and --color-speaker-wash both STAY DEFINED:
+          /speaker/messages/[slug] still uses the class for message pages that
+          carry no hero of their own, and that page was out of scope here.
+          Retiring the token means changing that page too. */}
+      <section className={`bg-[var(--color-band-1)] ${BAND}`}>
         <Container>
           <FadeIn>
             {/* DOM order is paragraph then photo, and there is no `order`
@@ -278,9 +297,13 @@ export default function SpeakerPage() {
       </section>
 
       {/* -------------------------------------------------------- messages */}
+      {/* Beat 2 of the alternation: panel. The seven keynote cards are dark
+          saturated gradients (.msg-teal through .msg-violet, all of them
+          between #1E163F and #B8371A at their lightest stop), so dropping the
+          ground four points of lightness costs them nothing. */}
       <section
         aria-label="Messages Michele speaks on"
-        className={`bg-[var(--color-band-2)] ${BAND}`}
+        className={`bg-[var(--color-panel)] ${BAND}`}
       >
         <SectionIntro
           eyebrow="Topics"
@@ -458,9 +481,12 @@ export default function SpeakerPage() {
       </section>
 
       {/* ----------------------------------------------------- past events */}
+      {/* Panel, and it is panel BECAUSE the press kit below it has to be
+          white. See the note on that band. The periwinkle quote banner sits
+          between this and the messages grid, so two panels never touch. */}
       <section
         aria-label="Where Michele has spoken"
-        className={`bg-[var(--color-band-3)] ${BAND}`}
+        className={`bg-[var(--color-panel)] ${BAND}`}
       >
         {/* Was "Recent stages.", which Michele found context-free. The eyebrow
             came down from "Where I have spoken" to a single word so it does
@@ -507,6 +533,28 @@ export default function SpeakerPage() {
       </section>
 
       {/* -------------------------------------------------------- press kit */}
+      {/* THE ONE BAND THE ALTERNATION SKIPS, and the constraint that sets
+          every other ground on the page.
+
+          The whole of this section is a single --color-panel card lifting off
+          its ground. Panel is #F1EEE7 and the ground would be #F1EEE7 too if
+          the alternation ran straight through, which is 1:1: the card would
+          stop existing and only its navy-10 hairline would be left. So this
+          band is pinned WHITE, and the two bands touching it are pinned panel
+          to keep an edge on both sides.
+
+          Reading down the page, the neutral grounds now go:
+
+            lead + photo   #FCFAF6   band-1
+            messages       #F1EEE7   panel
+            quote banner   periwinkle, its own sampled surface, untouched
+            stages         #F1EEE7   panel
+            press kit      #FCFAF6   band-1   <- pinned, this note
+            book me        #F1EEE7   panel
+
+          No two neighbouring grounds are equal. If you ever put a panel card
+          in another band here, re-derive the sequence from that band out
+          rather than nudging one section and hoping. */}
       <section
         aria-labelledby="press-kit-heading"
         className={`bg-[var(--color-band-1)] ${BAND}`}
@@ -553,8 +601,13 @@ export default function SpeakerPage() {
 
       {/* -------------------------------------------------------- book me */}
       {/* Plain band, no panel, one button. See the CLOSING CTA note at the
-          top of this file before adding a container or an address here. */}
-      <section className={`bg-[var(--color-band-2)] ${BAND}`}>
+          top of this file before adding a container or an address here.
+
+          Panel, so the page closes on a definite edge under the white press
+          kit band instead of running white into the footer. The coral CTA
+          measures 3.99:1 as a shape on this ground against the 3.0 a control
+          boundary needs, which is better than the 3.49:1 it gets on white. */}
+      <section className={`bg-[var(--color-panel)] ${BAND}`}>
         <Container>
           <FadeIn>
             <div className="max-w-2xl">
