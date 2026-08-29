@@ -70,6 +70,24 @@ import { pageMetadata } from '@/lib/schema'
  * that the quote banner has been cut from between the deliverables panel and
  * the FAQ.
  *
+ * THE BAND RHYTHM IS SWITCHED OFF HERE AS OF 2026-08-29, and only here. The
+ * markup below still asks for band-1, band-2 and band-3 in that order, and it
+ * should keep asking: those class names are what the sitewide scale will snap
+ * back to the moment the pilot ends. What changed is what the tokens resolve
+ * to. Michele wants to see /coach running on ONE warm white, #FBF8F1, instead
+ * of the two neutrals the site carries today (the band scale starting at
+ * #FAF9F5 and the #FFFFFF card ground), so `.page-coach` on the container
+ * below trips a `:root:has()` rule in tailwind.css that flattens every band,
+ * --color-panel, --color-white and --color-coach-surface-soft to that single
+ * value. Section boundaries on this page are carried by whitespace alone
+ * while the pilot runs, and cards by their navy/10 hairline alone.
+ *
+ * So: do not "fix" the 1, 2, 1, 2, 3 sequence below because the page renders
+ * flat, and do not add a fourth band expecting it to read as a new ground.
+ * If Michele approves the single white it goes sitewide by re-cutting the
+ * tokens in @theme, and this page goes back to being ordinary. If she turns
+ * it down, dropping the `page-coach` class restores the scale exactly.
+ *
  * RECOLOURED 2026-08-29, and this page ONLY. Michele and Brett want /coach to
  * be the most professional of the three role pages: /speaker and /author stay
  * creative and warm, /coach goes cool and expert. Three elements moved to a
@@ -304,7 +322,15 @@ function CheckMark() {
 
 export default function CoachingPage() {
   return (
-    <>
+    /* `page-coach` is the ONE-WHITE PILOT marker and it does nothing on its
+       own: the rule that reads it is `:root:has(.page-coach)` in
+       tailwind.css, which repoints the band scale, the panel ground and
+       --color-white at a single #FBF8F1 for the whole document. It has to
+       be a marker rather than a styled wrapper because SiteHeader,
+       SiteFooter and the portalled ContactPopup all render outside this
+       subtree; see the block in tailwind.css for the reasoning and the
+       measurements. Removing this class is the rollback. */
+    <div className="page-coach">
       <WebPageJsonLd
         path="/coach"
         name="Author coaching with Michele Okimura"
@@ -657,6 +683,6 @@ export default function CoachingPage() {
           </FadeIn>
         </Container>
       </section>
-    </>
+    </div>
   )
 }

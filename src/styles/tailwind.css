@@ -827,6 +827,97 @@ html {
 }
 
 /* ---------------------------------------------------------------------
+   THE ONE-WHITE PILOT  (/coach only, added 2026-08-29)
+   ---------------------------------------------------------------------
+   THIS IS A PILOT AND IT IS DELIBERATELY SCOPED TO ONE PAGE. Michele wants
+   to see a single warm white on a real page before deciding whether the
+   site should run on one. If she says yes, the right follow-up is to re-cut
+   the tokens in @theme above and DELETE this block, not to copy it onto
+   more pages. If she says no, deleting this block is the whole rollback.
+
+   WHAT SHE IS LOOKING AT. The site currently carries two neutral whites: a
+   band scale that starts at #FAF9F5 and steps down to #EEEBE2, and a card
+   ground at pure #FFFFFF that lifts off it. On /coach that means a reader
+   scrolling the page crosses five different neutrals. #FBF8F1 replaces all
+   of them: warmer than #FAF9F5 in hue, brighter than it in value, and well
+   short of the #FFFFFF the cards use now.
+
+   EVERY BAND IS FLATTENED TO THE SAME VALUE, which switches off the section
+   rhythm the band scale exists to provide. That is the point of the pilot
+   rather than a side effect of it: Michele asked for one consistent white,
+   so the honest way to show her one is to give her one. What she will see
+   is that section boundaries on /coach are now carried entirely by the
+   whitespace between sections, and cards are carried entirely by the
+   `ring-1 ring-navy/10` hairline every one of them already has. If the page
+   reads as flat, that is the trade the single white is asking for, and it
+   is the thing to decide on.
+
+   `--color-coach-surface-soft`, the tinted panel behind "In six months, you
+   get", goes with them. At #EDEAE2 it was the one genuinely tan surface
+   left on the page, so leaving it out would have shown her a page that was
+   still jumping between whites in the one place she is most likely to look.
+
+   WHY :root:has() AND NOT A CLASS ON THE PAGE. Three of the surfaces that
+   have to change are not rendered by the page at all. SiteHeader paints
+   band-1, SiteFooter paints the band-4 run-in, and ContactPopup portals to
+   document.body; all three sit outside the /coach subtree in layout.tsx. A
+   class on the page container reaches none of them. Hanging the override on
+   :root instead means the tokens are already correct wherever they are
+   read, including inside the portal. The page's only job is to carry the
+   `.page-coach` marker that trips the :has().
+
+   It is static CSS on purpose. The alternative, a client component that
+   stamps a class onto documentElement from usePathname, repaints after
+   hydration, and the reader would watch the page change colour.
+
+   --color-white IS IN THE LIST, and it is not only a background. It is
+   #FAF9F5, the same value as band-1, and layout.tsx paints it on <html> via
+   `bg-white`; it is also the ink for the hero H1 and eyebrow and for
+   --coach-card-ink on the UAV card. Both jobs move to #FBF8F1 here. As ink
+   that is a change of four hundredths of a contrast point: the hero reads
+   7.00:1 on #1F5F5B today and 6.96:1 after, and the UAV card 12.88:1 today
+   and 12.79:1 after. Both stay far above AA and neither is visible.
+
+   CONTRAST. #FBF8F1 sits between band-1 and the #FFFFFF panel in value, so
+   every pairing on the page lands between two figures that already passed.
+   Measured, worst case last:
+
+     navy / neutral-950   13.83:1
+     neutral-800          11.66
+     neutral-700          10.36
+     neutral-600           7.25
+     neutral-500           5.52
+     teal-text             5.16
+     coral-text            5.13   (accent numerals; AA wants 4.5)
+     CTA #C84C33 shape     4.36   (needs 3.0)
+     field-border          3.43   (needs 3.0)
+
+   Nothing on /coach fails, and every one of these is BETTER than the same
+   ink on the band it used to sit on. The tight pair, teal-text and
+   coral-text, gain most: they were at 4.59:1 and 4.56:1 on band-4.
+
+   The deep teal hero, the soft teal TSS card, the navy UAV card and the
+   terracotta CTA are all untouched. They are the page's colour and the
+   pilot is only about the neutral behind them. */
+:root:has(.page-coach) {
+  --color-band-1: #fbf8f1;
+  --color-band-2: #fbf8f1;
+  --color-band-3: #fbf8f1;
+  --color-band-4: #fbf8f1;
+  --color-panel: #fbf8f1;
+  --color-white: #fbf8f1;
+  --color-coach-surface-soft: #fbf8f1;
+}
+
+/* The token above already reaches <html>, which carries `bg-white`. This
+   repeats it as a literal so the overscroll gutter above and below the page
+   cannot fall back to a different white if that utility is ever changed. */
+html:has(.page-coach),
+html:has(.page-coach) body {
+  background-color: #fbf8f1;
+}
+
+/* ---------------------------------------------------------------------
    QUOTE BANNER  (/speaker and /author)
    ---------------------------------------------------------------------
    The periwinkle strip behind Michele's portrait and her purpose line. It
