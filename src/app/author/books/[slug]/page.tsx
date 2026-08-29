@@ -271,16 +271,19 @@ export default async function AuthorBookPage({
   /**
    * Draw the "Read the story behind it" link in the footer row.
    *
-   * Off for the Brave Series curriculum. The ResearchPartnership callout under
-   * the hero now carries this page's one story link, and a second link to a
-   * second story at the foot of the same page splits the reader two ways.
+   * The Brave Series curriculum only, by Michele's direction of 2026-08-28.
+   * Every other title's footer row carries the one link back to the shelf.
    *
-   * A rule about the PAGE rather than dropping `storyHref` from the record in
+   * It coexists with the ResearchPartnership callout at the head of the same
+   * page on purpose: the callout goes to the ASU case study, this goes to the
+   * series' own project page, and they are two different stories.
+   *
+   * A rule about the PAGE rather than dropping `storyHref` from the records in
    * src/lib/author-books.ts, for the same reason `showBuyPanel` is: that field
-   * is where the series' project page is written down, and the three child
-   * titles point at it too.
+   * is where each title's project page is written down, and this page is its
+   * only reader, so flipping this one line is how the link comes back.
    */
-  const showStoryLink = Boolean(book.storyHref) && slug !== 'brave-series'
+  const showStoryLink = Boolean(book.storyHref) && slug === 'brave-series'
 
   return (
     <>
