@@ -5,7 +5,7 @@ engagement-type: church-partner
 ready-to-publish: true
 nda-flagged: false
 endorsements-pending: false
-hero-headline: Twelve years of mentorship, and a curriculum that crossed generations
+hero-headline: Informal Mentorship and a Curriculum That Crosses Generations
 completion-date: 2026-08
 ---
 
