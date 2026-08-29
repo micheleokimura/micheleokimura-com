@@ -74,7 +74,7 @@ import { pageMetadata } from '@/lib/schema'
  * markup below still asks for band-1, band-2 and band-3 in that order, and it
  * should keep asking: those class names are what the sitewide scale will snap
  * back to the moment the pilot ends. What changed is what the tokens resolve
- * to. Michele wants to see /coach running on ONE warm white, #FBF8F1, instead
+ * to. Michele wants to see /coach running on ONE warm white, #FCFAF6, instead
  * of the two neutrals the site carries today (the band scale starting at
  * #FAF9F5 and the #FFFFFF card ground), so `.page-coach` on the container
  * below trips a `:root:has()` rule in tailwind.css that flattens every band,
@@ -325,7 +325,7 @@ export default function CoachingPage() {
     /* `page-coach` is the ONE-WHITE PILOT marker and it does nothing on its
        own: the rule that reads it is `:root:has(.page-coach)` in
        tailwind.css, which repoints the band scale, the panel ground and
-       --color-white at a single #FBF8F1 for the whole document. It has to
+       --color-white at a single #FCFAF6 for the whole document. It has to
        be a marker rather than a styled wrapper because SiteHeader,
        SiteFooter and the portalled ContactPopup all render outside this
        subtree; see the block in tailwind.css for the reasoning and the

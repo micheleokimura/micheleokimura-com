@@ -838,9 +838,28 @@ html {
    WHAT SHE IS LOOKING AT. The site currently carries two neutral whites: a
    band scale that starts at #FAF9F5 and steps down to #EEEBE2, and a card
    ground at pure #FFFFFF that lifts off it. On /coach that means a reader
-   scrolling the page crosses five different neutrals. #FBF8F1 replaces all
-   of them: warmer than #FAF9F5 in hue, brighter than it in value, and well
-   short of the #FFFFFF the cards use now.
+   scrolling the page crosses five different neutrals. #FCFAF6 replaces all
+   of them. It is a shade warmer than #FAF9F5 and genuinely brighter than
+   it, and it stops well short of the #FFFFFF the cards use now: measured in
+   L*, band-1 is 97.90, this is 98.32 and white is 100, so it covers a fifth
+   of the distance from the old ground to white.
+
+   SECOND ROUND, 2026-08-29. This started at #FBF8F1, and Michele asked for
+   a slightly whiter one after seeing that live on /coach.
+
+   WORTH KNOWING WHY, because the first value did not do what the note here
+   originally claimed it did. #FBF8F1 is warm (R-B is 10, against 5 for
+   band-1) but it is very slightly DARKER than band-1, L* 97.63 against
+   97.90. So round one gave her more warmth and a touch less light, when the
+   thing she was after was a brighter ground. #FCFAF6 is the correction: R-B
+   6, so barely warmer than band-1 rather than twice as warm, and above it
+   in lightness rather than below. That is the whole difference between the
+   two rounds, and it is why this one reads whiter rather than just cleaner.
+
+   If a third round is wanted, change the seven tokens and the literal in
+   the html rule below and nothing else, then re-measure. Every figure in
+   this comment is derived from that one value, and the L* numbers above are
+   the ones to check first: hex that looks lighter often is not.
 
    EVERY BAND IS FLATTENED TO THE SAME VALUE, which switches off the section
    rhythm the band scale exists to provide. That is the point of the pilot
@@ -873,40 +892,48 @@ html {
    --color-white IS IN THE LIST, and it is not only a background. It is
    #FAF9F5, the same value as band-1, and layout.tsx paints it on <html> via
    `bg-white`; it is also the ink for the hero H1 and eyebrow and for
-   --coach-card-ink on the UAV card. Both jobs move to #FBF8F1 here. As ink
-   that is a change of four hundredths of a contrast point: the hero reads
-   7.00:1 on #1F5F5B today and 6.96:1 after, and the UAV card 12.88:1 today
-   and 12.79:1 after. Both stay far above AA and neither is visible.
+   --coach-card-ink on the UAV card. Both jobs move to #FCFAF6 here. As ink
+   that is a small GAIN, because the new value is lighter than the one it
+   replaces: the hero reads 7.00:1 on #1F5F5B before and 7.08:1 after, and
+   the UAV card 12.88:1 before and 13.01:1 after. (At #FBF8F1, the first
+   round of this pilot, both went very slightly the other way, 6.96:1 and
+   12.79:1. Neither direction is visible; it is recorded so nobody re-derives
+   it.)
 
-   CONTRAST. #FBF8F1 sits between band-1 and the #FFFFFF panel in value, so
+   CONTRAST. #FCFAF6 sits between band-1 and the #FFFFFF panel in value, so
    every pairing on the page lands between two figures that already passed.
    Measured, worst case last:
 
-     navy / neutral-950   13.83:1
-     neutral-800          11.66
-     neutral-700          10.36
-     neutral-600           7.25
-     neutral-500           5.52
-     teal-text             5.16
-     coral-text            5.13   (accent numerals; AA wants 4.5)
-     CTA #C84C33 shape     4.36   (needs 3.0)
-     field-border          3.43   (needs 3.0)
+     navy / neutral-950   14.07:1
+     neutral-800          11.86
+     neutral-700          10.54
+     neutral-600           7.37
+     neutral-500           5.61
+     teal-text             5.25
+     coral-text            5.22   (accent numerals; AA wants 4.5)
+     CTA #C84C33 shape     4.44   (needs 3.0)
+     field-border          3.49   (needs 3.0)
 
-   Nothing on /coach fails, and every one of these is BETTER than the same
-   ink on the band it used to sit on. The tight pair, teal-text and
-   coral-text, gain most: they were at 4.59:1 and 4.56:1 on band-4.
+   Nothing on /coach fails. Every one of these figures is better than the
+   same ink on any BAND it used to sit on, and the tight pair gain most:
+   teal-text and coral-text were at 4.59:1 and 4.56:1 on band-4 and are at
+   5.25:1 and 5.22:1 now. The one direction that gives a little back is the
+   card interiors, which were pure #FFFFFF and scored 14.67:1 for navy
+   against this ground's 14.07:1. That is the cost of the cards no longer
+   being the brightest surface on the page, it is the pilot working as
+   intended, and 14.07:1 is not a number anyone needs to worry about.
 
    The deep teal hero, the soft teal TSS card, the navy UAV card and the
    terracotta CTA are all untouched. They are the page's colour and the
    pilot is only about the neutral behind them. */
 :root:has(.page-coach) {
-  --color-band-1: #fbf8f1;
-  --color-band-2: #fbf8f1;
-  --color-band-3: #fbf8f1;
-  --color-band-4: #fbf8f1;
-  --color-panel: #fbf8f1;
-  --color-white: #fbf8f1;
-  --color-coach-surface-soft: #fbf8f1;
+  --color-band-1: #fcfaf6;
+  --color-band-2: #fcfaf6;
+  --color-band-3: #fcfaf6;
+  --color-band-4: #fcfaf6;
+  --color-panel: #fcfaf6;
+  --color-white: #fcfaf6;
+  --color-coach-surface-soft: #fcfaf6;
 }
 
 /* The token above already reaches <html>, which carries `bg-white`. This
@@ -914,7 +941,7 @@ html {
    cannot fall back to a different white if that utility is ever changed. */
 html:has(.page-coach),
 html:has(.page-coach) body {
-  background-color: #fbf8f1;
+  background-color: #fcfaf6;
 }
 
 /* ---------------------------------------------------------------------
