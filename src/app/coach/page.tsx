@@ -73,10 +73,26 @@ import { pageMetadata } from '@/lib/schema'
  * RECOLOURED 2026-08-29, and this page ONLY. Michele and Brett want /coach to
  * be the most professional of the three role pages: /speaker and /author stay
  * creative and warm, /coach goes cool and expert. Three elements moved to a
- * teal-and-navy palette and nothing else on the site was touched:
- *   hero  #B8D4CE  soft professional teal, spa calm
- *   TSS   #1F5F5B  deep teal, the same family, darker for anchor weight
- *   UAV   #1F2E4A  deep midnight navy, the trust half of the pairing
+ * teal-and-navy palette and nothing else on the site was touched.
+ *
+ * SWAPPED later the same day, which is the state below. Michele and Brett are
+ * applying a principle across the site: the darker, bolder colour goes on the
+ * big hero header and the softer accent goes on the small feature boxes. The
+ * first pass had it backwards, so the hero and the TSS card traded values:
+ *   hero  #1F5F5B  deep teal, the page's bold anchor (was #B8D4CE)
+ *   TSS   #B0CFD0  soft teal, the accent (was #1F5F5B)
+ *   UAV   #1F2E4A  deep midnight navy, untouched in the swap
+ *
+ * #B0CFD0 is the old hero mint shifted toward blue, hue 167 -> 182, at
+ * Michele's direction. It sheds the green cast and still lands within 6
+ * degrees of the hero's 176, so hero and TSS stay one family. The alternative
+ * on the table, #ADCFD5, was passed over: hue 189 drifts toward the UAV navy
+ * and the teal pair stops reading as a pair.
+ *
+ * The ink flipped with each ground. The hero was navy on light and is now
+ * white and cream on dark; the TSS card was white and cream on dark and is now
+ * navy on light. UAV keeps its white and cream, so the TSS/UAV pair is no
+ * longer symmetrical. That is the instruction's own consequence, not a miss.
  *
  * The "Join the waitlist" CTA stays warm on purpose. It is the one warm accent
  * left on the page and it is what makes the CTA carry against the cool ground.
@@ -91,8 +107,9 @@ import { pageMetadata } from '@/lib/schema'
  * as the other. Do not add a second navy panel lower down without re-checking
  * that separation.
  *
- * The saturated moment on the page is still the TSS/UAV pair, and that is
- * deliberate: see the .coach-card block in tailwind.css.
+ * The saturated moment on the page is now the hero itself, with the UAV card
+ * as the second dark note lower down: see the .coach-card block in
+ * tailwind.css.
  *
  * ACRONYMS, set by Michele 2026-08-27 and sitewide.
  *
@@ -141,11 +158,12 @@ type Pillar = {
  * The two named parts of the method, as the saturated gradient tiles Brett
  * pulled from the "Most-Used Services" row on livingin-platform.vercel.app.
  *
- * One colour each: deep teal for the talking, deep navy for the voice. They
- * are a matched cool pair as of 2026-08-29, where the pair used to be teal and
- * coral. Each carries a different texture so the two do not read as one
- * repeated tile. Every value below is measured; see the .coach-card block in
- * tailwind.css before changing a stop.
+ * One colour each: soft teal for the talking, deep navy for the voice. Both
+ * are cool as of 2026-08-29, where the pair used to be teal and coral, and
+ * they stopped being a matched PAIR later that day when the deep teal went up
+ * to the hero and left this card light. Each carries a different texture so
+ * the two do not read as one repeated tile. Every value below is measured; see
+ * the .coach-card block in tailwind.css before changing a stop.
  */
 const PILLARS: Pillar[] = [
   {
@@ -155,15 +173,32 @@ const PILLARS: Pillar[] = [
       'You and Michele will sit down, and you’ll tell her about your book the way you would tell a friend over coffee. She will ask questions, you talk, and she will record the whole conversation. What you said comes back to you as manuscript pages in your own words, ready to read and react to.',
     icon: MessagesSquare,
     style: {
-      // Deep teal. Rings, because a Talk Story Session is a conversation
-      // widening out from one question. Retuned 2026-08-29 to #1F5F5B, the
-      // darker, richer relative of the new hero teal, so the pair reads as one
-      // family with this card carrying the anchor weight.
-      '--coach-card-a': '#0b2e2c',
-      '--coach-card-b': '#1f5f5b',
-      '--coach-card-glow': 'rgba(0, 176, 159, 0.45)',
+      // Soft teal, and the one LIGHT tile on the page. Rings, because a Talk
+      // Story Session is a conversation widening out from one question.
+      //
+      // This card was #1F5F5B until the swap later on 2026-08-29, when that
+      // deep teal moved up to the hero and this box took the soft teal in
+      // trade: bold on the big header, soft on the small feature box. #B0CFD0
+      // is the old hero mint shifted toward blue, hue 167 -> 182, which drops
+      // the green cast and still sits within 6 degrees of the hero's 176.
+      //
+      // b is the DARKEST flat point here, which is the reverse of the navy
+      // card, because this one carries navy ink. a is a lighter tint of the
+      // same teal, so the gradient only brightens away from the measured
+      // floor. Everything below inverted with the ground: white rings would
+      // not show on this, and bright teal #00B09F in the corner became a
+      // saturated patch, so the rings are navy and the corner glow is the
+      // hero's own #1F5F5B. See the .coach-card block in tailwind.css.
+      '--coach-card-a': '#c9dedf',
+      '--coach-card-b': '#b0cfd0',
+      '--coach-card-glow': 'rgba(31, 95, 91, 0.28)',
       '--coach-card-pattern':
-        'repeating-radial-gradient(circle at 82% 6%, rgba(255,255,255,0.075) 0 1px, rgba(255,255,255,0) 1px 14px), radial-gradient(70% 55% at 12% 100%, rgba(0,176,159,0.18) 0%, rgba(0,176,159,0) 64%)',
+        'repeating-radial-gradient(circle at 82% 6%, rgba(31,39,68,0.055) 0 1px, rgba(31,39,68,0) 1px 14px), radial-gradient(70% 55% at 12% 100%, rgba(31,95,91,0.16) 0%, rgba(31,95,91,0) 64%)',
+      '--coach-card-ink': 'var(--color-navy)',
+      '--coach-card-ink-soft': 'var(--color-navy)',
+      '--coach-card-body': 'rgba(31, 39, 68, 0.85)',
+      '--coach-card-ring-bg': 'rgba(31, 39, 68, 0.08)',
+      '--coach-card-ring-line': 'rgba(31, 39, 68, 0.22)',
     } as React.CSSProperties,
   },
   {
@@ -185,11 +220,19 @@ const PILLARS: Pillar[] = [
       // as pure decoration. Diagonal hatching, so it reads as a hand rather
       // than an echo of the rings next to it.
       //
-      // Recoloured from coral to #1F2E4A on 2026-08-29. Navy against the deep
-      // teal beside it is the "senior strategist" pairing Michele and Brett
-      // asked /coach to have, and gold on navy is what makes it read as
-      // considered rather than cold. The glow moved to a mid blue with it; a
-      // coral drop shadow under a navy tile read as a stray warm halo.
+      // Recoloured from coral to #1F2E4A on 2026-08-29. Navy is the "senior
+      // strategist" half of the pairing Michele and Brett asked /coach to
+      // have, and gold on navy is what makes it read as considered rather
+      // than cold. The glow moved to a mid blue with it; a coral drop shadow
+      // under a navy tile read as a stray warm halo.
+      //
+      // LEFT ALONE in the swap later that day. Michele asked for the hero and
+      // TSS to trade colours and said nothing about this card, so it keeps
+      // every value it had, including its white and cream ink, which is what
+      // the .coach-card defaults now carry. The result is that the pair is no
+      // longer symmetrical: TSS is light and this is dark. That is a real
+      // consequence of the instruction rather than an oversight, and it is
+      // hers to call.
       '--coach-card-a': '#0e1728',
       '--coach-card-b': '#1f2e4a',
       '--coach-card-glow': 'rgba(58, 90, 140, 0.45)',
@@ -279,10 +322,17 @@ export default function CoachingPage() {
           swap this for a centred layout or a bare max-w div; either one breaks
           that alignment.
 
-          Ground is `.surface-coach-hero`, the soft teal field as of
-          2026-08-29, NOT the sitewide navy banner. See tailwind.css for the
-          contrast measurements and for why the eyebrow here is navy rather
-          than an accent colour. */}
+          Ground is `.surface-coach-hero`, the DEEP teal field as of the
+          second pass on 2026-08-29, NOT the sitewide navy banner. It was a
+          soft teal for a few hours in between; Michele and Brett swapped it
+          with the TSS card so the bold colour sits on the big header and the
+          soft one on the small box.
+
+          The ink flipped with the ground and there is no navy left in here:
+          the eyebrow and the H1 are --color-white and the subtitle is
+          --color-cream, which keeps the H1 above it without dropping under
+          AA. See tailwind.css for every measurement, including the one weak
+          number on the page, the terracotta CTA's 1.59:1 as a shape. */}
       <section
         aria-label="The Brave Purpose Author Method"
         className="surface-coach-hero relative isolate w-full overflow-hidden py-14 sm:py-16 lg:py-20"
@@ -290,11 +340,11 @@ export default function CoachingPage() {
         <Container>
           <FadeIn className="max-w-2xl">
             <h1>
-              <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-navy)] uppercase sm:text-sm">
+              <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-white)] uppercase sm:text-sm">
                 {siteConfig.offerName}
               </span>
               <span className="sr-only"> - </span>
-              <span className="font-display mt-4 block text-[2rem] leading-[1.1] font-medium tracking-tight text-balance text-[var(--color-navy)] sm:mt-5 sm:text-[2.5rem] lg:text-5xl lg:leading-[1.08]">
+              <span className="font-display mt-4 block text-[2rem] leading-[1.1] font-medium tracking-tight text-balance text-[var(--color-white)] sm:mt-5 sm:text-[2.5rem] lg:text-5xl lg:leading-[1.08]">
                 Write your book in six months.
               </span>
             </h1>
@@ -303,7 +353,7 @@ export default function CoachingPage() {
                 match the rest of the page. Approved verbatim, including the
                 singular "conversation" here against the plural used in the
                 metadata and the TSS card. Do not edit it. */}
-            <p className="font-display mt-4 max-w-2xl text-lg leading-7 font-medium text-neutral-700 sm:text-xl sm:leading-8">
+            <p className="font-display mt-4 max-w-2xl text-lg leading-7 font-medium text-[var(--color-cream)] sm:text-xl sm:leading-8">
               Talk with Michele. Together, you&rsquo;ll turn your conversation
               into a manuscript.
             </p>
@@ -368,24 +418,25 @@ export default function CoachingPage() {
                         <Icon
                           aria-hidden="true"
                           strokeWidth={1.6}
-                          className="h-8 w-8 text-[var(--color-cream)] sm:h-9 sm:w-9"
+                          className="coach-card-icon h-8 w-8 sm:h-9 sm:w-9"
                         />
                       </span>
                       {/* The acronym, at display scale in white. It used to be
                           a 14px cream eyebrow at 75% opacity; Michele asked on
                           2026-08-27 for TSS and UAV to read as the NAME of each
                           part of the method, so it now outsizes the spelled-out
-                          title below it. White is --color-white, the token the
-                          .coach-card contrast notes are measured against, and
-                          at full opacity: 4.95:1 on the teal card and 7.71:1 on
-                          the navy at each card's lightest point, both clear of
+                          title below it. The colour is --coach-card-ink, set
+                          by .coach-card-abbr, which is navy on the light TSS
+                          tile and --color-white on the dark UAV one, at full
+                          opacity in both: 7.24:1 and 7.71:1 at each card's
+                          worst point, both clear of
                           the 4.5:1 AA floor for normal text, let alone the 3:1
                           this size and weight actually owe. Do not put it back
                           on an opacity modifier; the old /75 was what made it
                           recede. */}
                       <p
                         aria-hidden="true"
-                        className="font-display mt-6 text-4xl leading-none font-extrabold tracking-[0.06em] text-[var(--color-white)] uppercase sm:text-5xl"
+                        className="coach-card-abbr font-display mt-6 text-4xl leading-none font-extrabold tracking-[0.06em] uppercase sm:text-5xl"
                       >
                         {item.abbr}
                       </p>
@@ -394,11 +445,11 @@ export default function CoachingPage() {
                           "TSS. Talk Story Sessions." Sighted readers see only
                           the title, because the abbreviation is already the
                           line above it. */}
-                      <h3 className="font-display mt-3 text-2xl font-semibold tracking-tight text-[var(--color-cream)] sm:text-[1.75rem]">
+                      <h3 className="coach-card-title font-display mt-3 text-2xl font-semibold tracking-tight sm:text-[1.75rem]">
                         <span className="sr-only">{item.abbr}. </span>
                         {item.title}
                       </h3>
-                      <p className="mt-5 max-w-md text-xl leading-9 text-[var(--color-cream)]/85">
+                      <p className="coach-card-body mt-5 max-w-md text-xl leading-9">
                         {item.body}
                       </p>
                     </div>
@@ -534,22 +585,25 @@ export default function CoachingPage() {
 
       {/* -------------------------------------------------- 6. NOT JUST BOOKS */}
       {/* Kept from the previous coaching pass, wording untouched. The panel
-          carries `.surface-coach-hero`, the same field as the hero at the top
-          of the page: Michele asked on 2026-08-27 for this box to match the
-          hero rather than the tinted cream it used to share with section 4.
-          What she asked for was that the two MATCH, so when the hero went teal
-          on 2026-08-29 this panel went with it and the intent still holds. Her
-          words for it were "the hero pink", so if she ever wants this one box
-          left warm it is a one-line change: give it its own surface instead of
-          sharing the hero's. interest="other" (not "coaching") keeps these
-          inquiries out of the book wait-list.
+          carries `.surface-coach-soft`. Michele asked on 2026-08-27 for this
+          box to MATCH the hero rather than the tinted cream it used to share
+          with section 4, and it shared the hero's own class until the hero
+          went dark on 2026-08-29. interest="other" keeps these inquiries out
+          of the book wait-list, and "coaching" would put them in it.
 
-          On the teal ground this panel carries its heading at 12.58:1, its
-          body copy at 6.59:1 and the CTA at the same 2.94:1 the button has in
-          the hero, so nothing here is a new contrast condition. See the
-          .surface-coach-hero block in tailwind.css. It sits on band-3
-          (#efefea, cool grey) inside a navy-10 hairline ring, and the teal
-          reads 1.36:1 against that ground, so the panel still separates.
+          It cannot match a dark hero. This is a small box carrying navy ink,
+          which is exactly the case the new principle says stays soft, so it
+          kept the soft teal and moved with it to #B0CFD0. The page now runs on
+          one soft teal instead of two near-identical ones, which is the
+          closest reading of what she asked for. If she wants this box dark to
+          match the hero literally, it is a one-line change back to
+          `.surface-coach-hero`, but the ink in here has to flip with it.
+
+          On this ground the panel carries its heading at 8.86:1 and its body
+          copy at 6.64:1, both comfortably AA, and the CTA at 2.79:1 as a
+          shape. See the .surface-coach-soft block in tailwind.css. It sits on
+          band-3 (#f2efe8, cool grey) inside a navy-10 hairline ring, and the
+          teal reads 1.44:1 against that ground, so the panel still separates.
 
           band-3 is the last content ground on the page. SiteFooter paints its
           own band-4 run-in below this, so the close of the page descends
@@ -560,7 +614,7 @@ export default function CoachingPage() {
       >
         <Container>
           <FadeIn>
-            <div className="surface-coach-hero rounded-4xl p-8 ring-1 ring-[var(--color-navy-10)] sm:p-12">
+            <div className="surface-coach-soft rounded-4xl p-8 ring-1 ring-[var(--color-navy-10)] sm:p-12">
               <h2
                 id="not-just-books-heading"
                 className="font-display text-2xl font-semibold tracking-tight text-neutral-950 sm:text-3xl"
