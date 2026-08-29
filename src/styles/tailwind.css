@@ -263,21 +263,37 @@
      These are a marigold, and the section reads as a colour block that the
      covers sit on rather than as a tint that apologises for being there.
 
-     THE RANGE IS STILL A CONTRAST BUDGET, and the arithmetic runs the other
-     way now. On a light wash the darkest pixel was the floor; on a saturated
-     one the DARKEST pixel is where dark type has the most room and the
-     LIGHTEST is the ceiling, so --color-author-wash-base #E8843C is the worst
-     case for every word in the section. Measured against it:
+     THE RANGE IS STILL A CONTRAST BUDGET, and which END of it you measure
+     depends on which way the ink runs. The wash spans #F2994E at the top down
+     to #E8843C at the base, so DARK type is worst off at the base and LIGHT
+     type is worst off at the top. The hero text is white as of 2026-08-29's
+     second pass, which puts the worst case at --color-author-wash-top #F2994E.
 
-       navy #1F2744 (neutral-950, neutral-700 is aliased dark too)  5.45:1
-       coral-text #B8431F, the eyebrow this hero used to use        2.02:1
-       neutral-700 #333B59, the subhead this hero used to use       4.08:1
+                                    on top #F2994E   on base #E8843C
+       --color-white #FAF9F5              2.11:1           2.56:1
+       --color-cream #F2ECDF              1.89:1           2.29:1
+       pure #FFFFFF, for reference        2.22:1           2.69:1
+       navy #1F2744, the previous ink     6.59:1           5.45:1
 
-     Which is why the eyebrow and the subhead are both navy on this page now.
-     Terracotta on marigold is the same hue family and it disappeared; the
-     grey-navy subhead missed AA by four tenths. If you retune these two
-     tokens, re-measure navy against whichever end comes out darker, and do
-     not put a mid-tone on this ground at all.
+     WHITE ON THIS MARIGOLD DOES NOT MEET AA AT ANY SIZE, and this is recorded
+     here rather than quietly fixed because Michele asked for the white ink
+     directly, to match Speaker and Coach. 2.11:1 is under the 3:1 large-text
+     floor the H1 needs and well under the 4.5:1 the 18px subhead needs. Weight
+     does not rescue the subhead either: WCAG large text means 24px, or 18.66px
+     BOLD, and this line is 18px at 500.
+
+     THE GROUND IS THE ONLY LEVER LEFT. There is no white-ish ink that fixes
+     this, because #FAF9F5 is already within a hair of pure white and every
+     step away from white on a mid-light orange goes DOWN before it comes back
+     up. For white to clear the floors, the marigold has to deepen:
+
+       3:1   large-text AA for the H1        ground at L 0.282, e.g. #E4701D
+       4.5:1 body AA for the subhead         ground at L 0.172, e.g. #B65916
+
+     Both hold hue 25 and saturation 0.79, so they are the same marigold turned
+     down rather than a different colour. Michele has seen these numbers and
+     the white ink is her call for now; if the wash is ever deepened, delete
+     this warning rather than letting it rot.
 
      Do NOT reach for these anywhere else. DESIGN-RULES bans coral-tinted
      panels, and this is deliberately the single exception Michele asked for
@@ -1005,9 +1021,11 @@ html {
    Two layers, unchanged in shape from the blush version this replaced. A soft
    ellipse deepens the right side, which is where the fan of covers sits, and a
    top-to-bottom gradient carries the rest. Both stops live inside the range set
-   by --color-author-wash-top and --color-author-wash-base, so the darkest pixel
-   anywhere in the section is the base, which is the worst case for the dark
-   type on it. See the token block in this file for the measurements.
+   by --color-author-wash-top and --color-author-wash-base, so the lightest
+   pixel anywhere in the section is the top, which is the worst case for the
+   WHITE type this hero carries as of 2026-08-29. It is also where the type
+   actually sits, at the head of the section. See the token block in this file
+   for the measurements and for the AA shortfall they record.
 
    The ellipse deepening rather than lightening the right side is deliberate.
    The covers are a mixed set and several of them (Dancing with Father, the

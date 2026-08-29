@@ -51,6 +51,12 @@ import { pageMetadata } from '@/lib/schema'
  * contrast budget it puts on every word in this section. Everything else still
  * uses the navy banner, and that is still the site identity.
  *
+ * THE HERO INK IS WHITE, second pass of 2026-08-29, so this banner reads the
+ * way Speaker and Coach do: light type on a colour field. All three lines take
+ * --color-white, which is Coach's hero ink. It is a known AA shortfall and the
+ * numbers are written up against .surface-author-wash in tailwind.css; the ink
+ * is Michele's direct call and the lever that would fix it is the marigold.
+ *
  * BANDS. Sections alternate --color-band-1 / band-2 the way the home page
  * does, so each one reads as a finished thought. There is no constraint on
  * which band goes last: SiteFooter paints its own run-in with band-4.
@@ -457,29 +463,35 @@ export default function AuthorPage() {
             <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_minmax(0,38rem)] lg:items-center lg:gap-12">
               <div className="max-w-2xl">
                 <h1>
-                  {/* Navy, not terracotta. This eyebrow was
-                      --color-brand-terracotta-ink #B8431F for as long as the
-                      wash was a pale blush. The wash went marigold on
-                      2026-08-29 and terracotta is the same hue family, so it
-                      fell to 2.02:1 against the deepest point of the ground and
-                      simply vanished. Navy holds 5.45:1 there. */}
-                  <span className="font-display block text-xs font-semibold tracking-[0.22em] text-neutral-950 uppercase sm:text-sm">
+                  {/* White, on Michele's direction of 2026-08-29: the Author
+                      hero now reads the way Speaker and Coach do, light type on
+                      a colour field. --color-white is Coach's hero ink exactly.
+
+                      This eyebrow has now been three colours in one day. It was
+                      --color-brand-terracotta-ink #B8431F under the old blush
+                      wash, went navy when the wash went marigold, and is white
+                      now. READ THE CONTRAST NOTE ON .surface-author-wash BEFORE
+                      TOUCHING IT AGAIN: white does not clear AA on this ground
+                      at any size, and the fix is the marigold, not the ink. */}
+                  <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-white)] uppercase sm:text-sm">
                     Author
                   </span>
                   <span className="sr-only"> - </span>
-                  <span className="font-display mt-4 block text-[2rem] leading-[1.1] font-medium tracking-tight text-balance text-neutral-950 sm:mt-5 sm:text-[2.5rem] lg:text-5xl lg:leading-[1.08]">
+                  <span className="font-display mt-4 block text-[2rem] leading-[1.1] font-medium tracking-tight text-balance text-[var(--color-white)] sm:mt-5 sm:text-[2.5rem] lg:text-5xl lg:leading-[1.08]">
                     Books, journals, and curricula for every age
                   </span>
                 </h1>
                 {/* Michele's approved subhead. Keep it verbatim.
 
-                    Navy rather than neutral-700 for the same reason as the
-                    eyebrow: #333B59 scores 4.08:1 on the deepest point of the
-                    marigold and misses AA for 18px text by four tenths. There
-                    is no lighter navy that clears it, so the subhead takes the
-                    full ink and lets size and weight carry the step down from
-                    the H1. */}
-                <p className="font-display mt-4 max-w-xl text-lg leading-7 font-medium text-neutral-950 sm:text-xl sm:leading-8">
+                    --color-white, the same ink as the H1 above it, and this is
+                    the ONE place the Author hero departs from Coach. Coach
+                    steps its subtitle down to --color-cream so the H1 stays
+                    above it; cream on this marigold measures 1.89:1 against
+                    2.11:1 for white, so borrowing that step would make the
+                    weakest number on the page weaker still and buy nothing.
+                    Size and weight carry the step down from the H1 instead,
+                    which is what this subhead already did when it was navy. */}
+                <p className="font-display mt-4 max-w-xl text-lg leading-7 font-medium text-[var(--color-white)] sm:text-xl sm:leading-8">
                   Books, journals, and curricula that call out purpose and
                   passion at every age.
                 </p>
