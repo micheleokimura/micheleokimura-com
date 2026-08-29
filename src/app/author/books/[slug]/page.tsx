@@ -75,7 +75,7 @@ function Panel({
   items?: string[]
 }) {
   return (
-    <div className="mt-8 rounded-3xl bg-[var(--color-band-2)] p-6 ring-1 ring-[var(--color-navy-10)] sm:p-8">
+    <div className="mt-8 rounded-3xl bg-[var(--color-panel)] p-6 ring-1 ring-[var(--color-navy-10)] sm:p-8">
       <h2 className="font-display text-xs font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
         {heading}
       </h2>
@@ -149,11 +149,13 @@ function Section({
 /**
  * The prominent purchase call to action. Michele read the old one-line
  * "Buy at thebraveseries.com" as far too small to find, so this is its own
- * centred panel: cream ground, tracked small-caps label, and the domain set at
- * heading scale.
+ * centred panel: warm neutral ground, tracked small-caps label, and the domain
+ * set at heading scale.
  *
- * Cream rather than a coral tint. DESIGN-RULES bans coral-tinted panels, and
- * the warm accent the brief asks for is exactly what --color-band-3 is for.
+ * Warm neutral rather than a coral tint. DESIGN-RULES bans coral-tinted
+ * panels. It was band-3 while the band scale stepped; it is --color-panel
+ * since 2026-08-29, when the bands flattened and a band stopped being able to
+ * draw a card at all.
  * No pill, no rounded-full, no button chrome: the underline carries the
  * affordance and thickens on hover.
  */
@@ -167,7 +169,7 @@ function BuyLink({
   href: string
 }) {
   return (
-    <div className="mt-12 rounded-2xl bg-[var(--color-band-3)] px-6 py-8 text-center ring-1 ring-[var(--color-navy-10)] sm:px-10 sm:py-10">
+    <div className="mt-12 rounded-2xl bg-[var(--color-panel)] px-6 py-8 text-center ring-1 ring-[var(--color-navy-10)] sm:px-10 sm:py-10">
       <p className="font-display text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-terracotta-ink)] uppercase sm:text-sm">
         {label}
       </p>

@@ -58,8 +58,14 @@ import { pageMetadata } from '@/lib/schema'
  * is Michele's direct call and the lever that would fix it is the marigold.
  *
  * BANDS. Sections alternate --color-band-1 / band-2 the way the home page
- * does, so each one reads as a finished thought. There is no constraint on
+ * does. Both tokens resolve to the same #FCFAF6 since 2026-08-29, when the
+ * scale flattened sitewide, so the alternation is a record of the intended
+ * rhythm rather than something a reader can see. There is no constraint on
  * which band goes last: SiteFooter paints its own run-in with band-4.
+ *
+ * The shelf TILES are cards, so they take --color-panel rather than a band.
+ * They were on band-3, which worked while the bands stepped; on the flat
+ * ground it would have made them invisible.
  *
  * 2026-08-25. The closing "Also built by Michele" row is gone. Its two cards,
  * the Kingdom Kids Workshop and ReThink Creativity, are speaking work rather
@@ -135,7 +141,7 @@ const TILE_SIZES = '(max-width: 640px) 6rem, (max-width: 1024px) 30vw, 24rem'
  * under a cover) came out half the width of its neighbours.
  */
 const TILE_CLASS =
-  'group flex h-full w-full flex-row overflow-hidden rounded-2xl bg-[var(--color-band-3)] shadow-sm ring-1 ring-[var(--color-navy-10)] transition duration-300 hover:-translate-y-0.5 hover:shadow-md hover:ring-[var(--color-teal-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)] sm:flex-col'
+  'group flex h-full w-full flex-row overflow-hidden rounded-2xl bg-[var(--color-panel)] shadow-sm ring-1 ring-[var(--color-navy-10)] transition duration-300 hover:-translate-y-0.5 hover:shadow-md hover:ring-[var(--color-teal-30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-teal)] sm:flex-col'
 
 /** Card body. Reference: `flex min-w-0 flex-1 flex-col p-2.5 xs:p-4`. */
 const BODY_CLASS = 'flex min-w-0 flex-1 flex-col p-2.5 sm:p-4'
