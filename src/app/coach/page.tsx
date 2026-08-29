@@ -81,9 +81,12 @@ import { pageMetadata } from '@/lib/schema'
  *
  * So: do not "fix" the 1, 2, 1, 2, 3 sequence below because the page renders
  * flat, and do not add a fourth band expecting it to read as a new ground.
- * Section boundaries here are carried by whitespace, and the deliverables box
- * is carried by --color-panel, which went DOWN to #F1EEE7 in the same pass so
- * that cards keep lifting off the flattened ground.
+ * Section boundaries here are carried by whitespace. The cards are carried by
+ * --color-panel and the deliverables box by --color-coach-surface-soft, both
+ * of which are back on their sitewide values. Taking those two DOWN to
+ * #F1EEE7 so they lift off the flat ground is a SEPARATE pilot, scoped to this
+ * page, dispatched as its own task on 2026-08-29. It briefly went sitewide and
+ * was pulled back the same day. Do not re-roll it from here.
  *
  * RECOLOURED 2026-08-29, and this page ONLY. Michele and Brett want /coach to
  * be the most professional of the three role pages: /speaker and /author stay
@@ -301,9 +304,10 @@ const FAQS: { question: string; answer: string }[] = [
  * The tick in "In six months, you get". A small round well rather than a bare
  * glyph, so the checklist picks up the icon treatment from the TSS and UAV
  * cards above it at a quieter scale. The tick itself is what has to be seen:
- * teal-text on the disc is 4.12:1, which clears the 3:1 a non-text graphic
- * owes under WCAG 1.4.11. The disc under it is decoration and is deliberately
- * quiet, 1.15:1 against the panel.
+ * teal-text on the disc is 3.98:1 over the #EDEAE2 box, which clears the 3:1
+ * a non-text graphic owes under WCAG 1.4.11. The disc under it is decoration
+ * and is deliberately quiet, 1.14:1 against the box. If the /coach card pilot
+ * takes that box to #F1EEE7, the glyph goes to 4.12:1 and still clears.
  */
 function CheckMark() {
   return (

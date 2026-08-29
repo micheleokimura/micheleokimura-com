@@ -56,7 +56,7 @@ export default function CaseStudiesPage() {
               <FadeIn as="li" key={study.slug} scaleIn>
                 <Link
                   href={`/case-studies/${study.slug}`}
-                  className="group flex h-full flex-col rounded-3xl bg-[var(--color-panel)] p-8 ring-1 ring-neutral-900/5 transition hover:shadow-lg hover:ring-neutral-900/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus-ring)]"
+                  className="group flex h-full flex-col rounded-3xl bg-white p-8 ring-1 ring-neutral-900/5 transition hover:shadow-lg hover:ring-neutral-900/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus-ring)]"
                 >
                   <span className="text-xs font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
                     {engagementLabel(study.engagementType)}

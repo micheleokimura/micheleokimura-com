@@ -51,11 +51,13 @@ import { siteConfig } from '@/lib/site-config'
  * in the markup because they are the record of the intended rhythm, and a
  * future re-cut would restore the steps without touching this file.
  *
- * What carries the seams now is whitespace and the cards. A CARD still never
- * takes a band: tiles use --color-panel, which went DOWN to #F1EEE7 in the
- * same pass and is the one neutral surface here that is not the ground. It
- * sits 4.17 points of lightness under it, which is the step the band scale
- * used to spend between neighbours, now spent where it can be seen.
+ * What carries the seams now is whitespace, and it carries them alone. A CARD
+ * still never takes a band: tiles use --color-panel, the one neutral surface
+ * here that is not the ground. It is pure #FFFFFF and clears #FCFAF6 by 1.68
+ * points of lightness, which is a thin edge and is why every one of these
+ * tiles keeps its `ring-1 ring-navy/10`. Taking that card ground DOWN to
+ * #F1EEE7 instead is being piloted on /coach; if it lands, these tiles gain
+ * 4.17 points of separation and this file does not change.
  *
  * THE THREE ROLE CARDS ARE THE EXCEPTION to "a card never takes a band". They
  * are not neutral tiles at all now: each one is a coloured gradient using the

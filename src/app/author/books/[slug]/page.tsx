@@ -149,13 +149,13 @@ function Section({
 /**
  * The prominent purchase call to action. Michele read the old one-line
  * "Buy at thebraveseries.com" as far too small to find, so this is its own
- * centred panel: warm neutral ground, tracked small-caps label, and the domain
- * set at heading scale.
+ * centred panel: the sitewide card ground, tracked small-caps label, and the
+ * domain set at heading scale.
  *
- * Warm neutral rather than a coral tint. DESIGN-RULES bans coral-tinted
- * panels. It was band-3 while the band scale stepped; it is --color-panel
- * since 2026-08-29, when the bands flattened and a band stopped being able to
- * draw a card at all.
+ * Neutral rather than a coral tint. DESIGN-RULES bans coral-tinted panels. It
+ * was band-3 while the band scale stepped; it is --color-panel since
+ * 2026-08-29, when the bands flattened and a band stopped being able to draw a
+ * card at all.
  * No pill, no rounded-full, no button chrome: the underline carries the
  * affordance and thickens on hover.
  */
