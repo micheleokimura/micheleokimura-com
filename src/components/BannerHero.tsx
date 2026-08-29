@@ -64,19 +64,21 @@ const EYEBROW_CLASS = {
  * `.surface-about-slate` at the foot. It is scoped to that one page: every
  * other interior hero still defaults to `teal`.
  *
- * That value was re-cut later the same day. It began as a warm earthy
- * slate-blue #4E5872, which Michele read as still mostly grey, and it is now
- * #4F5C99, a muted cornflower periwinkle in the direction of a blue
- * hydrangea. The token kept its `slate` name; see the block in tailwind.css
+ * That value was re-cut twice on the same day. It began as a warm earthy
+ * slate-blue #4E5872, which Michele read as still mostly grey; it went to
+ * #4F5C99, a cornflower periwinkle in the direction of a blue hydrangea,
+ * which she read as a touch too vibrant and digital; and it settled at
+ * #56608E, the same hue with the saturation pulled back so the band sits
+ * earthier. The token kept its `slate` name; see the block in tailwind.css
  * for why, and for the full re-measured contrast table.
  *
  * The two violets take the pale lavender eyebrow and the plum does NOT: on
  * the plum that lavender measures 4.48:1 at the lightest pixel of the
  * gradient and misses AA, so `plum` takes a warm blush at 5.37:1. `slate`
- * takes a pale warm sand at 4.84:1 for the same reason in reverse: the pale
- * teal would scrape a pass at 4.54:1 but pulls the band back cool, which is
- * what the recolour was for. See EYEBROW_CLASS above and the measured tables in
- * tailwind.css.
+ * takes a pale warm sand at 4.65:1 for the same reason in reverse: the pale
+ * teal fails AA outright at 4.36:1 on this ground and pulls the band back
+ * cool besides, which is what the recolour was for. See EYEBROW_CLASS above
+ * and the measured tables in tailwind.css.
  *
  * The eyebrow is plain tracked small caps. No pill, no badge, no border, no
  * rounded corners, anywhere, ever. Pills read as buttons and people click them.

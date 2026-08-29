@@ -44,7 +44,7 @@ export default function AboutPage() {
 
           Calls BannerHero directly rather than through the PageIntro alias,
           the same way /speaker does, because it needs a surface other than the
-          sitewide default. `slate` is the muted periwinkle this page
+          sitewide default. `slate` is the earthy periwinkle this page
           runs, and the closing panel at the foot of the page runs the SAME
           flat value. Change one and change the other, or the page stops
           framing itself. See the --color-about-slate block in tailwind.css. */}

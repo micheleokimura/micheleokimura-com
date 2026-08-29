@@ -695,47 +695,51 @@
      already settled into, which is Speaker's plum #624973, Author's marigold,
      and Coaching's warm sage-teal.
 
-     #4F5C99 is a muted cornflower periwinkle, and it replaced #4E5872 on
-     2026-08-29. The slate was the right idea and not enough of it: Michele
-     read it as still mostly grey, a blue that had been talked out of being a
-     colour. She asked for the direction a blue hydrangea goes, which is
-     periwinkle. Clearly more purple and more saturated than the slate, and
-     still earthy rather than neon or loud. It keeps the blue the navy had, so
-     /about still belongs to the site, and it sits with the family the other
-     pages settled into: Speaker's plum #624973, Coaching's blue-teal, and
-     Author's marigold.
+     #56608E is that same periwinkle with the saturation pulled back, and it
+     replaced #4F5C99 on 2026-08-29, hours after the cornflower itself
+     replaced the slate #4E5872. The cornflower moved far enough and then a
+     smidgen past it: Michele read #4F5C99 as vibrant to the point of feeling
+     digital, and asked for the periwinkle character kept while the colour
+     came back down to earth. This is the same hue to within a fifth of a
+     degree, 229.3 against 229.5, with saturation down roughly seven points
+     from 31.9 to 24.6 percent. It still goes the direction of a blue
+     hydrangea and now sits closer to a pigment than to a screen. It keeps
+     the blue the navy had, so /about still belongs to the site, and it sits
+     with the family the other pages settled into: Speaker's plum #624973,
+     Coaching's blue-teal, and Author's marigold.
 
-     What the move costs. Saturating toward purple lifts the relative
-     luminance from 0.0981 to 0.1162, so every ink on the band gives up
-     roughly half a point of contrast. Everything the page actually renders
-     still clears AA. Measured on the flat field, with the slate readings in
-     brackets so the cost is visible:
-       eyebrow --color-about-slate-ink #F0DFC8   4.84:1   (5.43)
-       banner headline cream #F2ECDF             5.37:1   (6.02)
-       panel headline text-white #FCFAF6         6.06:1   (6.80)
-       panel body copy, white at 95 percent      5.66:1   (6.33)
-       panel dl labels, white at 85 percent      4.91:1   (5.46)
-       panel email link text-white #FCFAF6       6.06:1   (6.80)
-       pure white #FFFFFF, reference only        6.32:1   (7.09)
-     Nothing clears AAA any more. The slate only ever cleared it against a
-     pure white this page does not paint. Note that this site remaps the
+     What the move costs. Dropping the saturation here also lifts the value a
+     little, so relative luminance goes from 0.1162 to 0.1230 and every ink
+     on the band gives up about two tenths of a point of contrast. Everything
+     the page actually renders still clears WCAG 2.2 AA. Measured on the flat
+     field, with the #4F5C99 readings in brackets so the cost is visible:
+       eyebrow --color-about-slate-ink #F0DFC8   4.65:1   (4.84)
+       banner headline cream #F2ECDF             5.16:1   (5.37)
+       panel headline text-white #FCFAF6         5.82:1   (6.06)
+       panel body copy, white at 95 percent      5.44:1   (5.65)
+       panel dl labels, white at 85 percent      4.74:1   (4.90)
+       panel email link text-white #FCFAF6       5.82:1   (6.06)
+       pure white #FFFFFF, reference only        6.07:1   (6.32)
+     Nothing clears AAA, and nothing has since the slate went. Note that this site remaps the
      Tailwind neutrals to warm creams, so measure against the painted value
      and never against the palette name: text-white lands at #FCFAF6, and
      text-neutral-300 is #B8B5B0 rather than the #E5E5E5 the name implies. The
      panel keeps the neutral-300 body copy off for that reason.
 
      The one ink that does NOT clear AA on this ground is a banner subtitle in
-     cream at 85 percent, which lands at 4.39:1 against 4.88:1 on the slate.
-     /about passes no subtitle to BannerHero, and has not since 2026-08-23, so
-     nothing renders it. If a subtitle is ever reinstated on this page it has
-     to step up to full cream, which holds 5.37:1.
+     cream at 85 percent, which lands at 4.24:1 against 4.38:1 on the
+     cornflower. /about passes no subtitle to BannerHero, and has not since
+     2026-08-23, so nothing renders it. If a subtitle is ever reinstated on
+     this page it has to step up to full cream, which holds 5.16:1.
 
-     A darker and a lighter candidate were both checked against the deployed
-     page before this landed. #4E5A8F holds that subtitle at 4.57:1 but barely
-     reads apart from the slate it replaces, and #5462A5 drops the eyebrow to
-     4.39:1 and the dl labels to 4.49:1, which fails AA on ink this page does
-     render. #4F5C99 is the value that moves far enough to read as periwinkle
-     while keeping every rendered layer above AA.
+     Two neighbours were measured alongside this one, as the warmer and the
+     quieter way to miss. #5A6390 is brighter by a hair and drops the eyebrow
+     sand to 4.44:1, which fails AA on ink this page does render, so it is
+     ruled out on contrast whatever it looks like. #585E88 is the quieter
+     direction and stays legal, eyebrow 4.77:1 and dl labels 4.86:1, so that
+     is the value to reach for if #56608E ever reads vibrant again. #56608E
+     is the one that grounds the cornflower while keeping every rendered
+     layer above AA.
 
      Flat, with no glow and no gradient, on both bands. .surface-teal-banner
      gradients its top stop darker to give the full-bleed navy sections depth,
@@ -744,18 +748,22 @@
      SAME colour, and any gradient means the two bands only match at one
      stop. This is the same reasoning .surface-speaker-plum-quote carries.
 
-     The eyebrow stays --color-about-slate-ink, a pale warm sand, at 4.84:1.
-     The sitewide pale teal #9FE8DF measures 4.54:1 here and would scrape a
-     pass, but it reads as a leftover from the navy banner and pulls the band
-     cool again, which is the whole thing this change was meant to fix. Sand
-     answers the terracotta button on the panel below it and keeps the eyebrow
-     distinct from the cream headline it sits above.
+     The eyebrow stays --color-about-slate-ink, a pale warm sand, at 4.65:1.
+     The sitewide pale teal #9FE8DF scraped a 4.54:1 pass on the cornflower
+     and measures 4.36:1 here, so it now fails AA outright and the sand is
+     load-bearing rather than a preference. Sand also answers the terracotta
+     button on the panel below it and keeps the eyebrow distinct from the
+     cream headline it sits above.
 
      Known, and carried through every recolour of this band: the terracotta
-     CTA button is 2.35:1 against this ground, against 2.63:1 on the slate and
-     3.17:1 on the old navy, so it still reads by its label and its shadow
-     rather than by a strong edge. Its own white label is untouched. Michele
-     asked for the button to stay the warm accent it is.
+     CTA button is 1.31:1 against this ground, against 1.37:1 on the
+     cornflower and 1.53:1 on the slate, so it still reads by its label and
+     its shadow rather than by a strong edge. Its own white label is
+     untouched at 4.63:1. Michele asked for the button to stay the warm
+     accent it is. The 2.35:1 and 2.63:1 this block used to claim were
+     measured against --color-brand-terracotta #F15C3D, which is the
+     decoration token; the button paints --color-cta #C84C33, and the figures
+     above are that value.
 
      The token is still named `slate` after a colour it no longer is. That
      name is load-bearing across BannerHero, ContactBlock, and the two surface
@@ -764,7 +772,7 @@
 
      Re-measure on the deployed page, not from these token values, if this
      colour is ever relit. */
-  --color-about-slate: #4f5c99;
+  --color-about-slate: #56608e;
   --color-about-slate-ink: #f0dfc8;
 }
 
