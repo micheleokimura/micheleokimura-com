@@ -391,8 +391,8 @@
      dark surface on the site: the teal and violet banners, the navy footer,
      the coloured role tiles on the home page, the coach hero, the UAV card.
      Each of those gained a little when the ground got lighter, because the ink
-     got lighter with it. On the coach hero #1F5F5B it reads 7.08:1 against
-     7.00:1 before; on the violet banner 14.98:1 against 14.82:1; on the UAV
+     got lighter with it. On the coach hero, #1F5F5B then and #38564D since it
+     warmed, it reads 7.73:1; on the violet banner 14.98:1 against 14.82:1; on the UAV
      card 13.01:1 against 12.88:1. The marigold Author hero is the one place
      this ink does not clear AA, and it did not before either; see the AUTHOR
      HERO WASH block above for the numbers and for Michele's call on them.
@@ -582,24 +582,44 @@
      more vibrant mid-indigo, and they are the colour she wants the page to
      be known by.
 
-     This is that card colour, lifted out of `.msg-violet` so the banner and
-     the closing CTA can share it: #3B2C74 is the LIGHT stop of the keynote
-     card gradient, which is the value the eye actually reads a card as. The
-     old banner field --color-speaker-deep #241B4F is 57 percent darker in
-     relative luminance, 0.01723 against 0.03992, which is why the two never
-     looked related.
+     This started as that card colour lifted out of `.msg-violet` so the
+     banner and the closing CTA could share it: #3B2C74, the LIGHT stop of the
+     keynote card gradient, which is the value the eye actually reads a card
+     as. The old banner field --color-speaker-deep #241B4F is 57 percent
+     darker in relative luminance, 0.01723 against 0.03992, which is why the
+     two never looked related.
+
+     WARMED TO #4C3A6E, later on 2026-08-29, and this is now its own value
+     rather than a copy of the card's. The three role heroes are meant to read
+     as siblings out of one brand, and they did not: /author anchors the set
+     on marigold #E8843C, a plainly warm colour, while /speaker sat on a
+     blue-indigo and /coach on a blue-teal, so the warm one looked like the
+     odd page rather than the parent. Michele asked for the two cool heroes to
+     come toward the anchor. /author is the anchor and does not move.
+
+     The shift is hue 252 -> 261 and saturation 0.62 -> 0.47: red goes into
+     the purple and some of the blue comes out, so the field reads as sunset
+     dusk rather than midnight sky. Value is held, 0.455 -> 0.431, which is
+     why every ratio below moves by less than a point and the band still
+     carries the same weight on the page.
+
+     THE KEYNOTE CARDS DO NOT MOVE. `.msg-violet` keeps #3B2C74 and the seven
+     topic cards keep their own purple, so the banner and the cards are now
+     near relations rather than the same value. That separation is deliberate
+     and Michele signed off on it: a hero and the content boxes inside it do
+     not have to be identical.
 
      --color-speaker-deep STAYS. /speaker/messages/[slug] and
      /speaker/creativity/rethink-creativity-conference still run
      .surface-violet-banner on it and both were out of scope in this pass.
      Retiring it means recolouring those two pages too.
 
-     Measured, on the flat field #3B2C74:
-       cream  #F2ECDF                        9.92:1
-       cream at 85 percent (the subtitle)    7.63:1
-       eyebrow --color-speaker-eyebrow       7.52:1
-       white  #FFFFFF                       11.68:1 */
-  --color-speaker-violet: #3b2c74;
+     Measured, on the flat field #4C3A6E (was #3B2C74):
+       cream  #F2ECDF                        8.35:1   (9.92)
+       cream at 85 percent (the subtitle)    6.55:1   (7.63)
+       eyebrow --color-speaker-eyebrow       6.33:1   (7.52)
+       white  #FFFFFF                        9.82:1  (11.68) */
+  --color-speaker-violet: #4c3a6e;
 }
 
 html {
@@ -791,38 +811,57 @@ html {
 /* THE /speaker PURPLE, on the two bands that bracket the page: the banner at
    the top and the "Book Michele" CTA at the bottom. Added 2026-08-29.
 
-   It is the keynote card's own material, not a new colour. The three layers
-   below are lifted from `.msg-violet` and `.msg-tex-lines` so the banner, the
-   seven cards and the closing CTA read as one surface family:
+   It borrows the keynote card's MATERIAL, and since the warming pass later on
+   2026-08-29 it no longer borrows the card's colour. The three layers are
+   still lifted from `.msg-violet` and `.msg-tex-lines`, so the banner, the
+   seven cards and the closing CTA still read as one surface family:
 
      the 115deg hairline stripes, 2px on 16px at 5.5 percent white
      the violet glow in the TOP RIGHT corner, --color-speaker-glow at 38%
-     the base gradient, --color-speaker-violet easing into #342767
+     the base gradient, --color-speaker-violet easing into #433361
+
+   THE GLOW IS NOT RETUNED and does not need to be. --color-speaker-glow
+   #3E009D sits at hue 264, which is already on the warm side of the new
+   field's 261, so at 38 percent it deepens and saturates the top-right corner
+   without pulling any blue back into it. It is also shared with `.msg-violet`
+   and `.surface-violet-banner`, both out of scope, so leaving it alone keeps
+   this a two-value change.
 
    ONE THING IS DELIBERATELY DIFFERENT from the card, and it is the whole
    point of this class. The card's base runs #3B2C74 to #1E163F, a long fall
    to near-black, because a card is tall and narrow and every text layer on it
    has to sit on deepening colour. A banner is short and wide, so the same
    gradient would put the almost-black at the bottom edge and hand back
-   exactly the heaviness Michele asked to be rid of. The dark stop here is
-   #342767, a quarter of the way down that same line: enough that the band is
-   lit rather than flat, not enough to leave the family.
+   exactly the heaviness Michele asked to be rid of. The dark stop is a
+   quarter of the way down that line, which on the old field was #342767. The
+   warmed field keeps that ratio exactly rather than a copied hex: #433361 is
+   #4C3A6E at 0.885 per channel, the same multiplier #342767 applied to
+   #3B2C74, so the band is lit rather than flat by the same amount as before.
 
    Measured contrast, worst pixel of the three layers, which is a stripe over
-   the light stop at #46387C: both the glow peak (#3C1B84) and the bottom of
+   the light stop at #564576: both the glow peak (#472480) and the bottom of
    the gradient go DOWN in luminance from the base, so the only layer that can
-   lighten the field is the texture.
+   lighten the field is the texture. Prior figures in brackets.
 
                              stripe   base     bottom   glow
-                             #46387C  #3B2C74  #342767  #3C1B84
-     cream #F2ECDF            8.43     9.92    10.93    10.61
-     cream/85, the subtitle   6.59     7.63     8.31     8.05
-     --color-speaker-eyebrow  6.39     7.52     8.29     8.04
-     white #FFFFFF            9.92    11.68    12.87    12.48
+                             #564576  #4C3A6E  #433361  #472480
+     cream #F2ECDF            7.11     8.35     9.46     9.74
+     cream/85, the subtitle   5.58     6.55     7.43     7.64
+     --color-speaker-eyebrow  5.39     6.33     7.18     7.39
+     white #FFFFFF            8.37     9.82    11.14    11.46
 
-   Every reading in that table clears AA, and every one of them clears AAA
-   except the subtitle and the eyebrow where they cross a stripe, at 6.59 and
-   6.39 against the 7:1 AAA bar. If you retune a stop, re-measure at the
+                            (8.43)  ( 9.92)  (10.93)  (10.61)   cream
+                            (6.59)  ( 7.63)  ( 8.31)  ( 8.05)   cream/85
+                            (6.39)  ( 7.52)  ( 8.29)  ( 8.04)   eyebrow
+                            (9.92)  (11.68)  (12.87)  (12.48)   white
+
+   Every reading in that table clears AA with better than a point of margin;
+   the weakest is the eyebrow across a stripe at 5.39:1 against the 4.5 bar.
+   Warming the field cost roughly 1.2 points of contrast everywhere, because
+   red carries less luminance weight than blue, and the AAA readings the old
+   field held on the base and the bottom stops are gone: only the bottom stop
+   and the glow still clear 7:1 for the subtitle and the eyebrow. That is the
+   accepted price of the change. If you retune a stop, re-measure at the
    stripe: it is the only layer that lightens the field, so it is the only
    column that can fail. */
 .surface-violet-card {
@@ -840,7 +879,7 @@ html {
       rgba(62, 0, 157, 0.38) 0%,
       rgba(62, 0, 157, 0) 64%
     ),
-    linear-gradient(160deg, var(--color-speaker-violet) 0%, #342767 100%);
+    linear-gradient(160deg, var(--color-speaker-violet) 0%, #433361 100%);
 }
 
 /* The light half of the same idea: the band that actually carries the Speaker
@@ -893,7 +932,7 @@ html {
    alternative and was passed over: at hue 189 it drifts toward the navy of the
    UAV card and the teal pair stops reading as a pair.
 
-   HERO. The ground is #1F5F5B, lifted by a white radial in the same ellipse
+   HERO. The ground is #38564D, lifted by a white radial in the same ellipse
    the old wash used, so the hero keeps its light-from-the-left composition
    instead of reading as a flat slab. The radial peak dropped from 38% white to
    12%: on a dark ground white LOWERS the contrast under the text, so the peak
@@ -901,22 +940,49 @@ html {
    average. Do not raise that 12% without re-measuring; at 22% the cream
    subtitle falls under AA.
 
-     --color-white #FCFAF6   7.08:1 flat, 5.27:1 at the radial peak
-     --color-cream #F2ECDF   6.27:1 flat, 4.67:1 at the radial peak
+   WARMED FROM #1F5F5B TO #38564D, later on 2026-08-29. Same pass that warmed
+   the /speaker banner, same reason: the three role heroes are meant to read as
+   siblings out of one brand, /author anchors the set on marigold #E8843C, and
+   a blue-teal beside it made the warm page look like the odd one. The shift is
+   hue 176 -> 162 and saturation 0.67 -> 0.35, which puts a yellow-green
+   undertone into the teal and takes most of the blue out: grounded earth
+   rather than cold ocean. /author does not move, it is the anchor.
+
+   MICHELE'S OPENING VALUE WAS #3E5F55 AND IT COULD NOT SHIP. At that
+   lightness the cream subtitle measures 4.46:1 at the radial peak, which is
+   under the 4.5 AA bar for normal text, and the subtitle is 18px medium so it
+   does not qualify as large. The peak is the worst case here by design, so
+   that is a real failure and not a rounding one. #38564D is the same hue and
+   saturation seated about 10 percent deeper, which buys the margin back
+   without touching the 12 percent radial the composition depends on. Every
+   reading below is BETTER than the cool teal it replaces.
+
+     --color-white #FCFAF6   7.73:1 flat, 5.63:1 at the radial peak  (7.08, 5.27)
+     --color-cream #F2ECDF   6.84:1 flat, 4.98:1 at the radial peak  (6.27, 4.67)
+
+   THE TSS BOX DOES NOT MOVE and the teal pair is looser than it was. #B0CFD0
+   sat 6 degrees off the old hero's 176 and now sits 20 degrees off this hero's
+   162. That is deliberate and in scope: Michele ruled the small feature boxes
+   out of this pass, and a hero and the content boxes inside it do not have to
+   be the same colour. If the pair is ever meant to be tight again, the box is
+   the value that moves, not the hero.
 
    The ink FLIPPED with the ground. The eyebrow and the H1 were navy on the old
    light wash and are now --color-white; the subtitle was text-neutral-700 and
    is now --color-cream, which keeps the H1 above it without dropping under AA.
    There is no navy left in this hero.
 
-   The CTA on this ground measures 1.59:1 as a shape, down from 2.94:1 on the
-   old light wash. The button is deliberately left warm, because it is the one
-   warm accent on a cool page, and Michele asked for it to stay terracotta
-   through the swap. Its own label contrast, white on #C84C33 at 4.63:1, is a
-   sitewide condition of that button and is unchanged here. The shape figure is
-   the weakest number on the page: a mid-dark terracotta on a mid-dark teal has
-   little edge definition, and it is flagged rather than fixed because fixing
-   it means either cooling the CTA or restyling the sitewide button.
+   The CTA on this ground measures 1.74:1 as a shape, up from 1.59:1 on the
+   cool teal and still down from 2.94:1 on the light wash it replaced. The
+   button is deliberately left warm, because it is the one warm accent on the
+   page, and Michele asked for it to stay terracotta through the swap. Its own
+   label contrast, white on #C84C33 at 4.63:1, is a sitewide condition of that
+   button and is unchanged here. The shape figure is still the weakest number
+   on the page: a mid-dark terracotta on a mid-dark teal has little edge
+   definition, and warming the ground toward the button narrows the hue gap
+   without fixing the luminance one. It stays flagged rather than fixed,
+   because fixing it means either cooling the CTA or restyling the sitewide
+   button.
 
    SOFT. `.surface-coach-soft` is the "Not just books" panel near the foot of
    the page. It used to share `.surface-coach-hero`, because Michele asked on
@@ -932,7 +998,7 @@ html {
    It sits on the #FCFAF6 ground inside a navy-10 hairline ring and reads
    1.59:1 against it, so the panel still separates. */
 .surface-coach-hero {
-  background-color: #1f5f5b;
+  background-color: #38564d;
   background-image: radial-gradient(
     ellipse 90% 140% at 20% 50%,
     rgba(255, 255, 255, 0.12) 0%,
@@ -1247,9 +1313,14 @@ html {
    numbers come out pessimistic.
 
    The light card's texture had to invert with it. White rings are invisible on
-   #B0CFD0, so they became navy at 5.5%, and the corner glow became the hero's
-   own #1F5F5B at 16% instead of bright teal #00B09F at 18%, which turned into
-   a saturated patch once the ground went light. Bright teal #00B09F now
+   #B0CFD0, so they became navy at 5.5%, and the corner glow became #1F5F5B at
+   16% instead of bright teal #00B09F at 18%, which turned into a saturated
+   patch once the ground went light. #1F5F5B was the hero's own colour when
+   that glow was chosen; the hero warmed to #38564D later on 2026-08-29 and
+   this card was ruled out of scope, so the glow is now a cool teal the hero no
+   longer carries. It is a 16 percent tint in one corner of one box and the
+   figures above still hold, so it was left alone rather than chased. Retune it
+   to the new hero teal whenever this card is next opened. Bright teal #00B09F now
    appears on this page only inside the dark card's shadow, never as a fill
    behind words.
 

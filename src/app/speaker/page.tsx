@@ -31,15 +31,24 @@ import {
  *
  * What changed in that pass, and why, so none of it gets quietly undone:
  *
- * BANNER. The ground is violet, and as of 2026-08-29 it is the KEYNOTE CARD's
- * violet: `.surface-violet-card`, built on --color-speaker-violet #3B2C74,
- * which is the light stop of `.msg-violet` down in the messages grid. It used
- * to be `.surface-violet-banner` on --color-speaker-deep #241B4F, sampled
- * from the stage photograph directly below it. Michele's read: that field was
- * a very dark, almost-black purple, it felt heavy, and it looked like a
- * different colour from the cards rather than the same page. So the page now
- * carries ONE purple, and the two bands that bracket it, this banner and the
- * "Book Michele" CTA at the foot, both take it.
+ * BANNER. The ground is violet: `.surface-violet-card`, built on
+ * --color-speaker-violet. It used to be `.surface-violet-banner` on
+ * --color-speaker-deep #241B4F, sampled from the stage photograph directly
+ * below it. Michele's read: that field was a very dark, almost-black purple,
+ * it felt heavy, and it looked like a different colour from the cards rather
+ * than the same page. So the page carries ONE purple, and the two bands that
+ * bracket it, this banner and the "Book Michele" CTA at the foot, both take
+ * it. That happened on 2026-08-29 and the value it took was #3B2C74, the
+ * light stop of `.msg-violet` down in the messages grid.
+ *
+ * It was WARMED to #4C3A6E later the same day. The three role heroes are
+ * meant to read as siblings out of one brand and they did not: /author
+ * anchors the set on marigold, so a blue-indigo here and a blue-teal on
+ * /coach made the warm page look like the odd one instead of the parent. The
+ * shift puts red into the purple and takes blue out, hue 252 -> 261 at lower
+ * saturation, and holds the value so the band carries the same weight. The
+ * keynote cards keep #3B2C74: the banner and the cards are near relations now
+ * rather than one value, which Michele signed off on. /author does not move.
  *
  * The banner also opts out of `text-wrap: balance`. Michele read the headline
  * as centred; it measured flush with the wordmark at every width, and what

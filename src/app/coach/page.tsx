@@ -107,6 +107,23 @@ import { pageMetadata } from '@/lib/schema'
  * on the table, #ADCFD5, was passed over: hue 189 drifts toward the UAV navy
  * and the teal pair stops reading as a pair.
  *
+ * THE HERO WARMED TO #38564D later still on 2026-08-29, and it is the ONLY
+ * value on this page that moved. The three role heroes are meant to read as
+ * siblings out of one brand: /author anchors the set on marigold, so a
+ * blue-teal here and a blue-indigo on /speaker made the warm page look like
+ * the odd one. Hue goes 176 -> 162 and saturation 0.67 -> 0.35, a yellow-green
+ * undertone in place of the blue, which reads as grounded earth rather than
+ * cold ocean. Michele opened on #3E5F55 and it could not ship: the cream
+ * subtitle falls to 4.46:1 at the radial peak, under the 4.5 AA bar, so this
+ * is that colour seated about 10 percent deeper. Every contrast reading on the
+ * hero is now better than the cool teal's.
+ *
+ * TSS and UAV DID NOT MOVE in that pass, by Michele's instruction, so the
+ * hero/TSS pairing above is looser than it was: 20 degrees apart rather than
+ * 6. That is accepted. A hero and the feature boxes inside it do not have to
+ * be the same colour, and if the pair is ever meant to be tight again, the box
+ * is what moves.
+ *
  * The ink flipped with each ground. The hero was navy on light and is now
  * white and cream on dark; the TSS card was white and cream on dark and is now
  * navy on light. UAV keeps its white and cream, so the TSS/UAV pair is no
@@ -198,15 +215,19 @@ const PILLARS: Pillar[] = [
       // deep teal moved up to the hero and this box took the soft teal in
       // trade: bold on the big header, soft on the small feature box. #B0CFD0
       // is the old hero mint shifted toward blue, hue 167 -> 182, which drops
-      // the green cast and still sits within 6 degrees of the hero's 176.
+      // the green cast and sat within 6 degrees of the hero's 176 at the time.
+      // The hero then warmed to #38564D, hue 162, and this box was ruled out
+      // of scope, so that gap is 20 degrees now. Left as-is on purpose.
       //
       // b is the DARKEST flat point here, which is the reverse of the navy
       // card, because this one carries navy ink. a is a lighter tint of the
       // same teal, so the gradient only brightens away from the measured
       // floor. Everything below inverted with the ground: white rings would
       // not show on this, and bright teal #00B09F in the corner became a
-      // saturated patch, so the rings are navy and the corner glow is the
-      // hero's own #1F5F5B. See the .coach-card block in tailwind.css.
+      // saturated patch, so the rings are navy and the corner glow is #1F5F5B,
+      // which was the hero's own colour when it was chosen. The hero has since
+      // warmed to #38564D and this card stayed, so the glow is a cool teal the
+      // hero no longer carries. See the .coach-card block in tailwind.css.
       '--coach-card-a': '#c9dedf',
       '--coach-card-b': '#b0cfd0',
       '--coach-card-glow': 'rgba(31, 95, 91, 0.28)',
