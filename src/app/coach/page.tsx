@@ -74,19 +74,27 @@ import { pageMetadata } from '@/lib/schema'
  * markup below still asks for band-1, band-2 and band-3 in that order, and it
  * should keep asking: those class names are what the sitewide scale will snap
  * back to the moment the pilot ends. What changed is what the tokens resolve
- * to. Michele wants to see /coach running on ONE warm white, #FCFAF6, instead
- * of the two neutrals the site carries today (the band scale starting at
- * #FAF9F5 and the #FFFFFF card ground), so `.page-coach` on the container
- * below trips a `:root:has()` rule in tailwind.css that flattens every band,
- * --color-panel, --color-white and --color-coach-surface-soft to that single
- * value. Section boundaries on this page are carried by whitespace alone
- * while the pilot runs, and cards by their navy/10 hairline alone.
+ * to. `.page-coach` on the container below trips a `:root:has()` rule in
+ * tailwind.css that flattens all four bands and --color-white to one warm
+ * white, #FCFAF6, in place of the band scale starting at #FAF9F5. Section
+ * boundaries on this page are carried by whitespace alone while the pilot
+ * runs.
  *
- * So: do not "fix" the 1, 2, 1, 2, 3 sequence below because the page renders
+ * THE CARDS DO NOT FOLLOW THE BANDS, as of round three on 2026-08-29. They
+ * ran flat with the ground for two rounds, Michele saw it, and asked for the
+ * lift back. The same rule repoints --color-panel and
+ * --color-coach-surface-soft to #F1EEE7, a soft warm neutral 4.17 L* BELOW
+ * the ground, so the two card groups on this page (the 01/02 cards in
+ * section 3 and the "In six months" panel in section 4) lift by being darker
+ * and warmer rather than brighter. Their navy/10 hairline now sits on a real
+ * edge instead of standing in for one.
+ *
+ * So: do not "fix" the 1, 2, 1, 2, 3 sequence below because the bands render
  * flat, and do not add a fourth band expecting it to read as a new ground.
- * If Michele approves the single white it goes sitewide by re-cutting the
- * tokens in @theme, and this page goes back to being ordinary. If she turns
- * it down, dropping the `page-coach` class restores the scale exactly.
+ * Do not "restore" the cards to the ground value either; the split is the
+ * point. If Michele approves this it goes sitewide by re-cutting the tokens
+ * in @theme, and this page goes back to being ordinary. If she turns it
+ * down, dropping the `page-coach` class restores the scale exactly.
  *
  * RECOLOURED 2026-08-29, and this page ONLY. Michele and Brett want /coach to
  * be the most professional of the three role pages: /speaker and /author stay
@@ -322,11 +330,11 @@ function CheckMark() {
 
 export default function CoachingPage() {
   return (
-    /* `page-coach` is the ONE-WHITE PILOT marker and it does nothing on its
+    /* `page-coach` is the NEUTRALS PILOT marker and it does nothing on its
        own: the rule that reads it is `:root:has(.page-coach)` in
-       tailwind.css, which repoints the band scale, the panel ground and
-       --color-white at a single #FCFAF6 for the whole document. It has to
-       be a marker rather than a styled wrapper because SiteHeader,
+       tailwind.css, which repoints the band scale and --color-white at
+       #FCFAF6 and the two card tokens at #F1EEE7 for the whole document. It
+       has to be a marker rather than a styled wrapper because SiteHeader,
        SiteFooter and the portalled ContactPopup all render outside this
        subtree; see the block in tailwind.css for the reasoning and the
        measurements. Removing this class is the rollback. */

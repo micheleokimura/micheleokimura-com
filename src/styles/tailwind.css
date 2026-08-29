@@ -827,22 +827,30 @@ html {
 }
 
 /* ---------------------------------------------------------------------
-   THE ONE-WHITE PILOT  (/coach only, added 2026-08-29)
+   THE NEUTRALS PILOT  (/coach only, added 2026-08-29)
    ---------------------------------------------------------------------
+   Named THE ONE-WHITE PILOT through rounds one and two, when it really was
+   one white. Round three split the cards back off, so it is a two-neutral
+   pilot now: #FCFAF6 ground, #F1EEE7 cards.
+
    THIS IS A PILOT AND IT IS DELIBERATELY SCOPED TO ONE PAGE. Michele wants
-   to see a single warm white on a real page before deciding whether the
-   site should run on one. If she says yes, the right follow-up is to re-cut
+   to see the neutrals on a real page before deciding whether the site
+   should run on them. If she says yes, the right follow-up is to re-cut
    the tokens in @theme above and DELETE this block, not to copy it onto
    more pages. If she says no, deleting this block is the whole rollback.
 
-   WHAT SHE IS LOOKING AT. The site currently carries two neutral whites: a
+   WHAT SHE IS LOOKING AT. The site carries two neutral whites of its own: a
    band scale that starts at #FAF9F5 and steps down to #EEEBE2, and a card
    ground at pure #FFFFFF that lifts off it. On /coach that means a reader
-   scrolling the page crosses five different neutrals. #FCFAF6 replaces all
-   of them. It is a shade warmer than #FAF9F5 and genuinely brighter than
-   it, and it stops well short of the #FFFFFF the cards use now: measured in
-   L*, band-1 is 97.90, this is 98.32 and white is 100, so it covers a fifth
+   scrolling the page crosses five different neutrals. #FCFAF6 replaced all
+   of them in round two. It is a shade warmer than #FAF9F5 and genuinely
+   brighter than it, and it stops well short of #FFFFFF: measured in L*,
+   band-1 is 97.90, this is 98.32 and white is 100, so it covers a fifth
    of the distance from the old ground to white.
+
+   Read the rest of this note in order. Rounds one and two below are about
+   the GROUND and their reasoning still stands. Round three, THE CARD LIFT,
+   is where the cards stop following it.
 
    SECOND ROUND, 2026-08-29. This started at #FBF8F1, and Michele asked for
    a slightly whiter one after seeing that live on /coach.
@@ -856,25 +864,62 @@ html {
    in lightness rather than below. That is the whole difference between the
    two rounds, and it is why this one reads whiter rather than just cleaner.
 
-   If a third round is wanted, change the seven tokens and the literal in
-   the html rule below and nothing else, then re-measure. Every figure in
-   this comment is derived from that one value, and the L* numbers above are
-   the ones to check first: hex that looks lighter often is not.
+   THIRD ROUND, 2026-08-29: THE CARD LIFT. Rounds one and two put the cards
+   on the same value as the ground, and that answered the question Michele
+   was actually asking. Her answer, having seen it: the ground is right and
+   the cards are not. Flat was the trade the single white asked for, and she
+   does not want to pay it. So the two CARD tokens split back off:
 
-   EVERY BAND IS FLATTENED TO THE SAME VALUE, which switches off the section
-   rhythm the band scale exists to provide. That is the point of the pilot
-   rather than a side effect of it: Michele asked for one consistent white,
-   so the honest way to show her one is to give her one. What she will see
-   is that section boundaries on /coach are now carried entirely by the
-   whitespace between sections, and cards are carried entirely by the
-   `ring-1 ring-navy/10` hairline every one of them already has. If the page
-   reads as flat, that is the trade the single white is asking for, and it
-   is the thing to decide on.
+     --color-panel               #FCFAF6 -> #F1EEE7
+     --color-coach-surface-soft  #FCFAF6 -> #F1EEE7
 
-   `--color-coach-surface-soft`, the tinted panel behind "In six months, you
-   get", goes with them. At #EDEAE2 it was the one genuinely tan surface
-   left on the page, so leaving it out would have shown her a page that was
-   still jumping between whites in the one place she is most likely to look.
+   The ground does NOT move. band-1 through band-4 stay at #FCFAF6, and so
+   does --color-white, which is why they are still listed separately below.
+   The page now runs on two neutrals on purpose: one ground, one card.
+
+   #F1EEE7 IS A STEP DOWN, NOT A STEP UP. This is the opposite move from
+   rounds one and two, which chased brightness. L* 94.15 against the ground's
+   98.32, so the cards sit 4.17 L* BELOW the surface they lift off, and they
+   lift by being darker rather than lighter. That is deliberate: the ground
+   is already within two points of white, so there was no headroom left to
+   lift into. R-B is 10 against the ground's 6, so the card is also the
+   warmer of the two and the pair reads as one family rather than as a white
+   next to a grey.
+
+   FOR SCALE, since "is that enough separation" is the question this raises:
+
+     pre-pilot   #FFFFFF card on #FAF9F5 band   dL* 2.10
+     rounds 1-2  #FCFAF6 card on #FCFAF6 band   dL* 0.00   (invisible)
+     now         #F1EEE7 card on #FCFAF6 band   dL* 4.17
+
+   So the separation is roughly twice what the site carried before the pilot
+   started, and the `ring-1 ring-navy/10` hairline every card already has is
+   now reinforcing a real edge instead of standing in for one.
+
+   IF A FOURTH ROUND IS WANTED, the ground and the cards are now two
+   independent values and they re-measure separately. Changing the ground
+   means the four bands, --color-white and the literal in the html rule
+   below; changing the cards means the two tokens above and nothing else.
+   Check L* first in either case: hex that looks lighter often is not, which
+   is the mistake round one made.
+
+   WHAT THIS CHANGES ON THE PAGE. Exactly two card groups, because those are
+   the only two consumers of these tokens that render on /coach:
+
+     --color-panel               the "01 The missing roadmap" and "02 The
+                                 borrowed voice" cards in section 3
+     --color-coach-surface-soft  the "In six months, you get:" panel in
+                                 section 4
+
+   Everything else on /coach is either the ground or has a colour of its own.
+   The FAQ is a bare `dl` on band-2 with hairline dividers and no card, so it
+   does not move. Neither do the deep teal hero, the soft teal TSS card, the
+   navy UAV card, the terracotta CTA button, or the soft teal "Not just
+   books" panel, which carries `.surface-coach-soft` rather than a neutral.
+
+   THE BANDS ARE STILL FLAT, and section rhythm on /coach is still carried by
+   whitespace alone. That part of the pilot is unchanged and is still a thing
+   to decide on; this round only settles the cards.
 
    WHY :root:has() AND NOT A CLASS ON THE PAGE. Three of the surfaces that
    have to change are not rendered by the page at all. SiteHeader paints
@@ -914,26 +959,56 @@ html {
      CTA #C84C33 shape     4.44   (needs 3.0)
      field-border          3.49   (needs 3.0)
 
-   Nothing on /coach fails. Every one of these figures is better than the
+   Nothing on the GROUND fails. Every one of these figures is better than the
    same ink on any BAND it used to sit on, and the tight pair gain most:
    teal-text and coral-text were at 4.59:1 and 4.56:1 on band-4 and are at
-   5.25:1 and 5.22:1 now. The one direction that gives a little back is the
-   card interiors, which were pure #FFFFFF and scored 14.67:1 for navy
-   against this ground's 14.07:1. That is the cost of the cards no longer
-   being the brightest surface on the page, it is the pilot working as
-   intended, and 14.07:1 is not a number anyone needs to worry about.
+   5.25:1 and 5.22:1 now.
 
-   The deep teal hero, the soft teal TSS card, the navy UAV card and the
-   terracotta CTA are all untouched. They are the page's colour and the
-   pilot is only about the neutral behind them. */
+   CONTRAST INSIDE THE CARDS is now a separate table, because as of round
+   three the cards are a darker value than the ground and no longer inherit
+   its figures. Everything here is ink on #F1EEE7, with the round-two figure
+   on #FCFAF6 in brackets so the cost of the lift is visible:
+
+     navy / neutral-950   12.66:1  [14.07]   card titles, panel heading
+     neutral-800          10.67    [11.86]   the "In six months" list
+     neutral-700           9.49    [10.54]   card body copy
+     neutral-600           6.63     [7.37]
+     neutral-500           5.05     [5.61]
+     teal-text             4.72     [5.25]
+     coral-text            4.69     [5.22]   the 01/02 numerals; AA wants 4.5
+
+   Every one of those clears AA as text. The lift costs about a tenth of the
+   ratio across the board, which is what moving a ground down 4.17 L* buys,
+   and the two tight pairs are the ones to re-check if the card value is ever
+   taken darker than this: coral-text has 0.19 of headroom left over the 4.5
+   floor and teal-text 0.22. #F1EEE7 is close to as dark as the cards can go
+   before the numerals need recolouring.
+
+   ONE FIGURE MOVES BELOW 4.5 AND IT IS NOT TEXT. The tick in "In six months"
+   is a teal-text glyph sitting on its own `bg-teal/15` well, and the well
+   composites over the card, so the glyph darkens with it: 4.13:1 on the new
+   #CDE5DC disc against 4.53:1 on the old #D6EFE9. The tick is `aria-hidden`
+   decoration next to text that carries the meaning, so it is governed by the
+   3:1 of WCAG 1.4.11 rather than the 4.5:1 of 1.4.3, and 4.13:1 clears that
+   with room. Worth knowing it was only 0.03 over the text floor before, so
+   nothing was really lost. If the well is ever asked to carry meaning on its
+   own, recolour it then.
+
+   The deep teal hero, the soft teal TSS card, the navy UAV card, the
+   terracotta CTA and the soft teal "Not just books" panel are all untouched.
+   They are the page's colour and the pilot is only about the neutrals. */
 :root:has(.page-coach) {
   --color-band-1: #fcfaf6;
   --color-band-2: #fcfaf6;
   --color-band-3: #fcfaf6;
   --color-band-4: #fcfaf6;
-  --color-panel: #fcfaf6;
   --color-white: #fcfaf6;
-  --color-coach-surface-soft: #fcfaf6;
+
+  /* THE CARDS COME BACK OFF THE GROUND, round three, 2026-08-29. See the
+     CARD LIFT note above for why these two are no longer #FCFAF6 and why
+     --color-white is not in with them. */
+  --color-panel: #f1eee7;
+  --color-coach-surface-soft: #f1eee7;
 }
 
 /* The token above already reaches <html>, which carries `bg-white`. This
