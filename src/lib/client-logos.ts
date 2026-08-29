@@ -1,5 +1,6 @@
-// Registry for the home-page LogoMarquee. Final 17-org list, confirmed by
-// Michele 2026-08-23.
+// Registry for the home-page LogoMarquee. 17-org list confirmed by Michele
+// 2026-08-23, plus First Assembly of God (Red Hill) added 2026-08-28 when its
+// case study landed. 18 orgs.
 //
 // === SLUG WIRING CONTRACT ===
 // `slug` is the join key. It matches the case-study markdown filename under
@@ -160,5 +161,15 @@ export const CLIENT_LOGOS: ClientLogo[] = [
     logo: `${DIR}/she-leads-america.png`,
     href: '/case-studies/she-leads-america',
     matte: true,
+  },
+  // Orange flame mark on transparent, 400px square, so it needs neither
+  // `invert` nor `matte`. Same art as /org-logos/first-assembly-of-god.png,
+  // copied into the marquee's own directory so the two registries stay
+  // independent.
+  {
+    slug: 'first-assembly-of-god',
+    name: 'First Assembly of God',
+    logo: `${DIR}/first-assembly-of-god.png`,
+    href: '/case-studies/first-assembly-of-god',
   },
 ]
