@@ -752,6 +752,31 @@ html {
   );
 }
 
+/* The About page's closing CTA panel, and nothing else on the site. Michele
+   read the shared navy panel as cold sitting under her portrait, so this one
+   ground is a deep warm sage pulled from the plants behind her in that
+   photograph. Every other page keeps `.surface-teal`.
+
+   Flat, with no lit-from-above lift. `.surface-teal` gradients its top stop
+   darker to give the full-bleed navy sections depth; this panel is the single
+   value Michele picked, so it stays that value edge to edge.
+
+   Contrast budget, measured against the flat ground:
+     white headline and email link   6.47:1
+     neutral-200 body copy           5.13:1
+     white/85 dl labels              5.21:1
+   Sage carries about 5.2x the relative luminance of navy, so the two secondary
+   inks sit one stop brighter here than they do on the navy panels. At the navy
+   values (neutral-300 body, white/70 labels) they measure 4.36:1 and 4.14:1 on
+   sage and miss AA. Re-measure both if you ever relight this colour.
+
+   Known: the terracotta CTA button is 1.40:1 against this ground, against
+   3.17:1 on navy, so it reads by its label and shadow rather than by a strong
+   edge. Left as Michele specified it. */
+.surface-sage {
+  background-color: #526258;
+}
+
 /* THE site-wide banner surface. Every interior page hero uses this and only
    this: no per-page photography, no per-page background. A teal glow sits at
    the centre over a navy field that deepens toward the edges, so the banner

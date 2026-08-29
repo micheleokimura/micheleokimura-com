@@ -628,7 +628,7 @@ export default function AboutPage() {
         </div>
       </Container>
 
-      <ContactBlock heading="Let&rsquo;s work together.">
+      <ContactBlock heading="Let&rsquo;s work together." surface="sage">
         <p>
           Whether it is coaching through the Brave Purpose Author Method or a
           speaking date, join the waitlist and Michele will reach out personally.
