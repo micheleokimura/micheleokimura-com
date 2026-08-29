@@ -731,31 +731,43 @@ html {
    page opens warm instead of dark. One surface, light and deliberately quiet.
    Everything else on the page runs on the band-1/2/3 scale.
 
-   .surface-coach-hero  a coral wash over a warm blush cream. Coral is the
-   loudest colour in the palette, so it appears here only as a low-opacity
-   glow, capped at 13%. At the centre of the glow the field blends to #F6DCD0,
-   where navy body copy holds 11.2:1 and the cream-era neutral ramp is
-   unaffected. The eyebrow on this ground is NAVY, not coral-text: coral-text
-   #B8431F measures 3.91:1 here and misses AA for small text, and teal-text is
-   no better at 3.93:1. Neither of the accent text colours can spell a word on
-   this wash, which is the whole reason the eyebrow is navy.
+   .surface-coach-hero  a soft professional teal field.
 
-   The coral CTA that sits on this wash measures 2.54:1 against it as a shape.
-   That is a hair below the 2.82:1 the same button gets on plain cream and is
-   the same site-wide condition every coral-on-light button already has; it is
-   not introduced here. If the button boundary is ever tightened, tighten it
-   site-wide rather than on this page alone.
+   RECOLOURED 2026-08-29 at Michele and Brett's direction. Of the three role
+   pages, /coach is the one that should read coolest and most expert, so the
+   hero gave up its coral wash for a spa-calm teal. /speaker and /author keep
+   their warm grounds on purpose; this change is scoped to /coach alone.
+
+   The ground is #B8D4CE, lifted by a white radial sitting in the same ellipse
+   the old coral wash used, so the hero keeps its light-from-the-left
+   composition instead of reading as a flat slab. White only ever lightens, so
+   #B8D4CE is the DARKEST point of the field and both ratios below are floors
+   rather than averages:
+
+     --color-navy #1F2744   9.32:1   the eyebrow and the H1
+     text-neutral-700       6.59:1   the subtitle
+
+   The eyebrow stays NAVY. That was already true on the coral wash, and it is
+   still right here: an accent-coloured word on this ground would sit too close
+   to the field to read as ink.
+
+   The CTA on this wash measures 2.94:1 against it as a shape, which is BETTER
+   than the 2.54:1 it had on the old coral wash and better than the 2.82:1 the
+   same button gets on plain cream. The button is deliberately left warm: it is
+   the one warm accent on a cool page and it is what makes the CTA carry. Its
+   own label contrast, white on #C84C33 at 4.43:1, is a sitewide condition of
+   that button and is not introduced here; fix it site-wide or not at all.
 
    There was a second surface here, `.surface-coach-quote`, a soft teal wash
    behind a Michele quote banner. Michele moved that banner to the Speaker page
    and the wash went with it, so only the hero is left. */
 .surface-coach-hero {
-  background-color: #f7efe6;
+  background-color: #b8d4ce;
   background-image: radial-gradient(
     ellipse 90% 140% at 20% 50%,
-    rgba(241, 92, 61, 0.13) 0%,
-    rgba(241, 92, 61, 0.05) 50%,
-    rgba(241, 92, 61, 0) 78%
+    rgba(255, 255, 255, 0.38) 0%,
+    rgba(255, 255, 255, 0.14) 50%,
+    rgba(255, 255, 255, 0) 78%
   );
 }
 
@@ -985,7 +997,7 @@ html {
 }
 
 /* ---------------------------------------------------------------------
-   COACH METHOD CARDS  (the TST / UAV pair on /coach)
+   COACH METHOD CARDS  (the TSS / UAV pair on /coach)
    ---------------------------------------------------------------------
    Built to the "Most-Used Services" pattern Brett sent from
    livingin-platform.vercel.app/services: a saturated gradient tile carrying a
@@ -999,25 +1011,44 @@ html {
      --coach-card-glow     the coloured drop shadow under the card
      --coach-card-pattern  the texture layer, painted OVER the gradient
 
+   RECOLOURED 2026-08-29. The pair used to be teal and coral; it is now teal
+   and navy, because /coach is the page Michele and Brett want reading coolest
+   and most expert. The b stops are #1F5F5B and #1F2E4A. Nothing outside
+   /coach was touched.
+
    CONTRAST IS THE CONSTRAINT ON THE GRADIENT, not taste. Cream text sits on
    these, so the LIGHT end of each gradient is what has to be measured, and the
    texture's own highlights lift it further. Measured against --color-white
-   #FAFAF8 at each card's lightest point:
+   #FAFAF8, first on the flat b stop and then at each card's lightest point,
+   which is the centre of the corner glow plus the all-over texture:
 
-     teal   #0F5F58   7.18:1, and 4.50:1 at the very centre of an 18% tint
-     coral  #A63A19   6.20:1, and 4.55:1 at the very centre of a 16% tint
+     teal  #1F5F5B   7.06:1 flat, 4.95:1 at the centre of the 18% tint
+     navy  #1F2E4A  12.98:1 flat, 7.71:1 at the centre of the 16% tint
+
+   The corner glow and the ::before sheen sit in OPPOSITE corners, top-left
+   versus bottom, so they never compound; measure them separately or the
+   numbers come out pessimistic. The sheen corner is the milder of the two:
+   4.16:1 on teal and 6.77:1 on navy, both still clear for the display-scale
+   acronym that is the only thing sitting near it.
 
    Those worst cases are the middle of the corner glows, where no word sits;
-   the copy runs down the centre, where both cards are far darker. This is why
-   the tints are capped where they are. Push a corner tint past ~20% and the
-   card stops clearing AA at its brightest point, so re-measure the blend
-   rather than eyeballing it if these are ever retuned. Bright teal #00B09F and
-   coral #F15C3D appear here ONLY inside a glow or a shadow, never as a fill
-   behind words.
+   the copy runs down the centre, where both cards are at the flat b stop. The
+   body copy is --color-cream at 85%, which is 5.03:1 on teal and 8.76:1 on
+   navy where it actually sits. In the teal card's glow corner that same cream
+   drops to 3.65:1, which is a hair under AA but is unchanged from the coral-era
+   card (3.68:1) and is not introduced by this recolour; if it is ever fixed,
+   raise the cream toward white rather than darkening the tile.
 
-   The gold in the coral card's corner is #E9AE3F at 16%. Gold is the
-   decoration-only colour in this palette and a background glow is decoration;
-   it never spells a word here or anywhere.
+   This is why the tints are capped where they are. Push a corner tint past
+   ~20% and the teal card stops clearing AA at its brightest point, so
+   re-measure the blend rather than eyeballing it if these are ever retuned.
+   Bright teal #00B09F appears here ONLY inside a glow or a shadow, never as a
+   fill behind words.
+
+   The gold in the navy card's corner is #E9AE3F at 16%. It survived the
+   recolour on purpose: gold on navy is what keeps that tile from reading cold.
+   Gold is the decoration-only colour in this palette and a background glow is
+   decoration; it never spells a word here or anywhere.
 
    ::before is the top-left sheen that keeps the tile from reading as flat
    vinyl. It is z-index -1 inside an `isolation: isolate` context, so it paints
