@@ -146,6 +146,23 @@ const DOOR_ICONS: Record<Door['icon'], typeof Mic> = {
  * cards get taller at this size and that is accepted; the attribution block
  * stays at 15px so the hierarchy inside the card still holds.
  *
+ * CARDS WIDEN AGAIN AT `lg` ONLY, to 31rem/496px from the 27rem/432px they
+ * carry from sm up. Michele's note on 2026-08-29: on her MacBook the top row
+ * clears the fold and the bottom row is cut off. A wider card gives the same
+ * quote a longer measure, so it reflows into fewer lines and the row gets
+ * shorter: the tallest quote in the top row drops from 11 lines to 9 and the
+ * row from 557px to 485px, and the bottom row from 479px to 443px. 31rem is
+ * the useful step. Anything from 28rem to 30rem reflows nothing, because no
+ * quote loses a line until the measure passes 496px.
+ *
+ * THIS DOES NOT ON ITS OWN PUT BOTH ROWS ABOVE THE FOLD, and no card width
+ * does. The two rows plus their gap still measure 952px against roughly 800px
+ * of usable height on a 1440x900 MacBook, and the floor is about 790px for the
+ * pair even at an absurd 42rem card. Closing the rest means the things that
+ * were deliberately ruled out of this change: the 20px body type, the p-8
+ * card padding, or the section's own py-28. Do not "finish the job" by cutting
+ * one of those without asking her first, because each was set on her word.
+ *
  * The horizontal space between cards is `mx` on the card, NOT `gap` on the
  * track. The marquee keyframes wrap by translating exactly -50% of the track,
  * and a flex `gap` adds a gap BETWEEN the two copies as well as inside them, so
@@ -154,7 +171,7 @@ const DOOR_ICONS: Record<Door['icon'], typeof Mic> = {
  */
 function TestimonialCard({ item }: { item: Testimonial }) {
   return (
-    <figure className="mx-3 flex w-[21rem] shrink-0 flex-col rounded-2xl bg-[var(--color-panel)] p-7 ring-1 ring-[var(--color-navy-10)] sm:w-[27rem] sm:p-8">
+    <figure className="mx-3 flex w-[21rem] shrink-0 flex-col rounded-2xl bg-[var(--color-panel)] p-7 ring-1 ring-[var(--color-navy-10)] sm:w-[27rem] sm:p-8 lg:w-[31rem]">
       <blockquote className="flex-auto text-xl leading-9 text-neutral-800">
         &ldquo;{item.quote}&rdquo;
       </blockquote>
