@@ -58,7 +58,7 @@ export function ContactBlock({
               <div
                 className={cn(
                   'mt-6 text-xl',
-                  sage ? 'text-neutral-200' : 'text-neutral-300',
+                  sage ? 'text-white/95' : 'text-neutral-300',
                 )}
               >
                 {children}

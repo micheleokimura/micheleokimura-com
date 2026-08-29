@@ -754,25 +754,30 @@ html {
 
 /* The About page's closing CTA panel, and nothing else on the site. Michele
    read the shared navy panel as cold sitting under her portrait, so this one
-   ground is a deep warm sage pulled from the plants behind her in that
-   photograph. Every other page keeps `.surface-teal`.
+   ground is a deep warm sage pulled from the plants in that photograph. Every
+   other page keeps `.surface-teal`.
 
    Flat, with no lit-from-above lift. `.surface-teal` gradients its top stop
    darker to give the full-bleed navy sections depth; this panel is the single
    value Michele picked, so it stays that value edge to edge.
 
-   Contrast budget, measured against the flat ground:
-     white headline and email link   6.47:1
-     neutral-200 body copy           5.13:1
-     white/85 dl labels              5.21:1
-   Sage carries about 5.2x the relative luminance of navy, so the two secondary
-   inks sit one stop brighter here than they do on the navy panels. At the navy
-   values (neutral-300 body, white/70 labels) they measure 4.36:1 and 4.14:1 on
-   sage and miss AA. Re-measure both if you ever relight this colour.
+   Contrast, measured on the deployed page against the painted ground rather
+   than against the Tailwind palette, because this site remaps the neutrals to
+   warm creams and the raw palette numbers are badly wrong here:
+     headline, text-white -> #fcfaf6, 28px   6.20:1
+     body copy, text-white/95 -> #f3f2ed     5.77:1
+     dl labels, text-white/85 -> #e2e3de     5.01:1
+     white label on the terracotta button    6.47:1
+   Sage carries about 5.2x the relative luminance of navy, so inks that are
+   comfortable on the navy panels fail here. The shared defaults measure 3.16:1
+   (text-neutral-300 body, which is #b8b5b0 once remapped, and not the #e5e5e5
+   the palette name implies) and 3.99:1 (white/70 labels). Both are lifted in
+   sage mode only. Re-measure on the page, not from the token values, if you
+   ever relight this colour.
 
    Known: the terracotta CTA button is 1.40:1 against this ground, against
-   3.17:1 on navy, so it reads by its label and shadow rather than by a strong
-   edge. Left as Michele specified it. */
+   3.17:1 on navy, so it reads by its label and its shadow rather than by a
+   strong edge. Left as Michele specified it. */
 .surface-sage {
   background-color: #526258;
 }
