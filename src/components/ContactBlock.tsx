@@ -16,12 +16,13 @@ type Props = {
   cta?: React.ReactNode
   /**
    * The panel's ground. 'teal' is the sitewide navy surface and the default.
-   * 'sage' is the About page's warm green, pulled from the plants behind
-   * Michele in the portrait that sits on that panel. Sage is far lighter than
+   * 'slate' is the About page's warm earthy slate-blue, the same flat value
+   * its banner runs, so the top and the bottom of that page frame it in one
+   * colour. It replaced a sage green on 2026-08-29. Slate is far lighter than
    * navy, so the two secondary inks step up one stop to hold AA on it. The
-   * measurements live with `.surface-sage` in tailwind.css.
+   * measurements live with `.surface-about-slate` in tailwind.css.
    */
-  surface?: 'teal' | 'sage'
+  surface?: 'teal' | 'slate'
 }
 
 /**
@@ -39,14 +40,14 @@ export function ContactBlock({
   cta,
   surface = 'teal',
 }: Props) {
-  const sage = surface === 'sage'
+  const slate = surface === 'slate'
 
   return (
     <Container className="mt-24 sm:mt-32 lg:mt-40">
       <FadeIn
         className={cn(
           '-mx-6 rounded-4xl px-6 py-20 sm:mx-0 sm:py-32 md:px-12',
-          sage ? 'surface-sage' : 'bg-neutral-950 surface-teal',
+          slate ? 'surface-about-slate' : 'bg-neutral-950 surface-teal',
         )}
       >
         <div className="mx-auto max-w-4xl">
@@ -58,7 +59,7 @@ export function ContactBlock({
               <div
                 className={cn(
                   'mt-6 text-xl',
-                  sage ? 'text-white/95' : 'text-neutral-300',
+                  slate ? 'text-white/95' : 'text-neutral-300',
                 )}
               >
                 {children}
@@ -81,7 +82,7 @@ export function ContactBlock({
                 <dt
                   className={cn(
                     'font-display font-semibold uppercase tracking-wider',
-                    sage ? 'text-white/85' : 'text-white/70',
+                    slate ? 'text-white/85' : 'text-white/70',
                   )}
                 >
                   Email
@@ -101,7 +102,7 @@ export function ContactBlock({
                 <dt
                   className={cn(
                     'font-display font-semibold uppercase tracking-wider',
-                    sage ? 'text-white/85' : 'text-white/70',
+                    slate ? 'text-white/85' : 'text-white/70',
                   )}
                 >
                   Based in

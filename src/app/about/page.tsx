@@ -4,7 +4,7 @@ import { pageMetadata } from '@/lib/schema'
 
 import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
-import { PageIntro } from '@/components/PageIntro'
+import { BannerHero } from '@/components/BannerHero'
 import Image from 'next/image'
 
 import { AboutMosaic } from '@/components/AboutMosaic'
@@ -40,8 +40,15 @@ export default function AboutPage() {
       {/* Banner runs with no subtitle. It used to carry "Maybe dreams give
           purpose a voice.", which Michele cut on 2026-08-23 because the pull
           quote further down says the same thing better: "I believe dreams give
-          purpose a voice." Do not reinstate one without retiring the other. */}
-      <PageIntro eyebrow="About" title="About Michele." />
+          purpose a voice." Do not reinstate one without retiring the other.
+
+          Calls BannerHero directly rather than through the PageIntro alias,
+          the same way /speaker does, because it needs a surface other than the
+          sitewide default. `slate` is the warm earthy slate-blue this page
+          runs, and the closing panel at the foot of the page runs the SAME
+          flat value. Change one and change the other, or the page stops
+          framing itself. See the --color-about-slate block in tailwind.css. */}
+      <BannerHero eyebrow="About" title="About Michele." surface="slate" />
 
       {/* Michele's positioning tagline, added 2026-08-26 as the page opener.
           It sits under the site banner and above every piece of content,
@@ -628,7 +635,7 @@ export default function AboutPage() {
         </div>
       </Container>
 
-      <ContactBlock heading="Let&rsquo;s work together." surface="sage">
+      <ContactBlock heading="Let&rsquo;s work together." surface="slate">
         <p>
           Whether it is coaching through the Brave Purpose Author Method or a
           speaking date, join the waitlist and Michele will reach out personally.

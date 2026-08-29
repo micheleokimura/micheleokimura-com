@@ -674,6 +674,72 @@
      stop; nothing clears AAA any more. That is the accepted price. */
   --color-speaker-plum: #624973;
   --color-speaker-plum-ink: #efdfd9;
+
+  /* ---------------------------------------------------------------------
+     ABOUT PAGE SLATE  (added 2026-08-29)
+     ---------------------------------------------------------------------
+     ONE colour, used twice on /about and nowhere else: the banner at the top
+     of the page and the closing "Let's work together." panel at the bottom.
+     Those two bands are the frame the whole page sits in, so they are the
+     same value edge to edge and read as a single identity rather than as two
+     unrelated decisions.
+
+     What it replaces. The top was .surface-teal-banner, the sitewide navy
+     field with a teal glow in it, and the bottom was .surface-sage #526258, a
+     deep green sampled from the plants behind Michele in the portrait on that
+     panel. Michele read the pair as unrelated: the navy cold and much darker
+     than anything else on the page, the sage a third hue that answered
+     nothing above it. Neither sat with the warm family the other pages had
+     already settled into, which is Speaker's plum #624973, Author's marigold,
+     and Coaching's warm sage-teal.
+
+     #4E5872 is a warm earthy slate-blue. It keeps the blue the navy had, so
+     /about still belongs to the site, and gives up the coldness: it is
+     roughly four and a half times the relative luminance of --color-navy, and
+     its hue carries enough red to sit beside terracotta without the two
+     fighting. It lands close to the plum in value, which is what makes the
+     two pages read as siblings.
+
+     Flat, with no glow and no gradient, on both bands. .surface-teal-banner
+     gradients its top stop darker to give the full-bleed navy sections depth,
+     and .surface-speaker-plum runs a soft radial. Neither applies here: the
+     point of this colour is that the top and the bottom of the page are the
+     SAME colour, and any gradient means the two bands only match at one
+     stop. This is the same reasoning .surface-speaker-plum-quote carries.
+
+     Contrast, measured on the flat field, with the readings the sage panel
+     used to get in brackets so the cost of the move is visible:
+       white  #FFFFFF                          7.09:1   (6.47)
+       white as painted #FCFAF6                6.80:1   (6.20)
+       cream  #F2ECDF                          6.02:1   (5.49)
+       cream at 85 percent (banner subtitle)   4.88:1   (4.49, which missed AA)
+       white at 95 percent (panel body copy)   6.33:1   (5.77)
+       white at 85 percent (panel dl labels)   5.47:1   (5.01)
+       --color-about-slate-ink (the eyebrow)   5.43:1
+     Everything clears AA, and the banner subtitle at 85 percent cream now
+     clears it where it did not on sage. Nothing clears AAA. Note that this
+     site remaps the Tailwind neutrals to warm creams, so measure against the
+     painted value and never against the palette name: text-white lands at
+     #FCFAF6, and text-neutral-300 is #B8B5B0 rather than the #E5E5E5 the name
+     implies. The panel keeps the neutral-300 body copy off for that reason.
+
+     The eyebrow is --color-about-slate-ink, a pale warm sand. The sitewide
+     pale teal #9FE8DF measures 5.09:1 here and would pass, but it reads as a
+     leftover from the navy banner and pulls the band cool again, which is the
+     whole thing this change was meant to fix. Sand answers the terracotta
+     button on the panel below it and keeps the eyebrow distinct from the
+     cream headline it sits above.
+
+     Known, and carried over unchanged from the sage panel: the terracotta CTA
+     button is 1.53:1 against this ground, against 1.40:1 on sage and 3.17:1
+     on navy, so it still reads by its label and its shadow rather than by a
+     strong edge. Its own white label holds 4.63:1 and is untouched. Michele
+     asked for the button to stay the warm accent it is.
+
+     Re-measure on the deployed page, not from these token values, if this
+     colour is ever relit. */
+  --color-about-slate: #4e5872;
+  --color-about-slate-ink: #f0dfc8;
 }
 
 html {
@@ -806,34 +872,29 @@ html {
   );
 }
 
-/* The About page's closing CTA panel, and nothing else on the site. Michele
-   read the shared navy panel as cold sitting under her portrait, so this one
-   ground is a deep warm sage pulled from the plants in that photograph. Every
-   other page keeps `.surface-teal`.
+/* The two /about bands, and nothing else on the site: the banner at the top
+   of the page and the closing "Let's work together." panel at the bottom.
 
-   Flat, with no lit-from-above lift. `.surface-teal` gradients its top stop
-   darker to give the full-bleed navy sections depth; this panel is the single
-   value Michele picked, so it stays that value edge to edge.
+   Both take the same flat --color-about-slate. They are deliberately two
+   classes over one value rather than one class, because the banner and the
+   panel are laid out by different components and a future change to either
+   one should not silently move the other. See the --color-about-slate token
+   block above for the hue reasoning and the full measured contrast table.
 
-   Contrast, measured on the deployed page against the painted ground rather
-   than against the Tailwind palette, because this site remaps the neutrals to
-   warm creams and the raw palette numbers are badly wrong here:
-     headline, text-white -> #fcfaf6, 28px   6.20:1
-     body copy, text-white/95 -> #f3f2ed     5.77:1
-     dl labels, text-white/85 -> #e2e3de     5.01:1
-     white label on the terracotta button    6.47:1
-   Sage carries about 5.2x the relative luminance of navy, so inks that are
-   comfortable on the navy panels fail here. The shared defaults measure 3.16:1
-   (text-neutral-300 body, which is #b8b5b0 once remapped, and not the #e5e5e5
-   the palette name implies) and 3.99:1 (white/70 labels). Both are lifted in
-   sage mode only. Re-measure on the page, not from the token values, if you
-   ever relight this colour.
+   Flat on purpose. No glow, no gradient. The point of this colour is that the
+   top and the bottom of the page are the SAME colour, and a gradient means
+   they only match at one stop. Do not add depth to one of these without
+   adding the identical treatment to the other.
 
-   Known: the terracotta CTA button is 1.40:1 against this ground, against
-   3.17:1 on navy, so it reads by its label and its shadow rather than by a
-   strong edge. Left as Michele specified it. */
-.surface-sage {
-  background-color: #526258;
+   Every other page is unchanged: interior heroes keep .surface-teal-banner,
+   /speaker keeps .surface-speaker-plum, and every other closing panel keeps
+   .surface-teal. */
+.surface-about-slate-banner {
+  background-color: var(--color-about-slate);
+}
+
+.surface-about-slate {
+  background-color: var(--color-about-slate);
 }
 
 /* THE site-wide banner surface. Every interior page hero uses this and only

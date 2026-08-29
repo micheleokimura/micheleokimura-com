@@ -7,6 +7,7 @@ const SURFACE_CLASS = {
   teal: 'surface-teal-banner',
   violet: 'surface-violet-banner',
   plum: 'surface-speaker-plum',
+  slate: 'surface-about-slate-banner',
 } as const
 
 /** The eyebrow ink each ground takes, because the eyebrow is the smallest
@@ -16,6 +17,7 @@ const EYEBROW_CLASS = {
   teal: 'text-[var(--color-teal-on-dark)]',
   violet: 'text-[var(--color-speaker-eyebrow)]',
   plum: 'text-[var(--color-speaker-plum-ink)]',
+  slate: 'text-[var(--color-about-slate-ink)]',
 } as const
 
 /**
@@ -55,10 +57,20 @@ const EYEBROW_CLASS = {
  * /speaker/messages/[slug] and the ReThink conference page still ask for
  * `violet` and are unchanged.
  *
+ * `surface="slate"` is /about, added 2026-08-29. Michele read the navy banner
+ * as cold, and much darker than the sage panel closing the same page, so the
+ * two bands that frame /about had nothing to do with each other. Both are now
+ * one flat warm earthy slate-blue, `.surface-about-slate-banner` up top and
+ * `.surface-about-slate` at the foot. It is scoped to that one page: every
+ * other interior hero still defaults to `teal`.
+ *
  * The two violets take the pale lavender eyebrow and the plum does NOT: on
  * the plum that lavender measures 4.48:1 at the lightest pixel of the
- * gradient and misses AA, so `plum` takes a warm blush at 5.37:1. See
- * EYEBROW_CLASS above and the measured tables in tailwind.css.
+ * gradient and misses AA, so `plum` takes a warm blush at 5.37:1. `slate`
+ * takes a pale warm sand at 5.43:1 for the same reason in reverse: the pale
+ * teal would pass at 5.09:1 but pulls the band back cool, which is what the
+ * recolour was for. See EYEBROW_CLASS above and the measured tables in
+ * tailwind.css.
  *
  * The eyebrow is plain tracked small caps. No pill, no badge, no border, no
  * rounded corners, anywhere, ever. Pills read as buttons and people click them.
@@ -86,10 +98,11 @@ export function BannerHero({
   centered?: boolean
   /**
    * Banner ground. `violet` is the photo-derived field the message pages
-   * carry; `plum` is the warm, untextured purple /speaker itself runs. See
+   * carry; `plum` is the warm, untextured purple /speaker itself runs;
+   * `slate` is the warm earthy slate-blue /about runs top and bottom. See
    * above.
    */
-  surface?: 'teal' | 'violet' | 'plum'
+  surface?: 'teal' | 'violet' | 'plum' | 'slate'
   /**
    * Whether the H1 may use `text-wrap: balance`.
    *
