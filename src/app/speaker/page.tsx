@@ -482,10 +482,12 @@ export default function SpeakerPage() {
           disappeared. Cream carries the quote and cream at 85 percent carries
           the name, which is the same pairing the two purple bands use.
 
-          `.surface-speaker-quote`, the periwinkle, STAYS DEFINED. /author
-          still runs it, and its contrast budget was measured against a
-          different photograph. See the note on the class in tailwind.css
-          before touching it. */}
+          `.surface-speaker-quote`, the periwinkle, STAYS DEFINED and now has
+          no callers at all: /author's closing quote band went to that page's
+          marigold earlier the same day. It is left standing rather than
+          deleted here, because a /speaker recolour is not the pass that
+          should retire a class /coach and /author also once used. See the
+          note on it in tailwind.css. */}
       <section
         aria-label="In Michele's words"
         className={`surface-speaker-plum-quote ${BAND}`}

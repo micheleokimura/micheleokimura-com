@@ -1113,14 +1113,18 @@ html {
    the same day. The class name still says speaker because /speaker is where
    it was defined.
 
-   /speaker NO LONGER USES IT, as of 2026-08-29. That page's quote band went
-   to the warm plum with the two bands that bracket it, so the page carries
-   one colour end to end; it runs `.surface-speaker-plum-quote` now. THE ONLY
-   CALLER LEFT IS /author, which is why this declaration and its contrast
-   budget stay exactly as they are: the numbers below were measured against
-   the beach photograph on /speaker, and the /author instance carries a
-   different picture. Re-measure against the /author photograph before
-   touching this, and do not fold it into the plum.
+   IT HAS NO CALLERS LEFT, as of 2026-08-29, and both pages left it on the
+   same day. /author went first: its closing quote band took the marigold the
+   page opens on, in `.surface-author-quote` below. /speaker went second: its
+   quote band took the warm plum the two bands bracketing that page carry, in
+   `.surface-speaker-plum-quote`. Neither move was about the periwinkle
+   itself; both pages were being made to close on the colour they open on.
+
+   So this is dead code and it is left standing deliberately rather than
+   deleted in a recolour pass that owns neither page. Retire it, and
+   --color-coach-* if nothing else wants them, in a pass that can look at
+   /coach, which is where it started. Everything below is the measurement
+   record for the /speaker photograph and is only useful if it comes back.
 
    The colour is sampled from the photograph it carries. Michele asked for
    "periwinkle, a lighter sapphire, matching the sapphire flowers in the
