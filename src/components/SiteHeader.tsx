@@ -90,12 +90,21 @@ export function SiteHeader() {
     // and nothing underneath. It is now a symmetric py-3 / sm:py-4, which lands
     // the bar at roughly 68px: an ordinary site-header height. `main` in
     // layout.tsx pads down to clear it, so re-measure that pt if this changes.
-    // The bar takes an explicit band-1 ground and a navy hairline, so it reads
-    // as its own strip rather than as type floating on the page. Same principle
-    // as the section bands below it: mark the boundary, do not shout about it.
-    // The hairline is doing most of the work, since band-1 is also the page
-    // ground on most routes; what it separates the header from is whatever the
-    // page opens with, which is a dark hero or banner on every route today.
+    // The bar takes an explicit band-1 ground and NO bottom hairline. It used
+    // to carry one at navy/8, on the theory that it should read as its own
+    // strip rather than as type floating on the page. Michele and Brett both
+    // read the result the other way on 2026-08-29: because band-1 is also the
+    // page ground, the rule was not marking a boundary between two surfaces,
+    // it was drawing a line across one. What you saw was header, grey line, a
+    // stripe of the same cream, then the banner, and the line made that stripe
+    // look like a mistake instead of like the top margin it is.
+    //
+    // Nothing replaces it. The bar keeps its band-1 ground, and the ~22px of
+    // cream between the row and the banner (the slack between the real header
+    // height and --header-offset) now reads as one continuous field running
+    // into the top of the hero. The header does not need a boundary of its own
+    // to stay legible: it is `absolute`, so it scrolls away rather than sitting
+    // over the page, and the banner underneath is dark on every interior route.
     //
     // `absolute`, not `fixed`: this scrolls away, and `main` in layout.tsx pads
     // down to clear it, so an opaque background here never covers content.
@@ -106,10 +115,8 @@ export function SiteHeader() {
     // bar; a bar that stopped below the island would read as a floating card.
     <header
       className={cn(
-        'absolute top-0 right-0 left-0 z-40 border-b py-3 pt-[calc(0.75rem+env(safe-area-inset-top,0px))] sm:py-4 sm:pt-[calc(1rem+env(safe-area-inset-top,0px))]',
-        floating
-          ? 'border-transparent bg-transparent'
-          : 'border-[var(--color-navy)]/8 bg-[var(--color-band-1)]',
+        'absolute top-0 right-0 left-0 z-40 py-3 pt-[calc(0.75rem+env(safe-area-inset-top,0px))] sm:py-4 sm:pt-[calc(1rem+env(safe-area-inset-top,0px))]',
+        floating ? 'bg-transparent' : 'bg-[var(--color-band-1)]',
       )}
     >
       {/* THE TOP SCRIM, and it is now carrying words rather than a logotype,
