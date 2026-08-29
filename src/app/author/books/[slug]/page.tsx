@@ -7,7 +7,7 @@ import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
 import { BannerHero } from '@/components/BannerHero'
 import { BraveSeriesCovers } from '@/components/BraveSeriesCovers'
-import { CoverGrid } from '@/components/CaseStudyLayout'
+import { CoverGrid, ResearchPartnership } from '@/components/CaseStudyLayout'
 import {
   AvailableAt,
   Cover,
@@ -268,6 +268,20 @@ export default async function AuthorBookPage({
    */
   const showBuyPanel = Boolean(book.buy) && slug !== 'brave-series'
 
+  /**
+   * Draw the "Read the story behind it" link in the footer row.
+   *
+   * Off for the Brave Series curriculum. The ResearchPartnership callout under
+   * the hero now carries this page's one story link, and a second link to a
+   * second story at the foot of the same page splits the reader two ways.
+   *
+   * A rule about the PAGE rather than dropping `storyHref` from the record in
+   * src/lib/author-books.ts, for the same reason `showBuyPanel` is: that field
+   * is where the series' project page is written down, and the three child
+   * titles point at it too.
+   */
+  const showStoryLink = Boolean(book.storyHref) && slug !== 'brave-series'
+
   return (
     <>
       <WebPageJsonLd
@@ -277,6 +291,29 @@ export default async function AuthorBookPage({
       />
 
       <BannerHero eyebrow="Author" title={book.title} subtitle={book.meta} />
+
+      {/* The ASU research partnership, directly under the hero and above the
+          description, the same place and the same wording it carries on
+          /projects/brave-series. It sits outside the two-column body because
+          ResearchPartnership draws its own Container: nested inside the body
+          column it would be a marquee panel squeezed into a 1fr track.
+
+          Brave Series only. No other title on this shelf has a research
+          partner, and the callout is the credibility a reader weighs before
+          they read anything else about the curriculum. */}
+      {slug === 'brave-series' ? (
+        <ResearchPartnership
+          eyebrow="ACADEMIC RESEARCH FOUNDATION"
+          heading="How a landmark Hawaiʻi study inspired the Brave Series"
+          ctaHref="/case-studies/asu-office-of-sex-trafficking-intervention-research"
+        >
+          The Brave Series was evaluated by Dr. Dominique Roe-Sepowitz of ASU
+          School of Social Work, lead researcher on Hawaiʻi&rsquo;s six-year
+          state study of sex trafficking. Her research inspired the very first
+          Brave Series curriculum in 2019. Today, she volunteers her time to
+          help ground the series in research-credible outcome measurement.
+        </ResearchPartnership>
+      ) : null}
 
       <Container className="py-12 sm:py-16 lg:py-20">
         <FadeIn className="grid grid-cols-1 gap-10 lg:grid-cols-[18rem_1fr] lg:gap-16">
@@ -524,7 +561,7 @@ export default async function AuthorBookPage({
             ) : null}
 
             <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-[var(--color-navy-10)] pt-8">
-              {book.storyHref ? (
+              {showStoryLink && book.storyHref ? (
                 <Link
                   href={book.storyHref}
                   className="font-display -my-2.5 inline-flex items-center gap-1.5 py-2.5 text-base font-semibold text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition hover:decoration-2"
