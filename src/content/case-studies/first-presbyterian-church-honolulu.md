@@ -19,14 +19,20 @@ His imprint reaches beyond his own congregation. Dan and Pam Chun founded Hawaii
 
 ## The Engagement
 
+### When a new nonprofit found its first mentor
+
 Senior Pastor Dan met with Michele and her early team a handful of times in those first years, offering the kind of practical wisdom that only comes from someone who has already walked the road. Dan has remained a friend, sounding board, and a quiet encourager to Michele across the entire life of the nonprofit.
 
 Pastor Dan also was part of the Explicit Movement speaker team.
+
+### A women's small group that enlarged the audience for the Brave Series
 
 More recently, Leona Larkin, First Presbyterian's Care and Restoration Ministries Director, and Michele co-led a women leaders' small group through the Brave & Beautiful curriculum, part of the Brave Series. The Brave Series was originally written for teenage girls. What surprised everyone was how deeply the material landed with the adult women in that group. The conversations were unguarded, the transformation was visible, and the framework proved just as fitting for women navigating leadership as it had been for young women navigating adolescence.
 
 ## The Outcome
 
 The response led to something that Michele had hoped for. First Presbyterian Church of Honolulu purchased the Brave and Bold curriculum to mentor and equip its men leaders, extending what the women discovered into the men's leadership as well.
+
+### A partnership Michele holds with real gratitude
 
 Michele considers it a genuine honor to work with Leona Larkin and to support the work of First Presbyterian Church of Honolulu. What began 12 years ago as one senior pastor's offer to help a new nonprofit find its footing has become a partnership in equipping leaders across generations.
