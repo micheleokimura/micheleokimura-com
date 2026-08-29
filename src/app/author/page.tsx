@@ -689,7 +689,7 @@ export default function AuthorPage() {
           this wash. */}
       <section
         aria-label="In Michele's words"
-        className="surface-speaker-quote w-full py-14 sm:py-24 lg:py-28"
+        className="surface-author-quote w-full py-14 sm:py-24 lg:py-28"
       >
         <Container>
           <FadeIn>
@@ -710,17 +710,27 @@ export default function AuthorPage() {
               <div>
                 {/* No quotation marks. At this size a pair of curly quotes
                     just hangs two heavy marks in the corners, and the display
-                    setting already reads as a quote. Navy rather than
-                    teal-text, which measures 3.96:1 on this wash and fails. */}
-                <blockquote className="font-display mx-auto max-w-[22ch] text-[1.5rem] leading-[1.25] font-medium tracking-tight text-balance text-[var(--color-navy)] sm:max-w-[26ch] sm:text-[1.875rem] sm:leading-[1.22] lg:mx-0 lg:max-w-[30ch] lg:text-[2.25rem] lg:leading-[1.2]">
+                    setting already reads as a quote.
+
+                    WHITE, matching the Author hero, since the ground under it
+                    became the hero's marigold on 2026-08-29. It measures
+                    2.58:1 and does not meet AA; read the note on
+                    .surface-author-quote before touching the ink, because the
+                    fix is the ground rather than the type. */}
+                <blockquote className="font-display mx-auto max-w-[22ch] text-[1.5rem] leading-[1.25] font-medium tracking-tight text-balance text-[var(--color-white)] sm:max-w-[26ch] sm:text-[1.875rem] sm:leading-[1.22] lg:mx-0 lg:max-w-[30ch] lg:text-[2.25rem] lg:leading-[1.2]">
                   My heart is to help people live in the fullness of who they
                   were created to be with brave purpose.
                 </blockquote>
                 {/* No dash before the name: no em dash anywhere on this site,
-                    so the attribution is the name alone. neutral-600 is the
-                    only secondary that clears AA on the periwinkle;
-                    coral-text, the usual house eyebrow colour, is 3.93:1. */}
-                <figcaption className="font-display mt-6 text-xs font-semibold tracking-[0.18em] text-neutral-600 uppercase sm:mt-8 sm:text-sm">
+                    so the attribution is the name alone.
+
+                    FULL white at any breakpoint. The periwinkle
+                    this used to sit on took a neutral-600 secondary; the
+                    marigold takes none, so the line reads as secondary on
+                    size, weight, caps and letterspacing instead, and every
+                    step of opacity down from full white would only cost
+                    contrast the ratio cannot spare. */}
+                <figcaption className="font-display mt-6 text-xs font-semibold tracking-[0.18em] text-[var(--color-white)] uppercase sm:mt-8 sm:text-sm">
                   Michele Okimura
                 </figcaption>
               </div>

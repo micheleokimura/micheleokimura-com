@@ -205,6 +205,39 @@
   --color-band-4: #fcfaf6;
 
   /* ---------------------------------------------------------------------
+     THE WARM ALTERNATING GROUND  (home page only, 2026-08-29)
+     ---------------------------------------------------------------------
+     Michele, after the single-white re-cut landed: the home page needs
+     section separation you can SEE, and the whitespace-only seams above are
+     too quiet to tell her where one thought ends and the next begins.
+
+     So the home page alternates. Odd sections keep --color-band-* (#FCFAF6)
+     and even ones take this, which is a step deeper and still warm:
+
+       #FCFAF6  vs  #F2ECDF     1.13:1 of lightness, a visible seam on a
+                                screen and still calm in a photograph
+
+     THE VALUE IS THE SAME HEX AS --color-cream, AND THAT IS ON PURPOSE, but
+     it is a SEPARATE TOKEN rather than an alias. --color-cream is a TEXT
+     colour for dark surfaces now and carries a standing "do not use as a
+     background" note earned when cream tiles fought the periwinkle on
+     /speaker. That note is about CARDS on a light ground; this is the ground
+     itself, on a page with no periwinkle. Keeping the two names apart means a
+     future re-tint of the cream TEXT cannot silently repaint the home page.
+
+     WHAT STILL CLEARS AA ON IT, measured rather than assumed:
+
+       teal heading #0F766E      4.65:1   (was 5.25 on #FCFAF6, needs 3.0)
+       neutral-800 body          12.86:1
+       neutral-900 body          15.23:1
+       #FFFFFF card on it        1.18:1   vs 1.13 on #FCFAF6, so the panel
+                                          tiles LIFT slightly better here
+
+     Home page only. /speaker runs its own neutral rhythm on #F1EEE7 and is
+     deliberately left alone; do not unify the two without Michele. */
+  --color-band-warm: #f2ecdf;
+
+  /* ---------------------------------------------------------------------
      THE CARD / PANEL GROUND
      ---------------------------------------------------------------------
      The tile that lifts off a section. Added 2026-08-29 taking the job
@@ -1085,6 +1118,45 @@ html {
    before recolouring anything on this strip. */
 .surface-speaker-quote {
   background-color: #d5daf5;
+}
+
+/* The Author page's closing quote ground. THE SAME MARIGOLD AS THE AUTHOR
+   HERO, flat rather than washed, added 2026-08-29.
+
+   It used to share .surface-speaker-quote with /speaker, which put a
+   periwinkle strip at the foot of a page whose banner is marigold and whose
+   identity is nothing else. Michele's note: the page should close on the
+   colour it opens on. /speaker keeps the periwinkle and is untouched, which
+   is why this is a second class rather than an edit to the first.
+
+   FLAT --color-author-wash-base, not the hero's two-layer gradient. The hero
+   grades top-to-base so the fan of covers sits on the deeper end; there are
+   no covers here, and the base is the DARKER half of the range, so a flat
+   fill is both simpler and the better of the two for the white type.
+
+   THE WHITE INK ON THIS DOES NOT MEET AA, exactly as it does not on the hero:
+
+     --color-white #FCFAF6 on #E8843C      2.58:1
+     pure #FFFFFF, for reference           2.69:1
+     navy #1F2744, the ink this replaced   5.45:1
+
+   2.58:1 is under the 3:1 large-text floor the blockquote needs at 24px and
+   up, and the attribution is small caps well under any large-text exemption.
+   The shortfall is INHERITED, deliberately: Michele chose white on the
+   marigold for the hero with these numbers in front of her, and a quote block
+   that matched the hero's colour while flipping its ink to navy would have
+   been the odd one out on her own page. THE GROUND IS THE ONLY LEVER, same as
+   the hero: white clears 3:1 at a ground of L 0.282 (#E4701D) and 4.5:1 at
+   L 0.172 (#B65916), both the same hue and saturation turned down. If the
+   hero wash is ever deepened, deepen this with it and delete both warnings
+   together. See the --color-author-wash-* token block for the full workup.
+
+   The attribution is FULL white at every breakpoint. Every step
+   down makes a failing ratio worse (90% is 2.36:1, 80% is 2.15:1) and the
+   line is already clearly secondary on size, weight, caps and letterspacing
+   alone. Do not fade it to buy hierarchy that the type is already buying. */
+.surface-author-quote {
+  background-color: var(--color-author-wash-base);
 }
 
 /* ---------------------------------------------------------------------

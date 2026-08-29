@@ -32,27 +32,39 @@ import { siteConfig } from '@/lib/site-config'
  * SECTION BANDS. Michele, on the page running as one flat colour: "I'm just
  * staring into a void and I don't know when a thought's completed and it's
  * ready. I'm ready to move on somewhere else." Every section below is
- * full-bleed, sits on one of --color-band-1/2/3, and carries its own vertical
- * padding instead of the old margin stack.
+ * full-bleed, sits on one of --color-band-1/2/3/warm, and carries its own
+ * vertical padding instead of the old margin stack.
  *
- * The order down the page, which is a rhythm rather than a strict A/B:
+ * The order down the page:
  *
  *   hero          navy video
- *   marquee       band-2   (set on the section in LogoMarquee.tsx)
- *   three doors   band-1
- *   pull quote    band-3   deepest, most padding, the pause
- *   the Method    band-2
- *   postures      band-1
- *   footer run-in band-4   (painted by SiteFooter, not by this file)
+ *   marquee       band-2      #FCFAF6  (set in LogoMarquee.tsx)
+ *   three doors   band-warm   #F2ECDF
+ *   pull quote    band-3      #FCFAF6  most padding, the pause
+ *   friends say   band-warm   #F2ECDF
+ *   the Method    band-2      #FCFAF6
+ *   postures      band-warm   #F2ECDF
+ *   footer run-in band-4      #FCFAF6  (painted by SiteFooter, not this file)
  *
- * THE BANDS ALL RESOLVE TO ONE WHITE as of 2026-08-29. Michele approved the
- * single #FCFAF6 ground off the /coach pilot and asked for it sitewide, so the
- * sequence above no longer paints five shades; it paints one. The numbers stay
- * in the markup because they are the record of the intended rhythm, and a
- * future re-cut would restore the steps without touching this file.
+ * IT IS A STRICT A/B AGAIN as of 2026-08-29, and it is meant to be SEEN.
+ * The single-white re-cut earlier the same day resolved every band to #FCFAF6
+ * and left whitespace to carry the seams on its own. It did not carry them:
+ * Michele's read was that the page went back to reading as one sheet and she
+ * still could not tell where a thought finished. So the even sections take
+ * --color-band-warm (#F2ECDF), a step deeper and still warm, and no two
+ * adjacent sections on this page share a ground. The hero and the footer
+ * run-in are untouched at either end.
  *
- * What carries the seams now is whitespace, and it carries them alone. A CARD
- * still never takes a band: tiles use --color-panel, the one neutral surface
+ * Check the alternation, not the token names, if you add a section here. The
+ * marquee is the FIRST thing under the hero, not the last, which is the trap:
+ * a new section dropped in above it has to be #FCFAF6's opposite, and the
+ * band-1/2/3 numbers are a record of the old rhythm rather than a guide to
+ * this one.
+ *
+ * THIS PAGE ONLY. /speaker runs its own neutral rhythm on #F1EEE7 and stays
+ * there; the two were not unified and should not be without Michele.
+ *
+ * A CARD still never takes a band: tiles use --color-panel, the one neutral surface
  * here that is not the ground. It is pure #FFFFFF and clears #FCFAF6 by 1.68
  * points of lightness, which is a thin edge and is why every one of these
  * tiles keeps its `ring-1 ring-navy/10`. Taking that card ground DOWN to
@@ -61,7 +73,7 @@ import { siteConfig } from '@/lib/site-config'
  *
  * THE THREE ROLE CARDS ARE THE EXCEPTION to "a card never takes a band". They
  * are not neutral tiles at all now: each one is a coloured gradient using the
- * shared .msg-card system (see tailwind.css), so they sit ON band-1 as
+ * shared .msg-card system (see tailwind.css), so they sit ON band-warm as
  * saturated objects rather than as a five-point shade difference. The rule
  * still holds for every other card on the page.
  *
@@ -466,7 +478,7 @@ export default function HomePage() {
       {/* Speaker, Author, Coach, left to right. Order is locked in DOORS. */}
       <section
         aria-labelledby="three-ways-heading"
-        className="bg-[var(--color-band-1)] py-20 sm:py-24 lg:py-28"
+        className="bg-[var(--color-band-warm)] py-20 sm:py-24 lg:py-28"
       >
         <div className={WIDE}>
           <h2 id="three-ways-heading" className="sr-only">
@@ -626,12 +638,13 @@ export default function HomePage() {
 
       {/* --------------------------------------- things my friends say */}
       {/* Restored 2026-08-24 after Michele reversed the decision to leave
-          testimonials off the home page. Back on band-1, between the quote on
-          band-3 and the Method on band-2, which is exactly where it sat before.
+          testimonials off the home page. It sits between the quote and the
+          Method, which is exactly where it sat before, and takes band-warm so
+          that both of its neighbours stay a visible step lighter.
           Slower and larger than the parked version; see the row and the card. */}
       <section
         aria-labelledby="friends-say-heading"
-        className="overflow-hidden bg-[var(--color-band-1)] py-20 sm:py-24 lg:py-28"
+        className="overflow-hidden bg-[var(--color-band-warm)] py-20 sm:py-24 lg:py-28"
       >
         <Container>
           <FadeIn>
@@ -708,14 +721,15 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* The last section on the page. It no longer has to be band-1: the
-          footer used to sit below an UNPAINTED margin, so any band here left a
-          strip of page ground above the navy. SiteFooter now paints its own
-          run-in with band-4, so this is free to take whatever the rhythm wants
-          and the descent into the footer is 1 -> 4 -> navy. */}
+      {/* The last section on the page, and free to take whatever the rhythm
+          wants. The footer used to sit below an UNPAINTED margin, so any band
+          here left a strip of page ground above the navy. SiteFooter paints
+          its own run-in with band-4 now, so the descent into the footer is
+          band-warm #F2ECDF -> band-4 #FCFAF6 -> navy, and the last seam on
+          the page is as visible as the ones above it. */}
       <section
         aria-label="Where writers start"
-        className="bg-[var(--color-band-1)] py-20 sm:py-24 lg:py-28"
+        className="bg-[var(--color-band-warm)] py-20 sm:py-24 lg:py-28"
       >
         <div className={WIDE}>
           <FadeIn>
