@@ -268,23 +268,6 @@ export default async function AuthorBookPage({
    */
   const showBuyPanel = Boolean(book.buy) && slug !== 'brave-series'
 
-  /**
-   * Draw the "Read the story behind it" link in the footer row.
-   *
-   * The Brave Series curriculum only, by Michele's direction of 2026-08-28.
-   * Every other title's footer row carries the one link back to the shelf.
-   *
-   * It coexists with the ResearchPartnership callout at the head of the same
-   * page on purpose: the callout goes to the ASU case study, this goes to the
-   * series' own project page, and they are two different stories.
-   *
-   * A rule about the PAGE rather than dropping `storyHref` from the records in
-   * src/lib/author-books.ts, for the same reason `showBuyPanel` is: that field
-   * is where each title's project page is written down, and this page is its
-   * only reader, so flipping this one line is how the link comes back.
-   */
-  const showStoryLink = Boolean(book.storyHref) && slug === 'brave-series'
-
   return (
     <>
       <WebPageJsonLd
@@ -563,16 +546,12 @@ export default async function AuthorBookPage({
               </div>
             ) : null}
 
+            {/* One link out, on every title. The "Read the story behind it"
+                link that used to lead this row was removed on 2026-08-28 by
+                Michele's direction: no book page carries it now. `storyHref`
+                is still on the records in src/lib/author-books.ts, and this
+                page no longer reads it. */}
             <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-[var(--color-navy-10)] pt-8">
-              {showStoryLink && book.storyHref ? (
-                <Link
-                  href={book.storyHref}
-                  className="font-display -my-2.5 inline-flex items-center gap-1.5 py-2.5 text-base font-semibold text-[var(--color-brand-teal)] underline decoration-[var(--color-brand-terracotta)] decoration-1 underline-offset-4 transition hover:decoration-2"
-                >
-                  Read the story behind it
-                  <span aria-hidden="true">&rarr;</span>
-                </Link>
-              ) : null}
               <Link
                 href="/author"
                 className="font-display -my-2.5 inline-flex items-center gap-1.5 py-2.5 text-base font-semibold text-neutral-700 underline decoration-[var(--color-navy)]/25 decoration-1 underline-offset-4 transition hover:text-neutral-950 hover:decoration-2"
