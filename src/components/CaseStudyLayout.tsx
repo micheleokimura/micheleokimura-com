@@ -532,3 +532,103 @@ export function SiblingLinks({
     </FadeIn>
   )
 }
+
+/* --------------------------------------------------- research partnership */
+
+/**
+ * The accent that runs down the left edge of every ResearchPartnership
+ * callout, and colours its eyebrow.
+ *
+ * CHANGE THE ACCENT IN ONE PLACE: edit this line. Navy is the academic
+ * default. `var(--color-brand-teal)` and `var(--color-gold)` are the other two
+ * on-palette options; coral is not, because DESIGN-RULES bans coral card
+ * rings. A single page can also override it per-callout with the `accent`
+ * prop without touching this default.
+ */
+const RESEARCH_ACCENT = 'var(--color-navy)'
+
+/**
+ * A featured callout for an academic or institutional research partnership.
+ *
+ * Deliberately heavier than the tile treatments above it. A partnership like
+ * the ASU one is the credibility behind a curriculum rather than one more fact
+ * about it, so it gets a cream marquee panel with a solid accent rule and the
+ * body copy at the sitewide 20px reading size, sat directly under the hero.
+ *
+ * Written to take a second partner (Foursquare, the Department of Education)
+ * with nothing but new props: every string is passed in, and `accent` and
+ * `width` are the two knobs for how loud it lands.
+ */
+export function ResearchPartnership({
+  eyebrow,
+  heading,
+  children,
+  ctaHref,
+  ctaLabel = 'Read the full story',
+  id = 'research-partnership',
+  accent = RESEARCH_ACCENT,
+  /** Panel measure. `wide` is the marquee row; `narrow` matches body copy. */
+  width = 'wide',
+  className = 'mt-12 sm:mt-16',
+}: {
+  eyebrow: string
+  heading: string
+  children: React.ReactNode
+  ctaHref: string
+  ctaLabel?: string
+  id?: string
+  accent?: string
+  width?: 'wide' | 'narrow'
+  className?: string
+}) {
+  return (
+    <section aria-labelledby={id}>
+      <Container className={className}>
+        <FadeIn>
+          <div
+            className={`relative overflow-hidden rounded-3xl bg-[var(--color-cream)] ring-1 ring-[var(--color-navy-10)] ${
+              width === 'narrow' ? 'max-w-3xl' : ''
+            }`}
+          >
+            <span
+              aria-hidden="true"
+              className="absolute inset-y-0 left-0 w-1.5"
+              style={{ backgroundColor: accent }}
+            />
+            <div className="grid grid-cols-1 gap-x-12 gap-y-6 py-9 pr-8 pl-10 sm:py-12 sm:pr-12 sm:pl-14 lg:grid-cols-2 lg:items-start">
+              <div>
+                <p
+                  className="font-display text-xs font-semibold tracking-[0.22em] uppercase sm:text-sm"
+                  style={{ color: accent }}
+                >
+                  {eyebrow}
+                </p>
+                <h2
+                  id={id}
+                  className="mt-4 font-display text-2xl leading-tight font-semibold tracking-tight text-balance text-neutral-950 sm:text-3xl sm:leading-tight"
+                >
+                  {heading}
+                </h2>
+              </div>
+              <div>
+                <p className="text-xl leading-9 text-neutral-700">{children}</p>
+                <Link
+                  href={ctaHref}
+                  className="group mt-6 inline-flex items-center gap-2 text-base font-semibold text-neutral-950 underline decoration-[var(--color-brand-terracotta)] decoration-2 underline-offset-4 transition hover:text-[var(--color-brand-terracotta-ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus-ring)]"
+                >
+                  {ctaLabel}
+                  <span
+                    aria-hidden="true"
+                    className="transition group-hover:translate-x-0.5"
+                  >
+                    &rarr;
+                  </span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </FadeIn>
+      </Container>
+    </section>
+  )
+}

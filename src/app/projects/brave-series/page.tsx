@@ -11,6 +11,7 @@ import {
   Prose,
   PullQuote,
   Recognition,
+  ResearchPartnership,
   SiblingLinks,
   StatGrid,
   VoiceNote,
@@ -134,6 +135,21 @@ export default function BraveSeriesPage() {
         </p>
       }
     >
+      {/* Sat directly under the hero, above the body, because the ASU
+          partnership is the research credibility a reader weighs before they
+          read anything else about the curriculum. */}
+      <ResearchPartnership
+        eyebrow="Academic research foundation"
+        heading="How a landmark Hawaiʻi study inspired the Brave Series"
+        ctaHref="/case-studies/asu-office-of-sex-trafficking-intervention-research"
+      >
+        The Brave Series was evaluated by Dr. Dominique Roe-Sepowitz of ASU
+        School of Social Work, lead researcher on Hawaiʻi&rsquo;s six-year state
+        study of sex trafficking. Her research inspired the very first Brave
+        Series curriculum in 2019. Today, she volunteers her time to help ground
+        the series in research-credible outcome measurement.
+      </ResearchPartnership>
+
       <PullQuote attribution="Trafficking survivor" className="mt-14 sm:mt-20">
         If I had this when I was in high school, I would have never gotten
         trafficked in the first place.
