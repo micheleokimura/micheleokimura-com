@@ -145,104 +145,103 @@
   /* ---------------------------------------------------------------------
      SECTION BANDS
      ---------------------------------------------------------------------
-     Michele, on the home page running as one flat colour: "I'm just staring
-     into a void and I don't know when a thought's completed and it's ready.
-     I'm ready to move on somewhere else." These bands are the answer. Every
-     full-bleed section sits on one of them, and neighbours never share a band,
-     so each change of ground marks the end of one thought.
+     ONE WHITE, FOUR NAMES, as of 2026-08-29's third pass. All four bands
+     resolve to #FCFAF6 and so does --color-white. Michele saw the single warm
+     white running on /coach as a pilot, approved it, and asked for it
+     sitewide: no more jumping between two whites.
 
-       --color-band-1  #FAF9F5  the default ground (same value as --color-white)
-       --color-band-2  #F6F4EE  one step down
-       --color-band-3  #F2EFE8  two steps down, for the quiet/pause sections
-       --color-band-4  #EEEBE2  deepest, and ONLY for the run-in to the footer
+       --color-band-1  #FCFAF6
+       --color-band-2  #FCFAF6
+       --color-band-3  #FCFAF6
+       --color-band-4  #FCFAF6
 
-     RE-CUT 2026-08-29 as a soft warm white family. Michele asked for a ground
-     that is brighter than the old one and still warm, so it stops fighting the
-     lavender on /speaker. Two things changed together and both matter:
+     THE NAMES ARE KEPT ON PURPOSE. About forty call sites ask for a band by
+     number and they should keep asking. The numbers are the only record of
+     which step of the rhythm each section was written to occupy, so the scale
+     can be re-cut in one place if the steps are ever wanted back. Do not go
+     around the markup swapping bg-[var(--color-band-2)] for bg-white.
 
-       The HUE. The old ramp drifted greenish-neutral at the top (#FAFAF8 is
-       two points of chroma) and tan at the bottom (#E9E9E2 sat next to the
-       genuinely tan neutral ramp). Every band now holds the same warm hue at
-       low chroma, 5 at band-1 rising to 12 at band-4, so the scale reads as
-       one warm white getting quieter rather than as neutral fading to oat.
+     WHAT CARRIES A SECTION BOUNDARY NOW. Whitespace, and the cards. The band
+     scale used to mark the end of a thought with about five points of
+     lightness; that job moves to --color-panel, which went DOWN below the
+     ground in the same pass and is the one neutral surface on the site that is
+     not #FCFAF6. A section that has to read as its own thing gets a panel in
+     it, and the vertical rhythm does the rest.
 
-       The STEP. The old steps were 6.0/6.0/6.7 points of lightness. They are
-       5.3/5.0/4.7 now, which is TIGHTER, and that is deliberate: band-4 could
-       not stay as deep as #E9E9E2 and clear contrast. See below.
+     History, because these values have moved three times and the reasons are
+     not readable from the hex:
 
-     BAND-4 IS A CONTRAST FLOOR, not a taste value. On the old #E9E9E2 three
-     things failed outright: --color-teal-text at 4.49:1, --color-coral-text at
-     4.46:1 (AA wants 4.5) and --color-field-border at 2.98:1 (WCAG 1.4.11
-     wants 3.0). #EEEBE2 is the shallowest warm value where all three clear,
-     at 4.59:1, 4.56:1 and 3.05:1. Do not deepen band-4 without re-measuring
-     those three; they are the reason the bottom of this scale sits where it
-     does, and the whole ramp was compressed upward to make room for them.
+       2026-08-23  cream #F2ECDF retired as the ground: Michele read it as
+                   "too tan".
+       2026-08-29  the ramp re-cut warm, #FAF9F5 stepping down to #EEEBE2,
+                   because the old top end drifted green against the lavender
+                   on /speaker.
+       2026-08-29  flattened to #FCFAF6, this pass.
 
-     THE STEPS ARE SUPPOSED TO BE ALMOST INVISIBLE. Roughly 5 points of
-     lightness apart, near-neutral rather than tan. Someone glancing at the page
-     should not be able to name two of these as "different colours"; they should
-     only notice that a section started. If a band ever reads as a coloured
-     panel, it has been pushed too far and the effect is lost.
+     #FCFAF6 is L* 98.32, against 97.90 for the #FAF9F5 it replaces and 100 for
+     pure white, so it covers about a fifth of the distance from the old ground
+     to white and stays warm (R minus B is 6). Every ink therefore scores
+     BETTER here than on any band it used to sit on, because the ground only
+     got lighter:
 
-     Band-4 exists because the gap above the footer used to be unpainted page
-     ground, which put a strip of the LIGHTEST shade immediately above the navy
-     footer. Painting that run-in with the deepest shade turns the end of the
-     page into a descent (sections -> deeper -> navy) instead of a jump.
+                          old band-1  old band-4  #FCFAF6
+       navy                   13.92       12.30    14.07
+       neutral-700            10.43        9.22    10.54
+       neutral-600             7.30        6.45     7.37
+       neutral-500             5.55        4.91     5.61
+       teal-text               5.20        4.59     5.25
+       coral-text              5.16        4.56     5.22
+       field-border            3.45        3.05     3.49   (needs 3.0)
+       CTA #C84C33 shape       4.39        3.88     4.44   (needs 3.0)
 
-     These are grounds, not tiles. A card that needs to lift off its section
-     uses --color-panel, which is BRIGHTER than every band and therefore lifts
-     off all four; see that token. Do not use a band as a card colour: two
-     bands next to each other is exactly the contrast this scale is designed
-     NOT to have.
-
-     Measured on the new ramp, worst case first. Navy body copy clears AA with
-     enormous room: 13.92:1 on band-1, 13.33:1 on band-2, 12.77:1 on band-3,
-     12.30:1 on band-4. The two accent text colours are the tight ones, and
-     they now clear on every band:
-
-                        band-1  band-2  band-3  band-4
-       navy              13.92   13.33   12.77   12.30
-       neutral-600        7.30    6.99    6.69    6.45
-       neutral-500        5.55    5.32    5.09    4.91
-       teal-text          5.20    4.98    4.77    4.59
-       coral-text         5.16    4.95    4.74    4.56
-       field-border       3.45    3.31    3.17    3.05   (needs 3.0)
-       CTA #C84C33 shape  4.39    4.21    4.03    3.88   (needs 3.0) */
-  --color-band-1: #faf9f5;
-  --color-band-2: #f6f4ee;
-  --color-band-3: #f2efe8;
-  --color-band-4: #eeebe2;
+     neutral-400 is 3.01:1 here and still fails AA for text on every ground on
+     this site. It is decorative only. If you are reaching for it to spell a
+     word, you want neutral-500. */
+  --color-band-1: #fcfaf6;
+  --color-band-2: #fcfaf6;
+  --color-band-3: #fcfaf6;
+  --color-band-4: #fcfaf6;
 
   /* ---------------------------------------------------------------------
      THE CARD / PANEL GROUND
      ---------------------------------------------------------------------
-     The tile that lifts off a section. Added 2026-08-29, taking the job
-     --color-cream used to do.
+     The tile that lifts off a section. Added 2026-08-29 taking the job
+     --color-cream used to do, and turned around later the same day.
 
-     IT GOES UP, NOT DOWN, and that is the whole idea. Cream was a tile
-     because it was DARKER than the ground; that worked while the ground was
-     bright and neutral, but it meant every card on the site was the tannest
-     thing on the page, and on /speaker the cream cards sat a few hundred
-     pixels from a periwinkle strip and lost. With the band scale re-cut as a
-     soft warm white the headroom below band-1 is only fifteen points of
-     lightness for four bands, so a tile going DOWN either collides with
-     band-2 or lands on top of band-3. Going up, one value clears all four:
+     IT GOES DOWN NOW, and that is the whole change. For one afternoon this
+     token was pure #FFFFFF, because the ground was #FAF9F5 and a tile going
+     down had only fifteen points of lightness to work in before it collided
+     with the band below it. Flattening the bands removed that problem: with
+     nothing under the ground to collide with, the entire range below #FCFAF6
+     is free, and a card can be the darker surface again.
 
-       panel over band-1   +7.0 points of lightness
-       panel over band-2  +12.3
-       panel over band-3  +17.3
-       panel over band-4  +22.0
+     It HAS to go down, because up is gone. #FCFAF6 is L* 98.32 and pure white
+     is 100, so there is not two full points of lightness left above the
+     ground. That is not a card, it is a rounding error. Michele's read on the
+     flat page was that the cards blend into the base and need a slight lift,
+     and the only direction with room in it is down.
 
-     On band-1 that lift is the subtlest, and there the `ring-1 ring-navy/10`
-     every one of these cards already carries is what draws the edge. That
-     ring is not optional on a panel sitting on band-1.
+     #F1EEE7 is L* 94.15, which is 4.17 points below the ground: the same size
+     of step the old band scale used between neighbours, now spent on the one
+     boundary that has to be seen rather than on four that did not. It is the
+     same value as --color-neutral-50, deliberately, so the card ground and the
+     light end of the neutral ramp are one colour instead of two near-misses.
 
-     It is pure #FFFFFF on purpose, which is the one place on this site that
-     is allowed to be. A card is the only surface a reader looks THROUGH to
-     read something, so it gets the most contrast headroom on the site: navy
-     14.67:1, teal-text 5.47:1, coral-text 5.44:1, field-border 3.64:1. Every
-     one of those is the best figure any ground here scores. */
-  --color-panel: #ffffff;
+     The `ring-1 ring-navy/10` every one of these cards carries is still not
+     optional. Four points of lightness is a soft edge by design, and the
+     hairline is what makes it a definite one.
+
+     CONTRAST ON A CARD IS THE WORST CASE ON THE SITE NOW rather than the best,
+     which is the cost of the direction change, and it is still a long way from
+     tight: navy 12.66:1, neutral-800 10.67:1, neutral-700 9.49:1, neutral-600
+     6.63:1, neutral-500 5.05:1, teal-text 4.72:1, coral-text 4.69:1,
+     field-border 3.14:1, CTA as a shape 3.99:1. Every one clears its floor.
+     The two to watch if this value is ever deepened are teal-text and
+     coral-text: they want 4.5:1 and have about a fifth of a point in hand.
+
+     Do NOT put a bg-neutral-100 image well (#EDEAE2) inside a panel. The two
+     are 1.04:1 apart and the well vanishes. On the ground it reads fine. */
+  --color-panel: #f1eee7;
 
   /* ---------------------------------------------------------------------
      AUTHOR HERO WASH
@@ -270,20 +269,20 @@
      second pass, which puts the worst case at --color-author-wash-top #F2994E.
 
                                     on top #F2994E   on base #E8843C
-       --color-white #FAF9F5              2.11:1           2.56:1
+       --color-white #FCFAF6              2.13:1           2.58:1
        --color-cream #F2ECDF              1.89:1           2.29:1
        pure #FFFFFF, for reference        2.22:1           2.69:1
        navy #1F2744, the previous ink     6.59:1           5.45:1
 
      WHITE ON THIS MARIGOLD DOES NOT MEET AA AT ANY SIZE, and this is recorded
      here rather than quietly fixed because Michele asked for the white ink
-     directly, to match Speaker and Coach. 2.11:1 is under the 3:1 large-text
+     directly, to match Speaker and Coach. 2.13:1 is under the 3:1 large-text
      floor the H1 needs and well under the 4.5:1 the 18px subhead needs. Weight
      does not rescue the subhead either: WCAG large text means 24px, or 18.66px
      BOLD, and this line is 18px at 500.
 
      THE GROUND IS THE ONLY LEVER LEFT. There is no white-ish ink that fixes
-     this, because #FAF9F5 is already within a hair of pure white and every
+     this, because #FCFAF6 is already within a hair of pure white and every
      step away from white on a mid-light orange goes DOWN before it comes back
      up. For white to clear the floors, the marigold has to deepen:
 
@@ -347,8 +346,8 @@
      the neutral ramp because WCAG 1.4.11 holds a form border to 3:1 while a
      decorative dashed placeholder rule is exempt as pure decoration -- and the
      ramp is used for both. #7F8699 was derived at 3.09:1 on cream; on today's
-     grounds it runs 3.45:1 on band-1 down to 3.05:1 on band-4, and 3.64:1 on
-     --color-panel, so it clears 3.0 everywhere it can land.
+     grounds it runs 3.49:1 on the #FCFAF6 ground and 3.14:1 on the #F1EEE7
+     panel, so it clears 3.0 on both surfaces it can land on.
 
      This matters more than it looks: an input is a near-white box on a
      near-white card, so this border is the ONLY thing that says "type here".
@@ -364,19 +363,32 @@
      existing bg-white / text-white utilities pick it up site-wide. Anything
      that genuinely needs pure white must say #ffffff explicitly.
 
-     GROUND CHANGED TWICE. On 2026-08-23 it went from cream #F2ECDF, which
-     Michele read as "too tan", to an off-white #FAFAF8. On 2026-08-29 it went
-     to the soft warm white #FAF9F5 it is now, which is the same lightness and
-     a warmer hue: #FAFAF8 was very slightly GREEN, and against the lavender on
-     /speaker that is the wrong direction to be wrong in. This value must stay
-     equal to --color-band-1; they are the same ground and two names for it.
+     GROUND CHANGED THREE TIMES. On 2026-08-23 it went from cream #F2ECDF,
+     which Michele read as "too tan", to an off-white #FAFAF8. On 2026-08-29 it
+     went to the soft warm white #FAF9F5, the same lightness and a warmer hue,
+     because #FAFAF8 was very slightly GREEN and against the lavender on
+     /speaker that is the wrong direction to be wrong in. Later the same day it
+     went to #FCFAF6, the single sitewide white Michele approved off the /coach
+     pilot. This value must stay equal to --color-band-1; they are the same
+     ground and two names for it.
+
+     IT IS ALSO INK, and that is easy to forget when changing it. layout.tsx
+     paints it on <html> via `bg-white`, and it is the text colour on every
+     dark surface on the site: the teal and violet banners, the navy footer,
+     the coloured role tiles on the home page, the coach hero, the UAV card.
+     Each of those gained a little when the ground got lighter, because the ink
+     got lighter with it. On the coach hero #1F5F5B it reads 7.08:1 against
+     7.00:1 before; on the violet banner 14.98:1 against 14.82:1; on the UAV
+     card 13.01:1 against 12.88:1. The marigold Author hero is the one place
+     this ink does not clear AA, and it did not before either; see the AUTHOR
+     HERO WASH block above for the numbers and for Michele's call on them.
 
      Every contrast figure originally quoted in this file was measured against
-     cream. They all survive both moves, because the ground only ever got
-     lighter: dark ink on #FAF9F5 scores higher than the same ink on #F2ECDF,
+     cream. They all survive all three moves, because the ground only ever got
+     lighter: dark ink on #FCFAF6 scores higher than the same ink on #F2ECDF,
      never lower. The three derived text colors keep their AA passes with room
-     to spare (teal-text 4.65 -> 5.20, coral-text 4.62 -> 5.16, field-border
-     3.09 -> 3.45).
+     to spare (teal-text 4.65 -> 5.25, coral-text 4.62 -> 5.22, field-border
+     3.09 -> 3.49).
 
      `neutral-950` IS navy now. Body copy, major headings and every dark UI
      surface are the same locked navy, which is what the palette asks for.
@@ -403,13 +415,15 @@
      and field-border (2.85:1) all failed on it. At #EDEAE2 they are 4.55:1,
      4.52:1 and 3.03:1.
 
-     Measured on band-1: 950 13.92:1, 700 10.43:1, 600 7.30:1, 500 5.55:1. 400
-     and lighter are decorative (rules, dividers, disabled) and MUST NOT carry
-     body text: neutral-400 is 2.98:1 on band-1 and fails AA on every ground on
-     this site. Six call sites were spelling words in it and were moved to
+     neutral-50 #F1EEE7 is also --color-panel, on purpose; see that token.
+
+     Measured on the ground: 950 14.07:1, 700 10.54:1, 600 7.37:1, 500 5.61:1.
+     400 and lighter are decorative (rules, dividers, disabled) and MUST NOT
+     carry body text: neutral-400 is 3.01:1 on the ground and 2.71:1 on a
+     panel, and fails AA on every surface on this site. Six call sites were spelling words in it and were moved to
      neutral-500 on 2026-08-29. If you are reaching for neutral-400 for text,
      you want neutral-500. */
-  --color-white: #faf9f5;
+  --color-white: #fcfaf6;
   --color-neutral-950: #1f2744;
   --color-neutral-900: #252d4b;
   --color-neutral-800: #2b3352;
@@ -491,11 +505,14 @@
   --color-coach-accent-ink: var(--color-coral-ink);
   --color-coach-accent-text: var(--color-coral-text);
   --color-coach-surface-dark: var(--color-navy);
-  /* Tracks --color-neutral-100, which is where this value came from and where
-     it went on 2026-08-29. At its old #EAE3D3 the panel failed teal-text
-     (4.28:1), coral-text (4.25:1) and field-border (2.85:1); it clears all
-     three now at 4.55:1, 4.52:1 and 3.03:1. */
-  --color-coach-surface-soft: #edeae2;
+  /* The "In six months, you get" box. It is a card, so as of 2026-08-29 it
+     takes the sitewide card ground rather than a hex of its own. It tracked
+     --color-neutral-100 before that, which stopped working the moment the
+     bands flattened: at #EDEAE2 it was only 1.04:1 off the new ground and the
+     box disappeared. On --color-panel it reads 1.11:1 against the ground, the
+     same lift every other card on the site gets, and the ink on it measures
+     navy 12.66:1, neutral-700 9.49:1, teal-text 4.72:1, coral-text 4.69:1. */
+  --color-coach-surface-soft: var(--color-panel);
 
   /* ---------------------------------------------------------------------
      PHOTO-DERIVED SECTION WASHES
@@ -777,7 +794,7 @@ html {
    average. Do not raise that 12% without re-measuring; at 22% the cream
    subtitle falls under AA.
 
-     --color-white #FAF9F5   7.00:1 flat, 5.22:1 at the radial peak
+     --color-white #FCFAF6   7.08:1 flat, 5.27:1 at the radial peak
      --color-cream #F2ECDF   6.27:1 flat, 4.67:1 at the radial peak
 
    The ink FLIPPED with the ground. The eyebrow and the H1 were navy on the old
@@ -805,8 +822,8 @@ html {
      neutral-950 #1F2744  8.86:1   the heading
      neutral-700 #333B59  6.64:1   the body copy
 
-   It sits on band-3 (#f2efe8) inside a navy-10 hairline ring and reads 1.44:1
-   against that ground, so the panel still separates. */
+   It sits on the #FCFAF6 ground inside a navy-10 hairline ring and reads
+   1.59:1 against it, so the panel still separates. */
 .surface-coach-hero {
   background-color: #1f5f5b;
   background-image: radial-gradient(
@@ -824,199 +841,6 @@ html {
     rgba(255, 255, 255, 0.14) 50%,
     rgba(255, 255, 255, 0) 78%
   );
-}
-
-/* ---------------------------------------------------------------------
-   THE NEUTRALS PILOT  (/coach only, added 2026-08-29)
-   ---------------------------------------------------------------------
-   Named THE ONE-WHITE PILOT through rounds one and two, when it really was
-   one white. Round three split the cards back off, so it is a two-neutral
-   pilot now: #FCFAF6 ground, #F1EEE7 cards.
-
-   THIS IS A PILOT AND IT IS DELIBERATELY SCOPED TO ONE PAGE. Michele wants
-   to see the neutrals on a real page before deciding whether the site
-   should run on them. If she says yes, the right follow-up is to re-cut
-   the tokens in @theme above and DELETE this block, not to copy it onto
-   more pages. If she says no, deleting this block is the whole rollback.
-
-   WHAT SHE IS LOOKING AT. The site carries two neutral whites of its own: a
-   band scale that starts at #FAF9F5 and steps down to #EEEBE2, and a card
-   ground at pure #FFFFFF that lifts off it. On /coach that means a reader
-   scrolling the page crosses five different neutrals. #FCFAF6 replaced all
-   of them in round two. It is a shade warmer than #FAF9F5 and genuinely
-   brighter than it, and it stops well short of #FFFFFF: measured in L*,
-   band-1 is 97.90, this is 98.32 and white is 100, so it covers a fifth
-   of the distance from the old ground to white.
-
-   Read the rest of this note in order. Rounds one and two below are about
-   the GROUND and their reasoning still stands. Round three, THE CARD LIFT,
-   is where the cards stop following it.
-
-   SECOND ROUND, 2026-08-29. This started at #FBF8F1, and Michele asked for
-   a slightly whiter one after seeing that live on /coach.
-
-   WORTH KNOWING WHY, because the first value did not do what the note here
-   originally claimed it did. #FBF8F1 is warm (R-B is 10, against 5 for
-   band-1) but it is very slightly DARKER than band-1, L* 97.63 against
-   97.90. So round one gave her more warmth and a touch less light, when the
-   thing she was after was a brighter ground. #FCFAF6 is the correction: R-B
-   6, so barely warmer than band-1 rather than twice as warm, and above it
-   in lightness rather than below. That is the whole difference between the
-   two rounds, and it is why this one reads whiter rather than just cleaner.
-
-   THIRD ROUND, 2026-08-29: THE CARD LIFT. Rounds one and two put the cards
-   on the same value as the ground, and that answered the question Michele
-   was actually asking. Her answer, having seen it: the ground is right and
-   the cards are not. Flat was the trade the single white asked for, and she
-   does not want to pay it. So the two CARD tokens split back off:
-
-     --color-panel               #FCFAF6 -> #F1EEE7
-     --color-coach-surface-soft  #FCFAF6 -> #F1EEE7
-
-   The ground does NOT move. band-1 through band-4 stay at #FCFAF6, and so
-   does --color-white, which is why they are still listed separately below.
-   The page now runs on two neutrals on purpose: one ground, one card.
-
-   #F1EEE7 IS A STEP DOWN, NOT A STEP UP. This is the opposite move from
-   rounds one and two, which chased brightness. L* 94.15 against the ground's
-   98.32, so the cards sit 4.17 L* BELOW the surface they lift off, and they
-   lift by being darker rather than lighter. That is deliberate: the ground
-   is already within two points of white, so there was no headroom left to
-   lift into. R-B is 10 against the ground's 6, so the card is also the
-   warmer of the two and the pair reads as one family rather than as a white
-   next to a grey.
-
-   FOR SCALE, since "is that enough separation" is the question this raises:
-
-     pre-pilot   #FFFFFF card on #FAF9F5 band   dL* 2.10
-     rounds 1-2  #FCFAF6 card on #FCFAF6 band   dL* 0.00   (invisible)
-     now         #F1EEE7 card on #FCFAF6 band   dL* 4.17
-
-   So the separation is roughly twice what the site carried before the pilot
-   started, and the `ring-1 ring-navy/10` hairline every card already has is
-   now reinforcing a real edge instead of standing in for one.
-
-   IF A FOURTH ROUND IS WANTED, the ground and the cards are now two
-   independent values and they re-measure separately. Changing the ground
-   means the four bands, --color-white and the literal in the html rule
-   below; changing the cards means the two tokens above and nothing else.
-   Check L* first in either case: hex that looks lighter often is not, which
-   is the mistake round one made.
-
-   WHAT THIS CHANGES ON THE PAGE. Exactly two card groups, because those are
-   the only two consumers of these tokens that render on /coach:
-
-     --color-panel               the "01 The missing roadmap" and "02 The
-                                 borrowed voice" cards in section 3
-     --color-coach-surface-soft  the "In six months, you get:" panel in
-                                 section 4
-
-   Everything else on /coach is either the ground or has a colour of its own.
-   The FAQ is a bare `dl` on band-2 with hairline dividers and no card, so it
-   does not move. Neither do the deep teal hero, the soft teal TSS card, the
-   navy UAV card, the terracotta CTA button, or the soft teal "Not just
-   books" panel, which carries `.surface-coach-soft` rather than a neutral.
-
-   THE BANDS ARE STILL FLAT, and section rhythm on /coach is still carried by
-   whitespace alone. That part of the pilot is unchanged and is still a thing
-   to decide on; this round only settles the cards.
-
-   WHY :root:has() AND NOT A CLASS ON THE PAGE. Three of the surfaces that
-   have to change are not rendered by the page at all. SiteHeader paints
-   band-1, SiteFooter paints the band-4 run-in, and ContactPopup portals to
-   document.body; all three sit outside the /coach subtree in layout.tsx. A
-   class on the page container reaches none of them. Hanging the override on
-   :root instead means the tokens are already correct wherever they are
-   read, including inside the portal. The page's only job is to carry the
-   `.page-coach` marker that trips the :has().
-
-   It is static CSS on purpose. The alternative, a client component that
-   stamps a class onto documentElement from usePathname, repaints after
-   hydration, and the reader would watch the page change colour.
-
-   --color-white IS IN THE LIST, and it is not only a background. It is
-   #FAF9F5, the same value as band-1, and layout.tsx paints it on <html> via
-   `bg-white`; it is also the ink for the hero H1 and eyebrow and for
-   --coach-card-ink on the UAV card. Both jobs move to #FCFAF6 here. As ink
-   that is a small GAIN, because the new value is lighter than the one it
-   replaces: the hero reads 7.00:1 on #1F5F5B before and 7.08:1 after, and
-   the UAV card 12.88:1 before and 13.01:1 after. (At #FBF8F1, the first
-   round of this pilot, both went very slightly the other way, 6.96:1 and
-   12.79:1. Neither direction is visible; it is recorded so nobody re-derives
-   it.)
-
-   CONTRAST. #FCFAF6 sits between band-1 and the #FFFFFF panel in value, so
-   every pairing on the page lands between two figures that already passed.
-   Measured, worst case last:
-
-     navy / neutral-950   14.07:1
-     neutral-800          11.86
-     neutral-700          10.54
-     neutral-600           7.37
-     neutral-500           5.61
-     teal-text             5.25
-     coral-text            5.22   (accent numerals; AA wants 4.5)
-     CTA #C84C33 shape     4.44   (needs 3.0)
-     field-border          3.49   (needs 3.0)
-
-   Nothing on the GROUND fails. Every one of these figures is better than the
-   same ink on any BAND it used to sit on, and the tight pair gain most:
-   teal-text and coral-text were at 4.59:1 and 4.56:1 on band-4 and are at
-   5.25:1 and 5.22:1 now.
-
-   CONTRAST INSIDE THE CARDS is now a separate table, because as of round
-   three the cards are a darker value than the ground and no longer inherit
-   its figures. Everything here is ink on #F1EEE7, with the round-two figure
-   on #FCFAF6 in brackets so the cost of the lift is visible:
-
-     navy / neutral-950   12.66:1  [14.07]   card titles, panel heading
-     neutral-800          10.67    [11.86]   the "In six months" list
-     neutral-700           9.49    [10.54]   card body copy
-     neutral-600           6.63     [7.37]
-     neutral-500           5.05     [5.61]
-     teal-text             4.72     [5.25]
-     coral-text            4.69     [5.22]   the 01/02 numerals; AA wants 4.5
-
-   Every one of those clears AA as text. The lift costs about a tenth of the
-   ratio across the board, which is what moving a ground down 4.17 L* buys,
-   and the two tight pairs are the ones to re-check if the card value is ever
-   taken darker than this: coral-text has 0.19 of headroom left over the 4.5
-   floor and teal-text 0.22. #F1EEE7 is close to as dark as the cards can go
-   before the numerals need recolouring.
-
-   ONE FIGURE MOVES BELOW 4.5 AND IT IS NOT TEXT. The tick in "In six months"
-   is a teal-text glyph sitting on its own `bg-teal/15` well, and the well
-   composites over the card, so the glyph darkens with it: 4.13:1 on the new
-   #CDE5DC disc against 4.53:1 on the old #D6EFE9. The tick is `aria-hidden`
-   decoration next to text that carries the meaning, so it is governed by the
-   3:1 of WCAG 1.4.11 rather than the 4.5:1 of 1.4.3, and 4.13:1 clears that
-   with room. Worth knowing it was only 0.03 over the text floor before, so
-   nothing was really lost. If the well is ever asked to carry meaning on its
-   own, recolour it then.
-
-   The deep teal hero, the soft teal TSS card, the navy UAV card, the
-   terracotta CTA and the soft teal "Not just books" panel are all untouched.
-   They are the page's colour and the pilot is only about the neutrals. */
-:root:has(.page-coach) {
-  --color-band-1: #fcfaf6;
-  --color-band-2: #fcfaf6;
-  --color-band-3: #fcfaf6;
-  --color-band-4: #fcfaf6;
-  --color-white: #fcfaf6;
-
-  /* THE CARDS COME BACK OFF THE GROUND, round three, 2026-08-29. See the
-     CARD LIFT note above for why these two are no longer #FCFAF6 and why
-     --color-white is not in with them. */
-  --color-panel: #f1eee7;
-  --color-coach-surface-soft: #f1eee7;
-}
-
-/* The token above already reaches <html>, which carries `bg-white`. This
-   repeats it as a literal so the overscroll gutter above and below the page
-   cannot fall back to a different white if that utility is ever changed. */
-html:has(.page-coach),
-html:has(.page-coach) body {
-  background-color: #fcfaf6;
 }
 
 /* ---------------------------------------------------------------------
@@ -1290,10 +1114,13 @@ html:has(.page-coach) body {
 
    DARK CARD (UAV #1F2E4A). Cream and white text, so the LIGHT end is the
    worst case and the texture's own highlights lift it further. Measured
-   against --color-white #FAF9F5: 12.98:1 on the flat b stop, 7.71:1 at the
-   centre of the 16% corner tint. The sheen corner is milder at 6.77:1. Body
+   against --color-white when that token was #FAF9F5: 12.98:1 on the flat b
+   stop, 7.71:1 at the centre of the 16% corner tint. The sheen corner is
+   milder at 6.77:1. Body
    copy is --color-cream at 85%, 8.76:1 where it actually sits. Push a corner
-   tint past ~20% and re-measure rather than eyeballing it.
+   tint past ~20% and re-measure rather than eyeballing it. --color-white is
+   #FCFAF6 since 2026-08-29, which is lighter, so all three white figures above
+   are floors now rather than exact readings; the flat b stop is 13.01:1.
 
    LIGHT CARD (TSS #B0CFD0). Navy text, so it is the other way round: the DARK
    end is the worst case, and the b stop is deliberately the darkest flat point

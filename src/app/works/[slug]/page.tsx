@@ -143,7 +143,7 @@ export default async function WorkPage({
             </div>
 
             <aside>
-              <dl className="rounded-2xl border border-neutral-200 bg-white p-6">
+              <dl className="rounded-2xl border border-neutral-200 bg-[var(--color-panel)] p-6">
                 <h3 className="mb-4 font-display text-sm font-semibold tracking-widest text-[var(--color-brand-terracotta-ink)] uppercase">
                   Details
                 </h3>

@@ -31,7 +31,7 @@ export default function ContactPage() {
       <Container className="mt-16 sm:mt-20 lg:mt-24">
         <div className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-2">
           <FadeIn>
-            <div className="rounded-3xl bg-neutral-50 p-8 ring-1 ring-inset ring-neutral-900/5">
+            <div className="rounded-3xl bg-[var(--color-panel)] p-8 ring-1 ring-inset ring-neutral-900/5">
               <h2 className="font-display text-2xl font-semibold tracking-tight text-neutral-950">
                 Save your spot
               </h2>
@@ -48,7 +48,7 @@ export default function ContactPage() {
           <FadeIn>
             <div className="mb-10 max-w-md">
               <MichelePortrait width={440} />
-              <div className="mt-5 rounded-2xl bg-neutral-50 p-5 ring-1 ring-inset ring-neutral-900/5">
+              <div className="mt-5 rounded-2xl bg-[var(--color-panel)] p-5 ring-1 ring-inset ring-neutral-900/5">
                 <p className="text-base text-neutral-700">
                   This is who reads every signup. Michele reaches out personally by
                   email when a spot opens.

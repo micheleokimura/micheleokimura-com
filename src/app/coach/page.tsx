@@ -70,31 +70,20 @@ import { pageMetadata } from '@/lib/schema'
  * that the quote banner has been cut from between the deliverables panel and
  * the FAQ.
  *
- * THE BAND RHYTHM IS SWITCHED OFF HERE AS OF 2026-08-29, and only here. The
- * markup below still asks for band-1, band-2 and band-3 in that order, and it
- * should keep asking: those class names are what the sitewide scale will snap
- * back to the moment the pilot ends. What changed is what the tokens resolve
- * to. `.page-coach` on the container below trips a `:root:has()` rule in
- * tailwind.css that flattens all four bands and --color-white to one warm
- * white, #FCFAF6, in place of the band scale starting at #FAF9F5. Section
- * boundaries on this page are carried by whitespace alone while the pilot
- * runs.
+ * THE BAND RHYTHM IS SWITCHED OFF, and it is switched off SITEWIDE as of
+ * 2026-08-29 rather than here. This page piloted the single warm white
+ * #FCFAF6; Michele approved it and asked for it everywhere, so the band tokens
+ * in @theme all resolve to that one value now and the `.page-coach` marker
+ * and its `:root:has()` override are both deleted. The markup below still
+ * asks for band-1, band-2 and band-3 in that order and it should keep asking:
+ * those numbers are the record of the intended sequence, and they are what a
+ * future re-cut would snap back to.
  *
- * THE CARDS DO NOT FOLLOW THE BANDS, as of round three on 2026-08-29. They
- * ran flat with the ground for two rounds, Michele saw it, and asked for the
- * lift back. The same rule repoints --color-panel and
- * --color-coach-surface-soft to #F1EEE7, a soft warm neutral 4.17 L* BELOW
- * the ground, so the two card groups on this page (the 01/02 cards in
- * section 3 and the "In six months" panel in section 4) lift by being darker
- * and warmer rather than brighter. Their navy/10 hairline now sits on a real
- * edge instead of standing in for one.
- *
- * So: do not "fix" the 1, 2, 1, 2, 3 sequence below because the bands render
+ * So: do not "fix" the 1, 2, 1, 2, 3 sequence below because the page renders
  * flat, and do not add a fourth band expecting it to read as a new ground.
- * Do not "restore" the cards to the ground value either; the split is the
- * point. If Michele approves this it goes sitewide by re-cutting the tokens
- * in @theme, and this page goes back to being ordinary. If she turns it
- * down, dropping the `page-coach` class restores the scale exactly.
+ * Section boundaries here are carried by whitespace, and the deliverables box
+ * is carried by --color-panel, which went DOWN to #F1EEE7 in the same pass so
+ * that cards keep lifting off the flattened ground.
  *
  * RECOLOURED 2026-08-29, and this page ONLY. Michele and Brett want /coach to
  * be the most professional of the three role pages: /speaker and /author stay
@@ -311,8 +300,10 @@ const FAQS: { question: string; answer: string }[] = [
 /**
  * The tick in "In six months, you get". A small round well rather than a bare
  * glyph, so the checklist picks up the icon treatment from the TSS and UAV
- * cards above it at a quieter scale. The teal disc is 3.77:1 against the panel
- * behind it, which clears the 3:1 a non-text graphic owes under WCAG 1.4.11.
+ * cards above it at a quieter scale. The tick itself is what has to be seen:
+ * teal-text on the disc is 4.12:1, which clears the 3:1 a non-text graphic
+ * owes under WCAG 1.4.11. The disc under it is decoration and is deliberately
+ * quiet, 1.15:1 against the panel.
  */
 function CheckMark() {
   return (
@@ -330,15 +321,11 @@ function CheckMark() {
 
 export default function CoachingPage() {
   return (
-    /* `page-coach` is the NEUTRALS PILOT marker and it does nothing on its
-       own: the rule that reads it is `:root:has(.page-coach)` in
-       tailwind.css, which repoints the band scale and --color-white at
-       #FCFAF6 and the two card tokens at #F1EEE7 for the whole document. It
-       has to be a marker rather than a styled wrapper because SiteHeader,
-       SiteFooter and the portalled ContactPopup all render outside this
-       subtree; see the block in tailwind.css for the reasoning and the
-       measurements. Removing this class is the rollback. */
-    <div className="page-coach">
+    /* Plain wrapper. This used to carry `page-coach`, the marker for the
+       one-white pilot's `:root:has()` override in tailwind.css. The pilot
+       went sitewide on 2026-08-29 and both the marker and the override are
+       gone; the tokens in @theme carry it now. */
+    <div>
       <WebPageJsonLd
         path="/coach"
         name="Author coaching with Michele Okimura"

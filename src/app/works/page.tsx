@@ -90,7 +90,7 @@ export default function WorksPage() {
                     <FadeIn as="li" key={work.slug} scaleIn>
                       <Link
                         href={`/works/${work.slug}`}
-                        className="group flex h-full flex-col rounded-3xl bg-white p-6 ring-1 ring-neutral-900/5 transition hover:shadow-lg hover:ring-neutral-900/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus-ring)]"
+                        className="group flex h-full flex-col rounded-3xl bg-[var(--color-panel)] p-6 ring-1 ring-neutral-900/5 transition hover:shadow-lg hover:ring-neutral-900/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus-ring)]"
                       >
                         {work.coverImage ? (
                           <div className="relative mb-4 aspect-[3/4] w-full overflow-hidden rounded-xl bg-neutral-100">
@@ -103,7 +103,7 @@ export default function WorksPage() {
                             />
                           </div>
                         ) : (
-                          <div className="mb-4 flex aspect-[3/4] w-full items-center justify-center rounded-xl bg-neutral-50 p-6">
+                          <div className="mb-4 flex aspect-[3/4] w-full items-center justify-center rounded-xl bg-neutral-100 p-6">
                             <span className="text-center font-display text-lg font-semibold tracking-tight text-neutral-500">
                               {work.title}
                             </span>

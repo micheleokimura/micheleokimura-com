@@ -381,7 +381,7 @@ export function StatGrid({
       >
         {items.map((item) => (
           <FadeIn as="li" key={item.label} scaleIn>
-            <div className="h-full rounded-2xl border border-neutral-200 bg-white p-6">
+            <div className="h-full rounded-2xl border border-neutral-200 bg-[var(--color-panel)] p-6">
               <p className="font-display text-3xl font-medium tracking-tight text-neutral-950">
                 {item.value}
               </p>
@@ -513,7 +513,7 @@ export function SiblingLinks({
           <li key={item.href}>
             <Link
               href={item.href}
-              className="group flex h-full flex-col rounded-2xl border border-neutral-200 bg-white p-5 transition hover:shadow-lg hover:ring-1 hover:ring-neutral-900/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus-ring)]"
+              className="group flex h-full flex-col rounded-2xl border border-neutral-200 bg-[var(--color-panel)] p-5 transition hover:shadow-lg hover:ring-1 hover:ring-neutral-900/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-focus-ring)]"
             >
               <p className="font-display text-lg font-semibold tracking-tight text-neutral-950">
                 {item.title}

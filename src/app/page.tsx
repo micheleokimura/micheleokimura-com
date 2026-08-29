@@ -45,14 +45,17 @@ import { siteConfig } from '@/lib/site-config'
  *   postures      band-1
  *   footer run-in band-4   (painted by SiteFooter, not by this file)
  *
- * Two rules hold it together. Neighbours never share a band, because a repeated
- * ground is exactly the seam that goes missing. And a CARD never takes a band:
- * tiles use --color-panel, which is brighter than every band and so lifts off
- * any of them,
- * whereas a band on a band would be a 5-point difference nobody can see.
+ * THE BANDS ALL RESOLVE TO ONE WHITE as of 2026-08-29. Michele approved the
+ * single #FCFAF6 ground off the /coach pilot and asked for it sitewide, so the
+ * sequence above no longer paints five shades; it paints one. The numbers stay
+ * in the markup because they are the record of the intended rhythm, and a
+ * future re-cut would restore the steps without touching this file.
  *
- * "Friends say" sits on band-1 between the quote (band-3) and the Method
- * (band-2). Both neighbours differ from it, so the rhythm is unchanged.
+ * What carries the seams now is whitespace and the cards. A CARD still never
+ * takes a band: tiles use --color-panel, which went DOWN to #F1EEE7 in the
+ * same pass and is the one neutral surface here that is not the ground. It
+ * sits 4.17 points of lightness under it, which is the step the band scale
+ * used to spend between neighbours, now spent where it can be seen.
  *
  * THE THREE ROLE CARDS ARE THE EXCEPTION to "a card never takes a band". They
  * are not neutral tiles at all now: each one is a coloured gradient using the
