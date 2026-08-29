@@ -114,15 +114,25 @@ import { pageMetadata } from '@/lib/schema'
  * the odd one. Hue goes 176 -> 162 and saturation 0.67 -> 0.35, a yellow-green
  * undertone in place of the blue, which reads as grounded earth rather than
  * cold ocean. Michele opened on #3E5F55 and it could not ship: the cream
- * subtitle falls to 4.46:1 at the radial peak, under the 4.5 AA bar, so this
- * is that colour seated about 10 percent deeper. Every contrast reading on the
- * hero is now better than the cool teal's.
+ * subtitle falls to 4.46:1 at the radial peak, under the 4.5 AA bar, so that
+ * was seated about 10 percent deeper.
  *
- * TSS and UAV DID NOT MOVE in that pass, by Michele's instruction, so the
- * hero/TSS pairing above is looser than it was: 20 degrees apart rather than
- * 6. That is accepted. A hero and the feature boxes inside it do not have to
- * be the same colour, and if the pair is ever meant to be tight again, the box
- * is what moves.
+ * THEN IT CAME BACK TO BLUE, #38564D -> #275958, still 2026-08-29 and still
+ * the only value on this page that moves. Hue 162 overshot: it read green
+ * rather than teal, and against the TSS box's blue-teal 182 the two stopped
+ * looking like siblings. Hue 162 -> 179 relates them again at 3 degrees
+ * apart, tighter than the 6 they had before any of this. The warming is not
+ * undone by it: saturation stays 0.56 against the old cold teal's 0.67, and
+ * that restraint is what keeps the ground earthy. Michele's value was #2F6C6A
+ * and it could not ship as given, same failure as #3E5F55, cream at 3.92:1 at
+ * the peak, as did all three fallbacks she sent with it. #275958 is her hue
+ * and her saturation seated deeper: white 7.58:1 flat and 5.55:1 at the peak,
+ * cream 6.72:1 and 4.92:1. Full workings in tailwind.css.
+ *
+ * TSS and UAV DID NOT MOVE in either pass, by Michele's instruction. The
+ * hero/TSS pairing went 6 degrees apart, then 20, and is now 3. The box never
+ * moved for any of it; the hero did, which is the way round the note here has
+ * said it should be from the start.
  *
  * The ink flipped with each ground. The hero was navy on light and is now
  * white and cream on dark; the TSS card was white and cream on dark and is now
@@ -216,8 +226,9 @@ const PILLARS: Pillar[] = [
       // trade: bold on the big header, soft on the small feature box. #B0CFD0
       // is the old hero mint shifted toward blue, hue 167 -> 182, which drops
       // the green cast and sat within 6 degrees of the hero's 176 at the time.
-      // The hero then warmed to #38564D, hue 162, and this box was ruled out
-      // of scope, so that gap is 20 degrees now. Left as-is on purpose.
+      // The hero then warmed to #38564D, hue 162, opening that gap to 20
+      // degrees, and came back to #275958, hue 179, which closes it to 3. This
+      // box was ruled out of scope for both moves and never changed.
       //
       // b is the DARKEST flat point here, which is the reverse of the navy
       // card, because this one carries navy ink. a is a lighter tint of the
@@ -225,9 +236,10 @@ const PILLARS: Pillar[] = [
       // floor. Everything below inverted with the ground: white rings would
       // not show on this, and bright teal #00B09F in the corner became a
       // saturated patch, so the rings are navy and the corner glow is #1F5F5B,
-      // which was the hero's own colour when it was chosen. The hero has since
-      // warmed to #38564D and this card stayed, so the glow is a cool teal the
-      // hero no longer carries. See the .coach-card block in tailwind.css.
+      // which was the hero's own colour when it was chosen. The hero warmed
+      // away to #38564D and this card stayed, stranding the glow; the hero has
+      // since come back to #275958, hue 179 against the glow's 176, so the two
+      // are close again. See the .coach-card block in tailwind.css.
       '--coach-card-a': '#c9dedf',
       '--coach-card-b': '#b0cfd0',
       '--coach-card-glow': 'rgba(31, 95, 91, 0.28)',

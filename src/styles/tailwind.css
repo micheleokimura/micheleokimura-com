@@ -424,8 +424,8 @@
      dark surface on the site: the teal and violet banners, the navy footer,
      the coloured role tiles on the home page, the coach hero, the UAV card.
      Each of those gained a little when the ground got lighter, because the ink
-     got lighter with it. On the coach hero, #1F5F5B then and #38564D since it
-     warmed, it reads 7.73:1; on the violet banner 14.98:1 against 14.82:1; on the UAV
+     got lighter with it. On the coach hero, which went #1F5F5B, then #38564D,
+     then #275958, it reads 7.58:1; on the violet banner 14.98:1 against 14.82:1; on the UAV
      card 13.01:1 against 12.88:1. The marigold Author hero is the one place
      this ink does not clear AA, and it did not before either; see the AUTHOR
      HERO WASH block above for the numbers and for Michele's call on them.
@@ -1082,7 +1082,7 @@ html {
    alternative and was passed over: at hue 189 it drifts toward the navy of the
    UAV card and the teal pair stops reading as a pair.
 
-   HERO. The ground is #38564D, lifted by a white radial in the same ellipse
+   HERO. The ground is #275958, lifted by a white radial in the same ellipse
    the old wash used, so the hero keeps its light-from-the-left composition
    instead of reading as a flat slab. The radial peak dropped from 38% white to
    12%: on a dark ground white LOWERS the contrast under the text, so the peak
@@ -1090,40 +1090,64 @@ html {
    average. Do not raise that 12% without re-measuring; at 22% the cream
    subtitle falls under AA.
 
-   WARMED FROM #1F5F5B TO #38564D, later on 2026-08-29. Same pass that warmed
-   the /speaker banner, same reason: the three role heroes are meant to read as
-   siblings out of one brand, /author anchors the set on marigold #E8843C, and
-   a blue-teal beside it made the warm page look like the odd one. The shift is
-   hue 176 -> 162 and saturation 0.67 -> 0.35, which puts a yellow-green
-   undertone into the teal and takes most of the blue out: grounded earth
-   rather than cold ocean. /author does not move, it is the anchor.
+   WARMED FROM #1F5F5B TO #38564D, later on 2026-08-29, and that value is
+   gone again; the paragraph is kept because the reasoning still explains what
+   the page was reaching for. Same pass that warmed the /speaker banner, same
+   reason: the three role heroes are meant to read as siblings out of one
+   brand, /author anchors the set on marigold #E8843C, and a blue-teal beside
+   it made the warm page look like the odd one. The shift was hue 176 -> 162
+   and saturation 0.67 -> 0.35. /author does not move, it is the anchor.
 
    MICHELE'S OPENING VALUE WAS #3E5F55 AND IT COULD NOT SHIP. At that
    lightness the cream subtitle measures 4.46:1 at the radial peak, which is
    under the 4.5 AA bar for normal text, and the subtitle is 18px medium so it
    does not qualify as large. The peak is the worst case here by design, so
-   that is a real failure and not a rounding one. #38564D is the same hue and
-   saturation seated about 10 percent deeper, which buys the margin back
-   without touching the 12 percent radial the composition depends on. Every
-   reading below is BETTER than the cool teal it replaces.
+   that is a real failure and not a rounding one. #38564D was the same hue and
+   saturation seated about 10 percent deeper, which bought the margin back
+   without touching the 12 percent radial the composition depends on.
 
-     --color-white #FCFAF6   7.73:1 flat, 5.63:1 at the radial peak  (7.08, 5.27)
-     --color-cream #F2ECDF   6.84:1 flat, 4.98:1 at the radial peak  (6.27, 4.67)
+   PULLED BACK TO BLUE-TEAL, #38564D -> #275958, still on 2026-08-29. Hue 162
+   overshot: it took so much blue out that the hero read green rather than
+   teal, and the TSS box below it is a blue-teal at hue 182, so the two
+   stopped reading as one family and started reading as two. Michele asked for
+   the hero to come back toward blue so it relates to the box again. Hue
+   162 -> 179 does that. What it does NOT do is undo the warming: saturation
+   stays at 0.56 rather than the 0.67 of the old cold #1F5F5B, and that
+   restraint is where the grounded, earthy quality lives. Hue carries the
+   family resemblance, saturation carries the warmth, and they are separable.
 
-   THE TSS BOX DOES NOT MOVE and the teal pair is looser than it was. #B0CFD0
-   sat 6 degrees off the old hero's 176 and now sits 20 degrees off this hero's
-   162. That is deliberate and in scope: Michele ruled the small feature boxes
-   out of this pass, and a hero and the content boxes inside it do not have to
-   be the same colour. If the pair is ever meant to be tight again, the box is
-   the value that moves, not the hero.
+   HER VALUE WAS #2F6C6A AND IT COULD NOT SHIP AS GIVEN, for exactly the
+   reason #3E5F55 could not ship earlier the same day: it is a light seat, and
+   the cream subtitle measures 3.92:1 at the radial peak. The three fallbacks
+   offered alongside it all sit at the same lightness and all fail with it:
+   #356E6C at 3.83:1, #3A6E6D at 3.79:1, #2C6A70 at 4.01:1. None of this is a
+   verdict on the hue, which is right and is kept.
+
+   #275958 IS HER COLOUR SEATED DEEPER. It holds her hue and her saturation,
+   179 and 0.56, and drops value 0.42 -> 0.35. Same remedy as the
+   #3E5F55 -> #38564D move, same reason for it, and it lands within a
+   hundredth of the margins the green hero shipped with:
+
+     --color-white #FCFAF6   7.58:1 flat, 5.55:1 at the radial peak  (7.73, 5.63)
+     --color-cream #F2ECDF   6.72:1 flat, 4.92:1 at the radial peak  (6.84, 4.98)
+
+   Bracketed figures are the #38564D hero this replaces. Both pass AA at the
+   peak, which is the floor, and both are comfortably AAA flat.
+
+   THE TSS BOX DOES NOT MOVE and the teal pair is tight again. #B0CFD0 sits at
+   hue 182, 3 degrees off this hero's 179, where it was 20 degrees off the
+   green one and 6 degrees off the cold one before that. Michele ruled the
+   small feature boxes out of this pass too, so the hero is the value that
+   moved, which is the way round the earlier note here said it should be.
 
    The ink FLIPPED with the ground. The eyebrow and the H1 were navy on the old
    light wash and are now --color-white; the subtitle was text-neutral-700 and
    is now --color-cream, which keeps the H1 above it without dropping under AA.
    There is no navy left in this hero.
 
-   The CTA on this ground measures 1.74:1 as a shape, up from 1.59:1 on the
-   cool teal and still down from 2.94:1 on the light wash it replaced. The
+   The CTA on this ground measures 1.71:1 as a shape, level with the 1.74:1 it
+   read on the green hero, up from 1.59:1 on the cool teal and still down from
+   2.94:1 on the light wash it replaced. The
    button is deliberately left warm, because it is the one warm accent on the
    page, and Michele asked for it to stay terracotta through the swap. Its own
    label contrast, white on #C84C33 at 4.63:1, is a sitewide condition of that
@@ -1148,7 +1172,7 @@ html {
    It sits on the #FCFAF6 ground inside a navy-10 hairline ring and reads
    1.59:1 against it, so the panel still separates. */
 .surface-coach-hero {
-  background-color: #38564d;
+  background-color: #275958;
   background-image: radial-gradient(
     ellipse 90% 140% at 20% 50%,
     rgba(255, 255, 255, 0.12) 0%,
@@ -1516,11 +1540,12 @@ html {
    #B0CFD0, so they became navy at 5.5%, and the corner glow became #1F5F5B at
    16% instead of bright teal #00B09F at 18%, which turned into a saturated
    patch once the ground went light. #1F5F5B was the hero's own colour when
-   that glow was chosen; the hero warmed to #38564D later on 2026-08-29 and
-   this card was ruled out of scope, so the glow is now a cool teal the hero no
-   longer carries. It is a 16 percent tint in one corner of one box and the
-   figures above still hold, so it was left alone rather than chased. Retune it
-   to the new hero teal whenever this card is next opened. Bright teal #00B09F now
+   that glow was chosen. The hero warmed away from it to #38564D later on
+   2026-08-29 and this card was ruled out of scope, which left the glow
+   stranded 14 degrees off; the hero then came back to blue-teal #275958 the
+   same day, hue 179 against the glow's 176, so the two are close again and the
+   stranding fixed itself. It is a 16 percent tint in one corner of one box and
+   the figures above still hold. Bright teal #00B09F now
    appears on this page only inside the dark card's shadow, never as a fill
    behind words.
 
