@@ -31,24 +31,43 @@ import {
  *
  * What changed in that pass, and why, so none of it gets quietly undone:
  *
- * BANNER. The ground is violet: `.surface-violet-card`, built on
- * --color-speaker-violet. It used to be `.surface-violet-banner` on
- * --color-speaker-deep #241B4F, sampled from the stage photograph directly
- * below it. Michele's read: that field was a very dark, almost-black purple,
- * it felt heavy, and it looked like a different colour from the cards rather
- * than the same page. So the page carries ONE purple, and the two bands that
- * bracket it, this banner and the "Book Michele" CTA at the foot, both take
- * it. That happened on 2026-08-29 and the value it took was #3B2C74, the
- * light stop of `.msg-violet` down in the messages grid.
+ * BANNER. The ground is `.surface-speaker-plum` on --color-speaker-plum
+ * #624973, and it took three moves in one day, 2026-08-29, to get there.
  *
- * It was WARMED to #4C3A6E later the same day. The three role heroes are
- * meant to read as siblings out of one brand and they did not: /author
- * anchors the set on marigold, so a blue-indigo here and a blue-teal on
- * /coach made the warm page look like the odd one instead of the parent. The
- * shift puts red into the purple and takes blue out, hue 252 -> 261 at lower
- * saturation, and holds the value so the band carries the same weight. The
- * keynote cards keep #3B2C74: the banner and the cards are near relations now
- * rather than one value, which Michele signed off on. /author does not move.
+ * It started as `.surface-violet-banner` on --color-speaker-deep #241B4F,
+ * sampled from the stage photograph directly below it. Michele's read: that
+ * field was a very dark, almost-black purple, it felt heavy, and it looked
+ * like a different colour from the keynote cards rather than the same page.
+ * So the banner took the CARDS' own colour and texture, #3B2C74 with the
+ * hairline stripes, and the "Book Michele" CTA at the foot took it too.
+ *
+ * Then it was warmed to #4C3A6E, because the three role heroes are meant to
+ * read as siblings out of one brand and they did not: /author anchors the set
+ * on marigold, so a blue-indigo here and a blue-teal on /coach made the warm
+ * page look like the odd one instead of the parent. Hue 252 -> 261 at lower
+ * saturation, value held.
+ *
+ * The third move is this one, and it finishes the second in the direction the
+ * second was already going. #4C3A6E is warmer than what it replaced and still
+ * reads as dusk rather than as anything earthy; Michele's brief was an aged
+ * velvet book cover. So: hue 261 -> 275 and saturation 0.47 -> 0.37, which
+ * puts a red undertone in the purple and takes enough saturation out that it
+ * reads as dyed cloth rather than as a screen colour. Hue 275 rather than the
+ * 269 first proposed, because at 269 the field still reads faintly lilac
+ * beside the terracotta button sitting on it, and past about 285 it goes rosy
+ * and starts reading pink.
+ *
+ * THE DIAGONAL STRIPES CAME OFF in the same move. What reads as a texture on
+ * a card reads as a hatch pattern across a band 1440px wide, and Michele
+ * asked for a clean field. There is no texture layer on this surface now and
+ * nothing should add one. See the token block in tailwind.css before moving
+ * the hue.
+ *
+ * THREE bands carry it, so the page runs one colour top to bottom: this
+ * banner, the "community of dreamers" quote band in the middle, and the CTA
+ * at the foot. The keynote cards keep #3B2C74, cold and darker, which Michele
+ * signed off on as a step down from the band rather than a match to it.
+ * /author's marigold, /coach's teal and About's sage do not move.
  *
  * The banner also opts out of `text-wrap: balance`. Michele read the headline
  * as centred; it measured flush with the wordmark at every width, and what
@@ -83,10 +102,12 @@ import {
  * QUOTE BANNER. Moved here from /coach on 2026-08-24, which dropped it in the
  * same pass. It sits between the keynote grid and the stages list: a breath
  * between the two densest blocks on the page, and "here is why I speak on
- * these" landing right after what she speaks on. Its periwinkle is sampled
- * from the sapphire flowers in the dress in the photograph it carries, which
- * is the same photo-derived convention the banner at the top of this page
- * follows.
+ * these" landing right after what she speaks on.
+ *
+ * It was periwinkle, sampled from the sapphire flowers in a dress, until
+ * 2026-08-29. It is the page's plum now, flat, with cream copy on it, so the
+ * middle of the page belongs to the same colour as the two ends. /author
+ * still carries the periwinkle version; see the note at the band itself.
  *
  * CLOSING CTA. The dark navy "Book Michele" panel is gone, along with the
  * michele@micheleokimura.com link inside it. Michele: no dark blue text boxes
@@ -94,13 +115,12 @@ import {
  * It is a plain band with one Contact button on the sitewide popup. Do not
  * put an address back on this page.
  *
- * Since 2026-08-29 that band runs `.surface-violet-card`, the same ground as
+ * Since 2026-08-29 that band runs `.surface-speaker-plum`, the same ground as
  * the banner at the top. This does not reopen the rule above: what Michele
- * ruled out was a dark BLUE box, and this is the page's own purple, the one
- * the seven cards between the two bands are already wearing. It is still a
- * plain band, still one button, still no panel and no address. It is also
- * still Speaker's alone: /about closes on the shared ContactBlock and does
- * not share a token with this, so recolouring here cannot reach it.
+ * ruled out was a dark BLUE box, and this is the page's own purple. It is
+ * still a plain band, still one button, still no panel and no address. It is
+ * also still Speaker's alone: /about closes on the shared ContactBlock and
+ * does not share a token with this, so recolouring here cannot reach it.
  *
  * WORKSHOPS. There is no workshops row on this page any more. It landed here
  * on 2026-08-25 carrying one card, ReThink Creativity, after coming off the
@@ -254,7 +274,7 @@ export default function SpeakerPage() {
         eyebrow="Speaking"
         title="Some messages do more than inspire."
         subtitle="They give people permission to be brave."
-        surface="violet-card"
+        surface="plum"
         balanceTitle={false}
       />
 
@@ -449,25 +469,40 @@ export default function SpeakerPage() {
           way too, stages into press kit into the ask, which is the order an
           event organiser reads in.
 
-          Periwinkle. It was sampled from the sapphire flowers in the floral
-          dress that used to be the photograph here; that photo moved to
-          /author on 2026-08-24 and the wash stayed, at Michele's instruction.
-          It still belongs to the picture: this frame's dominant hue is the sky
-          and the ocean at 218 degrees, and the wash sits at 228, so the tie
-          survived the swap rather than being kept out of habit. The numbers
-          and the contrast budget are in the SPEAKER QUOTE BANNER block in
-          tailwind.css. */}
+          THE PERIWINKLE IS GONE, 2026-08-29. This band was #D5DAF5, a pale
+          lavender sampled from the sapphire flowers in a dress that is no
+          longer even in the photograph, carrying navy copy. It is the page's
+          own plum now, the same flat field the banner and the closing CTA
+          run, which is what makes /speaker read as one colour from top to
+          bottom instead of purple at both ends with a cool pastel stranded in
+          the middle.
+
+          The inks turned over with it and they had to: navy measures 1.90:1
+          on the plum and neutral-600 measures 1.01:1, so both would have
+          disappeared. Cream carries the quote and cream at 85 percent carries
+          the name, which is the same pairing the two purple bands use.
+
+          `.surface-speaker-quote`, the periwinkle, STAYS DEFINED. /author
+          still runs it, and its contrast budget was measured against a
+          different photograph. See the note on the class in tailwind.css
+          before touching it. */}
       <section
         aria-label="In Michele's words"
-        className={`surface-speaker-quote ${BAND}`}
+        className={`surface-speaker-plum-quote ${BAND}`}
       >
         <Container>
           <FadeIn>
             <figure className="flex flex-col items-center gap-10 text-center lg:flex-row lg:gap-16 lg:text-left">
               {/* A fixed pixel box rather than a percentage, so the circle
                   stays a circle at every width instead of squashing to an
-                  oval in the flex row. */}
-              <div className="relative h-[250px] w-[250px] flex-none overflow-hidden rounded-full bg-neutral-100 ring-1 ring-[var(--color-navy-10)] sm:h-[300px] sm:w-[300px] lg:h-[340px] lg:w-[340px]">
+                  oval in the flex row.
+
+                  The hairline went from --color-navy-10 to white/15 with the
+                  recolour. A 10 percent navy ring is a DARKENING, which is
+                  what a circle needs on a pale periwinkle and the wrong way
+                  round on a dark plum: it drew a faint dark halo where the
+                  photograph is the brighter thing. */}
+              <div className="relative h-[250px] w-[250px] flex-none overflow-hidden rounded-full bg-neutral-100 ring-1 ring-white/15 sm:h-[300px] sm:w-[300px] lg:h-[340px] lg:w-[340px]">
                 <Image
                   src={MICHELE_PORTRAIT}
                   alt="Michele Okimura on a beach in Hawaiʻi, leaning against a palm trunk with the ocean behind her"
@@ -480,19 +515,21 @@ export default function SpeakerPage() {
               <div>
                 {/* No quotation marks. At this size a pair of curly quotes
                     just hangs two heavy marks in the corners, and the display
-                    setting already reads as a quote. Navy rather than
-                    teal-text, which measures 3.96:1 on this wash and fails. */}
-                <blockquote className="font-display mx-auto max-w-[22ch] text-[1.5rem] leading-[1.25] font-medium tracking-tight text-balance text-[var(--color-navy)] sm:max-w-[26ch] sm:text-[1.875rem] sm:leading-[1.22] lg:mx-0 lg:max-w-[30ch] lg:text-[2.25rem] lg:leading-[1.2]">
+                    setting already reads as a quote. Cream on the plum at
+                    6.56:1, which is the banner headline's own pairing; it was
+                    navy on the periwinkle, and navy measures 1.90:1 here. */}
+                <blockquote className="font-display mx-auto max-w-[22ch] text-[1.5rem] leading-[1.25] font-medium tracking-tight text-balance text-[var(--color-cream)] sm:max-w-[26ch] sm:text-[1.875rem] sm:leading-[1.22] lg:mx-0 lg:max-w-[30ch] lg:text-[2.25rem] lg:leading-[1.2]">
                   Let&rsquo;s become a community of dreamers where we
                   don&rsquo;t compete, but instead celebrate and support one
                   another.
                 </blockquote>
                 {/* No dash before the name: the house rule for this page is no
                     em dash anywhere, so the attribution is the name alone.
-                    neutral-600 is the only secondary that clears AA on the
-                    periwinkle; coral-text, the usual house eyebrow colour,
-                    lands at 3.93:1 here. */}
-                <figcaption className="font-display mt-6 text-xs font-semibold tracking-[0.18em] text-neutral-600 uppercase sm:mt-8 sm:text-sm">
+                    Cream at 85 percent, the same value the two purple bands
+                    give their secondary copy, at 5.28:1. It was neutral-600,
+                    which was the only secondary that cleared AA on the
+                    periwinkle and measures 1.01:1 on the plum. */}
+                <figcaption className="font-display mt-6 text-xs font-semibold tracking-[0.18em] text-[var(--color-cream)]/85 uppercase sm:mt-8 sm:text-sm">
                   Michele Okimura
                 </figcaption>
               </div>
@@ -503,8 +540,8 @@ export default function SpeakerPage() {
 
       {/* ----------------------------------------------------- past events */}
       {/* Panel, and it is panel BECAUSE the press kit below it has to be
-          white. See the note on that band. The periwinkle quote banner sits
-          between this and the messages grid, so two panels never touch. */}
+          white. See the note on that band. The plum quote banner sits between
+          this and the messages grid, so two panels never touch. */}
       <section
         aria-label="Where Michele has spoken"
         className={`bg-[var(--color-panel)] ${BAND}`}
@@ -568,20 +605,20 @@ export default function SpeakerPage() {
 
             lead + photo   #FCFAF6   band-1
             messages       #F1EEE7   panel
-            quote banner   periwinkle, its own sampled surface, untouched
+            quote banner   the page's plum, .surface-speaker-plum-quote
             stages         #F1EEE7   panel
             press kit      #FCFAF6   band-1   <- pinned, this note
-            book me        the page's violet, .surface-violet-card
+            book me        the page's plum, .surface-speaker-plum
 
           No two neighbouring grounds are equal. If you ever put a panel card
           in another band here, re-derive the sequence from that band out
           rather than nudging one section and hoping.
 
-          The closing band went from panel to the page's violet on 2026-08-29,
+          The closing band went from panel to the page's purple on 2026-08-29,
           which only helps this note: the edge under the white press kit is
-          11.20:1 now instead of 1.11:1. The pin stays anyway. If the violet
-          ever comes off that band it lands back on panel, and this band has to
-          be white again for the card inside it to exist. */}
+          7.41:1 now instead of 1.11:1. The pin stays anyway. If the plum ever
+          comes off that band it lands back on panel, and this band has to be
+          white again for the card inside it to exist. */}
       <section
         aria-labelledby="press-kit-heading"
         className={`bg-[var(--color-band-1)] ${BAND}`}
@@ -633,36 +670,36 @@ export default function SpeakerPage() {
           THE PAGE'S PURPLE, 2026-08-29. This was --color-panel #F1EEE7, picked
           so the page closed on a definite edge under the white press kit band
           instead of running white into the footer. It still does that, harder:
-          `.surface-violet-card` is the same ground the banner at the top of
-          the page carries, so /speaker now opens and closes on one colour with
-          the seven keynote cards in it wearing the same one. That was
+          `.surface-speaker-plum` is the same ground the banner at the top of
+          the page carries, so /speaker now opens and closes on one colour, and
+          the quote band in the middle of the page carries it too. That was
           Michele's ask, and it is what makes the page read as a single purple
           identity rather than three unrelated violets.
 
           The edge under the press kit is unaffected: the white band above
-          measures 11.20:1 against this, where it was 1.11:1 against panel.
+          measures 7.41:1 against this, where it was 1.11:1 against panel. It
+          was 9.42:1 on the previous, cooler #4C3A6E and 11.20:1 on the
+          #3B2C74 before that; each warming step lifts the field's luminance,
+          and 7.41 is still an unmistakable edge.
 
           `data-surface="dark"` is what BannerHero puts on its own section. It
           switches the sitewide focus ring to the light variant in tailwind.css,
           so keyboard focus stays visible on a dark ground. */}
-      <section
-        data-surface="dark"
-        className={`surface-violet-card ${BAND}`}
-      >
+      <section data-surface="dark" className={`surface-speaker-plum ${BAND}`}>
         <Container>
           <FadeIn>
             <div className="max-w-2xl">
               {/* Cream, matching the banner's own headline, rather than white:
                   the two bands are the same ground and should carry the same
-                  ink. 9.92:1 on the flat field, 8.43:1 on the worst pixel of
-                  the hairline texture. */}
+                  ink. 6.56:1 on the flat field, 5.90:1 on the lightest pixel
+                  of the gradient. */}
               <h2 className="font-display text-2xl font-semibold tracking-tight text-[var(--color-cream)] sm:text-3xl">
                 Book Michele.
               </h2>
               {/* Cream at 85 percent, which is the banner's subtitle value.
-                  7.63:1 flat, 6.59:1 on a stripe. Was neutral-600, which
-                  measures 1.49:1 here, and the heading was neutral-950 at
-                  1.70:1. Both would have been invisible. */}
+                  5.28:1 flat, 4.78:1 on the lightest pixel of the gradient.
+                  Was neutral-600, which measures 1.01:1 on the plum, and the
+                  heading was neutral-950. Both would have been invisible. */}
               <p className="mt-4 text-xl leading-9 text-[var(--color-cream)]/85">
                 Ready to bring Michele to your church, school, conference, or
                 team? Tell her about your event and she will reach out
@@ -674,14 +711,19 @@ export default function SpeakerPage() {
 
                     THE RING IS AN ACCESSIBILITY FIX, not decoration. WCAG
                     1.4.11 wants 3:1 between a control and the colour beside
-                    it, and terracotta #C84C33 against this purple is 2.52:1.
+                    it, and terracotta #C84C33 against this plum is 1.67:1.
                     It clears the bar everywhere else on the site, 3.17:1 on
                     the navy grounds and 3.99:1 on panel, which is why no
                     other CTA carries a ring. White at 60 percent over this
-                    field resolves to #B1ABC7 and measures 5.29:1 against it,
-                    so the ring is what delimits the control here. The label
-                    is untouched at 4.63:1 white on terracotta. Drop the ring
-                    only if this band ever goes back to a light ground.
+                    field measures 3.95:1 against it, and 3.68:1 at the
+                    lightest pixel of the gradient, so the ring is what
+                    delimits the control here. The warm recolour made the
+                    ring MORE load-bearing, not less: terracotta against the
+                    field went 2.52 -> 2.12 -> 1.67 across the two warming
+                    steps, because each one moves the purple toward the
+                    button's own hue. The label is untouched at 4.63:1
+                    white on terracotta. Drop the ring only if this band ever
+                    goes back to a light ground.
 
                     tone="dark" is what moves the FOCUS ring to white; the
                     offset it ships with is the teal panels' colour, so the
@@ -692,7 +734,7 @@ export default function SpeakerPage() {
                 <ContactTrigger
                   interest="speaking"
                   tone="dark"
-                  className="ring-2 ring-white/60 focus-visible:ring-offset-[var(--color-speaker-violet)]"
+                  className="ring-2 ring-white/60 focus-visible:ring-offset-[var(--color-speaker-plum)]"
                 >
                   Contact
                 </ContactTrigger>

@@ -6,7 +6,16 @@ import { FadeIn } from '@/components/FadeIn'
 const SURFACE_CLASS = {
   teal: 'surface-teal-banner',
   violet: 'surface-violet-banner',
-  'violet-card': 'surface-violet-card',
+  plum: 'surface-speaker-plum',
+} as const
+
+/** The eyebrow ink each ground takes, because the eyebrow is the smallest
+ *  type on the banner and it is the first thing to fail a recolour. Every
+ *  entry owes a measured figure in the matching block in tailwind.css. */
+const EYEBROW_CLASS = {
+  teal: 'text-[var(--color-teal-on-dark)]',
+  violet: 'text-[var(--color-speaker-eyebrow)]',
+  plum: 'text-[var(--color-speaker-plum-ink)]',
 } as const
 
 /**
@@ -36,14 +45,20 @@ const SURFACE_CLASS = {
  * third surface, because each one owes a measured contrast budget. The
  * default stays teal, so a page has to ask for this.
  *
- * `surface="violet-card"` is the same idea one shade brighter, added
- * 2026-08-29 for /speaker itself. Michele read the sampled violet field as a
- * heavy, almost-black purple that had nothing to do with the seven keynote
- * cards below it, so /speaker now runs `.surface-violet-card`, which is the
- * cards' own colour and texture. It is scoped to that one page on purpose:
+ * `surface="plum"` is /speaker itself, added 2026-08-29. Michele read the
+ * sampled violet field as a heavy, almost-black purple that had nothing to do
+ * with the seven keynote cards below it, so that page first took the cards'
+ * own colour and texture, and then, later the same day, gave up both: the
+ * hairline stripes came off the banner and the hue was re-cut warm and earthy
+ * at #624973. `.surface-speaker-plum` is the result, and it was briefly named
+ * `violet-card` in between. It is scoped to that one page on purpose:
  * /speaker/messages/[slug] and the ReThink conference page still ask for
- * `violet` and are unchanged. Both violets take the same pale lavender
- * eyebrow; the measured numbers for each are in tailwind.css.
+ * `violet` and are unchanged.
+ *
+ * The two violets take the pale lavender eyebrow and the plum does NOT: on
+ * the plum that lavender measures 4.48:1 at the lightest pixel of the
+ * gradient and misses AA, so `plum` takes a warm blush at 5.37:1. See
+ * EYEBROW_CLASS above and the measured tables in tailwind.css.
  *
  * The eyebrow is plain tracked small caps. No pill, no badge, no border, no
  * rounded corners, anywhere, ever. Pills read as buttons and people click them.
@@ -71,10 +86,10 @@ export function BannerHero({
   centered?: boolean
   /**
    * Banner ground. `violet` is the photo-derived field the message pages
-   * carry; `violet-card` is the brighter keynote-card purple /speaker itself
-   * runs. See above.
+   * carry; `plum` is the warm, untextured purple /speaker itself runs. See
+   * above.
    */
-  surface?: 'teal' | 'violet' | 'violet-card'
+  surface?: 'teal' | 'violet' | 'plum'
   /**
    * Whether the H1 may use `text-wrap: balance`.
    *
@@ -103,10 +118,7 @@ export function BannerHero({
   /** Optional CTA row. Coaching uses it; Author and Speak do not. */
   children?: React.ReactNode
 }) {
-  const eyebrowColor =
-    surface === 'teal'
-      ? 'text-[var(--color-teal-on-dark)]'
-      : 'text-[var(--color-speaker-eyebrow)]'
+  const eyebrowColor = EYEBROW_CLASS[surface]
 
   return (
     <section

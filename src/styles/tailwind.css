@@ -607,52 +607,73 @@
   --color-speaker-wash: #efebf7;
   --color-speaker-eyebrow: #d6c9f5;
 
-  /* ONE PURPLE FOR /speaker, 2026-08-29.
+  /* THE /speaker PLUM, 2026-08-29.
      ---------------------------------------------------------------------
-     Michele's read: the banner at the top of /speaker was a very dark,
-     almost-black purple that felt heavy and read as a different colour from
-     the seven keynote cards further down the page. The cards are the richer,
-     more vibrant mid-indigo, and they are the colour she wants the page to
-     be known by.
+     This field moved three times in one day. All three are worth keeping
+     straight, because each one partly undoes the reasoning of the last, and
+     the token it lives in was renamed on the way through: it was
+     --color-speaker-violet and that name is gone.
 
-     This started as that card colour lifted out of `.msg-violet` so the
-     banner and the closing CTA could share it: #3B2C74, the LIGHT stop of the
-     keynote card gradient, which is the value the eye actually reads a card
-     as. The old banner field --color-speaker-deep #241B4F is 57 percent
-     darker in relative luminance, 0.01723 against 0.03992, which is why the
-     two never looked related.
+     MOVE ONE. The banner was --color-speaker-deep #241B4F, sampled off the
+     stage photograph. Michele read it as a very dark, almost-black purple
+     that felt heavy and looked like a different colour from the seven
+     keynote cards further down the page, so the banner and the closing CTA
+     took the CARDS' own colour instead: #3B2C74, the light stop of
+     `.msg-violet`, which is the value the eye actually reads a card as.
 
-     WARMED TO #4C3A6E, later on 2026-08-29, and this is now its own value
-     rather than a copy of the card's. The three role heroes are meant to read
-     as siblings out of one brand, and they did not: /author anchors the set
-     on marigold #E8843C, a plainly warm colour, while /speaker sat on a
-     blue-indigo and /coach on a blue-teal, so the warm one looked like the
-     odd page rather than the parent. Michele asked for the two cool heroes to
-     come toward the anchor. /author is the anchor and does not move.
+     MOVE TWO, #3B2C74 -> #4C3A6E. The three role heroes are meant to read as
+     siblings out of one brand and they did not: /author anchors the set on
+     marigold #E8843C, a plainly warm colour, while /speaker sat on a
+     blue-indigo and /coach on a blue-teal, so the warm page looked like the
+     odd one rather than the parent. Hue 252 -> 261 at saturation 0.62 ->
+     0.47, value held. That made the field its own value rather than a copy
+     of the card's, which it still is.
 
-     The shift is hue 252 -> 261 and saturation 0.62 -> 0.47: red goes into
-     the purple and some of the blue comes out, so the field reads as sunset
-     dusk rather than midnight sky. Value is held, 0.455 -> 0.431, which is
-     why every ratio below moves by less than a point and the band still
-     carries the same weight on the page.
+     MOVE THREE, #4C3A6E -> #624973, and it finishes move two in the
+     direction move two was already going. #4C3A6E is warmer than what it
+     replaced and it still reads as dusk: a lit, slightly cool violet.
+     Michele's brief was an aged velvet book cover. So hue 261 -> 275 and
+     saturation 0.47 -> 0.37, value 0.43 -> 0.45. The red undertone is what
+     makes it earthy, and taking ten more points of saturation out is what
+     makes it read as dyed cloth rather than as a screen colour.
 
-     THE KEYNOTE CARDS DO NOT MOVE. `.msg-violet` keeps #3B2C74 and the seven
-     topic cards keep their own purple, so the banner and the cards are now
-     near relations rather than the same value. That separation is deliberate
-     and Michele signed off on it: a hero and the content boxes inside it do
-     not have to be identical.
+     Hue 275 rather than the 269 that was proposed, and those six degrees are
+     the whole judgement call. At 269 the field still reads faintly lilac and
+     cool next to the terracotta button sitting on it. Past about 285 it goes
+     rosy and starts reading pink, which was the failure mode to avoid. 275
+     is the last step that is unmistakably purple and already warm.
+
+     THE KEYNOTE CARDS DO NOT FOLLOW, and they have not followed since move
+     two. `.msg-violet` keeps #3B2C74 to #1E163F and stays cool and dark on
+     purpose: a hero and the content boxes inside it do not have to be
+     identical, Michele signed that separation off, and a darker, cooler card
+     on a warm plum band reads as a step rather than as a clash. Do not chase
+     them into this hue without looking at the page.
 
      --color-speaker-deep STAYS. /speaker/messages/[slug] and
      /speaker/creativity/rethink-creativity-conference still run
      .surface-violet-banner on it and both were out of scope in this pass.
      Retiring it means recolouring those two pages too.
 
-     Measured, on the flat field #4C3A6E (was #3B2C74):
-       cream  #F2ECDF                        8.35:1   (9.92)
-       cream at 85 percent (the subtitle)    6.55:1   (7.63)
-       eyebrow --color-speaker-eyebrow       6.33:1   (7.52)
-       white  #FFFFFF                        9.82:1  (11.68) */
-  --color-speaker-violet: #4c3a6e;
+     The eyebrow moved with the field. --color-speaker-eyebrow #D6C9F5 is a
+     pale LAVENDER, and on a warm plum it reads as a leftover from the cold
+     version; worse, it measures 4.48:1 at the lightest pixel of the banner
+     gradient and misses AA by two hundredths. The plum surfaces take
+     --color-speaker-plum-ink instead, a warm blush at 5.37:1 there. The old
+     eyebrow token stays for the two message pages still on the deep violet.
+
+     Measured on the flat field, with the #4C3A6E readings in brackets, and
+     see .surface-speaker-plum for the gradient stops:
+       cream  #F2ECDF                        6.56:1   (8.35)
+       cream at 85 percent (the subtitle)    5.28:1   (6.55)
+       --color-speaker-plum-ink              5.97:1   (eyebrow was 6.33)
+       white  #FFFFFF                        7.72:1   (9.82)
+     Warming and lifting the value cost about 1.8 points everywhere, on top
+     of the 1.2 move two cost, because red carries less luminance weight than
+     blue. Everything still clears AA on the flat field and at every gradient
+     stop; nothing clears AAA any more. That is the accepted price. */
+  --color-speaker-plum: #624973;
+  --color-speaker-plum-ink: #efdfd9;
 }
 
 html {
@@ -871,78 +892,83 @@ html {
     );
 }
 
-/* THE /speaker PURPLE, on the two bands that bracket the page: the banner at
-   the top and the "Book Michele" CTA at the bottom. Added 2026-08-29.
+/* THE /speaker PLUM, on the two bands that bracket the page: the banner at
+   the top and the "Book Michele" CTA at the bottom. Added 2026-08-29 as
+   `.surface-violet-card`, rebuilt under this name later the same day.
 
-   It borrows the keynote card's MATERIAL, and since the warming pass later on
-   2026-08-29 it no longer borrows the card's colour. The three layers are
-   still lifted from `.msg-violet` and `.msg-tex-lines`, so the banner, the
-   seven cards and the closing CTA still read as one surface family:
+   THE HAIRLINE STRIPES ARE GONE and they are not coming back. The class used
+   to stack three layers lifted straight off `.msg-violet` and
+   `.msg-tex-lines`: 115deg stripes at 5.5 percent white, a saturated violet
+   glow in the top right, and the card's own gradient. The idea was that the
+   banner, the seven cards and the CTA would read as one material. What it
+   actually produced was a diagonal hatch across the widest, emptiest surface
+   on the page. On a card it is a texture; at 1440px wide and 320px tall it is
+   a pattern, and Michele asked for it off. There is no texture layer here now
+   and nothing should add one.
 
-     the 115deg hairline stripes, 2px on 16px at 5.5 percent white
-     the violet glow in the TOP RIGHT corner, --color-speaker-glow at 38%
-     the base gradient, --color-speaker-violet easing into #433361
+   What is left is one radial gradient in the plum's own hue, so the band is
+   lit at the top rather than dead flat. The old glow was --color-speaker-glow
+   #3E009D, a hard blue-violet, which is exactly the coldness this recolour
+   was undoing; the light stop is a plum instead, the same hue and saturation
+   as the field with 3.5 points of value on it.
 
-   THE GLOW IS NOT RETUNED and does not need to be. --color-speaker-glow
-   #3E009D sits at hue 264, which is already on the warm side of the new
-   field's 261, so at 38 percent it deepens and saturates the top-right corner
-   without pulling any blue back into it. It is also shared with `.msg-violet`
-   and `.surface-violet-banner`, both out of scope, so leaving it alone keeps
-   this a two-value change.
+   The dark stop is 5.5 points DOWN from the field rather than the long fall
+   to near-black a card makes. A card is tall and narrow and can afford to
+   deepen; a banner is short and wide, so the same gradient would park the
+   almost-black on the bottom edge and hand back the heaviness Michele asked
+   to be rid of in the first place.
 
-   ONE THING IS DELIBERATELY DIFFERENT from the card, and it is the whole
-   point of this class. The card's base runs #3B2C74 to #1E163F, a long fall
-   to near-black, because a card is tall and narrow and every text layer on it
-   has to sit on deepening colour. A banner is short and wide, so the same
-   gradient would put the almost-black at the bottom edge and hand back
-   exactly the heaviness Michele asked to be rid of. The dark stop is a
-   quarter of the way down that line, which on the old field was #342767. The
-   warmed field keeps that ratio exactly rather than a copied hex: #433361 is
-   #4C3A6E at 0.885 per channel, the same multiplier #342767 applied to
-   #3B2C74, so the band is lit rather than flat by the same amount as before.
+   Measured contrast at all three stops. The light stop is the worst case and
+   it is the only column that can fail, because both other stops go DOWN in
+   luminance from it:
 
-   Measured contrast, worst pixel of the three layers, which is a stripe over
-   the light stop at #564576: both the glow peak (#472480) and the bottom of
-   the gradient go DOWN in luminance from the base, so the only layer that can
-   lighten the field is the texture. Prior figures in brackets.
+                                  light    field    dark
+                                  #6A4F7C  #624973  #564065
+     cream #F2ECDF                 5.90     6.56     7.70
+     cream/85, the subtitle        4.78     5.28     6.09
+     --color-speaker-plum-ink      5.37     5.97     7.00
+     white #FFFFFF                 6.95     7.72     9.06
+     the CTA ring, white/60        3.68     3.95     4.46
 
-                             stripe   base     bottom   glow
-                             #564576  #4C3A6E  #433361  #472480
-     cream #F2ECDF            7.11     8.35     9.46     9.74
-     cream/85, the subtitle   5.58     6.55     7.43     7.64
-     --color-speaker-eyebrow  5.39     6.33     7.18     7.39
-     white #FFFFFF            8.37     9.82    11.14    11.46
+   Every text reading clears AA and the ring clears the 3:1 that WCAG 1.4.11
+   asks of a control's boundary. Nothing here clears AAA at the light stop,
+   which is a real change from the two colder fields this replaced: worst
+   case was 8.43:1 on #3B2C74 and 7.11:1 on #4C3A6E, both of them darker. If
+   a future pass needs AAA back, take value off the field rather than
+   reaching for a darker ink.
 
-                            (8.43)  ( 9.92)  (10.93)  (10.61)   cream
-                            (6.59)  ( 7.63)  ( 8.31)  ( 8.05)   cream/85
-                            (6.39)  ( 7.52)  ( 8.29)  ( 8.04)   eyebrow
-                            (9.92)  (11.68)  (12.87)  (12.48)   white
+   --color-speaker-eyebrow, the pale lavender, MUST NOT be used on this
+   surface: it lands at 4.48:1 on the light stop and fails. That is what
+   --color-speaker-plum-ink is for. */
+.surface-speaker-plum {
+  background-color: var(--color-speaker-plum);
+  background-image: radial-gradient(
+    ellipse 95% 150% at 50% 28%,
+    #6a4f7c 0%,
+    var(--color-speaker-plum) 58%,
+    #564065 100%
+  );
+}
 
-   Every reading in that table clears AA with better than a point of margin;
-   the weakest is the eyebrow across a stripe at 5.39:1 against the 4.5 bar.
-   Warming the field cost roughly 1.2 points of contrast everywhere, because
-   red carries less luminance weight than blue, and the AAA readings the old
-   field held on the base and the bottom stops are gone: only the bottom stop
-   and the glow still clear 7:1 for the subtitle and the eyebrow. That is the
-   accepted price of the change. If you retune a stop, re-measure at the
-   stripe: it is the only layer that lightens the field, so it is the only
-   column that can fail. */
-.surface-violet-card {
-  background-color: var(--color-speaker-violet);
-  background-image:
-    repeating-linear-gradient(
-      115deg,
-      rgba(255, 255, 255, 0.055) 0px,
-      rgba(255, 255, 255, 0.055) 2px,
-      rgba(255, 255, 255, 0) 2px,
-      rgba(255, 255, 255, 0) 16px
-    ),
-    radial-gradient(
-      68% 120% at 82% 8%,
-      rgba(62, 0, 157, 0.38) 0%,
-      rgba(62, 0, 157, 0) 64%
-    ),
-    linear-gradient(160deg, var(--color-speaker-violet) 0%, #433361 100%);
+/* The flat half of the same plum, for the "community of dreamers" quote band
+   in the middle of /speaker. Added 2026-08-29.
+
+   No gradient, deliberately, and this is the same reasoning the periwinkle
+   strip it replaces carried: the band is one full-bleed strip with a circular
+   portrait sitting on it, and a gradient fights the circle. So it is the flat
+   field, which is also what makes it read as the SAME colour as the two bands
+   that bracket the page rather than as a third variation on them.
+
+   Measured on the flat field #624973:
+     cream #F2ECDF          6.56:1   the quote
+     cream at 85 percent    5.28:1   the attribution
+   Both clear AA. Navy #1F2744, which the periwinkle version used for the
+   quote, measures 1.90:1 here and would be invisible; neutral-600, which it
+   used for the attribution, measures 1.01:1 and is very nearly the same
+   luminance as the field. If this band is ever recoloured again, re-measure
+   both inks. */
+.surface-speaker-plum-quote {
+  background-color: var(--color-speaker-plum);
 }
 
 /* The light half of the same idea: the band that actually carries the Speaker
@@ -1085,9 +1111,16 @@ html {
    The periwinkle strip behind Michele's portrait and her purpose line. It
    started on /coach, moved to /speaker on 2026-08-24, and landed on /author
    the same day. The class name still says speaker because /speaker is where
-   it was defined. Both branches have now landed on main, so this is the one
-   declaration and it serves both pages. Re-measure against both photographs
-   before recolouring it.
+   it was defined.
+
+   /speaker NO LONGER USES IT, as of 2026-08-29. That page's quote band went
+   to the warm plum with the two bands that bracket it, so the page carries
+   one colour end to end; it runs `.surface-speaker-plum-quote` now. THE ONLY
+   CALLER LEFT IS /author, which is why this declaration and its contrast
+   budget stay exactly as they are: the numbers below were measured against
+   the beach photograph on /speaker, and the /author instance carries a
+   different picture. Re-measure against the /author photograph before
+   touching this, and do not fold it into the plum.
 
    The colour is sampled from the photograph it carries. Michele asked for
    "periwinkle, a lighter sapphire, matching the sapphire flowers in the
