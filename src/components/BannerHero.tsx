@@ -1,6 +1,14 @@
 import { Container } from '@/components/Container'
 import { FadeIn } from '@/components/FadeIn'
 
+/** Every ground this banner is allowed to take. Adding one owes a measured
+ *  contrast budget in the matching block in tailwind.css. */
+const SURFACE_CLASS = {
+  teal: 'surface-teal-banner',
+  violet: 'surface-violet-banner',
+  'violet-card': 'surface-violet-card',
+} as const
+
 /**
  * THE banner hero. Every interior page uses this one component: Author, Speak,
  * Coaching, About, Resources, Works, Projects, and every case study. The site
@@ -28,6 +36,15 @@ import { FadeIn } from '@/components/FadeIn'
  * third surface, because each one owes a measured contrast budget. The
  * default stays teal, so a page has to ask for this.
  *
+ * `surface="violet-card"` is the same idea one shade brighter, added
+ * 2026-08-29 for /speaker itself. Michele read the sampled violet field as a
+ * heavy, almost-black purple that had nothing to do with the seven keynote
+ * cards below it, so /speaker now runs `.surface-violet-card`, which is the
+ * cards' own colour and texture. It is scoped to that one page on purpose:
+ * /speaker/messages/[slug] and the ReThink conference page still ask for
+ * `violet` and are unchanged. Both violets take the same pale lavender
+ * eyebrow; the measured numbers for each are in tailwind.css.
+ *
  * The eyebrow is plain tracked small caps. No pill, no badge, no border, no
  * rounded corners, anywhere, ever. Pills read as buttons and people click them.
  *
@@ -52,8 +69,12 @@ export function BannerHero({
   subtitle?: React.ReactNode
   /** Centers the banner text. Off by default. */
   centered?: boolean
-  /** Banner ground. `violet` is /speaker's photo-derived field; see above. */
-  surface?: 'teal' | 'violet'
+  /**
+   * Banner ground. `violet` is the photo-derived field the message pages
+   * carry; `violet-card` is the brighter keynote-card purple /speaker itself
+   * runs. See above.
+   */
+  surface?: 'teal' | 'violet' | 'violet-card'
   /**
    * Whether the H1 may use `text-wrap: balance`.
    *
@@ -83,18 +104,14 @@ export function BannerHero({
   children?: React.ReactNode
 }) {
   const eyebrowColor =
-    surface === 'violet'
-      ? 'text-[var(--color-speaker-eyebrow)]'
-      : 'text-[var(--color-teal-on-dark)]'
+    surface === 'teal'
+      ? 'text-[var(--color-teal-on-dark)]'
+      : 'text-[var(--color-speaker-eyebrow)]'
 
   return (
     <section
       data-surface="dark"
-      className={`${
-        surface === 'violet'
-          ? 'surface-violet-banner'
-          : 'surface-teal-banner'
-      } relative isolate flex min-h-[280px] w-full items-center overflow-hidden py-12 sm:min-h-[300px] sm:py-14 lg:min-h-[320px] ${
+      className={`${SURFACE_CLASS[surface]} relative isolate flex min-h-[280px] w-full items-center overflow-hidden py-12 sm:min-h-[300px] sm:py-14 lg:min-h-[320px] ${
         media ? 'lg:py-16' : ''
       }`}
     >

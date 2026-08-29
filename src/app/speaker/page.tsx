@@ -31,16 +31,20 @@ import {
  *
  * What changed in that pass, and why, so none of it gets quietly undone:
  *
- * BANNER. The ground is violet now, not the sitewide navy-and-teal. It is
- * sampled from the stage photograph directly below it (see PHOTO-DERIVED
- * SECTION WASHES in tailwind.css, which carries the sampled numbers and the
- * measured contrast). This is the first application of a new sitewide
- * convention: a section that carries a hero photograph takes its ground FROM
- * that photograph. The banner also opts out of `text-wrap: balance`. Michele
- * read the headline as centred; it measured flush with the wordmark at every
- * width, and what actually read as centred was balance evening the two lines
- * out and removing the ragged right edge. See the note on `balanceTitle` in
- * BannerHero.
+ * BANNER. The ground is violet, and as of 2026-08-29 it is the KEYNOTE CARD's
+ * violet: `.surface-violet-card`, built on --color-speaker-violet #3B2C74,
+ * which is the light stop of `.msg-violet` down in the messages grid. It used
+ * to be `.surface-violet-banner` on --color-speaker-deep #241B4F, sampled
+ * from the stage photograph directly below it. Michele's read: that field was
+ * a very dark, almost-black purple, it felt heavy, and it looked like a
+ * different colour from the cards rather than the same page. So the page now
+ * carries ONE purple, and the two bands that bracket it, this banner and the
+ * "Book Michele" CTA at the foot, both take it.
+ *
+ * The banner also opts out of `text-wrap: balance`. Michele read the headline
+ * as centred; it measured flush with the wordmark at every width, and what
+ * actually read as centred was balance evening the two lines out and removing
+ * the ragged right edge. See the note on `balanceTitle` in BannerHero.
  *
  * LEAD. The paragraph comes before the photograph on narrow viewports. It
  * used to be `order-first lg:order-last` on the picture, so a phone got the
@@ -80,6 +84,14 @@ import {
  * anywhere except the footer, and no email address on any client-facing page.
  * It is a plain band with one Contact button on the sitewide popup. Do not
  * put an address back on this page.
+ *
+ * Since 2026-08-29 that band runs `.surface-violet-card`, the same ground as
+ * the banner at the top. This does not reopen the rule above: what Michele
+ * ruled out was a dark BLUE box, and this is the page's own purple, the one
+ * the seven cards between the two bands are already wearing. It is still a
+ * plain band, still one button, still no panel and no address. It is also
+ * still Speaker's alone: /about closes on the shared ContactBlock and does
+ * not share a token with this, so recolouring here cannot reach it.
  *
  * WORKSHOPS. There is no workshops row on this page any more. It landed here
  * on 2026-08-25 carrying one card, ReThink Creativity, after coming off the
@@ -233,7 +245,7 @@ export default function SpeakerPage() {
         eyebrow="Speaking"
         title="Some messages do more than inspire."
         subtitle="They give people permission to be brave."
-        surface="violet"
+        surface="violet-card"
         balanceTitle={false}
       />
 
@@ -550,11 +562,17 @@ export default function SpeakerPage() {
             quote banner   periwinkle, its own sampled surface, untouched
             stages         #F1EEE7   panel
             press kit      #FCFAF6   band-1   <- pinned, this note
-            book me        #F1EEE7   panel
+            book me        the page's violet, .surface-violet-card
 
           No two neighbouring grounds are equal. If you ever put a panel card
           in another band here, re-derive the sequence from that band out
-          rather than nudging one section and hoping. */}
+          rather than nudging one section and hoping.
+
+          The closing band went from panel to the page's violet on 2026-08-29,
+          which only helps this note: the edge under the white press kit is
+          11.20:1 now instead of 1.11:1. The pin stays anyway. If the violet
+          ever comes off that band it lands back on panel, and this band has to
+          be white again for the card inside it to exist. */}
       <section
         aria-labelledby="press-kit-heading"
         className={`bg-[var(--color-band-1)] ${BAND}`}
@@ -603,24 +621,72 @@ export default function SpeakerPage() {
       {/* Plain band, no panel, one button. See the CLOSING CTA note at the
           top of this file before adding a container or an address here.
 
-          Panel, so the page closes on a definite edge under the white press
-          kit band instead of running white into the footer. The coral CTA
-          measures 3.99:1 as a shape on this ground against the 3.0 a control
-          boundary needs, which is better than the 3.49:1 it gets on white. */}
-      <section className={`bg-[var(--color-panel)] ${BAND}`}>
+          THE PAGE'S PURPLE, 2026-08-29. This was --color-panel #F1EEE7, picked
+          so the page closed on a definite edge under the white press kit band
+          instead of running white into the footer. It still does that, harder:
+          `.surface-violet-card` is the same ground the banner at the top of
+          the page carries, so /speaker now opens and closes on one colour with
+          the seven keynote cards in it wearing the same one. That was
+          Michele's ask, and it is what makes the page read as a single purple
+          identity rather than three unrelated violets.
+
+          The edge under the press kit is unaffected: the white band above
+          measures 11.20:1 against this, where it was 1.11:1 against panel.
+
+          `data-surface="dark"` is what BannerHero puts on its own section. It
+          switches the sitewide focus ring to the light variant in tailwind.css,
+          so keyboard focus stays visible on a dark ground. */}
+      <section
+        data-surface="dark"
+        className={`surface-violet-card ${BAND}`}
+      >
         <Container>
           <FadeIn>
             <div className="max-w-2xl">
-              <h2 className="font-display text-2xl font-semibold tracking-tight text-neutral-950 sm:text-3xl">
+              {/* Cream, matching the banner's own headline, rather than white:
+                  the two bands are the same ground and should carry the same
+                  ink. 9.92:1 on the flat field, 8.43:1 on the worst pixel of
+                  the hairline texture. */}
+              <h2 className="font-display text-2xl font-semibold tracking-tight text-[var(--color-cream)] sm:text-3xl">
                 Book Michele.
               </h2>
-              <p className="mt-4 text-xl leading-9 text-neutral-600">
+              {/* Cream at 85 percent, which is the banner's subtitle value.
+                  7.63:1 flat, 6.59:1 on a stripe. Was neutral-600, which
+                  measures 1.49:1 here, and the heading was neutral-950 at
+                  1.70:1. Both would have been invisible. */}
+              <p className="mt-4 text-xl leading-9 text-[var(--color-cream)]/85">
                 Ready to bring Michele to your church, school, conference, or
                 team? Tell her about your event and she will reach out
                 personally.
               </p>
               <div className="mt-8">
-                <ContactTrigger interest="speaking">Contact</ContactTrigger>
+                {/* The button keeps the warm terracotta --color-cta, and it
+                    gains a hairline.
+
+                    THE RING IS AN ACCESSIBILITY FIX, not decoration. WCAG
+                    1.4.11 wants 3:1 between a control and the colour beside
+                    it, and terracotta #C84C33 against this purple is 2.52:1.
+                    It clears the bar everywhere else on the site, 3.17:1 on
+                    the navy grounds and 3.99:1 on panel, which is why no
+                    other CTA carries a ring. White at 60 percent over this
+                    field resolves to #B1ABC7 and measures 5.29:1 against it,
+                    so the ring is what delimits the control here. The label
+                    is untouched at 4.63:1 white on terracotta. Drop the ring
+                    only if this band ever goes back to a light ground.
+
+                    tone="dark" is what moves the FOCUS ring to white; the
+                    offset it ships with is the teal panels' colour, so the
+                    last class re-points it at this band. twMerge keeps both
+                    rings because the static one and the focus-visible one are
+                    different keys, and it is the later class that wins on the
+                    offset. */}
+                <ContactTrigger
+                  interest="speaking"
+                  tone="dark"
+                  className="ring-2 ring-white/60 focus-visible:ring-offset-[var(--color-speaker-violet)]"
+                >
+                  Contact
+                </ContactTrigger>
               </div>
             </div>
           </FadeIn>

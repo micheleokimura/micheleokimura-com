@@ -573,6 +573,33 @@
   --color-speaker-glow: #3e009d;
   --color-speaker-wash: #efebf7;
   --color-speaker-eyebrow: #d6c9f5;
+
+  /* ONE PURPLE FOR /speaker, 2026-08-29.
+     ---------------------------------------------------------------------
+     Michele's read: the banner at the top of /speaker was a very dark,
+     almost-black purple that felt heavy and read as a different colour from
+     the seven keynote cards further down the page. The cards are the richer,
+     more vibrant mid-indigo, and they are the colour she wants the page to
+     be known by.
+
+     This is that card colour, lifted out of `.msg-violet` so the banner and
+     the closing CTA can share it: #3B2C74 is the LIGHT stop of the keynote
+     card gradient, which is the value the eye actually reads a card as. The
+     old banner field --color-speaker-deep #241B4F is 57 percent darker in
+     relative luminance, 0.01723 against 0.03992, which is why the two never
+     looked related.
+
+     --color-speaker-deep STAYS. /speaker/messages/[slug] and
+     /speaker/creativity/rethink-creativity-conference still run
+     .surface-violet-banner on it and both were out of scope in this pass.
+     Retiring it means recolouring those two pages too.
+
+     Measured, on the flat field #3B2C74:
+       cream  #F2ECDF                        9.92:1
+       cream at 85 percent (the subtitle)    7.63:1
+       eyebrow --color-speaker-eyebrow       7.52:1
+       white  #FFFFFF                       11.68:1 */
+  --color-speaker-violet: #3b2c74;
 }
 
 html {
@@ -759,6 +786,61 @@ html {
       #2e2263 0%,
       var(--color-speaker-deep) 78%
     );
+}
+
+/* THE /speaker PURPLE, on the two bands that bracket the page: the banner at
+   the top and the "Book Michele" CTA at the bottom. Added 2026-08-29.
+
+   It is the keynote card's own material, not a new colour. The three layers
+   below are lifted from `.msg-violet` and `.msg-tex-lines` so the banner, the
+   seven cards and the closing CTA read as one surface family:
+
+     the 115deg hairline stripes, 2px on 16px at 5.5 percent white
+     the violet glow in the TOP RIGHT corner, --color-speaker-glow at 38%
+     the base gradient, --color-speaker-violet easing into #342767
+
+   ONE THING IS DELIBERATELY DIFFERENT from the card, and it is the whole
+   point of this class. The card's base runs #3B2C74 to #1E163F, a long fall
+   to near-black, because a card is tall and narrow and every text layer on it
+   has to sit on deepening colour. A banner is short and wide, so the same
+   gradient would put the almost-black at the bottom edge and hand back
+   exactly the heaviness Michele asked to be rid of. The dark stop here is
+   #342767, a quarter of the way down that same line: enough that the band is
+   lit rather than flat, not enough to leave the family.
+
+   Measured contrast, worst pixel of the three layers, which is a stripe over
+   the light stop at #46387C: both the glow peak (#3C1B84) and the bottom of
+   the gradient go DOWN in luminance from the base, so the only layer that can
+   lighten the field is the texture.
+
+                             stripe   base     bottom   glow
+                             #46387C  #3B2C74  #342767  #3C1B84
+     cream #F2ECDF            8.43     9.92    10.93    10.61
+     cream/85, the subtitle   6.59     7.63     8.31     8.05
+     --color-speaker-eyebrow  6.39     7.52     8.29     8.04
+     white #FFFFFF            9.92    11.68    12.87    12.48
+
+   Every reading in that table clears AA, and every one of them clears AAA
+   except the subtitle and the eyebrow where they cross a stripe, at 6.59 and
+   6.39 against the 7:1 AAA bar. If you retune a stop, re-measure at the
+   stripe: it is the only layer that lightens the field, so it is the only
+   column that can fail. */
+.surface-violet-card {
+  background-color: var(--color-speaker-violet);
+  background-image:
+    repeating-linear-gradient(
+      115deg,
+      rgba(255, 255, 255, 0.055) 0px,
+      rgba(255, 255, 255, 0.055) 2px,
+      rgba(255, 255, 255, 0) 2px,
+      rgba(255, 255, 255, 0) 16px
+    ),
+    radial-gradient(
+      68% 120% at 82% 8%,
+      rgba(62, 0, 157, 0.38) 0%,
+      rgba(62, 0, 157, 0) 64%
+    ),
+    linear-gradient(160deg, var(--color-speaker-violet) 0%, #342767 100%);
 }
 
 /* The light half of the same idea: the band that actually carries the Speaker
