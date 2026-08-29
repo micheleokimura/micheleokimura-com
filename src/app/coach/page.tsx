@@ -261,7 +261,6 @@ const STALLS: Stall[] = [
 
 const DELIVERABLES: string[] = [
   'A finished manuscript in your own voice.',
-  'Your book, written. Then Michele shows you how to use your voice for the rest of what you write: social posts, talks, the next book.',
   'A written walkthrough of your publishing options.',
 ]
 
