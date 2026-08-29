@@ -64,7 +64,8 @@ import { pageMetadata } from '@/lib/schema'
  * page is third person throughout.
  *
  * COLOR. The page runs on the site band scale (band-1/2/3, see tailwind.css)
- * with one surface of its own, `.surface-coach-hero`. Brett asked for the hero
+ * with one surface of its own, `.surface-coach-hero`, which carries both the
+ * ground and the hero's pure-white ink. Brett asked for the hero
  * to stop being the sitewide navy banner. The bands then run 1, 2, 1, 2, 3
  * down the page and neighbours never share a ground, which still holds now
  * that the quote banner has been cut from between the deliverables panel and
@@ -120,17 +121,23 @@ import { pageMetadata } from '@/lib/schema'
  * THEN IT CAME BACK TO BLUE, #38564D -> #275958, still 2026-08-29 and still
  * the only value on this page that moves. Hue 162 overshot: it read green
  * rather than teal, and against the TSS box's blue-teal 182 the two stopped
- * looking like siblings. Hue 162 -> 179 relates them again at 3 degrees
- * apart, tighter than the 6 they had before any of this. The warming is not
- * undone by it: saturation stays 0.56 against the old cold teal's 0.67, and
- * that restraint is what keeps the ground earthy. Michele's value was #2F6C6A
- * and it could not ship as given, same failure as #3E5F55, cream at 3.92:1 at
- * the peak, as did all three fallbacks she sent with it. #275958 is her hue
- * and her saturation seated deeper: white 7.58:1 flat and 5.55:1 at the peak,
- * cream 6.72:1 and 4.92:1. Full workings in tailwind.css.
+ * looking like siblings. Hue 162 -> 178 relates them again. The warming is
+ * not undone by it: saturation stays 0.56 against the old cold teal's 0.67,
+ * and that restraint is what keeps the ground earthy.
  *
- * TSS and UAV DID NOT MOVE in either pass, by Michele's instruction. The
- * hero/TSS pairing went 6 degrees apart, then 20, and is now 3. The box never
+ * AND THEN IT CAME BACK UP, #275958 -> #2F6C6A, third pass, same day. That
+ * lighter value is Michele's own and she preferred it to the deeper seat. It
+ * had failed the first time round on the cream subtitle, 3.92:1 at the radial
+ * peak against a 4.5 AA bar, and the deeper ground was the fix. This pass
+ * takes the other fix: keep her ground and brighten the ink instead. The
+ * whole hero is now pure #FFFFFF, which reads 6.04:1 flat and 4.61:1 at the
+ * peak. Cream is gone from this hero, and so is the --color-white token,
+ * which is #FCFAF6 and lands at 4.43:1 at the peak, under AA for the eyebrow.
+ * The lighter ground costs about 1.2 points everywhere, so the hero is an AA
+ * surface now where the deep one was AAA. Full workings in tailwind.css.
+ *
+ * TSS and UAV DID NOT MOVE in any pass, by Michele's instruction. The
+ * hero/TSS pairing went 6 degrees apart, then 20, then 3, and is now 4. The box never
  * moved for any of it; the hero did, which is the way round the note here has
  * said it should be from the start.
  *
@@ -227,8 +234,9 @@ const PILLARS: Pillar[] = [
       // is the old hero mint shifted toward blue, hue 167 -> 182, which drops
       // the green cast and sat within 6 degrees of the hero's 176 at the time.
       // The hero then warmed to #38564D, hue 162, opening that gap to 20
-      // degrees, and came back to #275958, hue 179, which closes it to 3. This
-      // box was ruled out of scope for both moves and never changed.
+      // degrees, came back to #275958, hue 179, and settled on Michele's
+      // #2F6C6A, hue 178, which closes it to 4. This box was ruled out of
+      // scope for every one of those moves and has never changed.
       //
       // b is the DARKEST flat point here, which is the reverse of the navy
       // card, because this one carries navy ink. a is a lighter tint of the
@@ -238,8 +246,8 @@ const PILLARS: Pillar[] = [
       // saturated patch, so the rings are navy and the corner glow is #1F5F5B,
       // which was the hero's own colour when it was chosen. The hero warmed
       // away to #38564D and this card stayed, stranding the glow; the hero has
-      // since come back to #275958, hue 179 against the glow's 176, so the two
-      // are close again. See the .coach-card block in tailwind.css.
+      // since come back to blue-teal and settled on #2F6C6A, hue 178 against
+      // the glow's 176, so the two are close again. See the .coach-card block in tailwind.css.
       '--coach-card-a': '#c9dedf',
       '--coach-card-b': '#b0cfd0',
       '--coach-card-glow': 'rgba(31, 95, 91, 0.28)',
@@ -379,17 +387,25 @@ export default function CoachingPage() {
           swap this for a centred layout or a bare max-w div; either one breaks
           that alignment.
 
-          Ground is `.surface-coach-hero`, the DEEP teal field as of the
-          second pass on 2026-08-29, NOT the sitewide navy banner. It was a
-          soft teal for a few hours in between; Michele and Brett swapped it
-          with the TSS card so the bold colour sits on the big header and the
-          soft one on the small box.
+          Ground is `.surface-coach-hero`, Michele's blue-teal #2F6C6A as of
+          the third pass on 2026-08-29, NOT the sitewide navy banner. It was a
+          soft teal for a few hours before that, then a deeper #275958 for
+          part of the day; she looked at the deep seat and preferred the
+          lighter one, so the ground came back up and the contrast fix moved
+          onto the ink instead.
 
-          The ink flipped with the ground and there is no navy left in here:
-          the eyebrow and the H1 are --color-white and the subtitle is
-          --color-cream, which keeps the H1 above it without dropping under
-          AA. See tailwind.css for every measurement, including the one weak
-          number on the page, the terracotta CTA's 1.59:1 as a shape. */}
+          THE INK IS PURE #FFFFFF AND IT IS NOT SET HERE. It is a single
+          `color` declaration on `.surface-coach-hero` in tailwind.css, and
+          the eyebrow, the H1 and the subtitle all inherit it. That is why
+          none of them carries a text- utility. Do not add one back reaching
+          for --color-white or --color-cream: on this lighter ground the token
+          white is 4.43:1 at the radial peak and cream is 3.92:1, both under
+          AA, and only pure white clears it at 4.61:1. The CTA sets its own
+          ink and is unaffected.
+
+          See tailwind.css for every measurement, including the weakest number
+          on the page, which got weaker in this pass: the terracotta CTA is
+          1.31:1 as a shape flat and 1.00:1 at the radial peak. */}
       <section
         aria-label="The Brave Purpose Author Method"
         className="surface-coach-hero relative isolate w-full overflow-hidden py-14 sm:py-16 lg:py-20"
@@ -397,11 +413,11 @@ export default function CoachingPage() {
         <Container>
           <FadeIn className="max-w-2xl">
             <h1>
-              <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-white)] uppercase sm:text-sm">
+              <span className="font-display block text-xs font-semibold tracking-[0.22em] uppercase sm:text-sm">
                 {siteConfig.offerName}
               </span>
               <span className="sr-only"> - </span>
-              <span className="font-display mt-4 block text-[2rem] leading-[1.1] font-medium tracking-tight text-balance text-[var(--color-white)] sm:mt-5 sm:text-[2.5rem] lg:text-5xl lg:leading-[1.08]">
+              <span className="font-display mt-4 block text-[2rem] leading-[1.1] font-medium tracking-tight text-balance sm:mt-5 sm:text-[2.5rem] lg:text-5xl lg:leading-[1.08]">
                 Write your book in six months.
               </span>
             </h1>
@@ -410,7 +426,7 @@ export default function CoachingPage() {
                 match the rest of the page. Approved verbatim, including the
                 singular "conversation" here against the plural used in the
                 metadata and the TSS card. Do not edit it. */}
-            <p className="font-display mt-4 max-w-2xl text-lg leading-7 font-medium text-[var(--color-cream)] sm:text-xl sm:leading-8">
+            <p className="font-display mt-4 max-w-2xl text-lg leading-7 font-medium sm:text-xl sm:leading-8">
               Talk with Michele. Together, you&rsquo;ll turn your conversation
               into a manuscript.
             </p>
