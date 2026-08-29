@@ -441,7 +441,7 @@ export default function SpeakerPage() {
                 <blockquote className="font-display mx-auto max-w-[22ch] text-[1.5rem] leading-[1.25] font-medium tracking-tight text-balance text-[var(--color-navy)] sm:max-w-[26ch] sm:text-[1.875rem] sm:leading-[1.22] lg:mx-0 lg:max-w-[30ch] lg:text-[2.25rem] lg:leading-[1.2]">
                   Let&rsquo;s become a community of dreamers where we
                   don&rsquo;t compete, but instead celebrate and support one
-                  another
+                  another.
                 </blockquote>
                 {/* No dash before the name: the house rule for this page is no
                     em dash anywhere, so the attribution is the name alone.
