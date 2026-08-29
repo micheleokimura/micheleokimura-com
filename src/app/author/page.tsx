@@ -44,10 +44,12 @@ import { pageMetadata } from '@/lib/schema'
  * Do not resort it here.
  *
  * HERO. This is the one page on the site that does not use BannerHero, and the
- * one page with a background of its own. The wash is sampled from
- * author-hero.jpg; see .surface-author-wash in tailwind.css for the sampling
- * and the contrast budget. Everything else still uses the navy banner, and
- * that is still the site identity.
+ * one page with a background of its own. The wash was a blush sampled from
+ * author-hero.jpg until 2026-08-29; it is a chosen marigold now, because the
+ * portrait it was agreeing with left this hero and Michele asked for the band
+ * to pop. See .surface-author-wash in tailwind.css for the colour and the
+ * contrast budget it puts on every word in this section. Everything else still
+ * uses the navy banner, and that is still the site identity.
  *
  * BANDS. Sections alternate --color-band-1 / band-2 the way the home page
  * does, so each one reads as a finished thought. There is no constraint on
@@ -455,7 +457,13 @@ export default function AuthorPage() {
             <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_minmax(0,38rem)] lg:items-center lg:gap-12">
               <div className="max-w-2xl">
                 <h1>
-                  <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-brand-terracotta-ink)] uppercase sm:text-sm">
+                  {/* Navy, not terracotta. This eyebrow was
+                      --color-brand-terracotta-ink #B8431F for as long as the
+                      wash was a pale blush. The wash went marigold on
+                      2026-08-29 and terracotta is the same hue family, so it
+                      fell to 2.02:1 against the deepest point of the ground and
+                      simply vanished. Navy holds 5.45:1 there. */}
+                  <span className="font-display block text-xs font-semibold tracking-[0.22em] text-neutral-950 uppercase sm:text-sm">
                     Author
                   </span>
                   <span className="sr-only"> - </span>
@@ -463,8 +471,15 @@ export default function AuthorPage() {
                     Books, journals, and curricula for every age
                   </span>
                 </h1>
-                {/* Michele's approved subhead. Keep it verbatim. */}
-                <p className="font-display mt-4 max-w-xl text-lg leading-7 font-medium text-neutral-700 sm:text-xl sm:leading-8">
+                {/* Michele's approved subhead. Keep it verbatim.
+
+                    Navy rather than neutral-700 for the same reason as the
+                    eyebrow: #333B59 scores 4.08:1 on the deepest point of the
+                    marigold and misses AA for 18px text by four tenths. There
+                    is no lighter navy that clears it, so the subhead takes the
+                    full ink and lets size and weight carry the step down from
+                    the H1. */}
+                <p className="font-display mt-4 max-w-xl text-lg leading-7 font-medium text-neutral-950 sm:text-xl sm:leading-8">
                   Books, journals, and curricula that call out purpose and
                   passion at every age.
                 </p>

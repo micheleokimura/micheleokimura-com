@@ -169,25 +169,39 @@
      Michele's Author review: "pull the dominant colour from Michele's hero
      photo and use it as a wash for the hero section."
 
-     It is sampled, not chosen. A 200-point downsample of
-     /public/images/michele/author-hero.jpg, with the near-white paper and the
-     shadows dropped, clusters hardest at #DBA686 (hue 22, sat 0.39): the warm
-     blush that runs through the florals on her dress and the wood behind her.
-     These two are that colour lightened until it stops being a panel and
-     starts being a ground.
+     It started sampled. A 200-point downsample of the portrait that used to
+     sit in this hero clustered hardest at #DBA686, and the first version of
+     these two tokens was that blush lightened (#FCF7F3 over #F6EBE2) until it
+     stopped being a panel and started being a ground.
 
-     THE RANGE IS A CONTRAST BUDGET. Nothing in this section may go darker
-     than --color-author-wash-base, because that is the floor where the tracked
-     small-caps eyebrow, which is --color-brand-terracotta-ink #B8431F, still
-     clears AA at 4.64:1. Navy body copy holds 12.5:1 there and the H1 has room
-     to spare. If you deepen the wash, re-measure the eyebrow first; it is the
-     colour that fails, not the heading.
+     IT IS A CHOSEN COLOUR NOW, not a sampled one, as of 2026-08-29. The
+     portrait left this hero on 2026-08-24 and a fan of Michele's own covers
+     took its place, so there was no longer a photograph for the ground to
+     agree with. Michele asked for the banner to pop: warm, joyful, saturated.
+     These are a marigold, and the section reads as a colour block that the
+     covers sit on rather than as a tint that apologises for being there.
+
+     THE RANGE IS STILL A CONTRAST BUDGET, and the arithmetic runs the other
+     way now. On a light wash the darkest pixel was the floor; on a saturated
+     one the DARKEST pixel is where dark type has the most room and the
+     LIGHTEST is the ceiling, so --color-author-wash-base #E8843C is the worst
+     case for every word in the section. Measured against it:
+
+       navy #1F2744 (neutral-950, neutral-700 is aliased dark too)  5.45:1
+       coral-text #B8431F, the eyebrow this hero used to use        2.02:1
+       neutral-700 #333B59, the subhead this hero used to use       4.08:1
+
+     Which is why the eyebrow and the subhead are both navy on this page now.
+     Terracotta on marigold is the same hue family and it disappeared; the
+     grey-navy subhead missed AA by four tenths. If you retune these two
+     tokens, re-measure navy against whichever end comes out darker, and do
+     not put a mid-tone on this ground at all.
 
      Do NOT reach for these anywhere else. DESIGN-RULES bans coral-tinted
      panels, and this is deliberately the single exception Michele asked for
      rather than the start of a set. */
-  --color-author-wash-top: #fcf7f3;
-  --color-author-wash-base: #f6ebe2;
+  --color-author-wash-top: #f2994e;
+  --color-author-wash-base: #e8843c;
 
   --color-teal-text: #0f766e;
   --color-teal-on-dark: #9fe8df;
@@ -829,15 +843,25 @@ html {
   background-size: 14px 14px, auto, auto;
 }
 
-/* The Author hero ground. Warm blush pulled from Michele's own hero photo, so
-   the section reads as an extension of the picture sitting in it rather than
-   as a tinted box behind it.
+/* The Author hero ground. A warm marigold block, saturated on purpose: Michele
+   asked on 2026-08-29 for this banner to pop with colour, and it is the one
+   section of the site allowed to be loud on a light page.
 
-   Two layers. A soft ellipse warms the right side, which is where the portrait
-   sits, and a top-to-bottom gradient carries the rest. Both stops live inside
-   the range set by --color-author-wash-top and --color-author-wash-base, so the
-   darkest pixel anywhere in the section is the base and every text colour on it
-   is measured against that. See the token block in this file.
+   Two layers, unchanged in shape from the blush version this replaced. A soft
+   ellipse deepens the right side, which is where the fan of covers sits, and a
+   top-to-bottom gradient carries the rest. Both stops live inside the range set
+   by --color-author-wash-top and --color-author-wash-base, so the darkest pixel
+   anywhere in the section is the base, which is the worst case for the dark
+   type on it. See the token block in this file for the measurements.
+
+   The ellipse deepening rather than lightening the right side is deliberate.
+   The covers are a mixed set and several of them (Dancing with Father, the
+   Dream Big Journals) are pale or cream, so a slightly deeper ground under
+   them is what keeps their edges readable.
+
+   The transparent stop is the base colour at zero alpha rather than `transparent`
+   or a leftover cream. It has to match the layer it fades into or the midpoint
+   of the fade goes grey.
 
    This is the ONLY per-page hero background on the site. Every other interior
    page uses .surface-teal-banner, and that is still the identity. */
@@ -847,7 +871,7 @@ html {
     radial-gradient(
       ellipse 60% 120% at 78% 40%,
       var(--color-author-wash-base) 0%,
-      rgba(246, 235, 226, 0) 70%
+      rgba(232, 132, 60, 0) 70%
     ),
     linear-gradient(
       to bottom,
