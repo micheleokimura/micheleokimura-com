@@ -66,15 +66,15 @@ export const LOGO_ORGS: LogoOrg[] = [
     logoDark: '/org-logos/leeward-community-church-white.svg',
     href: '/case-studies/leeward-community-church',
   },
-  // No logo art has been supplied yet. `logo`/`logoDark` stay null so the tile
-  // is skipped by carouselItems() rather than rendering a dangling image path.
-  // Drop first-assembly-of-god.png and -white.png into /public/org-logos and
-  // point these two fields at them to light the tile up.
+  // Logo art landed 2026-08-28. Michele supplied the Red Hill circular mark as a
+  // white-background JPEG; it ships here keyed to transparency so it does not
+  // sit in a white box on a coloured band, with the usual white-on-transparent
+  // companion for dark surfaces.
   {
     slug: 'first-assembly-of-god',
     name: 'First Assembly of God',
-    logo: null,
-    logoDark: null,
+    logo: '/org-logos/first-assembly-of-god.png',
+    logoDark: '/org-logos/first-assembly-of-god-white.png',
     href: '/case-studies/first-assembly-of-god',
   },
   {
