@@ -1,6 +1,6 @@
 // Registry for the home-page LogoMarquee. 17-org list confirmed by Michele
-// 2026-08-23, plus First Assembly of God (Red Hill) added 2026-08-28 when its
-// case study landed. 18 orgs.
+// 2026-08-23, plus First Assembly of God (Red Hill) and First Presbyterian
+// Church of Honolulu, both added 2026-08-28. 19 orgs.
 //
 // === SLUG WIRING CONTRACT ===
 // `slug` is the join key. It matches the case-study markdown filename under
@@ -21,8 +21,9 @@
 // their trademark. `invert` flags art that ships white or cream on transparent
 // (Hale Kipa, Transform Our World, Hanalani, Hawaiʻi Catholic Schools, the
 // Foursquare four-icon mark) so it reads as dark on the cream band. `matte`
-// flags art with an opaque white background (She Leads America) so it
-// multiply-blends into the cream instead of sitting in a white box.
+// flags art with an opaque white background (She Leads America, First
+// Presbyterian) so it multiply-blends into the cream instead of sitting in a
+// white box.
 
 export type ClientLogo = {
   slug: string
@@ -171,5 +172,21 @@ export const CLIENT_LOGOS: ClientLogo[] = [
     name: 'First Assembly of God',
     logo: `${DIR}/first-assembly-of-god.png`,
     href: '/case-studies/first-assembly-of-god',
+  },
+  // NO CASE STUDY YET. This is the first tile to use the `contact` route the
+  // header describes; every other org in the list has a page. Do not point
+  // `href` at /case-studies/first-presbyterian-church-honolulu to make it
+  // clickable: that markdown file does not exist and the tile would 404.
+  // Swap `contact` for the real href the moment Michele clears the story.
+  //
+  // The mark is green stained glass on an opaque white background, so it takes
+  // `matte` for the same reason She Leads America does.
+  {
+    slug: 'first-presbyterian-church-honolulu',
+    name: 'First Presbyterian Church of Honolulu',
+    logo: `${DIR}/first-presbyterian-church-honolulu.png`,
+    href: null,
+    contact: true,
+    matte: true,
   },
 ]
