@@ -10,20 +10,23 @@
  * its full description can never drift apart.
  *
  * === THE ORDER IS THE POINT ===
- * SHELF below is Michele's order, set 2026-08-23 and unchanged by the tile
- * rebuild. Do not resort it alphabetically or by date, and do not reintroduce
- * a divider between her own titles and the Releasing Generations curriculum:
- * she asked for one list.
+ * SHELF below is Michele's order. Do not resort it alphabetically or by date,
+ * and do not reintroduce a divider between her own titles and the Releasing
+ * Generations curriculum: she asked for one list.
  *
- *   1 Brave Purpose with God   5 Brave Series Curriculum
- *   2 Brave Purpose                (Beautiful / Bold / Together)
- *   3 Dream Big Journals        6 Dancing with Father
- *     Curriculum                7 The Birth of Explicit Movement
- *       (Journals + Teacher     8 Explicit Movement 21-Day Journal
- *        Guides)
- *   4 Raising Kingdom Kids
+ *   1 Dream Big Journals        4 Dancing with Father
+ *     Curriculum                5 The Birth of Explicit Movement
+ *       (Journals + Teacher     6 Explicit Movement 21-Day Journal
+ *        Guides)                7 Brave Purpose with God
+ *   2 Raising Kingdom Kids      8 Brave Purpose
+ *   3 Brave Series Curriculum
+ *       (Beautiful / Bold / Together)
  *
- * The faith edition leads at 1, by direction.
+ * The two Brave Purpose titles led the shelf from 2026-08-23 until 2026-08-29,
+ * when Michele moved them to the foot of it: both release in 2027 and still
+ * show a COVER SOON placeholder, so the titles with real cover art lead
+ * instead. The faith edition stays ahead of the secular one within that pair,
+ * by direction. Put them back on top once there are covers to show.
  *
  * === COPY RULES ===
  * Endorser quotes are VERBATIM and must stay that way, including any phrasing
@@ -843,7 +846,6 @@ export type ShelfBlock =
     }
 
 export const SHELF: ShelfBlock[] = [
-  { kind: 'books', slugs: ['brave-purpose-with-god', 'brave-purpose'] },
   {
     kind: 'family',
     slug: 'dream-big-journal-curriculum',
@@ -868,4 +870,7 @@ export const SHELF: ShelfBlock[] = [
       'explicit-movement-21-day-journal',
     ],
   },
+  // Both Brave Purpose titles release in 2027 and have no cover art yet, so
+  // they sit at the foot of the shelf until there is a cover to show.
+  { kind: 'books', slugs: ['brave-purpose-with-god', 'brave-purpose'] },
 ]
