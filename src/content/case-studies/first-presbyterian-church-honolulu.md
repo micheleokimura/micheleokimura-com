@@ -21,7 +21,7 @@ His imprint reaches beyond his own congregation. Dan and Pam Chun founded Hawaii
 
 ### When a new nonprofit found its first mentor
 
-Senior Pastor Dan met with Michele and her early team a handful of times in those first years, offering the kind of practical wisdom that only comes from someone who has already walked the road. Dan has remained a friend, sounding board, and a quiet encourager to Michele across the entire life of the nonprofit.
+Senior Pastor Dan met with Michele and her early team a handful of times in those first years, offering the kind of practical wisdom that only comes from someone who has already walked the road. In the years since, he has remained a friend, sounding board, and occasional encourager along the way.
 
 Pastor Dan also was part of the Explicit Movement speaker team.
 
