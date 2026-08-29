@@ -425,9 +425,9 @@
      the coloured role tiles on the home page, the coach hero, the UAV card.
      Each of those gained a little when the ground got lighter, because the ink
      got lighter with it. The coach hero no longer uses this ink at
-     all: it went #1F5F5B, #38564D, #275958 and then back to Michele's
-     #2F6C6A, where this token measures 4.43:1 and fails, so that hero runs on
-     pure #FFFFFF instead. On the violet banner 14.98:1 against 14.82:1; on the UAV
+     all: it went #1F5F5B, #38564D, #275958, back to Michele's #2F6C6A and on
+     to #32747E, where this token measures 4.35:1 and fails, so that hero runs
+     on pure #FFFFFF instead. On the violet banner 14.98:1 against 14.82:1; on the UAV
      card 13.01:1 against 12.88:1. The marigold Author hero is the one place
      this ink does not clear AA, and it did not before either; see the AUTHOR
      HERO WASH block above for the numbers and for Michele's call on them.
@@ -1084,16 +1084,16 @@ html {
    alternative and was passed over: at hue 189 it drifts toward the navy of the
    UAV card and the teal pair stops reading as a pair.
 
-   HERO. The ground is #2F6C6A, lifted by a white radial in the same ellipse
+   HERO. The ground is #32747E, lifted by a white radial in the same ellipse
    the old wash used, so the hero keeps its light-from-the-left composition
-   instead of reading as a flat slab. The radial peak dropped from 38% white to
-   12%: on a dark ground white LOWERS the contrast under the text, so the peak
-   is now the worst case and every ratio below is a floor rather than an
-   average. THAT 12% IS NOW AT ITS CEILING. The hero ink is pure white and
-   reads 4.61:1 at the peak against a 4.5 bar; 13% is 4.54:1 and 14% is
-   4.42:1, which fails. Do not raise it. If the composition ever wants more
-   light from the left, take it out of the ground instead and seat the teal
-   deeper.
+   instead of reading as a flat slab. The radial peak went 38% white to 12% to
+   8%: on a dark ground white LOWERS the contrast under the text, so the peak
+   is the worst case and every ratio below is a floor rather than an average.
+   THAT 8% IS NOW AT ITS CEILING. The hero ink is pure white and reads 4.53:1
+   at the peak against a 4.5 bar; 9% is 4.44:1, which fails. Do not raise it.
+   The 50% stop moved with it, 4.5% to 3%, so the falloff keeps its shape and
+   the wash only dims. If the composition ever wants more light from the left,
+   take it out of the ground instead and seat the teal deeper.
 
    WARMED FROM #1F5F5B TO #38564D, later on 2026-08-29, and that value is
    gone again; the paragraph is kept because the reasoning still explains what
@@ -1121,13 +1121,27 @@ html {
    restraint is where the grounded, earthy quality lives. Hue carries the
    family resemblance, saturation carries the warmth, and they are separable.
 
-   HER VALUE #2F6C6A IS BACK, AND IT SHIPS, still 2026-08-29. It went to
-   #275958 for part of the day because the ink of the moment could not hold AA
+   HER VALUE #2F6C6A SHIPPED FOR PART OF 2026-08-29 and is now gone. It went
+   to #275958 earlier that day because the ink of the moment could not hold AA
    on it: at #2F6C6A the cream subtitle measures 3.92:1 at the radial peak
    against a 4.5 bar. Michele looked at the deeper seat and preferred the
    lighter one, so the fix was moved off the ground and onto the ink. Seating
    the colour deeper was one remedy; brightening the ink is the other, and it
-   is the one that keeps the colour she picked.
+   is the one that kept the colour she picked.
+
+   NOW #2F6C6A -> #32747E, fourth pass, same day. Michele read #2F6C6A as
+   still slightly green and a touch dark, and asked for more blue in the mix
+   and a little more light. Hue 178 -> 188 and lightness 0.30 -> 0.35 is that
+   move, and it is the largest step toward blue this hero has taken.
+
+   THE RADIAL PAID FOR IT, not the ground and not the ink. At #32747E the pure
+   white ink measures 4.18:1 at the old 12% peak, which fails, so one of three
+   things had to give. The ground could seat deeper, #2F707A at 4.38:1 or
+   #2E6D77 at 4.53:1, but that walks back the brightening she just asked for.
+   The ink is already pure white and has nowhere left to go. So the peak came
+   down to 8%, which buys 4.53:1 on the colour she picked. This is the same
+   move as the last pass in a different place: keep her value and take the
+   contrast out of whatever else is adjustable.
 
    THE INK IS NOW PURE #FFFFFF, not the --color-white token. That token is
    #FCFAF6, a warm off-white, and on this lighter ground it measures 4.43:1 at
@@ -1136,18 +1150,22 @@ html {
    a literal hex on `.surface-coach-hero` and inherited by everything in the
    section. Do not put the token back.
 
-     #FFFFFF pure white       6.04:1 flat, 4.61:1 at the radial peak  (7.91, 5.79)
-     --color-white #FCFAF6    5.80:1 flat, 4.43:1 at the peak, FAILS  (7.58, 5.55)
-     --color-cream #F2ECDF    5.14:1 flat, 3.92:1 at the peak, FAILS  (6.72, 4.92)
+     #FFFFFF pure white       5.34:1 flat, 4.53:1 at the radial peak  (6.04, 4.63)
+     --color-white #FCFAF6    5.12:1 flat, 4.35:1 at the peak, FAILS  (5.80, 4.43)
+     --color-cream #F2ECDF    4.53:1 flat, 3.85:1 at the peak, FAILS  (5.14, 3.92)
 
-   Bracketed figures are the #275958 hero this replaces; the lighter ground
-   costs about 1.2 points everywhere. Only the first row ships. It clears AA
-   at the peak, which is the floor, and AAA flat is gone: 6.04:1 is under the
-   7:1 bar, so this hero is an AA surface now where the deep one was AAA. That
-   is the trade Michele made and it is a real one.
+   Bracketed figures are the #2F6C6A hero this replaces, measured at its own
+   12% peak. All three text elements sit on the first row, because all three
+   inherit the one ink. It clears AA at the peak, which is the floor, and it
+   clears it by 0.03, which is the thinnest margin any surface on this site
+   runs on. AAA flat is long gone. Treat every number in this block as load
+   bearing: there is no headroom left anywhere in this hero, and any further
+   brightening of the ground has to come with a deeper ink, which pure white
+   cannot supply.
 
    THE TSS BOX DOES NOT MOVE and the teal pair is still tight. #B0CFD0 sits at
-   hue 182, 4 degrees off this hero's 178, where it was 3 degrees off the deep
+   hue 182, 6 degrees off this hero's 188, where it was 4 degrees off #2F6C6A,
+   3 degrees off the deep
    one, 20 degrees off the green one and 6 degrees off the cold one before
    that. Michele ruled the
    small feature boxes out of this pass too, so the hero is the value that
@@ -1168,10 +1186,10 @@ html {
    `text-[var(--color-cta-ink)]` and is unaffected.
 
    THE CTA GOT WORSE HERE and it is the price of the lighter ground. As a
-   shape the terracotta reads 1.31:1 flat, down from 1.71:1 on the deep teal,
-   and at the radial peak it is 1.00:1: #C84C33 and the lifted ground have the
-   same luminance there, so the button edge disappears and only the hue
-   separates it. The button sits below the ellipse centre so it does not see
+   shape the terracotta reads 1.15:1 flat, down from 1.31:1 on #2F6C6A and
+   1.71:1 on the deep teal, and at the radial peak it is 1.02:1: #C84C33 and
+   the lifted ground have almost the same luminance there, so the button edge
+   all but disappears and only the hue separates it. The button sits below the ellipse centre so it does not see
    the full peak, but the true figure is somewhere in that range and every
    part of it is worse than before. Michele's instruction was to change the
    ground and the subtitle only, so this is reported rather than fixed. The
@@ -1199,13 +1217,14 @@ html {
    It sits on the #FCFAF6 ground inside a navy-10 hairline ring and reads
    1.59:1 against it, so the panel still separates. */
 .surface-coach-hero {
-  /* Michele's value, and pure #FFFFFF ink is what lets it ship. See above. */
-  background-color: #2f6c6a;
+  /* Michele's value, and pure #FFFFFF ink over an 8% radial is what lets it
+     ship. See above. */
+  background-color: #32747e;
   color: #ffffff;
   background-image: radial-gradient(
     ellipse 90% 140% at 20% 50%,
-    rgba(255, 255, 255, 0.12) 0%,
-    rgba(255, 255, 255, 0.045) 50%,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.03) 50%,
     rgba(255, 255, 255, 0) 78%
   );
 }
@@ -1572,8 +1591,8 @@ html {
    that glow was chosen. The hero warmed away from it to #38564D later on
    2026-08-29 and this card was ruled out of scope, which left the glow
    stranded 14 degrees off; the hero then came back to blue-teal the
-   same day and settled on #2F6C6A, hue 178 against the glow's 176, so the two
-   are close again and the stranding fixed itself. It is a 16 percent tint in one corner of one box and
+   same day, and after #2F6C6A at hue 178 it has gone on to #32747E at hue
+   188, which strands the glow again, now 12 degrees off. It is a 16 percent tint in one corner of one box and
    the figures above still hold. Bright teal #00B09F now
    appears on this page only inside the dark card's shadow, never as a fill
    behind words.

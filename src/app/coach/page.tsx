@@ -128,16 +128,22 @@ import { pageMetadata } from '@/lib/schema'
  * AND THEN IT CAME BACK UP, #275958 -> #2F6C6A, third pass, same day. That
  * lighter value is Michele's own and she preferred it to the deeper seat. It
  * had failed the first time round on the cream subtitle, 3.92:1 at the radial
- * peak against a 4.5 AA bar, and the deeper ground was the fix. This pass
- * takes the other fix: keep her ground and brighten the ink instead. The
- * whole hero is now pure #FFFFFF, which reads 6.04:1 flat and 4.61:1 at the
- * peak. Cream is gone from this hero, and so is the --color-white token,
- * which is #FCFAF6 and lands at 4.43:1 at the peak, under AA for the eyebrow.
- * The lighter ground costs about 1.2 points everywhere, so the hero is an AA
- * surface now where the deep one was AAA. Full workings in tailwind.css.
+ * peak against a 4.5 AA bar, and the deeper ground was the fix. That pass
+ * took the other fix: keep her ground and brighten the ink instead. The whole
+ * hero went pure #FFFFFF. Cream is gone from this hero, and so is the
+ * --color-white token, which is #FCFAF6 and fails at the peak.
+ *
+ * AND FURTHER TOWARD BLUE, #2F6C6A -> #32747E, fourth pass, same day. Michele
+ * read #2F6C6A as still a little green and a touch dark and asked for more
+ * blue and more light: hue 178 -> 188, lightness 0.30 -> 0.35. Pure white on
+ * it reads 4.18:1 at the 12% radial peak, which fails, so the RADIAL came
+ * down to 8% and the ink and the ground both stayed. That reads 5.34:1 flat
+ * and 4.53:1 at the peak, an AA surface clearing the bar by 0.03. There is no
+ * headroom left in this hero. Full workings in tailwind.css.
  *
  * TSS and UAV DID NOT MOVE in any pass, by Michele's instruction. The
- * hero/TSS pairing went 6 degrees apart, then 20, then 3, and is now 4. The box never
+ * hero/TSS pairing went 6 degrees apart, then 20, then 3, then 4, and is now
+ * 6. The box never
  * moved for any of it; the hero did, which is the way round the note here has
  * said it should be from the start.
  *
@@ -234,9 +240,10 @@ const PILLARS: Pillar[] = [
       // is the old hero mint shifted toward blue, hue 167 -> 182, which drops
       // the green cast and sat within 6 degrees of the hero's 176 at the time.
       // The hero then warmed to #38564D, hue 162, opening that gap to 20
-      // degrees, came back to #275958, hue 179, and settled on Michele's
-      // #2F6C6A, hue 178, which closes it to 4. This box was ruled out of
-      // scope for every one of those moves and has never changed.
+      // degrees, came back to #275958, hue 179, went to Michele's #2F6C6A,
+      // hue 178, and is now #32747E, hue 188, which opens it back to 6. This
+      // box was ruled out of scope for every one of those moves and has never
+      // changed.
       //
       // b is the DARKEST flat point here, which is the reverse of the navy
       // card, because this one carries navy ink. a is a lighter tint of the
@@ -245,9 +252,10 @@ const PILLARS: Pillar[] = [
       // not show on this, and bright teal #00B09F in the corner became a
       // saturated patch, so the rings are navy and the corner glow is #1F5F5B,
       // which was the hero's own colour when it was chosen. The hero warmed
-      // away to #38564D and this card stayed, stranding the glow; the hero has
-      // since come back to blue-teal and settled on #2F6C6A, hue 178 against
-      // the glow's 176, so the two are close again. See the .coach-card block in tailwind.css.
+      // away to #38564D and this card stayed, stranding the glow; the hero
+      // came back to blue-teal at #2F6C6A, hue 178 against the glow's 176, and
+      // has since gone on to #32747E, hue 188, which strands it again at 12
+      // degrees. See the .coach-card block in tailwind.css.
       '--coach-card-a': '#c9dedf',
       '--coach-card-b': '#b0cfd0',
       '--coach-card-glow': 'rgba(31, 95, 91, 0.28)',
@@ -387,12 +395,12 @@ export default function CoachingPage() {
           swap this for a centred layout or a bare max-w div; either one breaks
           that alignment.
 
-          Ground is `.surface-coach-hero`, Michele's blue-teal #2F6C6A as of
-          the third pass on 2026-08-29, NOT the sitewide navy banner. It was a
-          soft teal for a few hours before that, then a deeper #275958 for
-          part of the day; she looked at the deep seat and preferred the
-          lighter one, so the ground came back up and the contrast fix moved
-          onto the ink instead.
+          Ground is `.surface-coach-hero`, Michele's blue-teal #32747E as of
+          the fourth pass on 2026-08-29, NOT the sitewide navy banner. It was a
+          soft teal for a few hours before that, then a deeper #275958, then
+          her #2F6C6A; she read that one as still a little green and a touch
+          dark, so this pass took it further toward blue and lifted it. The
+          contrast fix moved onto the radial, which is now 8% rather than 12%.
 
           THE INK IS PURE #FFFFFF AND IT IS NOT SET HERE. It is a single
           `color` declaration on `.surface-coach-hero` in tailwind.css, and
@@ -404,8 +412,8 @@ export default function CoachingPage() {
           ink and is unaffected.
 
           See tailwind.css for every measurement, including the weakest number
-          on the page, which got weaker in this pass: the terracotta CTA is
-          1.31:1 as a shape flat and 1.00:1 at the radial peak. */}
+          on the page, which got weaker again in this pass: the terracotta CTA
+          is 1.15:1 as a shape flat and 1.02:1 at the radial peak. */}
       <section
         aria-label="The Brave Purpose Author Method"
         className="surface-coach-hero relative isolate w-full overflow-hidden py-14 sm:py-16 lg:py-20"
