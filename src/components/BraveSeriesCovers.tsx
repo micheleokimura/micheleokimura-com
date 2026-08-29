@@ -40,13 +40,13 @@ function Tile({
         </div>
       ) : (
         <div className="flex aspect-[3/4] w-full flex-col items-center justify-center rounded-2xl border border-dashed border-neutral-300 bg-neutral-50 p-4 text-center">
-          <span className="font-display text-2xl leading-none font-semibold tracking-tight text-neutral-400">
+          <span className="font-display text-2xl leading-none font-semibold tracking-tight text-neutral-500">
             {cover.volume}
           </span>
           <span className="font-display mt-2 text-sm leading-tight font-semibold tracking-tight text-neutral-500">
             Volume {cover.volume}
           </span>
-          <span className="mt-2 text-[0.65rem] tracking-widest text-neutral-400 uppercase">
+          <span className="mt-2 text-[0.65rem] tracking-widest text-neutral-500 uppercase">
             Cover coming soon
           </span>
         </div>

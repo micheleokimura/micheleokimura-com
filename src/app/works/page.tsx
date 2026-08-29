@@ -104,7 +104,7 @@ export default function WorksPage() {
                           </div>
                         ) : (
                           <div className="mb-4 flex aspect-[3/4] w-full items-center justify-center rounded-xl bg-neutral-50 p-6">
-                            <span className="text-center font-display text-lg font-semibold tracking-tight text-neutral-400">
+                            <span className="text-center font-display text-lg font-semibold tracking-tight text-neutral-500">
                               {work.title}
                             </span>
                           </div>

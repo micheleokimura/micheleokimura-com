@@ -47,7 +47,7 @@ export function BookFacts({
               <span className="font-display text-lg leading-tight font-semibold tracking-tight text-neutral-500">
                 {title}
               </span>
-              <span className="mt-3 text-xs tracking-widest text-neutral-400 uppercase">
+              <span className="mt-3 text-xs tracking-widest text-neutral-500 uppercase">
                 Cover coming soon
               </span>
             </div>

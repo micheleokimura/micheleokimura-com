@@ -81,15 +81,22 @@
                         accents on navy, the banner glow.
        coral   #F15C3D  primary CTA fill. Contact, Join waitlist, form submits.
        gold    #E9AE3F  DECORATIVE ONLY. Dividers, ornament, tiny bullets.
-       navy    #1F2744  body text, headings on cream, every dark UI surface.
-       cream   #F2ECDF  the dominant ground. Oat/parchment, masculine-neutral.
+       navy    #1F2744  body text, headings on light ground, every dark UI
+                        surface.
+       cream   #F2ECDF  ON DARK SURFACES ONLY. See the note on the token.
 
      ---------------------------------------------------------------------
      THE THREE DERIVED TEXT COLORS, and why each one has to exist
      ---------------------------------------------------------------------
      The brand hexes are display colors. Three of them cannot legally carry
-     text, so each gets exactly one measured stand-in. All figures are WCAG 2.1
-     contrast against cream #F2ECDF unless stated.
+     text, so each gets exactly one measured stand-in. The figures below are
+     the ORIGINAL derivations, taken against cream #F2ECDF when cream was the
+     page ground. Cream has not been the ground since 2026-08-23 and is not a
+     ground at all since 2026-08-29; every one of these colours scores HIGHER
+     on today's grounds than the number quoted, because every ground on the
+     site is now lighter than cream. Current figures are in the SECTION BANDS
+     block below. The derivations are kept because they are why each token
+     exists, not because they are today's measurements.
 
      1. --color-teal-text #0F766E, because teal #00B09F on cream is 2.31:1.
         That fails AA (4.5:1) AND fails the 3:1 large-text floor, so bright
@@ -118,6 +125,17 @@
      read as text on a dark surface; it holds 7.71:1 even at the brightest
      point of the banner gradient, so it cannot drift below AA as the glow is
      tuned. Use it for every eyebrow and small caption on navy. */
+  /* CREAM IS A TEXT COLOUR NOW, and only on dark surfaces: the footer, the
+     navy and violet banners, the dark coach panels, the dark-surface focus
+     ring. It is the warm off-white that keeps those panels from reading as
+     white-on-black, and it is 12.46:1 on navy.
+
+     It used to be the page ground (until 2026-08-23) and then the card/tile
+     ground (until 2026-08-29). Michele's read on the tile: the cream cards
+     fought the lavender on /speaker, which they did, being the one properly
+     tan surface left on the site sitting next to a periwinkle strip. The tile
+     is --color-panel now. Do NOT reach for cream as a background again; on a
+     light ground it is the colour that made the site read as "too tan". */
   --color-cream: #f2ecdf;
   --color-navy: #1f2744;
   --color-teal: #00b09f;
@@ -133,10 +151,32 @@
      full-bleed section sits on one of them, and neighbours never share a band,
      so each change of ground marks the end of one thought.
 
-       --color-band-1  #FAFAF8  the default ground (same value as --color-white)
-       --color-band-2  #F5F5F0  one step down
-       --color-band-3  #EFEFEA  two steps down, for the quiet/pause sections
-       --color-band-4  #E9E9E2  deepest, and ONLY for the run-in to the footer
+       --color-band-1  #FAF9F5  the default ground (same value as --color-white)
+       --color-band-2  #F6F4EE  one step down
+       --color-band-3  #F2EFE8  two steps down, for the quiet/pause sections
+       --color-band-4  #EEEBE2  deepest, and ONLY for the run-in to the footer
+
+     RE-CUT 2026-08-29 as a soft warm white family. Michele asked for a ground
+     that is brighter than the old one and still warm, so it stops fighting the
+     lavender on /speaker. Two things changed together and both matter:
+
+       The HUE. The old ramp drifted greenish-neutral at the top (#FAFAF8 is
+       two points of chroma) and tan at the bottom (#E9E9E2 sat next to the
+       genuinely tan neutral ramp). Every band now holds the same warm hue at
+       low chroma, 5 at band-1 rising to 12 at band-4, so the scale reads as
+       one warm white getting quieter rather than as neutral fading to oat.
+
+       The STEP. The old steps were 6.0/6.0/6.7 points of lightness. They are
+       5.3/5.0/4.7 now, which is TIGHTER, and that is deliberate: band-4 could
+       not stay as deep as #E9E9E2 and clear contrast. See below.
+
+     BAND-4 IS A CONTRAST FLOOR, not a taste value. On the old #E9E9E2 three
+     things failed outright: --color-teal-text at 4.49:1, --color-coral-text at
+     4.46:1 (AA wants 4.5) and --color-field-border at 2.98:1 (WCAG 1.4.11
+     wants 3.0). #EEEBE2 is the shallowest warm value where all three clear,
+     at 4.59:1, 4.56:1 and 3.05:1. Do not deepen band-4 without re-measuring
+     those three; they are the reason the bottom of this scale sits where it
+     does, and the whole ramp was compressed upward to make room for them.
 
      THE STEPS ARE SUPPOSED TO BE ALMOST INVISIBLE. Roughly 5 points of
      lightness apart, near-neutral rather than tan. Someone glancing at the page
@@ -150,17 +190,59 @@
      page into a descent (sections -> deeper -> navy) instead of a jump.
 
      These are grounds, not tiles. A card that needs to lift off its section
-     uses --color-cream, which is warm and clearly reads as a tile against any
-     of them. Do not use a band as a card colour: two bands next to each other
-     is exactly the contrast this scale is designed NOT to have.
+     uses --color-panel, which is BRIGHTER than every band and therefore lifts
+     off all four; see that token. Do not use a band as a card colour: two
+     bands next to each other is exactly the contrast this scale is designed
+     NOT to have.
 
-     All four are light enough that navy body copy clears AA with room to
-     spare: navy #1F2744 scores 13.7:1 on band-1, 13.2:1 on band-2, 12.6:1 on
-     band-3, and 12.1:1 on band-4. */
-  --color-band-1: #fafaf8;
-  --color-band-2: #f5f5f0;
-  --color-band-3: #efefea;
-  --color-band-4: #e9e9e2;
+     Measured on the new ramp, worst case first. Navy body copy clears AA with
+     enormous room: 13.92:1 on band-1, 13.33:1 on band-2, 12.77:1 on band-3,
+     12.30:1 on band-4. The two accent text colours are the tight ones, and
+     they now clear on every band:
+
+                        band-1  band-2  band-3  band-4
+       navy              13.92   13.33   12.77   12.30
+       neutral-600        7.30    6.99    6.69    6.45
+       neutral-500        5.55    5.32    5.09    4.91
+       teal-text          5.20    4.98    4.77    4.59
+       coral-text         5.16    4.95    4.74    4.56
+       field-border       3.45    3.31    3.17    3.05   (needs 3.0)
+       CTA #C84C33 shape  4.39    4.21    4.03    3.88   (needs 3.0) */
+  --color-band-1: #faf9f5;
+  --color-band-2: #f6f4ee;
+  --color-band-3: #f2efe8;
+  --color-band-4: #eeebe2;
+
+  /* ---------------------------------------------------------------------
+     THE CARD / PANEL GROUND
+     ---------------------------------------------------------------------
+     The tile that lifts off a section. Added 2026-08-29, taking the job
+     --color-cream used to do.
+
+     IT GOES UP, NOT DOWN, and that is the whole idea. Cream was a tile
+     because it was DARKER than the ground; that worked while the ground was
+     bright and neutral, but it meant every card on the site was the tannest
+     thing on the page, and on /speaker the cream cards sat a few hundred
+     pixels from a periwinkle strip and lost. With the band scale re-cut as a
+     soft warm white the headroom below band-1 is only fifteen points of
+     lightness for four bands, so a tile going DOWN either collides with
+     band-2 or lands on top of band-3. Going up, one value clears all four:
+
+       panel over band-1   +7.0 points of lightness
+       panel over band-2  +12.3
+       panel over band-3  +17.3
+       panel over band-4  +22.0
+
+     On band-1 that lift is the subtlest, and there the `ring-1 ring-navy/10`
+     every one of these cards already carries is what draws the edge. That
+     ring is not optional on a panel sitting on band-1.
+
+     It is pure #FFFFFF on purpose, which is the one place on this site that
+     is allowed to be. A card is the only surface a reader looks THROUGH to
+     read something, so it gets the most contrast headroom on the site: navy
+     14.67:1, teal-text 5.47:1, coral-text 5.44:1, field-border 3.64:1. Every
+     one of those is the best figure any ground here scores. */
+  --color-panel: #ffffff;
 
   /* ---------------------------------------------------------------------
      AUTHOR HERO WASH
@@ -248,12 +330,13 @@
   /* The border of a form field, and nothing else. It is a separate token from
      the neutral ramp because WCAG 1.4.11 holds a form border to 3:1 while a
      decorative dashed placeholder rule is exempt as pure decoration -- and the
-     ramp is used for both. #7F8699 is 3.09:1 on cream.
+     ramp is used for both. #7F8699 was derived at 3.09:1 on cream; on today's
+     grounds it runs 3.45:1 on band-1 down to 3.05:1 on band-4, and 3.64:1 on
+     --color-panel, so it clears 3.0 everywhere it can land.
 
-     This matters more than it looks: `bg-white` is cream, and the modals are
-     also cream, so an input is a cream box on a cream card and this border is
-     the ONLY thing that says "type here". neutral-300 was 1.74:1, which made
-     the field effectively invisible. */
+     This matters more than it looks: an input is a near-white box on a
+     near-white card, so this border is the ONLY thing that says "type here".
+     neutral-300 was 1.74:1, which made the field effectively invisible. */
   --color-field-border: #7f8699;
 
   /* Focus ring on cards and image buttons. Coral #F15C3D is 2.81:1 on cream
@@ -265,18 +348,19 @@
      existing bg-white / text-white utilities pick it up site-wide. Anything
      that genuinely needs pure white must say #ffffff explicitly.
 
-     GROUND CHANGED 2026-08-23 (Michele's home-page review). This used to be
-     cream #F2ECDF, and she read the whole site as "too tan". The ground is now
-     an off-white #FAFAF8: still not pure white, but far closer to it. Cream is
-     NOT retired -- it stayed at --color-cream and is now a deliberate tinted
-     PANEL color rather than the default ground, which is what gives the home
-     page its band-to-band shade variation.
+     GROUND CHANGED TWICE. On 2026-08-23 it went from cream #F2ECDF, which
+     Michele read as "too tan", to an off-white #FAFAF8. On 2026-08-29 it went
+     to the soft warm white #FAF9F5 it is now, which is the same lightness and
+     a warmer hue: #FAFAF8 was very slightly GREEN, and against the lavender on
+     /speaker that is the wrong direction to be wrong in. This value must stay
+     equal to --color-band-1; they are the same ground and two names for it.
 
-     Every contrast figure quoted in this file was measured against cream. They
-     all survive the move, because the ground got LIGHTER: dark ink on #FAFAF8
-     scores higher than the same ink on #F2ECDF, never lower. The three derived
-     text colors keep their AA passes with room to spare (teal-text 4.65 -> 5.05,
-     coral-text 4.62 -> 5.02, field-border 3.09 -> 3.36).
+     Every contrast figure originally quoted in this file was measured against
+     cream. They all survive both moves, because the ground only ever got
+     lighter: dark ink on #FAF9F5 scores higher than the same ink on #F2ECDF,
+     never lower. The three derived text colors keep their AA passes with room
+     to spare (teal-text 4.65 -> 5.20, coral-text 4.62 -> 5.16, field-border
+     3.09 -> 3.45).
 
      `neutral-950` IS navy now. Body copy, major headings and every dark UI
      surface are the same locked navy, which is what the palette asks for.
@@ -288,12 +372,28 @@
      and desaturated enough to read as a near-black rather than as "blue".
      Do not retarget this ramp to teal or coral.
 
-     The ramp runs navy at the dark end to cream at the light end, so it is
-     literally an interpolation between the two locked ground colors. Measured
-     on cream: 950 12.46:1, 700 9.34:1, 600 6.53:1, 500 4.97:1. 400 and
-     lighter are decorative (rules, dividers, disabled) and must not carry
-     body text. */
-  --color-white: #fafaf8;
+     The ramp runs navy at the dark end to the page ground at the light end.
+     Its light end was re-cut on 2026-08-29 along with the bands: 50, 100 and
+     200 used to interpolate toward cream and were the tannest surfaces left on
+     the site (neutral-100 #EAE3D3 carried 23 points of chroma). They now
+     interpolate toward --color-band-1 at roughly their old lightness, so the
+     image wells and hairlines they draw stopped reading as oat. This is the
+     change that actually settles the /speaker complaint: the round portrait
+     well and the 16/9 photo well on that page are bg-neutral-100, and they sat
+     directly on the periwinkle strip and in the violet wash.
+
+     neutral-100 gained two points of lightness in the move rather than holding
+     exactly, because at its old value teal-text (4.28:1), coral-text (4.25:1)
+     and field-border (2.85:1) all failed on it. At #EDEAE2 they are 4.55:1,
+     4.52:1 and 3.03:1.
+
+     Measured on band-1: 950 13.92:1, 700 10.43:1, 600 7.30:1, 500 5.55:1. 400
+     and lighter are decorative (rules, dividers, disabled) and MUST NOT carry
+     body text: neutral-400 is 2.98:1 on band-1 and fails AA on every ground on
+     this site. Six call sites were spelling words in it and were moved to
+     neutral-500 on 2026-08-29. If you are reaching for neutral-400 for text,
+     you want neutral-500. */
+  --color-white: #faf9f5;
   --color-neutral-950: #1f2744;
   --color-neutral-900: #252d4b;
   --color-neutral-800: #2b3352;
@@ -302,9 +402,9 @@
   --color-neutral-500: #5c6480;
   --color-neutral-400: #8a91a8;
   --color-neutral-300: #b8b5b0;
-  --color-neutral-200: #d8d2c6;
-  --color-neutral-100: #eae3d3;
-  --color-neutral-50: #f0e9da;
+  --color-neutral-200: #d9d5cc;
+  --color-neutral-100: #edeae2;
+  --color-neutral-50: #f1eee7;
 
   /* ---------------------------------------------------------------------
      CTA FILLS
@@ -375,7 +475,11 @@
   --color-coach-accent-ink: var(--color-coral-ink);
   --color-coach-accent-text: var(--color-coral-text);
   --color-coach-surface-dark: var(--color-navy);
-  --color-coach-surface-soft: #eae3d3;
+  /* Tracks --color-neutral-100, which is where this value came from and where
+     it went on 2026-08-29. At its old #EAE3D3 the panel failed teal-text
+     (4.28:1), coral-text (4.25:1) and field-border (2.85:1); it clears all
+     three now at 4.55:1, 4.52:1 and 3.03:1. */
+  --color-coach-surface-soft: #edeae2;
 
   /* ---------------------------------------------------------------------
      PHOTO-DERIVED SECTION WASHES

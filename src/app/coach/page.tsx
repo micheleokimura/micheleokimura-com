@@ -322,7 +322,7 @@ export default function CoachingPage() {
               in tailwind.css. Two up at lg, stacked below.
 
               These are the only loud tiles on the page, and that is the point:
-              the 01/02 cards in the next section stay quiet cream so the two
+              the 01/02 cards in the next section stay quiet white so the two
               sections do not compete. */}
           <FadeInStagger faster className="mt-12 sm:mt-14">
             <ul role="list" className="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-8">
@@ -405,7 +405,7 @@ export default function CoachingPage() {
             <ul role="list" className="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-8">
               {STALLS.map((stall) => (
                 <FadeIn as="li" key={stall.number} className="flex">
-                  <div className="flex w-full flex-col rounded-3xl bg-[var(--color-cream)] p-7 ring-1 ring-[var(--color-navy-10)] sm:p-9">
+                  <div className="flex w-full flex-col rounded-3xl bg-[var(--color-panel)] p-7 ring-1 ring-[var(--color-navy-10)] sm:p-9">
                     <p
                       aria-hidden="true"
                       className="font-display text-3xl font-semibold tracking-tight text-[var(--color-coach-accent-text)]"

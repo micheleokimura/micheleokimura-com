@@ -552,7 +552,7 @@ const RESEARCH_ACCENT = 'var(--color-navy)'
  *
  * Deliberately heavier than the tile treatments above it. A partnership like
  * the ASU one is the credibility behind a curriculum rather than one more fact
- * about it, so it gets a cream marquee panel with a solid accent rule and the
+ * about it, so it gets a bright marquee panel with a solid accent rule and the
  * body copy at the sitewide 20px reading size, sat directly under the hero.
  *
  * Written to take a second partner (Foursquare, the Department of Education)
@@ -586,7 +586,7 @@ export function ResearchPartnership({
       <Container className={className}>
         <FadeIn>
           <div
-            className={`relative overflow-hidden rounded-3xl bg-[var(--color-cream)] ring-1 ring-[var(--color-navy-10)] ${
+            className={`relative overflow-hidden rounded-3xl bg-[var(--color-panel)] ring-1 ring-[var(--color-navy-10)] ${
               width === 'narrow' ? 'max-w-3xl' : ''
             }`}
           >

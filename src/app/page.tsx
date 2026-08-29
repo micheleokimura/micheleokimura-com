@@ -47,7 +47,8 @@ import { siteConfig } from '@/lib/site-config'
  *
  * Two rules hold it together. Neighbours never share a band, because a repeated
  * ground is exactly the seam that goes missing. And a CARD never takes a band:
- * tiles use --color-cream, which is warm and lifts off any of these neutrals,
+ * tiles use --color-panel, which is brighter than every band and so lifts off
+ * any of them,
  * whereas a band on a band would be a 5-point difference nobody can see.
  *
  * "Friends say" sits on band-1 between the quote (band-3) and the Method
@@ -136,7 +137,7 @@ const DOOR_ICONS: Record<Door['icon'], typeof Mic> = {
  */
 function TestimonialCard({ item }: { item: Testimonial }) {
   return (
-    <figure className="mx-3 flex w-[21rem] shrink-0 flex-col rounded-2xl bg-[var(--color-cream)] p-7 ring-1 ring-[var(--color-navy-10)] sm:w-[27rem] sm:p-8">
+    <figure className="mx-3 flex w-[21rem] shrink-0 flex-col rounded-2xl bg-[var(--color-panel)] p-7 ring-1 ring-[var(--color-navy-10)] sm:w-[27rem] sm:p-8">
       <blockquote className="flex-auto text-xl leading-9 text-neutral-800">
         &ldquo;{item.quote}&rdquo;
       </blockquote>
@@ -729,7 +730,7 @@ export default function HomePage() {
                 'A finished manuscript that will not sit still.',
               ].map((posture) => (
                 <FadeIn as="li" key={posture} className="flex">
-                  <p className="font-display flex w-full items-center justify-center rounded-2xl bg-[var(--color-cream)] p-8 text-center text-lg leading-7 font-medium text-balance text-neutral-800 ring-1 ring-[var(--color-navy-10)]">
+                  <p className="font-display flex w-full items-center justify-center rounded-2xl bg-[var(--color-panel)] p-8 text-center text-lg leading-7 font-medium text-balance text-neutral-800 ring-1 ring-[var(--color-navy-10)]">
                     {posture}
                   </p>
                 </FadeIn>

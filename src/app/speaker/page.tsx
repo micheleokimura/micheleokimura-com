@@ -488,7 +488,7 @@ export default function SpeakerPage() {
                   <span className="shrink-0 text-xl leading-9 text-neutral-500 sm:text-right">
                     {item.where}
                     {item.format && (
-                      <span className="mt-1 block text-sm tracking-wider text-neutral-400 uppercase">
+                      <span className="mt-1 block text-sm tracking-wider text-neutral-500 uppercase">
                         {item.format}
                       </span>
                     )}
@@ -513,7 +513,7 @@ export default function SpeakerPage() {
       >
         <Container>
           <FadeIn>
-            <div className="rounded-3xl bg-[var(--color-cream)] p-8 ring-1 ring-inset ring-[var(--color-navy-10)] sm:p-10">
+            <div className="rounded-3xl bg-[var(--color-panel)] p-8 ring-1 ring-inset ring-[var(--color-navy-10)] sm:p-10">
               <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
                 <div className="max-w-2xl">
                   <h2
@@ -540,7 +540,7 @@ export default function SpeakerPage() {
                     <span className="text-sm font-semibold text-neutral-500">
                       Download the Press Kit (PDF)
                     </span>
-                    <span className="text-xs font-medium tracking-wider text-neutral-400 uppercase">
+                    <span className="text-xs font-medium tracking-wider text-neutral-500 uppercase">
                       Coming soon
                     </span>
                   </div>
