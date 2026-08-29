@@ -319,7 +319,7 @@ export const FRIENDS_SAY_TOP: Testimonial[] = [
      * right quote for that context. Do not reconcile the two.
      */
     quote:
-      'Get ready to be inspired! He is the God of the Old Testament, and yet he is active now and speaks to his servants. Michele is one of those servant saints. It is unmistakable. What you hold before you is a roadmap of her journey of an intimate relationship with the Father. Explicit Movement is a book for all ages, but especially for the next generation.',
+      'Get ready to be inspired! He is the God of the Old Testament, and yet he is active now and speaks to his servants. Michele is one of those servant saints. It is unmistakable. What you hold before you is a roadmap of her journey of an intimate relationship with the Father. The Birth of Explicit Movement is a book for all ages, but especially for the next generation.',
     name: 'Pastor Kihāpiʻilani Pimental',
     title: 'Worker Supervisor, Foursquare Missions International',
     work: 'The Birth of Explicit Movement',
