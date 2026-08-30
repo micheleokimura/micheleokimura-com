@@ -17,8 +17,8 @@ Hale Kipa is a well established and well reputed Hawaiʻi nonprofit serving youn
 
 ## The Engagement
 
-Michele worked with Venus Rosete Medeiros on the girls' residential home. The residential program uses the Brave & Beautiful volumes as an empowerment resource for the girls in its care. Michele has also gone in and done small-group work with the girls directly, on dreaming big for their lives with brave purpose. Small groups are the right format for this room: a keynote would not reach girls who have learned to keep their distance from adults with microphones.
+Michele worked with Venus Rosete Medeiros and her team on the girls' residential home. The residential program uses the Brave & Beautiful volumes as an empowerment resource for the girls in its care. Michele has also come in to do small group work with the girls directly, on dreaming big for their lives with Brave Purpose.
 
 ## The Outcome
 
-Brave & Beautiful is in ongoing use inside the residential program rather than sitting on a shelf, and Michele's relationship with Hale Kipa continues.
+Brave & Beautiful remains in ongoing use inside the residential program, and Michele's relationship with Hale Kipa continues. Michele deeply honors and champions Hale Kipa's vision and community impact, and holds real respect for the work they do in the community.
