@@ -29,7 +29,7 @@ Our working relationship with the department was carefully built over the course
 
 ## The Outcome
 
-In the summer of 2026, after a thorough vetting process and collaboration with the DOE, the partnership yielded incredible results:
+In the summer of 2026, after a thorough vetting process and collaboration with the DOE, the partnership yielded positive results.
 
 **State Approval:** The team created a customized, 3-article Hawaiʻi version of Brave Together, which the DOE approved for use in secondary schools to meet the state's Sexual Violence Prevention Initiative mandate.
 
