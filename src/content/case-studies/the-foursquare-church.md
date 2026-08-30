@@ -25,6 +25,8 @@ The Foursquare Church is a global Pentecostal denomination, and Foursquare Missi
 
 **Missions Collaboration:** Within the missions arm, Michele's closest working relationship is with Kihāpiʻilani Pimental, Worker Supervisor for Foursquare Missions International. A Native Hawaiian leader with global reach who oversees FMI, Pastor Pimental was present for her sessions in Montana.
 
+Michele recently served as the mission team leader on a Foursquare trip to Hong Kong, where she designed most of the lessons, taught, and oversaw four days of English instruction at a Christian school partnered with Foursquare. The trip marked the very first time a Foursquare national region collaborated with an international region, fulfilling a vision that Foursquare's president, Randy Remington, has nurtured for about five years.
+
 **Curriculum Contributors:** Expanding the reach of the ministry, several Foursquare pastors have contributed articles to the Brave Series, including:
 
 - Senior Pastor and District Supervisor Sheldon Lacsina
