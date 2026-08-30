@@ -17,13 +17,11 @@ Island Pacific Academy (IPA) is an esteemed independent school located on Oʻahu
 
 ## The Engagement
 
-Michele and Gerald Teramae share a close friendship spanning over fifteen years, which has fostered numerous collaborations.
+Michele and Gerald Teramae share a close friendship spanning over 15 years, which has fostered numerous connections and opportunities.
 
 **Leadership Retreat Presentation:** A pivotal moment in this partnership occurred when Michele presented the Dream Big Journal to IPA's leadership team during their retreat.
 
-**Adult-First Approach:** Michele intentionally began the session by guiding the leaders to revisit their own personal dreams before asking them to engage their students in the same process.
-
-**Ongoing Collaboration:** Michele and Gerald meet periodically to envision future initiatives. Gerald has consistently supported Michele's work, opening doors and helping her cultivate strong connections with key community leaders.
+**Ongoing Collaboration:** Michele and Gerald collaborated to organize a series of Dream Big assemblies at Island Pacific Academy. Michele's dear friend and partner in many projects, Nancy Vuu, came to IPA to lead Dream Big assemblies for students from elementary through high school. Gerald has consistently supported Michele's work, opening doors and helping her cultivate strong connections with key community leaders. Michele has also met with several members of Gerald's leadership team to envision parenting workshops and support offerings for IPA families.
 
 **Curriculum Consideration:** Currently, IPA has samples of the Brave Series to consider implementing the curriculum for their own students.
 
@@ -34,3 +32,5 @@ Following the impactful leadership retreat, Gerald Teramae provided a formal end
 > "Michele was able to rekindle and inspire the need and desire to reignite and inspire our Leadership Team that it is never too late to become a 'dreamer' and make a positive impact and difference in the world."
 >
 > Gerald Teramae, Head of School, Island Pacific Academy
+
+Michele considers it a genuine honor and privilege to support Gerald and champion his vision. She holds deep respect for his leadership as a visionary in the education world, and for the genuine care he brings to both his students and staff.
