@@ -25,14 +25,12 @@ Our working relationship with the department was carefully built over the course
 
 **Leadership Support:** In December 2024, Phyllis and Michele presented the program to Superintendent Hayashi, who shared their vision of making it accessible to secondary schools statewide.
 
-**Statewide Outreach:** Over the following year, the team finalized the Coed version, while Michele presented the Brave Series to all Hawaiʻi middle school principals and traveled to Maui to share resources with DOE complex counselors.
+**Statewide Outreach:** Over the following year, the team finalized the coed version of the curriculum. Michele and Phyllis Unebasami went on to present the Brave Series at a statewide meeting for Hawaiʻi middle school principals, and later at a Maui meeting for complex counselors.
 
 ## The Outcome
 
 In the summer of 2026, after a thorough vetting process and collaboration with the DOE, the partnership yielded incredible results:
 
 **State Approval:** The team created a customized, 3-article Hawaiʻi version of Brave Together, which the DOE approved for use in secondary schools to meet the state's Sexual Violence Prevention Initiative mandate.
-
-**Positive Reception:** The statewide presentation to principals generated an overwhelmingly positive reaction.
 
 **Resource Distribution:** The complex leader overseeing the Maui meeting purchased Dream Big Journals for every counselor in attendance, providing them with immediate resources and officially solidifying our ongoing working relationship.
