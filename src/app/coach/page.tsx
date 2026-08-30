@@ -100,13 +100,14 @@ import { pageMetadata } from '@/lib/schema'
  * first pass had it backwards, so the hero and the TSS card traded values:
  *   hero  #1F5F5B  deep teal, the page's bold anchor (was #B8D4CE)
  *   TSS   #B0CFD0  soft teal, the accent (was #1F5F5B)
- *   UAV   #1F2E4A  deep midnight navy, untouched in the swap
+ *   UAV   #1F2E4A  deep midnight navy, untouched in the swap (now #3E4A7A)
  *
  * #B0CFD0 is the old hero mint shifted toward blue, hue 167 -> 182, at
  * Michele's direction. It sheds the green cast and still lands within 6
  * degrees of the hero's 176, so hero and TSS stay one family. The alternative
  * on the table, #ADCFD5, was passed over: hue 189 drifts toward the UAV navy
- * and the teal pair stops reading as a pair.
+ * and the teal pair stops reading as a pair. (That navy is periwinkle now, so
+ * the collision it named is gone; the choice still stands on its own terms.)
  *
  * THE HERO WARMED TO #38564D later still on 2026-08-29, and it is the ONLY
  * value on this page that moved. The three role heroes are meant to read as
@@ -141,11 +142,12 @@ import { pageMetadata } from '@/lib/schema'
  * and 4.53:1 at the peak, an AA surface clearing the bar by 0.03. There is no
  * headroom left in this hero. Full workings in tailwind.css.
  *
- * TSS and UAV DID NOT MOVE in any pass, by Michele's instruction. The
- * hero/TSS pairing went 6 degrees apart, then 20, then 3, then 4, and is now
- * 6. The box never
- * moved for any of it; the hero did, which is the way round the note here has
- * said it should be from the start.
+ * TSS and UAV DID NOT MOVE in any of the hero passes, by Michele's
+ * instruction. The hero/TSS pairing went 6 degrees apart, then 20, then 3,
+ * then 4, and is now 6. The box never moved for any of it; the hero did, which
+ * is the way round the note here has said it should be from the start. TSS is
+ * still untouched. UAV moved once, later, and for a different reason: see the
+ * PALETTE COHESION note below.
  *
  * The ink flipped with each ground. The hero was navy on light and is now
  * white and cream on dark; the TSS card was white and cream on dark and is now
@@ -155,18 +157,30 @@ import { pageMetadata } from '@/lib/schema'
  * The "Join the waitlist" CTA stays warm on purpose. It is the one warm accent
  * left on the page and it is what makes the CTA carry against the cool ground.
  *
- * THE OLD RULE HERE READ "no navy panel appears anywhere below the header:
- * dark navy is the footer's, and the footer's only." The UAV card is now navy,
- * so that rule no longer holds as written. It is a deliberate exception rather
- * than an oversight, and it survives the reason the rule existed: the UAV card
- * is #1F2E4A against the footer's #1F2744, close relatives, but it sits
- * mid-page inside band-1 with the stalls, the deliverables panel and the whole
- * FAQ between it and the footer, so the two never meet and neither can be read
- * as the other. Do not add a second navy panel lower down without re-checking
- * that separation.
+ * PALETTE COHESION, 2026-08-29, and the only value on this page that this
+ * pass touches. The site's four heroes had settled as Speaker warm plum, Coach
+ * blue-teal, About periwinkle, Author marigold. The UAV card belonged to none
+ * of them: it was a cold navy with no relative anywhere on the site except the
+ * footer. It moved to deep periwinkle #3E4A7A, which sits in the same family
+ * as the /about bands' #56608E (hue 228 against 229), seated deeper because
+ * this card carries light ink and those bands carry dark. /coach and /about
+ * now share a colour thread. The gradient's a stop moved with it, #0E1728 ->
+ * #2B365E, so the tile reads periwinkle at both ends.
  *
- * The saturated moment on the page is now the hero itself, with the UAV card
- * as the second dark note lower down: see the .coach-card block in
+ * NOTHING ELSE ON THIS PAGE MOVED in that pass. The hero teal, the TSS box and
+ * the "Not Just Books" panel were all explicitly out of scope.
+ *
+ * THE OLD RULE HERE READ "no navy panel appears anywhere below the header:
+ * dark navy is the footer's, and the footer's only." That rule was already
+ * broken when this card went navy, and the periwinkle move repairs most of the
+ * damage: the card is no longer a navy at all, and it is a good deal lighter
+ * than the footer's #1F2744. The separation argument still holds anyway, and
+ * is worth keeping: the card sits mid-page inside band-1 with the stalls, the
+ * deliverables panel and the whole FAQ between it and the footer, so the two
+ * never meet. Do not add a dark panel lower down without re-checking that.
+ *
+ * The saturated moment on the page is still the hero itself, with the UAV
+ * card as the second dark note lower down: see the .coach-card block in
  * tailwind.css.
  *
  * ACRONYMS, set by Michele 2026-08-27 and sitewide.
@@ -283,28 +297,56 @@ const PILLARS: Pillar[] = [
       'Before you draft a single chapter, Michele will build your Unique Author Voice (UAV): a 46-dimensional read of how you use grammar, logic, and rhetoric, rooted in the classical trivium. Every page you and she write gets measured against that profile. Your book sounds like you on your best day.',
     icon: FingerprintPattern,
     style: {
-      // Deep midnight navy, with the palette's gold banked into the far corner
+      // Deep periwinkle, with the palette's gold banked into the far corner
       // as pure decoration. Diagonal hatching, so it reads as a hand rather
       // than an echo of the rings next to it.
       //
-      // Recoloured from coral to #1F2E4A on 2026-08-29. Navy is the "senior
+      // Recoloured from coral to midnight navy #1F2E4A on 2026-08-29, then
+      // LEFT ALONE in the hero/TSS swap later that day. Navy was the "senior
       // strategist" half of the pairing Michele and Brett asked /coach to
-      // have, and gold on navy is what makes it read as considered rather
-      // than cold. The glow moved to a mid blue with it; a coral drop shadow
-      // under a navy tile read as a stray warm halo.
+      // have, and gold on navy is what kept it from reading cold.
       //
-      // LEFT ALONE in the swap later that day. Michele asked for the hero and
-      // TSS to trade colours and said nothing about this card, so it keeps
-      // every value it had, including its white and cream ink, which is what
-      // the .coach-card defaults now carry. The result is that the pair is no
-      // longer symmetrical: TSS is light and this is dark. That is a real
-      // consequence of the instruction rather than an oversight, and it is
-      // hers to call.
-      '--coach-card-a': '#0e1728',
-      '--coach-card-b': '#1f2e4a',
-      '--coach-card-glow': 'rgba(58, 90, 140, 0.45)',
+      // MOVED TO PERIWINKLE #3E4A7A on 2026-08-29's palette-cohesion pass.
+      // The four heroes had settled as Speaker warm plum, Coach blue-teal,
+      // About periwinkle, Author marigold, and this box was the one saturated
+      // panel on the site that belonged to none of them: a cold navy with no
+      // relative anywhere. #3E4A7A is hue 228, saturation 0.33, against the
+      // /about bands' #56608E at hue 229, saturation 0.25. Same family, this
+      // one seated deeper because it carries light ink and they carry dark.
+      // That is the point of the move: /coach and /about now share a colour
+      // thread, and the box stops being an orphan.
+      //
+      // THE a STOP MOVED WITH IT, #0E1728 -> #2B365E, and it had to. a is the
+      // gradient's top-left start and b its bottom-right end, so leaving a at
+      // a near-black navy would have made the tile read cold at the top and
+      // periwinkle only at the bottom, which is the opposite of the
+      // instruction. #2B365E holds b's hue at 227 and its own slightly higher
+      // saturation, the same way #0E1728 sat against #1F2E4A, and keeps the
+      // old ramp: HSL lightness 0.269 -> 0.361 here against 0.106 -> 0.206
+      // before, a span of 0.09 either way.
+      //
+      // IT ALSO CLEARS THE FOOTER. The old worry on this card was that navy
+      // #1F2E4A sat close to the footer's #1F2744; the note below still
+      // applies but the two are now further apart, not closer. b is a
+      // periwinkle a third lighter than the footer and a stop lighter again
+      // than the old a.
+      //
+      // THE PAIR IS STILL NOT SYMMETRICAL: TSS is light and this is dark.
+      // That is the swap's own consequence rather than an oversight.
+      '--coach-card-a': '#2b365e',
+      '--coach-card-b': '#3e4a7a',
+      '--coach-card-glow': 'rgba(78, 92, 150, 0.45)',
       '--coach-card-pattern':
         'repeating-linear-gradient(115deg, rgba(255,255,255,0.06) 0 2px, rgba(255,255,255,0) 2px 16px), radial-gradient(58% 52% at 86% 94%, rgba(233,174,63,0.16) 0%, rgba(233,174,63,0) 64%)',
+      // Body copy goes to FULL cream here, up from the .coach-card default of
+      // cream at 85%. Lifting the ground from #1F2E4A to #3E4A7A cost this
+      // tile about five points of contrast, and 85% cream lands at 4.06:1 in
+      // the bottom-right corner where the gold tint and a white hatch stripe
+      // compound, under the 4.5:1 AA floor for normal text. Full cream puts
+      // that same worst point at 4.91:1. The step down from the title is
+      // carried by size and weight, which were already carrying most of it.
+      // Numbers in the .coach-card block in tailwind.css.
+      '--coach-card-body': 'var(--color-cream)',
     } as React.CSSProperties,
   },
 ]
