@@ -447,9 +447,9 @@
      the coloured role tiles on the home page, the coach hero, the UAV card.
      Each of those gained a little when the ground got lighter, because the ink
      got lighter with it. The coach hero no longer uses this ink at
-     all: it went #1F5F5B, #38564D, #275958, back to Michele's #2F6C6A and on
-     to #32747E, where this token measures 4.35:1 and fails, so that hero runs
-     on pure #FFFFFF instead. On the violet banner 14.98:1 against 14.82:1; on the UAV
+     all: it went #1F5F5B, #38564D, #275958, back to Michele's #2F6C6A, on to
+     #32747E and now to #337681, where this token measures 4.42:1 at the 6%
+     radial peak and fails, so that hero runs on pure #FFFFFF instead. On the violet banner 14.98:1 against 14.82:1; on the UAV
      card 13.01:1 against 12.88:1. The marigold Author hero is the one place
      this ink does not clear AA, and it did not before either; see the AUTHOR
      HERO WASH block above for the numbers and for Michele's call on them.
@@ -730,18 +730,43 @@
      with the family the other pages settled into: Speaker's plum #624973,
      Coaching's blue-teal, and Author's marigold.
 
-     What the move costs. Dropping the saturation here also lifts the value a
-     little, so relative luminance goes from 0.1162 to 0.1230 and every ink
-     on the band gives up about two tenths of a point of contrast. Everything
-     the page actually renders still clears WCAG 2.2 AA. Measured on the flat
-     field, with the #4F5C99 readings in brackets so the cost is visible:
-       eyebrow --color-about-slate-ink #F0DFC8   4.65:1   (4.84)
-       banner headline cream #F2ECDF             5.16:1   (5.37)
-       panel headline text-white #FCFAF6         5.82:1   (6.06)
-       panel body copy, white at 95 percent      5.44:1   (5.65)
-       panel dl labels, white at 85 percent      4.74:1   (4.90)
-       panel email link text-white #FCFAF6       5.82:1   (6.06)
-       pure white #FFFFFF, reference only        6.07:1   (6.32)
+     LIFTED #56608E -> #576290 on 2026-08-29, the same pass that lifted the
+     /coach hero, and both bands moved by the SAME +3.9 percent of relative
+     luminance so the two pages stay siblings. Michele asked for both grounds
+     "very, very little" lighter. Hue and saturation are held: 229.3 -> 228.4
+     and 24.6 -> 24.7, so this is a value move only.
+
+     WHY IT IS 3.9 PERCENT AND NOT THE 8 PERCENT THAT WAS ASKED FOR. The
+     request came in as #616BA0, described as about 8 percent brighter. Read
+     as HSL lightness that is roughly right, 44.7 -> 50.4, but HSL lightness
+     is not what contrast is computed from. In relative luminance #616BA0 is
+     0.1559 against 0.1230, a +27 percent jump, and it takes the eyebrow sand
+     to 3.91:1 and the panel dl labels to 4.06:1. Both fail AA on ink this
+     page renders. The pullback value offered alongside it, #5D67A0, fails
+     the same two at 4.11:1 and 4.24:1. This band has almost no headroom: the
+     sand eyebrow caps the ground at 0.1288 of luminance, which is +4.8
+     percent, and #576290 sits just under that at +3.9 with a little margin
+     left. Going further means giving up the sand eyebrow for a near-white,
+     because on a ground this light nothing with warmth left in it clears
+     4.5:1. Michele's brief kept the ink white and cream, so the ground is
+     what gave way.
+
+     What the move costs. Every ink loses about a tenth of a point and
+     everything the page renders still clears WCAG 2.2 AA. Measured on the
+     flat field, with the #56608E readings in brackets:
+       eyebrow --color-about-slate-ink #F0DFC8   4.53:1   (4.65)
+       banner headline cream #F2ECDF             5.02:1   (5.16)
+       panel headline text-white #FCFAF6         5.67:1   (5.82)
+       panel body copy, white at 95 percent      5.29:1   (5.44)
+       panel dl labels, white at 85 percent      4.62:1   (4.74)
+       panel email link text-white #FCFAF6       5.67:1   (5.82)
+       pure white #FFFFFF, reference only        5.91:1   (6.07)
+
+     The two tightest are the eyebrow at 4.53 and the dl labels at 4.62. Both
+     are floors, both are load bearing, and neither has room for another
+     lift. Earlier history, kept because the reasoning still stands: dropping
+     the saturation from #4F5C99 to #56608E moved relative luminance 0.1162
+     to 0.1230 and cost every ink about two tenths of a point.
      Nothing clears AAA, and nothing has since the slate went. Note that this site remaps the
      Tailwind neutrals to warm creams, so measure against the painted value
      and never against the palette name: text-white lands at #FCFAF6, and
@@ -749,19 +774,20 @@
      panel keeps the neutral-300 body copy off for that reason.
 
      The one ink that does NOT clear AA on this ground is a banner subtitle in
-     cream at 85 percent, which lands at 4.24:1 against 4.38:1 on the
-     cornflower. /about passes no subtitle to BannerHero, and has not since
-     2026-08-23, so nothing renders it. If a subtitle is ever reinstated on
-     this page it has to step up to full cream, which holds 5.16:1.
+     cream at 85 percent, which lands at 4.13:1, against 4.24:1 on #56608E and
+     4.38:1 on the cornflower. /about passes no subtitle to BannerHero, and
+     has not since 2026-08-23, so nothing renders it. If a subtitle is ever
+     reinstated on this page it has to step up to full cream, which holds
+     5.02:1.
 
-     Two neighbours were measured alongside this one, as the warmer and the
-     quieter way to miss. #5A6390 is brighter by a hair and drops the eyebrow
-     sand to 4.44:1, which fails AA on ink this page does render, so it is
-     ruled out on contrast whatever it looks like. #585E88 is the quieter
-     direction and stays legal, eyebrow 4.77:1 and dl labels 4.86:1, so that
-     is the value to reach for if #56608E ever reads vibrant again. #56608E
-     is the one that grounds the cornflower while keeping every rendered
-     layer above AA.
+     Neighbours measured across the passes, so the walls on both sides are
+     known. Brighter: #5A6390 drops the eyebrow sand to 4.44:1 and #616BA0 to
+     3.91:1, both failing AA on ink this page renders, and #586291 at +4.5
+     percent is the absolute ceiling at 4.51:1 with nothing to spare. Quieter:
+     #585E88 stays legal at eyebrow 4.77:1 and dl labels 4.86:1, and is the
+     value to reach for if this band ever reads vibrant again. #576290 is the
+     brightest periwinkle here that still keeps every rendered layer above AA
+     with a usable margin.
 
      Flat, with no glow and no gradient, on both bands. .surface-teal-banner
      gradients its top stop darker to give the full-bleed navy sections depth,
@@ -794,7 +820,7 @@
 
      Re-measure on the deployed page, not from these token values, if this
      colour is ever relit. */
-  --color-about-slate: #56608e;
+  --color-about-slate: #576290;
   --color-about-slate-ink: #f0dfc8;
 }
 
@@ -1138,11 +1164,13 @@ html {
    alternative and was passed over: at hue 189 it drifts toward the navy of the
    UAV card and the teal pair stops reading as a pair.
 
-   HERO. The ground is #32747E, lifted by a white radial in the same ellipse
+   HERO. The ground is #337681, lifted by a white radial in the same ellipse
    the old wash used, so the hero keeps its light-from-the-left composition
    instead of reading as a flat slab. The radial peak went 38% white to 12% to
-   8%: on a dark ground white LOWERS the contrast under the text, so the peak
-   is the worst case and every ratio below is a floor rather than an average.
+   8% to 6%: on a dark ground white LOWERS the contrast under the text, so the
+   peak is the worst case and every ratio below is a floor rather than an
+   average. The paragraphs below are the #32747E pass at its own 8% peak; the
+   LIFTED note further down carries the current numbers.
    THAT 8% IS NOW AT ITS CEILING. The hero ink is pure white and reads 4.53:1
    at the peak against a 4.5 bar; 9% is 4.44:1, which fails. Do not raise it.
    The 50% stop moved with it, 4.5% to 3%, so the falloff keeps its shape and
@@ -1217,6 +1245,35 @@ html {
    brightening of the ground has to come with a deeper ink, which pure white
    cannot supply.
 
+   LIFTED #32747E -> #337681 on 2026-08-29, and THE RADIAL PAID FOR IT AGAIN,
+   8 percent down to 6. Michele asked for this hero and the /about bands to
+   come up "very, very little" together, so both moved by the same +3.9
+   percent of relative luminance and the two pages stay siblings. Hue and
+   saturation are held: 187.9 -> 188.5 and 43.2 -> 43.3, a value move only.
+   The 50 percent stop went 3 percent to 2.25 so the falloff keeps its shape,
+   which is the same bookkeeping the 12 -> 8 pass did.
+
+     #FFFFFF pure white       5.19:1 flat, 4.61:1 at the 6% peak  (5.34, 4.53)
+
+   The peak reading actually IMPROVES, 4.53 to 4.61, because dimming the
+   radial buys back more than the ground gives up. That was the point: the
+   note above says there is no headroom in this hero, and it was right, so
+   the lift had to come out of the wash rather than out of the ink.
+
+   WHAT COULD NOT SHIP. The request came in as #3E828C, described as about 8
+   percent brighter. As HSL lightness that reads right, 34.5 -> 39.6, but in
+   relative luminance it is +28.7 percent, and pure white on it measures
+   4.40:1 FLAT. That is below the 4.5 bar with the radial deleted entirely,
+   so no amount of dimming the wash rescues it and the remedy offered with
+   the request does not reach. The pullback value #3B7F88 is 4.59:1 flat and
+   4.40:1 at even a 2 percent peak, so it ships only with no radial at all,
+   which costs the light-from-the-left composition this hero is built on. The
+   ink cannot absorb either one: it is already pure #FFFFFF. Ceilings, so the
+   next pass does not have to rediscover them: at a 6 percent peak the ground
+   caps at #337782 (+5.7 percent), at 5 percent it caps at #347984 (+9.5),
+   and at 4 percent at #357B86 (+13.4). Every step past those trades away
+   more of the wash.
+
    THE TSS BOX DOES NOT MOVE and the teal pair is still tight. #B0CFD0 sits at
    hue 182, 6 degrees off this hero's 188, where it was 4 degrees off #2F6C6A,
    3 degrees off the deep
@@ -1240,10 +1297,11 @@ html {
    `text-[var(--color-cta-ink)]` and is unaffected.
 
    THE CTA GOT WORSE HERE and it is the price of the lighter ground. As a
-   shape the terracotta reads 1.15:1 flat, down from 1.31:1 on #2F6C6A and
-   1.71:1 on the deep teal, and at the radial peak it is 1.02:1: #C84C33 and
-   the lifted ground have almost the same luminance there, so the button edge
-   all but disappears and only the hue separates it. The button sits below the ellipse centre so it does not see
+   shape the terracotta reads 1.12:1 flat, down from 1.15:1 on #32747E, 1.31:1
+   on #2F6C6A and 1.71:1 on the deep teal, and at the 6% radial peak it is
+   1.00:1: #C84C33 and the lifted ground have the same luminance there to two
+   decimals, so the button edge disappears entirely and only the hue separates
+   it. The button sits below the ellipse centre so it does not see
    the full peak, but the true figure is somewhere in that range and every
    part of it is worse than before. Michele's instruction was to change the
    ground and the subtitle only, so this is reported rather than fixed. The
@@ -1271,14 +1329,14 @@ html {
    It sits on the #FCFAF6 ground inside a navy-10 hairline ring and reads
    1.59:1 against it, so the panel still separates. */
 .surface-coach-hero {
-  /* Michele's value, and pure #FFFFFF ink over an 8% radial is what lets it
-     ship. See above. */
-  background-color: #32747e;
+  /* Michele's value, and pure #FFFFFF ink over a 6% radial is what lets it
+     ship. The radial is what paid for the lift to #337681. See above. */
+  background-color: #337681;
   color: #ffffff;
   background-image: radial-gradient(
     ellipse 90% 140% at 20% 50%,
-    rgba(255, 255, 255, 0.08) 0%,
-    rgba(255, 255, 255, 0.03) 50%,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.0225) 50%,
     rgba(255, 255, 255, 0) 78%
   );
 }

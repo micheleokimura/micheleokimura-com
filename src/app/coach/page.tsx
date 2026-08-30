@@ -162,7 +162,7 @@ import { pageMetadata } from '@/lib/schema'
  * blue-teal, About periwinkle, Author marigold. The UAV card belonged to none
  * of them: it was a cold navy with no relative anywhere on the site except the
  * footer. It moved to deep periwinkle #3E4A7A, which sits in the same family
- * as the /about bands' #56608E (hue 228 against 229), seated deeper because
+ * as the /about bands' #576290 (hue 228 against 228), seated deeper because
  * this card carries light ink and those bands carry dark. /coach and /about
  * now share a colour thread. The gradient's a stop moved with it, #0E1728 ->
  * #2B365E, so the tile reads periwinkle at both ends.
@@ -311,7 +311,7 @@ const PILLARS: Pillar[] = [
       // About periwinkle, Author marigold, and this box was the one saturated
       // panel on the site that belonged to none of them: a cold navy with no
       // relative anywhere. #3E4A7A is hue 228, saturation 0.33, against the
-      // /about bands' #56608E at hue 229, saturation 0.25. Same family, this
+      // /about bands' #576290 at hue 228, saturation 0.25. Same family, this
       // one seated deeper because it carries light ink and they carry dark.
       // That is the point of the move: /coach and /about now share a colour
       // thread, and the box stops being an orphan.
@@ -437,25 +437,29 @@ export default function CoachingPage() {
           swap this for a centred layout or a bare max-w div; either one breaks
           that alignment.
 
-          Ground is `.surface-coach-hero`, Michele's blue-teal #32747E as of
-          the fourth pass on 2026-08-29, NOT the sitewide navy banner. It was a
+          Ground is `.surface-coach-hero`, Michele's blue-teal #337681 as of
+          the fifth pass on 2026-08-29, NOT the sitewide navy banner. It was a
           soft teal for a few hours before that, then a deeper #275958, then
-          her #2F6C6A; she read that one as still a little green and a touch
-          dark, so this pass took it further toward blue and lifted it. The
-          contrast fix moved onto the radial, which is now 8% rather than 12%.
+          her #2F6C6A, then #32747E; she read that one as still a little green
+          and a touch dark, so the fourth pass took it further toward blue and
+          the fifth lifted it again, in step with the /about bands so the two
+          pages move together. The contrast fix moved onto the radial both
+          times, which is now 6% rather than 8% rather than 12%.
 
           THE INK IS PURE #FFFFFF AND IT IS NOT SET HERE. It is a single
           `color` declaration on `.surface-coach-hero` in tailwind.css, and
           the eyebrow, the H1 and the subtitle all inherit it. That is why
           none of them carries a text- utility. Do not add one back reaching
           for --color-white or --color-cream: on this lighter ground the token
-          white is 4.43:1 at the radial peak and cream is 3.92:1, both under
+          white is 4.42:1 at the 6% radial peak and cream is 3.91:1, both under
           AA, and only pure white clears it at 4.61:1. The CTA sets its own
           ink and is unaffected.
 
           See tailwind.css for every measurement, including the weakest number
           on the page, which got weaker again in this pass: the terracotta CTA
-          is 1.15:1 as a shape flat and 1.02:1 at the radial peak. */}
+          is 1.12:1 as a shape flat and 1.00:1 at the radial peak, where its
+          luminance and the lifted ground's are the same to two decimals and
+          only hue separates the button from its field. */}
       <section
         aria-label="The Brave Purpose Author Method"
         className="surface-coach-hero relative isolate w-full overflow-hidden py-14 sm:py-16 lg:py-20"

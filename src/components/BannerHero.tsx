@@ -69,8 +69,11 @@ const EYEBROW_CLASS = {
  * #4F5C99, a cornflower periwinkle in the direction of a blue hydrangea,
  * which she read as a touch too vibrant and digital; and it settled at
  * #56608E, the same hue with the saturation pulled back so the band sits
- * earthier. The token kept its `slate` name; see the block in tailwind.css
- * for why, and for the full re-measured contrast table.
+ * earthier. It was then lifted a little to #576290, in step with the /coach
+ * hero so the two pages stay siblings. The token kept its `slate` name; see
+ * the block in tailwind.css for why, and for the full re-measured contrast
+ * table. That block is also where the ceiling lives: the sand eyebrow caps
+ * this ground, and it is the reason the band cannot go brighter.
  *
  * The two violets take the pale lavender eyebrow and the plum does NOT: on
  * the plum that lavender measures 4.48:1 at the lightest pixel of the
