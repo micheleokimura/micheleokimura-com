@@ -477,8 +477,10 @@ export default function AuthorPage() {
                       --color-brand-terracotta-ink #B8431F under the old blush
                       wash, went navy when the wash went marigold, and is white
                       now. READ THE CONTRAST NOTE ON .surface-author-wash BEFORE
-                      TOUCHING IT AGAIN: white does not clear AA on this ground
-                      at any size, and the fix is the marigold, not the ink. */}
+                      TOUCHING IT AGAIN: white still does not clear AA on this
+                      ground at any size, even after the marigold deepened to
+                      #DA8B48/#D07836 on 2026-08-29, and the fix is a deeper
+                      marigold rather than a different ink. */}
                   <span className="font-display block text-xs font-semibold tracking-[0.22em] text-[var(--color-white)] uppercase sm:text-sm">
                     Author
                   </span>
@@ -492,9 +494,10 @@ export default function AuthorPage() {
                     --color-white, the same ink as the H1 above it, and this is
                     the ONE place the Author hero departs from Coach. Coach
                     steps its subtitle down to --color-cream so the H1 stays
-                    above it; cream on this marigold measures 1.89:1 against
-                    2.11:1 for white, so borrowing that step would make the
-                    weakest number on the page weaker still and buy nothing.
+                    above it; cream on this marigold measures 2.30:1 against
+                    2.59:1 for white at the hero's worst case, so borrowing that
+                    step would make the weakest number on the page weaker still
+                    and buy nothing.
                     Size and weight carry the step down from the H1 instead,
                     which is what this subhead already did when it was navy. */}
                 <p className="font-display mt-4 max-w-xl text-lg leading-7 font-medium text-[var(--color-white)] sm:text-xl sm:leading-8">
@@ -713,10 +716,12 @@ export default function AuthorPage() {
                     setting already reads as a quote.
 
                     WHITE, matching the Author hero, since the ground under it
-                    became the hero's marigold on 2026-08-29. It measures
-                    2.58:1 and does not meet AA; read the note on
-                    .surface-author-quote before touching the ink, because the
-                    fix is the ground rather than the type. */}
+                    became the hero's marigold on 2026-08-29. It measures 3.14:1
+                    on the deepened marigold #D07836, which clears the 3:1
+                    large-text floor this blockquote needs; the attribution
+                    below it is small caps and still falls short. Read the note
+                    on .surface-author-quote before touching the ink, because
+                    the fix is the ground rather than the type. */}
                 <blockquote className="font-display mx-auto max-w-[22ch] text-[1.5rem] leading-[1.25] font-medium tracking-tight text-balance text-[var(--color-white)] sm:max-w-[26ch] sm:text-[1.875rem] sm:leading-[1.22] lg:mx-0 lg:max-w-[30ch] lg:text-[2.25rem] lg:leading-[1.2]">
                   My heart is to help people live in the fullness of who they
                   were created to be with brave purpose.
