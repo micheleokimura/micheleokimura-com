@@ -321,6 +321,7 @@ export default function HomePage() {
           muted
           loop
           playsInline
+          preload="auto"
           poster="/team/michele-hero-canva.jpg"
           className="absolute inset-0 h-full w-full object-cover object-center"
           aria-hidden="true"
