@@ -5,7 +5,7 @@ engagement-type: curriculum-approval
 ready-to-publish: true
 nda-flagged: false
 endorsements-pending: false
-hero-headline: Two years, a new co-ed edition, and statewide approval
+hero-headline: Two years, a coed edition, and the Brave Together Hawaiʻi curriculum for secondary schools
 completion-date: 2026-06
 ---
 
