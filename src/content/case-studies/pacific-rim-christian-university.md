@@ -19,7 +19,7 @@ Pacific Rim Christian University is a Christian university located in Honolulu, 
 
 Michele's collaboration with Pacific Rim goes much deeper than a standard speaking relationship:
 
-**University Courses:** Over the course of two semesters, she taught two full university courses on Explicit Movement. This placed the field material utilized by her nonprofit directly into the hands of university students within a formal academic setting.
+**University Courses:** Over the course of two semesters, she taught two full university courses on Explicit Movement alongside team member Marion Logan. This placed the field material utilized by her nonprofit directly into the hands of university students within a formal academic setting.
 
 **Chapel Speaking:** She has been a featured speaker at the university's chapels, bringing her core message of dreaming big and living with brave purpose to the broader student body.
 
