@@ -17,7 +17,7 @@ Hale Kipa is a well established and well reputed Hawaiʻi nonprofit serving youn
 
 ## The Engagement
 
-Michele worked with Venus Rosete Medeiros and her team on the girls' residential home. The residential program uses the Brave & Beautiful volumes as an empowerment resource for the girls in its care. Kaui Burgess, who works with the girls on confidence and public speaking, invited Michele to speak in one of her sessions on dreaming big for their lives with Brave Purpose.
+Michele worked with Venus Rosete Medeiros and her team in implementing the Brave & Beautiful volumes as an empowerment resource for the girls in their care. Kaui Burgess, who works with the girls on confidence and public speaking, invited Michele to speak in one of her sessions on dreaming big for their lives with Brave Purpose.
 
 ## The Outcome
 
