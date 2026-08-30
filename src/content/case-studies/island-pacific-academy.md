@@ -21,7 +21,7 @@ Michele and Gerald Teramae share a close friendship spanning over 15 years, whic
 
 **Leadership Retreat Presentation:** A pivotal moment in this partnership occurred when Michele presented the Dream Big Journal to IPA's leadership team during their retreat.
 
-**Ongoing Collaboration:** Michele and Gerald collaborated to organize a series of Dream Big assemblies at Island Pacific Academy. Michele's dear friend and partner in many projects, Nancy Vuu, came to IPA to lead Dream Big assemblies for students from elementary through high school. Gerald has consistently supported Michele's work, opening doors and helping her cultivate strong connections with key community leaders. Michele has also met with several members of Gerald's leadership team to envision parenting workshops and support offerings for IPA families.
+**Ongoing Collaboration:** Michele and Gerald collaborated to organize a series of Dream Big assemblies at Island Pacific Academy. Michele's dear friend and partner in many projects, Nancy Vuu, came to IPA to lead Dream Big assemblies for students from elementary through high school. Gerald has consistently supported Michele's work, opening doors and helping her cultivate strong connections with key community leaders. Michele has also met with a few of Gerald's leadership team to envision parenting workshops and support offerings for IPA families.
 
 **Curriculum Consideration:** Currently, IPA has samples of the Brave Series to consider implementing the curriculum for their own students.
 
