@@ -1293,8 +1293,18 @@ html {
    The colour is declared ONCE, on `.surface-coach-hero`, and inherited. The
    three text elements carry no text- utility of their own. This class has
    exactly one caller, the /coach hero section, so the inheritance cannot
-   reach anything else. The CTA inside it sets its own
-   `text-[var(--color-cta-ink)]` and is unaffected.
+   reach anything else.
+
+   THERE IS NO CTA IN THIS HERO ANY MORE, as of 2026-08-29. Michele asked for
+   the /coach top banner to be text only, matching /speaker, /author and
+   /about, and the "Join the waitlist" button moved to a full-bleed
+   `.surface-coach-soft` band at the foot of the page. So the block below is
+   now HISTORY rather than a live condition: it is the record of why the
+   button could not stay, and the 1.12:1 it describes is not on the page. On
+   its new ground the same button reads 2.80:1 flat, which is still under 3:1
+   and is the shortfall `.surface-coach-soft` already carried for the "Get in
+   touch" button. If a button is ever put back in this hero, every number
+   below applies again unchanged.
 
    THE CTA GOT WORSE HERE and it is the price of the lighter ground. As a
    shape the terracotta reads 1.12:1 flat, down from 1.15:1 on #32747E, 1.31:1
@@ -1315,8 +1325,24 @@ html {
    because fixing it means either cooling the CTA or restyling the sitewide
    button.
 
-   SOFT. `.surface-coach-soft` is the "Not just books" panel near the foot of
-   the page. It used to share `.surface-coach-hero`, because Michele asked on
+   SOFT. `.surface-coach-soft` has TWO callers on /coach as of 2026-08-29: the
+   "Not just books" panel near the foot of the page, and the full-bleed
+   closing CTA band directly under it, which is where the hero's "Join the
+   waitlist" button went. The repetition is deliberate, because every band
+   token on /coach resolves to the same #FCFAF6 and a cream closing band would
+   not read as a band at all. The two are told apart by shape: a rounded,
+   ringed card inset in cream, then a full-bleed band under it.
+
+   THE CLOSING BAND CARRIES THE TERRACOTTA CTA at 2.80:1 as a shape flat, and
+   about 3.4:1 where the radial below lifts the ground toward white. Flat is
+   the number that counts and it is under the 3:1 WCAG 1.4.11 asks of a
+   control boundary. It is not a new shortfall: the "Get in touch" button has
+   sat on this exact ground at this exact ratio all along, and the button came
+   here from 1.12:1 on the hero, so the move is a gain of more than a point.
+   Closing it for real means cooling the CTA or restyling the sitewide button,
+   which is the same conclusion the hero block above reached.
+
+   It used to share `.surface-coach-hero`, because Michele asked on
    2026-08-27 for that box to MATCH the hero. It cannot match a dark hero: it
    is a small box carrying navy ink, which is exactly the case the new
    principle says stays soft. So it keeps the soft teal and moves with it to

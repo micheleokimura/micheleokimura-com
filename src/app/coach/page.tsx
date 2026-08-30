@@ -430,12 +430,18 @@ export default function CoachingPage() {
       <FaqJsonLd faqs={FAQS} />
 
       {/* ---------------------------------------------------------- 1. HERO */}
-      {/* Left-aligned, and aligned to the WORDMARK rather than to the page.
+      {/* TEXT ONLY, as of 2026-08-29. Michele asked for this banner to carry
+          no button, matching /speaker, /author and /about, none of which put a
+          CTA in the top banner. The "Join the waitlist" button was MOVED, not
+          cut: it is now the closing band at the foot of this page, section 7.
+          Do not add a button back up here without her.
+
+          Left-aligned, and aligned to the WORDMARK rather than to the page.
           Both this and SiteHeader render inside `Container`, so the eyebrow,
-          the H1, the subtitle and the button all start on the same vertical
-          line as the Michele Okimura logo above them, at every width. Do not
-          swap this for a centred layout or a bare max-w div; either one breaks
-          that alignment.
+          the H1 and the subtitle all start on the same vertical line as the
+          Michele Okimura logo above them, at every width. Do not swap this for
+          a centred layout or a bare max-w div; either one breaks that
+          alignment.
 
           Ground is `.surface-coach-hero`, Michele's blue-teal #337681 as of
           the fifth pass on 2026-08-29, NOT the sitewide navy banner. It was a
@@ -452,14 +458,17 @@ export default function CoachingPage() {
           none of them carries a text- utility. Do not add one back reaching
           for --color-white or --color-cream: on this lighter ground the token
           white is 4.42:1 at the 6% radial peak and cream is 3.91:1, both under
-          AA, and only pure white clears it at 4.61:1. The CTA sets its own
-          ink and is unaffected.
+          AA, and only pure white clears it at 4.61:1.
 
-          See tailwind.css for every measurement, including the weakest number
-          on the page, which got weaker again in this pass: the terracotta CTA
-          is 1.12:1 as a shape flat and 1.00:1 at the radial peak, where its
-          luminance and the lifted ground's are the same to two decimals and
-          only hue separates the button from its field. */}
+          THE WEAKEST NUMBER ON THE PAGE LEFT WITH THE BUTTON. The terracotta
+          CTA read 1.12:1 as a shape flat on this ground and 1.00:1 at the 6%
+          radial peak, where its luminance and the lifted ground's are the same
+          to two decimals and only hue separated the button from its field.
+          Both are far under the 3:1 WCAG 1.4.11 asks of a control boundary,
+          and tailwind.css had it flagged as reported rather than fixed. Moving
+          the button to the soft teal band at the foot of the page takes it to
+          2.80:1 flat, so the ground it was starving on no longer carries a
+          control at all. See tailwind.css for the rest of the measurements. */}
       <section
         aria-label="The Brave Purpose Author Method"
         className="surface-coach-hero relative isolate w-full overflow-hidden py-14 sm:py-16 lg:py-20"
@@ -484,12 +493,6 @@ export default function CoachingPage() {
               Talk with Michele. Together, you&rsquo;ll turn your conversation
               into a manuscript.
             </p>
-
-            <div className="mt-7 sm:mt-8">
-              <ContactTrigger interest="coaching">
-                Join the waitlist
-              </ContactTrigger>
-            </div>
           </FadeIn>
         </Container>
       </section>
@@ -732,9 +735,12 @@ export default function CoachingPage() {
           band-3 (#f2efe8, cool grey) inside a navy-10 hairline ring, and the
           teal reads 1.44:1 against that ground, so the panel still separates.
 
-          band-3 is the last content ground on the page. SiteFooter paints its
-          own band-4 run-in below this, so the close of the page descends
-          2 -> 3 -> 4 -> navy instead of jumping. */}
+          band-3 is the last BAND on the page, and it is no longer the last
+          ground: the closing CTA in section 7 below is a full-bleed
+          `.surface-coach-soft`, so the foot of the page now runs
+          2 -> 3 -> soft teal -> SiteFooter's band-4 run-in -> navy. The soft
+          teal repeats between this panel and that band on purpose; the reason
+          is in the section 7 note. */}
       <section
         aria-labelledby="not-just-books-heading"
         className="bg-[var(--color-band-3)] py-16 sm:py-20 lg:py-24"
@@ -781,6 +787,69 @@ export default function CoachingPage() {
               <div className="mt-8">
                 <ContactTrigger interest="other">Get in touch</ContactTrigger>
               </div>
+            </div>
+          </FadeIn>
+        </Container>
+      </section>
+
+      {/* --------------------------------------------------- 7. CLOSING CTA */}
+      {/* The page's one ask, and the ONLY "Join the waitlist" button on
+          /coach. It sat in the hero until 2026-08-29, when Michele asked for
+          the top banner to be text only to match /speaker, /author and
+          /about. The button MOVED here rather than being cut. Keep exactly one
+          of it on the page.
+
+          This is not the closing "I would love to hear about your book" panel
+          Brett cut in the 2026-08-23 rebuild. That one was cut for printing an
+          email address, and there is no address here.
+
+          FULL BLEED ON `.surface-coach-soft`, the page's one soft accent,
+          which is also the ground under the "Not just books" panel directly
+          above. That repetition is deliberate. Every band token on this page
+          resolves to the same #FCFAF6, so a cream closing section would not
+          read as a section at all; a coloured surface is the only thing that
+          separates a band here. See the COLOR note at the top of this file.
+
+          The deep teal was ruled out even though /author and /speaker both
+          close on the colour they open on, because that is the ground the
+          button was starving on. Terracotta reads 2.80:1 as a shape flat on
+          #B0CFD0 and about 3.4:1 where the radial lifts it, against 1.12:1
+          flat and 1.00:1 at the peak on the hero. 2.80:1 is still under the
+          3:1 WCAG 1.4.11 asks of a control boundary, so it is a shortfall
+          carried over rather than closed; it is the same pairing that already
+          ships on the "Get in touch" button one section up, so this
+          reproduces a known condition instead of creating a new one. The
+          button's own label, white on #C84C33 at 4.63:1, is a sitewide
+          condition of the button and is unchanged.
+
+          Ink is the same pair the panel above uses on this ground:
+          neutral-950 at 8.86:1 for the heading, neutral-700 at 6.64:1 for the
+          line under it, both flat figures and both better where the radial
+          lifts the ground.
+
+          interest="coaching" is what files the inquiry as a book waitlist
+          request, and it is the one thing separating this button from the
+          interest="other" one above it. Do not merge the two, and do not
+          switch this one to "other". */}
+      <section
+        aria-labelledby="coach-cta-heading"
+        className="surface-coach-soft w-full py-16 sm:py-20 lg:py-24"
+      >
+        <Container>
+          <FadeIn className="max-w-3xl">
+            <h2
+              id="coach-cta-heading"
+              className="font-display text-3xl font-medium tracking-tight text-balance text-neutral-950 sm:text-4xl lg:text-5xl"
+            >
+              Ready to write your book?
+            </h2>
+            <p className="mt-6 max-w-2xl text-xl leading-9 text-neutral-700">
+              Start with a conversation. Michele will take it from there.
+            </p>
+            <div className="mt-8 sm:mt-10">
+              <ContactTrigger interest="coaching">
+                Join the waitlist
+              </ContactTrigger>
             </div>
           </FadeIn>
         </Container>
