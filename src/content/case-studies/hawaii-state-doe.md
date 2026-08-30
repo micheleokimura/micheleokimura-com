@@ -33,4 +33,4 @@ In the summer of 2026, after a thorough vetting process and collaboration with t
 
 **State Approval:** The team created a customized, 3-article Hawaiʻi version of Brave Together, which the DOE approved for use in secondary schools to meet the state's Sexual Violence Prevention Initiative mandate.
 
-**Resource Distribution:** The complex leader overseeing the Maui meeting purchased Dream Big Journals for every counselor in attendance, providing them with immediate resources and officially solidifying our ongoing working relationship.
+**Resource Distribution:** The complex leader overseeing the Maui meeting purchased Dream Big Journals for every counselor in attendance.
