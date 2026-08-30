@@ -54,14 +54,22 @@ export type MessageBlock =
   | { kind: 'list'; items: string[]; termed?: boolean }
 
 /**
- * Card colour on the /speaker grid. Each one is a Michele palette hue taken
- * down until white clears AA on it; the raw hexes cannot carry white text.
- * Violet is the Speaker hero's own colour. Defined as `.msg-<accent>` in
- * tailwind.css, where the measured contrast lives.
+ * Card colour on the /speaker grid. As of 2026-08-29 these are the four page
+ * identity colours of the site laid out as a mosaic: Speaker's own plum,
+ * Author's marigold, Coaching's blue-teal and About's periwinkle. The grid is
+ * where a reader sees all four of Michele's hats at once, so it carries all
+ * four hues rather than a set of its own.
  *
- * Assign so that no two cards touching in the 3-up grid share an accent.
+ * Three of the four are the identity hex exactly. Marigold is the one that is
+ * taken down, because #D07836 measures 3.27:1 against white and no off-white
+ * recovers it; the card holds its hue and saturation and drops the lightness
+ * until white clears AA. Defined as `.msg-<accent>` in tailwind.css, where
+ * every measured number lives.
+ *
+ * Assign in rotation and check BOTH grids: three columns from lg up and two
+ * columns at sm. No two cards touching in either one may share an accent.
  */
-export type MessageAccent = 'teal' | 'coral' | 'gold' | 'navy' | 'violet'
+export type MessageAccent = 'plum' | 'marigold' | 'bluegreen' | 'periwinkle'
 
 /** Hairline pattern behind the colour. Neighbours never share one either. */
 export type MessageTexture = 'lines' | 'rings' | 'grid' | 'dots'
@@ -273,7 +281,7 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     title: 'Finding Your Brave Purpose',
     teaser:
       'The leap from a God-given dream to a courageous "yes" can feel impossible. Audiences leave with a teachable, practical framework to finally step into their own brave purpose.',
-    accent: 'teal',
+    accent: 'plum',
     texture: 'lines',
     icon: 'compass',
     // Michele's own rewrite, 2026-08-26, dropped in verbatim. It replaces the
@@ -315,7 +323,7 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     title: 'Dreaming Big With God',
     teaser:
       "God's vision for your life is beautifully larger than the one you are comfortable praying for. This message expands your faith to embrace what is truly possible.",
-    accent: 'coral',
+    accent: 'marigold',
     texture: 'rings',
     icon: 'sparkles',
     // Michele's full description, 2026-08-24, verbatim bar the em dashes she
@@ -349,7 +357,7 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     title: 'Activating Your Creativity',
     teaser:
       'You are purposely created by the creator to create. Michele expands the definition of creativity, connecting to every sphere of influence in a person’s life. Everyone is a creative genius. Learn why.',
-    accent: 'navy',
+    accent: 'bluegreen',
     texture: 'grid',
     icon: 'palette',
     // Michele's full description, 2026-08-24, verbatim bar the em dash after
@@ -465,7 +473,7 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     cardTitle: 'Building a Kingdom Culture',
     teaser:
       'How do we shape a culture that fosters a resilient, deep-rooted, fully alive faith in our children and youth? Michele offers a highly interactive experience for parents and leaders, imparting keys to transformation.',
-    accent: 'gold',
+    accent: 'periwinkle',
     texture: 'dots',
     icon: 'house',
     // Michele's full description, 2026-08-24, verbatim. Her closing line
@@ -591,7 +599,7 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     subtitle: 'Heart Wide Open',
     teaser:
       'Gain practical keys to build strong emotional connections within your family. Your child’s heart has a door, and you hold the key. Michele equips parents to become the safe haven their children run toward.',
-    accent: 'violet',
+    accent: 'plum',
     texture: 'lines',
     icon: 'heart',
     // Michele's full description, 2026-08-24, verbatim. Her source carries no
@@ -635,7 +643,7 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     cardTitle: 'Identity, Healing, and Brave Purpose',
     teaser:
       'A message Michele is often invited to bring in women’s ministry settings and churches. She walks women through the truth of their identity in Christ, the healing God offers, and the joy-filled freedom Christ gives.',
-    accent: 'teal',
+    accent: 'marigold',
     texture: 'rings',
     icon: 'sunrise',
     // Michele's full description, 2026-08-24, verbatim. The only change she
@@ -703,7 +711,7 @@ export const SPEAKER_MESSAGES: SpeakerMessage[] = [
     title: 'How to Hear God’s Voice',
     teaser:
       'For youth and adults of all ages who are ready to grow in their two-way relationship with God, this workshop builds faith through testimony, teaches discernment, and gives each participant practical activities to hear God’s voice in real time. Be prepared to encounter God in this time.',
-    accent: 'coral',
+    accent: 'bluegreen',
     texture: 'grid',
     icon: 'waveform',
     // Michele's full description, 2026-08-24. Her draft was voice-typed, so

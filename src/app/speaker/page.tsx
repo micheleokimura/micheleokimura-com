@@ -208,12 +208,19 @@ const ICONS: Record<MessageIcon, typeof Compass> = {
   waveform: AudioWaveform,
 }
 
+/**
+ * The mosaic. Four page identity colours rotated through the seven cards in
+ * document order, so the grid reads as all four of Michele's hats at once.
+ * The rotation is checked against BOTH grids, three columns from lg up and
+ * two columns at sm, and no two touching cards share a colour in either. If a
+ * message is ever added, removed, or reordered, re-walk both grids rather
+ * than trusting the rotation to stay clean on its own.
+ */
 const ACCENT_CLASS: Record<MessageAccent, string> = {
-  teal: 'msg-teal',
-  coral: 'msg-coral',
-  gold: 'msg-gold',
-  navy: 'msg-navy',
-  violet: 'msg-violet',
+  plum: 'msg-plum',
+  marigold: 'msg-marigold',
+  bluegreen: 'msg-bluegreen',
+  periwinkle: 'msg-periwinkle',
 }
 
 const TEXTURE_CLASS: Record<MessageTexture, string> = {
@@ -339,9 +346,9 @@ export default function SpeakerPage() {
 
       {/* -------------------------------------------------------- messages */}
       {/* Beat 2 of the alternation: panel. The seven keynote cards are dark
-          saturated gradients (.msg-teal through .msg-violet, all of them
-          between #1E163F and #B8371A at their lightest stop), so dropping the
-          ground four points of lightness costs them nothing. */}
+          saturated gradients (.msg-plum, .msg-marigold, .msg-bluegreen and
+          .msg-periwinkle, the lightest top stop among them #337681),
+          so dropping the ground four points of lightness costs them nothing. */}
       <section
         aria-label="Messages Michele speaks on"
         className={`bg-[var(--color-panel)] ${BAND}`}

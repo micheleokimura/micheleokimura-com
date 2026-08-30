@@ -1567,6 +1567,109 @@ html {
   );
 }
 
+/* ---------------------------------------------------------------------
+   THE /speaker MOSAIC  (added 2026-08-29)
+   ---------------------------------------------------------------------
+   The four accents below serve the /speaker keynote grid and NOTHING else.
+   Michele asked for that grid to be a mosaic of the site's four page
+   identities rather than a palette of its own: Speaker's plum, Author's
+   marigold, Coaching's blue-teal and About's periwinkle, rotated through the
+   seven cards so no two touching tiles share a hue. The grid is the one place
+   a reader sees all four of her hats at once, so it carries all four colours.
+
+   THE FIVE ACCENTS ABOVE ARE UNTOUCHED and must stay that way. `.msg-teal`,
+   `.msg-coral` and `.msg-violet` are the home page's three role cards
+   (`msg-${door.accent}` in src/app/page.tsx, off `accent` in
+   src/lib/home-variants.ts). `.msg-gold` and `.msg-navy` have no caller left
+   after this pass; they are kept rather than deleted because the block above
+   is shared and this pass owns only /speaker.
+
+   TEXTURE IS UNCHANGED. These classes set `--msg-base` and `--msg-glow` and
+   nothing else, exactly like the five above, so every card keeps whichever
+   `.msg-tex-*` pattern it already had. The mosaic moved colour and only
+   colour.
+
+   THREE OF THE FOUR ARE THE IDENTITY HEX EXACTLY, sitting at the gradient's
+   TOP stop, which is the card's lightest pixel and therefore its worst case
+   for the white ink:
+
+     plum       #624973  --color-speaker-plum, the Speaker hero
+     blue-teal  #337681  .surface-coach-hero
+     periwinkle #576290  --color-about-slate
+
+   MARIGOLD IS THE ONE THAT MOVED, and it had to. --color-author-wash-base
+   #D07836 measures 3.27:1 against pure white and 3.14:1 against the #FCFAF6
+   the cards actually paint, so it fails AA for the teaser at any off-white:
+   every step away from white on a mid-light orange goes DOWN before it comes
+   back up, which the Author hero token block works through at length. The
+   ground is the only lever, so this card holds the marigold's hue at 25.7 and
+   its saturation at 0.62 and drops HSL lightness 0.514 -> 0.376, landing on
+   #9C5724. It is the Author marigold turned down, which is the same move all
+   five accents above already make against their own raw palette hexes.
+
+   Each bottom stop is its top stop at 0.58 of the HSL lightness, holding hue
+   and saturation, which is the ratio the five accents above run on.
+
+   Measured, #FCFAF6 on each card, at the position each layer actually sits.
+   The title lands around 45 percent down, the teaser around 65, and the
+   "Learn more" control on the white/15 chip at the foot:
+
+                        top     peak    title   teaser  "Learn more"
+     plum              7.41    6.05     9.48    10.57    7.63
+     marigold          5.30    4.52     7.24     8.30     6.54
+     blue-teal         4.97    4.55     6.77     7.83     6.27
+     periwinkle        5.67    4.56     7.56     8.70     6.63
+
+   The white/85 subtitle, which only `heart-wide-open` renders, measures
+   7.52:1 on plum and holds 5.95, 5.62 and 6.18 on the other three, so the
+   rotation is safe wherever that card lands. Every figure here clears the
+   4.5:1 body floor, including the flat top stop and the centre of the glow,
+   so white clears AA at every pixel of all four cards and no ink changed in
+   this pass. 4.52:1, the marigold glow centre, is the thinnest margin here.
+
+   THE GLOW ALPHAS ARE A CONTRAST BUDGET, not a taste call. Each one is the
+   largest value that still leaves the centre of the ellipse at or above
+   4.5:1, which is why they differ: plum has the most headroom at 22 percent
+   and periwinkle the least at 13. The blue-teal and the periwinkle both
+   tracked the 3.9 percent lift those two heroes took on 2026-08-29, and their
+   glows came down two points to pay for it. Re-measure the blend, not the
+   stops, if any of these is ever retuned. */
+.msg-plum {
+  --msg-base: linear-gradient(160deg, #624973 0%, #392a43 100%);
+  --msg-glow: radial-gradient(
+    68% 55% at 82% 8%,
+    rgba(155, 127, 212, 0.22) 0%,
+    rgba(155, 127, 212, 0) 64%
+  );
+}
+
+.msg-marigold {
+  --msg-base: linear-gradient(160deg, #9c5724 0%, #5a3215 100%);
+  --msg-glow: radial-gradient(
+    68% 55% at 82% 8%,
+    rgba(233, 174, 63, 0.14) 0%,
+    rgba(233, 174, 63, 0) 64%
+  );
+}
+
+.msg-bluegreen {
+  --msg-base: linear-gradient(160deg, #337681 0%, #1e444b 100%);
+  --msg-glow: radial-gradient(
+    68% 55% at 82% 8%,
+    rgba(0, 176, 159, 0.14) 0%,
+    rgba(0, 176, 159, 0) 64%
+  );
+}
+
+.msg-periwinkle {
+  --msg-base: linear-gradient(160deg, #576290 0%, #323954 100%);
+  --msg-glow: radial-gradient(
+    68% 55% at 82% 8%,
+    rgba(159, 232, 223, 0.13) 0%,
+    rgba(159, 232, 223, 0) 64%
+  );
+}
+
 /* Textures. Decoration only, so they carry no contrast budget of their own;
    keep every one of them under 10 percent white or it starts competing with
    the copy. `dots` is the only one that needs a background-size, and it must
